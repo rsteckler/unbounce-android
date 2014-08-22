@@ -31,19 +31,36 @@ public class SettingsActivity extends Activity {
 
             SharedPreferences sharedPref = getPreferenceScreen().getSharedPreferences();
             sharedPref.registerOnSharedPreferenceChangeListener(this);
-            onSharedPreferenceChanged(sharedPref, "seconds_nlp_wakelock");
+            onSharedPreferenceChanged(sharedPref, "seconds_locator");
+            onSharedPreferenceChanged(sharedPref, "seconds_detection");
         }
 
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            if (key.equals("seconds_nlp_wakelock")) {
+            if (key.equals("seconds_locator")) {
                 EditTextPreference pref = (EditTextPreference) findPreference(key);
                 String value = sharedPreferences.getString(key, "");
                 if (value.isEmpty()) {
                     value = "(unchanged)";
                 } else if (!value.matches("\\d{1,5}")) {
                     pref.setText("");
-                    Toast.makeText(getActivity(), "Invalid wakelock frequency", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Invalid locator frequency", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (isAdded()) {
+                    pref.setSummary("Currently: " + value);
+                }
+            }
+            else if (key.equals("seconds_detection"))
+            {
+                EditTextPreference pref = (EditTextPreference) findPreference(key);
+                String value = sharedPreferences.getString(key, "");
+                if (value.isEmpty()) {
+                    value = "(unchanged)";
+                } else if (!value.matches("\\d{1,5}")) {
+                    pref.setText("");
+                    Toast.makeText(getActivity(), "Invalid detection frequency", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
