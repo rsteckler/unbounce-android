@@ -1,4 +1,4 @@
-package com.ryansteckler.nlpfix;
+package com.ryansteckler.nlpunbounce;
 
 /**
  * Created by ryan steckler on 8/18/14.
@@ -6,6 +6,7 @@ package com.ryansteckler.nlpfix;
 import android.os.SystemClock;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
+import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.callbacks.XC_LoadPackage.LoadPackageParam;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
@@ -21,8 +22,6 @@ public class nlpFix implements IXposedHookLoadPackage {
     //...we change the request to this frequency:
     private static final int MIN_NETWORK_RETRY_MILLIS = 240000;
 
-    //Don't allow NlpWakeLock to acquire a wakelock more frequently than:
-    private static final int NLP_WAKELOCK_MAX_FREQ = 240000;
     //Don't allow NlpCollectorWakeLock to acquire a wakelock more frequently than:
     private static final int NLP_COLLECTOR_WAKELOCK_MAX_FREQ = 240000;
 
@@ -35,6 +34,7 @@ public class nlpFix implements IXposedHookLoadPackage {
 
     @Override
     public void handleLoadPackage(LoadPackageParam lpparam) throws Throwable {
+
         if (lpparam.packageName.equals("android")) {
             findAndHookMethod("com.android.server.power.PowerManagerService", lpparam.classLoader, "acquireWakeLockInternal", android.os.IBinder.class, int.class, String.class, String.class, android.os.WorkSource.class, int.class, int.class, new XC_MethodHook() {
                 @Override
@@ -62,11 +62,18 @@ public class nlpFix implements IXposedHookLoadPackage {
                     }
                     else if (wakeLockName.equals("NlpWakeLock"))
                     {
+                        XSharedPreferences prefs = new XSharedPreferences(nlpFix.class.getPackage().getName());
+                        prefs.reload();
+                        int nlpWakeLockMaxFreq = tryParseInt(prefs.getString("seconds_nlp_wakelock", "240"));
+                        nlpWakeLockMaxFreq *= 1000; //convert to ms
+
+                        XposedBridge.log("NlpUnbounce: NlpWakeLock Frequency: " + nlpWakeLockMaxFreq);
+
                         //Debounce this to our minimum interval.
                         final long now = SystemClock.elapsedRealtime();
                         long timeSinceLastWakelock = now - mLastNlpWakeLockTime;
 
-                        if(timeSinceLastWakelock < NLP_WAKELOCK_MAX_FREQ) {
+                        if(timeSinceLastWakelock < nlpWakeLockMaxFreq) {
                             //Not enough time has passed since the last wakelock
                             XposedBridge.log("NlpUnbounce: Preventing NlpWakeLock.  Last granted: " + timeSinceLastWakelock + " milliseconds ago.");
                             param.setResult(null);
@@ -94,6 +101,14 @@ public class nlpFix implements IXposedHookLoadPackage {
                     }
                 }
             });
+        }
+    }
+
+    private static int tryParseInt(String s) {
+        try {
+            return Integer.parseInt(s);
+        } catch (NumberFormatException nfe) {
+            return 0;
         }
     }
 }

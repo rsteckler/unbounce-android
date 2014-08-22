@@ -4,7 +4,7 @@ android {
     compileSdkVersion 20
     buildToolsVersion '20.0.0'
     defaultConfig {
-        applicationId 'com.rsteckler.nlpunbounce'
+        applicationId 'com.ryansteckler.nlpunbounce'
         minSdkVersion 15
         targetSdkVersion 20
         versionCode 1
