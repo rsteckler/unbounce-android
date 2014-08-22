@@ -3,15 +3,30 @@
 
     <EditTextPreference
         android:defaultValue="240"
-        android:dialogTitle="Enter seconds between ALARM_WAKEUP_LOCATOR"
+        android:dialogTitle="Enter seconds between LOCATOR alarms"
         android:key="seconds_locator"
         android:summary=""
-        android:title="Seconds between ALARM_WAKEUP_LOCATOR" />
+        android:title="Seconds between LOCATOR" />
 
     <EditTextPreference
         android:defaultValue="240"
-        android:dialogTitle="Enter seconds between ALARM_WAKEUP_ACTIVITY_DETECTION"
+        android:dialogTitle="Enter seconds between DETECTION alarms"
         android:key="seconds_detection"
         android:summary=""
-        android:title="Seconds between ALARM_WAKEUP_ACTIVITY_DETECTION" />
+        android:title="Seconds between DETECTION" />
+
+    <EditTextPreference
+        android:defaultValue="240"
+        android:dialogTitle="Enter seconds between NlpWakeLocks"
+        android:key="seconds_wake_nlp"
+        android:summary=""
+        android:title="Seconds between NlpWakeLocks" />
+
+    <EditTextPreference
+        android:defaultValue="240"
+        android:dialogTitle="Enter seconds between NlpCollectorWakeLocks"
+        android:key="seconds_wake_collector"
+        android:summary=""
+        android:title="Seconds between NlpCollectorWakeLocks" />
+
 </PreferenceScreen>
