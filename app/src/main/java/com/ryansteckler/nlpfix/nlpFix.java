@@ -50,34 +50,28 @@ public class nlpFix implements IXposedHookLoadPackage {
                     {
                         XposedBridge.log("NlpUnbounce: NlpCollectorWakeLock requesting a wakelock");
                         //Debounce this to our minimum interval.
-                        if (mLastNlpCollectorWakeLockTime != 0) {
-                            //We may be debouncing this
-                            final long now = SystemClock.elapsedRealtime();
-                            long timeSinceLastWakelock = now -  mLastNlpCollectorWakeLockTime;
-                            XposedBridge.log("NlpUnbounce: Last NlpCollectorWakeLock was " + timeSinceLastWakelock + " milliseconds ago.");
+                        final long now = SystemClock.elapsedRealtime();
+                        long timeSinceLastWakelock = now -  mLastNlpCollectorWakeLockTime;
+                        XposedBridge.log("NlpUnbounce: Last NlpCollectorWakeLock was " + timeSinceLastWakelock + " milliseconds ago.");
 
-                            if(timeSinceLastWakelock < NLP_COLLECTOR_WAKELOCK_MAX_FREQ) {
-                                //Not enough time has passed since the last wakelock
-                                XposedBridge.log("NlpUnbounce: Preventing NlpCollectorWakeLock.");
-                                param.setResult(null);
-                            }
+                        if(timeSinceLastWakelock < NLP_COLLECTOR_WAKELOCK_MAX_FREQ) {
+                            //Not enough time has passed since the last wakelock
+                            XposedBridge.log("NlpUnbounce: Preventing NlpCollectorWakeLock.");
+                            param.setResult(null);
                         }
                     }
                     else if (wakeLockName.equals("NlpWakeLock"))
                     {
                         XposedBridge.log("NlpUnbounce: NlpWakeLock requesting a wakelock");
                         //Debounce this to our minimum interval.
-                        if (mLastNlpWakeLockTime != 0) {
-                            //We may be debouncing this
-                            final long now = SystemClock.elapsedRealtime();
-                            long timeSinceLastWakelock = now -  mLastNlpWakeLockTime;
-                            XposedBridge.log("NlpUnbounce: Last NlpWakeLock was " + timeSinceLastWakelock + " milliseconds ago.");
+                        final long now = SystemClock.elapsedRealtime();
+                        long timeSinceLastWakelock = now - mLastNlpWakeLockTime;
+                        XposedBridge.log("NlpUnbounce: Last NlpWakeLock was " + timeSinceLastWakelock + " milliseconds ago.");
 
-                            if(timeSinceLastWakelock < NLP_WAKELOCK_MAX_FREQ) {
-                                //Not enough time has passed since the last wakelock
-                                XposedBridge.log("NlpUnbounce: Preventing NlpWakeLock.");
-                                param.setResult(null);
-                            }
+                        if(timeSinceLastWakelock < NLP_WAKELOCK_MAX_FREQ) {
+                            //Not enough time has passed since the last wakelock
+                            XposedBridge.log("NlpUnbounce: Preventing NlpWakeLock.");
+                            param.setResult(null);
                         }
                     }
                 }
