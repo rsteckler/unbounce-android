@@ -1,19 +1,14 @@
 package com.ryansteckler.nlpfix;
 
 /**
- * Created by rsteckler on 8/18/14.
+ * Created by ryan steckler on 8/18/14.
  */
-
-import android.os.IBinder;
-import android.os.PowerManager;
 import android.os.SystemClock;
-import android.os.WorkSource;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.callbacks.XC_LoadPackage.LoadPackageParam;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
-import static de.robv.android.xposed.XposedHelpers.getObjectField;
 
 import de.robv.android.xposed.XC_MethodHook;
 
@@ -59,6 +54,12 @@ public class nlpFix implements IXposedHookLoadPackage {
                             XposedBridge.log("NlpUnbounce: Preventing NlpCollectorWakeLock.");
                             param.setResult(null);
                         }
+                        else
+                        {
+                            //Allow the wakelock
+                            mLastNlpCollectorWakeLockTime = now;
+                        }
+
                     }
                     else if (wakeLockName.equals("NlpWakeLock"))
                     {
@@ -72,6 +73,11 @@ public class nlpFix implements IXposedHookLoadPackage {
                             //Not enough time has passed since the last wakelock
                             XposedBridge.log("NlpUnbounce: Preventing NlpWakeLock.");
                             param.setResult(null);
+                        }
+                        else
+                        {
+                            //Allow the wakelock
+                            mLastNlpWakeLockTime = now;
                         }
                     }
                 }
