@@ -1,0 +1,16 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.rsteckler.myapplication">
+
+    <application
+        android:allowBackup="true"
+        android:label="NlpUnbounce"
+        android:icon="@drawable/ic_launcher"
+        android:theme="@style/AppTheme">
+
+        <meta-data android:name="xposedmodule" android:value="true" />
+        <meta-data android:name="xposedminversion" android:value="54" />
+        <meta-data android:name="xposeddescription" android:value="Reduce NLP Wakelocks by Ryan Steckler" />
+
+    </application>
+
+</manifest>
