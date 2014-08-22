@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <EditTextPreference
+        android:defaultValue="240"
+        android:dialogTitle="Enter seconds between NlpWakeLocks"
+        android:key="seconds_nlp_wakelock"
+        android:summary="The minimum amount of time between granting NlpWakeLock"
+        android:title="Seconds between NlpWakeLock" />
+
+    <!--<CheckBoxPreference-->
+        <!--android:defaultValue="false"-->
+        <!--android:key="debug"-->
+        <!--android:summary="Shows an additional menu item to access Play Store&apos;s debug settings"-->
+        <!--android:title="Enable debug menu" />-->
+
+</PreferenceScreen>
