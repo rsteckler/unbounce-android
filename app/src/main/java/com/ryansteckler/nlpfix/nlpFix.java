@@ -43,40 +43,38 @@ public class nlpFix implements IXposedHookLoadPackage {
                     String wakeLockName = (String)param.args[2];
                     if (wakeLockName.equals("NlpCollectorWakeLock"))
                     {
-                        XposedBridge.log("NlpUnbounce: NlpCollectorWakeLock requesting a wakelock");
                         //Debounce this to our minimum interval.
                         final long now = SystemClock.elapsedRealtime();
                         long timeSinceLastWakelock = now -  mLastNlpCollectorWakeLockTime;
-                        XposedBridge.log("NlpUnbounce: Last NlpCollectorWakeLock was " + timeSinceLastWakelock + " milliseconds ago.");
 
                         if(timeSinceLastWakelock < NLP_COLLECTOR_WAKELOCK_MAX_FREQ) {
                             //Not enough time has passed since the last wakelock
-                            XposedBridge.log("NlpUnbounce: Preventing NlpCollectorWakeLock.");
+                            XposedBridge.log("NlpUnbounce: Preventing NlpCollectorWakeLock.  Last granted: " + timeSinceLastWakelock + " milliseconds ago.");
                             param.setResult(null);
                         }
                         else
                         {
                             //Allow the wakelock
+                            XposedBridge.log("NlpUnbounce: Allowing NlpCollectorWakeLock.");
                             mLastNlpCollectorWakeLockTime = now;
                         }
 
                     }
                     else if (wakeLockName.equals("NlpWakeLock"))
                     {
-                        XposedBridge.log("NlpUnbounce: NlpWakeLock requesting a wakelock");
                         //Debounce this to our minimum interval.
                         final long now = SystemClock.elapsedRealtime();
                         long timeSinceLastWakelock = now - mLastNlpWakeLockTime;
-                        XposedBridge.log("NlpUnbounce: Last NlpWakeLock was " + timeSinceLastWakelock + " milliseconds ago.");
 
                         if(timeSinceLastWakelock < NLP_WAKELOCK_MAX_FREQ) {
                             //Not enough time has passed since the last wakelock
-                            XposedBridge.log("NlpUnbounce: Preventing NlpWakeLock.");
+                            XposedBridge.log("NlpUnbounce: Preventing NlpWakeLock.  Last granted: " + timeSinceLastWakelock + " milliseconds ago.");
                             param.setResult(null);
                         }
                         else
                         {
                             //Allow the wakelock
+                            XposedBridge.log("NlpUnbounce: Allowing NlpWakeLock.");
                             mLastNlpWakeLockTime = now;
                         }
                     }
@@ -91,8 +89,7 @@ public class nlpFix implements IXposedHookLoadPackage {
 
                     if((Long)(param.args[0]) <= MIN_NETWORK_THRESHOLD_MILLIS)
                     {
-                        XposedBridge.log("NlpUnbounce: Detected NLP Reporting equal to or 60 seconds. (requested: " + param.args[0] + " milliseconds)");
-                        XposedBridge.log("NlpUnbounce: Setting interval to 240 seconds ");
+                        XposedBridge.log("NlpUnbounce: Detected NLP Reporting equal to or 60 seconds. (requested: " + param.args[0] + " milliseconds).  Setting interval to " + MIN_NETWORK_THRESHOLD_MILLIS + " milliseconds.");
                         param.args[0] = MIN_NETWORK_RETRY_MILLIS;
                     }
                 }
