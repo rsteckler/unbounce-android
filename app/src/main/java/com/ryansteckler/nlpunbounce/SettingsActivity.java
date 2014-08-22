@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceScreen;
 import android.widget.Toast;
 
 public class SettingsActivity extends Activity {
@@ -61,6 +62,37 @@ public class SettingsActivity extends Activity {
                 } else if (!value.matches("\\d{1,5}")) {
                     pref.setText("");
                     Toast.makeText(getActivity(), "Invalid detection frequency", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (isAdded()) {
+                    pref.setSummary("Currently: " + value);
+                }
+            }
+            else if (key.equals("seconds_wake_nlp")) {
+                EditTextPreference pref = (EditTextPreference) findPreference(key);
+                String value = sharedPreferences.getString(key, "");
+                if (value.isEmpty()) {
+                    value = "(unchanged)";
+                } else if (!value.matches("\\d{1,5}")) {
+                    pref.setText("");
+                    Toast.makeText(getActivity(), "Invalid nlp frequency", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (isAdded()) {
+                    pref.setSummary("Currently: " + value);
+                }
+            }
+            else if (key.equals("seconds_wake_collector"))
+            {
+                EditTextPreference pref = (EditTextPreference) findPreference(key);
+                String value = sharedPreferences.getString(key, "");
+                if (value.isEmpty()) {
+                    value = "(unchanged)";
+                } else if (!value.matches("\\d{1,5}")) {
+                    pref.setText("");
+                    Toast.makeText(getActivity(), "Invalid collector frequency", Toast.LENGTH_SHORT).show();
                     return;
                 }
 

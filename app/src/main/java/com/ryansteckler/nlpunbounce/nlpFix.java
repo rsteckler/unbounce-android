@@ -3,15 +3,9 @@ package com.ryansteckler.nlpunbounce;
 /**
  * Created by ryan steckler on 8/18/14.
  */
-import android.app.ActivityManager;
 import android.app.PendingIntent;
 import android.content.Intent;
-import android.content.IntentSender;
-import android.os.Parcel;
 import android.os.SystemClock;
-import android.os.WorkSource;
-
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
@@ -61,6 +55,7 @@ public class nlpFix implements IXposedHookLoadPackage {
                                 if (timeSinceLastLocator < locatorMaxFreq) {
                                     //Not enough time has passed since the last wakelock
                                     XposedBridge.log("NlpUnbounce: Preventing ALARM_WAKEUP_LOCATOR.  Last granted: " + timeSinceLastLocator + " milliseconds ago.  Frequency allowed: " + locatorMaxFreq);
+
                                     alarmList.remove(j);
                                 } else {
                                     //Allow the wakelock
@@ -81,6 +76,7 @@ public class nlpFix implements IXposedHookLoadPackage {
                                 if (timeSinceLastDetection < detectionMaxFreq) {
                                     //Not enough time has passed since the last wakelock
                                     XposedBridge.log("NlpUnbounce: Preventing ALARM_WAKEUP_ACTIVITY_DETECTION.  Last granted: " + timeSinceLastDetection + " milliseconds ago.  Frequency allowed: " + detectionMaxFreq);
+
                                     alarmList.remove(j);
                                 } else {
                                     //Allow the wakelock
