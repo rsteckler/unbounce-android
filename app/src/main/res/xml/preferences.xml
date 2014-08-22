@@ -3,15 +3,15 @@
 
     <EditTextPreference
         android:defaultValue="240"
-        android:dialogTitle="Enter seconds between NlpWakeLocks"
-        android:key="seconds_nlp_wakelock"
-        android:summary="The minimum amount of time between granting NlpWakeLock"
-        android:title="Seconds between NlpWakeLock" />
+        android:dialogTitle="Enter seconds between ALARM_WAKEUP_LOCATOR"
+        android:key="seconds_locator"
+        android:summary=""
+        android:title="Seconds between ALARM_WAKEUP_LOCATOR" />
 
-    <!--<CheckBoxPreference-->
-        <!--android:defaultValue="false"-->
-        <!--android:key="debug"-->
-        <!--android:summary="Shows an additional menu item to access Play Store&apos;s debug settings"-->
-        <!--android:title="Enable debug menu" />-->
-
+    <EditTextPreference
+        android:defaultValue="240"
+        android:dialogTitle="Enter seconds between ALARM_WAKEUP_ACTIVITY_DETECTION"
+        android:key="seconds_detection"
+        android:summary=""
+        android:title="Seconds between ALARM_WAKEUP_ACTIVITY_DETECTION" />
 </PreferenceScreen>
