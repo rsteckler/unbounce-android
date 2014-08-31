@@ -17,6 +17,8 @@ import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 
 import de.robv.android.xposed.XC_MethodHook;
 
+import java.util.Date;
+import java.text.DateFormat;
 
 public class nlpFix implements IXposedHookLoadPackage {
 
@@ -39,10 +41,14 @@ public class nlpFix implements IXposedHookLoadPackage {
 
                         PendingIntent pi = (PendingIntent) XposedHelpers.getObjectField(curAlarm, "operation");
                         Intent intent = (Intent) XposedHelpers.callMethod(pi, "getIntent");
+                        if(intent==null || intent.getAction()==null){
+                            continue;
+                        } 
 
                         XSharedPreferences prefs = new XSharedPreferences(nlpFix.class.getPackage().getName());
                         prefs.reload();
 
+                        String dt = DateFormat.getDateTimeInstance().format(new Date(System.currentTimeMillis()));
                         if (intent.getAction().equals("com.google.android.gms.nlp.ALARM_WAKEUP_LOCATOR")) {
                             int locatorMaxFreq = tryParseInt(prefs.getString("seconds_locator", "240"));
                             locatorMaxFreq *= 1000; //convert to ms
@@ -54,12 +60,12 @@ public class nlpFix implements IXposedHookLoadPackage {
 
                                 if (timeSinceLastLocator < locatorMaxFreq) {
                                     //Not enough time has passed since the last wakelock
-                                    XposedBridge.log("NlpUnbounce: Preventing ALARM_WAKEUP_LOCATOR.  Last granted: " + timeSinceLastLocator + " milliseconds ago.  Frequency allowed: " + locatorMaxFreq);
+                                    //XposedBridge.log("NlpUnbounce: Preventing ALARM_WAKEUP_LOCATOR.  Last granted: " + timeSinceLastLocator + " milliseconds ago.  Frequency allowed: " + locatorMaxFreq);
 
                                     alarmList.remove(j);
                                 } else {
                                     //Allow the wakelock
-                                    XposedBridge.log("NlpUnbounce: Allowing ALARM_WAKEUP_LOCATOR.");
+                                    XposedBridge.log(dt + " NlpUnbounce: Allowing ALARM_WAKEUP_LOCATOR." + locatorMaxFreq);
                                     mLastLocatorAlarm = now;
                                 }
                             }
@@ -75,13 +81,14 @@ public class nlpFix implements IXposedHookLoadPackage {
 
                                 if (timeSinceLastDetection < detectionMaxFreq) {
                                     //Not enough time has passed since the last wakelock
-                                    XposedBridge.log("NlpUnbounce: Preventing ALARM_WAKEUP_ACTIVITY_DETECTION.  Last granted: " + timeSinceLastDetection + " milliseconds ago.  Frequency allowed: " + detectionMaxFreq);
+                                    //XposedBridge.log("NlpUnbounce: Preventing ALARM_WAKEUP_ACTIVITY_DETECTION.  Last granted: " + timeSinceLastDetection + " milliseconds ago.  Frequency allowed: " + detectionMaxFreq);
 
                                     alarmList.remove(j);
                                 } else {
                                     //Allow the wakelock
-                                    XposedBridge.log("NlpUnbounce: Allowing ALARM_WAKEUP_ACTIVITY_DETECTION.");
-                                    mLastLocatorAlarm = now;
+                                    XposedBridge.log(dt + " NlpUnbounce: Allowing ALARM_WAKEUP_ACTIVITY_DETECTION." + detectionMaxFreq);
+                                    //mLastLocatorAlarm = now;
+                                    mLastDetectionAlarm = now;
                                 }
                             }
                         }
@@ -98,6 +105,7 @@ public class nlpFix implements IXposedHookLoadPackage {
                     prefs.reload();
 
                     String wakeLockName = (String)param.args[2];
+                    String dt = DateFormat.getDateTimeInstance().format(new Date(System.currentTimeMillis()));
                     if (wakeLockName.equals("NlpCollectorWakeLock"))
                     {
                         int collectorMaxFreq = tryParseInt(prefs.getString("seconds_wake_collector", "240"));
@@ -110,12 +118,12 @@ public class nlpFix implements IXposedHookLoadPackage {
 
                             if (timeSinceLastWakelock < collectorMaxFreq) {
                                 //Not enough time has passed since the last wakelock
-                                XposedBridge.log("NlpUnbounce: Preventing NlpCollectorWakeLock.  Last granted: " + timeSinceLastWakelock + " milliseconds ago.  Frequency allowed: " + collectorMaxFreq);
+                                //XposedBridge.log("NlpUnbounce: Preventing NlpCollectorWakeLock.  Last granted: " + timeSinceLastWakelock + " milliseconds ago.  Frequency allowed: " + collectorMaxFreq);
 
                                 param.setResult(null);
                             } else {
                                 //Allow the wakelock
-                                XposedBridge.log("NlpUnbounce: Allowing NlpCollectorWakeLock.");
+                                XposedBridge.log(dt + " NlpUnbounce: Allowing NlpCollectorWakeLock." + collectorMaxFreq);
                                 mLastNlpCollectorWakelock = now;
                             }
                         }
@@ -133,12 +141,12 @@ public class nlpFix implements IXposedHookLoadPackage {
 
                             if (timeSinceLastWakelock < nlpMaxFreq) {
                                 //Not enough time has passed since the last wakelock
-                                XposedBridge.log("NlpUnbounce: Preventing NlpWakeLock.  Last granted: " + timeSinceLastWakelock + " milliseconds ago.  Frequency allowed: " + nlpMaxFreq);
+                                //XposedBridge.log("NlpUnbounce: Preventing NlpWakeLock.  Last granted: " + timeSinceLastWakelock + " milliseconds ago.  Frequency allowed: " + nlpMaxFreq);
 
                                 param.setResult(null);
                             } else {
                                 //Allow the wakelock
-                                XposedBridge.log("NlpUnbounce: Allowing NlpWakeLock.");
+                                XposedBridge.log(dt + " NlpUnbounce: Allowing NlpWakeLock." + nlpMaxFreq);
                                 mLastNlpWakelock = now;
                             }
                         }
