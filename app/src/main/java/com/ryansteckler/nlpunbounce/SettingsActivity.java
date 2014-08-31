@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceScreen;
 import android.widget.Toast;
 
 public class SettingsActivity extends Activity {
@@ -34,6 +33,8 @@ public class SettingsActivity extends Activity {
             sharedPref.registerOnSharedPreferenceChangeListener(this);
             onSharedPreferenceChanged(sharedPref, "seconds_locator");
             onSharedPreferenceChanged(sharedPref, "seconds_detection");
+            onSharedPreferenceChanged(sharedPref, "seconds_wake_nlp");
+            onSharedPreferenceChanged(sharedPref, "seconds_wake_collector");
         }
 
         @Override
