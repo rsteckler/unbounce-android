@@ -216,7 +216,7 @@ public class nlpFix implements IXposedHookLoadPackage {
                     //Not enough time has passed since the last wakelock.  Deny the wakelock
                     param.setResult(null);
 
-                    debugLog(prefs, TAG + "Preventing NlpWakeLock.  Max Interval: " + nlpMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
+                    debugLog(prefs, "Preventing NlpWakeLock.  Max Interval: " + nlpMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
 
                 } else {
                     //Allow the wakelock
