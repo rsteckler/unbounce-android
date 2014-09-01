@@ -79,19 +79,32 @@ public class nlpFix implements IXposedHookLoadPackage {
     private void hookWakeLocks(LoadPackageParam lpparam, XSharedPreferences prefs) {
         boolean wakeLocksHooked = false;
         try {
-            //Try for wakelock hooks for API levels 17-20
-            debugLog(prefs, "Attempting 17to20 WakeLockHook");
-            try17To20WakeLockHook(lpparam, prefs);
-            debugLog(prefs, "Successful 17to20 WakeLockHook");
+            //Try for wakelock hooks for API levels 19-20
+            debugLog(prefs, "Attempting 19to20 WakeLockHook");
+            try19To20WakeLockHook(lpparam, prefs);
+            debugLog(prefs, "Successful 19to20 WakeLockHook");
             wakeLocksHooked = true;
         } catch (NoSuchMethodError nsme) {
-            debugLog(prefs, "Failed 17to20 WakeLockHook: " + nsme.getMessage());
+            debugLog(prefs, "Failed 19to20 WakeLockHook: " + nsme.getMessage());
         } catch (XposedHelpers.ClassNotFoundError cnfe) {
-            debugLog(prefs, "Failed 17to20 WakeLockHook: " + cnfe.getMessage());
+            debugLog(prefs, "Failed 19to20 WakeLockHook: " + cnfe.getMessage());
         } catch (Throwable e) {
-            debugLog(prefs, "Failed 17to20 WakeLockHook: " + e.getMessage());
+            debugLog(prefs, "Failed 19to20 WakeLockHook: " + e.getMessage());
         }
 
+        try {
+            //Try for wakelock hooks for API levels 17-18
+            debugLog(prefs, "Attempting 17to18 WakeLockHook");
+            try17To18WakeLockHook(lpparam, prefs);
+            debugLog(prefs, "Successful 17to18 WakeLockHook");
+            wakeLocksHooked = true;
+        } catch (NoSuchMethodError nsme) {
+            debugLog(prefs, "Failed 17to18 WakeLockHook: " + nsme.getMessage());
+        } catch (XposedHelpers.ClassNotFoundError cnfe) {
+            debugLog(prefs, "Failed 17to18 WakeLockHook: " + cnfe.getMessage());
+        } catch (Throwable e) {
+            debugLog(prefs, "Failed 17to18 WakeLockHook: " + e.getMessage());
+        }
 
         try {
             //Try for wakelock hooks for API levels 15-16
@@ -112,8 +125,18 @@ public class nlpFix implements IXposedHookLoadPackage {
         }
     }
 
-    private void try17To20WakeLockHook(LoadPackageParam lpparam, final XSharedPreferences prefs) {
+    private void try19To20WakeLockHook(LoadPackageParam lpparam, final XSharedPreferences prefs) {
         findAndHookMethod("com.android.server.power.PowerManagerService", lpparam.classLoader, "acquireWakeLockInternal", android.os.IBinder.class, int.class, String.class, String.class, android.os.WorkSource.class, int.class, int.class, new XC_MethodHook() {
+            @Override
+            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                String wakeLockName = (String)param.args[2];
+                handleWakeLock(param, prefs, wakeLockName);
+            }
+        });
+    }
+
+    private void try17To18WakeLockHook(LoadPackageParam lpparam, final XSharedPreferences prefs) {
+        findAndHookMethod("com.android.server.power.PowerManagerService", lpparam.classLoader, "acquireWakeLockInternal", android.os.IBinder.class, int.class, String.class, android.os.WorkSource.class, int.class, int.class, new XC_MethodHook() {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                 String wakeLockName = (String)param.args[2];
