@@ -25,7 +25,8 @@ public class nlpFix implements IXposedHookLoadPackage {
     private long mLastNlpWakeLock = 0;  // Last wakelock attempt
     private long mLastNlpCollectorWakeLock = 0;  // Last wakelock attempt
 
-    private static boolean debugLog = false;
+    private static final boolean debugLog = false;
+    private static boolean showedUnsupportedAlarmMessage = false;
 
     @Override
     public void handleLoadPackage(LoadPackageParam lpparam) throws Throwable {
@@ -49,6 +50,8 @@ public class nlpFix implements IXposedHookLoadPackage {
             alarmsHooked = true;
         } catch (NoSuchMethodError nsme) {
             //No problem.
+        } catch (XposedHelpers.ClassNotFoundError cnfe) {
+            //No problem.
         }
 
         try {
@@ -56,6 +59,8 @@ public class nlpFix implements IXposedHookLoadPackage {
             try15To18AlarmHook(lpparam, prefs);
             alarmsHooked = true;
         } catch (NoSuchMethodError nsme) {
+            //No problem.
+        } catch (XposedHelpers.ClassNotFoundError cnfe) {
             //No problem.
         }
 
@@ -72,6 +77,8 @@ public class nlpFix implements IXposedHookLoadPackage {
             wakeLocksHooked = true;
         } catch (NoSuchMethodError nsme) {
             //No problem.
+        } catch (XposedHelpers.ClassNotFoundError cnfe) {
+            //No problem.
         }
 
         try {
@@ -79,6 +86,8 @@ public class nlpFix implements IXposedHookLoadPackage {
             try15To16WakeLockHook(lpparam, prefs);
             wakeLocksHooked = true;
         } catch (NoSuchMethodError nsme) {
+            //No problem.
+        } catch (XposedHelpers.ClassNotFoundError cnfe) {
             //No problem.
         }
 
@@ -190,7 +199,24 @@ public class nlpFix implements IXposedHookLoadPackage {
             Object curAlarm = triggers.get(j);
 
             PendingIntent pi = (PendingIntent) XposedHelpers.getObjectField(curAlarm, "operation");
-            Intent intent = (Intent) XposedHelpers.callMethod(pi, "getIntent");
+            Intent intent = null;
+            try {
+                intent = (Intent) XposedHelpers.callMethod(pi, "getIntent");
+//                String debugString = intent.toString();
+//                XposedBridge.log(TAG + "Debug 4.3+ = " + debugString);
+//
+//                IntentSender sender = pi.getIntentSender();
+//                debugString = sender.toString();
+//                XposedBridge.log(TAG + "Debug 4.2.2- = " + debugString);
+//
+            } catch (NoSuchMethodError nsme) {
+                //API prior to 4.2.2_r1 don't have this.
+                if (!showedUnsupportedAlarmMessage) {
+                    showedUnsupportedAlarmMessage = true;
+                    XposedBridge.log(TAG + "Alarm prevention is not yet supported on Android versions less than 4.2.2");
+                }
+            }
+
             if(intent==null || intent.getAction()==null){
                 //TODO: Why does the system have alarms with null intents?
                 continue;
