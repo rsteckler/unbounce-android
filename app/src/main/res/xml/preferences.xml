@@ -29,4 +29,9 @@
         android:summary=""
         android:title="Seconds between NlpCollectorWakeLocks" />
 
+    <CheckBoxPreference
+        android:key="debug_logging"
+        android:title="Debug Logging"
+        android:summary="Enable debug logcat output"
+        android:defaultValue="false"/>
 </PreferenceScreen>

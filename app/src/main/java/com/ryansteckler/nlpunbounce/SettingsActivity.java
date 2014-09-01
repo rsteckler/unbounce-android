@@ -3,6 +3,7 @@ package com.ryansteckler.nlpunbounce;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.PreferenceFragment;
 import android.widget.Toast;
@@ -35,6 +36,7 @@ public class SettingsActivity extends Activity {
             onSharedPreferenceChanged(sharedPref, "seconds_detection");
             onSharedPreferenceChanged(sharedPref, "seconds_wake_nlp");
             onSharedPreferenceChanged(sharedPref, "seconds_wake_collector");
+            onSharedPreferenceChanged(sharedPref, "debug_logging");
         }
 
         @Override
@@ -100,6 +102,13 @@ public class SettingsActivity extends Activity {
                 if (isAdded()) {
                     pref.setSummary("Currently: " + value);
                 }
+            }
+            else if (key.equals("debug_logging"))
+            {
+                CheckBoxPreference pref = (CheckBoxPreference) findPreference(key);
+                boolean value = sharedPreferences.getBoolean(key, false);
+                pref.setChecked(value);
+                pref.setSummary("Currently: " + value);
             }
         }
     }

@@ -25,7 +25,6 @@ public class nlpFix implements IXposedHookLoadPackage {
     private long mLastNlpWakeLock = 0;  // Last wakelock attempt
     private long mLastNlpCollectorWakeLock = 0;  // Last wakelock attempt
 
-    private static final boolean debugLog = false;
     private static boolean showedUnsupportedAlarmMessage = false;
 
     @Override
@@ -46,22 +45,30 @@ public class nlpFix implements IXposedHookLoadPackage {
         boolean alarmsHooked = false;
         try {
             //Try for alarm hooks for API levels 19-20
+            debugLog(prefs, "Attempting 19to20 AlarmHook");
             try19To20AlarmHook(lpparam, prefs);
+            debugLog(prefs, "Successful 19to20 AlarmHook");
             alarmsHooked = true;
         } catch (NoSuchMethodError nsme) {
-            //No problem.
+            debugLog(prefs, "Failed 19to20 AlarmHook: " + nsme.getMessage());
         } catch (XposedHelpers.ClassNotFoundError cnfe) {
-            //No problem.
+            debugLog(prefs, "Failed 19to20 AlarmHook: " + cnfe.getMessage());
+        } catch (Throwable e) {
+            debugLog(prefs, "Failed 19to20 AlarmHook: " + e.getMessage());
         }
 
         try {
             //Try for alarm hooks for API levels 15-18.
+            debugLog(prefs, "Attempting 15to18 AlarmHook");
             try15To18AlarmHook(lpparam, prefs);
+            debugLog(prefs, "Successful 15to18 AlarmHook");
             alarmsHooked = true;
         } catch (NoSuchMethodError nsme) {
-            //No problem.
+            debugLog(prefs, "Failed 15to18 AlarmHook: " + nsme.getMessage());
         } catch (XposedHelpers.ClassNotFoundError cnfe) {
-            //No problem.
+            debugLog(prefs, "Failed 15to18 AlarmHook: " + cnfe.getMessage());
+        } catch (Throwable e) {
+            debugLog(prefs, "Failed 15to18 AlarmHook: " + e.getMessage());
         }
 
         if (!alarmsHooked) {
@@ -72,23 +79,45 @@ public class nlpFix implements IXposedHookLoadPackage {
     private void hookWakeLocks(LoadPackageParam lpparam, XSharedPreferences prefs) {
         boolean wakeLocksHooked = false;
         try {
-            //Try for wakelock hooks for API levels 17-20
-            try17To20WakeLockHook(lpparam, prefs);
+            //Try for wakelock hooks for API levels 19-20
+            debugLog(prefs, "Attempting 19to20 WakeLockHook");
+            try19To20WakeLockHook(lpparam, prefs);
+            debugLog(prefs, "Successful 19to20 WakeLockHook");
             wakeLocksHooked = true;
         } catch (NoSuchMethodError nsme) {
-            //No problem.
+            debugLog(prefs, "Failed 19to20 WakeLockHook: " + nsme.getMessage());
         } catch (XposedHelpers.ClassNotFoundError cnfe) {
-            //No problem.
+            debugLog(prefs, "Failed 19to20 WakeLockHook: " + cnfe.getMessage());
+        } catch (Throwable e) {
+            debugLog(prefs, "Failed 19to20 WakeLockHook: " + e.getMessage());
+        }
+
+        try {
+            //Try for wakelock hooks for API levels 17-18
+            debugLog(prefs, "Attempting 17to18 WakeLockHook");
+            try17To18WakeLockHook(lpparam, prefs);
+            debugLog(prefs, "Successful 17to18 WakeLockHook");
+            wakeLocksHooked = true;
+        } catch (NoSuchMethodError nsme) {
+            debugLog(prefs, "Failed 17to18 WakeLockHook: " + nsme.getMessage());
+        } catch (XposedHelpers.ClassNotFoundError cnfe) {
+            debugLog(prefs, "Failed 17to18 WakeLockHook: " + cnfe.getMessage());
+        } catch (Throwable e) {
+            debugLog(prefs, "Failed 17to18 WakeLockHook: " + e.getMessage());
         }
 
         try {
             //Try for wakelock hooks for API levels 15-16
+            debugLog(prefs, "Attempting 15to16 WakeLockHook");
             try15To16WakeLockHook(lpparam, prefs);
+            debugLog(prefs, "Successful 15to16 WakeLockHook");
             wakeLocksHooked = true;
         } catch (NoSuchMethodError nsme) {
-            //No problem.
+            debugLog(prefs, "Failed 15to16 WakeLockHook: " + nsme.getMessage());
         } catch (XposedHelpers.ClassNotFoundError cnfe) {
-            //No problem.
+            debugLog(prefs, "Failed 15to16 WakeLockHook: " + cnfe.getMessage());
+        } catch (Throwable e) {
+            debugLog(prefs, "Failed 15to16 WakeLockHook: " + e.getMessage());
         }
 
         if (!wakeLocksHooked) {
@@ -96,8 +125,18 @@ public class nlpFix implements IXposedHookLoadPackage {
         }
     }
 
-    private void try17To20WakeLockHook(LoadPackageParam lpparam, final XSharedPreferences prefs) {
+    private void try19To20WakeLockHook(LoadPackageParam lpparam, final XSharedPreferences prefs) {
         findAndHookMethod("com.android.server.power.PowerManagerService", lpparam.classLoader, "acquireWakeLockInternal", android.os.IBinder.class, int.class, String.class, String.class, android.os.WorkSource.class, int.class, int.class, new XC_MethodHook() {
+            @Override
+            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                String wakeLockName = (String)param.args[2];
+                handleWakeLock(param, prefs, wakeLockName);
+            }
+        });
+    }
+
+    private void try17To18WakeLockHook(LoadPackageParam lpparam, final XSharedPreferences prefs) {
+        findAndHookMethod("com.android.server.power.PowerManagerService", lpparam.classLoader, "acquireWakeLockInternal", android.os.IBinder.class, int.class, String.class, android.os.WorkSource.class, int.class, int.class, new XC_MethodHook() {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                 String wakeLockName = (String)param.args[2];
@@ -153,9 +192,7 @@ public class nlpFix implements IXposedHookLoadPackage {
                     //Not enough time has passed since the last wakelock.  Deny the wakelock
                     param.setResult(null);
 
-                    if (debugLog) {
-                        XposedBridge.log(TAG + "Preventing NlpCollectorWakeLock.  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
-                    }
+                    debugLog(prefs, "Preventing NlpCollectorWakeLock.  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
 
                 } else {
                     //Allow the wakelock
@@ -179,9 +216,8 @@ public class nlpFix implements IXposedHookLoadPackage {
                     //Not enough time has passed since the last wakelock.  Deny the wakelock
                     param.setResult(null);
 
-                    if (debugLog) {
-                        XposedBridge.log(TAG + "Preventing NlpWakeLock.  Max Interval: " + nlpMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
-                    }
+                    debugLog(prefs, TAG + "Preventing NlpWakeLock.  Max Interval: " + nlpMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
+
                 } else {
                     //Allow the wakelock
                     XposedBridge.log(TAG + "Allowing NlpWakeLock.  Max Interval: " + nlpMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
@@ -234,10 +270,7 @@ public class nlpFix implements IXposedHookLoadPackage {
                     if (timeSinceLastLocator < locatorMaxFreq) {
                         //Not enough time has passed since the last alarm.  Remove it from the triggerlist
                         triggers.remove(j);
-
-                        if (debugLog) {
-                            XposedBridge.log(TAG + "Preventing ALARM_WAKEUP_LOCATOR.  Max Interval: " + locatorMaxFreq + " Time since last granted: " + timeSinceLastLocator);
-                        }
+                        debugLog(prefs, "Preventing ALARM_WAKEUP_LOCATOR.  Max Interval: " + locatorMaxFreq + " Time since last granted: " + timeSinceLastLocator);
                     } else {
                         //Allow the wakelock
                         XposedBridge.log(TAG + "Allowing ALARM_WAKEUP_LOCATOR.  Max Interval: " + locatorMaxFreq + " Time since last granted: " + timeSinceLastLocator);
@@ -257,12 +290,9 @@ public class nlpFix implements IXposedHookLoadPackage {
                     if (timeSinceLastDetection < detectionMaxFreq) {
                         //Not enough time has passed since the last wakelock.  Remove it from the triggerlist.
                         triggers.remove(j);
-
-                        if (debugLog) {
-                            XposedBridge.log(TAG + "Preventing ALARM_WAKEUP_ACTIVITY_DETECTION.  Max Interval: " + detectionMaxFreq + " Time since last granted: " + timeSinceLastDetection);
-                        }
-
-                    } else {
+                        debugLog(prefs, "Preventing ALARM_WAKEUP_ACTIVITY_DETECTION.  Max Interval: " + detectionMaxFreq + " Time since last granted: " + timeSinceLastDetection);
+                    }
+                    else {
                         //Allow the wakelock
                         XposedBridge.log(TAG + "Allowing ALARM_WAKEUP_ACTIVITY_DETECTION.  Max Interval: " + detectionMaxFreq + " Time since last granted: " + timeSinceLastDetection);
                         mLastDetectionAlarm = now;
@@ -278,6 +308,14 @@ public class nlpFix implements IXposedHookLoadPackage {
             return Integer.parseInt(s);
         } catch (NumberFormatException nfe) {
             return 0;
+        }
+    }
+
+    private void debugLog(XSharedPreferences prefs, String log)
+    {
+        if (prefs.getBoolean("debug_logging", false))
+        {
+            XposedBridge.log(TAG + log);
         }
     }
 }
