@@ -108,6 +108,30 @@
             android:summary="Enable debug logcat output"
             android:defaultValue="false"/>
 
+        <Preference
+            android:title="Donate $1.00"
+            android:key="donate_1"
+            android:editable="false"
+            android:defaultValue="0"
+            android:summary="Buy me a cup of coffee while I code."
+            />
+
+        <Preference
+            android:title="Donate $5.00"
+            android:key="donate_5"
+            android:editable="false"
+            android:defaultValue="0"
+            android:summary="Buy me a latte while I debug."
+            />
+
+        <Preference
+            android:title="Donate $10.00"
+            android:key="donate_10"
+            android:editable="false"
+            android:defaultValue="0"
+            android:summary="Because you don't need an external battery pack anymore."
+            />
+
     </PreferenceCategory>
 
 

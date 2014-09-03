@@ -6,6 +6,7 @@ package com.ryansteckler.nlpunbounce;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.SystemClock;
 
 import java.util.ArrayList;
@@ -50,32 +51,24 @@ public class nlpFix implements IXposedHookLoadPackage {
 
     private void hookAlarms(LoadPackageParam lpparam, XSharedPreferences prefs) {
         boolean alarmsHooked = false;
-        try {
-            //Try for alarm hooks for API levels 19-20
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
+        {
+            //Try for alarm hooks for API levels >= 19
             debugLog(prefs, "Attempting 19to20 AlarmHook");
             try19To20AlarmHook(lpparam, prefs);
             debugLog(prefs, "Successful 19to20 AlarmHook");
             alarmsHooked = true;
-        } catch (NoSuchMethodError nsme) {
-            debugLog(prefs, "Failed 19to20 AlarmHook: " + nsme.getMessage());
-        } catch (XposedHelpers.ClassNotFoundError cnfe) {
-            debugLog(prefs, "Failed 19to20 AlarmHook: " + cnfe.getMessage());
-        } catch (Throwable e) {
-            debugLog(prefs, "Failed 19to20 AlarmHook: " + e.getMessage());
         }
-
-        try {
+        else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1 &&
+                Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN_MR2)
+        {
             //Try for alarm hooks for API levels 15-18.
             debugLog(prefs, "Attempting 15to18 AlarmHook");
             try15To18AlarmHook(lpparam, prefs);
             debugLog(prefs, "Successful 15to18 AlarmHook");
             alarmsHooked = true;
-        } catch (NoSuchMethodError nsme) {
-            debugLog(prefs, "Failed 15to18 AlarmHook: " + nsme.getMessage());
-        } catch (XposedHelpers.ClassNotFoundError cnfe) {
-            debugLog(prefs, "Failed 15to18 AlarmHook: " + cnfe.getMessage());
-        } catch (Throwable e) {
-            debugLog(prefs, "Failed 15to18 AlarmHook: " + e.getMessage());
+
         }
 
         if (!alarmsHooked) {
@@ -85,46 +78,30 @@ public class nlpFix implements IXposedHookLoadPackage {
 
     private void hookWakeLocks(LoadPackageParam lpparam, XSharedPreferences prefs) {
         boolean wakeLocksHooked = false;
-        try {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             //Try for wakelock hooks for API levels 19-20
             debugLog(prefs, "Attempting 19to20 WakeLockHook");
             try19To20WakeLockHook(lpparam, prefs);
             debugLog(prefs, "Successful 19to20 WakeLockHook");
             wakeLocksHooked = true;
-        } catch (NoSuchMethodError nsme) {
-            debugLog(prefs, "Failed 19to20 WakeLockHook: " + nsme.getMessage());
-        } catch (XposedHelpers.ClassNotFoundError cnfe) {
-            debugLog(prefs, "Failed 19to20 WakeLockHook: " + cnfe.getMessage());
-        } catch (Throwable e) {
-            debugLog(prefs, "Failed 19to20 WakeLockHook: " + e.getMessage());
         }
-
-        try {
+        else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1 &&
+                Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN_MR2) {
             //Try for wakelock hooks for API levels 17-18
             debugLog(prefs, "Attempting 17to18 WakeLockHook");
             try17To18WakeLockHook(lpparam, prefs);
             debugLog(prefs, "Successful 17to18 WakeLockHook");
             wakeLocksHooked = true;
-        } catch (NoSuchMethodError nsme) {
-            debugLog(prefs, "Failed 17to18 WakeLockHook: " + nsme.getMessage());
-        } catch (XposedHelpers.ClassNotFoundError cnfe) {
-            debugLog(prefs, "Failed 17to18 WakeLockHook: " + cnfe.getMessage());
-        } catch (Throwable e) {
-            debugLog(prefs, "Failed 17to18 WakeLockHook: " + e.getMessage());
         }
-
-        try {
+        else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1 &&
+                Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN)
+        {
             //Try for wakelock hooks for API levels 15-16
             debugLog(prefs, "Attempting 15to16 WakeLockHook");
             try15To16WakeLockHook(lpparam, prefs);
             debugLog(prefs, "Successful 15to16 WakeLockHook");
             wakeLocksHooked = true;
-        } catch (NoSuchMethodError nsme) {
-            debugLog(prefs, "Failed 15to16 WakeLockHook: " + nsme.getMessage());
-        } catch (XposedHelpers.ClassNotFoundError cnfe) {
-            debugLog(prefs, "Failed 15to16 WakeLockHook: " + cnfe.getMessage());
-        } catch (Throwable e) {
-            debugLog(prefs, "Failed 15to16 WakeLockHook: " + e.getMessage());
         }
 
         if (!wakeLocksHooked) {

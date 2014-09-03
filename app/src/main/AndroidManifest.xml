@@ -2,9 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ryansteckler.nlpunbounce" >
 
+    <uses-permission android:name="com.android.vending.BILLING" />
+
     <application
         android:allowBackup="true"
-        android:label="NlpUnbounce" >
+        android:label="NlpUnbounce"
+        android:icon="@drawable/ic_launcher">
         <meta-data
             android:name="xposedmodule"
             android:value="true" />
