@@ -1,37 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <PreferenceCategory
+        android:title="Alarms"
+        android:key="">
 
-    <EditTextPreference
-        android:defaultValue="240"
-        android:dialogTitle="Enter seconds between LOCATOR alarms"
-        android:key="seconds_locator"
-        android:summary=""
-        android:title="Seconds between LOCATOR" />
+        <CheckBoxPreference
+            android:key="alarm_locator_enabled"
+            android:title="Restrict ALARM_LOCATOR"
+            android:summary=""
+            android:defaultValue="true"/>
 
-    <EditTextPreference
-        android:defaultValue="240"
-        android:dialogTitle="Enter seconds between DETECTION alarms"
-        android:key="seconds_detection"
-        android:summary=""
-        android:title="Seconds between DETECTION" />
+        <EditTextPreference
+            android:defaultValue="240"
+            android:key="alarm_locator_seconds"
+            android:summary="Every 240 seconds"
+            android:title="Allowed frequency" />
 
-    <EditTextPreference
-        android:defaultValue="240"
-        android:dialogTitle="Enter seconds between NlpWakeLocks"
-        android:key="seconds_wake_nlp"
-        android:summary=""
-        android:title="Seconds between NlpWakeLocks" />
+        <Preference
+            android:title="Reset blocked count"
+            android:key="ALARM_WAKEUP_LOCATOR_blocked"
+            android:editable="false"
+            android:defaultValue="0"
+            android:summary="Blocked y times"
+            />
 
-    <EditTextPreference
-        android:defaultValue="240"
-        android:dialogTitle="Enter seconds between NlpCollectorWakeLocks"
-        android:key="seconds_wake_collector"
-        android:summary=""
-        android:title="Seconds between NlpCollectorWakeLocks" />
+        <CheckBoxPreference
+            android:key="alarm_detection_enabled"
+            android:title="Restrict ALARM_ACTIVITY_DETECTION"
+            android:summary=""
+            android:defaultValue="true"/>
 
-    <CheckBoxPreference
-        android:key="debug_logging"
-        android:title="Debug Logging"
-        android:summary="Enable debug logcat output"
-        android:defaultValue="false"/>
+        <EditTextPreference
+            android:defaultValue="240"
+            android:key="alarm_detection_seconds"
+            android:summary="Every 240 seconds"
+            android:title="Allowed frequency" />
+
+        <Preference
+            android:title="Reset blocked count"
+            android:key="ALARM_WAKEUP_ACTIVITY_DETECTION_blocked"
+            android:editable="false"
+            android:defaultValue="0"
+            android:summary="Blocked y times"
+            />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Wakelocks"
+        android:key="">
+
+        <CheckBoxPreference
+            android:key="wakelock_nlp_enabled"
+            android:title="Restrict NlpWakeLock"
+            android:summary=""
+            android:defaultValue="true"/>
+
+        <EditTextPreference
+            android:defaultValue="240"
+            android:key="wakelock_nlp_seconds"
+            android:summary="Every 240 seconds"
+            android:title="Allowed frequency" />
+
+        <Preference
+            android:title="Reset blocked count"
+            android:key="NlpWakeLock_blocked"
+            android:editable="false"
+            android:defaultValue="0"
+            android:summary="Blocked y times"
+            />
+
+        <CheckBoxPreference
+            android:key="wakelock_collector_enabled"
+            android:title="Restrict NlpCollectorWakeLock"
+            android:summary=""
+            android:defaultValue="true"/>
+
+        <EditTextPreference
+            android:defaultValue="240"
+            android:key="wakelock_collector_seconds"
+            android:summary="Every 240 seconds"
+            android:title="Allowed frequency" />
+
+        <Preference
+            android:title="Reset blocked count"
+            android:key="NlpCollectorWakeLock_blocked"
+            android:editable="false"
+            android:defaultValue="0"
+            android:summary="Blocked y times"
+            />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="About"
+        android:key="">
+
+        <Preference
+            android:title="Author: Ryan Steckler"
+            android:key=""
+            android:editable="false"
+            android:defaultValue="0"
+            android:summary="Version: 1.1.3"
+            />
+
+        <CheckBoxPreference
+            android:key="debug_logging"
+            android:title="Debug Logging"
+            android:summary="Enable debug logcat output"
+            android:defaultValue="false"/>
+
+    </PreferenceCategory>
+
+
+
 </PreferenceScreen>

@@ -4,8 +4,10 @@ package com.ryansteckler.nlpunbounce;
  * Created by ryan steckler on 8/18/14.
  */
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.SystemClock;
+
 import java.util.ArrayList;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
@@ -13,6 +15,8 @@ import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage.LoadPackageParam;
+
+import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 
 import de.robv.android.xposed.XC_MethodHook;
@@ -20,6 +24,7 @@ import de.robv.android.xposed.XC_MethodHook;
 public class nlpFix implements IXposedHookLoadPackage {
 
     private static final String TAG = "NlpUnbounce: ";
+    private static final String VERSION = "1.1.2"; //This needs to be pulled from the manifest or gradle build.
     private long mLastLocatorAlarm = 0;  // Last alarm attempt
     private long mLastDetectionAlarm = 0;  // Last alarm attempt
     private long mLastNlpWakeLock = 0;  // Last wakelock attempt
@@ -31,6 +36,8 @@ public class nlpFix implements IXposedHookLoadPackage {
     public void handleLoadPackage(LoadPackageParam lpparam) throws Throwable {
 
         if (lpparam.packageName.equals("android")) {
+
+            XposedBridge.log(TAG + "Version " + VERSION);
 
             final XSharedPreferences prefs = new XSharedPreferences(nlpFix.class.getPackage().getName());
             prefs.reload();
@@ -160,7 +167,7 @@ public class nlpFix implements IXposedHookLoadPackage {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 ArrayList<Object> triggers = (ArrayList<Object>)param.args[0];
-                handleAlarm(prefs, triggers);
+                handleAlarm(prefs, param, triggers);
             }
         });
     }
@@ -170,7 +177,7 @@ public class nlpFix implements IXposedHookLoadPackage {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 ArrayList<Object> triggers = (ArrayList<Object>)param.args[1];
-                handleAlarm(prefs, triggers);
+                handleAlarm(prefs, param, triggers);
             }
         });
     }
@@ -178,12 +185,14 @@ public class nlpFix implements IXposedHookLoadPackage {
     private void handleWakeLock(XC_MethodHook.MethodHookParam param, XSharedPreferences prefs, String wakeLockName) {
         prefs.reload();
 
+
         if (wakeLockName.equals("NlpCollectorWakeLock"))
         {
-            int collectorMaxFreq = tryParseInt(prefs.getString("seconds_wake_collector", "240"));
-            collectorMaxFreq *= 1000; //convert to ms
+            //If we're blocking them
+            if (prefs.getBoolean("wakelock_collector_enabled", false)) {
+                int collectorMaxFreq = tryParseInt(prefs.getString("wakelock_collector_seconds", "240"));
+                collectorMaxFreq *= 1000; //convert to ms
 
-            if (collectorMaxFreq != 0) {
                 //Debounce this to our minimum interval.
                 final long now = SystemClock.elapsedRealtime();
                 long timeSinceLastWakeLock = now - mLastNlpCollectorWakeLock;
@@ -191,6 +200,7 @@ public class nlpFix implements IXposedHookLoadPackage {
                 if (timeSinceLastWakeLock < collectorMaxFreq) {
                     //Not enough time has passed since the last wakelock.  Deny the wakelock
                     param.setResult(null);
+                    incrementBlockCount(prefs, param, "NlpCollectorWakeLock");
 
                     debugLog(prefs, "Preventing NlpCollectorWakeLock.  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
 
@@ -203,10 +213,10 @@ public class nlpFix implements IXposedHookLoadPackage {
         }
         else if (wakeLockName.equals("NlpWakeLock"))
         {
-            int nlpMaxFreq = tryParseInt(prefs.getString("seconds_wake_nlp", "240"));
-            nlpMaxFreq *= 1000; //convert to ms
+            if (prefs.getBoolean("wakelock_nlp_enabled", false)) {
 
-            if (nlpMaxFreq != 0) {
+                int nlpMaxFreq = tryParseInt(prefs.getString("wakelock_nlp_seconds", "240"));
+                nlpMaxFreq *= 1000; //convert to ms
 
                 //Debounce this to our minimum interval.
                 final long now = SystemClock.elapsedRealtime();
@@ -215,6 +225,7 @@ public class nlpFix implements IXposedHookLoadPackage {
                 if (timeSinceLastWakeLock < nlpMaxFreq) {
                     //Not enough time has passed since the last wakelock.  Deny the wakelock
                     param.setResult(null);
+                    incrementBlockCount(prefs, param, "NlpWakeLock");
 
                     debugLog(prefs, "Preventing NlpWakeLock.  Max Interval: " + nlpMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
 
@@ -228,7 +239,7 @@ public class nlpFix implements IXposedHookLoadPackage {
         }
     }
 
-    private void handleAlarm(XSharedPreferences prefs, ArrayList<Object> triggers) {
+    private void handleAlarm(XSharedPreferences prefs, XC_MethodHook.MethodHookParam param, ArrayList<Object> triggers) {
         prefs.reload();
 
         for (int j = triggers.size() - 1; j >= 0; j--) {
@@ -237,7 +248,7 @@ public class nlpFix implements IXposedHookLoadPackage {
             PendingIntent pi = (PendingIntent) XposedHelpers.getObjectField(curAlarm, "operation");
             Intent intent = null;
             try {
-                intent = (Intent) XposedHelpers.callMethod(pi, "getIntent");
+                intent = (Intent) callMethod(pi, "getIntent");
 //                String debugString = intent.toString();
 //                XposedBridge.log(TAG + "Debug 4.3+ = " + debugString);
 //
@@ -259,10 +270,10 @@ public class nlpFix implements IXposedHookLoadPackage {
             }
 
             if (intent.getAction().equals("com.google.android.gms.nlp.ALARM_WAKEUP_LOCATOR")) {
-                int locatorMaxFreq = tryParseInt(prefs.getString("seconds_locator", "240"));
-                locatorMaxFreq *= 1000; //convert to ms
+                if (prefs.getBoolean("alarm_locator_enabled", false)) {
+                    int locatorMaxFreq = tryParseInt(prefs.getString("alarm_locator_seconds", "240"));
+                    locatorMaxFreq *= 1000; //convert to ms
 
-                if (locatorMaxFreq != 0) {
                     //Debounce this to our minimum interval.
                     final long now = SystemClock.elapsedRealtime();
                     long timeSinceLastLocator = now - mLastLocatorAlarm;
@@ -270,6 +281,8 @@ public class nlpFix implements IXposedHookLoadPackage {
                     if (timeSinceLastLocator < locatorMaxFreq) {
                         //Not enough time has passed since the last alarm.  Remove it from the triggerlist
                         triggers.remove(j);
+                        incrementBlockCount(prefs, param, "ALARM_WAKEUP_LOCATOR");
+
                         debugLog(prefs, "Preventing ALARM_WAKEUP_LOCATOR.  Max Interval: " + locatorMaxFreq + " Time since last granted: " + timeSinceLastLocator);
                     } else {
                         //Allow the wakelock
@@ -279,10 +292,10 @@ public class nlpFix implements IXposedHookLoadPackage {
                 }
             }
             if (intent.getAction().equals("com.google.android.gms.nlp.ALARM_WAKEUP_ACTIVITY_DETECTION")) {
-                int detectionMaxFreq = tryParseInt(prefs.getString("seconds_detection", "240"));
-                detectionMaxFreq *= 1000; //convert to ms
+                if (prefs.getBoolean("alarm_detection_enabled", false)) {
+                    int detectionMaxFreq = tryParseInt(prefs.getString("alarm_detection_seconds", "240"));
+                    detectionMaxFreq *= 1000; //convert to ms
 
-                if (detectionMaxFreq != 0) {
                     //Debounce this to our minimum interval.
                     final long now = SystemClock.elapsedRealtime();
                     long timeSinceLastDetection = now - mLastDetectionAlarm;
@@ -290,6 +303,8 @@ public class nlpFix implements IXposedHookLoadPackage {
                     if (timeSinceLastDetection < detectionMaxFreq) {
                         //Not enough time has passed since the last wakelock.  Remove it from the triggerlist.
                         triggers.remove(j);
+                        incrementBlockCount(prefs, param, "ALARM_WAKEUP_ACTIVITY_DETECTION");
+
                         debugLog(prefs, "Preventing ALARM_WAKEUP_ACTIVITY_DETECTION.  Max Interval: " + detectionMaxFreq + " Time since last granted: " + timeSinceLastDetection);
                     }
                     else {
@@ -302,6 +317,24 @@ public class nlpFix implements IXposedHookLoadPackage {
         }
     }
 
+    private void incrementBlockCount(XSharedPreferences prefs, XC_MethodHook.MethodHookParam param, String name) {
+
+        Context context = (Context)XposedHelpers.getObjectField(param.thisObject, "mContext");
+
+        if (context != null) {
+            Intent intent = new Intent("com.ryansteckler.nlpunbounce.INCREMENT_BLOCK_COUNT");
+            //TODO:  add FLAG_RECEIVER_REGISTERED_ONLY_BEFORE_BOOT to the intent to avoid needing to catch
+            //      the IllegalStateException.  The flag value changed between 4.3 and 4.4  :/
+            intent.putExtra("name", name);
+            try {
+
+
+                context.sendBroadcast(intent);
+            } catch (IllegalStateException ise) {
+                //Ignore.  This is becuase boot hasn't completed yet.
+            }
+        }
+    }
 
     private static int tryParseInt(String s) {
         try {

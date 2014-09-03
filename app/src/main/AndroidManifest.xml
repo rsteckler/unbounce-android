@@ -4,7 +4,7 @@
 
     <application
         android:allowBackup="true"
-        android:label="NlpUnbounce">
+        android:label="NlpUnbounce" >
         <meta-data
             android:name="xposedmodule"
             android:value="true" />
@@ -18,11 +18,19 @@
         <activity
             android:name=".SettingsActivity"
             android:label="NlpUnbounce settings" >
-             <intent-filter>
-             <action android:name="android.intent.action.MAIN" />
-             <category android:name="de.robv.android.xposed.category.MODULE_SETTINGS" />
-             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="de.robv.android.xposed.category.MODULE_SETTINGS" />
+            </intent-filter>
         </activity>
+
+        <receiver android:name=".BlockReceiver"
+            android:enabled="true"
+            android:exported="true" >
+        <intent-filter>
+                <action android:name="com.ryansteckler.nlpunbounce.INCREMENT_BLOCK_COUNT" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
