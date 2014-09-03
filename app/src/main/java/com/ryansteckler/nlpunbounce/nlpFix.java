@@ -25,7 +25,7 @@ import de.robv.android.xposed.XC_MethodHook;
 public class nlpFix implements IXposedHookLoadPackage {
 
     private static final String TAG = "NlpUnbounce: ";
-    private static final String VERSION = "1.1.2"; //This needs to be pulled from the manifest or gradle build.
+    private static final String VERSION = "1.1.3"; //This needs to be pulled from the manifest or gradle build.
     private long mLastLocatorAlarm = 0;  // Last alarm attempt
     private long mLastDetectionAlarm = 0;  // Last alarm attempt
     private long mLastNlpWakeLock = 0;  // Last wakelock attempt
