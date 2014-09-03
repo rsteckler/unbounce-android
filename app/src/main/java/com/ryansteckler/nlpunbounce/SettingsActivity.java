@@ -111,8 +111,6 @@ public class SettingsActivity extends Activity {
                 {
                     if (!result.isSuccess()) {
                         Log.d(TAG, "In-app Billing setup failed: " + result);
-                    } else {
-                        Log.d(TAG, "In-app Billing is set up OK");
                     }
                 }
             });

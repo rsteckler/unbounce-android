@@ -13,7 +13,7 @@
             android:value="true" />
         <meta-data
             android:name="xposedminversion"
-            android:value="54" />
+            android:value="42" />
         <meta-data
             android:name="xposeddescription"
             android:value="Reduce NLP Wakelocks by Ryan Steckler" />
