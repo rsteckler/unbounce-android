@@ -205,7 +205,7 @@ public class SettingsActivity extends Activity {
             {
                 //Handle checking the box
                 CheckBoxPreference pref = (CheckBoxPreference) findPreference(key);
-                boolean value = sharedPreferences.getBoolean(key, false);
+                boolean value = sharedPreferences.getBoolean(key, true);
                 pref.setChecked(value);
                 //Handle enabling/disabling dependent items
                 if (key.equals("alarm_locator_enabled")) {
@@ -231,7 +231,7 @@ public class SettingsActivity extends Activity {
                     key.equals("wakelock_collector_seconds"))
             {
                 EditTextPreference pref = (EditTextPreference) findPreference(key);
-                String strValue = sharedPreferences.getString(key, "");
+                String strValue = sharedPreferences.getString(key, "240");
                 long value = 0;
                 try {
                     value = Long.parseLong(strValue);
