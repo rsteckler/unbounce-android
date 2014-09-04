@@ -21,6 +21,7 @@ import java.sql.Time;
 public class SettingsActivity extends Activity {
 
     private static final String TAG = "NlpUnbounceSettings: ";
+
     IabHelper mHelper;
 
     @Override
@@ -31,6 +32,20 @@ public class SettingsActivity extends Activity {
         if (savedInstanceState == null)
             getFragmentManager().beginTransaction().replace(android.R.id.content,
                     new PrefsFragment()).commit();
+
+        //Setup donations
+        //Normally we would secure this key, but we're not licensing this app.
+        String base64billing = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxwicOx54j03qBil36upqYab0uBWnf+WjoSRNOaTD9mkqj9bLM465gZlDXhutMZ+n5RlHUqmxl7jwH9KyYGTbwFqCxbLMCwR4oDhXVhX4fS6iggoHY7Ek6EzMT79x2XwCDg1pdQmX9d9TYRp32Sw2E+yg2uZKSPW29ikfdcmfkHcdCWrjFSuMJpC14R3d9McWQ7sg42eQq2spIuSWtP8ARGtj1M8eLVxgkQpXWrk9ijPgVcAbNZYWT9ndIZoKPg7VJVvzzAUNK/YOb+BzRurqJ42vCZy1+K+E4EUtmg/fxawHfXLZ3F/gNwictZO9fv1PYHPMa0sezSNVFAcm0yP1BwIDAQAB";
+        mHelper = new IabHelper(SettingsActivity.this, base64billing);
+        mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
+            public void onIabSetupFinished(IabResult result)
+            {
+                if (!result.isSuccess()) {
+                    Log.d(TAG, "In-app Billing setup failed: " + result);
+                }
+            }
+        });
+
     }
 
     @Override
@@ -72,8 +87,7 @@ public class SettingsActivity extends Activity {
             }};
     };
 
-    @SuppressLint("ValidFragment")
-    public class PrefsFragment extends PreferenceFragment
+    public static class PrefsFragment extends PreferenceFragment
             implements SharedPreferences.OnSharedPreferenceChangeListener {
 
 
@@ -101,20 +115,6 @@ public class SettingsActivity extends Activity {
             onSharedPreferenceChanged(sharedPref, "NlpWakeLock_blocked");
             onSharedPreferenceChanged(sharedPref, "NlpCollectorWakeLock_blocked");
             onSharedPreferenceChanged(sharedPref, "debug_logging");
-
-            //Setup donations
-            //Normally we would secure this key, but we're not licensing this app.
-            String base64billing = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxwicOx54j03qBil36upqYab0uBWnf+WjoSRNOaTD9mkqj9bLM465gZlDXhutMZ+n5RlHUqmxl7jwH9KyYGTbwFqCxbLMCwR4oDhXVhX4fS6iggoHY7Ek6EzMT79x2XwCDg1pdQmX9d9TYRp32Sw2E+yg2uZKSPW29ikfdcmfkHcdCWrjFSuMJpC14R3d9McWQ7sg42eQq2spIuSWtP8ARGtj1M8eLVxgkQpXWrk9ijPgVcAbNZYWT9ndIZoKPg7VJVvzzAUNK/YOb+BzRurqJ42vCZy1+K+E4EUtmg/fxawHfXLZ3F/gNwictZO9fv1PYHPMa0sezSNVFAcm0yP1BwIDAQAB";
-            SettingsActivity.this.mHelper = new IabHelper(SettingsActivity.this, base64billing);
-            SettingsActivity.this.mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
-                public void onIabSetupFinished(IabResult result)
-                {
-                    if (!result.isSuccess()) {
-                        Log.d(TAG, "In-app Billing setup failed: " + result);
-                    }
-                }
-            });
-
 
             //Hook up the custom clicks
             Preference pref = (Preference) findPreference("ALARM_WAKEUP_LOCATOR_blocked");
@@ -165,7 +165,7 @@ public class SettingsActivity extends Activity {
             pref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
-                    mHelper.launchPurchaseFlow(SettingsActivity.this, "donate_1", 1, SettingsActivity.this.mPurchaseFinishedListener, "1");
+                    ((SettingsActivity)getActivity()).mHelper.launchPurchaseFlow(getActivity(), "donate_1", 1, ((SettingsActivity)getActivity()).mPurchaseFinishedListener, "1");
                     return true;
                 }
             });
@@ -174,7 +174,7 @@ public class SettingsActivity extends Activity {
             pref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
-                    mHelper.launchPurchaseFlow(SettingsActivity.this, "donate_5", 5, SettingsActivity.this.mPurchaseFinishedListener, "5");
+                    ((SettingsActivity)getActivity()).mHelper.launchPurchaseFlow(getActivity(), "donate_5", 5, ((SettingsActivity)getActivity()).mPurchaseFinishedListener, "5");
                     return true;
                 }
             });
@@ -183,7 +183,7 @@ public class SettingsActivity extends Activity {
             pref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
-                    mHelper.launchPurchaseFlow(SettingsActivity.this, "donate_10", 10, SettingsActivity.this.mPurchaseFinishedListener, "10");
+                    ((SettingsActivity)getActivity()).mHelper.launchPurchaseFlow(getActivity(), "donate_10", 10, ((SettingsActivity)getActivity()).mPurchaseFinishedListener, "10");
                     return true;
                 }
             });

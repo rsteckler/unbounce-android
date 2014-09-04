@@ -47,6 +47,21 @@ public class nlpFix implements IXposedHookLoadPackage {
             hookAlarms(lpparam, prefs);
             hookWakeLocks(lpparam, prefs);
 
+
+//            findAndHookMethod("android.util.Slog", lpparam.classLoader, "d", String.class, String.class, new XC_MethodHook() {
+//                @Override
+//                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+//                String tag = (String)param.args[1];
+//                    if (tag.contains("NlpWakeLock") && tag.contains("acquireWL")) {
+//                        //stack trace?
+//                        new Exception().printStackTrace();
+//                        debugLog(prefs, "FOUND NLPWAKELOCK: " + tag);
+//                    }
+//
+////                debugLog(prefs, "Wakelock params: " + param.args[0] + ", " + param.args[1] + ", " + param.args[2] + ", " + param.args[3] + ", " + param.args[4] + ", " + param.args[5] + ", " + param.args[6]);
+//                }
+//            });
+
         }
     }
 
@@ -110,12 +125,11 @@ public class nlpFix implements IXposedHookLoadPackage {
         }
     }
 
-    private void try19To20WakeLockHook(final LoadPackageParam lpparam, final XSharedPreferences prefs) {
+    private void try19To20WakeLockHook(LoadPackageParam lpparam, final XSharedPreferences prefs) {
         findAndHookMethod("com.android.server.power.PowerManagerService", lpparam.classLoader, "acquireWakeLockInternal", android.os.IBinder.class, int.class, String.class, String.class, android.os.WorkSource.class, int.class, int.class, new XC_MethodHook() {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 
-//                debugLog(prefs, "Wakelock params: " + param.args[0] + ", " + param.args[1] + ", " + param.args[2] + ", " + param.args[3] + ", " + param.args[4] + ", " + param.args[5] + ", " + param.args[6]);
                 String wakeLockName = (String)param.args[2];
                 handleWakeLock(param, prefs, wakeLockName);
             }
