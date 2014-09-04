@@ -19,13 +19,14 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage.LoadPackageParam;
 
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
+import static de.robv.android.xposed.XposedHelpers.findClass;
 
 import de.robv.android.xposed.XC_MethodHook;
 
 public class nlpFix implements IXposedHookLoadPackage {
 
     private static final String TAG = "NlpUnbounce: ";
-    private static final String VERSION = "1.1.3"; //This needs to be pulled from the manifest or gradle build.
+    private static final String VERSION = "1.1.4"; //This needs to be pulled from the manifest or gradle build.
     private long mLastLocatorAlarm = 0;  // Last alarm attempt
     private long mLastDetectionAlarm = 0;  // Last alarm attempt
     private long mLastNlpWakeLock = 0;  // Last wakelock attempt
@@ -109,10 +110,12 @@ public class nlpFix implements IXposedHookLoadPackage {
         }
     }
 
-    private void try19To20WakeLockHook(LoadPackageParam lpparam, final XSharedPreferences prefs) {
+    private void try19To20WakeLockHook(final LoadPackageParam lpparam, final XSharedPreferences prefs) {
         findAndHookMethod("com.android.server.power.PowerManagerService", lpparam.classLoader, "acquireWakeLockInternal", android.os.IBinder.class, int.class, String.class, String.class, android.os.WorkSource.class, int.class, int.class, new XC_MethodHook() {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+
+//                debugLog(prefs, "Wakelock params: " + param.args[0] + ", " + param.args[1] + ", " + param.args[2] + ", " + param.args[3] + ", " + param.args[4] + ", " + param.args[5] + ", " + param.args[6]);
                 String wakeLockName = (String)param.args[2];
                 handleWakeLock(param, prefs, wakeLockName);
             }
@@ -166,7 +169,7 @@ public class nlpFix implements IXposedHookLoadPackage {
         if (wakeLockName.equals("NlpCollectorWakeLock"))
         {
             //If we're blocking them
-            if (prefs.getBoolean("wakelock_collector_enabled", false)) {
+            if (prefs.getBoolean("wakelock_collector_enabled", true)) {
                 int collectorMaxFreq = tryParseInt(prefs.getString("wakelock_collector_seconds", "240"));
                 collectorMaxFreq *= 1000; //convert to ms
 
@@ -190,7 +193,7 @@ public class nlpFix implements IXposedHookLoadPackage {
         }
         else if (wakeLockName.equals("NlpWakeLock"))
         {
-            if (prefs.getBoolean("wakelock_nlp_enabled", false)) {
+            if (prefs.getBoolean("wakelock_nlp_enabled", true)) {
 
                 int nlpMaxFreq = tryParseInt(prefs.getString("wakelock_nlp_seconds", "240"));
                 nlpMaxFreq *= 1000; //convert to ms
@@ -247,7 +250,7 @@ public class nlpFix implements IXposedHookLoadPackage {
             }
 
             if (intent.getAction().equals("com.google.android.gms.nlp.ALARM_WAKEUP_LOCATOR")) {
-                if (prefs.getBoolean("alarm_locator_enabled", false)) {
+                if (prefs.getBoolean("alarm_locator_enabled", true)) {
                     int locatorMaxFreq = tryParseInt(prefs.getString("alarm_locator_seconds", "240"));
                     locatorMaxFreq *= 1000; //convert to ms
 
@@ -269,7 +272,7 @@ public class nlpFix implements IXposedHookLoadPackage {
                 }
             }
             if (intent.getAction().equals("com.google.android.gms.nlp.ALARM_WAKEUP_ACTIVITY_DETECTION")) {
-                if (prefs.getBoolean("alarm_detection_enabled", false)) {
+                if (prefs.getBoolean("alarm_detection_enabled", true)) {
                     int detectionMaxFreq = tryParseInt(prefs.getString("alarm_detection_seconds", "240"));
                     detectionMaxFreq *= 1000; //convert to ms
 

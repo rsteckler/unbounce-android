@@ -99,7 +99,7 @@
             android:key=""
             android:editable="false"
             android:defaultValue="0"
-            android:summary="Version: 1.1.3"
+            android:summary="Version: 1.1.4"
             />
 
         <CheckBoxPreference
