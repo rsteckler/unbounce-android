@@ -19,7 +19,6 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage.LoadPackageParam;
 
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
-import static de.robv.android.xposed.XposedHelpers.findClass;
 
 import de.robv.android.xposed.XC_MethodHook;
 
@@ -46,22 +45,6 @@ public class nlpFix implements IXposedHookLoadPackage {
 
             hookAlarms(lpparam, prefs);
             hookWakeLocks(lpparam, prefs);
-
-
-//            findAndHookMethod("android.util.Slog", lpparam.classLoader, "d", String.class, String.class, new XC_MethodHook() {
-//                @Override
-//                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-//                String tag = (String)param.args[1];
-//                    if (tag.contains("NlpWakeLock") && tag.contains("acquireWL")) {
-//                        //stack trace?
-//                        new Exception().printStackTrace();
-//                        debugLog(prefs, "FOUND NLPWAKELOCK: " + tag);
-//                    }
-//
-////                debugLog(prefs, "Wakelock params: " + param.args[0] + ", " + param.args[1] + ", " + param.args[2] + ", " + param.args[3] + ", " + param.args[4] + ", " + param.args[5] + ", " + param.args[6]);
-//                }
-//            });
-
         }
     }
 
@@ -194,7 +177,7 @@ public class nlpFix implements IXposedHookLoadPackage {
                 if (timeSinceLastWakeLock < collectorMaxFreq) {
                     //Not enough time has passed since the last wakelock.  Deny the wakelock
                     param.setResult(null);
-                    incrementBlockCount(prefs, param, "NlpCollectorWakeLock");
+                    incrementBlockCount(param, "NlpCollectorWakeLock");
 
                     debugLog(prefs, "Preventing NlpCollectorWakeLock.  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
 
@@ -219,7 +202,7 @@ public class nlpFix implements IXposedHookLoadPackage {
                 if (timeSinceLastWakeLock < nlpMaxFreq) {
                     //Not enough time has passed since the last wakelock.  Deny the wakelock
                     param.setResult(null);
-                    incrementBlockCount(prefs, param, "NlpWakeLock");
+                    incrementBlockCount(param, "NlpWakeLock");
 
                     debugLog(prefs, "Preventing NlpWakeLock.  Max Interval: " + nlpMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
 
@@ -275,7 +258,7 @@ public class nlpFix implements IXposedHookLoadPackage {
                     if (timeSinceLastLocator < locatorMaxFreq) {
                         //Not enough time has passed since the last alarm.  Remove it from the triggerlist
                         triggers.remove(j);
-                        incrementBlockCount(prefs, param, "ALARM_WAKEUP_LOCATOR");
+                        incrementBlockCount(param, "ALARM_WAKEUP_LOCATOR");
 
                         debugLog(prefs, "Preventing ALARM_WAKEUP_LOCATOR.  Max Interval: " + locatorMaxFreq + " Time since last granted: " + timeSinceLastLocator);
                     } else {
@@ -297,7 +280,7 @@ public class nlpFix implements IXposedHookLoadPackage {
                     if (timeSinceLastDetection < detectionMaxFreq) {
                         //Not enough time has passed since the last wakelock.  Remove it from the triggerlist.
                         triggers.remove(j);
-                        incrementBlockCount(prefs, param, "ALARM_WAKEUP_ACTIVITY_DETECTION");
+                        incrementBlockCount(param, "ALARM_WAKEUP_ACTIVITY_DETECTION");
 
                         debugLog(prefs, "Preventing ALARM_WAKEUP_ACTIVITY_DETECTION.  Max Interval: " + detectionMaxFreq + " Time since last granted: " + timeSinceLastDetection);
                     }
@@ -311,7 +294,7 @@ public class nlpFix implements IXposedHookLoadPackage {
         }
     }
 
-    private void incrementBlockCount(XSharedPreferences prefs, XC_MethodHook.MethodHookParam param, String name) {
+    private void incrementBlockCount(XC_MethodHook.MethodHookParam param, String name) {
 
         Context context = (Context)XposedHelpers.getObjectField(param.thisObject, "mContext");
 
