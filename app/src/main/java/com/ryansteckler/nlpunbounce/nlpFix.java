@@ -144,6 +144,15 @@ public class nlpFix implements IXposedHookLoadPackage {
                 handleWakeLockAcquire(param, wakeLockName, lock);
             }
         });
+
+        findAndHookMethod("com.android.server.power.PowerManagerService", lpparam.classLoader, "releaseWakeLockInternal", android.os.IBinder.class, int.class, new XC_MethodHook() {
+            @Override
+            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                IBinder lock = (IBinder)param.args[0];
+                handleWakeLockRelease(param, lock);
+            }
+        });
+
     }
 
     private void try15To16WakeLockHook(LoadPackageParam lpparam) {
@@ -155,6 +164,15 @@ public class nlpFix implements IXposedHookLoadPackage {
                 handleWakeLockAcquire(param, wakeLockName, lock);
             }
         });
+
+        findAndHookMethod("com.android.server.power.PowerManagerService", lpparam.classLoader, "releaseWakeLockLocked", android.os.IBinder.class, int.class, boolean.class, new XC_MethodHook() {
+            @Override
+            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                IBinder lock = (IBinder)param.args[0];
+                handleWakeLockRelease(param, lock);
+            }
+        });
+
     }
 
     private void try19To20AlarmHook(LoadPackageParam lpparam) {
@@ -247,10 +265,6 @@ public class nlpFix implements IXposedHookLoadPackage {
             curStats.setTimeStarted(SystemClock.elapsedRealtime());
             mCurrentWakeLocks.put(lock, curStats);
         }
-        else
-        {
-//            debugLog("Duplicate wakelock acquisition: " + wakeLockName + "(" + lock + ")");
-        }
     }
 
     private void handleWakeLockRelease(XC_MethodHook.MethodHookParam param, IBinder lock) {
@@ -261,10 +275,6 @@ public class nlpFix implements IXposedHookLoadPackage {
         {
             curStats.setTimeStopped(SystemClock.elapsedRealtime());
             sendStats(param, curStats);
-        }
-        else
-        {
-//            debugLog("Release without acquisition: " + lock);
         }
     }
 
