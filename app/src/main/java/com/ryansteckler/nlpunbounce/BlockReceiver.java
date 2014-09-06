@@ -20,7 +20,7 @@ public class BlockReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
         if (action.equals("com.ryansteckler.nlpunbounce.INCREMENT_BLOCK_COUNT")) {
-            SharedPreferences prefs = context.getSharedPreferences(BlockReceiver.class.getPackage().getName() + "_preferences",  Context.MODE_WORLD_READABLE);
+            SharedPreferences prefs = context.getSharedPreferences(BlockReceiver.class.getPackage().getName() + "_blockpreferences",  Context.MODE_WORLD_READABLE);
 
             String blockName = intent.getStringExtra("name") + "_blocked";
             long count = prefs.getLong(blockName, 0);

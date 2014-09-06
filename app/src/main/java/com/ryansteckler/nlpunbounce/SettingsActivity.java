@@ -2,6 +2,7 @@ package com.ryansteckler.nlpunbounce;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -105,6 +106,10 @@ public class SettingsActivity extends Activity {
 
             final SharedPreferences sharedPref = getPreferenceScreen().getSharedPreferences();
             sharedPref.registerOnSharedPreferenceChangeListener(this);
+
+            final SharedPreferences blockPref = this.getActivity(). getSharedPreferences(BlockReceiver.class.getPackage().getName() + "_blockpreferences", Context.MODE_WORLD_READABLE);
+            blockPref.registerOnSharedPreferenceChangeListener(this);
+
             onSharedPreferenceChanged(sharedPref, "alarm_locator_enabled");
             onSharedPreferenceChanged(sharedPref, "alarm_detection_enabled");
             onSharedPreferenceChanged(sharedPref, "wakelock_nlp_enabled");
@@ -113,21 +118,19 @@ public class SettingsActivity extends Activity {
             onSharedPreferenceChanged(sharedPref, "alarm_detection_seconds");
             onSharedPreferenceChanged(sharedPref, "wakelock_nlp_seconds");
             onSharedPreferenceChanged(sharedPref, "wakelock_collector_seconds");
-            onSharedPreferenceChanged(sharedPref, "ALARM_WAKEUP_LOCATOR_blocked");
-            onSharedPreferenceChanged(sharedPref, "ALARM_WAKEUP_ACTIVITY_DETECTION_blocked");
-            onSharedPreferenceChanged(sharedPref, "NlpWakeLock_blocked");
-            onSharedPreferenceChanged(sharedPref, "NlpCollectorWakeLock_blocked");
             onSharedPreferenceChanged(sharedPref, "debug_logging");
+
+            onSharedPreferenceChanged(blockPref, "ALARM_WAKEUP_LOCATOR_blocked");
+            onSharedPreferenceChanged(blockPref, "ALARM_WAKEUP_ACTIVITY_DETECTION_blocked");
+            onSharedPreferenceChanged(blockPref, "NlpWakeLock_blocked");
+            onSharedPreferenceChanged(blockPref, "NlpCollectorWakeLock_blocked");
 
             //Hook up the custom clicks
             Preference pref = (Preference) findPreference("ALARM_WAKEUP_LOCATOR_blocked");
             pref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
-                    SharedPreferences.Editor edit = sharedPref.edit();
-                    edit.putLong("ALARM_WAKEUP_LOCATOR_blocked", 0);
-                    edit.commit();
-                    return true;
+                    return resetBlockCount(preference, blockPref);
                 }
             });
 
@@ -135,10 +138,7 @@ public class SettingsActivity extends Activity {
             pref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
-                    SharedPreferences.Editor edit = sharedPref.edit();
-                    edit.putLong("ALARM_WAKEUP_ACTIVITY_DETECTION_blocked", 0);
-                    edit.commit();
-                    return true;
+                    return resetBlockCount(preference, blockPref);
                 }
             });
 
@@ -146,10 +146,7 @@ public class SettingsActivity extends Activity {
             pref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
-                    SharedPreferences.Editor edit = sharedPref.edit();
-                    edit.putLong("NlpWakeLock_blocked", 0);
-                    edit.commit();
-                    return true;
+                    return resetBlockCount(preference, blockPref);
                 }
             });
 
@@ -157,10 +154,7 @@ public class SettingsActivity extends Activity {
             pref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
-                    SharedPreferences.Editor edit = sharedPref.edit();
-                    edit.putLong("NlpCollectorWakeLock_blocked", 0);
-                    edit.commit();
-                    return true;
+                    return resetBlockCount(preference, blockPref);
                 }
             });
 
@@ -201,6 +195,13 @@ public class SettingsActivity extends Activity {
                 }
             });
 
+        }
+
+        private boolean resetBlockCount(Preference preference, SharedPreferences blockPref) {
+            SharedPreferences.Editor edit = blockPref.edit();
+            edit.putLong(preference.getKey(), 0);
+            edit.commit();
+            return true;
         }
 
         private void dumpStats(boolean byCount)
