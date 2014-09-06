@@ -30,8 +30,11 @@
         <receiver android:name=".BlockReceiver"
             android:enabled="true"
             android:exported="true" >
-        <intent-filter>
+            <intent-filter>
                 <action android:name="com.ryansteckler.nlpunbounce.INCREMENT_BLOCK_COUNT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.ryansteckler.nlpunbounce.SEND_STATS" />
             </intent-filter>
         </receiver>
     </application>

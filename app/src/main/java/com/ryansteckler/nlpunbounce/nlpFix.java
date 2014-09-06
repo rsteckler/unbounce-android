@@ -7,9 +7,11 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.os.IBinder;
 import android.os.SystemClock;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XSharedPreferences;
@@ -33,6 +35,9 @@ public class nlpFix implements IXposedHookLoadPackage {
 
     private static boolean showedUnsupportedAlarmMessage = false;
 
+    XSharedPreferences m_prefs;
+    public static HashMap<IBinder, WakeLockStats> mCurrentWakeLocks;
+
     @Override
     public void handleLoadPackage(LoadPackageParam lpparam) throws Throwable {
 
@@ -40,32 +45,34 @@ public class nlpFix implements IXposedHookLoadPackage {
 
             XposedBridge.log(TAG + "Version " + VERSION);
 
-            final XSharedPreferences prefs = new XSharedPreferences(nlpFix.class.getPackage().getName());
-            prefs.reload();
+            m_prefs = new XSharedPreferences(nlpFix.class.getPackage().getName());
+            m_prefs.reload();
 
-            hookAlarms(lpparam, prefs);
-            hookWakeLocks(lpparam, prefs);
+            mCurrentWakeLocks = new HashMap<IBinder, WakeLockStats>();
+
+            hookAlarms(lpparam);
+            hookWakeLocks(lpparam);
         }
     }
 
-    private void hookAlarms(LoadPackageParam lpparam, XSharedPreferences prefs) {
+    private void hookAlarms(LoadPackageParam lpparam) {
         boolean alarmsHooked = false;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
         {
             //Try for alarm hooks for API levels >= 19
-            debugLog(prefs, "Attempting 19to20 AlarmHook");
-            try19To20AlarmHook(lpparam, prefs);
-            debugLog(prefs, "Successful 19to20 AlarmHook");
+            debugLog("Attempting 19to20 AlarmHook");
+            try19To20AlarmHook(lpparam);
+            debugLog("Successful 19to20 AlarmHook");
             alarmsHooked = true;
         }
         else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1 &&
                 Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN_MR2)
         {
             //Try for alarm hooks for API levels 15-18.
-            debugLog(prefs, "Attempting 15to18 AlarmHook");
-            try15To18AlarmHook(lpparam, prefs);
-            debugLog(prefs, "Successful 15to18 AlarmHook");
+            debugLog("Attempting 15to18 AlarmHook");
+            try15To18AlarmHook(lpparam);
+            debugLog("Successful 15to18 AlarmHook");
             alarmsHooked = true;
 
         }
@@ -75,31 +82,31 @@ public class nlpFix implements IXposedHookLoadPackage {
         }
     }
 
-    private void hookWakeLocks(LoadPackageParam lpparam, XSharedPreferences prefs) {
+    private void hookWakeLocks(LoadPackageParam lpparam) {
         boolean wakeLocksHooked = false;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             //Try for wakelock hooks for API levels 19-20
-            debugLog(prefs, "Attempting 19to20 WakeLockHook");
-            try19To20WakeLockHook(lpparam, prefs);
-            debugLog(prefs, "Successful 19to20 WakeLockHook");
+            debugLog("Attempting 19to20 WakeLockHook");
+            try19To20WakeLockHook(lpparam);
+            debugLog("Successful 19to20 WakeLockHook");
             wakeLocksHooked = true;
         }
         else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1 &&
                 Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN_MR2) {
             //Try for wakelock hooks for API levels 17-18
-            debugLog(prefs, "Attempting 17to18 WakeLockHook");
-            try17To18WakeLockHook(lpparam, prefs);
-            debugLog(prefs, "Successful 17to18 WakeLockHook");
+            debugLog("Attempting 17to18 WakeLockHook");
+            try17To18WakeLockHook(lpparam);
+            debugLog("Successful 17to18 WakeLockHook");
             wakeLocksHooked = true;
         }
         else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1 &&
                 Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN)
         {
             //Try for wakelock hooks for API levels 15-16
-            debugLog(prefs, "Attempting 15to16 WakeLockHook");
-            try15To16WakeLockHook(lpparam, prefs);
-            debugLog(prefs, "Successful 15to16 WakeLockHook");
+            debugLog("Attempting 15to16 WakeLockHook");
+            try15To16WakeLockHook(lpparam);
+            debugLog("Successful 15to16 WakeLockHook");
             wakeLocksHooked = true;
         }
 
@@ -108,66 +115,76 @@ public class nlpFix implements IXposedHookLoadPackage {
         }
     }
 
-    private void try19To20WakeLockHook(LoadPackageParam lpparam, final XSharedPreferences prefs) {
+    private void try19To20WakeLockHook(LoadPackageParam lpparam) {
         findAndHookMethod("com.android.server.power.PowerManagerService", lpparam.classLoader, "acquireWakeLockInternal", android.os.IBinder.class, int.class, String.class, String.class, android.os.WorkSource.class, int.class, int.class, new XC_MethodHook() {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-
                 String wakeLockName = (String)param.args[2];
-                handleWakeLock(param, prefs, wakeLockName);
+                IBinder lock = (IBinder)param.args[0];
+                handleWakeLockAcquire(param, wakeLockName, lock);
             }
         });
+
+        findAndHookMethod("com.android.server.power.PowerManagerService", lpparam.classLoader, "releaseWakeLockInternal", android.os.IBinder.class, int.class, new XC_MethodHook() {
+            @Override
+            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                IBinder lock = (IBinder)param.args[0];
+                handleWakeLockRelease(param, lock);
+            }
+        });
+
     }
 
-    private void try17To18WakeLockHook(LoadPackageParam lpparam, final XSharedPreferences prefs) {
+    private void try17To18WakeLockHook(LoadPackageParam lpparam) {
         findAndHookMethod("com.android.server.power.PowerManagerService", lpparam.classLoader, "acquireWakeLockInternal", android.os.IBinder.class, int.class, String.class, android.os.WorkSource.class, int.class, int.class, new XC_MethodHook() {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                 String wakeLockName = (String)param.args[2];
-                handleWakeLock(param, prefs, wakeLockName);
+                IBinder lock = (IBinder)param.args[0];
+                handleWakeLockAcquire(param, wakeLockName, lock);
             }
         });
     }
 
-    private void try15To16WakeLockHook(LoadPackageParam lpparam, final XSharedPreferences prefs) {
+    private void try15To16WakeLockHook(LoadPackageParam lpparam) {
         findAndHookMethod("com.android.server.PowerManagerService", lpparam.classLoader, "acquireWakeLockLocked", int.class, android.os.IBinder.class, int.class, int.class, String.class, android.os.WorkSource.class, new XC_MethodHook() {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                 String wakeLockName = (String)param.args[4];
-                handleWakeLock(param, prefs, wakeLockName);
+                IBinder lock = (IBinder)param.args[1];
+                handleWakeLockAcquire(param, wakeLockName, lock);
             }
         });
     }
 
-    private void try19To20AlarmHook(LoadPackageParam lpparam, final XSharedPreferences prefs) {
+    private void try19To20AlarmHook(LoadPackageParam lpparam) {
         findAndHookMethod("com.android.server.AlarmManagerService", lpparam.classLoader, "triggerAlarmsLocked", ArrayList.class, long.class, long.class, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 ArrayList<Object> triggers = (ArrayList<Object>)param.args[0];
-                handleAlarm(prefs, param, triggers);
+                handleAlarm(param, triggers);
             }
         });
     }
 
-    private void try15To18AlarmHook(LoadPackageParam lpparam, final XSharedPreferences prefs) {
+    private void try15To18AlarmHook(LoadPackageParam lpparam) {
         findAndHookMethod("com.android.server.AlarmManagerService", lpparam.classLoader, "triggerAlarmsLocked", ArrayList.class, ArrayList.class, long.class, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 ArrayList<Object> triggers = (ArrayList<Object>)param.args[1];
-                handleAlarm(prefs, param, triggers);
+                handleAlarm(param, triggers);
             }
         });
     }
 
-    private void handleWakeLock(XC_MethodHook.MethodHookParam param, XSharedPreferences prefs, String wakeLockName) {
-        prefs.reload();
-
+    private void handleWakeLockAcquire(XC_MethodHook.MethodHookParam param, String wakeLockName, IBinder lock) {
+        m_prefs.reload();
 
         if (wakeLockName.equals("NlpCollectorWakeLock"))
         {
             //If we're blocking them
-            if (prefs.getBoolean("wakelock_collector_enabled", true)) {
-                int collectorMaxFreq = tryParseInt(prefs.getString("wakelock_collector_seconds", "240"));
+            if (m_prefs.getBoolean("wakelock_collector_enabled", true)) {
+                int collectorMaxFreq = tryParseInt(m_prefs.getString("wakelock_collector_seconds", "240"));
                 collectorMaxFreq *= 1000; //convert to ms
 
                 //Debounce this to our minimum interval.
@@ -179,20 +196,21 @@ public class nlpFix implements IXposedHookLoadPackage {
                     param.setResult(null);
                     incrementBlockCount(param, "NlpCollectorWakeLock");
 
-                    debugLog(prefs, "Preventing NlpCollectorWakeLock.  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
+                    debugLog("Preventing NlpCollectorWakeLock.  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
 
                 } else {
                     //Allow the wakelock
                     XposedBridge.log(TAG + "Allowing NlpCollectorWakeLock.  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
                     mLastNlpCollectorWakeLock = now;
+                    recordAcquire(wakeLockName, lock);
                 }
             }
         }
         else if (wakeLockName.equals("NlpWakeLock"))
         {
-            if (prefs.getBoolean("wakelock_nlp_enabled", true)) {
+            if (m_prefs.getBoolean("wakelock_nlp_enabled", true)) {
 
-                int nlpMaxFreq = tryParseInt(prefs.getString("wakelock_nlp_seconds", "240"));
+                int nlpMaxFreq = tryParseInt(m_prefs.getString("wakelock_nlp_seconds", "240"));
                 nlpMaxFreq *= 1000; //convert to ms
 
                 //Debounce this to our minimum interval.
@@ -204,20 +222,72 @@ public class nlpFix implements IXposedHookLoadPackage {
                     param.setResult(null);
                     incrementBlockCount(param, "NlpWakeLock");
 
-                    debugLog(prefs, "Preventing NlpWakeLock.  Max Interval: " + nlpMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
+                    debugLog("Preventing NlpWakeLock.  Max Interval: " + nlpMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
 
                 } else {
                     //Allow the wakelock
                     XposedBridge.log(TAG + "Allowing NlpWakeLock.  Max Interval: " + nlpMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
-
                     mLastNlpWakeLock = now;
+                    recordAcquire(wakeLockName, lock);
                 }
+            }
+        }
+        else {
+            recordAcquire(wakeLockName, lock);
+        }
+    }
+
+    private void recordAcquire(String wakeLockName, IBinder lock) {
+        //Get the lock
+        WakeLockStats curStats = mCurrentWakeLocks.get(lock);
+        if (curStats == null)
+        {
+            curStats = new WakeLockStats();
+            curStats.setName(wakeLockName);
+            curStats.setTimeStarted(SystemClock.elapsedRealtime());
+            mCurrentWakeLocks.put(lock, curStats);
+        }
+        else
+        {
+//            debugLog("Duplicate wakelock acquisition: " + wakeLockName + "(" + lock + ")");
+        }
+    }
+
+    private void handleWakeLockRelease(XC_MethodHook.MethodHookParam param, IBinder lock) {
+        m_prefs.reload();
+
+        WakeLockStats curStats = mCurrentWakeLocks.remove(lock);
+        if (curStats != null)
+        {
+            curStats.setTimeStopped(SystemClock.elapsedRealtime());
+            sendStats(param, curStats);
+        }
+        else
+        {
+//            debugLog("Release without acquisition: " + lock);
+        }
+    }
+
+    private void sendStats(XC_MethodHook.MethodHookParam param, WakeLockStats curStat)
+    {
+        Context context = (Context)XposedHelpers.getObjectField(param.thisObject, "mContext");
+
+        if (context != null) {
+            Intent intent = new Intent("com.ryansteckler.nlpunbounce.SEND_STATS");
+            //TODO:  add FLAG_RECEIVER_REGISTERED_ONLY_BEFORE_BOOT (hardcoded value) to the intent to avoid needing to catch
+            //      the IllegalStateException.  The flag value changed between 4.3 and 4.4  :/
+            intent.putExtra("stat", curStat);
+
+            try {
+                context.sendBroadcast(intent);
+            } catch (IllegalStateException ise) {
+                //Ignore.  This is because boot hasn't completed yet.
             }
         }
     }
 
-    private void handleAlarm(XSharedPreferences prefs, XC_MethodHook.MethodHookParam param, ArrayList<Object> triggers) {
-        prefs.reload();
+    private void handleAlarm(XC_MethodHook.MethodHookParam param, ArrayList<Object> triggers) {
+        m_prefs.reload();
 
         for (int j = triggers.size() - 1; j >= 0; j--) {
             Object curAlarm = triggers.get(j);
@@ -247,8 +317,8 @@ public class nlpFix implements IXposedHookLoadPackage {
             }
 
             if (intent.getAction().equals("com.google.android.gms.nlp.ALARM_WAKEUP_LOCATOR")) {
-                if (prefs.getBoolean("alarm_locator_enabled", true)) {
-                    int locatorMaxFreq = tryParseInt(prefs.getString("alarm_locator_seconds", "240"));
+                if (m_prefs.getBoolean("alarm_locator_enabled", true)) {
+                    int locatorMaxFreq = tryParseInt(m_prefs.getString("alarm_locator_seconds", "240"));
                     locatorMaxFreq *= 1000; //convert to ms
 
                     //Debounce this to our minimum interval.
@@ -260,7 +330,7 @@ public class nlpFix implements IXposedHookLoadPackage {
                         triggers.remove(j);
                         incrementBlockCount(param, "ALARM_WAKEUP_LOCATOR");
 
-                        debugLog(prefs, "Preventing ALARM_WAKEUP_LOCATOR.  Max Interval: " + locatorMaxFreq + " Time since last granted: " + timeSinceLastLocator);
+                        debugLog("Preventing ALARM_WAKEUP_LOCATOR.  Max Interval: " + locatorMaxFreq + " Time since last granted: " + timeSinceLastLocator);
                     } else {
                         //Allow the wakelock
                         XposedBridge.log(TAG + "Allowing ALARM_WAKEUP_LOCATOR.  Max Interval: " + locatorMaxFreq + " Time since last granted: " + timeSinceLastLocator);
@@ -269,8 +339,8 @@ public class nlpFix implements IXposedHookLoadPackage {
                 }
             }
             if (intent.getAction().equals("com.google.android.gms.nlp.ALARM_WAKEUP_ACTIVITY_DETECTION")) {
-                if (prefs.getBoolean("alarm_detection_enabled", true)) {
-                    int detectionMaxFreq = tryParseInt(prefs.getString("alarm_detection_seconds", "240"));
+                if (m_prefs.getBoolean("alarm_detection_enabled", true)) {
+                    int detectionMaxFreq = tryParseInt(m_prefs.getString("alarm_detection_seconds", "240"));
                     detectionMaxFreq *= 1000; //convert to ms
 
                     //Debounce this to our minimum interval.
@@ -282,7 +352,7 @@ public class nlpFix implements IXposedHookLoadPackage {
                         triggers.remove(j);
                         incrementBlockCount(param, "ALARM_WAKEUP_ACTIVITY_DETECTION");
 
-                        debugLog(prefs, "Preventing ALARM_WAKEUP_ACTIVITY_DETECTION.  Max Interval: " + detectionMaxFreq + " Time since last granted: " + timeSinceLastDetection);
+                        debugLog("Preventing ALARM_WAKEUP_ACTIVITY_DETECTION.  Max Interval: " + detectionMaxFreq + " Time since last granted: " + timeSinceLastDetection);
                     }
                     else {
                         //Allow the wakelock
@@ -304,8 +374,6 @@ public class nlpFix implements IXposedHookLoadPackage {
             //      the IllegalStateException.  The flag value changed between 4.3 and 4.4  :/
             intent.putExtra("name", name);
             try {
-
-
                 context.sendBroadcast(intent);
             } catch (IllegalStateException ise) {
                 //Ignore.  This is becuase boot hasn't completed yet.
@@ -321,9 +389,9 @@ public class nlpFix implements IXposedHookLoadPackage {
         }
     }
 
-    private void debugLog(XSharedPreferences prefs, String log)
+    private void debugLog(String log)
     {
-        if (prefs.getBoolean("debug_logging", false))
+        if (m_prefs.getBoolean("debug_logging", false))
         {
             XposedBridge.log(TAG + log);
         }

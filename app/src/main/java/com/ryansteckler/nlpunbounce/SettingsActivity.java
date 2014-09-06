@@ -17,6 +17,9 @@ import com.ryansteckler.inappbilling.IabResult;
 import com.ryansteckler.inappbilling.Purchase;
 
 import java.sql.Time;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class SettingsActivity extends Activity {
 
@@ -187,6 +190,31 @@ public class SettingsActivity extends Activity {
                     return true;
                 }
             });
+
+            pref = (Preference) findPreference("about_author");
+            pref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    dumpStats(SortWakeLockMap.COUNT);
+                    dumpStats(SortWakeLockMap.DURATION);
+                    return true;
+                }
+            });
+
+        }
+
+        private void dumpStats(boolean byCount)
+        {
+            Log.d(TAG, "WakeLocks sorted by: " + (byCount ? "Count" : "Duration"));
+
+            HashMap<String, WakeLockStatsCombined> sorted = SortWakeLockMap.sortByComparator(BlockReceiver.mWakeLockStats, byCount);
+            Iterator it = sorted.entrySet().iterator();
+            while (it.hasNext()) {
+                Map.Entry pairs = (Map.Entry) it.next();
+                WakeLockStatsCombined curStat = (WakeLockStatsCombined) pairs.getValue();
+                Log.d(TAG, pairs.getKey() + "-> Count: " + curStat.getCount() + " Duration: " + curStat.getDuration());
+            }
+            Log.d(TAG, "------ END");
         }
 
         private void enableDependent(String control, boolean enable)
