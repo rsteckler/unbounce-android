@@ -1,4 +1,4 @@
-package com.ryansteckler.nlpunbounce;
+package com.ryansteckler.nlpunbounce.models;
 
 /**
  * Created by rsteckler on 9/5/14.

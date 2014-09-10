@@ -15,4 +15,8 @@
     <dimen name="double_sub_icon_size">40sp</dimen>
     <dimen name="subheader_text_size">20sp</dimen>
     <dimen name="button_height">40sp</dimen>
+
+    <!-- Start new design -->
+    <dimen name="textsize_body1">14sp</dimen>
+    <dimen name="textsize_caption">12sp</dimen>
 </resources>

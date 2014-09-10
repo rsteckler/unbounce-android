@@ -1,36 +1,23 @@
 package com.ryansteckler.nlpunbounce;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.app.FragmentManager;
-import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.app.ListFragment;
-import android.text.method.CharacterPickerDialog;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.view.animation.DecelerateInterpolator;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 
-import com.ryansteckler.nlpunbounce.com.ryansteckler.nlpunbounce.adapters.WakelocksAdapter;
+import com.ryansteckler.nlpunbounce.adapters.WakelocksAdapter;
+import com.ryansteckler.nlpunbounce.helpers.SortWakeLocks;
+import com.ryansteckler.nlpunbounce.models.WakeLockStatsCombined;
 
 import java.util.ArrayList;
 
@@ -38,32 +25,20 @@ import java.util.ArrayList;
  * A fragment representing a list of Items.
  * <p />
  * <p />
- * Activities containing this fragment MUST implement the {@link OnWakelockFragmentInteractionListener}
+ * Activities containing this fragment MUST implement the {@link OnFragmentInteractionListener}
  * interface.
  */
-public class WakelockFragment extends ListFragment {
+public class WakelocksFragment extends ListFragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    private OnWakelockFragmentInteractionListener mListener;
-
+    private OnFragmentInteractionListener mListener;
     private WakelocksAdapter mAdapter;
+    private boolean mShowingDetail = false;
 
-    private Animator mCurrentAnimator;
+    //Whether we're sorting the wakelocks list by duration or count
+    private boolean mSortByTime = true;
 
-    // TODO: Rename and change types of parameters
-    public static WakelockFragment newInstance(int sectionNumber) {
-        WakelockFragment fragment = new WakelockFragment();
-        Bundle args = new Bundle();
-        args.putInt(MaterialSettingsActivity.ARG_SECTION_NUMBER, sectionNumber);
-        fragment.setArguments(args);
+    public static WakelocksFragment newInstance(int sectionNumber) {
+        WakelocksFragment fragment = new WakelocksFragment();
         return fragment;
     }
 
@@ -71,40 +46,45 @@ public class WakelockFragment extends ListFragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public WakelockFragment() {
+    public WakelocksFragment() {
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View view = inflater.inflate(R.layout.fragment_wakelock_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_wakelocks, container, false);
+
         return view;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        if (mListener != null)
+            mListener.onWakelocksSetTitle("Wakelocks");
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
         mAdapter = new WakelocksAdapter(getActivity(), new ArrayList<WakeLockStatsCombined>(BlockReceiver.mWakeLockStats.values()));
+        mAdapter.sort(SortWakeLocks.getListComparator(!mSortByTime));
         setListAdapter(mAdapter);
-    }
 
+        setHasOptionsMenu(true);
+    }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        ((MaterialSettingsActivity) activity).onSectionAttached(
-                getArguments().getInt(MaterialSettingsActivity.ARG_SECTION_NUMBER));
+        try {
+            mListener = (OnFragmentInteractionListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
     }
 
     @Override
@@ -115,9 +95,12 @@ public class WakelockFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, final View v, int position, long id) {
-        super.onListItemClick(l, v, position, id);;
-        v.setBackgroundColor(Color.parseColor("#0CBB9B"));
-        final Drawable oldDrawable = null;
+        super.onListItemClick(l, v, position, id);
+        //This suppresses the android system's click handler, which highlights the button, then fades it
+        //back to the background, THEN starts our animation.  We just want it to fade to our desired color and stay
+        //there until the animation takes over.  Looks sexier that way.
+        v.setBackgroundResource(R.drawable.list_item_down);
+
         //Not great form, but the animation to show the details view takes 400ms.  We'll set our background
         //color back to normal once the animation finishes.  I wish there was a more elegant way to avoid
         //a timer.
@@ -127,52 +110,52 @@ public class WakelockFragment extends ListFragment {
                         v.setBackgroundResource(R.drawable.list_background);
                     }
                 },
-                400);
-
-        if (null != mListener) {
-            // Notify the active callbacks interface (the activity, if the
-            // fragment is attached to one) that an item has been selected.
-            mListener.onDetailInteraction(((WakeLockStatsCombined) mAdapter.getItem(position)).getName());
-        }
+                400
+        );
 
         //Switch to detail view.
         switchToDetail(position);
-
     }
 
     private void switchToDetail(int position) {
+        //We're going for an animation from the list item, expanding to take the entire screen.
+        //Start by getting the bounds of the current list item, as a starting point.
         ListView list = (ListView)getActivity().findViewById(android.R.id.list);
-        View listItem = list.getChildAt(position);
-
-        // Calculate the starting and ending bounds for the zoomed-in image.
-        // This step involves lots of math. Yay, math.
+        View listItem = list.getChildAt(position - list.getFirstVisiblePosition());
         final Rect startBounds = new Rect();
+        listItem.getGlobalVisibleRect(startBounds);
+
+        //Now get the final bounds for the animation:  the same bounds as the parent list.
         final Rect finalBounds = new Rect();
         final Point globalOffset = new Point();
-
-        // The start bounds are the global visible rectangle of the thumbnail,
-        // and the final bounds are the global visible rectangle of the container
-        // view. Also set the container view's offset as the origin for the
-        // bounds, since that's the origin for the positioning animation
-        // properties (X, Y).
-        listItem.getGlobalVisibleRect(startBounds);
         list.getGlobalVisibleRect(finalBounds, globalOffset);
+
+        //Offset both bounds because we aren't full-screen.
         startBounds.offset(-globalOffset.x, -globalOffset.y);
         finalBounds.offset(-globalOffset.x, -globalOffset.y);
 
+        //Spin up the new Detail fragment.  Dig the custom animations.  Also put it on the back stack
+        //so we can hit the back button and come back to the list.
         FragmentManager fragmentManager = getFragmentManager();
-        WakelockDetailFragment newFrag = WakelockDetailFragment.newInstance(startBounds.top, finalBounds.top, startBounds.bottom, finalBounds.bottom);
+        WakelockDetailFragment newFrag = WakelockDetailFragment.newInstance(startBounds.top, finalBounds.top, startBounds.bottom, finalBounds.bottom, (WakeLockStatsCombined)mAdapter.getItem(position));
         fragmentManager.beginTransaction()
-                .setCustomAnimations(R.animator.expand_in, android.R.animator.fade_out, android.R.animator.fade_in, R.animator.expand_out)
+                .setCustomAnimations(R.animator.expand_in, R.animator.noop, R.animator.noop, R.animator.expand_out)
+                .hide(this)
                 .add(R.id.container, newFrag, "wakelock_detail")
                 .addToBackStack(null)
                 .commit();
 
-        WakeLockStatsCombined curStat = (WakeLockStatsCombined)mAdapter.getItem(position);
-        getActivity().getActionBar().setTitle(curStat.getName());
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+            if (mListener != null)
+                mListener.onWakelocksSetTitle("Wakelocks");
+        }
 
     }
-    private boolean mSortByTime = true;
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -183,13 +166,21 @@ public class WakelockFragment extends ListFragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+
+        //If they pushed the sort toggle, switch the icon from duration<->count
         if (id == R.id.action_sort) {
             mSortByTime = !mSortByTime;
             getActivity().invalidateOptionsMenu();
+
+            //Do the re-sort here
+            mAdapter.sort(!mSortByTime);
+
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
@@ -217,9 +208,9 @@ public class WakelockFragment extends ListFragment {
     * "http://developer.android.com/training/basics/fragments/communicating.html"
     * >Communicating with Other Fragments</a> for more information.
     */
-    public interface OnWakelockFragmentInteractionListener {
+    public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        public void onDetailInteraction(String id);
+        public void onWakelocksSetTitle(String id);
     }
 
 }

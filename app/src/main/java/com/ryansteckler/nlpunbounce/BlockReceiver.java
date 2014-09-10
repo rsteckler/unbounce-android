@@ -4,13 +4,14 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.util.Log;
+
+import com.ryansteckler.nlpunbounce.models.WakeLockStats;
+import com.ryansteckler.nlpunbounce.models.WakeLockStatsCombined;
 
 import java.util.HashMap;
 
-import de.robv.android.xposed.XposedBridge;
-
 public class BlockReceiver extends BroadcastReceiver {
+    
     public BlockReceiver() {
     }
 

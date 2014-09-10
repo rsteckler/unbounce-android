@@ -3,38 +3,20 @@ package com.ryansteckler.nlpunbounce;
 import android.app.Activity;
 
 import android.app.ActionBar;
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.ActionBarDrawerToggle;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 
 public class MaterialSettingsActivity extends Activity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks,
-        WakelockFragment.OnWakelockFragmentInteractionListener,
-        WakelockDetailFragment.OnFragmentInteractionListener {
+        WakelocksFragment.OnFragmentInteractionListener,
+        WakelockDetailFragment.OnFragmentInteractionListener,
+        HomeFragment.OnFragmentInteractionListener {
 
-//    private boolean mShowingDetail = false;
-//
-//    @Override
-//    public boolean onKeyDown(int keyCode, KeyEvent event)  {
-//        if (keyCode == KeyEvent.KEYCODE_BACK ) {
-//            if (mShowingDetail) {
-//
-//                return true;
-//            }
-//        }
-//
-//        return super.onKeyDown(keyCode, event);
-//    }
-//
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
@@ -75,7 +57,8 @@ public class MaterialSettingsActivity extends Activity
                     .commit();
         } else if (position == 1) {
             fragmentManager.beginTransaction()
-                    .replace(R.id.container, WakelockFragment.newInstance(position + 1))
+                    .replace(R.id.container, WakelocksFragment.newInstance(position + 1))
+                    .addToBackStack("wakelocks")
                     .commit();
         } else if (position == 2) {
             fragmentManager.beginTransaction()
@@ -128,13 +111,6 @@ public class MaterialSettingsActivity extends Activity
     }
 
     @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        if (!mNavigationDrawerFragment.isDrawerOpen()) {
-        }
-        return super.onPrepareOptionsMenu(menu);
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -148,18 +124,21 @@ public class MaterialSettingsActivity extends Activity
     }
 
     @Override
-    public void onDetailInteraction(String id) {
-        View enableSwitch = findViewById(R.id.wakelock_switch);
-        enableSwitch.setVisibility(View.VISIBLE);
-
-        View sortItem = findViewById(R.id.action_sort);
-        sortItem.setVisibility(View.GONE);
-
-        invalidateOptionsMenu();
+    public void onWakelocksSetTitle(String title) {
+        mTitle = title;
+        restoreActionBar();
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
+    public void onHomeSetTitle(String title) {
+        mTitle = title;
+        restoreActionBar();
+    }
+
+    @Override
+    public void onWakelockDetailSetTitle(String title) {
+        mTitle = title;
+        restoreActionBar();
 
     }
 }

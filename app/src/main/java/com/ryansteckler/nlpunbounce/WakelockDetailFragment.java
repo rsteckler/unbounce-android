@@ -11,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.ryansteckler.nlpunbounce.models.WakeLockStatsCombined;
 
 
 /**
@@ -29,11 +30,13 @@ public class WakelockDetailFragment extends Fragment {
     private static final String ARG_FINAL_TOP = "finalTop";
     private static final String ARG_START_BOTTOM = "startBottom";
     private static final String ARG_FINAL_BOTTOM = "finalBottom";
+    private static final String ARG_CUR_STAT = "curStat";
 
     private int mStartTop;
     private int mFinalTop;
     private int mStartBottom;
     private int mFinalBottom;
+    private WakeLockStatsCombined mStat;
 
     private OnFragmentInteractionListener mListener;
 
@@ -42,6 +45,9 @@ public class WakelockDetailFragment extends Fragment {
         ExpandingLayout anim = (ExpandingLayout)getActivity().findViewById(R.id.layoutDetails);
         anim.setAnimationBounds(mStartTop, mFinalTop, mStartBottom, mFinalBottom);
         super.onViewCreated(view, savedInstanceState);
+        if (mListener != null)
+            mListener.onWakelockDetailSetTitle(mStat.getName());
+
     }
 
     /**
@@ -51,13 +57,14 @@ public class WakelockDetailFragment extends Fragment {
      * @return A new instance of fragment WakelockDetailFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static WakelockDetailFragment newInstance(int startTop, int finalTop, int startBottom, int finalBottom) {
+    public static WakelockDetailFragment newInstance(int startTop, int finalTop, int startBottom, int finalBottom, WakeLockStatsCombined stat) {
         WakelockDetailFragment fragment = new WakelockDetailFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_START_TOP, startTop);
         args.putInt(ARG_FINAL_TOP, finalTop);
         args.putInt(ARG_START_BOTTOM, startBottom);
         args.putInt(ARG_FINAL_BOTTOM, finalBottom);
+        args.putSerializable(ARG_CUR_STAT, stat);
         fragment.setArguments(args);
         return fragment;
     }
@@ -73,6 +80,7 @@ public class WakelockDetailFragment extends Fragment {
             mFinalTop = getArguments().getInt(ARG_FINAL_TOP);
             mStartBottom = getArguments().getInt(ARG_START_BOTTOM);
             mFinalBottom = getArguments().getInt(ARG_FINAL_BOTTOM);
+            mStat = (WakeLockStatsCombined)getArguments().getSerializable(ARG_CUR_STAT);
         }
         setHasOptionsMenu(true);
     }
@@ -96,6 +104,7 @@ public class WakelockDetailFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
         getActivity().getMenuInflater().inflate(R.menu.wakelock_detail, menu);
     }
 
@@ -128,7 +137,7 @@ public class WakelockDetailFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        public void onFragmentInteraction(Uri uri);
+        public void onWakelockDetailSetTitle(String title);
     }
 
 }

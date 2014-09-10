@@ -2,13 +2,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.ryansteckler.nlpunbounce.MaterialSettingsActivity" >
 
-    <item android:id="@+id/wakelock_switch"
-        android:titleCondensed=""
-        android:title=""
-        android:actionViewClass="android.widget.Switch"
-        android:showAsAction="always"
-        android:visible="false"/>
-
     <item android:id="@+id/action_sort"
         android:icon="@drawable/ic_action_sort_by_size"
         android:title="@string/action_sort_by_count"

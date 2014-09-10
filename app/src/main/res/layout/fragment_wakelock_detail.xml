@@ -4,7 +4,8 @@
     android:id="@+id/layoutDetails"
     android:layout_height="match_parent"
     tools:context="com.ryansteckler.nlpunbounce.WakelockDetailFragment"
-    android:visibility="visible">
+    android:visibility="visible"
+    android:background="@android:color/background_light">
 
     <LinearLayout
         android:orientation="vertical"
@@ -22,7 +23,7 @@
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="#0CBB9B"
+            android:background="@color/background_primary"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
@@ -32,8 +33,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="This wakelock is part of Google Play Services.  When your location services are turned on, it will watch for location updates.  When the phone has a new location, this wakelock is acquired and your location is sent to Google.  They use your location, and other informaiton, to keep their WiFi location database up to date."
-                android:id="@+id/textView2"
-                android:fontFamily="@string/app_font_family" />
+                style="@style/TextBody1Light"
+                android:id="@+id/textView2" />
         </LinearLayout>
 
         <View style="@style/Divider"
@@ -42,8 +43,7 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_height="fill_parent"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
@@ -74,28 +74,26 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:enabled="false"
-                        android:textSize="@dimen/header_size"
                         android:layout_marginLeft="@dimen/pad_icon"
                         android:text="@string/local_text"
-                        android:fontFamily="sans-serif-light" />
+                        style="@style/TextTitle" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
                         android:text="Your device stats"
                         android:layout_marginLeft="@dimen/pad_icon"
-                        android:fontFamily="sans-serif-thin" />
+                        style="@style/TextCaption" />
 
                 </LinearLayout>
 
-                <ImageButton
-                    android:layout_width="@dimen/button_height"
-                    android:layout_height="@dimen/button_height"
-                    android:id="@+id/imageButton"
-                    android:src="@drawable/ic_reset"
-                    android:scaleType="centerCrop"
-                    android:background="@null" />
+                <!--<ImageButton-->
+                    <!--android:layout_width="@dimen/button_height"-->
+                    <!--android:layout_height="@dimen/button_height"-->
+                    <!--android:id="@+id/imageButton"-->
+                    <!--android:src="@drawable/ic_reset"-->
+                    <!--android:scaleType="centerCrop"-->
+                    <!--android:background="@null" />-->
 
             </LinearLayout>
 
@@ -115,15 +113,15 @@
                     android:text="Wakelock time allowed"
                     android:gravity="center_vertical"
                     android:layout_weight="1"
-                    android:fontFamily="sans-serif" />
+                    style="@style/TextBody1" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:text="26d 17h 47m 39s"
+                    style="@style/TextBody1"
                     android:id="@+id/textLocalWakeTimeAllowed"
-                    android:gravity="center_vertical"
-                    android:fontFamily="sans-serif" />
+                    android:gravity="center_vertical"/>
 
             </LinearLayout>
             <LinearLayout
@@ -138,15 +136,15 @@
                     android:text="Wakelock time blocked"
                     android:gravity="center_vertical"
                     android:layout_weight="1"
-                    android:fontFamily="sans-serif" />
+                    style="@style/TextBody1" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
+                    style="@style/TextBody1"
                     android:text="52d 4h 41m 36s"
                     android:id="@+id/textLocalWakeTimeBlocked"
-                    android:gravity="center_vertical"
-                    android:fontFamily="sans-serif" />
+                    android:gravity="center_vertical" />
 
             </LinearLayout>
             <LinearLayout
@@ -159,17 +157,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:text="Wakelocks acquired"
+                    style="@style/TextBody1"
                     android:gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:fontFamily="sans-serif" />
+                    android:layout_weight="1"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
+                    style="@style/TextBody1"
                     android:text="4,793,202"
                     android:id="@+id/textLocalWakeAcquired"
-                    android:gravity="center_vertical"
-                    android:fontFamily="sans-serif" />
+                    android:gravity="center_vertical" />
 
             </LinearLayout>
             <LinearLayout
@@ -180,19 +178,19 @@
 
                 <TextView
                     android:layout_width="wrap_content"
+                    style="@style/TextBody1"
                     android:layout_height="fill_parent"
                     android:text="Wakelocks blocked"
                     android:gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:fontFamily="sans-serif" />
+                    android:layout_weight="1" />
 
                 <TextView
                     android:layout_width="wrap_content"
+                    style="@style/TextBody1"
                     android:layout_height="fill_parent"
                     android:text="953,664"
                     android:id="@+id/textLocalWakeBlocked"
-                    android:gravity="center_vertical"
-                    android:fontFamily="sans-serif" />
+                    android:gravity="center_vertical" />
 
             </LinearLayout>
             <LinearLayout

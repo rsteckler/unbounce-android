@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="background_primary">#0CBB9B</color>
+
+    <color name="background_secondary">#0BB1CB</color>
+
+    <color name="background_tertiary">#F88560</color>
+
+    <color name="background_four">#E9C142</color>
+
+    <color name="background_five">#EF6996</color>
+
+</resources>

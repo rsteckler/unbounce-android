@@ -1,11 +1,12 @@
-package com.ryansteckler.nlpunbounce;
+package com.ryansteckler.nlpunbounce.models;
 
+import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
 
 /**
  * Created by rsteckler on 9/5/14.
  */
-public class WakeLockStatsCombined {
+public class WakeLockStatsCombined implements Serializable {
     private long mDuration;
     private long mCount;
 

@@ -1,4 +1,4 @@
-package com.ryansteckler.nlpunbounce;
+package com.ryansteckler.nlpunbounce.hooks;
 
 /**
  * Created by ryan steckler on 8/18/14.
@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.IBinder;
 import android.os.SystemClock;
+
+import com.ryansteckler.nlpunbounce.models.WakeLockStats;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,7 +26,7 @@ import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 
 import de.robv.android.xposed.XC_MethodHook;
 
-public class nlpFix implements IXposedHookLoadPackage {
+public class Wakelocks implements IXposedHookLoadPackage {
 
     private static final String TAG = "NlpUnbounce: ";
     private static final String VERSION = "1.1.4"; //This needs to be pulled from the manifest or gradle build.
@@ -45,7 +47,7 @@ public class nlpFix implements IXposedHookLoadPackage {
 
             XposedBridge.log(TAG + "Version " + VERSION);
 
-            m_prefs = new XSharedPreferences(nlpFix.class.getPackage().getName());
+            m_prefs = new XSharedPreferences(Wakelocks.class.getPackage().getName());
             m_prefs.reload();
 
             mCurrentWakeLocks = new HashMap<IBinder, WakeLockStats>();

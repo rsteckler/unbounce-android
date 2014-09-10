@@ -33,4 +33,32 @@
         <item name="android:background">?android:attr/listDivider</item>
     </style>
 
+    <style name="TextBody1">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:alpha">0.87</item>
+    </style>
+
+    <style name="TextBody1Light">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:alpha">0.87</item>
+    </style>
+
+    <style name="TextCaption">
+        <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:alpha">0.54</item>
+    </style>
+
+    <style name="TextTitle">
+        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">sans-serif-</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:alpha">0.87</item>
+    </style>
+
 </resources>

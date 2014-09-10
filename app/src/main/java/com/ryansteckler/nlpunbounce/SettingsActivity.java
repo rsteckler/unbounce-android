@@ -1,6 +1,5 @@
 package com.ryansteckler.nlpunbounce;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -16,8 +15,9 @@ import android.widget.Toast;
 import com.ryansteckler.inappbilling.IabHelper;
 import com.ryansteckler.inappbilling.IabResult;
 import com.ryansteckler.inappbilling.Purchase;
+import com.ryansteckler.nlpunbounce.helpers.SortWakeLocks;
+import com.ryansteckler.nlpunbounce.models.WakeLockStatsCombined;
 
-import java.sql.Time;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -189,8 +189,8 @@ public class SettingsActivity extends Activity {
             pref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
-                    dumpStats(SortWakeLockMap.COUNT);
-                    dumpStats(SortWakeLockMap.DURATION);
+                    dumpStats(true);
+                    dumpStats(false);
                     return true;
                 }
             });
@@ -208,7 +208,7 @@ public class SettingsActivity extends Activity {
         {
             Log.d(TAG, "WakeLocks sorted by: " + (byCount ? "Count" : "Duration"));
 
-            HashMap<String, WakeLockStatsCombined> sorted = SortWakeLockMap.sortByComparator(BlockReceiver.mWakeLockStats, byCount);
+            HashMap<String, WakeLockStatsCombined> sorted = SortWakeLocks.sortByComparator(BlockReceiver.mWakeLockStats, byCount);
             Iterator it = sorted.entrySet().iterator();
             while (it.hasNext()) {
                 Map.Entry pairs = (Map.Entry) it.next();
