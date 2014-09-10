@@ -1,8 +1,36 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <style name="UnbounceTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+        <item name="android:actionBarStyle">@style/UnbounceActionBar</item>
+        <!--<item name="android:actionBarTabTextStyle">@style/TabTextStyle</item>-->
+        <!--<item name="android:actionMenuTextColor">@color/actionbar_text</item>-->
+    </style>
+
+    <!-- general styles for the action bar -->
+    <style name="UnbounceActionBar" parent="android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">#0c967c</item>
+        <!--<item name="android:titleTextStyle">@style/TitleTextStyle</item>-->
+        <!--<item name="android:backgroundStacked">@drawable/actionbar_background</item>-->
+        <!--<item name="android:backgroundSplit">@drawable/actionbar_background</item>-->
+    </style>
+
+    <!-- action bar title text -->
+    <!--<style name="TitleTextStyle"-->
+        <!--parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">-->
+        <!--<item name="android:textColor">@color/actionbar_text</item>-->
+    <!--</style>-->
+
+    <!-- action bar tab text -->
+    <!--<style name="TabTextStyle"-->
+        <!--parent="@style/Widget.AppCompat.ActionBar.TabText">-->
+        <!--<item name="android:textColor">@color/actionbar_text</item>-->
+    <!--</style>-->
+
+    <style name="Divider">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">?android:attr/listDivider</item>
     </style>
 
 </resources>

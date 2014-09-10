@@ -6,8 +6,9 @@
 
     <application
         android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
         android:label="NlpUnbounce"
-        android:icon="@drawable/ic_launcher">
+        android:theme="@style/UnbounceTheme">
         <meta-data
             android:name="xposedmodule"
             android:value="true" />
@@ -21,13 +22,10 @@
         <activity
             android:name=".SettingsActivity"
             android:label="NlpUnbounce settings" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="de.robv.android.xposed.category.MODULE_SETTINGS" />
-            </intent-filter>
         </activity>
 
-        <receiver android:name=".BlockReceiver"
+        <receiver
+            android:name=".BlockReceiver"
             android:enabled="true"
             android:exported="true" >
             <intent-filter>
@@ -37,6 +35,15 @@
                 <action android:name="com.ryansteckler.nlpunbounce.SEND_STATS" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name=".MaterialSettingsActivity"
+            android:label="@string/title_activity_material_settings" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="de.robv.android.xposed.category.MODULE_SETTINGS" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

@@ -8,24 +8,24 @@ public class WakeLockStats implements java.io.Serializable{
         return mTimeStarted;
     }
 
-    public void setTimeStarted(long mTimeStarted) {
-        this.mTimeStarted = mTimeStarted;
+    public void setTimeStarted(long timeStarted) {
+        this.mTimeStarted = timeStarted;
     }
 
     public long getTimeStopped() {
         return mTimeStopped;
     }
 
-    public void setTimeStopped(long mTimeStopped) {
-        this.mTimeStopped = mTimeStopped;
+    public void setTimeStopped(long timeStopped) {
+        this.mTimeStopped = timeStopped;
     }
 
     public String getName() {
         return mName;
     }
 
-    public void setName(String mName) {
-        this.mName = mName;
+    public void setName(String name) {
+        this.mName = name;
     }
 
     private long mTimeStarted;

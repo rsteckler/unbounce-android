@@ -35,10 +35,12 @@ public class BlockReceiver extends BroadcastReceiver {
             if (combined == null)
             {
                 combined = new WakeLockStatsCombined();
+                combined.setName(curStat.getName());
             }
             combined.addDuration(curStat.getTimeStopped() - curStat.getTimeStarted());
             combined.incrementCount();
             mWakeLockStats.put(curStat.getName(), combined);
         }
     }
+
 }
