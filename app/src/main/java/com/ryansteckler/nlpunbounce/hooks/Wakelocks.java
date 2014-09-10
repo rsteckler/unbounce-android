@@ -10,7 +10,7 @@ import android.os.Build;
 import android.os.IBinder;
 import android.os.SystemClock;
 
-import com.ryansteckler.nlpunbounce.models.WakeLockStats;
+import com.ryansteckler.nlpunbounce.models.InterimWakelock;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,7 +38,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
     private static boolean showedUnsupportedAlarmMessage = false;
 
     XSharedPreferences m_prefs;
-    public static HashMap<IBinder, WakeLockStats> mCurrentWakeLocks;
+    public static HashMap<IBinder, InterimWakelock> mCurrentWakeLocks;
 
     @Override
     public void handleLoadPackage(LoadPackageParam lpparam) throws Throwable {
@@ -50,7 +50,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
             m_prefs = new XSharedPreferences(Wakelocks.class.getPackage().getName());
             m_prefs.reload();
 
-            mCurrentWakeLocks = new HashMap<IBinder, WakeLockStats>();
+            mCurrentWakeLocks = new HashMap<IBinder, InterimWakelock>();
 
             hookAlarms(lpparam);
             hookWakeLocks(lpparam);
@@ -214,7 +214,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
                 if (timeSinceLastWakeLock < collectorMaxFreq) {
                     //Not enough time has passed since the last wakelock.  Deny the wakelock
                     param.setResult(null);
-                    incrementBlockCount(param, "NlpCollectorWakeLock");
+                    recordBlock(param, wakeLockName);
 
                     debugLog("Preventing NlpCollectorWakeLock.  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
 
@@ -240,7 +240,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
                 if (timeSinceLastWakeLock < nlpMaxFreq) {
                     //Not enough time has passed since the last wakelock.  Deny the wakelock
                     param.setResult(null);
-                    incrementBlockCount(param, "NlpWakeLock");
+                    recordBlock(param, wakeLockName);
 
                     debugLog("Preventing NlpWakeLock.  Max Interval: " + nlpMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
 
@@ -259,10 +259,10 @@ public class Wakelocks implements IXposedHookLoadPackage {
 
     private void recordAcquire(String wakeLockName, IBinder lock) {
         //Get the lock
-        WakeLockStats curStats = mCurrentWakeLocks.get(lock);
+        InterimWakelock curStats = mCurrentWakeLocks.get(lock);
         if (curStats == null)
         {
-            curStats = new WakeLockStats();
+            curStats = new InterimWakelock();
             curStats.setName(wakeLockName);
             curStats.setTimeStarted(SystemClock.elapsedRealtime());
             mCurrentWakeLocks.put(lock, curStats);
@@ -272,7 +272,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
     private void handleWakeLockRelease(XC_MethodHook.MethodHookParam param, IBinder lock) {
         m_prefs.reload();
 
-        WakeLockStats curStats = mCurrentWakeLocks.remove(lock);
+        InterimWakelock curStats = mCurrentWakeLocks.remove(lock);
         if (curStats != null)
         {
             curStats.setTimeStopped(SystemClock.elapsedRealtime());
@@ -280,7 +280,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
         }
     }
 
-    private void sendStats(XC_MethodHook.MethodHookParam param, WakeLockStats curStat)
+    private void sendStats(XC_MethodHook.MethodHookParam param, InterimWakelock curStat)
     {
         Context context = (Context)XposedHelpers.getObjectField(param.thisObject, "mContext");
 
@@ -340,7 +340,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
                     if (timeSinceLastLocator < locatorMaxFreq) {
                         //Not enough time has passed since the last alarm.  Remove it from the triggerlist
                         triggers.remove(j);
-                        incrementBlockCount(param, "ALARM_WAKEUP_LOCATOR");
+                        recordBlock(param, "ALARM_WAKEUP_LOCATOR");
 
                         debugLog("Preventing ALARM_WAKEUP_LOCATOR.  Max Interval: " + locatorMaxFreq + " Time since last granted: " + timeSinceLastLocator);
                     } else {
@@ -362,7 +362,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
                     if (timeSinceLastDetection < detectionMaxFreq) {
                         //Not enough time has passed since the last wakelock.  Remove it from the triggerlist.
                         triggers.remove(j);
-                        incrementBlockCount(param, "ALARM_WAKEUP_ACTIVITY_DETECTION");
+                        recordBlock(param, "ALARM_WAKEUP_ACTIVITY_DETECTION");
 
                         debugLog("Preventing ALARM_WAKEUP_ACTIVITY_DETECTION.  Max Interval: " + detectionMaxFreq + " Time since last granted: " + timeSinceLastDetection);
                     }
@@ -376,7 +376,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
         }
     }
 
-    private void incrementBlockCount(XC_MethodHook.MethodHookParam param, String name) {
+    private void recordBlock(XC_MethodHook.MethodHookParam param, String name) {
 
         Context context = (Context)XposedHelpers.getObjectField(param.thisObject, "mContext");
 

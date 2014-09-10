@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="background_primary">#0CBB9B</color>
+    <color name="background_primary">#009688</color>
 
-    <color name="background_secondary">#0BB1CB</color>
+    <color name="background_secondary">#FF9800</color>
+    <color name="background_secondary_faded">#ffb74d</color>
 
-    <color name="background_tertiary">#F88560</color>
+    <color name="background_gray">#9E9E9E</color>
 
-    <color name="background_four">#E9C142</color>
+    <color name="background_three">#FF5722</color>
 
-    <color name="background_five">#EF6996</color>
+    <color name="background_four">#673AB7</color>
+    <color name="background_four_faded">#9575cd</color>
+    <color name="background_four_shaded">#4527a0</color>
+
 
 </resources>

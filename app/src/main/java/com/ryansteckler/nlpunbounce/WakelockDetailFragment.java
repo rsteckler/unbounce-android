@@ -1,8 +1,6 @@
 package com.ryansteckler.nlpunbounce;
 
 import android.app.Activity;
-import android.graphics.Rect;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,7 +9,8 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.ryansteckler.nlpunbounce.models.WakeLockStatsCombined;
+import com.ryansteckler.nlpunbounce.models.WakelockStats;
+import com.ryansteckler.nlpunbounce.models.WakelockStatsCollection;
 
 
 /**
@@ -36,7 +35,7 @@ public class WakelockDetailFragment extends Fragment {
     private int mFinalTop;
     private int mStartBottom;
     private int mFinalBottom;
-    private WakeLockStatsCombined mStat;
+    private WakelockStats mStat;
 
     private OnFragmentInteractionListener mListener;
 
@@ -57,7 +56,7 @@ public class WakelockDetailFragment extends Fragment {
      * @return A new instance of fragment WakelockDetailFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static WakelockDetailFragment newInstance(int startTop, int finalTop, int startBottom, int finalBottom, WakeLockStatsCombined stat) {
+    public static WakelockDetailFragment newInstance(int startTop, int finalTop, int startBottom, int finalBottom, WakelockStats stat) {
         WakelockDetailFragment fragment = new WakelockDetailFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_START_TOP, startTop);
@@ -80,7 +79,7 @@ public class WakelockDetailFragment extends Fragment {
             mFinalTop = getArguments().getInt(ARG_FINAL_TOP);
             mStartBottom = getArguments().getInt(ARG_START_BOTTOM);
             mFinalBottom = getArguments().getInt(ARG_FINAL_BOTTOM);
-            mStat = (WakeLockStatsCombined)getArguments().getSerializable(ARG_CUR_STAT);
+            mStat = (WakelockStats)getArguments().getSerializable(ARG_CUR_STAT);
         }
         setHasOptionsMenu(true);
     }

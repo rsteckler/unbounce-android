@@ -17,9 +17,8 @@ import android.widget.ListView;
 
 import com.ryansteckler.nlpunbounce.adapters.WakelocksAdapter;
 import com.ryansteckler.nlpunbounce.helpers.SortWakeLocks;
-import com.ryansteckler.nlpunbounce.models.WakeLockStatsCombined;
-
-import java.util.ArrayList;
+import com.ryansteckler.nlpunbounce.models.WakelockStats;
+import com.ryansteckler.nlpunbounce.models.WakelockStatsCollection;
 
 /**
  * A fragment representing a list of Items.
@@ -54,7 +53,6 @@ public class WakelocksFragment extends ListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_wakelocks, container, false);
-
         return view;
     }
 
@@ -69,7 +67,7 @@ public class WakelocksFragment extends ListFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mAdapter = new WakelocksAdapter(getActivity(), new ArrayList<WakeLockStatsCombined>(BlockReceiver.mWakeLockStats.values()));
+        mAdapter = new WakelocksAdapter(getActivity(), WakelockStatsCollection.getInstance().toArrayList());
         mAdapter.sort(SortWakeLocks.getListComparator(!mSortByTime));
         setListAdapter(mAdapter);
 
@@ -137,7 +135,7 @@ public class WakelocksFragment extends ListFragment {
         //Spin up the new Detail fragment.  Dig the custom animations.  Also put it on the back stack
         //so we can hit the back button and come back to the list.
         FragmentManager fragmentManager = getFragmentManager();
-        WakelockDetailFragment newFrag = WakelockDetailFragment.newInstance(startBounds.top, finalBounds.top, startBounds.bottom, finalBounds.bottom, (WakeLockStatsCombined)mAdapter.getItem(position));
+        WakelockDetailFragment newFrag = WakelockDetailFragment.newInstance(startBounds.top, finalBounds.top, startBounds.bottom, finalBounds.bottom, (WakelockStats)mAdapter.getItem(position));
         fragmentManager.beginTransaction()
                 .setCustomAnimations(R.animator.expand_in, R.animator.noop, R.animator.noop, R.animator.expand_out)
                 .hide(this)

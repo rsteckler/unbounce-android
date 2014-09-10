@@ -10,6 +10,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.ryansteckler.nlpunbounce.models.WakelockStatsCollection;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -34,6 +37,17 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mListener.onHomeSetTitle("Home");
+        WakelockStatsCollection stats = WakelockStatsCollection.getInstance();
+        String duration = stats.getDurationAllowedFormatted(getActivity());
+        TextView textView = (TextView)view.findViewById(R.id.textLocalWakeTimeAllowed);
+        textView.setText(duration);
+        textView = (TextView)view.findViewById(R.id.textLocalWakeAcquired);
+        textView.setText(String.valueOf(stats.getTotalAllowedCount()));
+        textView = (TextView)view.findViewById(R.id.textLocalWakeBlocked);
+        textView.setText(String.valueOf(stats.getTotalBlockCount()));
+        textView = (TextView)view.findViewById(R.id.textLocalWakeTimeBlocked);
+        textView.setText(stats.getDurationBlockedFormatted(getActivity()));
+
     }
 
     @Override
@@ -43,6 +57,7 @@ public class HomeFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         return rootView;
     }
+
 
     public void onAttach(Activity activity) {
         super.onAttach(activity);

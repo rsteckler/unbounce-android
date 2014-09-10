@@ -4,72 +4,66 @@ package com.ryansteckler.nlpunbounce.helpers;
  * Created by rsteckler on 9/5/14.
  */
 
-import com.ryansteckler.nlpunbounce.models.WakeLockStatsCombined;
+import com.ryansteckler.nlpunbounce.models.WakelockStats;
 
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map.Entry;
 
 
 public class SortWakeLocks {
 
-    public static Comparator<Entry<String, WakeLockStatsCombined>> getMapComparator(final boolean byCount)
+//    public static Comparator<Entry<String, WakelockStats>> getMapComparator(final boolean byCount)
+//    {
+//        return new Comparator<Entry<String, WakelockStats>>()
+//        {
+//            public int compare(Entry<String, WakelockStats> o1,
+//                               Entry<String, WakelockStats> o2)
+//            {
+//                if (byCount)
+//                {
+//                    return ((Long)o2.getValue().getAllowedCount()).compareTo(o1.getValue().getAllowedCount());
+//                }
+//                else
+//                {
+//                    return ((Long)o2.getValue().getAllowedDuration()).compareTo(o1.getValue().getAllowedDuration());
+//                }
+//            }
+//        };
+//    }
+
+    public static Comparator<WakelockStats> getListComparator(final boolean byCount)
     {
-        return new Comparator<Entry<String, WakeLockStatsCombined>>()
+        return new Comparator<WakelockStats>()
         {
-            public int compare(Entry<String, WakeLockStatsCombined> o1,
-                               Entry<String, WakeLockStatsCombined> o2)
+            public int compare(WakelockStats o1,
+                               WakelockStats o2)
             {
                 if (byCount)
                 {
-                    return ((Long)o2.getValue().getCount()).compareTo(o1.getValue().getCount());
+                    return ((Long)o2.getAllowedCount()).compareTo(o1.getAllowedCount());
                 }
                 else
                 {
-                    return ((Long)o2.getValue().getDuration()).compareTo(o1.getValue().getDuration());
+                    return ((Long)o2.getAllowedDuration()).compareTo(o1.getAllowedDuration());
                 }
             }
         };
     }
 
-    public static Comparator<WakeLockStatsCombined> getListComparator(final boolean byCount)
-    {
-        return new Comparator<WakeLockStatsCombined>()
-        {
-            public int compare(WakeLockStatsCombined o1,
-                               WakeLockStatsCombined o2)
-            {
-                if (byCount)
-                {
-                    return ((Long)o2.getCount()).compareTo(o1.getCount());
-                }
-                else
-                {
-                    return ((Long)o2.getDuration()).compareTo(o1.getDuration());
-                }
-            }
-        };
-    }
-
-    public static HashMap<String, WakeLockStatsCombined> sortByComparator(HashMap<String, WakeLockStatsCombined> unsortMap, final boolean byCount)
-    {
-
-        List<Entry<String, WakeLockStatsCombined>> list = new LinkedList<Entry<String, WakeLockStatsCombined>>(unsortMap.entrySet());
-
-        // Sorting the list based on values
-        Collections.sort(list, getMapComparator(byCount));
-
-        // Maintaining insertion order with the help of LinkedList
-        HashMap<String, WakeLockStatsCombined> sortedMap = new LinkedHashMap<String, WakeLockStatsCombined>();
-        for (Entry<String, WakeLockStatsCombined> entry : list)
-        {
-            sortedMap.put(entry.getKey(), entry.getValue());
-        }
-
-        return sortedMap;
-    }
+//    public static HashMap<String, WakelockStats> sortByComparator(HashMap<String, WakelockStats> unsortMap, final boolean byCount)
+//    {
+//
+//        List<Entry<String, WakelockStats>> list = new LinkedList<Entry<String, WakelockStats>>(unsortMap.entrySet());
+//
+//        // Sorting the list based on values
+//        Collections.sort(list, getMapComparator(byCount));
+//
+//        // Maintaining insertion order with the help of LinkedList
+//        HashMap<String, WakelockStats> sortedMap = new LinkedHashMap<String, WakelockStats>();
+//        for (Entry<String, WakelockStats> entry : list)
+//        {
+//            sortedMap.put(entry.getKey(), entry.getValue());
+//        }
+//
+//        return sortedMap;
+//    }
 }
