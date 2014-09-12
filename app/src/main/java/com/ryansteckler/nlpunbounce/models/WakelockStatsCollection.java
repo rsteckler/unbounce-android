@@ -1,8 +1,11 @@
 package com.ryansteckler.nlpunbounce.models;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.Environment;
 import android.os.SystemClock;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -24,7 +27,7 @@ public class WakelockStatsCollection implements Serializable {
     final private static String STATS_FILENAME = "wakelocks.stats";
     HashMap<String, WakelockStats> mStats = null;
     long mLastSave = 0;
-    long mSaveTimeFrequency = 600000; //10 minutes
+    long mSaveTimeFrequency = 10000; //Save 10 seconds
 
     private WakelockStatsCollection(){};
     private static WakelockStatsCollection mInstance = null;
@@ -38,13 +41,16 @@ public class WakelockStatsCollection implements Serializable {
         return mInstance;
     }
 
-    public ArrayList<WakelockStats> toArrayList()
+    public ArrayList<WakelockStats> toArrayList(Context context)
     {
+        loadStats(context);
         return new ArrayList<WakelockStats>(mStats.values());
     }
 
     public String getDurationAllowedFormatted(Context context) {
         //Iterate over all wakelocks and return the duration
+        loadStats(context);
+
         long totalDuration = 0;
         Iterator<WakelockStats> iter = mStats.values().iterator();
         while (iter.hasNext())
@@ -74,7 +80,26 @@ public class WakelockStatsCollection implements Serializable {
         return (sb.toString());
     }
 
+    public WakelockStats getStat(Context context, String wakelockName)
+    {
+        loadStats(context);
+        if (mStats.containsKey(wakelockName)) {
+            return mStats.get(wakelockName);
+        }
+        else {
+            WakelockStats emptyStat = new WakelockStats();
+            emptyStat.setAllowedCount(0);
+            emptyStat.setAllowedDuration(0);
+            emptyStat.setBlockCount(0);
+            emptyStat.setName(wakelockName);
+            mStats.put(wakelockName, emptyStat);
+            saveNow(context);
+            return emptyStat;
+        }
+    }
+
     public String getDurationBlockedFormatted(Context context) {
+        loadStats(context);
         //Iterate over all wakelocks and return the duration
         long totalDuration = 0;
         Iterator<WakelockStats> iter = mStats.values().iterator();
@@ -105,8 +130,9 @@ public class WakelockStatsCollection implements Serializable {
         return (sb.toString());
     }
 
-    public long getTotalAllowedCount()
+    public long getTotalAllowedCount(Context context)
     {
+        loadStats(context);
         long totalCount = 0;
         Iterator<WakelockStats> iter = mStats.values().iterator();
         while (iter.hasNext())
@@ -117,8 +143,10 @@ public class WakelockStatsCollection implements Serializable {
         return totalCount;
     }
 
-    public long getTotalBlockCount()
+    public long getTotalBlockCount(Context context)
     {
+        loadStats(context);
+
         long totalCount = 0;
         Iterator<WakelockStats> iter = mStats.values().iterator();
         while (iter.hasNext())
@@ -131,11 +159,8 @@ public class WakelockStatsCollection implements Serializable {
 
     public String getDurationAllowedFormatted(Context context, String wakelockName)
     {
-        if (mStats == null)
-        {
-            //Load from disk and populate our stats
-            loadStats(context);
-        }
+        //Load from disk and populate our stats
+        loadStats(context);
 
         WakelockStats stat = mStats.get(wakelockName);
         return stat.getDurationAllowedFormatted();
@@ -143,11 +168,8 @@ public class WakelockStatsCollection implements Serializable {
 
     public void addInterimWakelock(Context context, InterimWakelock toAdd)
     {
-        if (mStats == null)
-        {
-            //Load from disk and populate our stats
-            loadStats(context);
-        }
+        //Load from disk and populate our stats
+        loadStats(context);
 
         WakelockStats combined = mStats.get(toAdd.getName());
         if (combined == null)
@@ -165,11 +187,8 @@ public class WakelockStatsCollection implements Serializable {
 
     public void incrementWakelockBlock(Context context, String wakelockName)
     {
-        if (mStats == null)
-        {
-            //Load from disk and populate our stats
-            loadStats(context);
-        }
+        //Load from disk and populate our stats
+        loadStats(context);
 
         WakelockStats combined = mStats.get(wakelockName);
         if (combined == null)
@@ -184,6 +203,20 @@ public class WakelockStatsCollection implements Serializable {
 
     }
 
+    public void resetStats(Context context, String wakelockName)
+    {
+        loadStats(context);
+        mStats.remove(wakelockName);
+        saveNow(context);
+    }
+
+    public void resetStats(Context context)
+    {
+        loadStats(context);
+        mStats.clear();
+        saveNow(context);
+    }
+
     private void saveIfNeeded(Context context) {
         //Find out how long since our last save
         final long now = SystemClock.elapsedRealtime();
@@ -194,7 +227,8 @@ public class WakelockStatsCollection implements Serializable {
             mLastSave = now;
 
             try {
-                FileOutputStream out = context.openFileOutput(STATS_FILENAME, Context.MODE_WORLD_WRITEABLE);
+                File outFile = new File(Environment.getDataDirectory(), "data/" + "com.ryansteckler.nlpunbounce" + "/files/" + STATS_FILENAME);
+                FileOutputStream out = new FileOutputStream(outFile);
                 ObjectOutputStream objOut = new ObjectOutputStream(out);
                 objOut.writeObject(mStats);
                 objOut.close();
@@ -208,22 +242,45 @@ public class WakelockStatsCollection implements Serializable {
         }
     }
 
+    private void saveNow(Context context) {
+        mLastSave = 0; //force a save
+        saveIfNeeded(context);
+    }
+
     private void loadStats(Context context) {
-        try {
-            FileInputStream in = context.openFileInput(STATS_FILENAME);
-            ObjectInputStream objIn = new ObjectInputStream(in);
-            mStats = (HashMap<String, WakelockStats>)objIn.readObject();
-            objIn.close();
-            in.close();
-        } catch (FileNotFoundException e) {
-            mStats = new HashMap<String, WakelockStats>();
-        } catch (StreamCorruptedException e) {
-            mStats = new HashMap<String, WakelockStats>();
-        } catch (IOException e) {
-            mStats = new HashMap<String, WakelockStats>();
-        } catch (ClassNotFoundException e) {
-            mStats = new HashMap<String, WakelockStats>();
+        if (mStats == null) {
+            try {
+                File inFile = new File(Environment.getDataDirectory(), "data/" + "com.ryansteckler.nlpunbounce" + "/files/" + STATS_FILENAME);
+                FileInputStream in = new FileInputStream(inFile);
+                ObjectInputStream objIn = new ObjectInputStream(in);
+                mStats = (HashMap<String, WakelockStats>) objIn.readObject();
+                objIn.close();
+                in.close();
+
+
+            } catch (FileNotFoundException e) {
+                mStats = new HashMap<String, WakelockStats>();
+            } catch (StreamCorruptedException e) {
+                mStats = new HashMap<String, WakelockStats>();
+            } catch (IOException e) {
+                mStats = new HashMap<String, WakelockStats>();
+            } catch (ClassNotFoundException e) {
+                mStats = new HashMap<String, WakelockStats>();
+            }
+
+            //Set the enabling
+            SharedPreferences prefs = context.getSharedPreferences("com.ryansteckler.nlpunbounce" + "_preferences", Context.MODE_WORLD_READABLE);
+            Iterator<WakelockStats> iter = mStats.values().iterator();
+            while (iter.hasNext())
+            {
+                WakelockStats curStat = iter.next();
+                String blockName = "wakelock_" + curStat.getName() + "enabled";
+                curStat.setBlockingEnabled(prefs.getBoolean(blockName, false));
+            }
         }
     }
 
+    public interface changeListener {
+        public void wakelockCleared(String wakelockName);
+    }
 }

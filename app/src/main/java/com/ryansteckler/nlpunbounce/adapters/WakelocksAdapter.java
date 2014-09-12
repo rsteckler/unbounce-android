@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.ryansteckler.nlpunbounce.R;
 import com.ryansteckler.nlpunbounce.helpers.SortWakeLocks;
 import com.ryansteckler.nlpunbounce.models.WakelockStats;
+import com.ryansteckler.nlpunbounce.models.WakelockStatsCollection;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -29,7 +30,10 @@ public class WakelocksAdapter extends ArrayAdapter {
 
     public WakelocksAdapter(Context context, ArrayList<WakelockStats> wakelockStatList) {
         super(context, R.layout.fragment_wakelocks_listitem, wakelockStatList);
+        calculateScale(wakelockStatList);
+    }
 
+    private void calculateScale(ArrayList<WakelockStats> wakelockStatList) {
         //Get the max and min values for the red-green spectrum of counts
         Iterator<WakelockStats> iter = wakelockStatList.iterator();
         while (iter.hasNext())
@@ -42,6 +46,7 @@ public class WakelocksAdapter extends ArrayAdapter {
         }
         mScale = mHighCount - mLowCount;
     }
+
 
     private static class ViewHolder {
         TextView name;
@@ -83,8 +88,7 @@ public class WakelocksAdapter extends ArrayAdapter {
         if (height > width) {
             viewHolder.wakeCount.setLayoutParams(new LinearLayout.LayoutParams(height, height));
         }
-        else
-        {
+        else {
             viewHolder.wakeCount.setLayoutParams(new LinearLayout.LayoutParams(width, width));
         }
 
@@ -95,6 +99,13 @@ public class WakelocksAdapter extends ArrayAdapter {
         float[] hsv = {point, 1, 1};
         viewHolder.wakeCount.setBackgroundColor(Color.HSVToColor(hsv));
 
+        if (wakelock.getBlockingEnabled()) {
+            convertView.setBackgroundColor(convertView.getResources().getColor(R.color.background_secondary_faded));
+        } else {
+            convertView.setBackgroundColor(Color.WHITE);
+        }
+
+
         return convertView;
     }
 
@@ -103,4 +114,5 @@ public class WakelocksAdapter extends ArrayAdapter {
         mByCount = byCount;
         sort(SortWakeLocks.getListComparator(byCount));
     }
+
 }

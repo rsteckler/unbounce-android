@@ -1,20 +1,31 @@
 package com.ryansteckler.nlpunbounce;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ValueAnimator;
 import android.app.Activity;
 
 import android.app.ActionBar;
 import android.app.FragmentManager;
-import android.net.Uri;
+import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.support.v4.widget.DrawerLayout;
+import android.widget.Toast;
+
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+import com.ryansteckler.inappbilling.IabHelper;
+import com.ryansteckler.inappbilling.IabResult;
+import com.ryansteckler.inappbilling.Purchase;
 
 public class MaterialSettingsActivity extends Activity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks,
         WakelocksFragment.OnFragmentInteractionListener,
-        WakelockDetailFragment.OnFragmentInteractionListener,
+        WakelockDetailFragment.FragmentInteractionListener,
         HomeFragment.OnFragmentInteractionListener {
 
     /**
@@ -22,13 +33,17 @@ public class MaterialSettingsActivity extends Activity
      */
     private NavigationDrawerFragment mNavigationDrawerFragment;
 
+    IabHelper mHelper;
+
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
     private CharSequence mTitle;
 
-    public static String ARG_SECTION_NUMBER = "ARG_SECTION_NUMBER";
     private int mCurrentSection = 1;
+    int mLastActionbarColor = 0;
+
+    private static final String TAG = "NlpUnbounceSettings: ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +60,65 @@ public class MaterialSettingsActivity extends Activity
                 R.id.navigation_drawer,
                 drawerLayout);
 
+        mLastActionbarColor = getResources().getColor(R.color.background_primary);
+
+        //Setup donations
+        //Normally we would secure this key, but we're not licensing this app.
+        String base64billing = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxwicOx54j03qBil36upqYab0uBWnf+WjoSRNOaTD9mkqj9bLM465gZlDXhutMZ+n5RlHUqmxl7jwH9KyYGTbwFqCxbLMCwR4oDhXVhX4fS6iggoHY7Ek6EzMT79x2XwCDg1pdQmX9d9TYRp32Sw2E+yg2uZKSPW29ikfdcmfkHcdCWrjFSuMJpC14R3d9McWQ7sg42eQq2spIuSWtP8ARGtj1M8eLVxgkQpXWrk9ijPgVcAbNZYWT9ndIZoKPg7VJVvzzAUNK/YOb+BzRurqJ42vCZy1+K+E4EUtmg/fxawHfXLZ3F/gNwictZO9fv1PYHPMa0sezSNVFAcm0yP1BwIDAQAB";
+        mHelper = new IabHelper(MaterialSettingsActivity.this, base64billing);
+        mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
+            public void onIabSetupFinished(IabResult result)
+            {
+                if (!result.isSuccess()) {
+                    Log.d(TAG, "In-app Billing setup failed: " + result);
+                }
+            }
+        });
+
+        GoogleAnalytics ga = GoogleAnalytics.getInstance(this);
+        Tracker tracker = ga.newTracker("UA-11575064-3");
+        tracker.setScreenName("MaterialSettingsActivity");
+        tracker.send(new HitBuilders.AppViewBuilder().build());
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        if (!mHelper.handleActivityResult(requestCode, resultCode, data)) {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    IabHelper.OnIabPurchaseFinishedListener mPurchaseFinishedListener = new IabHelper.OnIabPurchaseFinishedListener() {
+        public void onIabPurchaseFinished(IabResult result, Purchase purchase)
+        {
+            if (result.getResponse() == IabHelper.BILLING_RESPONSE_RESULT_USER_CANCELED ||
+                    result.getResponse() == IabHelper.BILLING_RESPONSE_RESULT_BILLING_UNAVAILABLE ||
+                    result.getResponse() == IabHelper.BILLING_RESPONSE_RESULT_DEVELOPER_ERROR ||
+                    result.getResponse() == IabHelper.BILLING_RESPONSE_RESULT_ERROR ||
+                    result.getResponse() == IabHelper.BILLING_RESPONSE_RESULT_ITEM_NOT_OWNED ||
+                    result.getResponse() == IabHelper.BILLING_RESPONSE_RESULT_ITEM_UNAVAILABLE)
+            {
+                Toast.makeText(MaterialSettingsActivity.this, "Thank you for the thought, but the donation failed.  -Ryan", Toast.LENGTH_LONG).show();
+            }
+            else if (result.getResponse() == IabHelper.BILLING_RESPONSE_RESULT_ITEM_ALREADY_OWNED) {
+                Toast.makeText(MaterialSettingsActivity.this, "Thank you for the thought, but you've already donated!  -Ryan", Toast.LENGTH_LONG).show();
+            }
+            else if (result.isSuccess()) {
+                Toast.makeText(MaterialSettingsActivity.this, "Thank you SO much for donating!  -Ryan", Toast.LENGTH_LONG).show();
+                mHelper.consumeAsync(purchase, mConsumeFinishedListener);
+            }
+            else
+            {
+                Toast.makeText(MaterialSettingsActivity.this, "Thank you for the thought, but the donation failed.  -Ryan", Toast.LENGTH_LONG).show();
+            }
+
+        }
+
+        IabHelper.OnConsumeFinishedListener mConsumeFinishedListener = new IabHelper.OnConsumeFinishedListener() {
+            public void onConsumeFinished(Purchase purchase, IabResult result) {
+            }};
+    };
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
@@ -64,21 +137,6 @@ public class MaterialSettingsActivity extends Activity
             fragmentManager.beginTransaction()
                     .replace(R.id.container, HomeFragment.newInstance(position + 1))
                     .commit();
-        }
-    }
-
-    public void onSectionAttached(int number) {
-        mCurrentSection = number;
-        switch (number) {
-            case 1:
-                mTitle = getString(R.string.title_home);
-                break;
-            case 2:
-                mTitle = getString(R.string.title_wakelocks);
-                break;
-            case 3:
-                mTitle = getString(R.string.title_alarms);
-                break;
         }
     }
 
@@ -127,18 +185,42 @@ public class MaterialSettingsActivity extends Activity
     public void onWakelocksSetTitle(String title) {
         mTitle = title;
         restoreActionBar();
+        animateActionbarBackground(getResources().getColor(R.color.background_secondary), 400);
     }
 
     @Override
     public void onHomeSetTitle(String title) {
         mTitle = title;
         restoreActionBar();
+        animateActionbarBackground(getResources().getColor(R.color.background_primary), 400);
     }
 
     @Override
     public void onWakelockDetailSetTitle(String title) {
         mTitle = title;
         restoreActionBar();
+    }
+
+    private void animateActionbarBackground(final int colorTo, final int durationInMs) {
+        //Not great form, but the animation to show the details view takes 400ms.  We'll set our background
+        //color back to normal once the animation finishes.  I wish there was a more elegant way to avoid
+        //a timer.
+        final ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), mLastActionbarColor, colorTo);
+        final ColorDrawable colorDrawable = new ColorDrawable(mLastActionbarColor);
+        colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+            @Override
+            public void onAnimationUpdate(final ValueAnimator animator) {
+                colorDrawable.setColor((Integer) animator.getAnimatedValue());
+                getActionBar().setBackgroundDrawable(colorDrawable);
+            }
+        });
+        if (durationInMs >= 0)
+            colorAnimation.setDuration(durationInMs);
+        colorAnimation.start();
+        mLastActionbarColor = colorTo;
 
     }
+
+
 }

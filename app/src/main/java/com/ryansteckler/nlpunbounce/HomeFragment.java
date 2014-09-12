@@ -5,11 +5,14 @@ package com.ryansteckler.nlpunbounce;
  */
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ryansteckler.nlpunbounce.models.WakelockStatsCollection;
@@ -34,20 +37,73 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mListener.onHomeSetTitle("Home");
+        loadStatsFromSource(view);
+        TextView textView;
+
+        textView = (TextView)view.findViewById(R.id.buttonResetStats);
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View textView) {
+                new AlertDialog.Builder(getActivity())
+                        .setTitle("Delete all stats?")
+                        .setMessage("This will reset stats for all of your wakelocks!")
+                        .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                WakelockStatsCollection stats = WakelockStatsCollection.getInstance();
+                                stats.resetStats(getActivity());
+                                loadStatsFromSource(view);
+                            }
+                        })
+                        .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // do nothing
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+            }
+        });
+
+        LinearLayout layout = (LinearLayout) view.findViewById(R.id.buttonKarma1);
+        layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MaterialSettingsActivity)getActivity()).mHelper.launchPurchaseFlow(getActivity(), "donate_1", 1, ((MaterialSettingsActivity)getActivity()).mPurchaseFinishedListener, "1");
+            }
+        });
+
+        layout = (LinearLayout) view.findViewById(R.id.buttonKarma5);
+        layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MaterialSettingsActivity)getActivity()).mHelper.launchPurchaseFlow(getActivity(), "donate_5", 5, ((MaterialSettingsActivity)getActivity()).mPurchaseFinishedListener, "5");
+            }
+        });
+
+        layout = (LinearLayout) view.findViewById(R.id.buttonKarma10);
+        layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MaterialSettingsActivity)getActivity()).mHelper.launchPurchaseFlow(getActivity(), "donate_10", 10, ((MaterialSettingsActivity)getActivity()).mPurchaseFinishedListener, "10");
+            }
+        });
+
+    }
+
+    private void loadStatsFromSource(View view) {
         WakelockStatsCollection stats = WakelockStatsCollection.getInstance();
         String duration = stats.getDurationAllowedFormatted(getActivity());
         TextView textView = (TextView)view.findViewById(R.id.textLocalWakeTimeAllowed);
         textView.setText(duration);
         textView = (TextView)view.findViewById(R.id.textLocalWakeAcquired);
-        textView.setText(String.valueOf(stats.getTotalAllowedCount()));
+        textView.setText(String.valueOf(stats.getTotalAllowedCount(getActivity())));
         textView = (TextView)view.findViewById(R.id.textLocalWakeBlocked);
-        textView.setText(String.valueOf(stats.getTotalBlockCount()));
+        textView.setText(String.valueOf(stats.getTotalBlockCount(getActivity())));
         textView = (TextView)view.findViewById(R.id.textLocalWakeTimeBlocked);
         textView.setText(stats.getDurationBlockedFormatted(getActivity()));
-
     }
 
     @Override

@@ -98,4 +98,18 @@
         <item name="android:alpha">0.87</item>
     </style>
 
+    <style name="TextButton">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:alpha">0.87</item>
+    </style>
+
+    <style name="TextButtonLight">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:alpha">0.87</item>
+    </style>
+
 </resources>

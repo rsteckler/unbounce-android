@@ -11,6 +11,7 @@ import android.os.IBinder;
 import android.os.SystemClock;
 
 import com.ryansteckler.nlpunbounce.models.InterimWakelock;
+import com.ryansteckler.nlpunbounce.models.WakelockStatsCollection;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,10 +33,12 @@ public class Wakelocks implements IXposedHookLoadPackage {
     private static final String VERSION = "1.1.4"; //This needs to be pulled from the manifest or gradle build.
     private long mLastLocatorAlarm = 0;  // Last alarm attempt
     private long mLastDetectionAlarm = 0;  // Last alarm attempt
-    private long mLastNlpWakeLock = 0;  // Last wakelock attempt
-    private long mLastNlpCollectorWakeLock = 0;  // Last wakelock attempt
+    private HashMap<String, Long> mLastWakelockAttempts = null;
 
     private static boolean showedUnsupportedAlarmMessage = false;
+
+    public static WakelockStatsCollection mWakelockStatsCollection = null;
+
 
     XSharedPreferences m_prefs;
     public static HashMap<IBinder, InterimWakelock> mCurrentWakeLocks;
@@ -47,12 +50,13 @@ public class Wakelocks implements IXposedHookLoadPackage {
 
             XposedBridge.log(TAG + "Version " + VERSION);
 
-            m_prefs = new XSharedPreferences(Wakelocks.class.getPackage().getName());
+            m_prefs = new XSharedPreferences("com.ryansteckler.nlpunbounce");
             m_prefs.reload();
 
             mCurrentWakeLocks = new HashMap<IBinder, InterimWakelock>();
+            mLastWakelockAttempts = new HashMap<String, Long>();
 
-            hookAlarms(lpparam);
+//            hookAlarms(lpparam);
             hookWakeLocks(lpparam);
         }
     }
@@ -200,59 +204,38 @@ public class Wakelocks implements IXposedHookLoadPackage {
     private void handleWakeLockAcquire(XC_MethodHook.MethodHookParam param, String wakeLockName, IBinder lock) {
         m_prefs.reload();
 
-        if (wakeLockName.equals("NlpCollectorWakeLock"))
-        {
-            //If we're blocking them
-            if (m_prefs.getBoolean("wakelock_collector_enabled", true)) {
-                int collectorMaxFreq = tryParseInt(m_prefs.getString("wakelock_collector_seconds", "240"));
-                collectorMaxFreq *= 1000; //convert to ms
+        //If we're blocking this wakelock
+        String prefName = "wakelock_" + wakeLockName + "_enabled";
+        if (m_prefs.getBoolean(prefName, false)) {
 
-                //Debounce this to our minimum interval.
-                final long now = SystemClock.elapsedRealtime();
-                long timeSinceLastWakeLock = now - mLastNlpCollectorWakeLock;
+            long collectorMaxFreq = m_prefs.getLong("wakelock_" + wakeLockName + "_seconds", 240);
+            collectorMaxFreq *= 1000; //convert to ms
 
-                if (timeSinceLastWakeLock < collectorMaxFreq) {
-                    //Not enough time has passed since the last wakelock.  Deny the wakelock
-                    param.setResult(null);
-                    recordBlock(param, wakeLockName);
-
-                    debugLog("Preventing NlpCollectorWakeLock.  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
-
-                } else {
-                    //Allow the wakelock
-                    XposedBridge.log(TAG + "Allowing NlpCollectorWakeLock.  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
-                    mLastNlpCollectorWakeLock = now;
-                    recordAcquire(wakeLockName, lock);
-                }
+            //Debounce this to our minimum interval.
+            final long now = SystemClock.elapsedRealtime();
+            long lastAttempt = 0;
+            try {
+                lastAttempt = mLastWakelockAttempts.get(wakeLockName);
             }
-        }
-        else if (wakeLockName.equals("NlpWakeLock"))
-        {
-            if (m_prefs.getBoolean("wakelock_nlp_enabled", true)) {
+            catch (NullPointerException npe)
+            { /* ok.  Just havent attempted yet.  Use 0 */ }
 
-                int nlpMaxFreq = tryParseInt(m_prefs.getString("wakelock_nlp_seconds", "240"));
-                nlpMaxFreq *= 1000; //convert to ms
+            long timeSinceLastWakeLock = now - lastAttempt;
 
-                //Debounce this to our minimum interval.
-                final long now = SystemClock.elapsedRealtime();
-                long timeSinceLastWakeLock = now - mLastNlpWakeLock;
+            if (timeSinceLastWakeLock < collectorMaxFreq) {
+                //Not enough time has passed since the last wakelock.  Deny the wakelock
+                param.setResult(null);
+                recordBlock(param, wakeLockName);
 
-                if (timeSinceLastWakeLock < nlpMaxFreq) {
-                    //Not enough time has passed since the last wakelock.  Deny the wakelock
-                    param.setResult(null);
-                    recordBlock(param, wakeLockName);
+                debugLog("Preventing " + wakeLockName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
 
-                    debugLog("Preventing NlpWakeLock.  Max Interval: " + nlpMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
-
-                } else {
-                    //Allow the wakelock
-                    XposedBridge.log(TAG + "Allowing NlpWakeLock.  Max Interval: " + nlpMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
-                    mLastNlpWakeLock = now;
-                    recordAcquire(wakeLockName, lock);
-                }
+            } else {
+                //Allow the wakelock
+                XposedBridge.log(TAG + "Allowing " + wakeLockName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
+                mLastWakelockAttempts.put(wakeLockName, now);
+                recordAcquire(wakeLockName, lock);
             }
-        }
-        else {
+        } else {
             recordAcquire(wakeLockName, lock);
         }
     }
@@ -276,25 +259,16 @@ public class Wakelocks implements IXposedHookLoadPackage {
         if (curStats != null)
         {
             curStats.setTimeStopped(SystemClock.elapsedRealtime());
-            sendStats(param, curStats);
+            updateStats(param, curStats);
         }
     }
 
-    private void sendStats(XC_MethodHook.MethodHookParam param, InterimWakelock curStat)
+    private void updateStats(XC_MethodHook.MethodHookParam param, InterimWakelock curStat)
     {
         Context context = (Context)XposedHelpers.getObjectField(param.thisObject, "mContext");
 
         if (context != null) {
-            Intent intent = new Intent("com.ryansteckler.nlpunbounce.SEND_STATS");
-            //TODO:  add FLAG_RECEIVER_REGISTERED_ONLY_BEFORE_BOOT (hardcoded value) to the intent to avoid needing to catch
-            //      the IllegalStateException.  The flag value changed between 4.3 and 4.4  :/
-            intent.putExtra("stat", curStat);
-
-            try {
-                context.sendBroadcast(intent);
-            } catch (IllegalStateException ise) {
-                //Ignore.  This is because boot hasn't completed yet.
-            }
+            mWakelockStatsCollection.getInstance().addInterimWakelock(context, curStat);
         }
     }
 
@@ -381,16 +355,18 @@ public class Wakelocks implements IXposedHookLoadPackage {
         Context context = (Context)XposedHelpers.getObjectField(param.thisObject, "mContext");
 
         if (context != null) {
-            Intent intent = new Intent("com.ryansteckler.nlpunbounce.INCREMENT_BLOCK_COUNT");
-            //TODO:  add FLAG_RECEIVER_REGISTERED_ONLY_BEFORE_BOOT to the intent to avoid needing to catch
-            //      the IllegalStateException.  The flag value changed between 4.3 and 4.4  :/
-            intent.putExtra("name", name);
-            try {
-                context.sendBroadcast(intent);
-            } catch (IllegalStateException ise) {
-                //Ignore.  This is becuase boot hasn't completed yet.
-            }
+            mWakelockStatsCollection.getInstance().incrementWakelockBlock(context, name);
+//            Intent intent = new Intent("com.ryansteckler.nlpunbounce.INCREMENT_BLOCK_COUNT");
+//            //TODO:  add FLAG_RECEIVER_REGISTERED_ONLY_BEFORE_BOOT to the intent to avoid needing to catch
+//            //      the IllegalStateException.  The flag value changed between 4.3 and 4.4  :/
+//            intent.putExtra("name", name);
+//            try {
+//                context.sendBroadcast(intent);
+//            } catch (IllegalStateException ise) {
+//                //Ignore.  This is becuase boot hasn't completed yet.
+//            }
         }
+
     }
 
     private static int tryParseInt(String s) {
@@ -403,7 +379,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
 
     private void debugLog(String log)
     {
-        if (m_prefs.getBoolean("debug_logging", false))
+//        if (m_prefs.getBoolean("debug_logging", false))
         {
             XposedBridge.log(TAG + log);
         }

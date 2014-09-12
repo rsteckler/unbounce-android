@@ -11,6 +11,7 @@ public class WakelockStats implements Serializable {
     private long mAllowedCount;
     private long mBlockCount;
     private String mName;
+    private boolean mBlockingEnabled;
 
     public String getName() {
         return mName;
@@ -19,6 +20,16 @@ public class WakelockStats implements Serializable {
     public void setName(String name) {
         synchronized (this) {
             this.mName = name;
+        }
+    }
+
+    public boolean getBlockingEnabled() {
+        return mBlockingEnabled;
+    }
+
+    public void setBlockingEnabled(boolean blockingEnabled) {
+        synchronized (this) {
+            this.mBlockingEnabled = blockingEnabled;
         }
     }
 
@@ -99,6 +110,8 @@ public class WakelockStats implements Serializable {
     public long getBlockedDuration()
     {
         //Determine the average alive time of a wakelock.
+        if (mAllowedCount == 0)
+            return 0;
         long averageTime = mAllowedDuration / mAllowedCount;
         //Now multiply that by the number we've blocked.
         long blockedTime = averageTime * mBlockCount;

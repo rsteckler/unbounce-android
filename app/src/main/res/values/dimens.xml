@@ -19,4 +19,7 @@
     <!-- Start new design -->
     <dimen name="textsize_body1">14sp</dimen>
     <dimen name="textsize_caption">12sp</dimen>
+    <dimen name="card_external_padding">8sp</dimen>
+    <dimen name="card_internal_padding">16sp</dimen>
+    <dimen name="flat_button_long_padding">32sp</dimen>
 </resources>

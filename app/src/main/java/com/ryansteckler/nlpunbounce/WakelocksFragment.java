@@ -27,14 +27,14 @@ import com.ryansteckler.nlpunbounce.models.WakelockStatsCollection;
  * Activities containing this fragment MUST implement the {@link OnFragmentInteractionListener}
  * interface.
  */
-public class WakelocksFragment extends ListFragment {
+public class WakelocksFragment extends ListFragment implements WakelockDetailFragment.FragmentClearListener {
 
     private OnFragmentInteractionListener mListener;
     private WakelocksAdapter mAdapter;
-    private boolean mShowingDetail = false;
 
     //Whether we're sorting the wakelocks list by duration or count
     private boolean mSortByTime = true;
+    private boolean mReloadOnShow = false;
 
     public static WakelocksFragment newInstance(int sectionNumber) {
         WakelocksFragment fragment = new WakelocksFragment();
@@ -67,9 +67,10 @@ public class WakelocksFragment extends ListFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mAdapter = new WakelocksAdapter(getActivity(), WakelockStatsCollection.getInstance().toArrayList());
+        mAdapter = new WakelocksAdapter(getActivity(), WakelockStatsCollection.getInstance().toArrayList(getActivity()));
         mAdapter.sort(SortWakeLocks.getListComparator(!mSortByTime));
         setListAdapter(mAdapter);
+        mAdapter.notifyDataSetChanged();
 
         setHasOptionsMenu(true);
     }
@@ -136,6 +137,7 @@ public class WakelocksFragment extends ListFragment {
         //so we can hit the back button and come back to the list.
         FragmentManager fragmentManager = getFragmentManager();
         WakelockDetailFragment newFrag = WakelockDetailFragment.newInstance(startBounds.top, finalBounds.top, startBounds.bottom, finalBounds.bottom, (WakelockStats)mAdapter.getItem(position));
+        newFrag.attachClearListener(this);
         fragmentManager.beginTransaction()
                 .setCustomAnimations(R.animator.expand_in, R.animator.noop, R.animator.noop, R.animator.expand_out)
                 .hide(this)
@@ -148,9 +150,18 @@ public class WakelocksFragment extends ListFragment {
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
+        //Remember the scroll pos so we can reinstate it
         if (!hidden) {
             if (mListener != null)
                 mListener.onWakelocksSetTitle("Wakelocks");
+            if (mReloadOnShow) {
+                mReloadOnShow = false;
+                //We may have had a change in the data for this wakelock (such as the user resetting the counters).
+                //Try updating it.
+                mAdapter = new WakelocksAdapter(getActivity(), WakelockStatsCollection.getInstance().toArrayList(getActivity()));
+                mAdapter.sort(SortWakeLocks.getListComparator(!mSortByTime));
+                setListAdapter(mAdapter);
+            }
         }
 
     }
@@ -194,6 +205,11 @@ public class WakelocksFragment extends ListFragment {
         }
 
         super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    public void onWakelockCleared() {
+        mReloadOnShow = true;
     }
 
     /**

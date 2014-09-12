@@ -2,10 +2,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.ryansteckler.nlpunbounce.MaterialSettingsActivity" >
 
-    <item android:id="@+id/wakelock_switch"
-        android:titleCondensed=""
-        android:title=""
-        android:actionViewClass="android.widget.Switch"
-        android:showAsAction="always"/>
+    <!--<item android:id="@+id/wakelock_switch"-->
+        <!--android:titleCondensed=""-->
+        <!--android:title=""-->
+        <!--android:actionViewClass="android.widget.Switch"-->
+        <!--android:showAsAction="always"/>-->
 
 </menu>

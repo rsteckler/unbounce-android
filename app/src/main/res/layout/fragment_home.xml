@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ryansteckler.nlpunbounce.MaterialSettingsActivity.HomeFragment">
+    tools:context="com.ryansteckler.nlpunbounce.MaterialSettingsActivity.HomeFragment"
+    android:background="#dddddd">
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -18,9 +19,6 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
 
-            <View style="@style/Divider"
-                android:layout_marginTop="@dimen/separator_pad"
-                android:visibility="gone" />
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="fill_parent"
@@ -206,24 +204,24 @@
 
                 </LinearLayout>
             </LinearLayout>
-            <View style="@style/Divider"
-                android:layout_marginTop="@dimen/separator_pad"
-                android:visibility="gone" />
+
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="@dimen/card_external_padding"
+                android:layout_marginRight="@dimen/card_external_padding"
+                android:background="@drawable/card_background"
+                android:layout_marginTop="@dimen/card_external_padding">
 
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/separator_pad"
-                    android:background="@color/background_secondary"
-                    android:paddingLeft="@dimen/activity_horizontal_margin"
-                    android:paddingRight="@dimen/activity_horizontal_margin"
-                    android:paddingTop="@dimen/activity_vertical_margin"
-                    android:padding="@dimen/activity_vertical_margin">
+                    android:background="@color/background_primary_shaded"
+                    android:paddingLeft="@dimen/card_internal_padding"
+                    android:paddingTop="@dimen/card_internal_padding"
+                    android:paddingBottom="@dimen/card_internal_padding">
 
                     <ImageView
                         android:layout_width="@dimen/header_icon_size"
@@ -234,7 +232,8 @@
                         android:orientation="vertical"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:gravity="center_vertical">
+                        android:gravity="center_vertical"
+                        android:layout_weight="1">
 
                         <TextView
                             android:id="@+id/lb_local"
@@ -254,14 +253,28 @@
 
                     </LinearLayout>
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="RESET"
+                        android:id="@+id/buttonResetStats"
+                        android:background="@drawable/flat_button_background"
+                        style="@style/TextButtonLight"
+                        android:paddingRight="@dimen/flat_button_long_padding"
+                        android:paddingTop="@dimen/card_external_padding"
+                        android:paddingBottom="@dimen/card_external_padding"
+                        android:paddingLeft="@dimen/card_external_padding"
+                        android:alpha="1"
+                        android:gravity="center_vertical" />
+
+
                 </LinearLayout>
 
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:paddingRight="@dimen/activity_horizontal_margin"
-                    android:paddingLeft="@dimen/activity_horizontal_margin">
+                    android:padding="@dimen/card_internal_padding">
 
                     <LinearLayout
                         android:orientation="horizontal"
@@ -406,6 +419,7 @@
                             style="@style/TextBody1Fade" />
 
                     </LinearLayout>
+
                 </LinearLayout>
 
             </LinearLayout>
@@ -414,20 +428,18 @@
                 android:orientation="vertical"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_marginTop="@dimen/section_pad">
+                android:background="@drawable/card_background"
+                android:layout_marginTop="@dimen/card_external_padding"
+                android:layout_marginRight="@dimen/card_external_padding"
+                android:layout_marginLeft="@dimen/card_external_padding">
 
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:showDividers="end"
-                    android:background="@color/background_four"
-                    android:paddingLeft="@dimen/activity_horizontal_margin"
-                    android:paddingTop="@dimen/activity_vertical_margin"
-                    android:paddingRight="@dimen/activity_horizontal_margin"
-                    android:paddingBottom="@dimen/activity_vertical_margin"
-                    android:layout_marginBottom="@dimen/separator_pad"
-                    android:layout_marginTop="@dimen/section_pad">
+                    android:background="@color/background_primary_shaded"
+                    android:padding="@dimen/card_internal_padding">
 
                     <ImageView
                         android:layout_width="@dimen/header_icon_size"
@@ -463,8 +475,7 @@
                     android:orientation="vertical"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:paddingLeft="@dimen/activity_horizontal_margin"
-                    android:paddingRight="@dimen/activity_horizontal_margin">
+                    android:padding="@dimen/card_internal_padding">
 
                     <LinearLayout
                         android:orientation="horizontal"
@@ -472,7 +483,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/separator_pad"
                         android:clickable="true"
-                        android:background="?android:attr/selectableItemBackground">
+                        android:background="?android:attr/selectableItemBackground"
+                        android:id="@+id/buttonKarma1">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -497,7 +509,8 @@
                         android:layout_marginTop="@dimen/separator_pad"
                         android:layout_marginBottom="@dimen/separator_pad"
                         android:clickable="true"
-                        android:background="?android:attr/selectableItemBackground">
+                        android:background="?android:attr/selectableItemBackground"
+                        android:id="@+id/buttonKarma5">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -522,7 +535,8 @@
                         android:layout_marginTop="@dimen/separator_pad"
                         android:layout_marginBottom="@dimen/separator_pad"
                         android:clickable="true"
-                        android:background="?android:attr/selectableItemBackground">
+                        android:background="?android:attr/selectableItemBackground"
+                        android:id="@+id/buttonKarma10">
 
                         <TextView
                             android:layout_width="wrap_content"

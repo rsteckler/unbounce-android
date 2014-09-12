@@ -6,7 +6,8 @@
     android:clickable="false"
     android:background="@drawable/list_background"
     android:paddingTop="@dimen/separator_pad"
-    android:paddingBottom="@dimen/separator_pad">
+    android:paddingBottom="@dimen/separator_pad"
+    android:id="@+id/listitemWakelock">
 
     <LinearLayout
         android:orientation="vertical"
