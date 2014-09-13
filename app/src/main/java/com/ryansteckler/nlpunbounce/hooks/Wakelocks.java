@@ -384,7 +384,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
 
     private void debugLog(String log)
     {
-//        if (m_prefs.getBoolean("debug_logging", false))
+        if (m_prefs.getBoolean("debug_logging", false))
         {
             XposedBridge.log(TAG + log);
         }

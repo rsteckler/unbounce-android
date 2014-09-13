@@ -95,7 +95,7 @@ public class WakelockDetailFragment extends Fragment {
             }
         });
 
-        Switch onOff = (Switch)view.findViewById(R.id.switchWakelock);
+        final Switch onOff = (Switch)view.findViewById(R.id.switchWakelock);
         String blockName = "wakelock_" + mStat.getName() + "_enabled";
         boolean enabled = prefs.getBoolean(blockName, false);
         onOff.setChecked(enabled);
@@ -122,6 +122,7 @@ public class WakelockDetailFragment extends Fragment {
                             .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     // do nothing
+                                    onOff.setChecked(false);
                                 }
                             })
                             .setIcon(android.R.drawable.ic_dialog_alert)
