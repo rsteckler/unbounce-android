@@ -1,7 +1,9 @@
 package com.ryansteckler.nlpunbounce.adapters;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,10 +32,13 @@ public class WakelocksAdapter extends ArrayAdapter {
 
     public WakelocksAdapter(Context context, ArrayList<WakelockStats> wakelockStatList) {
         super(context, R.layout.fragment_wakelocks_listitem, wakelockStatList);
-        calculateScale(wakelockStatList);
+        calculateScale(context, wakelockStatList);
     }
 
-    private void calculateScale(ArrayList<WakelockStats> wakelockStatList) {
+    private void calculateScale(Context context, ArrayList<WakelockStats> wakelockStatList) {
+
+        SharedPreferences prefs = context.getSharedPreferences("com.ryansteckler.nlpunbounce" + "_preferences", Context.MODE_WORLD_READABLE);
+
         //Get the max and min values for the red-green spectrum of counts
         Iterator<WakelockStats> iter = wakelockStatList.iterator();
         while (iter.hasNext())
@@ -43,10 +48,15 @@ public class WakelocksAdapter extends ArrayAdapter {
                 mHighCount = curStat.getAllowedCount();
             if (curStat.getAllowedCount() < mLowCount || mLowCount == 0)
                 mLowCount = curStat.getAllowedCount();
+
+            //Set the blocking flag
+            String blockName = "wakelock_" + curStat.getName() + "_enabled";
+            curStat.setBlockingEnabled(prefs.getBoolean(blockName, false));
+
         }
         mScale = mHighCount - mLowCount;
-    }
 
+    }
 
     private static class ViewHolder {
         TextView name;
@@ -100,9 +110,9 @@ public class WakelocksAdapter extends ArrayAdapter {
         viewHolder.wakeCount.setBackgroundColor(Color.HSVToColor(hsv));
 
         if (wakelock.getBlockingEnabled()) {
-            convertView.setBackgroundColor(convertView.getResources().getColor(R.color.background_secondary_faded));
+            viewHolder.name.setTypeface(null, Typeface.BOLD);
         } else {
-            convertView.setBackgroundColor(Color.WHITE);
+            viewHolder.name.setTypeface(null, Typeface.NORMAL);
         }
 
 

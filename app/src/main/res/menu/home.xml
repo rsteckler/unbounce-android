@@ -2,13 +2,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.ryansteckler.nlpunbounce.MaterialSettingsActivity" >
 
-    <item android:id="@+id/action_reset_stats"
-        android:title="@string/action_reset_stats"
-        android:orderInCategory="100"
-        android:showAsAction="never" />
+    <!--<item android:id="@+id/action_reset_stats"-->
+        <!--android:title="@string/action_reset_stats"-->
+        <!--android:orderInCategory="100"-->
+        <!--android:showAsAction="never" />-->
 
-    <item android:id="@+id/action_settings"
-        android:title="@string/action_settings"
-        android:orderInCategory="100"
-        android:showAsAction="never" />
+    <!--<item android:id="@+id/action_settings"-->
+        <!--android:title="@string/action_settings"-->
+        <!--android:orderInCategory="100"-->
+        <!--android:showAsAction="never" />-->
 </menu>

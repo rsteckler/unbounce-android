@@ -30,15 +30,15 @@ import de.robv.android.xposed.XC_MethodHook;
 public class Wakelocks implements IXposedHookLoadPackage {
 
     private static final String TAG = "NlpUnbounce: ";
-    private static final String VERSION = "1.1.4"; //This needs to be pulled from the manifest or gradle build.
+    private static final String VERSION = "1.1.5b2"; //This needs to be pulled from the manifest or gradle build.
     private long mLastLocatorAlarm = 0;  // Last alarm attempt
     private long mLastDetectionAlarm = 0;  // Last alarm attempt
     private HashMap<String, Long> mLastWakelockAttempts = null;
 
+    private long mLastUpdateStats = 0;
+    private long mUpdateStatsFrequency = 60000;
+
     private static boolean showedUnsupportedAlarmMessage = false;
-
-    public static WakelockStatsCollection mWakelockStatsCollection = null;
-
 
     XSharedPreferences m_prefs;
     public static HashMap<IBinder, InterimWakelock> mCurrentWakeLocks;
@@ -253,22 +253,36 @@ public class Wakelocks implements IXposedHookLoadPackage {
     }
 
     private void handleWakeLockRelease(XC_MethodHook.MethodHookParam param, IBinder lock) {
-        m_prefs.reload();
 
         InterimWakelock curStats = mCurrentWakeLocks.remove(lock);
         if (curStats != null)
         {
             curStats.setTimeStopped(SystemClock.elapsedRealtime());
-            updateStats(param, curStats);
+            Context context = (Context)XposedHelpers.getObjectField(param.thisObject, "mContext");
+            WakelockStatsCollection.getInstance().addInterimWakelock(context, curStats);
+            updateStatsIfNeeded(context);
         }
     }
 
-    private void updateStats(XC_MethodHook.MethodHookParam param, InterimWakelock curStat)
+    private void updateStatsIfNeeded(Context context)
     {
-        Context context = (Context)XposedHelpers.getObjectField(param.thisObject, "mContext");
-
         if (context != null) {
-            mWakelockStatsCollection.getInstance().addInterimWakelock(context, curStat);
+            final long now = SystemClock.elapsedRealtime();
+
+            long timeSinceLastUpdateStats = now - mLastUpdateStats;
+
+            if (timeSinceLastUpdateStats > mUpdateStatsFrequency) {
+                Intent intent = new Intent("com.ryansteckler.nlpunbounce.SEND_STATS");
+                //TODO:  add FLAG_RECEIVER_REGISTERED_ONLY_BEFORE_BOOT to the intent to avoid needing to catch
+                //      the IllegalStateException.  The flag value changed between 4.3 and 4.4  :/
+                intent.putExtra("stats", WakelockStatsCollection.getInstance().getSerializableStats());
+                try {
+                    context.sendBroadcast(intent);
+                } catch (IllegalStateException ise) {
+                    //Ignore.  This is because boot hasn't completed yet.
+                }
+                mLastUpdateStats = now;
+            }
         }
     }
 
@@ -355,16 +369,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
         Context context = (Context)XposedHelpers.getObjectField(param.thisObject, "mContext");
 
         if (context != null) {
-            mWakelockStatsCollection.getInstance().incrementWakelockBlock(context, name);
-//            Intent intent = new Intent("com.ryansteckler.nlpunbounce.INCREMENT_BLOCK_COUNT");
-//            //TODO:  add FLAG_RECEIVER_REGISTERED_ONLY_BEFORE_BOOT to the intent to avoid needing to catch
-//            //      the IllegalStateException.  The flag value changed between 4.3 and 4.4  :/
-//            intent.putExtra("name", name);
-//            try {
-//                context.sendBroadcast(intent);
-//            } catch (IllegalStateException ise) {
-//                //Ignore.  This is becuase boot hasn't completed yet.
-//            }
+            WakelockStatsCollection.getInstance().incrementWakelockBlock(context, name);
         }
 
     }

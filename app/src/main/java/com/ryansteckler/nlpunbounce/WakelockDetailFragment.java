@@ -1,7 +1,9 @@
 package com.ryansteckler.nlpunbounce;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -47,6 +49,8 @@ public class WakelockDetailFragment extends Fragment {
     private int mFinalBottom;
     private WakelockStats mStat;
     private FragmentClearListener mClearListener = null;
+
+    private boolean mKnownSafeWakelock = false;
 
     private FragmentInteractionListener mListener;
 
@@ -99,21 +103,34 @@ public class WakelockDetailFragment extends Fragment {
 
         onOff.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                SharedPreferences prefs = getActivity().getSharedPreferences(WakelockDetailFragment.class.getPackage().getName() + "_preferences", Context.MODE_WORLD_READABLE);
-                String blockName = "wakelock_" + mStat.getName() + "_enabled";
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putBoolean(blockName, b);
-                editor.commit();
+            public void onCheckedChanged(CompoundButton compoundButton, final boolean b) {
+                SharedPreferences prefs = getActivity().getSharedPreferences("com.ryansteckler.nlpunbounce" + "_preferences", Context.MODE_WORLD_READABLE);
+                final SharedPreferences.Editor editor = prefs.edit();
 
-                //Enable or disable the seconds setting.
-                getView().findViewById(R.id.editWakelockSeconds).setEnabled(b);
-                View panel = (View)getView().findViewById(R.id.settingsPanel);
-                panel.setBackgroundColor(b ?
-                       getResources().getColor(R.color.background_panel_enabled) :
-                       getResources().getColor(R.color.background_panel_disabled));
-                panel.setAlpha(b ? 1 : (float) .4);
+                if (b) {
+                    new AlertDialog.Builder(getActivity())
+                            .setTitle("Unbounce unknown wakelock?")
+                            .setMessage("This wakelock hasn't been proven safe to Unbounce.  Would you like to Unbounce it anyway?")
+                            .setPositiveButton("UNBOUNCE", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    String blockName = "wakelock_" + mStat.getName() + "_enabled";
+                                    editor.putBoolean(blockName, b);
+                                    editor.commit();
+                                    updateEnabledWakelock(b);
+                                }
+                            })
+                            .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // do nothing
+                                }
+                            })
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
 
+                }
+                else {
+                    updateEnabledWakelock(b);
+                }
             }
         });
 
@@ -147,10 +164,27 @@ public class WakelockDetailFragment extends Fragment {
             description.setText("NlpWakeLock is safe to unbounce.  It's used by Google Play Services to determine your rough location using a " +
                 "combination of cell towers and WiFi.  Once it has your location, it stores it locally so other apps, like Google Now, can access your " +
                 "location without using GPS or getting a new fix.  Recommended settings are between 180 and 600 seconds.");
+            mKnownSafeWakelock = true;
         } else if (mStat.getName().toLowerCase().equals("nlpcollectorwakelock")) {
             description.setText("NlpWakeLock is safe to unbounce.  It's used by Google Play Services to determine your rough location using a " +
                 "combination of cell towers and wifi.  Once it has your location, it sends it back to Google so they can expand their database " +
                 "of WiFi locations.  Recommended settings are between 180 and 600 seconds.");
+            mKnownSafeWakelock = true;
+        }
+    }
+
+    private void updateEnabledWakelock(boolean b) {
+        //Enable or disable the seconds setting.
+        getView().findViewById(R.id.editWakelockSeconds).setEnabled(b);
+        View panel = (View)getView().findViewById(R.id.settingsPanel);
+        panel.setBackgroundColor(b ?
+                getResources().getColor(R.color.background_panel_enabled) :
+                getResources().getColor(R.color.background_panel_disabled));
+        panel.setAlpha(b ? 1 : (float) .4);
+
+        if (mClearListener != null)
+        {
+            mClearListener.onWakelockCleared();
         }
     }
 

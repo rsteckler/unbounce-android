@@ -7,7 +7,9 @@ package com.ryansteckler.nlpunbounce;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,14 +52,14 @@ public class HomeFragment extends Fragment {
                 new AlertDialog.Builder(getActivity())
                         .setTitle("Delete all stats?")
                         .setMessage("This will reset stats for all of your wakelocks!")
-                        .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                        .setPositiveButton("DELETE", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 WakelockStatsCollection stats = WakelockStatsCollection.getInstance();
                                 stats.resetStats(getActivity());
                                 loadStatsFromSource(view);
                             }
                         })
-                        .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                        .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 // do nothing
                             }
@@ -91,6 +93,30 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        SharedPreferences prefs = getActivity().getSharedPreferences("com.ryansteckler.nlpunbounce" + "_preferences", Context.MODE_WORLD_READABLE);
+        if (prefs.getBoolean("first_launch", true)) {
+            final SharedPreferences.Editor editor = prefs.edit();
+            editor.putBoolean("first_launch", false);
+            editor.commit();
+
+            //Pop up the first time load prefs
+            new AlertDialog.Builder(getActivity())
+                    .setTitle("Load recommended defaults?")
+                    .setMessage("This will setup some default blocks for you to save battery life.")
+                    .setPositiveButton("SET DEFAULTS", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                        editor.putBoolean("wakelock_NlpWakeLock_enabled", true);
+                        editor.putBoolean("wakelock_NlpCollectorWakeLock_enabled", true);
+                        editor.commit();
+                        }
+                    })
+                    .setNegativeButton("SKIP DEFAULTS", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // do nothing
+                        }
+                    })
+                    .show();
+        }
     }
 
     private void loadStatsFromSource(View view) {

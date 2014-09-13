@@ -93,6 +93,7 @@ public class NavigationDrawerFragment extends Fragment {
                         getString(R.string.title_home),
                         getString(R.string.title_wakelocks),
                         getString(R.string.title_alarms),
+                        "Version 1.1.5b2"
                 }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;

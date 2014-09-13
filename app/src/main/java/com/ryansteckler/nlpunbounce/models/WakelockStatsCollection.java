@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Environment;
 import android.os.SystemClock;
+import android.util.Log;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -27,7 +28,7 @@ public class WakelockStatsCollection implements Serializable {
     final private static String STATS_FILENAME = "wakelocks.stats";
     HashMap<String, WakelockStats> mStats = null;
     long mLastSave = 0;
-    long mSaveTimeFrequency = 10000; //Save 10 seconds
+    long mSaveTimeFrequency = 15000; //Save every 15 seconds
 
     private WakelockStatsCollection(){};
     private static WakelockStatsCollection mInstance = null;
@@ -39,6 +40,16 @@ public class WakelockStatsCollection implements Serializable {
             mInstance = new WakelockStatsCollection();
         }
         return mInstance;
+    }
+
+    public void populateSerializableStats(HashMap<String, WakelockStats> source)
+    {
+        mStats = source;
+    }
+
+    public HashMap<String, WakelockStats> getSerializableStats()
+    {
+        return mStats;
     }
 
     public ArrayList<WakelockStats> toArrayList(Context context)
@@ -181,7 +192,11 @@ public class WakelockStatsCollection implements Serializable {
         combined.incrementAllowedCount();
         mStats.put(toAdd.getName(), combined);
 
-        saveIfNeeded(context);
+        //We explicitly don't save here because this method "happens" to only be called by the
+        //hook process, which shouldn't save the file because it's root, and our app needs to read the file.
+        //Todo:  In the future, we should provide a parameter so the hook process can call this specifying a no-save
+        //condition.
+        //        saveIfNeeded(context);
 
     }
 
@@ -199,7 +214,11 @@ public class WakelockStatsCollection implements Serializable {
         combined.incrementBlockCount();
         mStats.put(wakelockName, combined);
 
-        saveIfNeeded(context);
+        //We explicitly don't save here because this method "happens" to only be called by the
+        //hook process, which shouldn't save the file because it's root, and our app needs to read the file.
+        //Todo:  In the future, we should provide a parameter so the hook process can call this specifying a no-save
+        //condition.
+        //        saveIfNeeded(context);
 
     }
 
@@ -217,7 +236,7 @@ public class WakelockStatsCollection implements Serializable {
         saveNow(context);
     }
 
-    private void saveIfNeeded(Context context) {
+    public void saveIfNeeded(Context context) {
         //Find out how long since our last save
         final long now = SystemClock.elapsedRealtime();
         long timeSinceLastSave = now - mLastSave;
@@ -226,13 +245,17 @@ public class WakelockStatsCollection implements Serializable {
             //Save now
             mLastSave = now;
 
+            String filename = Environment.getDataDirectory() + "/data/" + "com.ryansteckler.nlpunbounce" + "/files/" + STATS_FILENAME;
             try {
-                File outFile = new File(Environment.getDataDirectory(), "data/" + "com.ryansteckler.nlpunbounce" + "/files/" + STATS_FILENAME);
+
+                File outFile = new File(filename);
+                outFile.setReadable(true, false);
                 FileOutputStream out = new FileOutputStream(outFile);
                 ObjectOutputStream objOut = new ObjectOutputStream(out);
                 objOut.writeObject(mStats);
                 objOut.close();
                 out.close();
+                outFile.setReadable(true, false);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -242,23 +265,36 @@ public class WakelockStatsCollection implements Serializable {
         }
     }
 
-    private void saveNow(Context context) {
+    public void saveNow(Context context) {
         mLastSave = 0; //force a save
         saveIfNeeded(context);
     }
 
     private void loadStats(Context context) {
         if (mStats == null) {
+            String filename = "";
             try {
-                File inFile = new File(Environment.getDataDirectory(), "data/" + "com.ryansteckler.nlpunbounce" + "/files/" + STATS_FILENAME);
-                FileInputStream in = new FileInputStream(inFile);
-                ObjectInputStream objIn = new ObjectInputStream(in);
-                mStats = (HashMap<String, WakelockStats>) objIn.readObject();
-                objIn.close();
-                in.close();
-
+                filename = Environment.getDataDirectory() + "/data/" + "com.ryansteckler.nlpunbounce" + "/files/" + STATS_FILENAME;
+                File inFile = new File(filename);
+                if (inFile.exists() && !inFile.canRead()) {
+                    Log.d("NlpUnbounce:WLSC", "Can't load file yet.  Skipping...");
+                }
+                else if (inFile.exists() && inFile.canRead()) {
+                    Log.d("NlpUnbounce:WLSC", "Ready to load file.");
+                    FileInputStream in = new FileInputStream(inFile);
+                    ObjectInputStream objIn = new ObjectInputStream(in);
+                    mStats = (HashMap<String, WakelockStats>) objIn.readObject();
+                    objIn.close();
+                    in.close();
+                }
+                else {
+                    Log.d("NlpUnbounce:WLSC", "Unknown file state.  Resetting.");
+                    mStats = new HashMap<String, WakelockStats>();
+                }
 
             } catch (FileNotFoundException e) {
+                Log.d("NlpUnbounce:WLSC", "Please send this log to Ryan.  It's a problem.  FNF: " + filename);
+                new Exception().printStackTrace();
                 mStats = new HashMap<String, WakelockStats>();
             } catch (StreamCorruptedException e) {
                 mStats = new HashMap<String, WakelockStats>();
@@ -267,20 +303,7 @@ public class WakelockStatsCollection implements Serializable {
             } catch (ClassNotFoundException e) {
                 mStats = new HashMap<String, WakelockStats>();
             }
-
-            //Set the enabling
-            SharedPreferences prefs = context.getSharedPreferences("com.ryansteckler.nlpunbounce" + "_preferences", Context.MODE_WORLD_READABLE);
-            Iterator<WakelockStats> iter = mStats.values().iterator();
-            while (iter.hasNext())
-            {
-                WakelockStats curStat = iter.next();
-                String blockName = "wakelock_" + curStat.getName() + "enabled";
-                curStat.setBlockingEnabled(prefs.getBoolean(blockName, false));
-            }
         }
     }
 
-    public interface changeListener {
-        public void wakelockCleared(String wakelockName);
-    }
 }
