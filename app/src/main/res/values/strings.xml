@@ -2,5 +2,21 @@
 <resources>
 
     <string name="app_name">NlpUnbounce</string>
+    <string name="title_activity_material_settings">NlpUnbounce</string>
+    <string name="title_home">Home</string>
+    <string name="title_wakelocks">Wakelocks</string>
+    <string name="title_alarms">Alarms</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_search">Search</string>
+    <string name="action_sort_by_count">Sort by count</string>
+    <string name="action_sort_by_time">Sort by time</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_reset_stats">Reset Stats</string>
+    <string name="donate_text">KARMA</string>
+    <string name="global_text">GLOBAL</string>
+    <string name="local_text">DEVICE STATS</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_font_family">sans-serif</string>
 
 </resources>

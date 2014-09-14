@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:clickable="false"
+    android:background="@drawable/list_background"
+    android:paddingTop="@dimen/separator_pad"
+    android:paddingBottom="@dimen/separator_pad"
+    android:id="@+id/listitemAlarm">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="486,652"
+            android:id="@+id/textViewAlarmCount"
+            android:singleLine="false"
+            android:visibility="visible"
+            android:gravity="center_vertical|center_horizontal"
+            android:paddingLeft="@dimen/section_pad"
+            android:paddingRight="@dimen/section_pad"
+            style="@style/TextCaption" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textviewAlarmName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NlpCollectorWakeLock"
+        android:fontFamily="@string/app_font_family"
+        android:layout_weight="1"
+        android:singleLine="true"
+        style="@style/TextBody1"
+        android:layout_marginLeft="@dimen/section_pad"
+        android:ellipsize="marquee" />
+
+</LinearLayout>

@@ -1,0 +1,343 @@
+<com.ryansteckler.nlpunbounce.ExpandingLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/layoutDetails"
+    android:layout_height="match_parent"
+    tools:context="com.ryansteckler.nlpunbounce.AlarmDetailFragment"
+    android:visibility="visible"
+    android:background="@android:color/background_light">
+
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:visibility="visible"
+            android:alpha="1">
+
+
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/card_background"
+                android:layout_margin="@dimen/card_external_padding"
+                android:layout_marginTop="@dimen/activity_vertical_margin">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/background_four_shaded"
+                    android:paddingLeft="@dimen/card_internal_padding"
+                    android:paddingTop="@dimen/card_internal_padding"
+                    android:paddingBottom="@dimen/card_internal_padding">
+
+                    <ImageView
+                        android:layout_width="@dimen/header_icon_size"
+                        android:layout_height="@dimen/header_icon_size"
+                        android:src="@drawable/ic_description_four" />
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:gravity="center_vertical"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/lb_description"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:enabled="false"
+                            android:layout_marginLeft="@dimen/pad_icon"
+                            android:text="DESCRIPTION"
+                            style="@style/TextTitleLight" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Why is this thing eating your battery?"
+                            android:layout_marginLeft="@dimen/pad_icon"
+                            style="@style/TextCaptionLight" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:padding="@dimen/card_internal_padding">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        style="@style/TextBody1"
+                        android:id="@+id/textViewAlarmDescription"
+                        android:alpha=".87" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/card_background"
+                android:layout_margin="@dimen/card_external_padding"
+                android:layout_marginTop="@dimen/activity_vertical_margin">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/background_four_shaded"
+                    android:paddingLeft="@dimen/card_internal_padding"
+                    android:paddingTop="@dimen/card_internal_padding"
+                    android:paddingBottom="@dimen/card_internal_padding"
+                    android:paddingRight="@dimen/card_internal_padding">
+
+                    <ImageView
+                        android:layout_width="@dimen/header_icon_size"
+                        android:layout_height="@dimen/header_icon_size"
+                        android:src="@drawable/ic_settings_four" />
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:gravity="center_vertical"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/lb_settings"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:enabled="false"
+                            android:layout_marginLeft="@dimen/pad_icon"
+                            android:text="SETTINGS"
+                            style="@style/TextTitleLight" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Control this alarm"
+                            android:layout_marginLeft="@dimen/pad_icon"
+                            style="@style/TextCaptionLight" />
+
+                    </LinearLayout>
+
+                    <Switch
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/switchAlarm"
+                        android:alpha="1"/>
+
+
+                </LinearLayout>
+
+                <FrameLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:paddingLeft="1dp"
+                    android:paddingRight="1dp"
+                    android:paddingBottom="2dp">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:padding="@dimen/card_internal_padding"
+                        android:id="@+id/settingsPanel"
+                        android:background="@color/background_panel_disabled">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="Allow every"
+                                    style="@style/TextBody2"
+                                    android:layout_marginRight="@dimen/card_external_padding"
+                                    android:layout_weight=".25"
+                                    android:layout_gravity="center_vertical" />
+
+                                <EditText
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:inputType="number"
+                                    android:id="@+id/editAlarmSeconds"
+                                    android:editable="true"
+                                    android:layout_weight=".3"
+                                    android:maxLength="5"
+                                    android:maxLines="1"
+                                    android:lines="1"
+                                    android:textAlignment="center"
+                                    android:gravity="center_horizontal"
+                                    android:layout_gravity="center_horizontal" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="seconds."
+                                    style="@style/TextBody2"
+                                    android:layout_marginLeft="@dimen/card_external_padding"
+                                    android:layout_weight=".5"
+                                    android:layout_gravity="center_vertical" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </FrameLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/card_background"
+                android:layout_margin="@dimen/card_external_padding"
+                android:layout_marginTop="@dimen/activity_vertical_margin">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/background_four_shaded"
+                    android:paddingLeft="@dimen/card_internal_padding"
+                    android:paddingTop="@dimen/card_internal_padding"
+                    android:paddingBottom="@dimen/card_internal_padding">
+
+                    <ImageView
+                        android:layout_width="@dimen/header_icon_size"
+                        android:layout_height="@dimen/header_icon_size"
+                        android:src="@drawable/ic_local_four" />
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:gravity="center_vertical"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/lb_local"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:enabled="false"
+                            android:layout_marginLeft="@dimen/pad_icon"
+                            android:text="@string/local_text"
+                            style="@style/TextTitleLight" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="View your progress"
+                            android:layout_marginLeft="@dimen/pad_icon"
+                            style="@style/TextCaptionLight" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="RESET"
+                        android:id="@+id/buttonResetStats"
+                        android:background="@drawable/flat_button_background"
+                        style="@style/TextButtonLight"
+                        android:paddingRight="@dimen/flat_button_long_padding"
+                        android:paddingTop="@dimen/card_external_padding"
+                        android:paddingBottom="@dimen/card_external_padding"
+                        android:paddingLeft="@dimen/card_external_padding"
+                        android:alpha="1"
+                        android:gravity="center_vertical"
+                        android:clickable="true"
+                        android:enabled="true"
+                        android:focusable="true" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:padding="@dimen/card_internal_padding">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="Alarms acquired"
+                            android:gravity="center_vertical"
+                            android:layout_weight="1"
+                            style="@style/TextBody1" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="4,793,202"
+                            android:id="@+id/textLocalAlarmAcquired"
+                            android:gravity="center_vertical"
+                            style="@style/TextBody1Fade" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="Alarms blocked"
+                            android:gravity="center_vertical"
+                            android:layout_weight="1"
+                            style="@style/TextBody1" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="953,664"
+                            android:id="@+id/textLocalAlarmBlocked"
+                            android:gravity="center_vertical"
+                            style="@style/TextBody1Fade" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+</com.ryansteckler.nlpunbounce.ExpandingLayout>

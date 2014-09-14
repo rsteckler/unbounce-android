@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="background_primary">#009688</color>
+    <color name="background_primary_shaded">#00796b</color>
+
+    <color name="background_secondary">#FF9800</color>
+    <color name="background_secondary_faded">#ffb74d</color>
+    <color name="background_secondary_shaded">#ef6c00</color>
+
+    <color name="background_gray">#9E9E9E</color>
+
+    <color name="background_three">#FF5722</color>
+
+    <color name="background_four">#9c27b0</color>
+    <color name="background_four_faded">#ba68c8</color>
+    <color name="background_four_shaded">#7b1fa2</color>
+
+    <color name="background_panel_disabled">#e0e0e0</color>
+    <color name="background_panel_enabled">#ffffff</color>
+
+
+</resources>
