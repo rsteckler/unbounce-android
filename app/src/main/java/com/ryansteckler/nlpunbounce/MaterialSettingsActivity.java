@@ -158,6 +158,8 @@ public class MaterialSettingsActivity extends Activity
             }
             else if (result.isSuccess()) {
                 Toast.makeText(MaterialSettingsActivity.this, "Thank you SO much for donating!  -Ryan", Toast.LENGTH_LONG).show();
+                mIsPremium = true;
+                updateDonationUi();
             }
             else
             {
