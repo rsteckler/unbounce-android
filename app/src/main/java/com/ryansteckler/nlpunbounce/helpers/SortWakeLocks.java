@@ -4,6 +4,7 @@ package com.ryansteckler.nlpunbounce.helpers;
  * Created by rsteckler on 9/5/14.
  */
 
+import com.ryansteckler.nlpunbounce.models.AlarmStats;
 import com.ryansteckler.nlpunbounce.models.WakelockStats;
 
 import java.util.Comparator;
@@ -30,7 +31,7 @@ public class SortWakeLocks {
 //        };
 //    }
 
-    public static Comparator<WakelockStats> getListComparator(final boolean byCount)
+    public static Comparator<WakelockStats> getWakelockListComparator(final boolean byCount)
     {
         return new Comparator<WakelockStats>()
         {
@@ -45,6 +46,18 @@ public class SortWakeLocks {
                 {
                     return ((Long)o2.getAllowedDuration()).compareTo(o1.getAllowedDuration());
                 }
+            }
+        };
+    }
+
+    public static Comparator<AlarmStats> getAlarmListComparator()
+    {
+        return new Comparator<AlarmStats>()
+        {
+            public int compare(AlarmStats o1,
+                               AlarmStats o2)
+            {
+                return ((Long)o2.getAllowedCount()).compareTo(o1.getAllowedCount());
             }
         };
     }

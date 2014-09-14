@@ -4,20 +4,26 @@ package com.ryansteckler.nlpunbounce;
  * Created by rsteckler on 9/7/14.
  */
 
+import android.animation.AnimatorSet;
+import android.animation.LayoutTransition;
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.ryansteckler.nlpunbounce.models.WakelockStatsCollection;
+import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -54,8 +60,13 @@ public class HomeFragment extends Fragment {
                         .setMessage("This will reset stats for all of your wakelocks!")
                         .setPositiveButton("DELETE", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                WakelockStatsCollection stats = WakelockStatsCollection.getInstance();
-                                stats.resetStats(getActivity());
+                                Intent intent = new Intent(XposedReceiver.RESET_ACTION);
+                                try {
+                                    getActivity().sendBroadcast(intent);
+                                } catch (IllegalStateException ise) {
+
+                                }
+                                UnbounceStatsCollection.getInstance().resetLocalStats();
                                 loadStatsFromSource(view);
                             }
                         })
@@ -68,6 +79,48 @@ public class HomeFragment extends Fragment {
                         .show();
             }
         });
+
+        SharedPreferences prefs = getActivity().getSharedPreferences("com.ryansteckler.nlpunbounce" + "_preferences", Context.MODE_WORLD_READABLE);
+        if (prefs.getBoolean("first_launch", true)) {
+            final SharedPreferences.Editor editor = prefs.edit();
+            editor.putBoolean("first_launch", false);
+            editor.putBoolean("wakelock_NlpWakeLock_enabled", true);
+            editor.putBoolean("wakelock_NlpCollectorWakeLock_enabled", true);
+            editor.putBoolean("wakelock_NlpCollectorWakeLock_enabled", true);
+            editor.putBoolean("alarm_com.google.android.gms.nlp.ALARM_WAKEUP_LOCATOR_enabled", true);
+            editor.putBoolean("alarm_com.google.android.gms.nlp.ALARM_WAKEUP_ACTIVITY_DETECTION_enabled", true);
+            editor.commit();
+
+            textView = (TextView)view.findViewById(R.id.textviewCloseBanner);
+
+            textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View textview) {
+                    //Animate this view out of sight
+                    ViewGroup bannerContainer = (ViewGroup)view;
+                    LayoutTransition lt = new LayoutTransition();
+
+                    float endLocation = view.getHeight();
+                    DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
+                    float dp = endLocation / (metrics.densityDpi / 160f);
+
+                    AnimatorSet animator = new AnimatorSet();
+                    ObjectAnimator moveBanner = ObjectAnimator.ofFloat(null, View.TRANSLATION_Y, 0, dp);
+                    ObjectAnimator fadeBanner = ObjectAnimator.ofFloat(null, View.ALPHA, 1, 0);
+                    animator.playTogether(moveBanner, fadeBanner);
+
+                    lt.setAnimator(LayoutTransition.DISAPPEARING, animator);
+                    bannerContainer.setLayoutTransition(lt);
+                    View banner = (View)view.findViewById(R.id.banner);
+                    bannerContainer.removeView(banner);
+                }
+            });
+
+            View banner = view.findViewById(R.id.banner);
+            banner.setVisibility(View.VISIBLE);
+
+        }
+
 
         LinearLayout layout = (LinearLayout) view.findViewById(R.id.buttonKarma1);
         layout.setOnClickListener(new View.OnClickListener() {
@@ -89,38 +142,34 @@ public class HomeFragment extends Fragment {
         layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MaterialSettingsActivity)getActivity()).mHelper.launchPurchaseFlow(getActivity(), "donate_10", 10, ((MaterialSettingsActivity)getActivity()).mPurchaseFinishedListener, "10");
+                ((MaterialSettingsActivity)getActivity()).mHelper.launchPurchaseFlow(getActivity(), "android.test.purchased", 10, ((MaterialSettingsActivity)getActivity()).mPurchaseFinishedListener, "10");
             }
         });
 
-        SharedPreferences prefs = getActivity().getSharedPreferences("com.ryansteckler.nlpunbounce" + "_preferences", Context.MODE_WORLD_READABLE);
-        if (prefs.getBoolean("first_launch", true)) {
-            final SharedPreferences.Editor editor = prefs.edit();
-            editor.putBoolean("first_launch", false);
-            editor.commit();
+        updatePremiumUi();
 
-            //Pop up the first time load prefs
-            new AlertDialog.Builder(getActivity())
-                    .setTitle("Load recommended defaults?")
-                    .setMessage("This will setup some default blocks for you to save battery life.")
-                    .setPositiveButton("SET DEFAULTS", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                        editor.putBoolean("wakelock_NlpWakeLock_enabled", true);
-                        editor.putBoolean("wakelock_NlpCollectorWakeLock_enabled", true);
-                        editor.commit();
-                        }
-                    })
-                    .setNegativeButton("SKIP DEFAULTS", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            // do nothing
-                        }
-                    })
-                    .show();
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden)
+        {
+            updatePremiumUi();
+        }
+    }
+
+    private void updatePremiumUi() {
+        if (((MaterialSettingsActivity)getActivity()).isPremium()) {
+            TextView textview = (TextView) getActivity().findViewById(R.id.textviewKarma);
+            textview.setVisibility(View.VISIBLE);
+            View donateView = (View) getActivity().findViewById(R.id.layoutDonate);
+            donateView.setVisibility(View.GONE);
         }
     }
 
     private void loadStatsFromSource(View view) {
-        WakelockStatsCollection stats = WakelockStatsCollection.getInstance();
+        UnbounceStatsCollection stats = UnbounceStatsCollection.getInstance();
         String duration = stats.getDurationAllowedFormatted(getActivity());
         TextView textView = (TextView)view.findViewById(R.id.textLocalWakeTimeAllowed);
         textView.setText(duration);

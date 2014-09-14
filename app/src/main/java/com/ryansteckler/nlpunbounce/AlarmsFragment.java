@@ -15,10 +15,10 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 
-import com.ryansteckler.nlpunbounce.adapters.WakelocksAdapter;
+import com.ryansteckler.nlpunbounce.adapters.AlarmsAdapter;
 import com.ryansteckler.nlpunbounce.helpers.SortWakeLocks;
+import com.ryansteckler.nlpunbounce.models.AlarmStats;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
-import com.ryansteckler.nlpunbounce.models.WakelockStats;
 
 /**
  * A fragment representing a list of Items.
@@ -27,17 +27,15 @@ import com.ryansteckler.nlpunbounce.models.WakelockStats;
  * Activities containing this fragment MUST implement the {@link OnFragmentInteractionListener}
  * interface.
  */
-public class WakelocksFragment extends ListFragment implements WakelockDetailFragment.FragmentClearListener {
+public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.FragmentClearListener {
 
     private OnFragmentInteractionListener mListener;
-    private WakelocksAdapter mAdapter;
+    private AlarmsAdapter mAdapter;
 
-    //Whether we're sorting the wakelocks list by duration or count
-    private boolean mSortByTime = false;
     private boolean mReloadOnShow = false;
 
-    public static WakelocksFragment newInstance(int sectionNumber) {
-        WakelocksFragment fragment = new WakelocksFragment();
+    public static AlarmsFragment newInstance(int sectionNumber) {
+        AlarmsFragment fragment = new AlarmsFragment();
         return fragment;
     }
 
@@ -45,7 +43,7 @@ public class WakelocksFragment extends ListFragment implements WakelockDetailFra
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public WakelocksFragment() {
+    public AlarmsFragment() {
     }
 
 
@@ -60,9 +58,9 @@ public class WakelocksFragment extends ListFragment implements WakelockDetailFra
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (mListener != null)
-            mListener.onWakelocksSetTitle("Wakelocks");
+            mListener.onAlarmsSetTitle("Alarms");
 
-        mAdapter.sort(SortWakeLocks.getWakelockListComparator(!mSortByTime));
+        mAdapter.sort(SortWakeLocks.getAlarmListComparator());
         mAdapter.notifyDataSetChanged();
 
     }
@@ -71,10 +69,9 @@ public class WakelocksFragment extends ListFragment implements WakelockDetailFra
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mAdapter = new WakelocksAdapter(getActivity(), UnbounceStatsCollection.getInstance().toWakelockArrayList(getActivity()));
+        mAdapter = new AlarmsAdapter(getActivity(), UnbounceStatsCollection.getInstance().toAlarmArrayList(getActivity()));
         setListAdapter(mAdapter);
-
-        setHasOptionsMenu(true);
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -138,12 +135,12 @@ public class WakelocksFragment extends ListFragment implements WakelockDetailFra
         //Spin up the new Detail fragment.  Dig the custom animations.  Also put it on the back stack
         //so we can hit the back button and come back to the list.
         FragmentManager fragmentManager = getFragmentManager();
-        WakelockDetailFragment newFrag = WakelockDetailFragment.newInstance(startBounds.top, finalBounds.top, startBounds.bottom, finalBounds.bottom, (WakelockStats)mAdapter.getItem(position));
+        AlarmDetailFragment newFrag = AlarmDetailFragment.newInstance(startBounds.top, finalBounds.top, startBounds.bottom, finalBounds.bottom, (AlarmStats)mAdapter.getItem(position));
         newFrag.attachClearListener(this);
         fragmentManager.beginTransaction()
                 .setCustomAnimations(R.animator.expand_in, R.animator.noop, R.animator.noop, R.animator.expand_out)
                 .hide(this)
-                .add(R.id.container, newFrag, "wakelock_detail")
+                .add(R.id.container, newFrag, "alarm_detail")
                 .addToBackStack(null)
                 .commit();
 
@@ -155,13 +152,14 @@ public class WakelocksFragment extends ListFragment implements WakelockDetailFra
         //Remember the scroll pos so we can reinstate it
         if (!hidden) {
             if (mListener != null)
-                mListener.onWakelocksSetTitle("Wakelocks");
+                mListener.onAlarmsSetTitle("Alarms");
             if (mReloadOnShow) {
                 mReloadOnShow = false;
                 //We may have had a change in the data for this wakelock (such as the user resetting the counters).
                 //Try updating it.
-                mAdapter = new WakelocksAdapter(getActivity(), UnbounceStatsCollection.getInstance().toWakelockArrayList(getActivity()));
-                mAdapter.sort(SortWakeLocks.getWakelockListComparator(!mSortByTime));
+                mAdapter = new AlarmsAdapter(getActivity(), UnbounceStatsCollection.getInstance().toAlarmArrayList(getActivity()));
+                mAdapter.sort(SortWakeLocks.getAlarmListComparator());
+                mAdapter.notifyDataSetChanged();
                 setListAdapter(mAdapter);
             }
         }
@@ -169,64 +167,23 @@ public class WakelocksFragment extends ListFragment implements WakelockDetailFra
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        getActivity().getMenuInflater().inflate(R.menu.wakelocks, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        //If they pushed the sort toggle, switch the icon from duration<->count
-        if (id == R.id.action_sort) {
-            mSortByTime = !mSortByTime;
-            getActivity().invalidateOptionsMenu();
-
-            //Do the re-sort here
-            mAdapter.sort(!mSortByTime);
-
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-
-
-    @Override
-    public void onPrepareOptionsMenu(Menu menu) {
-        MenuItem sortItem = menu.findItem(R.id.action_sort);
-        if (sortItem != null) {
-            if (mSortByTime) {
-                sortItem.setIcon(R.drawable.ic_action_time);
-                sortItem.setTitle(R.string.action_sort_by_time);
-            } else {
-                sortItem.setIcon(R.drawable.ic_action_sort_by_size);
-                sortItem.setTitle(R.string.action_sort_by_count);
-            }
-        }
-
-        super.onPrepareOptionsMenu(menu);
-    }
-
-    @Override
-    public void onWakelockCleared() {
+    public void onAlarmCleared() {
         mReloadOnShow = true;
     }
 
     /**
-    * This interface must be implemented by activities that contain this
-    * fragment to allow an interaction in this fragment to be communicated
-    * to the activity and potentially other fragments contained in that
-    * activity.
-    * <p>
-    * See the Android Training lesson <a href=
-    * "http://developer.android.com/training/basics/fragments/communicating.html"
-    * >Communicating with Other Fragments</a> for more information.
-    */
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
+     * <p>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        public void onWakelocksSetTitle(String id);
+        public void onAlarmsSetTitle(String id);
     }
 
 }

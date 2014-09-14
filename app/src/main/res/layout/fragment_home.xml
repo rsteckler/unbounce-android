@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.ryansteckler.nlpunbounce.MaterialSettingsActivity.HomeFragment"
+    android:id="@+id/home_container"
     android:background="#dddddd">
 
     <ScrollView
@@ -61,10 +62,6 @@
                     </LinearLayout>
 
                 </LinearLayout>
-
-                <View style="@style/Divider"
-                    android:layout_marginTop="@dimen/separator_pad"
-                    android:visibility="gone" />
 
                 <LinearLayout
                     android:orientation="horizontal"
@@ -471,94 +468,153 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:orientation="vertical"
+                <FrameLayout
                     android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:padding="@dimen/card_internal_padding">
+                    android:layout_height="fill_parent">
 
                     <LinearLayout
-                        android:orientation="horizontal"
+                        android:orientation="vertical"
                         android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/separator_pad"
-                        android:clickable="true"
-                        android:background="?android:attr/selectableItemBackground"
-                        android:id="@+id/buttonKarma1">
+                        android:layout_height="fill_parent"
+                        android:padding="@dimen/card_internal_padding"
+                        android:id="@+id/layoutDonate"
+                        android:visibility="visible">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="A cup of coffee while I write code"
-                            android:layout_weight="1"
-                            style="@style/TextBody1"
-                            android:gravity="center_vertical" />
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/separator_pad"
+                            android:clickable="true"
+                            android:background="?android:attr/selectableItemBackground"
+                            android:id="@+id/buttonKarma1">
 
-                        <ImageView
-                            android:layout_width="@dimen/sub_icon_size"
-                            android:layout_height="@dimen/sub_icon_size"
-                            android:src="@drawable/ic_donate_1"
-                            android:layout_gravity="right"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:text="A cup of coffee while I write code"
+                                android:layout_weight="1"
+                                style="@style/TextBody1"
+                                android:gravity="center_vertical" />
 
+                            <ImageView
+                                android:layout_width="@dimen/sub_icon_size"
+                                android:layout_height="@dimen/sub_icon_size"
+                                android:src="@drawable/ic_donate_1"
+                                android:layout_gravity="right"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/separator_pad"
+                            android:layout_marginBottom="@dimen/separator_pad"
+                            android:clickable="true"
+                            android:background="?android:attr/selectableItemBackground"
+                            android:id="@+id/buttonKarma5">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:text="A latte while I answer forum questions"
+                                android:gravity="center_vertical"
+                                android:layout_weight="1"
+                                style="@style/TextBody1" />
+
+                            <ImageView
+                                android:layout_width="@dimen/sub_icon_size"
+                                android:layout_height="@dimen/sub_icon_size"
+                                android:src="@drawable/ic_donate_5"
+                                android:layout_gravity="right"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/separator_pad"
+                            android:layout_marginBottom="@dimen/separator_pad"
+                            android:clickable="true"
+                            android:background="?android:attr/selectableItemBackground"
+                            android:id="@+id/buttonKarma10">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:text="The joy of not carrying your charger"
+                                android:gravity="center_vertical"
+                                android:layout_weight="1"
+                                style="@style/TextBody1" />
+
+                            <ImageView
+                                android:layout_width="@dimen/sub_icon_size"
+                                android:layout_height="@dimen/sub_icon_size"
+                                android:src="@drawable/ic_donate_10"
+                                android:layout_gravity="right"/>
+
+                        </LinearLayout>
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="fill_parent"
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/separator_pad"
-                        android:layout_marginBottom="@dimen/separator_pad"
-                        android:clickable="true"
-                        android:background="?android:attr/selectableItemBackground"
-                        android:id="@+id/buttonKarma5">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="A latte while I answer forum questions"
-                            android:gravity="center_vertical"
-                            android:layout_weight="1"
-                            style="@style/TextBody1" />
-
-                        <ImageView
-                            android:layout_width="@dimen/sub_icon_size"
-                            android:layout_height="@dimen/sub_icon_size"
-                            android:src="@drawable/ic_donate_5"
-                            android:layout_gravity="right"/>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/separator_pad"
-                        android:layout_marginBottom="@dimen/separator_pad"
-                        android:clickable="true"
-                        android:background="?android:attr/selectableItemBackground"
-                        android:id="@+id/buttonKarma10">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="The joy of not carrying your charger"
-                            android:gravity="center_vertical"
-                            android:layout_weight="1"
-                            style="@style/TextBody1" />
-
-                        <ImageView
-                            android:layout_width="@dimen/sub_icon_size"
-                            android:layout_height="@dimen/sub_icon_size"
-                            android:src="@drawable/ic_donate_10"
-                            android:layout_gravity="right"/>
-
-                    </LinearLayout>
-                </LinearLayout>
+                        android:text="Thank you for your donation.  It means a lot to me.  I work hard in my limited free time to bring you better battery life.  When you donated, you made a difference to the project, and made a difference in my family's life.  You rock.  -Ryan"
+                        android:id="@+id/textviewKarma"
+                        style="@style/TextBody1"
+                        android:visibility="gone"
+                        android:padding="@dimen/card_internal_padding" />
+                </FrameLayout>
 
             </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background_three"
+        android:visibility="gone"
+        android:id="@+id/banner"
+        android:layout_marginTop="80sp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Welcome!"
+                style="@style/TextTitleLight"
+                android:padding="@dimen/card_internal_padding"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="X"
+                android:id="@+id/textviewCloseBanner"
+                style="@style/TextTitleLight"
+                android:layout_weight="1"
+                android:gravity="center_vertical|right"
+                android:layout_marginRight="@dimen/card_internal_padding"
+                android:clickable="true" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="You can block wakelocks to stop your phone from staying awake, and block alarms to stop it from waking up in the first place.  We've already set up some battery saving defaults for you."
+            android:layout_margin="@dimen/card_internal_padding"
+            style="@style/TextTitleLight" />
+
+    </LinearLayout>
 
 
 </FrameLayout>

@@ -13,6 +13,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.analytics.GoogleAnalytics;
@@ -20,13 +22,19 @@ import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.ryansteckler.inappbilling.IabHelper;
 import com.ryansteckler.inappbilling.IabResult;
+import com.ryansteckler.inappbilling.Inventory;
 import com.ryansteckler.inappbilling.Purchase;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MaterialSettingsActivity extends Activity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks,
         WakelocksFragment.OnFragmentInteractionListener,
         WakelockDetailFragment.FragmentInteractionListener,
-        HomeFragment.OnFragmentInteractionListener {
+        HomeFragment.OnFragmentInteractionListener,
+        AlarmsFragment.OnFragmentInteractionListener,
+        AlarmDetailFragment.FragmentInteractionListener {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -34,6 +42,8 @@ public class MaterialSettingsActivity extends Activity
     private NavigationDrawerFragment mNavigationDrawerFragment;
 
     IabHelper mHelper;
+
+    private boolean mIsPremium = false;
 
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
@@ -63,6 +73,32 @@ public class MaterialSettingsActivity extends Activity
         mLastActionbarColor = getResources().getColor(R.color.background_primary);
 
         //Setup donations
+
+        final IabHelper.QueryInventoryFinishedListener mGotInventoryListener = new IabHelper.QueryInventoryFinishedListener() {
+            public void onQueryInventoryFinished(IabResult result, Inventory inventory) {
+
+                if (result.isFailure()) {
+                    //Not purchased - DEBUG ONLY SUCCESS!
+                    mIsPremium = true;
+
+                    // update UI accordingly
+                    updateDonationUi();
+                }
+                else {
+                    // does the user have the premium upgrade?
+                    if (inventory != null) {
+                        mIsPremium = inventory.hasPurchase("donate_1") ||
+                                inventory.hasPurchase("donate_5") ||
+                                inventory.hasPurchase("donate_10");
+                    }
+                    // update UI accordingly
+                    if (isPremium()) {
+                        updateDonationUi();
+                    }
+                }
+            }
+        };
+
         //Normally we would secure this key, but we're not licensing this app.
         String base64billing = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxwicOx54j03qBil36upqYab0uBWnf+WjoSRNOaTD9mkqj9bLM465gZlDXhutMZ+n5RlHUqmxl7jwH9KyYGTbwFqCxbLMCwR4oDhXVhX4fS6iggoHY7Ek6EzMT79x2XwCDg1pdQmX9d9TYRp32Sw2E+yg2uZKSPW29ikfdcmfkHcdCWrjFSuMJpC14R3d9McWQ7sg42eQq2spIuSWtP8ARGtj1M8eLVxgkQpXWrk9ijPgVcAbNZYWT9ndIZoKPg7VJVvzzAUNK/YOb+BzRurqJ42vCZy1+K+E4EUtmg/fxawHfXLZ3F/gNwictZO9fv1PYHPMa0sezSNVFAcm0yP1BwIDAQAB";
         mHelper = new IabHelper(MaterialSettingsActivity.this, base64billing);
@@ -72,14 +108,33 @@ public class MaterialSettingsActivity extends Activity
                 if (!result.isSuccess()) {
                     Log.d(TAG, "In-app Billing setup failed: " + result);
                 }
+                mHelper.queryInventoryAsync(false, mGotInventoryListener);
+
             }
         });
+
 
         GoogleAnalytics ga = GoogleAnalytics.getInstance(this);
         Tracker tracker = ga.newTracker("UA-11575064-3");
         tracker.setScreenName("MaterialSettingsActivity");
         tracker.send(new HitBuilders.AppViewBuilder().build());
     }
+
+    private void updateDonationUi() {
+        if (isPremium()) {
+            TextView textview = (TextView) findViewById(R.id.textviewKarma);
+            if (textview != null)
+                textview.setVisibility(View.VISIBLE);
+            View donateView = (View) findViewById(R.id.layoutDonate);
+            if (donateView != null)
+                donateView.setVisibility(View.GONE);
+        }
+    }
+
+    public boolean isPremium() {
+        return mIsPremium;
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
@@ -106,7 +161,6 @@ public class MaterialSettingsActivity extends Activity
             }
             else if (result.isSuccess()) {
                 Toast.makeText(MaterialSettingsActivity.this, "Thank you SO much for donating!  -Ryan", Toast.LENGTH_LONG).show();
-                mHelper.consumeAsync(purchase, mConsumeFinishedListener);
             }
             else
             {
@@ -115,9 +169,6 @@ public class MaterialSettingsActivity extends Activity
 
         }
 
-        IabHelper.OnConsumeFinishedListener mConsumeFinishedListener = new IabHelper.OnConsumeFinishedListener() {
-            public void onConsumeFinished(Purchase purchase, IabResult result) {
-            }};
     };
 
     @Override
@@ -126,17 +177,24 @@ public class MaterialSettingsActivity extends Activity
         FragmentManager fragmentManager = getFragmentManager();
         if (position == 0) {
             fragmentManager.beginTransaction()
+                    .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, android.R.animator.fade_in, android.R.animator.fade_out)
                     .replace(R.id.container, HomeFragment.newInstance(position + 1))
                     .commit();
         } else if (position == 1) {
             fragmentManager.beginTransaction()
+                    .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, android.R.animator.fade_in, android.R.animator.fade_out)
                     .replace(R.id.container, WakelocksFragment.newInstance(position + 1))
                     .addToBackStack("wakelocks")
                     .commit();
         } else if (position == 2) {
             fragmentManager.beginTransaction()
-                    .replace(R.id.container, HomeFragment.newInstance(position + 1))
+                    .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, android.R.animator.fade_in, android.R.animator.fade_out)
+                    .replace(R.id.container, AlarmsFragment.newInstance(position + 1))
+                    .addToBackStack("alarms")
                     .commit();
+        } else if (position == 3) {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
         }
     }
 
@@ -158,12 +216,7 @@ public class MaterialSettingsActivity extends Activity
                 getMenuInflater().inflate(R.menu.home, menu);
                 restoreActionBar();
                 return true;
-            } else if (mCurrentSection == 3) {
-                getMenuInflater().inflate(R.menu.home, menu);
-                restoreActionBar();
-                return true;
             }
-
         }
         return super.onCreateOptionsMenu(menu);
     }
@@ -223,4 +276,16 @@ public class MaterialSettingsActivity extends Activity
     }
 
 
+    @Override
+    public void onAlarmDetailSetTitle(String title) {
+        mTitle = title;
+        restoreActionBar();
+    }
+
+    @Override
+    public void onAlarmsSetTitle(String title) {
+        mTitle = title;
+        restoreActionBar();
+        animateActionbarBackground(getResources().getColor(R.color.background_four), 400);
+    }
 }

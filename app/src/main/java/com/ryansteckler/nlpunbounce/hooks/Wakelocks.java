@@ -4,14 +4,17 @@ package com.ryansteckler.nlpunbounce.hooks;
  * Created by ryan steckler on 8/18/14.
  */
 import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Build;
 import android.os.IBinder;
 import android.os.SystemClock;
 
+import com.ryansteckler.nlpunbounce.XposedReceiver;
 import com.ryansteckler.nlpunbounce.models.InterimWakelock;
-import com.ryansteckler.nlpunbounce.models.WakelockStatsCollection;
+import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,14 +34,16 @@ public class Wakelocks implements IXposedHookLoadPackage {
 
     private static final String TAG = "NlpUnbounce: ";
     private static final String VERSION = "1.1.5b2"; //This needs to be pulled from the manifest or gradle build.
-    private long mLastLocatorAlarm = 0;  // Last alarm attempt
-    private long mLastDetectionAlarm = 0;  // Last alarm attempt
-    private HashMap<String, Long> mLastWakelockAttempts = null;
+    private HashMap<String, Long> mLastWakelockAttempts = null; //The last time each wakelock was allowed.
+    private HashMap<String, Long> mLastAlarmAttempts = null; //The last time each alarm was allowed.
 
     private long mLastUpdateStats = 0;
     private long mUpdateStatsFrequency = 60000;
 
     private static boolean showedUnsupportedAlarmMessage = false;
+
+    private final BroadcastReceiver mBroadcastReceiver = new XposedReceiver();
+    private boolean mRegisteredRecevier = false;
 
     XSharedPreferences m_prefs;
     public static HashMap<IBinder, InterimWakelock> mCurrentWakeLocks;
@@ -55,9 +60,23 @@ public class Wakelocks implements IXposedHookLoadPackage {
 
             mCurrentWakeLocks = new HashMap<IBinder, InterimWakelock>();
             mLastWakelockAttempts = new HashMap<String, Long>();
+            mLastAlarmAttempts = new HashMap<String, Long>();
 
-//            hookAlarms(lpparam);
+            hookAlarms(lpparam);
             hookWakeLocks(lpparam);
+        }
+    }
+
+    private void setupReceiver(XC_MethodHook.MethodHookParam param)
+    {
+        if (!mRegisteredRecevier) {
+            mRegisteredRecevier = true;
+            Context context = (Context)XposedHelpers.getObjectField(param.thisObject, "mContext");
+
+            IntentFilter filter = new IntentFilter();
+            filter.addAction(XposedReceiver.RESET_ACTION);
+            filter.addAction(XposedReceiver.REFRESH_ACTION);
+            context.registerReceiver(mBroadcastReceiver, filter);
         }
     }
 
@@ -203,6 +222,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
 
     private void handleWakeLockAcquire(XC_MethodHook.MethodHookParam param, String wakeLockName, IBinder lock) {
         m_prefs.reload();
+        setupReceiver(param);
 
         //If we're blocking this wakelock
         String prefName = "wakelock_" + wakeLockName + "_enabled";
@@ -225,7 +245,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
             if (timeSinceLastWakeLock < collectorMaxFreq) {
                 //Not enough time has passed since the last wakelock.  Deny the wakelock
                 param.setResult(null);
-                recordBlock(param, wakeLockName);
+                recordWakelockBlock(param, wakeLockName);
 
                 debugLog("Preventing " + wakeLockName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
 
@@ -252,14 +272,18 @@ public class Wakelocks implements IXposedHookLoadPackage {
         }
     }
 
-    private void handleWakeLockRelease(XC_MethodHook.MethodHookParam param, IBinder lock) {
+    private void recordAlarmAcquire(Context context, String alarmName) {
+        UnbounceStatsCollection.getInstance().incrementAlarmAllowed(context, alarmName);
+        updateStatsIfNeeded(context);
+    }
 
+    private void handleWakeLockRelease(XC_MethodHook.MethodHookParam param, IBinder lock) {
         InterimWakelock curStats = mCurrentWakeLocks.remove(lock);
         if (curStats != null)
         {
             curStats.setTimeStopped(SystemClock.elapsedRealtime());
             Context context = (Context)XposedHelpers.getObjectField(param.thisObject, "mContext");
-            WakelockStatsCollection.getInstance().addInterimWakelock(context, curStats);
+            UnbounceStatsCollection.getInstance().addInterimWakelock(context, curStats);
             updateStatsIfNeeded(context);
         }
     }
@@ -275,7 +299,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
                 Intent intent = new Intent("com.ryansteckler.nlpunbounce.SEND_STATS");
                 //TODO:  add FLAG_RECEIVER_REGISTERED_ONLY_BEFORE_BOOT to the intent to avoid needing to catch
                 //      the IllegalStateException.  The flag value changed between 4.3 and 4.4  :/
-                intent.putExtra("stats", WakelockStatsCollection.getInstance().getSerializableStats());
+                intent.putExtra("stats", UnbounceStatsCollection.getInstance().getSerializableStats());
                 try {
                     context.sendBroadcast(intent);
                 } catch (IllegalStateException ise) {
@@ -316,60 +340,62 @@ public class Wakelocks implements IXposedHookLoadPackage {
                 continue;
             }
 
-            if (intent.getAction().equals("com.google.android.gms.nlp.ALARM_WAKEUP_LOCATOR")) {
-                if (m_prefs.getBoolean("alarm_locator_enabled", true)) {
-                    int locatorMaxFreq = tryParseInt(m_prefs.getString("alarm_locator_seconds", "240"));
-                    locatorMaxFreq *= 1000; //convert to ms
+            Context context = (Context)XposedHelpers.getObjectField(param.thisObject, "mContext");
 
-                    //Debounce this to our minimum interval.
-                    final long now = SystemClock.elapsedRealtime();
-                    long timeSinceLastLocator = now - mLastLocatorAlarm;
+            String alarmName = intent.getAction();
+            //If we're blocking this wakelock
+            String prefName = "alarm_" + alarmName + "_enabled";
+            if (m_prefs.getBoolean(prefName, false)) {
 
-                    if (timeSinceLastLocator < locatorMaxFreq) {
-                        //Not enough time has passed since the last alarm.  Remove it from the triggerlist
-                        triggers.remove(j);
-                        recordBlock(param, "ALARM_WAKEUP_LOCATOR");
+                long collectorMaxFreq = m_prefs.getLong("alarm_" + alarmName + "_seconds", 240);
+                collectorMaxFreq *= 1000; //convert to ms
 
-                        debugLog("Preventing ALARM_WAKEUP_LOCATOR.  Max Interval: " + locatorMaxFreq + " Time since last granted: " + timeSinceLastLocator);
-                    } else {
-                        //Allow the wakelock
-                        XposedBridge.log(TAG + "Allowing ALARM_WAKEUP_LOCATOR.  Max Interval: " + locatorMaxFreq + " Time since last granted: " + timeSinceLastLocator);
-                        mLastLocatorAlarm = now;
-                    }
+                //Debounce this to our minimum interval.
+                final long now = SystemClock.elapsedRealtime();
+                long lastAttempt = 0;
+                try {
+                    lastAttempt = mLastAlarmAttempts.get(alarmName);
                 }
-            }
-            if (intent.getAction().equals("com.google.android.gms.nlp.ALARM_WAKEUP_ACTIVITY_DETECTION")) {
-                if (m_prefs.getBoolean("alarm_detection_enabled", true)) {
-                    int detectionMaxFreq = tryParseInt(m_prefs.getString("alarm_detection_seconds", "240"));
-                    detectionMaxFreq *= 1000; //convert to ms
+                catch (NullPointerException npe)
+                { /* ok.  Just havent attempted yet.  Use 0 */ }
 
-                    //Debounce this to our minimum interval.
-                    final long now = SystemClock.elapsedRealtime();
-                    long timeSinceLastDetection = now - mLastDetectionAlarm;
+                long timeSinceLastAlarm = now - lastAttempt;
 
-                    if (timeSinceLastDetection < detectionMaxFreq) {
-                        //Not enough time has passed since the last wakelock.  Remove it from the triggerlist.
-                        triggers.remove(j);
-                        recordBlock(param, "ALARM_WAKEUP_ACTIVITY_DETECTION");
+                if (timeSinceLastAlarm < collectorMaxFreq) {
+                    //Not enough time has passed since the last wakelock.  Deny the wakelock
+                    //Not enough time has passed since the last alarm.  Remove it from the triggerlist
+                    triggers.remove(j);
+                    recordAlarmBlock(param, alarmName);
 
-                        debugLog("Preventing ALARM_WAKEUP_ACTIVITY_DETECTION.  Max Interval: " + detectionMaxFreq + " Time since last granted: " + timeSinceLastDetection);
-                    }
-                    else {
-                        //Allow the wakelock
-                        XposedBridge.log(TAG + "Allowing ALARM_WAKEUP_ACTIVITY_DETECTION.  Max Interval: " + detectionMaxFreq + " Time since last granted: " + timeSinceLastDetection);
-                        mLastDetectionAlarm = now;
-                    }
+                    debugLog("Preventing " + alarmName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastAlarm);
+
+                } else {
+                    //Allow the wakelock
+                    XposedBridge.log(TAG + "Allowing " + alarmName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastAlarm);
+                    mLastAlarmAttempts.put(alarmName, now);
+                    recordAlarmAcquire(context, alarmName);
                 }
+            } else {
+                recordAlarmAcquire(context, alarmName);
             }
         }
     }
 
-    private void recordBlock(XC_MethodHook.MethodHookParam param, String name) {
+    private void recordWakelockBlock(XC_MethodHook.MethodHookParam param, String name) {
 
         Context context = (Context)XposedHelpers.getObjectField(param.thisObject, "mContext");
 
         if (context != null) {
-            WakelockStatsCollection.getInstance().incrementWakelockBlock(context, name);
+            UnbounceStatsCollection.getInstance().incrementWakelockBlock(context, name);
+        }
+    }
+
+    private void recordAlarmBlock(XC_MethodHook.MethodHookParam param, String name) {
+
+        Context context = (Context)XposedHelpers.getObjectField(param.thisObject, "mContext");
+
+        if (context != null) {
+            UnbounceStatsCollection.getInstance().incrementAlarmBlock(context, name);
         }
 
     }

@@ -6,10 +6,8 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by rsteckler on 9/10/14.
  */
-public class WakelockStats implements Serializable {
+public class WakelockStats extends BaseStats implements Serializable {
     private long mAllowedDuration;
-    private long mAllowedCount;
-    private long mBlockCount;
     private String mName;
     private boolean mBlockingEnabled;
 
@@ -41,40 +39,6 @@ public class WakelockStats implements Serializable {
         synchronized (this) {
             this.mAllowedDuration = duration;
         }
-    }
-
-    public long getAllowedCount() {
-        return mAllowedCount;
-    }
-
-    public void setAllowedCount(long count) {
-        synchronized (this) {
-            this.mAllowedCount = count;
-        }
-    }
-
-    public long incrementAllowedCount() {
-        synchronized (this) {
-            mAllowedCount++;
-        }
-        return mAllowedCount;
-    }
-
-    public long getBlockCount() {
-        return mBlockCount;
-    }
-
-    public void setBlockCount(long count) {
-        synchronized (this) {
-            this.mBlockCount = count;
-        }
-    }
-
-    public long incrementBlockCount() {
-        synchronized (this) {
-            mBlockCount++;
-        }
-        return mBlockCount;
     }
 
     public long addDurationAllowed(long duration)
@@ -110,11 +74,11 @@ public class WakelockStats implements Serializable {
     public long getBlockedDuration()
     {
         //Determine the average alive time of a wakelock.
-        if (mAllowedCount == 0)
+        if (getAllowedCount() == 0)
             return 0;
-        long averageTime = mAllowedDuration / mAllowedCount;
+        long averageTime = mAllowedDuration / getAllowedCount();
         //Now multiply that by the number we've blocked.
-        long blockedTime = averageTime * mBlockCount;
+        long blockedTime = averageTime * getBlockCount();
 
         return blockedTime;
     }

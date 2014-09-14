@@ -7,7 +7,7 @@
     android:background="@drawable/list_background"
     android:paddingTop="@dimen/separator_pad"
     android:paddingBottom="@dimen/separator_pad"
-    android:id="@+id/listitemWakelock">
+    android:id="@+id/listitemAlarm">
 
     <LinearLayout
         android:orientation="vertical"
@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="486,652"
-            android:id="@+id/textViewWakelockCount"
+            android:id="@+id/textViewAlarmCount"
             android:singleLine="false"
             android:visibility="visible"
             android:gravity="center_vertical|center_horizontal"
@@ -28,7 +28,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textviewWakelockName"
+        android:id="@+id/textviewAlarmName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="NlpCollectorWakeLock"
@@ -39,15 +39,4 @@
         android:layout_marginLeft="@dimen/section_pad"
         android:ellipsize="marquee" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Awake 2d 24h 53m 29s"
-        android:id="@+id/textviewWakelockTime"
-        android:fontFamily="@string/app_font_family"
-        android:focusable="false"
-        style="@style/TextCaption"
-        android:layout_marginLeft="@dimen/separator_pad" />
-
-    <!--wakelock_duration-->
 </LinearLayout>

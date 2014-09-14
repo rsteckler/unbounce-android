@@ -11,9 +11,9 @@
 
     <color name="background_three">#FF5722</color>
 
-    <color name="background_four">#673AB7</color>
-    <color name="background_four_faded">#9575cd</color>
-    <color name="background_four_shaded">#4527a0</color>
+    <color name="background_four">#9c27b0</color>
+    <color name="background_four_faded">#ba68c8</color>
+    <color name="background_four_shaded">#7b1fa2</color>
 
     <color name="background_panel_disabled">#e0e0e0</color>
     <color name="background_panel_enabled">#ffffff</color>

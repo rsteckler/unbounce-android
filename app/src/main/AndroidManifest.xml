@@ -27,7 +27,7 @@
         </activity>
 
         <receiver
-            android:name=".BlockReceiver"
+            android:name=".ActivityReceiver"
             android:enabled="true"
             android:exported="true" >
             <intent-filter>

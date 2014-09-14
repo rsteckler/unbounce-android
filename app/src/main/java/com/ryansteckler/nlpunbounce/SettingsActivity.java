@@ -1,26 +1,14 @@
 package com.ryansteckler.nlpunbounce;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
-import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.ryansteckler.inappbilling.IabHelper;
-import com.ryansteckler.inappbilling.IabResult;
-import com.ryansteckler.inappbilling.Purchase;
-import com.ryansteckler.nlpunbounce.helpers.SortWakeLocks;
-import com.ryansteckler.nlpunbounce.models.WakelockStatsCollection;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
 public class SettingsActivity extends Activity {
 
