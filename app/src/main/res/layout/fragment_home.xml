@@ -37,7 +37,7 @@
                     <ImageView
                         android:layout_width="@dimen/header_icon_size"
                         android:layout_height="@dimen/header_icon_size"
-                        android:src="@drawable/ic_global" />
+                        android:src="@drawable/ic_local" />
 
                     <LinearLayout
                         android:orientation="vertical"
@@ -480,6 +480,16 @@
                         android:id="@+id/layoutDonate"
                         android:visibility="visible">
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="This app will always let you fix the Network Location Provider battery killers for free.  If you'd also like to Unbounce other wakelocks and alarms, you can upgrade to the Pro features by supporting the project below.  Any donation amount will unlock the Pro features."
+                            style="@style/TextBody1"
+                            android:layout_marginBottom="@dimen/card_internal_padding" />
+
+                        <View style="@style/Divider"
+                            android:layout_marginBottom="@dimen/card_internal_padding" />
+
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="fill_parent"
@@ -556,6 +566,7 @@
                                 android:layout_gravity="right"/>
 
                         </LinearLayout>
+
                     </LinearLayout>
 
                     <TextView

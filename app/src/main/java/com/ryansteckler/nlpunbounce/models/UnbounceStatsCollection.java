@@ -201,7 +201,7 @@ public class UnbounceStatsCollection implements Serializable {
         return (sb.toString());
     }
 
-    public long getTotalAllowedCount(Context context)
+    public long getTotalAllowedWakelockCount(Context context)
     {
         loadStats(context);
         long totalCount = 0;
@@ -209,12 +209,13 @@ public class UnbounceStatsCollection implements Serializable {
         while (iter.hasNext())
         {
             BaseStats curStat = iter.next();
-            totalCount += curStat.getAllowedCount();
+            if (curStat instanceof WakelockStats)
+                totalCount += curStat.getAllowedCount();
         }
         return totalCount;
     }
 
-    public long getTotalBlockCount(Context context)
+    public long getTotalBlockWakelockCount(Context context)
     {
         loadStats(context);
 
@@ -223,7 +224,37 @@ public class UnbounceStatsCollection implements Serializable {
         while (iter.hasNext())
         {
             BaseStats curStat = iter.next();
-            totalCount += curStat.getBlockCount();
+            if (curStat instanceof WakelockStats)
+                totalCount += curStat.getBlockCount();
+        }
+        return totalCount;
+    }
+
+    public long getTotalAllowedAlarmCount(Context context)
+    {
+        loadStats(context);
+        long totalCount = 0;
+        Iterator<BaseStats> iter = mStats.values().iterator();
+        while (iter.hasNext())
+        {
+            BaseStats curStat = iter.next();
+            if (curStat instanceof AlarmStats)
+                totalCount += curStat.getAllowedCount();
+        }
+        return totalCount;
+    }
+
+    public long getTotalBlockAlarmCount(Context context)
+    {
+        loadStats(context);
+
+        long totalCount = 0;
+        Iterator<BaseStats> iter = mStats.values().iterator();
+        while (iter.hasNext())
+        {
+            BaseStats curStat = iter.next();
+            if (curStat instanceof AlarmStats)
+                totalCount += curStat.getBlockCount();
         }
         return totalCount;
     }

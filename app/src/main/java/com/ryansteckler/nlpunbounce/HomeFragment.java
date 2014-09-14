@@ -174,11 +174,18 @@ public class HomeFragment extends Fragment {
         TextView textView = (TextView)view.findViewById(R.id.textLocalWakeTimeAllowed);
         textView.setText(duration);
         textView = (TextView)view.findViewById(R.id.textLocalWakeAcquired);
-        textView.setText(String.valueOf(stats.getTotalAllowedCount(getActivity())));
+        textView.setText(String.valueOf(stats.getTotalAllowedWakelockCount(getActivity())));
         textView = (TextView)view.findViewById(R.id.textLocalWakeBlocked);
-        textView.setText(String.valueOf(stats.getTotalBlockCount(getActivity())));
+        textView.setText(String.valueOf(stats.getTotalBlockWakelockCount(getActivity())));
         textView = (TextView)view.findViewById(R.id.textLocalWakeTimeBlocked);
         textView.setText(stats.getDurationBlockedFormatted(getActivity()));
+
+        //Alarms
+        textView = (TextView)view.findViewById(R.id.textLocalAlarmsAcquired);
+        textView.setText(String.valueOf(stats.getTotalAllowedAlarmCount(getActivity())));
+        textView = (TextView)view.findViewById(R.id.textLocalAlarmsBlocked);
+        textView.setText(String.valueOf(stats.getTotalBlockAlarmCount(getActivity())));
+
     }
 
     @Override

@@ -78,9 +78,6 @@ public class MaterialSettingsActivity extends Activity
             public void onQueryInventoryFinished(IabResult result, Inventory inventory) {
 
                 if (result.isFailure()) {
-                    //Not purchased - DEBUG ONLY SUCCESS!
-                    mIsPremium = true;
-
                     // update UI accordingly
                     updateDonationUi();
                 }
