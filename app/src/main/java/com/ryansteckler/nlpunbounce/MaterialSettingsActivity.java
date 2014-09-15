@@ -5,7 +5,9 @@ import android.animation.ValueAnimator;
 import android.app.Activity;
 
 import android.app.ActionBar;
+import android.app.AlertDialog;
 import android.app.FragmentManager;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -24,9 +26,12 @@ import com.ryansteckler.inappbilling.IabHelper;
 import com.ryansteckler.inappbilling.IabResult;
 import com.ryansteckler.inappbilling.Inventory;
 import com.ryansteckler.inappbilling.Purchase;
+import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import de.robv.android.xposed.XposedBridge;
 
 public class MaterialSettingsActivity extends Activity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks,
@@ -80,13 +85,21 @@ public class MaterialSettingsActivity extends Activity
                 if (result.isFailure()) {
                     // update UI accordingly
                     updateDonationUi();
+                    Log.d("NlpUnbounce", "IAP result failed with code: " + result.getMessage());
                 }
                 else {
                     // does the user have the premium upgrade?
+                    Log.d("NlpUnbounce", "IAP result succeeded");
                     if (inventory != null) {
-                        mIsPremium = inventory.hasPurchase("donate_1") ||
+                        Log.d("NlpUnbounce", "IAP inventory exists");
+
+                        if (inventory.hasPurchase("donate_1") ||
                                 inventory.hasPurchase("donate_5") ||
-                                inventory.hasPurchase("donate_10");
+                                inventory.hasPurchase("donate_10")) {
+                            Log.d("NlpUnbounce", "IAP inventory contains a donation");
+
+                            mIsPremium = true;
+                        };
                     }
                     // update UI accordingly
                     if (isPremium()) {
@@ -104,8 +117,20 @@ public class MaterialSettingsActivity extends Activity
             {
                 if (!result.isSuccess()) {
                     Log.d(TAG, "In-app Billing setup failed: " + result);
+                    new AlertDialog.Builder(MaterialSettingsActivity.this)
+                            .setTitle("Pro features unavailable.")
+                            .setMessage("Your device doesn't support In App Billing.  You won't be able to purchase the Pro features of Unbounce.  This could be because you need to update your Google Play Store application, or because you live in a country where In App Billing is disabled.")
+                            .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            })
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+
                 }
-                mHelper.queryInventoryAsync(false, mGotInventoryListener);
+                else {
+                    mHelper.queryInventoryAsync(false, mGotInventoryListener);
+                }
 
             }
         });
@@ -287,4 +312,5 @@ public class MaterialSettingsActivity extends Activity
         restoreActionBar();
         animateActionbarBackground(getResources().getColor(R.color.background_four), 400);
     }
+
 }
