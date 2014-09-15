@@ -9,7 +9,7 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:label="NlpUnbounce"
+        android:label="Unbounce"
         android:theme="@style/UnbounceTheme">
         <meta-data
             android:name="xposedmodule"
@@ -19,11 +19,11 @@
             android:value="42" />
         <meta-data
             android:name="xposeddescription"
-            android:value="Reduce NLP Wakelocks by Ryan Steckler" />
+            android:value="Control alarms and wakelocks" />
 
         <activity
             android:name=".SettingsActivity"
-            android:label="NlpUnbounce settings" >
+            android:label="Unbounce settings" >
         </activity>
 
         <receiver

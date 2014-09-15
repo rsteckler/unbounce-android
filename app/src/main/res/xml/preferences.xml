@@ -9,7 +9,7 @@
             android:key="about_author"
             android:editable="false"
             android:defaultValue="0"
-            android:summary="Version: 1.1.5b"
+            android:summary="Version: 1.1.6"
             />
 
         <CheckBoxPreference

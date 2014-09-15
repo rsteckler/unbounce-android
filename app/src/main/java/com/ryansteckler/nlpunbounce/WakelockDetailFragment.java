@@ -106,7 +106,7 @@ public class WakelockDetailFragment extends Fragment {
         onOff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final boolean b = onOff.isChecked();  //! because it's the user *just* clicked it and it hasn't changed yet.
+                final boolean b = onOff.isChecked();
                 //Check license
                 if (((MaterialSettingsActivity) getActivity()).isPremium() || mFreeWakelock) {
                     if (b && !mKnownSafeWakelock) {

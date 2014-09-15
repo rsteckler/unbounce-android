@@ -400,6 +400,9 @@ public class UnbounceStatsCollection implements Serializable {
             try {
 
                 File outFile = new File(filename);
+                if (!outFile.exists()) {
+                    outFile.createNewFile();
+                }
                 outFile.setReadable(true, false);
                 FileOutputStream out = new FileOutputStream(outFile);
                 ObjectOutputStream objOut = new ObjectOutputStream(out);
