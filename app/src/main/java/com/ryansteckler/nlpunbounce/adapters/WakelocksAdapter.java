@@ -72,7 +72,7 @@ public class WakelocksAdapter extends ArrayAdapter {
         //TODO:  The ViewHolder pattern is messing up the dynamic sizing of the count tag.  Removed
         //ViewHolder for now  :(
         ViewHolder viewHolder; // view lookup cache stored in tag
-//        if (convertView == null) {
+       if (convertView == null) {
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.fragment_wakelocks_listitem, parent, false);
@@ -80,10 +80,10 @@ public class WakelocksAdapter extends ArrayAdapter {
             viewHolder.wakeTime = (TextView) convertView.findViewById(R.id.textviewWakelockTime);
             viewHolder.wakeCount = (TextView) convertView.findViewById(R.id.textViewWakelockCount);
             convertView.setTag(viewHolder);
-//        }
-//        else {
-//            viewHolder = (ViewHolder) convertView.getTag();
-//        }
+       }
+       else {
+           viewHolder = (ViewHolder) convertView.getTag();
+       }
         // Populate the data into the template view using the data object
         viewHolder.name.setText(wakelock.getName());
         viewHolder.wakeTime.setText(String.valueOf(wakelock.getDurationAllowedFormatted()));
@@ -91,9 +91,8 @@ public class WakelocksAdapter extends ArrayAdapter {
         viewHolder.name.setSelected(true);
 
         //Size the count box width to at least the height.
-        convertView.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
         viewHolder.wakeCount.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
-        int height = convertView.getMeasuredHeight();
+        int height = viewHolder.wakeCount.getMeasuredHeight();
         int width = viewHolder.wakeCount.getMeasuredWidth();
         if (height > width) {
             viewHolder.wakeCount.setLayoutParams(new LinearLayout.LayoutParams(height, height));

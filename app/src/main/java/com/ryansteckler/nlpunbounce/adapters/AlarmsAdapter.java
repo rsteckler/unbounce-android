@@ -69,17 +69,17 @@ public class AlarmsAdapter extends ArrayAdapter {
         //TODO:  The ViewHolder pattern is messing up the dynamic sizing of the count tag.  Removed
         //ViewHolder for now  :(
         ViewHolder viewHolder; // view lookup cache stored in tag
-//        if (convertView == null) {
-        viewHolder = new ViewHolder();
-        LayoutInflater inflater = LayoutInflater.from(getContext());
-        convertView = inflater.inflate(R.layout.fragment_alarms_listitem, parent, false);
-        viewHolder.name = (TextView) convertView.findViewById(R.id.textviewAlarmName);
-        viewHolder.alarmCount = (TextView) convertView.findViewById(R.id.textViewAlarmCount);
-        convertView.setTag(viewHolder);
-//        }
-//        else {
-//            viewHolder = (ViewHolder) convertView.getTag();
-//        }
+       if (convertView == null) {
+            viewHolder = new ViewHolder();
+            LayoutInflater inflater = LayoutInflater.from(getContext());
+            convertView = inflater.inflate(R.layout.fragment_alarms_listitem, parent, false);
+            viewHolder.name = (TextView) convertView.findViewById(R.id.textviewAlarmName);
+            viewHolder.alarmCount = (TextView) convertView.findViewById(R.id.textViewAlarmCount);
+            convertView.setTag(viewHolder);
+       }
+       else {
+           viewHolder = (ViewHolder) convertView.getTag();
+       }
         // Populate the data into the template view using the data object
         viewHolder.name.setText(alarm.getName());
         viewHolder.alarmCount.setText(String.valueOf(alarm.getAllowedCount()));
@@ -87,9 +87,8 @@ public class AlarmsAdapter extends ArrayAdapter {
         viewHolder.name.setSelected(true);
 
         //Size the count box width to at least the height.
-        convertView.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
         viewHolder.alarmCount.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
-        int height = convertView.getMeasuredHeight();
+        int height = viewHolder.alarmCount.getMeasuredHeight();
         int width = viewHolder.alarmCount.getMeasuredWidth();
         if (height > width) {
             viewHolder.alarmCount.setLayoutParams(new LinearLayout.LayoutParams(height, height));
