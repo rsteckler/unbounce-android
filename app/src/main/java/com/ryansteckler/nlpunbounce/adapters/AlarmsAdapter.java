@@ -66,8 +66,6 @@ public class AlarmsAdapter extends ArrayAdapter {
         AlarmStats alarm = (AlarmStats)getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
 
-        //TODO:  The ViewHolder pattern is messing up the dynamic sizing of the count tag.  Removed
-        //ViewHolder for now  :(
         ViewHolder viewHolder; // view lookup cache stored in tag
        if (convertView == null) {
             viewHolder = new ViewHolder();

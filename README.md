@@ -2,6 +2,7 @@
 
 For the most up-to-date conversation, check the [Xda-Developers thread](http://forum.xda-developers.com/xposed/modules/mod-nlpunbounce-reduce-nlp-wakelocks-t2853874).
 
+Please target all pull requests to the "develop" branch.  Thanks! 
 
 ## FAQ
 ### I have a bug or feature request.
