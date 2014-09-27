@@ -49,14 +49,17 @@ public class WakelockStats extends BaseStats implements Serializable {
         return mAllowedDuration;
     }
 
-    public String getDurationAllowedFormatted() {
-        long days = TimeUnit.MILLISECONDS.toDays(mAllowedDuration);
-        mAllowedDuration -= TimeUnit.DAYS.toMillis(days);
-        long hours = TimeUnit.MILLISECONDS.toHours(mAllowedDuration);
-        mAllowedDuration -= TimeUnit.HOURS.toMillis(hours);
-        long minutes = TimeUnit.MILLISECONDS.toMinutes(mAllowedDuration);
-        mAllowedDuration -= TimeUnit.MINUTES.toMillis(minutes);
-        long seconds = TimeUnit.MILLISECONDS.toSeconds(mAllowedDuration);
+    public String getDurationAllowedFormatted() 
+    {
+        long allowedTime = mAllowedDuration;
+
+        long days = TimeUnit.MILLISECONDS.toDays(allowedTime);
+        allowedTime -= TimeUnit.DAYS.toMillis(days);
+        long hours = TimeUnit.MILLISECONDS.toHours(allowedTime);
+        allowedTime -= TimeUnit.HOURS.toMillis(hours);
+        long minutes = TimeUnit.MILLISECONDS.toMinutes(allowedTime);
+        allowedTime -= TimeUnit.MINUTES.toMillis(minutes);
+        long seconds = TimeUnit.MILLISECONDS.toSeconds(allowedTime);
 
         StringBuilder sb = new StringBuilder(64);
         sb.append(days);
