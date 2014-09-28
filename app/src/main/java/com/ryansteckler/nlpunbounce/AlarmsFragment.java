@@ -13,7 +13,6 @@ import android.widget.ListView;
 
 
 import com.ryansteckler.nlpunbounce.adapters.AlarmsAdapter;
-import com.ryansteckler.nlpunbounce.helpers.SortWakeLocks;
 import com.ryansteckler.nlpunbounce.models.AlarmStats;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
 
@@ -153,8 +152,7 @@ public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.
                 //We may have had a change in the data for this wakelock (such as the user resetting the counters).
                 //Try updating it.
                 mAdapter = new AlarmsAdapter(getActivity(), UnbounceStatsCollection.getInstance().toAlarmArrayList(getActivity()));
-                mAdapter.sort(SortWakeLocks.getAlarmListComparator());
-                mAdapter.notifyDataSetChanged();
+                mAdapter.sort();
                 setListAdapter(mAdapter);
             }
         }
