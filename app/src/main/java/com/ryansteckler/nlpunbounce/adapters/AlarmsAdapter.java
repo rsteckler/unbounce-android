@@ -3,7 +3,6 @@ package com.ryansteckler.nlpunbounce.adapters;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +13,7 @@ import android.widget.TextView;
 import com.ryansteckler.nlpunbounce.R;
 import com.ryansteckler.nlpunbounce.helpers.SortWakeLocks;
 import com.ryansteckler.nlpunbounce.models.AlarmStats;
+import com.ryansteckler.nlpunbounce.models.EventLookup;
 
 
 import java.util.ArrayList;
@@ -29,7 +29,9 @@ public class AlarmsAdapter extends ArrayAdapter {
     private long mScale = 0;
 
     private long mCategoryBlockedIndex = 0;
-    private long mCategoryNormalIndex = 0;
+    private long mCategorySafeIndex = 0;
+    private long mCategoryUnknownIndex = 0;
+    private long mCategoryUnsafeIndex = 0;
 
     private final static int ALARM_TYPE = 0;
     private final static int CATEGORY_TYPE = 1;
@@ -44,15 +46,37 @@ public class AlarmsAdapter extends ArrayAdapter {
     }
 
     private void addCategories(ArrayList<AlarmStats> alarmStatList) {
-
         mCategoryBlockedIndex = 0;
-        mCategoryNormalIndex = 0;
+        mCategorySafeIndex = 0;
+        mCategoryUnknownIndex = 0;
+        mCategoryUnsafeIndex = 0;
+
+        boolean foundSafe = false;
+        boolean foundUnknown = false;
 
         Iterator<AlarmStats> iter = alarmStatList.iterator();
         while (iter.hasNext()) {
-            mCategoryNormalIndex++;
+            if (!foundSafe)
+                mCategorySafeIndex++;
+
+            if (!foundUnknown)
+                mCategoryUnknownIndex++;
+
+            mCategoryUnsafeIndex++;
+
             AlarmStats curStat = iter.next();
+
             if (!curStat.getBlockingEnabled()) {
+                foundSafe = true;
+            }
+
+            if (!foundUnknown && foundSafe && EventLookup.isSafe(curStat.getName()) == EventLookup.UNKNOWN) {
+                foundUnknown = true;
+                mCategoryUnknownIndex++; //to account for the previous category
+            }
+
+            if (foundUnknown && EventLookup.isSafe(curStat.getName()) == EventLookup.UNSAFE) {
+                mCategoryUnsafeIndex += 2; //to account for the previous two categories
                 break;
             }
         }
@@ -93,9 +117,13 @@ public class AlarmsAdapter extends ArrayAdapter {
     @Override
     public Object getItem(int position) {
         int newPosition = position;
-        if (mCategoryNormalIndex < newPosition)
+        if (position > mCategoryBlockedIndex)
             newPosition--;
-        if (mCategoryBlockedIndex < newPosition)
+        if (position > mCategorySafeIndex)
+            newPosition--;
+        if (position > mCategoryUnknownIndex)
+            newPosition--;
+        if (position > mCategoryUnsafeIndex)
             newPosition--;
 
         return super.getItem(newPosition);
@@ -108,7 +136,10 @@ public class AlarmsAdapter extends ArrayAdapter {
 
     @Override
     public int getItemViewType(int position) {
-        if (position == mCategoryNormalIndex || position == mCategoryBlockedIndex)
+        if (position == mCategoryBlockedIndex ||
+                position == mCategorySafeIndex ||
+                position == mCategoryUnknownIndex ||
+                position == mCategoryUnsafeIndex)
             return CATEGORY_TYPE;
         else
             return ALARM_TYPE;
@@ -179,12 +210,17 @@ public class AlarmsAdapter extends ArrayAdapter {
                     categoryViewHolder = (CategoryViewHolder) convertView.getTag();
 
                 }
+
                 if (position == mCategoryBlockedIndex) {
                     categoryViewHolder.name.setText("Unbounced");
-                } else if (position == mCategoryNormalIndex) {
-                    categoryViewHolder.name.setText("Stock");
-                } else {
+                } else if (position == mCategorySafeIndex) {
+                    categoryViewHolder.name.setText("Safe to Unbounce");
+                } else if (position == mCategoryUnknownIndex) {
                     categoryViewHolder.name.setText("Unknown");
+                } else if (position == mCategoryUnsafeIndex) {
+                    categoryViewHolder.name.setText("Not safe to Unbounce");
+                } else {
+                    categoryViewHolder.name.setText("Error");
                 }
 
                 break;

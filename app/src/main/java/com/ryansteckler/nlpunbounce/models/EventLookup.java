@@ -36,23 +36,23 @@ public class EventLookup {
             toReturn = "This is an Android System level WakeLock.  The interface that apps use to talk to the window manager - meaning, applications will require a WindowManager lock everytime they need to be shown on the screen.";
         } else if (lower.equals("rilj")) {
             toReturn = "RILJ keeps your device awake while you're on a phone call and the screen is off";
-        } else if (lower.equals("SyncLoopWakelock")) {
+        } else if (lower.equals("syncloopwakelock")) {
             toReturn = "This is the WakeLock used by Android SyncManager to Sync accounts like Google+, Twitter, Linkedin, Gmail etc. The higher the unbouncing, the longer the amount of time until your accounts will get synced again.";
-        } else if (lower.equals("ICING")) {
+        } else if (lower.equals("icing")) {
             toReturn = "ICING is a Google Services WakeLock.  Currently looking for more details.";
-        } else if (lower.equals("StartingAlertService")) {
+        } else if (lower.equals("startingalertservice")) {
             toReturn = "This WakeLock can usually be associated with Calendar, although may effect other apps such as messaging. If your Calendar has notifications / alerts it can hold this WakeLock.";
-        } else if (lower.equals("AudioMix")) {
+        } else if (lower.equals("audiomix")) {
             toReturn = "This WakeLock handles Touch Sounds and Alert Sounds among others. It has plagued some devices even with Touch Sounds turned off.";
-        } else if (lower.equals("LocationManagerService")) {
+        } else if (lower.equals("locationmanagerservice")) {
             toReturn = "As the name implies. This is not typically a high battery drainer for some it might held a big wakelock.";
-        } else if (lower.equals("AudioIn")) {
+        } else if (lower.equals("audioin")) {
             toReturn = "This wakelock is used to hold the device awake listening for Google Search/Hotword Detection. \"Okay, Google\"";
-        } else if (lower.equals("NfcService:mRoutingWakeLock")) {
+        } else if (lower.equals("nfcservice:mroutingwakelock")) {
             toReturn = "Related to NFC service routing detected tags to the appropriate application.";
-        } else if (lower.equals("WakefulIntentService[GCoreUlr-LocationReportingService]")) {
+        } else if (lower.equals("wakefulintentservice[gcoreulr-locationreportingservice]")) {
             toReturn = "Used by Google Location Services to report your current location";
-        } else if (lower.equals("VZWGPSLocationProvider")) {
+        } else if (lower.equals("vzwgpslocationprovider")) {
             toReturn = "Verizon specific location service used for cell tower statistics.";
         } else if (lower.equals("hangouts_rtcs")) {
             toReturn = "Google Hangouts.  If you Unbounce this, Hangouts will no longer work.";
@@ -86,15 +86,15 @@ public class EventLookup {
 
         //Wakelocks - safe
         if (lower.equals("nlpwakelock") ||
-                lower.equals("SyncLoopWakelock") ||
-                lower.equals("ICING") ||
-                lower.equals("StartingAlertService") ||
-                lower.equals("AudioMix") ||
-                lower.equals("LocationManagerService") ||
-                lower.equals("AudioIn") ||
-                lower.equals("NfcService:mRoutingWakeLock") ||
-                lower.equals("WakefulIntentService[GCoreUlr-LocationReportingService]") ||
-                lower.equals("VZWGPSLocationProvider") ||
+                lower.equals("syncloopwakelock") ||
+                lower.equals("icing") ||
+                lower.equals("startingalertservice") ||
+                lower.equals("audiomix") ||
+                lower.equals("locationmanagerservice") ||
+                lower.equals("audioin") ||
+                lower.equals("nfcservice:mroutingwakelock") ||
+                lower.equals("wakefulintentservice[gcoreulr-locationreportingservice]") ||
+                lower.equals("vzwgpslocationprovider") ||
                 lower.equals("nlpcollectorwakelock")) {
             toReturn = SAFE;
         }
