@@ -7,9 +7,6 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.app.ListFragment;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -60,8 +57,7 @@ public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.
         if (mListener != null)
             mListener.onAlarmsSetTitle("Alarms");
 
-        mAdapter.sort(SortWakeLocks.getAlarmListComparator());
-        mAdapter.notifyDataSetChanged();
+        mAdapter.sort();
 
     }
 
@@ -71,7 +67,6 @@ public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.
 
         mAdapter = new AlarmsAdapter(getActivity(), UnbounceStatsCollection.getInstance().toAlarmArrayList(getActivity()));
         setListAdapter(mAdapter);
-        mAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -97,7 +92,7 @@ public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.
         //This suppresses the android system's click handler, which highlights the button, then fades it
         //back to the background, THEN starts our animation.  We just want it to fade to our desired color and stay
         //there until the animation takes over.  Looks sexier that way.
-        v.setBackgroundResource(R.drawable.list_item_down);
+        v.setBackgroundResource(R.drawable.list_item_down); //TODO:  Wrong color for alarms
 
         //Not great form, but the animation to show the details view takes 400ms.  We'll set our background
         //color back to normal once the animation finishes.  I wish there was a more elegant way to avoid

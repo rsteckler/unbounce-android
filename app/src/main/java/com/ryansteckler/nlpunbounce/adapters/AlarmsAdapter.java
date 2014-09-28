@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ryansteckler.nlpunbounce.R;
+import com.ryansteckler.nlpunbounce.helpers.SortWakeLocks;
 import com.ryansteckler.nlpunbounce.models.AlarmStats;
 
 
@@ -27,9 +28,34 @@ public class AlarmsAdapter extends ArrayAdapter {
     private long mHighCount = 0;
     private long mScale = 0;
 
+    private long mCategoryBlockedIndex = 0;
+    private long mCategoryNormalIndex = 0;
+
+    private final static int ALARM_TYPE = 0;
+    private final static int CATEGORY_TYPE = 1;
+
+    private ArrayList<AlarmStats> mBackingList = null;
+
     public AlarmsAdapter(Context context, ArrayList<AlarmStats> alarmStatList) {
         super(context, R.layout.fragment_wakelocks_listitem, alarmStatList);
+        mBackingList = alarmStatList;
         calculateScale(context, alarmStatList);
+        addCategories(mBackingList);
+    }
+
+    private void addCategories(ArrayList<AlarmStats> alarmStatList) {
+
+        mCategoryBlockedIndex = 0;
+        mCategoryNormalIndex = 0;
+
+        Iterator<AlarmStats> iter = alarmStatList.iterator();
+        while (iter.hasNext()) {
+            mCategoryNormalIndex++;
+            AlarmStats curStat = iter.next();
+            if (!curStat.getBlockingEnabled()) {
+                break;
+            }
+        }
     }
 
     private void calculateScale(Context context, ArrayList<AlarmStats> alarmStatList) {
@@ -55,61 +81,127 @@ public class AlarmsAdapter extends ArrayAdapter {
 
     }
 
-    private static class ViewHolder {
+    private static class AlarmViewHolder {
         TextView name;
         TextView alarmCount;
     }
 
+    private static class CategoryViewHolder {
+        TextView name;
+    }
+
+    @Override
+    public Object getItem(int position) {
+        int newPosition = position;
+        if (mCategoryNormalIndex < newPosition)
+            newPosition--;
+        if (mCategoryBlockedIndex < newPosition)
+            newPosition--;
+
+        return super.getItem(newPosition);
+    }
+
+    @Override
+    public int getViewTypeCount() {
+        return 2;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (position == mCategoryNormalIndex || position == mCategoryBlockedIndex)
+            return CATEGORY_TYPE;
+        else
+            return ALARM_TYPE;
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        // Get the data item for this position
-        AlarmStats alarm = (AlarmStats)getItem(position);
-        // Check if an existing view is being reused, otherwise inflate the view
+        int itemType = this.getItemViewType(position);
+        switch (itemType) {
+            case ALARM_TYPE:
+                // Get the data item for this position
+                AlarmStats alarm = (AlarmStats)getItem(position);
 
-        ViewHolder viewHolder; // view lookup cache stored in tag
-       if (convertView == null) {
-            viewHolder = new ViewHolder();
-            LayoutInflater inflater = LayoutInflater.from(getContext());
-            convertView = inflater.inflate(R.layout.fragment_alarms_listitem, parent, false);
-            viewHolder.name = (TextView) convertView.findViewById(R.id.textviewAlarmName);
-            viewHolder.alarmCount = (TextView) convertView.findViewById(R.id.textViewAlarmCount);
-            convertView.setTag(viewHolder);
-       }
-       else {
-           viewHolder = (ViewHolder) convertView.getTag();
-       }
-        // Populate the data into the template view using the data object
-        viewHolder.name.setText(alarm.getName());
-        viewHolder.alarmCount.setText(String.valueOf(alarm.getAllowedCount()));
+                // Check if an existing view is being reused, otherwise inflate the view
+                AlarmViewHolder alarmViewHolder; // view lookup cache stored in tag
+                if (convertView == null) {
+                    alarmViewHolder = new AlarmViewHolder();
 
-        viewHolder.name.setSelected(true);
+                    LayoutInflater inflater = LayoutInflater.from(getContext());
+                    convertView = inflater.inflate(R.layout.fragment_alarms_listitem, parent, false);
+                    alarmViewHolder.name = (TextView) convertView.findViewById(R.id.textviewAlarmName);
+                    alarmViewHolder.alarmCount = (TextView) convertView.findViewById(R.id.textViewAlarmCount);
 
-        //Size the count box width to at least the height.
-        viewHolder.alarmCount.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
-        int height = viewHolder.alarmCount.getMeasuredHeight();
-        int width = viewHolder.alarmCount.getMeasuredWidth();
-        if (height > width) {
-            viewHolder.alarmCount.setLayoutParams(new LinearLayout.LayoutParams(height, height));
-        }
-        else {
-            viewHolder.alarmCount.setLayoutParams(new LinearLayout.LayoutParams(width, width));
-        }
+                    convertView.setTag(alarmViewHolder);
+                }
+                else {
+                   alarmViewHolder = (AlarmViewHolder) convertView.getTag();
+                }
 
-        //Set the background color along the reg-green spectrum based on the severity of the count.
-        float correctedStat = alarm.getAllowedCount() - mLowCount;
-        float point = 120 - ((correctedStat / mScale) * 120); //this gives us a 1-120 hue number.
+                // Populate the data into the template view using the data object
+                alarmViewHolder.name.setText(alarm.getName());
+                alarmViewHolder.alarmCount.setText(String.valueOf(alarm.getAllowedCount()));
 
-        float[] hsv = {point, 1, 1};
-        viewHolder.alarmCount.setBackgroundColor(Color.HSVToColor(hsv));
+                alarmViewHolder.name.setSelected(true);
 
-        if (alarm.getBlockingEnabled()) {
-            viewHolder.name.setTypeface(null, Typeface.BOLD);
-        } else {
-            viewHolder.name.setTypeface(null, Typeface.NORMAL);
+                //Size the count box width to at least the height.
+                alarmViewHolder.alarmCount.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+                int height = alarmViewHolder.alarmCount.getMeasuredHeight();
+                int width = alarmViewHolder.alarmCount.getMeasuredWidth();
+                if (height > width) {
+                    alarmViewHolder.alarmCount.setLayoutParams(new LinearLayout.LayoutParams(height, height));
+                }
+                else {
+                    alarmViewHolder.alarmCount.setLayoutParams(new LinearLayout.LayoutParams(width, width));
+                }
+
+                //Set the background color along the reg-green spectrum based on the severity of the count.
+                float correctedStat = alarm.getAllowedCount() - mLowCount;
+                float point = 120 - ((correctedStat / mScale) * 120); //this gives us a 1-120 hue number.
+
+                float[] hsv = {point, 1, 1};
+                alarmViewHolder.alarmCount.setBackgroundColor(Color.HSVToColor(hsv));
+
+                break;
+
+            case CATEGORY_TYPE:
+                //Take care of the category special cases.
+                CategoryViewHolder categoryViewHolder = null; // view lookup cache stored in tag
+
+                // Check if an existing view is being reused, otherwise inflate the view
+                if (convertView == null) {
+                    categoryViewHolder = new CategoryViewHolder();
+                    LayoutInflater inflater = LayoutInflater.from(getContext());
+                    convertView = inflater.inflate(R.layout.fragment_wakelocks_listgroup, parent, false);
+                    categoryViewHolder.name = (TextView) convertView.findViewById(R.id.textviewCategoryName);
+                    convertView.setTag(categoryViewHolder);
+                } else {
+                    categoryViewHolder = (CategoryViewHolder) convertView.getTag();
+
+                }
+                if (position == mCategoryBlockedIndex) {
+                    categoryViewHolder.name.setText("Unbounced");
+                } else if (position == mCategoryNormalIndex) {
+                    categoryViewHolder.name.setText("Stock");
+                } else {
+                    categoryViewHolder.name.setText("Unknown");
+                }
+
+                break;
         }
 
 
         return convertView;
     }
+
+    public void sort(boolean categorize) {
+        sort(SortWakeLocks.getAlarmListComparator(categorize));
+        addCategories(mBackingList);
+    }
+
+    public void sort() {
+        sort(true);
+    }
+
 
 }

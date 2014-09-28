@@ -4,6 +4,16 @@
         android:title="Debug"
         android:key="">
 
+        <CheckBoxPreference
+            android:key="show_launcher_icon"
+            android:title="Show launcher icon"
+            android:defaultValue="false"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Debug"
+        android:key="">
+
         <Preference
             android:title="Author: Ryan Steckler"
             android:key="about_author"

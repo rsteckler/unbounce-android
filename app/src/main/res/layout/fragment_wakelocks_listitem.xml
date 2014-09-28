@@ -7,12 +7,15 @@
     android:background="@drawable/list_background"
     android:paddingTop="@dimen/separator_pad"
     android:paddingBottom="@dimen/separator_pad"
-    android:id="@+id/listitemWakelock">
+    android:id="@+id/listitemWakelock"
+    android:focusable="false"
+    android:baselineAligned="false">
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="0px"
+        android:layout_height="wrap_content"
+        android:layout_weight=".15">
 
         <TextView
             android:layout_width="wrap_content"
@@ -27,27 +30,35 @@
             style="@style/TextCaption" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textviewWakelockName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="NlpCollectorWakeLock"
-        android:fontFamily="@string/app_font_family"
-        android:layout_weight="1"
-        android:singleLine="true"
-        style="@style/TextBody1"
-        android:layout_marginLeft="@dimen/section_pad"
-        android:ellipsize="marquee" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="0px"
+        android:layout_height="fill_parent"
+        android:layout_weight=".85">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Awake 2d 24h 53m 29s"
-        android:id="@+id/textviewWakelockTime"
-        android:fontFamily="@string/app_font_family"
-        android:focusable="false"
-        style="@style/TextCaption"
-        android:layout_marginLeft="@dimen/separator_pad" />
+        <TextView
+            android:id="@+id/textviewWakelockName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NlpCollectorWakeLock"
+            android:fontFamily="@string/app_font_family"
+            android:layout_weight="1"
+            android:singleLine="true"
+            style="@style/TextBody1"
+            android:layout_marginLeft="@dimen/section_pad"
+            android:ellipsize="marquee" />
 
-    <!--wakelock_duration-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Awake 2d 24h 53m 29s"
+            android:id="@+id/textviewWakelockTime"
+            android:fontFamily="@string/app_font_family"
+            android:focusable="false"
+            style="@style/TextCaption"
+            android:layout_marginLeft="@dimen/separator_pad" />
+
+        </LinearLayout>
+
+
 </LinearLayout>

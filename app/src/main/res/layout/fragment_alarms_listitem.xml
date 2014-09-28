@@ -7,12 +7,14 @@
     android:background="@drawable/list_background"
     android:paddingTop="@dimen/separator_pad"
     android:paddingBottom="@dimen/separator_pad"
-    android:id="@+id/listitemAlarm">
+    android:id="@+id/listitemAlarm"
+    android:baselineAligned="false">
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="0px"
+        android:layout_height="wrap_content"
+        android:layout_weight=".15">
 
         <TextView
             android:layout_width="wrap_content"
@@ -27,6 +29,12 @@
             style="@style/TextCaption" />
     </LinearLayout>
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="0px"
+        android:layout_height="fill_parent"
+        android:layout_weight=".85">
+
     <TextView
         android:id="@+id/textviewAlarmName"
         android:layout_width="wrap_content"
@@ -38,5 +46,5 @@
         style="@style/TextBody1"
         android:layout_marginLeft="@dimen/section_pad"
         android:ellipsize="marquee" />
-
+    </LinearLayout>
 </LinearLayout>

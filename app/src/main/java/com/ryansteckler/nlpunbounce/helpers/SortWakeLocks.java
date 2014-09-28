@@ -31,33 +31,71 @@ public class SortWakeLocks {
 //        };
 //    }
 
-    public static Comparator<WakelockStats> getWakelockListComparator(final boolean byCount)
+    public static Comparator<WakelockStats> getWakelockListComparator(final boolean byCount) {
+        return getWakelockListComparator(byCount, true);
+    }
+
+    public static Comparator<WakelockStats> getWakelockListComparator(final boolean byCount, final boolean categorize)
     {
         return new Comparator<WakelockStats>()
         {
             public int compare(WakelockStats o1,
                                WakelockStats o2)
             {
-                if (byCount)
+                if (categorize)
                 {
-                    return ((Long)o2.getAllowedCount()).compareTo(o1.getAllowedCount());
+                    int categoryCompare = ((Boolean)o2.getBlockingEnabled()).compareTo(o1.getBlockingEnabled());
+                    if (categoryCompare == 0) {
+                        //The enabled state is the same.  Sub-compare
+                        if (byCount)
+                        {
+                            return ((Long)o2.getAllowedCount()).compareTo(o1.getAllowedCount());
+                        }
+                        else
+                        {
+                            return ((Long)o2.getAllowedDuration()).compareTo(o1.getAllowedDuration());
+                        }
+                    } else {
+                        return categoryCompare;
+                    }
+                } else {
+                    if (byCount)
+                    {
+                        return ((Long)o2.getAllowedCount()).compareTo(o1.getAllowedCount());
+                    }
+                    else
+                    {
+                        return ((Long)o2.getAllowedDuration()).compareTo(o1.getAllowedDuration());
+                    }
                 }
-                else
-                {
-                    return ((Long)o2.getAllowedDuration()).compareTo(o1.getAllowedDuration());
-                }
+
             }
         };
     }
 
-    public static Comparator<AlarmStats> getAlarmListComparator()
+    public static Comparator<AlarmStats> getAlarmListComparator() {
+        return getAlarmListComparator(true);
+    }
+
+    public static Comparator<AlarmStats> getAlarmListComparator(final boolean categorize)
     {
         return new Comparator<AlarmStats>()
         {
             public int compare(AlarmStats o1,
                                AlarmStats o2)
             {
-                return ((Long)o2.getAllowedCount()).compareTo(o1.getAllowedCount());
+                if (categorize) {
+                    int categoryCompare = ((Boolean)o2.getBlockingEnabled()).compareTo(o1.getBlockingEnabled());
+                    if (categoryCompare == 0) {
+                        //The enabled state is the same.  Sub-compare
+                        return ((Long) o2.getAllowedCount()).compareTo(o1.getAllowedCount());
+                    }
+                    else {
+                        return categoryCompare;
+                    }
+                } else {
+                    return ((Long) o2.getAllowedCount()).compareTo(o1.getAllowedCount());
+                }
             }
         };
     }
