@@ -23,6 +23,7 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.ryansteckler.nlpunbounce.models.EventLookup;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
 import com.ryansteckler.nlpunbounce.models.WakelockStats;
 
@@ -150,23 +151,10 @@ public class WakelockDetailFragment extends Fragment {
         });
 
         TextView description = (TextView)view.findViewById(R.id.textViewWakelockDescription);
-        description.setText("We don't have any information about this wakelock, yet.  It may not be safe to unbounce this wakelock.  Only " +
-            "do so if you know what you're doing, or you know how to disable Xposed at boot.  We're working hard to collect information about every" +
-            " major wakelock and alarm.  Please be patient while we collect this information in the next few weeks.");
-
-        if (mStat.getName().toLowerCase().equals("nlpwakelock")) {
-            description.setText("NlpWakeLock is safe to unbounce.  It's used by Google Play Services to determine your rough location using a " +
-                "combination of cell towers and WiFi.  Once it has your location, it stores it locally so other apps, like Google Now, can access your " +
-                "location without using GPS or getting a new fix.  Recommended settings are between 180 and 600 seconds.");
-            mKnownSafeWakelock = true;
-            mFreeWakelock = true;
-        } else if (mStat.getName().toLowerCase().equals("nlpcollectorwakelock")) {
-            description.setText("NlpWakeLock is safe to unbounce.  It's used by Google Play Services to determine your rough location using a " +
-                "combination of cell towers and wifi.  Once it has your location, it sends it back to Google so they can expand their database " +
-                "of WiFi locations.  Recommended settings are between 180 and 600 seconds.");
-            mKnownSafeWakelock = true;
-            mFreeWakelock = true;
-        }
+        String descriptionText = EventLookup.getDescription(mStat.getName());
+        description.setText(descriptionText);
+        mKnownSafeWakelock = EventLookup.isSafe(mStat.getName()) == EventLookup.SAFE;
+        mFreeWakelock = EventLookup.isFree(mStat.getName());
     }
 
     private boolean handleTextChange(TextView textView, EditText edit) {

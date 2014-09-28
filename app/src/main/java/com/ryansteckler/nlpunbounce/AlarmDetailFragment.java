@@ -22,6 +22,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.ryansteckler.nlpunbounce.models.AlarmStats;
+import com.ryansteckler.nlpunbounce.models.EventLookup;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
 
 
@@ -84,7 +85,7 @@ public class AlarmDetailFragment extends Fragment {
             @Override
             public void onFocusChange(View view, boolean b) {
                 if (!b) {
-                    handleTextChange((TextView)view, edit);
+                    handleTextChange((TextView) view, edit);
                 }
             }
         });
@@ -141,23 +142,10 @@ public class AlarmDetailFragment extends Fragment {
         });
 
         TextView description = (TextView)view.findViewById(R.id.textViewAlarmDescription);
-        description.setText("We don't have any information about this alarm, yet.  It may not be safe to unbounce this alarm.  Only " +
-                "do so if you know what you're doing, or you know how to disable Xposed at boot.  We're working hard to collect information about every" +
-                " major wakelock and alarm.  Please be patient while we collect this information in the next few weeks.");
-
-        if (mStat.getName().toLowerCase().equals("com.google.android.gms.nlp.alarm_wakeup_locator")) {
-            description.setText("This alarm is safe to unbounce.  It's used by Google Play Services to determine your rough location using a " +
-                    "combination of cell towers and WiFi.  Once it has your location, it stores it locally so other apps, like Google Now, can access your " +
-                    "location without using GPS or getting a new fix.  Recommended settings are between 180 and 600 seconds.");
-            mKnownSafeAlarm = true;
-            mFreeAlarm = true;
-        } else if (mStat.getName().toLowerCase().equals("com.google.android.gms.nlp.alarm_wakeup_activity_detection")) {
-            description.setText("This alarm is safe to unbounce.  It's used by Google Play Services to determine your rough location using a " +
-                    "combination of cell towers and wifi.  Once it has your location, it sends it back to Google so they can expand their database " +
-                    "of WiFi locations.  Recommended settings are between 180 and 600 seconds.");
-            mKnownSafeAlarm = true;
-            mFreeAlarm = true;
-        }
+        String descriptionText = EventLookup.getDescription(mStat.getName());
+        description.setText(descriptionText);
+        mKnownSafeAlarm = EventLookup.isSafe(mStat.getName()) == EventLookup.SAFE;
+        mFreeAlarm = EventLookup.isFree(mStat.getName());
     }
 
     private boolean handleTextChange(TextView textView, EditText edit) {
