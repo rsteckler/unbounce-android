@@ -8,6 +8,16 @@
             android:key="show_launcher_icon"
             android:title="Show launcher icon"
             android:defaultValue="true"/>
+
+        <Preference
+            android:title="Reset to defaults"
+            android:key="reset_defaults"
+            android:editable="false"
+            android:defaultValue="0"
+            android:summary="Reset all alarms and wakelocks to default settings"
+            />
+
+
     </PreferenceCategory>
 
     <PreferenceCategory

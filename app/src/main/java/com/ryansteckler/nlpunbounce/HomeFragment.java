@@ -23,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.ryansteckler.nlpunbounce.helpers.SettingsHelper;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
 
 /**
@@ -82,15 +83,7 @@ public class HomeFragment extends Fragment {
 
         SharedPreferences prefs = getActivity().getSharedPreferences("com.ryansteckler.nlpunbounce" + "_preferences", Context.MODE_WORLD_READABLE);
         if (prefs.getBoolean("first_launch", true)) {
-            final SharedPreferences.Editor editor = prefs.edit();
-            editor.putBoolean("first_launch", false);
-            editor.putBoolean("wakelock_NlpWakeLock_enabled", true);
-            editor.putBoolean("wakelock_NlpCollectorWakeLock_enabled", true);
-            editor.putBoolean("wakelock_NlpCollectorWakeLock_enabled", true);
-            editor.putBoolean("alarm_com.google.android.gms.nlp.ALARM_WAKEUP_LOCATOR_enabled", true);
-            editor.putBoolean("alarm_com.google.android.gms.nlp.ALARM_WAKEUP_ACTIVITY_DETECTION_enabled", true);
-            editor.commit();
-
+            SettingsHelper.resetToDefaults(prefs);
             textView = (TextView)view.findViewById(R.id.textviewCloseBanner);
 
             textView.setOnClickListener(new View.OnClickListener() {
