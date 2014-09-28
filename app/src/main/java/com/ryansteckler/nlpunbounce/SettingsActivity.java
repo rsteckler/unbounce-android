@@ -1,7 +1,9 @@
 package com.ryansteckler.nlpunbounce;
 
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
@@ -43,6 +45,7 @@ public class SettingsActivity extends Activity {
             sharedPref.registerOnSharedPreferenceChangeListener(this);
 
             onSharedPreferenceChanged(sharedPref, "debug_logging");
+            onSharedPreferenceChanged(sharedPref, "show_launcher_icon");
 
         }
 
@@ -61,6 +64,32 @@ public class SettingsActivity extends Activity {
                 boolean value = sharedPreferences.getBoolean(key, false);
                 pref.setChecked(value);
             }
+            else if (key.equals("show_launcher_icon"))
+            {
+                CheckBoxPreference pref = (CheckBoxPreference) findPreference(key);
+                boolean value = sharedPreferences.getBoolean(key, false);
+                pref.setChecked(value);
+
+                PackageManager packageManager = getActivity().getPackageManager();
+                int state = value ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED : PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
+                ComponentName aliasName = new ComponentName(getActivity(), "com.ryansteckler.nlpunbounce.Settings-Alias");
+                packageManager.setComponentEnabledSetting(aliasName, state, PackageManager.DONT_KILL_APP);
+            }
+
+        }
+
+        @Override
+        public void onResume() {
+            super.onResume();
+            getPreferenceScreen().getSharedPreferences()
+                    .registerOnSharedPreferenceChangeListener(this);
+        }
+
+        @Override
+        public void onPause() {
+            super.onPause();
+            getPreferenceScreen().getSharedPreferences()
+                    .unregisterOnSharedPreferenceChangeListener(this);
         }
     }
 }

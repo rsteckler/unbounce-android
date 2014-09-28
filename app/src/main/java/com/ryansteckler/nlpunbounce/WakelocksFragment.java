@@ -16,7 +16,6 @@ import android.widget.ListView;
 
 
 import com.ryansteckler.nlpunbounce.adapters.WakelocksAdapter;
-import com.ryansteckler.nlpunbounce.helpers.SortWakeLocks;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
 import com.ryansteckler.nlpunbounce.models.WakelockStats;
 
@@ -62,9 +61,7 @@ public class WakelocksFragment extends ListFragment implements WakelockDetailFra
         if (mListener != null)
             mListener.onWakelocksSetTitle("Wakelocks");
 
-        mAdapter.sort(SortWakeLocks.getWakelockListComparator(!mSortByTime));
-        mAdapter.notifyDataSetChanged();
-
+        mAdapter.sort(!mSortByTime);
     }
 
     @Override
@@ -97,6 +94,7 @@ public class WakelocksFragment extends ListFragment implements WakelockDetailFra
     @Override
     public void onListItemClick(ListView l, final View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
+
         //This suppresses the android system's click handler, which highlights the button, then fades it
         //back to the background, THEN starts our animation.  We just want it to fade to our desired color and stay
         //there until the animation takes over.  Looks sexier that way.
@@ -161,7 +159,7 @@ public class WakelocksFragment extends ListFragment implements WakelockDetailFra
                 //We may have had a change in the data for this wakelock (such as the user resetting the counters).
                 //Try updating it.
                 mAdapter = new WakelocksAdapter(getActivity(), UnbounceStatsCollection.getInstance().toWakelockArrayList(getActivity()));
-                mAdapter.sort(SortWakeLocks.getWakelockListComparator(!mSortByTime));
+                mAdapter.sort(!mSortByTime);
                 setListAdapter(mAdapter);
             }
         }
