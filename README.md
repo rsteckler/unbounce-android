@@ -29,8 +29,7 @@ Totally. I'd like this to become a one-stop shop for battery life, especially as
 ### I still get a ton of NlpWakeLocks and NlpCollectorWakeLocks
 After looking at the code, there looks to be a google bug where any broadcast that includes the word "collector" triggers a Play Services NlpCollectorWakeLock. NlpUnbounce also has settings to temper these wakelocks. Try using that if the alarms by themselves don't solve the problem.
 
-### Why is it called NlpUnbounce?
-Nlp is Network Location Provider. It's the part of Google Play Services responsible for the alarms and wakelocks.
+### Why is it called Unbounce?
 Debouncing is the process of taking a signal that's "bouncing" and interpreting it as a single "hit". This is a similar concept to what termpering the wakelocks does. It let's one of them come through, then turns them off for a certain amount of time. After I fixed the wakelocks, I realized that the alarms were causing them and I could actually stop the device from even waking up by killing the alarm. If DEbounce is a good term for denying the wakelock, UNbounce seemed like a good term for stopping them at the source.
 
 ### Where's the source code?
@@ -57,7 +56,7 @@ First, your battery life should be better when Location Services is turned on.  
 
 4) To watch the fix in action, run: adb logcat -v time | grep "NlpUnbounce"
 
-5) Watch your ADB for messages showing that NlpUnbounce is patching the intervals.
+5) Watch your ADB for messages showing that Unbounce is patching the intervals.
 
 
 ### What are the best settings?

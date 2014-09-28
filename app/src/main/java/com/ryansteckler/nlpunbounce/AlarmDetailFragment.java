@@ -11,6 +11,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
@@ -74,24 +75,17 @@ public class AlarmDetailFragment extends Fragment {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
                 if (i == EditorInfo.IME_ACTION_DONE) {
-                    try {
-                        long seconds = Long.parseLong(textView.getText().toString());
-                        SharedPreferences prefs = getActivity().getSharedPreferences(AlarmDetailFragment.class.getPackage().getName() + "_preferences", Context.MODE_WORLD_READABLE);
-                        String blockName = "alarm_" + mStat.getName() + "_seconds";
-                        SharedPreferences.Editor editor = prefs.edit();
-                        editor.putLong(blockName, seconds);
-                        editor.commit();
-                        textView.clearFocus();
-                        // hide virtual keyboard
-                        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                        imm.hideSoftInputFromWindow(edit.getWindowToken(), 0);
-                        return true;
-
-                    } catch (NumberFormatException nfe) {
-                        //Not a number.  Android let us down.
-                    }
+                    return handleTextChange(textView, edit);
                 }
                 return false;
+            }
+        });
+        edit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (!b) {
+                    handleTextChange((TextView)view, edit);
+                }
             }
         });
 
@@ -101,21 +95,26 @@ public class AlarmDetailFragment extends Fragment {
         onOff.setChecked(enabled);
         getView().findViewById(R.id.editAlarmSeconds).setEnabled(onOff.isChecked());
 
-        onOff.setOnClickListener(new View.OnClickListener() {
+        onOff.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View view) {
-                final boolean b = onOff.isChecked();  //! because it's the user *just* clicked it and it hasn't changed yet.
-                //Check license
-                if (((MaterialSettingsActivity) getActivity()).isPremium() || mFreeAlarm) {
-                    if (b && !mKnownSafeAlarm) {
-                        warnUnknownAlarm(onOff);
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                    //Check license
+                    if (((MaterialSettingsActivity) getActivity()).isPremium() || mFreeAlarm) {
+                        final boolean b = !onOff.isChecked();
+                        if (b && !mKnownSafeAlarm) {
+                            warnUnknownAlarm(onOff);
+                        } else {
+                            updateEnabledAlarm(b);
+                            return false;
+                        }
                     } else {
-                        onOff.setChecked(b);
-                        updateEnabledAlarm(b);
+                        //Deny based on licensing.
+                        warnLicensing(onOff);
                     }
+                    return true;
                 } else {
-                    //Deny based on licensing.
-                    warnLicensing(onOff);
+                    return false;
                 }
             }
         });
@@ -159,6 +158,27 @@ public class AlarmDetailFragment extends Fragment {
             mKnownSafeAlarm = true;
             mFreeAlarm = true;
         }
+    }
+
+    private boolean handleTextChange(TextView textView, EditText edit) {
+        try {
+            long seconds = Long.parseLong(textView.getText().toString());
+            SharedPreferences prefs = getActivity().getSharedPreferences(WakelockDetailFragment.class.getPackage().getName() + "_preferences", Context.MODE_WORLD_READABLE);
+            String blockName = "alarm_" + mStat.getName() + "_seconds";
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putLong(blockName, seconds);
+            editor.commit();
+            textView.clearFocus();
+            // hide virtual keyboard
+            InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(edit.getWindowToken(), 0);
+            return true;
+
+        } catch (NumberFormatException nfe)
+        {
+            //Not a number.  Android let us down.
+        }
+        return false;
     }
 
     private void warnLicensing(final Switch onOff) {

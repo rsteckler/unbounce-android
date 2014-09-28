@@ -186,6 +186,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:inputType="number"
+                                android:imeOptions="actionDone"
                                 android:id="@+id/editWakelockSeconds"
                                 android:editable="true"
                                 android:layout_weight=".3"
