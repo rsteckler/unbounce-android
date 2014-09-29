@@ -115,6 +115,11 @@ public class AlarmsAdapter extends ArrayAdapter {
     }
 
     @Override
+    public int getCount() {
+        return super.getCount() + 4; //4 categories
+    }
+
+    @Override
     public Object getItem(int position) {
         int newPosition = position;
         if (position > mCategoryBlockedIndex)
