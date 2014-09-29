@@ -9,7 +9,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.analytics.GoogleAnalytics;
@@ -23,7 +25,6 @@ import com.ryansteckler.nlpunbounce.AlarmsFragment;
 import com.ryansteckler.nlpunbounce.R;
 import com.ryansteckler.nlpunbounce.WakelockDetailFragment;
 import com.ryansteckler.nlpunbounce.WakelocksFragment;
-import com.ryansteckler.nlpunbounce.models.WakelockStats;
 
 public class TaskerActivity extends Activity
         implements
@@ -33,6 +34,12 @@ public class TaskerActivity extends Activity
         AlarmDetailFragment.FragmentInteractionListener,
         TaskerWhichFragment.OnFragmentInteractionListener {
 
+    public static final String EXTRA_BUNDLE = "com.twofortyfouram.locale.intent.extra.BUNDLE";
+    public static final String EXTRA_BLURB = "com.twofortyfouram.locale.intent.extra.BLURB";
+    public static final String BUNDLE_TYPE = "type";
+    public static final String BUNDLE_NAME = "name";
+    public static final String BUNDLE_SECONDS = "seconds";
+    public static final String BUNDLE_ENABLED = "enabled";
     IabHelper mHelper;
 
     private boolean mIsPremium = false;
@@ -101,6 +108,56 @@ public class TaskerActivity extends Activity
             }
         });
 
+        Button save = (Button)findViewById(R.id.buttonTaskerSave);
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fragmentManager = getFragmentManager();
+                Bundle taskerBundle = null;
+
+                //Set the default tasker values
+                taskerBundle = new Bundle();
+                String blurb = "";
+
+                WakelockDetailFragment wlFragment = (WakelockDetailFragment)fragmentManager.findFragmentByTag("wakelock_detail");
+                if (wlFragment != null) {
+                    taskerBundle.putString(BUNDLE_TYPE, "wakelock");
+                    taskerBundle.putString(BUNDLE_NAME, wlFragment.getName());
+                    taskerBundle.putLong(BUNDLE_SECONDS, wlFragment.getSeconds());
+                    taskerBundle.putBoolean(BUNDLE_ENABLED, wlFragment.getEnabled());
+                    blurb = wlFragment.getName() + " - " + (wlFragment.getEnabled() ? "On" : "Off") + " - " + wlFragment.getSeconds();
+                } else {
+                    AlarmDetailFragment alarmFragment = (AlarmDetailFragment)fragmentManager.findFragmentByTag("alarm_detail");
+                    if (alarmFragment != null) {
+                        taskerBundle.putString(BUNDLE_TYPE, "alarm");
+                        taskerBundle.putString(BUNDLE_NAME, alarmFragment.getName());
+                        taskerBundle.putLong(BUNDLE_SECONDS, alarmFragment.getSeconds());
+                        taskerBundle.putBoolean(BUNDLE_ENABLED, alarmFragment.getEnabled());
+                        blurb = alarmFragment.getName() + " - " + (alarmFragment.getEnabled() ? "On" : "Off") + " - " + alarmFragment.getSeconds();
+                    }
+                }
+
+                final Intent resultIntent = new Intent();
+                resultIntent.putExtra(EXTRA_BUNDLE, taskerBundle);
+                resultIntent.putExtra(EXTRA_BLURB, blurb);
+                setResult(RESULT_OK, resultIntent);
+                finish();
+            }
+        });
+
+        //If we have a bundle passed to us, we need to pre-populate that state in the detail page
+        if (savedInstanceState != null) {
+            Bundle savedBundle = getIntent().getBundleExtra(EXTRA_BUNDLE);
+            if (savedBundle != null) {
+                String type = savedBundle.getString(BUNDLE_TYPE);
+                long seconds = savedBundle.getLong(BUNDLE_SECONDS);
+                boolean enabled = savedBundle.getBoolean(BUNDLE_ENABLED);
+                String name = savedBundle.getString(BUNDLE_NAME);
+
+                //TODO:  Pass to detail fragment, and launch detail immediately (don't show "which" or "list")
+            }
+
+        }
 
         GoogleAnalytics ga = GoogleAnalytics.getInstance(this);
         Tracker tracker = ga.newTracker("UA-11575064-3");
@@ -111,7 +168,6 @@ public class TaskerActivity extends Activity
     public boolean isPremium() {
         return mIsPremium;
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
@@ -130,32 +186,7 @@ public class TaskerActivity extends Activity
                 .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, android.R.animator.fade_in, android.R.animator.fade_out)
                 .replace(R.id.container, mCurrentFragment)
                 .commit();
-
     }
-
-    // update the main content by replacing fragments
-//        FragmentManager fragmentManager = getFragmentManager();
-//        if (position == 0) {
-//            fragmentManager.beginTransaction()
-//                    .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, android.R.animator.fade_in, android.R.animator.fade_out)
-//                    .replace(R.id.container, HomeFragment.newInstance(position + 1))
-//                    .commit();
-//        } else if (position == 1) {
-//            fragmentManager.beginTransaction()
-//                    .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, android.R.animator.fade_in, android.R.animator.fade_out)
-//                    .replace(R.id.container, WakelocksFragment.newInstance(position + 1))
-//                    .addToBackStack("wakelocks")
-//                    .commit();
-//        } else if (position == 2) {
-//            fragmentManager.beginTransaction()
-//                    .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, android.R.animator.fade_in, android.R.animator.fade_out)
-//                    .replace(R.id.container, AlarmsFragment.newInstance(position + 1))
-//                    .addToBackStack("alarms")
-//                    .commit();
-//        } else if (position == 3) {
-//            Intent intent = new Intent(this, SettingsActivity.class);
-//            startActivity(intent);
-//        }
 
     @Override
     public void onWakelocksSetTitle(String title) {
@@ -165,6 +196,8 @@ public class TaskerActivity extends Activity
     public void onWakelocksSetTaskerTitle(String title) {
         TextView text = (TextView)findViewById(R.id.textTaskerHeader);
         text.setText(title);
+        Button save = (Button)findViewById(R.id.buttonTaskerSave);
+        save.setVisibility(View.GONE);
     }
 
     @Override
@@ -175,6 +208,8 @@ public class TaskerActivity extends Activity
     public void onWakelockDetailSetTaskerTitle(String title) {
         TextView text = (TextView)findViewById(R.id.textTaskerHeader);
         text.setText(title);
+        Button save = (Button)findViewById(R.id.buttonTaskerSave);
+        save.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -185,6 +220,8 @@ public class TaskerActivity extends Activity
     public void onAlarmDetailSetTaskerTitle(String title) {
         TextView text = (TextView)findViewById(R.id.textTaskerHeader);
         text.setText(title);
+        Button save = (Button)findViewById(R.id.buttonTaskerSave);
+        save.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -195,6 +232,8 @@ public class TaskerActivity extends Activity
     public void onAlarmsSetTaskerTitle(String title) {
         TextView text = (TextView)findViewById(R.id.textTaskerHeader);
         text.setText(title);
+        Button save = (Button)findViewById(R.id.buttonTaskerSave);
+        save.setVisibility(View.GONE);
     }
 
     @Override
@@ -209,5 +248,7 @@ public class TaskerActivity extends Activity
     public void onTaskerWhichSetTitle(String title) {
         TextView text = (TextView)findViewById(R.id.textTaskerHeader);
         text.setText(title);
+        Button save = (Button)findViewById(R.id.buttonTaskerSave);
+        save.setVisibility(View.GONE);
     }
 }

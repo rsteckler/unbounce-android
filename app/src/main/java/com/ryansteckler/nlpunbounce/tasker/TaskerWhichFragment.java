@@ -40,7 +40,7 @@ public class TaskerWhichFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                WakelocksFragment newFragment = WakelocksFragment.newInstance();
+                WakelocksFragment newFragment = WakelocksFragment.newInstance(true);
 
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction()
@@ -51,7 +51,7 @@ public class TaskerWhichFragment extends Fragment {
                     .commit();
 
                 if (mListener != null)
-                    mListener.onTaskerWhichSetTitle("Choose the wakelock you want to adjust settings for");
+                    mListener.onTaskerWhichSetTitle("Choose the wakelock to adjust.");
             }
         });
 
@@ -63,12 +63,12 @@ public class TaskerWhichFragment extends Fragment {
                 fragmentManager.beginTransaction()
                     .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, android.R.animator.fade_in, android.R.animator.fade_out)
                     .hide(TaskerWhichFragment.this)
-                    .add(R.id.container, AlarmsFragment.newInstance())
+                    .add(R.id.container, AlarmsFragment.newInstance(true))
                     .addToBackStack(null)
                     .commit();
 
                 if (mListener != null)
-                    mListener.onTaskerWhichSetTitle("Choose the alarm you want to adjust settings for");
+                    mListener.onTaskerWhichSetTitle("Choose the alarm to adjust.");
             }
         });
     }

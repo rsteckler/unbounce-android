@@ -24,7 +24,7 @@ import android.widget.TextView;
 import com.ryansteckler.nlpunbounce.models.AlarmStats;
 import com.ryansteckler.nlpunbounce.models.EventLookup;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
-
+import com.ryansteckler.nlpunbounce.tasker.TaskerActivity;
 
 
 /**
@@ -44,18 +44,37 @@ public class AlarmDetailFragment extends Fragment {
     private static final String ARG_START_BOTTOM = "startBottom";
     private static final String ARG_FINAL_BOTTOM = "finalBottom";
     private static final String ARG_CUR_STAT = "curStat";
+    private static final String ARG_TASKER_MODE = "taskerMode";
 
     private int mStartTop;
     private int mFinalTop;
     private int mStartBottom;
     private int mFinalBottom;
     private AlarmStats mStat;
+    private boolean mTaskerMode;
+
     private FragmentClearListener mClearListener = null;
 
     private boolean mKnownSafeAlarm = false;
     private boolean mFreeAlarm = false;
 
     private FragmentInteractionListener mListener;
+
+    public String getName() {
+        return mStat.getName();
+    }
+
+    public boolean getEnabled() {
+        Switch onOff = (Switch)getActivity().findViewById(R.id.switchAlarm);
+        return onOff.isChecked();
+    }
+
+    public long getSeconds() {
+        EditText editSeconds = (EditText)getActivity().findViewById(R.id.editAlarmSeconds);
+        String text = editSeconds.getText().toString();
+        long seconds = Long.parseLong(text);
+        return seconds;
+    }
 
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
@@ -64,7 +83,7 @@ public class AlarmDetailFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         if (mListener != null) {
             mListener.onAlarmDetailSetTitle(mStat.getName());
-            mListener.onAlarmDetailSetTaskerTitle("Choose the settings you want and SAVE");
+            mListener.onAlarmDetailSetTaskerTitle("Choose the settings you want.");
         }
 
         loadStatsFromSource(view);
@@ -93,6 +112,7 @@ public class AlarmDetailFragment extends Fragment {
         });
 
         final Switch onOff = (Switch) view.findViewById(R.id.switchAlarm);
+        //TODO:  If we're in tasker mode, and have an existing configuration, load that instead of prefs.
         String blockName = "alarm_" + mStat.getName() + "_enabled";
         boolean enabled = prefs.getBoolean(blockName, false);
         onOff.setChecked(enabled);
@@ -103,7 +123,17 @@ public class AlarmDetailFragment extends Fragment {
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
                     //Check license
-                    if (((MaterialSettingsActivity) getActivity()).isPremium() || mFreeAlarm) {
+                    boolean isPremium = false;
+                    //We may be running under the TaskerActivity or the MaterialSettingsActivity.
+                    Activity baseActivity = getActivity();
+                    if (baseActivity instanceof MaterialSettingsActivity) {
+                        isPremium = ((MaterialSettingsActivity) getActivity()).isPremium();
+                    }
+                    else if (baseActivity instanceof TaskerActivity) {
+                        isPremium = ((TaskerActivity) getActivity()).isPremium();
+                    }
+
+                    if (isPremium || mFreeAlarm) {
                         final boolean b = !onOff.isChecked();
                         if (b && !mKnownSafeAlarm) {
                             warnUnknownAlarm(onOff);
@@ -153,11 +183,13 @@ public class AlarmDetailFragment extends Fragment {
     private boolean handleTextChange(TextView textView, EditText edit) {
         try {
             long seconds = Long.parseLong(textView.getText().toString());
-            SharedPreferences prefs = getActivity().getSharedPreferences(WakelockDetailFragment.class.getPackage().getName() + "_preferences", Context.MODE_WORLD_READABLE);
-            String blockName = "alarm_" + mStat.getName() + "_seconds";
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putLong(blockName, seconds);
-            editor.commit();
+            if (!mTaskerMode) {
+                SharedPreferences prefs = getActivity().getSharedPreferences(WakelockDetailFragment.class.getPackage().getName() + "_preferences", Context.MODE_WORLD_READABLE);
+                String blockName = "alarm_" + mStat.getName() + "_seconds";
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putLong(blockName, seconds);
+                editor.commit();
+            }
             textView.clearFocus();
             // hide virtual keyboard
             InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -209,10 +241,12 @@ public class AlarmDetailFragment extends Fragment {
 
     private void updateEnabledAlarm(boolean b) {
         String blockName = "alarm_" + mStat.getName() + "_enabled";
-        SharedPreferences prefs = getActivity().getSharedPreferences("com.ryansteckler.nlpunbounce" + "_preferences", Context.MODE_WORLD_READABLE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putBoolean(blockName, b);
-        editor.commit();
+        if (!mTaskerMode) {
+            SharedPreferences prefs = getActivity().getSharedPreferences("com.ryansteckler.nlpunbounce" + "_preferences", Context.MODE_WORLD_READABLE);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putBoolean(blockName, b);
+            editor.commit();
+        }
 
         //Enable or disable the seconds setting.
         getView().findViewById(R.id.editAlarmSeconds).setEnabled(b);
@@ -245,7 +279,7 @@ public class AlarmDetailFragment extends Fragment {
      * @return A new instance of fragment AlarmlockDetailFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static AlarmDetailFragment newInstance(int startTop, int finalTop, int startBottom, int finalBottom, AlarmStats stat) {
+    public static AlarmDetailFragment newInstance(int startTop, int finalTop, int startBottom, int finalBottom, AlarmStats stat, boolean taskerMode) {
         AlarmDetailFragment fragment = new AlarmDetailFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_START_TOP, startTop);
@@ -253,6 +287,7 @@ public class AlarmDetailFragment extends Fragment {
         args.putInt(ARG_START_BOTTOM, startBottom);
         args.putInt(ARG_FINAL_BOTTOM, finalBottom);
         args.putSerializable(ARG_CUR_STAT, stat);
+        args.putBoolean(ARG_TASKER_MODE, taskerMode);
         fragment.setArguments(args);
         return fragment;
     }
@@ -269,6 +304,7 @@ public class AlarmDetailFragment extends Fragment {
             mStartBottom = getArguments().getInt(ARG_START_BOTTOM);
             mFinalBottom = getArguments().getInt(ARG_FINAL_BOTTOM);
             mStat = (AlarmStats)getArguments().getSerializable(ARG_CUR_STAT);
+            mTaskerMode = getArguments().getBoolean(ARG_TASKER_MODE);
         }
         setHasOptionsMenu(true);
     }

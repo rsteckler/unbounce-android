@@ -20,9 +20,27 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Welcome to Unbounce's Tasker plugin"
+                android:text="Welcome to Unbounce's Tasker plugin."
                 android:id="@+id/textTaskerHeader"
-                style="@style/TextTitle" />
+                style="@style/TextTitle"
+                android:gravity="left" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:gravity="right">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SAVE"
+                    android:id="@+id/buttonTaskerSave"
+                    android:background="@color/background_primary_shaded"
+                    style="@style/TextTitleLight"
+                    android:visibility="gone" />
+            </LinearLayout>
+
         </LinearLayout>
 
     <FrameLayout

@@ -76,8 +76,9 @@
         <receiver
             android:name=".tasker.TaskerReceiver"
             android:enabled="true"
-            android:exported="true"
-            android:process=":background">
+            android:exported="true">
+            <!--android:process=":background"-->
+
             <intent-filter>
                 <action android:name="com.twofortyfouram.locale.intent.action.FIRE_SETTING" />
             </intent-filter>
