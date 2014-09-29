@@ -64,8 +64,10 @@ public class WakelockDetailFragment extends Fragment {
         ExpandingLayout anim = (ExpandingLayout)getActivity().findViewById(R.id.layoutDetails);
         anim.setAnimationBounds(mStartTop, mFinalTop, mStartBottom, mFinalBottom);
         super.onViewCreated(view, savedInstanceState);
-        if (mListener != null)
+        if (mListener != null) {
             mListener.onWakelockDetailSetTitle(mStat.getName());
+            mListener.onWakelockDetailSetTaskerTitle("Choose the settings you want and SAVE");
+        }
 
         loadStatsFromSource(view);
 
@@ -333,6 +335,7 @@ public class WakelockDetailFragment extends Fragment {
     public interface FragmentInteractionListener {
         // TODO: Update argument type and name
         public void onWakelockDetailSetTitle(String title);
+        public void onWakelockDetailSetTaskerTitle(String title);
     }
 
     public interface FragmentClearListener {

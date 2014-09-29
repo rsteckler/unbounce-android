@@ -30,7 +30,7 @@ public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.
 
     private boolean mReloadOnShow = false;
 
-    public static AlarmsFragment newInstance(int sectionNumber) {
+    public static AlarmsFragment newInstance() {
         AlarmsFragment fragment = new AlarmsFragment();
         return fragment;
     }
@@ -145,8 +145,10 @@ public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.
         super.onHiddenChanged(hidden);
         //Remember the scroll pos so we can reinstate it
         if (!hidden) {
-            if (mListener != null)
+            if (mListener != null) {
                 mListener.onAlarmsSetTitle("Alarms");
+                mListener.onAlarmsSetTaskerTitle("Choose the alarm you want to adjust settings for.");
+            }
             if (mReloadOnShow) {
                 mReloadOnShow = false;
                 //We may have had a change in the data for this wakelock (such as the user resetting the counters).
@@ -177,6 +179,7 @@ public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         public void onAlarmsSetTitle(String id);
+        public void onAlarmsSetTaskerTitle(String title);
     }
 
 }

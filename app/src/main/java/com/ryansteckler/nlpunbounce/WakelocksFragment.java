@@ -35,7 +35,7 @@ public class WakelocksFragment extends ListFragment implements WakelockDetailFra
     private boolean mSortByTime = false;
     private boolean mReloadOnShow = false;
 
-    public static WakelocksFragment newInstance(int sectionNumber) {
+    public static WakelocksFragment newInstance() {
         WakelocksFragment fragment = new WakelocksFragment();
         return fragment;
     }
@@ -152,8 +152,10 @@ public class WakelocksFragment extends ListFragment implements WakelockDetailFra
         super.onHiddenChanged(hidden);
         //Remember the scroll pos so we can reinstate it
         if (!hidden) {
-            if (mListener != null)
+            if (mListener != null) {
                 mListener.onWakelocksSetTitle("Wakelocks");
+                mListener.onWakelocksSetTaskerTitle("Choose the wakelock you want to adjust settings for.");
+            }
             if (mReloadOnShow) {
                 mReloadOnShow = false;
                 //We may have had a change in the data for this wakelock (such as the user resetting the counters).
@@ -225,6 +227,7 @@ public class WakelocksFragment extends ListFragment implements WakelockDetailFra
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         public void onWakelocksSetTitle(String id);
+        public void onWakelocksSetTaskerTitle(String id);
     }
 
 }

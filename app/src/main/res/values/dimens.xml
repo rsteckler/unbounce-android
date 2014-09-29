@@ -22,4 +22,5 @@
     <dimen name="card_external_padding">8sp</dimen>
     <dimen name="card_internal_padding">16sp</dimen>
     <dimen name="flat_button_long_padding">32sp</dimen>
+    <dimen name="header_height">82sp</dimen>
 </resources>

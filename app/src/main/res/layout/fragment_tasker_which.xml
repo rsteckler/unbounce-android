@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:padding="@dimen/card_internal_padding">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Do you want to change settings for a Wakelock or an Alarm?"
+            style="@style/TextTitle"
+            android:layout_marginBottom="@dimen/card_internal_padding" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="WAKELOCK"
+            android:id="@+id/buttonTaskerWakelock"
+            android:layout_marginTop="@dimen/card_internal_padding"
+            android:background="@color/background_secondary"
+            style="@style/TextTitleLight" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ALARM"
+            android:id="@+id/buttonTaskerAlarm"
+            android:background="@color/background_four"
+            style="@style/TextTitleLight"
+            android:layout_marginTop="@dimen/card_external_padding" />
+
+    </LinearLayout>
+</LinearLayout>

@@ -62,8 +62,10 @@ public class AlarmDetailFragment extends Fragment {
         ExpandingLayout anim = (ExpandingLayout) getActivity().findViewById(R.id.layoutDetails);
         anim.setAnimationBounds(mStartTop, mFinalTop, mStartBottom, mFinalBottom);
         super.onViewCreated(view, savedInstanceState);
-        if (mListener != null)
+        if (mListener != null) {
             mListener.onAlarmDetailSetTitle(mStat.getName());
+            mListener.onAlarmDetailSetTaskerTitle("Choose the settings you want and SAVE");
+        }
 
         loadStatsFromSource(view);
 
@@ -321,6 +323,7 @@ public class AlarmDetailFragment extends Fragment {
     public interface FragmentInteractionListener {
         // TODO: Update argument type and name
         public void onAlarmDetailSetTitle(String title);
+        public void onAlarmDetailSetTaskerTitle(String title);
     }
 
     public interface FragmentClearListener {
