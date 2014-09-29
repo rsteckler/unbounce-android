@@ -89,14 +89,17 @@ public class SortWakeLocks {
                                AlarmStats o2)
             {
                 if (categorize) {
-                    int categoryCompare = ((Boolean)o2.getBlockingEnabled()).compareTo(o1.getBlockingEnabled());
-                    if (categoryCompare == 0) {
-                        //The enabled state is the same.  Sub-compare
-                        return ((Long) o2.getAllowedCount()).compareTo(o1.getAllowedCount());
-                    }
-                    else {
-                        return categoryCompare;
-                    }
+
+                    int blockingCompare = ((Boolean)o2.getBlockingEnabled()).compareTo(o1.getBlockingEnabled());
+                    if (blockingCompare != 0)
+                        return blockingCompare;
+
+                    int safetyCompare = ((Integer)EventLookup.isSafe(o2.getName())).compareTo(EventLookup.isSafe(o1.getName()));
+                    if (safetyCompare != 0)
+                        return safetyCompare;
+
+                    //The category state is the same.  Sub-compare
+                    return ((Long)o2.getAllowedCount()).compareTo(o1.getAllowedCount());
                 } else {
                     return ((Long) o2.getAllowedCount()).compareTo(o1.getAllowedCount());
                 }
