@@ -237,6 +237,11 @@ public class WakelocksAdapter extends ArrayAdapter {
         return convertView;
     }
 
+    @Override
+    public int getCount() {
+        return super.getCount() + 4; //4 categories
+    }
+
     public void sort(boolean byCount, boolean categorize) {
         mByCount = byCount;
         sort(SortWakeLocks.getWakelockListComparator(byCount, categorize));
