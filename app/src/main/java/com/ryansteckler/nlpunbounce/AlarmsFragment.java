@@ -15,6 +15,7 @@ import android.widget.ListView;
 import com.ryansteckler.nlpunbounce.adapters.AlarmsAdapter;
 import com.ryansteckler.nlpunbounce.models.AlarmStats;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
+import com.ryansteckler.nlpunbounce.models.WakelockStats;
 
 /**
  * A fragment representing a list of Items.
@@ -29,11 +30,22 @@ public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.
     private AlarmsAdapter mAdapter;
 
     private boolean mReloadOnShow = false;
+    private boolean mTaskerMode = false;
 
-    public static AlarmsFragment newInstance(int sectionNumber) {
+    private final static String ARG_TASKER_MODE = "taskerMode";
+
+    public static AlarmsFragment newInstance() {
+        return newInstance(false);
+    }
+
+    public static AlarmsFragment newInstance(boolean taskerMode) {
         AlarmsFragment fragment = new AlarmsFragment();
+        Bundle args = new Bundle();
+        args.putBoolean(ARG_TASKER_MODE, taskerMode);
+        fragment.setArguments(args);
         return fragment;
     }
+
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -63,6 +75,9 @@ public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mTaskerMode = getArguments().getBoolean(ARG_TASKER_MODE);
+        }
 
         mAdapter = new AlarmsAdapter(getActivity(), UnbounceStatsCollection.getInstance().toAlarmArrayList(getActivity()));
         setListAdapter(mAdapter);
@@ -129,7 +144,7 @@ public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.
         //Spin up the new Detail fragment.  Dig the custom animations.  Also put it on the back stack
         //so we can hit the back button and come back to the list.
         FragmentManager fragmentManager = getFragmentManager();
-        AlarmDetailFragment newFrag = AlarmDetailFragment.newInstance(startBounds.top, finalBounds.top, startBounds.bottom, finalBounds.bottom, (AlarmStats)mAdapter.getItem(position));
+        AlarmDetailFragment newFrag = AlarmDetailFragment.newInstance(startBounds.top, finalBounds.top, startBounds.bottom, finalBounds.bottom, (AlarmStats)mAdapter.getItem(position), mTaskerMode);
         newFrag.attachClearListener(this);
         fragmentManager.beginTransaction()
                 .setCustomAnimations(R.animator.expand_in, R.animator.noop, R.animator.noop, R.animator.expand_out)
@@ -145,8 +160,10 @@ public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.
         super.onHiddenChanged(hidden);
         //Remember the scroll pos so we can reinstate it
         if (!hidden) {
-            if (mListener != null)
+            if (mListener != null) {
                 mListener.onAlarmsSetTitle("Alarms");
+                mListener.onAlarmsSetTaskerTitle("Choose the alarm to adjust.");
+            }
             if (mReloadOnShow) {
                 mReloadOnShow = false;
                 //We may have had a change in the data for this wakelock (such as the user resetting the counters).
@@ -177,6 +194,7 @@ public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         public void onAlarmsSetTitle(String id);
+        public void onAlarmsSetTaskerTitle(String title);
     }
 
 }

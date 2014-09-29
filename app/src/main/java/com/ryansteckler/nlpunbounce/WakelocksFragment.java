@@ -35,8 +35,20 @@ public class WakelocksFragment extends ListFragment implements WakelockDetailFra
     private boolean mSortByTime = false;
     private boolean mReloadOnShow = false;
 
-    public static WakelocksFragment newInstance(int sectionNumber) {
+    private boolean mTaskerMode = false;
+
+    private final static String ARG_TASKER_MODE = "taskerMode";
+
+    public static WakelocksFragment newInstance() {
+        return newInstance(false);
+    }
+
+    public static WakelocksFragment newInstance(boolean taskerMode) {
         WakelocksFragment fragment = new WakelocksFragment();
+        Bundle args = new Bundle();
+        args.putBoolean(ARG_TASKER_MODE, taskerMode);
+        fragment.setArguments(args);
+
         return fragment;
     }
 
@@ -67,6 +79,10 @@ public class WakelocksFragment extends ListFragment implements WakelockDetailFra
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (getArguments() != null) {
+            mTaskerMode = getArguments().getBoolean(ARG_TASKER_MODE);
+        }
 
         mAdapter = new WakelocksAdapter(getActivity(), UnbounceStatsCollection.getInstance().toWakelockArrayList(getActivity()));
         setListAdapter(mAdapter);
@@ -136,7 +152,7 @@ public class WakelocksFragment extends ListFragment implements WakelockDetailFra
         //Spin up the new Detail fragment.  Dig the custom animations.  Also put it on the back stack
         //so we can hit the back button and come back to the list.
         FragmentManager fragmentManager = getFragmentManager();
-        WakelockDetailFragment newFrag = WakelockDetailFragment.newInstance(startBounds.top, finalBounds.top, startBounds.bottom, finalBounds.bottom, (WakelockStats)mAdapter.getItem(position));
+        WakelockDetailFragment newFrag = WakelockDetailFragment.newInstance(startBounds.top, finalBounds.top, startBounds.bottom, finalBounds.bottom, (WakelockStats)mAdapter.getItem(position), mTaskerMode);
         newFrag.attachClearListener(this);
         fragmentManager.beginTransaction()
                 .setCustomAnimations(R.animator.expand_in, R.animator.noop, R.animator.noop, R.animator.expand_out)
@@ -144,7 +160,6 @@ public class WakelocksFragment extends ListFragment implements WakelockDetailFra
                 .add(R.id.container, newFrag, "wakelock_detail")
                 .addToBackStack(null)
                 .commit();
-
     }
 
     @Override
@@ -152,8 +167,10 @@ public class WakelocksFragment extends ListFragment implements WakelockDetailFra
         super.onHiddenChanged(hidden);
         //Remember the scroll pos so we can reinstate it
         if (!hidden) {
-            if (mListener != null)
+            if (mListener != null) {
                 mListener.onWakelocksSetTitle("Wakelocks");
+                mListener.onWakelocksSetTaskerTitle("Choose the wakelock to adjust.");
+            }
             if (mReloadOnShow) {
                 mReloadOnShow = false;
                 //We may have had a change in the data for this wakelock (such as the user resetting the counters).
@@ -225,6 +242,7 @@ public class WakelocksFragment extends ListFragment implements WakelockDetailFra
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         public void onWakelocksSetTitle(String id);
+        public void onWakelocksSetTaskerTitle(String id);
     }
 
 }

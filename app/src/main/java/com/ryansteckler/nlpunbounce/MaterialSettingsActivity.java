@@ -26,12 +26,6 @@ import com.ryansteckler.inappbilling.IabHelper;
 import com.ryansteckler.inappbilling.IabResult;
 import com.ryansteckler.inappbilling.Inventory;
 import com.ryansteckler.inappbilling.Purchase;
-import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import de.robv.android.xposed.XposedBridge;
 
 public class MaterialSettingsActivity extends Activity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks,
@@ -202,18 +196,18 @@ public class MaterialSettingsActivity extends Activity
         if (position == 0) {
             fragmentManager.beginTransaction()
                     .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, android.R.animator.fade_in, android.R.animator.fade_out)
-                    .replace(R.id.container, HomeFragment.newInstance(position + 1))
+                    .replace(R.id.container, HomeFragment.newInstance())
                     .commit();
         } else if (position == 1) {
             fragmentManager.beginTransaction()
                     .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, android.R.animator.fade_in, android.R.animator.fade_out)
-                    .replace(R.id.container, WakelocksFragment.newInstance(position + 1))
+                    .replace(R.id.container, WakelocksFragment.newInstance())
                     .addToBackStack("wakelocks")
                     .commit();
         } else if (position == 2) {
             fragmentManager.beginTransaction()
                     .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, android.R.animator.fade_in, android.R.animator.fade_out)
-                    .replace(R.id.container, AlarmsFragment.newInstance(position + 1))
+                    .replace(R.id.container, AlarmsFragment.newInstance())
                     .addToBackStack("alarms")
                     .commit();
         } else if (position == 3) {
@@ -266,6 +260,11 @@ public class MaterialSettingsActivity extends Activity
     }
 
     @Override
+    public void onWakelocksSetTaskerTitle(String id) {
+        //Ignore because we're not in Tasker mode.
+    }
+
+    @Override
     public void onHomeSetTitle(String title) {
         mTitle = title;
         restoreActionBar();
@@ -276,6 +275,11 @@ public class MaterialSettingsActivity extends Activity
     public void onWakelockDetailSetTitle(String title) {
         mTitle = title;
         restoreActionBar();
+    }
+
+    @Override
+    public void onWakelockDetailSetTaskerTitle(String title) {
+        //Do nothing because we're not in Tasker mode.
     }
 
     private void animateActionbarBackground(final int colorTo, final int durationInMs) {
@@ -307,10 +311,20 @@ public class MaterialSettingsActivity extends Activity
     }
 
     @Override
+    public void onAlarmDetailSetTaskerTitle(String title) {
+        //Do nothing because we're not in Tasker mode.
+    }
+
+    @Override
     public void onAlarmsSetTitle(String title) {
         mTitle = title;
         restoreActionBar();
         animateActionbarBackground(getResources().getColor(R.color.background_four), 400);
+    }
+
+    @Override
+    public void onAlarmsSetTaskerTitle(String title) {
+        //Do nothing because we're not in Tasker mode.
     }
 
 }

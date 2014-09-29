@@ -37,7 +37,7 @@ public class HomeFragment extends Fragment {
      * Returns a new instance of this fragment for the given section
      * number.
      */
-    public static HomeFragment newInstance(int sectionNumber) {
+    public static HomeFragment newInstance() {
         HomeFragment fragment = new HomeFragment();
         return fragment;
     }
