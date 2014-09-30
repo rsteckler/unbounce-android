@@ -33,7 +33,7 @@ import de.robv.android.xposed.XC_MethodHook;
 public class Wakelocks implements IXposedHookLoadPackage {
 
     private static final String TAG = "NlpUnbounce: ";
-    private static final String VERSION = "1.1.8rc2"; //This needs to be pulled from the manifest or gradle build.
+    private static final String VERSION = "1.1.9"; //This needs to be pulled from the manifest or gradle build.
     private HashMap<String, Long> mLastWakelockAttempts = null; //The last time each wakelock was allowed.
     private HashMap<String, Long> mLastAlarmAttempts = null; //The last time each alarm was allowed.
 
