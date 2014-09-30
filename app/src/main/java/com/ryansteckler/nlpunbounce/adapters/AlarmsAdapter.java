@@ -47,22 +47,15 @@ public class AlarmsAdapter extends ArrayAdapter {
 
     private void addCategories(ArrayList<AlarmStats> alarmStatList) {
         mCategoryBlockedIndex = 0;
-        mCategorySafeIndex = 0;
-        mCategoryUnknownIndex = 0;
-        mCategoryUnsafeIndex = 0;
+        mCategorySafeIndex = 1;
+        mCategoryUnknownIndex = 2;
+        mCategoryUnsafeIndex = 3;
 
         boolean foundSafe = false;
         boolean foundUnknown = false;
 
         Iterator<AlarmStats> iter = alarmStatList.iterator();
         while (iter.hasNext()) {
-            if (!foundSafe)
-                mCategorySafeIndex++;
-
-            if (!foundUnknown)
-                mCategoryUnknownIndex++;
-
-            mCategoryUnsafeIndex++;
 
             AlarmStats curStat = iter.next();
 
@@ -72,13 +65,20 @@ public class AlarmsAdapter extends ArrayAdapter {
 
             if (!foundUnknown && foundSafe && EventLookup.isSafe(curStat.getName()) == EventLookup.UNKNOWN) {
                 foundUnknown = true;
-                mCategoryUnknownIndex++; //to account for the previous category
             }
 
             if (foundUnknown && EventLookup.isSafe(curStat.getName()) == EventLookup.UNSAFE) {
-                mCategoryUnsafeIndex += 2; //to account for the previous two categories
                 break;
             }
+
+            if (!foundSafe)
+                mCategorySafeIndex++;
+
+            if (!foundUnknown)
+                mCategoryUnknownIndex++;
+
+            mCategoryUnsafeIndex++;
+
         }
     }
 

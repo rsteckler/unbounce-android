@@ -10,21 +10,29 @@ import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ryansteckler.nlpunbounce.helpers.SettingsHelper;
+import com.ryansteckler.nlpunbounce.models.BaseStats;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
+
+import java.util.HashMap;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -43,6 +51,12 @@ public class HomeFragment extends Fragment {
     }
 
     public HomeFragment() {
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -166,7 +180,18 @@ public class HomeFragment extends Fragment {
 
         updatePremiumUi();
 
+        //Register for stats updates
+        refreshReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                loadStatsFromSource(getView());
+            }
+        };
+
+        getActivity().registerReceiver(refreshReceiver, new IntentFilter(XposedReceiver.REFRESH_ACTION));
     }
+
+    private BroadcastReceiver refreshReceiver;
 
     @Override
     public void onHiddenChanged(boolean hidden) {
@@ -230,6 +255,35 @@ public class HomeFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        getActivity().getMenuInflater().inflate(R.menu.home, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_refresh) {
+            Intent intent = new Intent(XposedReceiver.REFRESH_ACTION);
+            try {
+                getActivity().sendBroadcast(intent);
+            } catch (IllegalStateException ise) {
+
+            }
+
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+    }
+
 
     /**
      * This interface must be implemented by activities that contain this

@@ -50,22 +50,15 @@ public class WakelocksAdapter extends ArrayAdapter {
     private void addCategories(ArrayList<WakelockStats> wakelockStatList) {
 
         mCategoryBlockedIndex = 0;
-        mCategorySafeIndex = 0;
-        mCategoryUnknownIndex = 0;
-        mCategoryUnsafeIndex = 0;
+        mCategorySafeIndex = 1;
+        mCategoryUnknownIndex = 2;
+        mCategoryUnsafeIndex = 3;
 
         boolean foundSafe = false;
         boolean foundUnknown = false;
 
         Iterator<WakelockStats> iter = wakelockStatList.iterator();
         while (iter.hasNext()) {
-            if (!foundSafe)
-                mCategorySafeIndex++;
-
-            if (!foundUnknown)
-                mCategoryUnknownIndex++;
-
-            mCategoryUnsafeIndex++;
 
             WakelockStats curStat = iter.next();
 
@@ -75,13 +68,20 @@ public class WakelocksAdapter extends ArrayAdapter {
 
             if (!foundUnknown && foundSafe && EventLookup.isSafe(curStat.getName()) == EventLookup.UNKNOWN) {
                 foundUnknown = true;
-                mCategoryUnknownIndex++; //to account for the previous category
             }
 
             if (foundUnknown && EventLookup.isSafe(curStat.getName()) == EventLookup.UNSAFE) {
-                mCategoryUnsafeIndex += 2; //to account for the previous two categories
                 break;
             }
+
+            if (!foundSafe)
+                mCategorySafeIndex++;
+
+            if (!foundUnknown)
+                mCategoryUnknownIndex++;
+
+            mCategoryUnsafeIndex++;
+
         }
     }
 
@@ -239,7 +239,8 @@ public class WakelocksAdapter extends ArrayAdapter {
 
     @Override
     public int getCount() {
-        return super.getCount() + 4; //4 categories
+        int adjustedCount = super.getCount() + 4; //4 categories
+        return adjustedCount;
     }
 
     public void sort(boolean byCount, boolean categorize) {
