@@ -33,8 +33,18 @@ public class XposedReceiver extends BroadcastReceiver {
                 collection.resetStats(context, statName);
             }
         } else if (action.equals("com.ryansteckler.nlpunbounce.REFRESH_STATS")) {
-//            UnbounceStatsCollection collection = UnbounceStatsCollection.getInstance();
-//            collection.resetStats(context);
+            //Save for consistency
+            UnbounceStatsCollection.getInstance().saveNow(context);
+
+            Intent refreshIntent = new Intent("com.ryansteckler.nlpunbounce.SEND_STATS");
+            //TODO:  add FLAG_RECEIVER_REGISTERED_ONLY_BEFORE_BOOT to the intent to avoid needing to catch
+            //      the IllegalStateException.  The flag value changed between 4.3 and 4.4  :/
+            refreshIntent.putExtra("stats", UnbounceStatsCollection.getInstance().getSerializableStats());
+            try {
+                context.sendBroadcast(refreshIntent);
+            } catch (IllegalStateException ise) {
+                //Ignore.  This is because boot hasn't completed yet.
+            }
         }
     }
 }

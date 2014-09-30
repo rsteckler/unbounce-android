@@ -569,14 +569,103 @@
 
                     </LinearLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:text="Thank you for your donation.  It means a lot to me.  I work hard in my limited free time to bring you better battery life.  When you donated, you made a difference to the project, and made a difference in my family's life.  You rock.  -Ryan"
-                        android:id="@+id/textviewKarma"
-                        style="@style/TextBody1"
-                        android:visibility="gone"
-                        android:padding="@dimen/card_internal_padding" />
+                        android:padding="@dimen/card_internal_padding"
+                        android:id="@+id/layoutDonateAgain"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Thank you for your donation.  It means a lot to me.  I work hard in my limited free time to bring you better battery life.  When you donated, you made a difference to the project, and made a difference in my family's life.  You rock.  \nI've been asked if people can further support the project after donation.  The buttons below let you donate further, but don't provide any additional features.\n-Ryan"
+                            style="@style/TextBody1"
+                            android:padding="@dimen/card_internal_padding" />
+
+                        <View style="@style/Divider"
+                            android:layout_marginBottom="@dimen/card_internal_padding" />
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/separator_pad"
+                            android:clickable="true"
+                            android:background="?android:attr/selectableItemBackground"
+                            android:id="@+id/buttonKarma1Again">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:text="A cup of coffee while I read the bug list"
+                                android:layout_weight="1"
+                                style="@style/TextBody1"
+                                android:gravity="center_vertical" />
+
+                            <ImageView
+                                android:layout_width="@dimen/sub_icon_size"
+                                android:layout_height="@dimen/sub_icon_size"
+                                android:src="@drawable/ic_donate_1"
+                                android:layout_gravity="right"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/separator_pad"
+                            android:layout_marginBottom="@dimen/separator_pad"
+                            android:clickable="true"
+                            android:background="?android:attr/selectableItemBackground"
+                            android:id="@+id/buttonKarma5Again">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:text="A latte while I code new features"
+                                android:gravity="center_vertical"
+                                android:layout_weight="1"
+                                style="@style/TextBody1" />
+
+                            <ImageView
+                                android:layout_width="@dimen/sub_icon_size"
+                                android:layout_height="@dimen/sub_icon_size"
+                                android:src="@drawable/ic_donate_5"
+                                android:layout_gravity="right"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/separator_pad"
+                            android:layout_marginBottom="@dimen/separator_pad"
+                            android:clickable="true"
+                            android:background="?android:attr/selectableItemBackground"
+                            android:id="@+id/buttonKarma10Again">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:text="A month of unlimited music!"
+                                android:gravity="center_vertical"
+                                android:layout_weight="1"
+                                style="@style/TextBody1" />
+
+                            <ImageView
+                                android:layout_width="@dimen/sub_icon_size"
+                                android:layout_height="@dimen/sub_icon_size"
+                                android:src="@drawable/ic_donate_10"
+                                android:layout_gravity="right"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
                 </FrameLayout>
 
             </LinearLayout>

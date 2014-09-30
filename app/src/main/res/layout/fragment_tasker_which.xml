@@ -15,14 +15,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Do you want to change settings for a Wakelock or an Alarm?"
+            android:text="Do you want to change settings for a Wakelock or an Alarm, or do you want to reset stats for your device?"
             style="@style/TextTitle"
             android:layout_marginBottom="@dimen/card_internal_padding" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="WAKELOCK"
+            android:text="CHANGE WAKELOCK"
             android:id="@+id/buttonTaskerWakelock"
             android:layout_marginTop="@dimen/card_internal_padding"
             android:background="@color/background_secondary"
@@ -31,11 +31,20 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ALARM"
+            android:text="CHANGE ALARM"
             android:id="@+id/buttonTaskerAlarm"
             android:background="@color/background_four"
             style="@style/TextTitleLight"
             android:layout_marginTop="@dimen/card_external_padding" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="RESET STATS"
+            android:id="@+id/buttonTaskerReset"
+            android:layout_marginTop="@dimen/card_external_padding"
+            style="@style/TextTitleLight"
+            android:background="@color/background_three" />
 
     </LinearLayout>
 </LinearLayout>

@@ -3,6 +3,7 @@ package com.ryansteckler.nlpunbounce.tasker;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -71,6 +72,16 @@ public class TaskerWhichFragment extends Fragment {
                     mListener.onTaskerWhichSetTitle("Choose the alarm to adjust.");
             }
         });
+
+        button = (Button) view.findViewById(R.id.buttonTaskerReset);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mListener != null) {
+                    mListener.onTaskerResetSelected();
+                }
+            }
+        });
     }
 
 
@@ -123,8 +134,7 @@ public class TaskerWhichFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        public void onTaskerWakelockSelected();
-        public void onTaskerAlarmSelected();
+        public void onTaskerResetSelected();
         public void onTaskerWhichSetTitle(String title);
     }
 
