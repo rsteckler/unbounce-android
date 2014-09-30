@@ -138,9 +138,9 @@ public class MaterialSettingsActivity extends Activity
 
     private void updateDonationUi() {
         if (isPremium()) {
-            TextView textview = (TextView) findViewById(R.id.textviewKarma);
-            if (textview != null)
-                textview.setVisibility(View.VISIBLE);
+            View againView = (View) findViewById(R.id.layoutDonateAgain);
+            if (againView != null)
+                againView.setVisibility(View.VISIBLE);
             View donateView = (View) findViewById(R.id.layoutDonate);
             if (donateView != null)
                 donateView.setVisibility(View.GONE);
@@ -179,6 +179,9 @@ public class MaterialSettingsActivity extends Activity
                 Toast.makeText(MaterialSettingsActivity.this, "Thank you SO much for donating!  -Ryan", Toast.LENGTH_LONG).show();
                 mIsPremium = true;
                 updateDonationUi();
+                if (purchase.getSku().contains("consumable")) {
+                    mHelper.consumeAsync(purchase, mConsumeFinishedListener);
+                }
             }
             else
             {
@@ -187,6 +190,11 @@ public class MaterialSettingsActivity extends Activity
 
         }
 
+        IabHelper.OnConsumeFinishedListener mConsumeFinishedListener = new IabHelper.OnConsumeFinishedListener() {
+            public void onConsumeFinished(Purchase purchase, IabResult result) {
+                //Do nothing
+            }
+        };
     };
 
     @Override

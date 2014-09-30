@@ -237,11 +237,17 @@ public class TaskerActivity extends Activity
     }
 
     @Override
-    public void onTaskerWakelockSelected() {
-    }
+    public void onTaskerResetSelected() {
+        Bundle taskerBundle = new Bundle();
+        taskerBundle.putString(BUNDLE_TYPE, "reset");
+        String blurb = "Reset stats";
 
-    @Override
-    public void onTaskerAlarmSelected() {
+        final Intent resultIntent = new Intent();
+        resultIntent.putExtra(EXTRA_BUNDLE, taskerBundle);
+        resultIntent.putExtra(EXTRA_BLURB, blurb);
+        setResult(RESULT_OK, resultIntent);
+        finish();
+
     }
 
     @Override

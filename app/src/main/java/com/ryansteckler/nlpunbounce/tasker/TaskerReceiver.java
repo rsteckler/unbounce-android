@@ -7,6 +7,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.ryansteckler.nlpunbounce.MaterialSettingsActivity;
+import com.ryansteckler.nlpunbounce.XposedReceiver;
+import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
 
 public class TaskerReceiver extends BroadcastReceiver {
     public TaskerReceiver() {
@@ -19,19 +21,28 @@ public class TaskerReceiver extends BroadcastReceiver {
             Bundle savedBundle = intent.getBundleExtra(TaskerActivity.EXTRA_BUNDLE);
             if (savedBundle != null) {
                 String type = savedBundle.getString(TaskerActivity.BUNDLE_TYPE);
-                long seconds = savedBundle.getLong(TaskerActivity.BUNDLE_SECONDS);
-                boolean enabled = savedBundle.getBoolean(TaskerActivity.BUNDLE_ENABLED);
-                String name = savedBundle.getString(TaskerActivity.BUNDLE_NAME);
+                if (type.equals("reset")) {
+                    Intent resetIntent = new Intent(XposedReceiver.RESET_ACTION);
+                    try {
+                        context.sendBroadcast(resetIntent);
+                    } catch (IllegalStateException ise) {
 
-                //set the prefs appropriately.
-                SharedPreferences prefs = context.getSharedPreferences("com.ryansteckler.nlpunbounce" + "_preferences", Context.MODE_WORLD_READABLE);
-                String enabledName = type + "_" + name + "_enabled";
-                String secondsName = type + "_" + name + "_seconds";
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putBoolean(enabledName, enabled);
-                editor.putLong(secondsName, seconds);
-                editor.commit();
+                    }
 
+                } else {
+                    long seconds = savedBundle.getLong(TaskerActivity.BUNDLE_SECONDS);
+                    boolean enabled = savedBundle.getBoolean(TaskerActivity.BUNDLE_ENABLED);
+                    String name = savedBundle.getString(TaskerActivity.BUNDLE_NAME);
+
+                    //set the prefs appropriately.
+                    SharedPreferences prefs = context.getSharedPreferences("com.ryansteckler.nlpunbounce" + "_preferences", Context.MODE_WORLD_READABLE);
+                    String enabledName = type + "_" + name + "_enabled";
+                    String secondsName = type + "_" + name + "_seconds";
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putBoolean(enabledName, enabled);
+                    editor.putLong(secondsName, seconds);
+                    editor.commit();
+                }
             }
 
         }

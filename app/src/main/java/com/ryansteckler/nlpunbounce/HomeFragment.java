@@ -139,6 +139,31 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        LinearLayout layoutAgain = (LinearLayout) view.findViewById(R.id.buttonKarma1Again);
+        layoutAgain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MaterialSettingsActivity)getActivity()).mHelper.launchPurchaseFlow(getActivity(), "donate_1_consumable", 1, ((MaterialSettingsActivity)getActivity()).mPurchaseFinishedListener, "1");
+            }
+        });
+
+        layoutAgain = (LinearLayout) view.findViewById(R.id.buttonKarma5Again);
+        layoutAgain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MaterialSettingsActivity)getActivity()).mHelper.launchPurchaseFlow(getActivity(), "donate_5_consumable", 5, ((MaterialSettingsActivity)getActivity()).mPurchaseFinishedListener, "5");
+            }
+        });
+
+        layoutAgain = (LinearLayout) view.findViewById(R.id.buttonKarma10Again);
+        layoutAgain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MaterialSettingsActivity)getActivity()).mHelper.launchPurchaseFlow(getActivity(), "donate_10_consumable", 10, ((MaterialSettingsActivity)getActivity()).mPurchaseFinishedListener, "10");
+            }
+        });
+
+
         updatePremiumUi();
 
     }
@@ -154,8 +179,8 @@ public class HomeFragment extends Fragment {
 
     private void updatePremiumUi() {
         if (((MaterialSettingsActivity)getActivity()).isPremium()) {
-            TextView textview = (TextView) getActivity().findViewById(R.id.textviewKarma);
-            textview.setVisibility(View.VISIBLE);
+            View againView = (View) getActivity().findViewById(R.id.layoutDonateAgain);
+            againView.setVisibility(View.VISIBLE);
             View donateView = (View) getActivity().findViewById(R.id.layoutDonate);
             donateView.setVisibility(View.GONE);
         }
