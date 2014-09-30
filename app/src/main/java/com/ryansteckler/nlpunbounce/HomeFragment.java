@@ -57,6 +57,22 @@ public class HomeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
+        //Register for stats updates
+        refreshReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                loadStatsFromSource(getView());
+            }
+        };
+        getActivity().registerReceiver(refreshReceiver, new IntentFilter(XposedReceiver.REFRESH_ACTION));
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().unregisterReceiver(refreshReceiver);
     }
 
     @Override
@@ -180,15 +196,7 @@ public class HomeFragment extends Fragment {
 
         updatePremiumUi();
 
-        //Register for stats updates
-        refreshReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                loadStatsFromSource(getView());
-            }
-        };
-
-        getActivity().registerReceiver(refreshReceiver, new IntentFilter(XposedReceiver.REFRESH_ACTION));
+        requestRefresh();
     }
 
     private BroadcastReceiver refreshReceiver;
@@ -267,16 +275,20 @@ public class HomeFragment extends Fragment {
         int id = item.getItemId();
 
         if (id == R.id.action_refresh) {
-            Intent intent = new Intent(XposedReceiver.REFRESH_ACTION);
-            try {
-                getActivity().sendBroadcast(intent);
-            } catch (IllegalStateException ise) {
-
-            }
+            requestRefresh();
 
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void requestRefresh() {
+        Intent intent = new Intent(XposedReceiver.REFRESH_ACTION);
+        try {
+            getActivity().sendBroadcast(intent);
+        } catch (IllegalStateException ise) {
+
+        }
     }
 
     @Override

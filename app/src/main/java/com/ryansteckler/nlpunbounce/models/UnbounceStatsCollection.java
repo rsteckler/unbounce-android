@@ -28,7 +28,7 @@ public class UnbounceStatsCollection implements Serializable {
     final private static String STATS_FILENAME = "nlpunbounce.stats";
     HashMap<String, BaseStats> mStats = null;
     long mLastSave = 0;
-    long mSaveTimeFrequency = 15000; //Save every 15 seconds
+    long mSaveTimeFrequency = 60000; //Save every 60 seconds
 
     private UnbounceStatsCollection(){};
     private static UnbounceStatsCollection mInstance = null;
