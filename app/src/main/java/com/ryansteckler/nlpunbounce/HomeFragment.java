@@ -18,6 +18,8 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -26,8 +28,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.ryansteckler.nlpunbounce.helpers.NetworkHelper;
 import com.ryansteckler.nlpunbounce.helpers.SettingsHelper;
 import com.ryansteckler.nlpunbounce.models.BaseStats;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
@@ -65,7 +69,8 @@ public class HomeFragment extends Fragment {
                 loadStatsFromSource(getView());
             }
         };
-        getActivity().registerReceiver(refreshReceiver, new IntentFilter(XposedReceiver.REFRESH_ACTION));
+        //Register when new stats come in.
+        getActivity().registerReceiver(refreshReceiver, new IntentFilter(ActivityReceiver.SEND_STATS_ACTION));
 
     }
 
@@ -195,7 +200,21 @@ public class HomeFragment extends Fragment {
             }
         });
 
-
+        textView = (TextView) view.findViewById(R.id.buttonHelpFurther);
+        final LinearLayout expanded = (LinearLayout) view.findViewById(R.id.layoutExpandedDonateAgain);
+        final ScrollView scroll = (ScrollView) view.findViewById(R.id.scrollView);
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                expanded.setVisibility(View.VISIBLE);
+                scroll.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        scroll.fullScroll(View.FOCUS_DOWN);
+                    }
+                });
+            }
+        });
         updatePremiumUi();
 
         requestRefresh();
@@ -221,9 +240,9 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    private void loadStatsFromSource(View view) {
-        UnbounceStatsCollection stats = UnbounceStatsCollection.getInstance();
-        Context c = getActivity();
+    private void loadStatsFromSource(final View view) {
+        final UnbounceStatsCollection stats = UnbounceStatsCollection.getInstance();
+        final Context c = getActivity();
         String duration = stats.getDurationAllowedFormatted(c, UnbounceStatsCollection.STAT_CURRENT);
         //Wakelocks
         TextView textView = (TextView)view.findViewById(R.id.textLocalWakeTimeAllowed);
@@ -243,22 +262,28 @@ public class HomeFragment extends Fragment {
         textView = (TextView)view.findViewById(R.id.textLocalAlarmsBlocked);
         textView.setText(String.valueOf(stats.getTotalBlockAlarmCount(c, UnbounceStatsCollection.STAT_CURRENT)));
 
-        //Global wakelocks
-        textView = (TextView)view.findViewById(R.id.textGlobalWakelockDurationAllowed);
-        textView.setText(stats.getDurationAllowedFormatted(c, UnbounceStatsCollection.STAT_GLOBAL));
-        textView = (TextView)view.findViewById(R.id.textGlobalWakelockAllowed);
-        textView.setText(String.valueOf(stats.getTotalAllowedWakelockCount(c, UnbounceStatsCollection.STAT_GLOBAL)));
-        textView = (TextView)view.findViewById(R.id.textGlobalWakelockBlocked);
-        textView.setText(String.valueOf(stats.getTotalBlockWakelockCount(c, UnbounceStatsCollection.STAT_GLOBAL)));
-        textView = (TextView)view.findViewById(R.id.textGlobalWakelockDurationBlocked);
-        textView.setText(stats.getDurationBlockedFormatted(c, UnbounceStatsCollection.STAT_GLOBAL));
+        //Global wakelocks.
+        //Kick off a refresh
+        stats.getStatsFromNetwork(c, new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                TextView textView = (TextView)view.findViewById(R.id.textGlobalWakelockDurationAllowed);
+                textView.setText(stats.getDurationAllowedFormatted(c, UnbounceStatsCollection.STAT_GLOBAL));
+                textView = (TextView)view.findViewById(R.id.textGlobalWakelockAllowed);
+                textView.setText(String.valueOf(stats.getTotalAllowedWakelockCount(c, UnbounceStatsCollection.STAT_GLOBAL)));
+                textView = (TextView)view.findViewById(R.id.textGlobalWakelockBlocked);
+                textView.setText(String.valueOf(stats.getTotalBlockWakelockCount(c, UnbounceStatsCollection.STAT_GLOBAL)));
+                textView = (TextView)view.findViewById(R.id.textGlobalWakelockDurationBlocked);
+                textView.setText(stats.getDurationBlockedFormatted(c, UnbounceStatsCollection.STAT_GLOBAL));
 
-        //Global Alarms
-        textView = (TextView)view.findViewById(R.id.textGlobalAlarmAllowed);
-        textView.setText(String.valueOf(stats.getTotalAllowedAlarmCount(c, UnbounceStatsCollection.STAT_GLOBAL)));
-        textView = (TextView)view.findViewById(R.id.textGlobalAlarmBlocked);
-        textView.setText(String.valueOf(stats.getTotalBlockAlarmCount(c, UnbounceStatsCollection.STAT_GLOBAL)));
+                //Global Alarms
+                textView = (TextView)view.findViewById(R.id.textGlobalAlarmAllowed);
+                textView.setText(String.valueOf(stats.getTotalAllowedAlarmCount(c, UnbounceStatsCollection.STAT_GLOBAL)));
+                textView = (TextView)view.findViewById(R.id.textGlobalAlarmBlocked);
+                textView.setText(String.valueOf(stats.getTotalBlockAlarmCount(c, UnbounceStatsCollection.STAT_GLOBAL)));
 
+            }
+        });
     }
 
     @Override

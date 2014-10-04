@@ -25,7 +25,7 @@ public class XposedReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
-        if (action.equals("com.ryansteckler.nlpunbounce.RESET_STATS")) {
+        if (action.equals(RESET_ACTION)) {
             String statName = intent.getStringExtra(STAT_NAME);
             int statType = intent.getIntExtra(STAT_TYPE, -1);
             UnbounceStatsCollection collection = UnbounceStatsCollection.getInstance();
@@ -34,8 +34,8 @@ public class XposedReceiver extends BroadcastReceiver {
             } else {
                 collection.resetLocalStats(statName);
             }
-        } else if (action.equals("com.ryansteckler.nlpunbounce.REFRESH_STATS")) {
-            Intent refreshIntent = new Intent("com.ryansteckler.nlpunbounce.SEND_STATS");
+        } else if (action.equals(REFRESH_ACTION)) {
+            Intent refreshIntent = new Intent(ActivityReceiver.SEND_STATS_ACTION);
             //TODO:  add FLAG_RECEIVER_REGISTERED_ONLY_BEFORE_BOOT to the intent to avoid needing to catch
             //      the IllegalStateException.  The flag value changed between 4.3 and 4.4  :/
             refreshIntent.putExtra("stats", UnbounceStatsCollection.getInstance().getSerializableStats(UnbounceStatsCollection.STAT_CURRENT));
@@ -47,6 +47,7 @@ public class XposedReceiver extends BroadcastReceiver {
             } catch (IllegalStateException ise) {
                 //Ignore.  This is because boot hasn't completed yet.
             }
+
         }
     }
 }

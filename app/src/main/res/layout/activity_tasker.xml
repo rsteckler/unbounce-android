@@ -23,11 +23,12 @@
                 android:text="Welcome to Unbounce's Tasker plugin."
                 android:id="@+id/textTaskerHeader"
                 style="@style/TextTitle"
-                android:gravity="left" />
+                android:gravity="left"
+                android:layout_weight=".9" />
 
             <LinearLayout
                 android:orientation="horizontal"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:gravity="right">
 

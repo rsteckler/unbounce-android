@@ -52,8 +52,8 @@ public class UnbounceStatsCollection implements Serializable {
 
     long mLastSave = 0;
     long mLastPush = 0;
-    long mSaveTimeFrequency = 20000; //Save every ten minutes TODO fix these
-    long mPushTimeFrequency = 20000; //Push every 24 hours TODO fix these
+    long mSaveTimeFrequency = 600000; //Save every ten minutes
+    long mPushTimeFrequency = 86400000; //Push every 24 hours
 
     private static UnbounceStatsCollection mInstance = null;
 
@@ -559,7 +559,7 @@ public class UnbounceStatsCollection implements Serializable {
 
                 long timeSinceLastPush = now - mLastPush;
 
-                if (timeSinceLastPush > mPushTimeFrequency) {
+                if (timeSinceLastPush > mPushTimeFrequency || mGlobalStats.size() == 0) {
                     //Push now
                     pushStatsToNetwork(context);
                 }
@@ -722,5 +722,25 @@ public class UnbounceStatsCollection implements Serializable {
                 });
             }
         }
+    }
+
+    public void getStatsFromNetwork(final Context context, final Handler clientHandler) {
+        //Push the JSON to the server
+        NetworkHelper.getFromServer(URL_STATS, new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                if (msg.what == 1) {
+                    //Update global stats
+                    String globalStats = msg.getData().getString("global_stats");
+                    if (globalStats != null) {
+                        Type globalType = new TypeToken<HashMap<String, Long>>() {
+                        }.getType();
+                        final Gson gson = new GsonBuilder().create();
+                        mGlobalStats = gson.fromJson(globalStats, globalType);
+                    }
+                }
+                clientHandler.sendEmptyMessage(1);
+            }
+        });
     }
 }

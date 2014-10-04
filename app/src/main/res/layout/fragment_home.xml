@@ -26,6 +26,7 @@
                 android:layout_height="fill_parent"
                 android:layout_marginLeft="@dimen/card_external_padding"
                 android:layout_marginRight="@dimen/card_external_padding"
+                android:visibility="visible"
                 android:background="@drawable/card_background"
                 android:layout_marginTop="@dimen/card_external_padding">
 
@@ -108,7 +109,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:text="26d 17h 47m 39s"
+                            android:text="Loading..."
                             android:id="@+id/textRunningSince"
                             android:gravity="center_vertical"
                             style="@style/TextBody1Fade" />
@@ -132,7 +133,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:text="26d 17h 47m 39s"
+                            android:text="Loading..."
                             android:id="@+id/textLocalWakeTimeAllowed"
                             android:gravity="center_vertical"
                             style="@style/TextBody1Fade" />
@@ -156,7 +157,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:text="52d 4h 41m 36s"
+                            android:text="Loading..."
                             android:id="@+id/textLocalWakeTimeBlocked"
                             android:gravity="center_vertical"
                             style="@style/TextBody1Fade" />
@@ -180,7 +181,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:text="4,793,202"
+                            android:text="Loading..."
                             android:id="@+id/textLocalWakeAcquired"
                             android:gravity="center_vertical"
                             style="@style/TextBody1Fade" />
@@ -204,7 +205,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:text="953,664"
+                            android:text="Loading..."
                             android:id="@+id/textLocalWakeBlocked"
                             android:gravity="center_vertical"
                             style="@style/TextBody1Fade" />
@@ -228,7 +229,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:text="87,499"
+                            android:text="Loading..."
                             android:id="@+id/textLocalAlarmsAcquired"
                             android:gravity="center_vertical"
                             style="@style/TextBody1Fade" />
@@ -252,7 +253,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:text="43,224"
+                            android:text="Loading..."
                             android:id="@+id/textLocalAlarmsBlocked"
                             android:gravity="center_vertical"
                             style="@style/TextBody1Fade" />
@@ -271,6 +272,7 @@
                 android:layout_marginRight="@dimen/card_external_padding"
                 android:background="@drawable/card_background"
                 android:layout_marginTop="@dimen/card_external_padding"
+                android:visibility="visible"
                 android:id="@+id/linearLayout">
 
                 <LinearLayout
@@ -336,7 +338,7 @@
                             style="@style/TextBody1Fade"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:text="26d 17h 47m 39s"
+                            android:text="Loading..."
                             android:id="@+id/textGlobalWakelockDurationAllowed"
                             android:gravity="center_vertical" />
                     </LinearLayout>
@@ -358,7 +360,7 @@
                             style="@style/TextBody1Fade"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:text="52d 4h 41m 36s"
+                            android:text="Loading..."
                             android:id="@+id/textGlobalWakelockDurationBlocked"
                             android:gravity="center_vertical" />
                     </LinearLayout>
@@ -380,7 +382,7 @@
                             style="@style/TextBody1Fade"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:text="4,793,202"
+                            android:text="Loading..."
                             android:id="@+id/textGlobalWakelockAllowed"
                             android:gravity="center_vertical" />
                     </LinearLayout>
@@ -402,7 +404,7 @@
                             style="@style/TextBody1Fade"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:text="953,664"
+                            android:text="Loading..."
                             android:id="@+id/textGlobalWakelockBlocked"
                             android:gravity="center_vertical" />
                     </LinearLayout>
@@ -424,7 +426,7 @@
                             style="@style/TextBody1Fade"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:text="87,499"
+                            android:text="Loading..."
                             android:id="@+id/textGlobalAlarmAllowed"
                             android:gravity="center_vertical" />
                     </LinearLayout>
@@ -446,7 +448,7 @@
                             style="@style/TextBody1Fade"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:text="43,224"
+                            android:text="Loading..."
                             android:id="@+id/textGlobalAlarmBlocked"
                             android:gravity="center_vertical" />
                     </LinearLayout>
@@ -460,7 +462,8 @@
                 android:background="@drawable/card_background"
                 android:layout_marginTop="@dimen/card_external_padding"
                 android:layout_marginRight="@dimen/card_external_padding"
-                android:layout_marginLeft="@dimen/card_external_padding">
+                android:layout_marginLeft="@dimen/card_external_padding"
+                android:layout_marginBottom="@dimen/card_external_padding">
 
                 <LinearLayout
                     android:orientation="horizontal"
@@ -605,95 +608,119 @@
                         android:orientation="vertical"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/card_internal_padding"
                         android:id="@+id/layoutDonateAgain"
+                        android:padding="@dimen/card_internal_padding"
                         android:visibility="gone">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Thank you for your donation.  It means a lot to me.  I work hard in my limited free time to bring you better battery life.  When you donated, you made a difference to the project, and made a difference in my family's life.  You rock.  \nI've been asked if people can further support the project after donation.  The buttons below let you donate further, but don't provide any additional features.\n-Ryan"
-                            style="@style/TextBody1"
-                            android:padding="@dimen/card_internal_padding" />
+                            android:text="Thank you for your donation.  It means a lot to me.  I work hard in my limited free time to bring you better battery life.  When you donated, you made a difference to the project, and made a difference in my family's life.  You rock."
+                            style="@style/TextBody1" />
 
-                        <View style="@style/Divider"
-                            android:layout_marginBottom="@dimen/card_internal_padding" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="HOW CAN I HELP FURTHER?"
+                            android:id="@+id/buttonHelpFurther"
+                            android:gravity="center_horizontal"
+                            style="@style/TextCaption"
+                            android:paddingTop="@dimen/card_internal_padding"
+                            android:paddingBottom="@dimen/card_internal_padding" />
 
                         <LinearLayout
-                            android:orientation="horizontal"
+                            android:orientation="vertical"
                             android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/separator_pad"
-                            android:clickable="true"
-                            android:background="?android:attr/selectableItemBackground"
-                            android:id="@+id/buttonKarma1Again">
+                            android:layout_height="fill_parent"
+                            android:id="@+id/layoutExpandedDonateAgain"
+                            android:visibility="gone">
 
                             <TextView
                                 android:layout_width="wrap_content"
-                                android:layout_height="fill_parent"
-                                android:text="A cup of coffee while I read the bug list"
-                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:text="People have asked how they can contribute beyond their initial donation.  The buttons below let you donate further, but don't provide any additional features.  Thank you so much for supporting Unbounce!"
                                 style="@style/TextBody1"
-                                android:gravity="center_vertical" />
+                                android:paddingBottom="@dimen/card_external_padding" />
 
-                            <ImageView
-                                android:layout_width="@dimen/sub_icon_size"
-                                android:layout_height="@dimen/sub_icon_size"
-                                android:src="@drawable/ic_donate_1"
-                                android:layout_gravity="right"/>
+                            <View style="@style/Divider"
+                                android:layout_marginBottom="@dimen/card_external_padding" />
 
-                        </LinearLayout>
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/separator_pad"
+                                android:clickable="true"
+                                android:background="?android:attr/selectableItemBackground"
+                                android:id="@+id/buttonKarma1Again">
 
-                        <LinearLayout
-                            android:orientation="horizontal"
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/separator_pad"
-                            android:layout_marginBottom="@dimen/separator_pad"
-                            android:clickable="true"
-                            android:background="?android:attr/selectableItemBackground"
-                            android:id="@+id/buttonKarma5Again">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="fill_parent"
+                                    android:text="A cup of coffee while I read the bug list"
+                                    android:layout_weight="1"
+                                    style="@style/TextBody1"
+                                    android:gravity="center_vertical" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="fill_parent"
-                                android:text="A latte while I code new features"
-                                android:gravity="center_vertical"
-                                android:layout_weight="1"
-                                style="@style/TextBody1" />
+                                <ImageView
+                                    android:layout_width="@dimen/sub_icon_size"
+                                    android:layout_height="@dimen/sub_icon_size"
+                                    android:src="@drawable/ic_donate_1"
+                                    android:layout_gravity="right"/>
 
-                            <ImageView
-                                android:layout_width="@dimen/sub_icon_size"
-                                android:layout_height="@dimen/sub_icon_size"
-                                android:src="@drawable/ic_donate_5"
-                                android:layout_gravity="right"/>
+                            </LinearLayout>
 
-                        </LinearLayout>
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/separator_pad"
+                                android:layout_marginBottom="@dimen/separator_pad"
+                                android:clickable="true"
+                                android:background="?android:attr/selectableItemBackground"
+                                android:id="@+id/buttonKarma5Again">
 
-                        <LinearLayout
-                            android:orientation="horizontal"
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/separator_pad"
-                            android:layout_marginBottom="@dimen/separator_pad"
-                            android:clickable="true"
-                            android:background="?android:attr/selectableItemBackground"
-                            android:id="@+id/buttonKarma10Again">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="fill_parent"
+                                    android:text="A latte while I code new features"
+                                    android:gravity="center_vertical"
+                                    android:layout_weight="1"
+                                    style="@style/TextBody1" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="fill_parent"
-                                android:text="A month of unlimited music!"
-                                android:gravity="center_vertical"
-                                android:layout_weight="1"
-                                style="@style/TextBody1" />
+                                <ImageView
+                                    android:layout_width="@dimen/sub_icon_size"
+                                    android:layout_height="@dimen/sub_icon_size"
+                                    android:src="@drawable/ic_donate_5"
+                                    android:layout_gravity="right"/>
 
-                            <ImageView
-                                android:layout_width="@dimen/sub_icon_size"
-                                android:layout_height="@dimen/sub_icon_size"
-                                android:src="@drawable/ic_donate_10"
-                                android:layout_gravity="right"/>
+                            </LinearLayout>
 
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/separator_pad"
+                                android:layout_marginBottom="@dimen/separator_pad"
+                                android:clickable="true"
+                                android:background="?android:attr/selectableItemBackground"
+                                android:id="@+id/buttonKarma10Again">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="fill_parent"
+                                    android:text="A month of unlimited music!"
+                                    android:gravity="center_vertical"
+                                    android:layout_weight="1"
+                                    style="@style/TextBody1" />
+
+                                <ImageView
+                                    android:layout_width="@dimen/sub_icon_size"
+                                    android:layout_height="@dimen/sub_icon_size"
+                                    android:src="@drawable/ic_donate_10"
+                                    android:layout_gravity="right"/>
+
+                            </LinearLayout>
                         </LinearLayout>
 
                     </LinearLayout>
