@@ -20,26 +20,28 @@ public class XposedReceiver extends BroadcastReceiver {
     public final static String RESET_ACTION = "com.ryansteckler.nlpunbounce.RESET_STATS";
     public final static String REFRESH_ACTION = "com.ryansteckler.nlpunbounce.REFRESH_STATS";
     public final static String STAT_NAME = "stat_name";
+    public final static String STAT_TYPE = "stat_type";
 
     @Override
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
         if (action.equals("com.ryansteckler.nlpunbounce.RESET_STATS")) {
             String statName = intent.getStringExtra(STAT_NAME);
+            int statType = intent.getIntExtra(STAT_TYPE, -1);
             UnbounceStatsCollection collection = UnbounceStatsCollection.getInstance();
             if (statName == null) {
-                collection.resetStats(context);
+                collection.resetLocalStats(statType);
             } else {
-                collection.resetStats(context, statName);
+                collection.resetLocalStats(statName);
             }
         } else if (action.equals("com.ryansteckler.nlpunbounce.REFRESH_STATS")) {
-            //Save for consistency
-            UnbounceStatsCollection.getInstance().saveNow(context);
-
             Intent refreshIntent = new Intent("com.ryansteckler.nlpunbounce.SEND_STATS");
             //TODO:  add FLAG_RECEIVER_REGISTERED_ONLY_BEFORE_BOOT to the intent to avoid needing to catch
             //      the IllegalStateException.  The flag value changed between 4.3 and 4.4  :/
-            refreshIntent.putExtra("stats", UnbounceStatsCollection.getInstance().getSerializableStats());
+            refreshIntent.putExtra("stats", UnbounceStatsCollection.getInstance().getSerializableStats(UnbounceStatsCollection.STAT_CURRENT));
+            refreshIntent.putExtra("stat_type", UnbounceStatsCollection.STAT_CURRENT);
+            refreshIntent.putExtra("running_since", UnbounceStatsCollection.getInstance().getRunningSince());
+
             try {
                 context.sendBroadcast(refreshIntent);
             } catch (IllegalStateException ise) {

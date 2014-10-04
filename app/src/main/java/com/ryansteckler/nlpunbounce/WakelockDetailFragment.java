@@ -167,6 +167,7 @@ public class WakelockDetailFragment extends Fragment {
             public void onClick(View resetView) {
                 //Reset stats
                 Intent intent = new Intent(XposedReceiver.RESET_ACTION);
+                intent.putExtra(XposedReceiver.STAT_TYPE, UnbounceStatsCollection.STAT_CURRENT);
                 intent.putExtra(XposedReceiver.STAT_NAME, mStat.getName());
                 try {
                     getActivity().sendBroadcast(intent);

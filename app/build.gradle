@@ -1,6 +1,15 @@
 //Change version here + bump version code.  In Hooks/wakelocks.java, and in xml/preferences.xml
 apply plugin: 'com.android.application'
 
+buildscript {
+    repositories {
+        maven { url 'http://repo1.maven.org/maven2' }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.12.+'
+    }
+}
+
 android {
     compileSdkVersion 20
     buildToolsVersion '20.0.0'
@@ -21,9 +30,13 @@ android {
     }
 }
 
+repositories {
+    mavenCentral()
+}
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     provided files('XposedBridgeApi-54.jar')
     compile 'com.google.android.gms:play-services:+'
+    compile 'com.google.code.gson:gson:2.3'
 }

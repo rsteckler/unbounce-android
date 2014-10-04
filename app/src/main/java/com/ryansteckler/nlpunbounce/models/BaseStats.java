@@ -14,6 +14,16 @@ public class BaseStats implements Serializable {
     private String mName;
     private boolean mBlockingEnabled;
 
+    private String mType;
+
+    public String getType() {
+        return mType;
+    }
+
+    protected void setType(String type) {
+        mType = type;
+    }
+
     public String getName() {
         return mName;
     }

@@ -14,7 +14,7 @@
     <string name="action_settings">Settings</string>
     <string name="action_reset_stats">Reset Stats</string>
     <string name="donate_text">KARMA</string>
-    <string name="global_text">GLOBAL</string>
+    <string name="global_text">GLOBAL STATS</string>
     <string name="local_text">DEVICE STATS</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="app_font_family">sans-serif</string>

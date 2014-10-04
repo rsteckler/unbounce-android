@@ -91,14 +91,16 @@ public class HomeFragment extends Fragment {
                         .setMessage("This will reset stats for all of your wakelocks!")
                         .setPositiveButton("DELETE", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
+                                UnbounceStatsCollection.getInstance().resetStats(getActivity(), UnbounceStatsCollection.STAT_CURRENT);
+                                loadStatsFromSource(view);
+
                                 Intent intent = new Intent(XposedReceiver.RESET_ACTION);
+                                intent.putExtra(XposedReceiver.STAT_TYPE, UnbounceStatsCollection.STAT_CURRENT);
                                 try {
                                     getActivity().sendBroadcast(intent);
                                 } catch (IllegalStateException ise) {
 
                                 }
-                                UnbounceStatsCollection.getInstance().resetLocalStats();
-                                loadStatsFromSource(view);
                             }
                         })
                         .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
@@ -221,21 +223,41 @@ public class HomeFragment extends Fragment {
 
     private void loadStatsFromSource(View view) {
         UnbounceStatsCollection stats = UnbounceStatsCollection.getInstance();
-        String duration = stats.getDurationAllowedFormatted(getActivity());
+        Context c = getActivity();
+        String duration = stats.getDurationAllowedFormatted(c, UnbounceStatsCollection.STAT_CURRENT);
+        //Wakelocks
         TextView textView = (TextView)view.findViewById(R.id.textLocalWakeTimeAllowed);
         textView.setText(duration);
+        textView = (TextView)view.findViewById(R.id.textRunningSince);
+        textView.setText(stats.getRunningSinceFormatted());
         textView = (TextView)view.findViewById(R.id.textLocalWakeAcquired);
-        textView.setText(String.valueOf(stats.getTotalAllowedWakelockCount(getActivity())));
+        textView.setText(String.valueOf(stats.getTotalAllowedWakelockCount(c, UnbounceStatsCollection.STAT_CURRENT)));
         textView = (TextView)view.findViewById(R.id.textLocalWakeBlocked);
-        textView.setText(String.valueOf(stats.getTotalBlockWakelockCount(getActivity())));
+        textView.setText(String.valueOf(stats.getTotalBlockWakelockCount(c, UnbounceStatsCollection.STAT_CURRENT)));
         textView = (TextView)view.findViewById(R.id.textLocalWakeTimeBlocked);
-        textView.setText(stats.getDurationBlockedFormatted(getActivity()));
+        textView.setText(stats.getDurationBlockedFormatted(c, UnbounceStatsCollection.STAT_CURRENT));
 
         //Alarms
         textView = (TextView)view.findViewById(R.id.textLocalAlarmsAcquired);
-        textView.setText(String.valueOf(stats.getTotalAllowedAlarmCount(getActivity())));
+        textView.setText(String.valueOf(stats.getTotalAllowedAlarmCount(c, UnbounceStatsCollection.STAT_CURRENT)));
         textView = (TextView)view.findViewById(R.id.textLocalAlarmsBlocked);
-        textView.setText(String.valueOf(stats.getTotalBlockAlarmCount(getActivity())));
+        textView.setText(String.valueOf(stats.getTotalBlockAlarmCount(c, UnbounceStatsCollection.STAT_CURRENT)));
+
+        //Global wakelocks
+        textView = (TextView)view.findViewById(R.id.textGlobalWakelockDurationAllowed);
+        textView.setText(stats.getDurationAllowedFormatted(c, UnbounceStatsCollection.STAT_GLOBAL));
+        textView = (TextView)view.findViewById(R.id.textGlobalWakelockAllowed);
+        textView.setText(String.valueOf(stats.getTotalAllowedWakelockCount(c, UnbounceStatsCollection.STAT_GLOBAL)));
+        textView = (TextView)view.findViewById(R.id.textGlobalWakelockBlocked);
+        textView.setText(String.valueOf(stats.getTotalBlockWakelockCount(c, UnbounceStatsCollection.STAT_GLOBAL)));
+        textView = (TextView)view.findViewById(R.id.textGlobalWakelockDurationBlocked);
+        textView.setText(stats.getDurationBlockedFormatted(c, UnbounceStatsCollection.STAT_GLOBAL));
+
+        //Global Alarms
+        textView = (TextView)view.findViewById(R.id.textGlobalAlarmAllowed);
+        textView.setText(String.valueOf(stats.getTotalAllowedAlarmCount(c, UnbounceStatsCollection.STAT_GLOBAL)));
+        textView = (TextView)view.findViewById(R.id.textGlobalAlarmBlocked);
+        textView.setText(String.valueOf(stats.getTotalBlockAlarmCount(c, UnbounceStatsCollection.STAT_GLOBAL)));
 
     }
 

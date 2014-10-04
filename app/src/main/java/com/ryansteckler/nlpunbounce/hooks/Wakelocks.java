@@ -38,7 +38,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
     private HashMap<String, Long> mLastAlarmAttempts = null; //The last time each alarm was allowed.
 
     private long mLastUpdateStats = 0;
-    private long mUpdateStatsFrequency = 60000;
+    private long mUpdateStatsFrequency = 20000; //Send for saving every five minutes TODO fix this number
 
     private static boolean showedUnsupportedAlarmMessage = false;
 
@@ -299,12 +299,26 @@ public class Wakelocks implements IXposedHookLoadPackage {
                 Intent intent = new Intent("com.ryansteckler.nlpunbounce.SEND_STATS");
                 //TODO:  add FLAG_RECEIVER_REGISTERED_ONLY_BEFORE_BOOT to the intent to avoid needing to catch
                 //      the IllegalStateException.  The flag value changed between 4.3 and 4.4  :/
-                intent.putExtra("stats", UnbounceStatsCollection.getInstance().getSerializableStats());
+                intent.putExtra("stats", UnbounceStatsCollection.getInstance().getSerializableStats(UnbounceStatsCollection.STAT_CURRENT));
+                intent.putExtra("stat_type", UnbounceStatsCollection.STAT_CURRENT);
+                intent.putExtra("running_since", UnbounceStatsCollection.getInstance().getRunningSince());
                 try {
                     context.sendBroadcast(intent);
                 } catch (IllegalStateException ise) {
                     //Ignore.  This is because boot hasn't completed yet.
                 }
+
+                Intent intentPush = new Intent("com.ryansteckler.nlpunbounce.SEND_STATS");
+                //TODO:  add FLAG_RECEIVER_REGISTERED_ONLY_BEFORE_BOOT to the intent to avoid needing to catch
+                //      the IllegalStateException.  The flag value changed between 4.3 and 4.4  :/
+                intentPush.putExtra("stats", UnbounceStatsCollection.getInstance().getSerializableStats(UnbounceStatsCollection.STAT_PUSH));
+                intentPush.putExtra("stat_type", UnbounceStatsCollection.STAT_PUSH);
+                try {
+                    context.sendBroadcast(intentPush);
+                } catch (IllegalStateException ise) {
+                    //Ignore.  This is because boot hasn't completed yet.
+                }
+
                 mLastUpdateStats = now;
             }
         }

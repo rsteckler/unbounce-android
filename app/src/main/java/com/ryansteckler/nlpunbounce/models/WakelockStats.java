@@ -7,29 +7,12 @@ import java.util.concurrent.TimeUnit;
  * Created by rsteckler on 9/10/14.
  */
 public class WakelockStats extends BaseStats implements Serializable {
+
+    public WakelockStats() {
+        setType("wakelock");
+    }
+
     private long mAllowedDuration;
-    private String mName;
-    private boolean mBlockingEnabled;
-
-    public String getName() {
-        return mName;
-    }
-
-    public void setName(String name) {
-        synchronized (this) {
-            this.mName = name;
-        }
-    }
-
-    public boolean getBlockingEnabled() {
-        return mBlockingEnabled;
-    }
-
-    public void setBlockingEnabled(boolean blockingEnabled) {
-        synchronized (this) {
-            this.mBlockingEnabled = blockingEnabled;
-        }
-    }
 
     public long getAllowedDuration() {
         return mAllowedDuration;

@@ -24,188 +24,6 @@
                 android:orientation="vertical"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:visibility="gone">
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:showDividers="end"
-                    android:layout_marginTop="@dimen/separator_pad"
-                    android:layout_marginBottom="@dimen/separator_pad">
-
-                    <ImageView
-                        android:layout_width="@dimen/header_icon_size"
-                        android:layout_height="@dimen/header_icon_size"
-                        android:src="@drawable/ic_local" />
-
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:gravity="center_vertical">
-
-                        <TextView
-                            android:id="@+id/lb_global"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:enabled="false"
-                            android:layout_marginLeft="@dimen/pad_icon"
-                            android:text="@string/global_text" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Our combined stats"
-                            android:layout_marginLeft="@dimen/pad_icon"/>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="visible">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
-                        android:text="Wakelock time allowed"
-                        android:gravity="center_vertical"
-                        android:layout_weight="1"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
-                        android:text="26d 17h 47m 39s"
-                        android:id="@+id/textGlobalWakeTimeAllowed"
-                        android:gravity="center_vertical"
-                        />
-
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="visible">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
-                        android:text="Wakelock time blocked"
-                        android:gravity="center_vertical"
-                        android:layout_weight="1"
-                        />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
-                        android:text="52d 4h 41m 36s"
-                        android:id="@+id/textGlobalWakeTimeBlocked"
-                        android:gravity="center_vertical"
-                        />
-
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="visible">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
-                        android:text="Wakelocks acquired"
-                        android:gravity="center_vertical"
-                        android:layout_weight="1"
-                        />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
-                        android:text="4,793,202"
-                        android:id="@+id/textGlobalWakeAcquired"
-                        android:gravity="center_vertical"
-                        />
-
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="visible">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
-                        android:text="Wakelocks blocked"
-                        android:gravity="center_vertical"
-                        android:layout_weight="1"
-                        />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
-                        android:text="953,664"
-                        android:id="@+id/textGlobalWakeBlocked"
-                        android:gravity="center_vertical"
-                        />
-
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="visible">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
-                        android:text="Alarms fired"
-                        android:gravity="center_vertical"
-                        android:layout_weight="1"
-                        />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
-                        android:text="87,499"
-                        android:id="@+id/textGlobalAlarmsFired"
-                        android:gravity="center_vertical"
-                        />
-
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="visible">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
-                        android:text="Alarms blocked"
-                        android:gravity="center_vertical"
-                        android:layout_weight="1"
-                        />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
-                        android:text="43,224"
-                        android:id="@+id/textGlobalAlarmsBlocked"
-                        android:gravity="center_vertical"
-                        />
-
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
                 android:layout_marginLeft="@dimen/card_external_padding"
                 android:layout_marginRight="@dimen/card_external_padding"
                 android:background="@drawable/card_background"
@@ -272,6 +90,30 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:padding="@dimen/card_internal_padding">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="Stats collected for"
+                            android:gravity="center_vertical"
+                            android:layout_weight="1"
+                            style="@style/TextBody1" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="26d 17h 47m 39s"
+                            android:id="@+id/textRunningSince"
+                            android:gravity="center_vertical"
+                            style="@style/TextBody1Fade" />
+
+                    </LinearLayout>
 
                     <LinearLayout
                         android:orientation="horizontal"
@@ -419,6 +261,196 @@
 
                 </LinearLayout>
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="@dimen/card_external_padding"
+                android:layout_marginRight="@dimen/card_external_padding"
+                android:background="@drawable/card_background"
+                android:layout_marginTop="@dimen/card_external_padding"
+                android:id="@+id/linearLayout">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/background_primary_shaded"
+                    android:paddingLeft="@dimen/card_internal_padding"
+                    android:paddingTop="@dimen/card_internal_padding"
+                    android:paddingBottom="@dimen/card_internal_padding" >
+
+                    <ImageView
+                        android:layout_width="@dimen/header_icon_size"
+                        android:layout_height="@dimen/header_icon_size"
+                        android:src="@drawable/ic_global" />
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:gravity="center_vertical"
+                        android:layout_weight="1" >
+
+                        <TextView
+                            style="@style/TextTitleLight"
+                            android:id="@+id/textView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:enabled="false"
+                            android:layout_marginLeft="@dimen/pad_icon"
+                            android:text="@string/global_text" />
+
+                        <TextView
+                            style="@style/TextCaptionLight"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Our combined stats"
+                            android:layout_marginLeft="@dimen/pad_icon" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:padding="@dimen/card_internal_padding" >
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content" >
+
+                        <TextView
+                            style="@style/TextBody1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="Wakelock time allowed"
+                            android:gravity="center_vertical"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            style="@style/TextBody1Fade"
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="26d 17h 47m 39s"
+                            android:id="@+id/textGlobalWakelockDurationAllowed"
+                            android:gravity="center_vertical" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content" >
+
+                        <TextView
+                            style="@style/TextBody1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="Wakelock time blocked"
+                            android:gravity="center_vertical"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            style="@style/TextBody1Fade"
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="52d 4h 41m 36s"
+                            android:id="@+id/textGlobalWakelockDurationBlocked"
+                            android:gravity="center_vertical" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content" >
+
+                        <TextView
+                            style="@style/TextBody1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="Wakelocks acquired"
+                            android:gravity="center_vertical"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            style="@style/TextBody1Fade"
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="4,793,202"
+                            android:id="@+id/textGlobalWakelockAllowed"
+                            android:gravity="center_vertical" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content" >
+
+                        <TextView
+                            style="@style/TextBody1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="Wakelocks blocked"
+                            android:gravity="center_vertical"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            style="@style/TextBody1Fade"
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="953,664"
+                            android:id="@+id/textGlobalWakelockBlocked"
+                            android:gravity="center_vertical" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content" >
+
+                        <TextView
+                            style="@style/TextBody1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="Alarms fired"
+                            android:gravity="center_vertical"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            style="@style/TextBody1Fade"
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="87,499"
+                            android:id="@+id/textGlobalAlarmAllowed"
+                            android:gravity="center_vertical" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content" >
+
+                        <TextView
+                            style="@style/TextBody1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="Alarms blocked"
+                            android:gravity="center_vertical"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            style="@style/TextBody1Fade"
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="43,224"
+                            android:id="@+id/textGlobalAlarmBlocked"
+                            android:gravity="center_vertical" />
+                    </LinearLayout>
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
