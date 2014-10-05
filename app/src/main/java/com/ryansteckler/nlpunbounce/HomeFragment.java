@@ -61,22 +61,11 @@ public class HomeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-
-        //Register for stats updates
-        refreshReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                loadStatsFromSource(getView());
-            }
-        };
-        //Register when new stats come in.
-        getActivity().registerReceiver(refreshReceiver, new IntentFilter(ActivityReceiver.SEND_STATS_ACTION));
-
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onDestroyView() {
+        super.onDestroyView();
         getActivity().unregisterReceiver(refreshReceiver);
     }
 
@@ -84,6 +73,17 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mListener.onHomeSetTitle("Home");
+
+        //Register for stats updates
+        refreshReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                loadStatsFromSource(view);
+            }
+        };
+        //Register when new stats come in.
+        getActivity().registerReceiver(refreshReceiver, new IntentFilter(ActivityReceiver.SEND_STATS_ACTION));
+
         loadStatsFromSource(view);
         TextView textView;
 

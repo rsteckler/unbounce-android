@@ -559,7 +559,7 @@ public class UnbounceStatsCollection implements Serializable {
 
                 long timeSinceLastPush = now - mLastPush;
 
-                if (timeSinceLastPush > mPushTimeFrequency || mGlobalStats.size() == 0) {
+                if (timeSinceLastPush > mPushTimeFrequency || (mGlobalStats != null && mGlobalStats.size() == 0)) {
                     //Push now
                     pushStatsToNetwork(context);
                 }
