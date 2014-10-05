@@ -18,6 +18,8 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -26,8 +28,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.ryansteckler.nlpunbounce.helpers.NetworkHelper;
 import com.ryansteckler.nlpunbounce.helpers.SettingsHelper;
 import com.ryansteckler.nlpunbounce.models.BaseStats;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
@@ -60,9 +64,26 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        getActivity().unregisterReceiver(refreshReceiver);
+    }
+
+    @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mListener.onHomeSetTitle("Home");
+
+        //Register for stats updates
+        refreshReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                loadStatsFromSource(view);
+            }
+        };
+        //Register when new stats come in.
+        getActivity().registerReceiver(refreshReceiver, new IntentFilter(ActivityReceiver.SEND_STATS_ACTION));
+
         loadStatsFromSource(view);
         TextView textView;
 
@@ -75,14 +96,16 @@ public class HomeFragment extends Fragment {
                         .setMessage("This will reset stats for all of your wakelocks!")
                         .setPositiveButton("DELETE", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
+                                UnbounceStatsCollection.getInstance().resetStats(getActivity(), UnbounceStatsCollection.STAT_CURRENT);
+                                loadStatsFromSource(view);
+
                                 Intent intent = new Intent(XposedReceiver.RESET_ACTION);
+                                intent.putExtra(XposedReceiver.STAT_TYPE, UnbounceStatsCollection.STAT_CURRENT);
                                 try {
                                     getActivity().sendBroadcast(intent);
                                 } catch (IllegalStateException ise) {
 
                                 }
-                                UnbounceStatsCollection.getInstance().resetLocalStats();
-                                loadStatsFromSource(view);
                             }
                         })
                         .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
@@ -177,18 +200,24 @@ public class HomeFragment extends Fragment {
             }
         });
 
-
+        textView = (TextView) view.findViewById(R.id.buttonHelpFurther);
+        final LinearLayout expanded = (LinearLayout) view.findViewById(R.id.layoutExpandedDonateAgain);
+        final ScrollView scroll = (ScrollView) view.findViewById(R.id.scrollView);
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                expanded.setVisibility(View.VISIBLE);
+                scroll.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        scroll.fullScroll(View.FOCUS_DOWN);
+                    }
+                });
+            }
+        });
         updatePremiumUi();
 
-        //Register for stats updates
-        refreshReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                loadStatsFromSource(getView());
-            }
-        };
-
-        getActivity().registerReceiver(refreshReceiver, new IntentFilter(XposedReceiver.REFRESH_ACTION));
+        requestRefresh();
     }
 
     private BroadcastReceiver refreshReceiver;
@@ -211,24 +240,50 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    private void loadStatsFromSource(View view) {
-        UnbounceStatsCollection stats = UnbounceStatsCollection.getInstance();
-        String duration = stats.getDurationAllowedFormatted(getActivity());
+    private void loadStatsFromSource(final View view) {
+        final UnbounceStatsCollection stats = UnbounceStatsCollection.getInstance();
+        final Context c = getActivity();
+        String duration = stats.getDurationAllowedFormatted(c, UnbounceStatsCollection.STAT_CURRENT);
+        //Wakelocks
         TextView textView = (TextView)view.findViewById(R.id.textLocalWakeTimeAllowed);
         textView.setText(duration);
+        textView = (TextView)view.findViewById(R.id.textRunningSince);
+        textView.setText(stats.getRunningSinceFormatted());
         textView = (TextView)view.findViewById(R.id.textLocalWakeAcquired);
-        textView.setText(String.valueOf(stats.getTotalAllowedWakelockCount(getActivity())));
+        textView.setText(String.valueOf(stats.getTotalAllowedWakelockCount(c, UnbounceStatsCollection.STAT_CURRENT)));
         textView = (TextView)view.findViewById(R.id.textLocalWakeBlocked);
-        textView.setText(String.valueOf(stats.getTotalBlockWakelockCount(getActivity())));
+        textView.setText(String.valueOf(stats.getTotalBlockWakelockCount(c, UnbounceStatsCollection.STAT_CURRENT)));
         textView = (TextView)view.findViewById(R.id.textLocalWakeTimeBlocked);
-        textView.setText(stats.getDurationBlockedFormatted(getActivity()));
+        textView.setText(stats.getDurationBlockedFormatted(c, UnbounceStatsCollection.STAT_CURRENT));
 
         //Alarms
         textView = (TextView)view.findViewById(R.id.textLocalAlarmsAcquired);
-        textView.setText(String.valueOf(stats.getTotalAllowedAlarmCount(getActivity())));
+        textView.setText(String.valueOf(stats.getTotalAllowedAlarmCount(c, UnbounceStatsCollection.STAT_CURRENT)));
         textView = (TextView)view.findViewById(R.id.textLocalAlarmsBlocked);
-        textView.setText(String.valueOf(stats.getTotalBlockAlarmCount(getActivity())));
+        textView.setText(String.valueOf(stats.getTotalBlockAlarmCount(c, UnbounceStatsCollection.STAT_CURRENT)));
 
+        //Global wakelocks.
+        //Kick off a refresh
+        stats.getStatsFromNetwork(c, new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                TextView textView = (TextView)view.findViewById(R.id.textGlobalWakelockDurationAllowed);
+                textView.setText(stats.getDurationAllowedFormatted(c, UnbounceStatsCollection.STAT_GLOBAL));
+                textView = (TextView)view.findViewById(R.id.textGlobalWakelockAllowed);
+                textView.setText(String.valueOf(stats.getTotalAllowedWakelockCount(c, UnbounceStatsCollection.STAT_GLOBAL)));
+                textView = (TextView)view.findViewById(R.id.textGlobalWakelockBlocked);
+                textView.setText(String.valueOf(stats.getTotalBlockWakelockCount(c, UnbounceStatsCollection.STAT_GLOBAL)));
+                textView = (TextView)view.findViewById(R.id.textGlobalWakelockDurationBlocked);
+                textView.setText(stats.getDurationBlockedFormatted(c, UnbounceStatsCollection.STAT_GLOBAL));
+
+                //Global Alarms
+                textView = (TextView)view.findViewById(R.id.textGlobalAlarmAllowed);
+                textView.setText(String.valueOf(stats.getTotalAllowedAlarmCount(c, UnbounceStatsCollection.STAT_GLOBAL)));
+                textView = (TextView)view.findViewById(R.id.textGlobalAlarmBlocked);
+                textView.setText(String.valueOf(stats.getTotalBlockAlarmCount(c, UnbounceStatsCollection.STAT_GLOBAL)));
+
+            }
+        });
     }
 
     @Override
@@ -267,16 +322,20 @@ public class HomeFragment extends Fragment {
         int id = item.getItemId();
 
         if (id == R.id.action_refresh) {
-            Intent intent = new Intent(XposedReceiver.REFRESH_ACTION);
-            try {
-                getActivity().sendBroadcast(intent);
-            } catch (IllegalStateException ise) {
-
-            }
+            requestRefresh();
 
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void requestRefresh() {
+        Intent intent = new Intent(XposedReceiver.REFRESH_ACTION);
+        try {
+            getActivity().sendBroadcast(intent);
+        } catch (IllegalStateException ise) {
+
+        }
     }
 
     @Override

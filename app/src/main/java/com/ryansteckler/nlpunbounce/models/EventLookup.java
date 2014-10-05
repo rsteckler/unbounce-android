@@ -35,7 +35,7 @@ public class EventLookup {
         } else if (lower.equals("windowmanager")) {
             toReturn = "This is an Android System level WakeLock.  The interface that apps use to talk to the window manager - meaning, applications will require a WindowManager lock everytime they need to be shown on the screen.";
         } else if (lower.equals("rilj")) {
-            toReturn = "RILJ keeps your device awake while you're on a phone call and the screen is off";
+            toReturn = "RILJ keeps your device awake while processing phone actions, such as phone calls and cell tower communication.";
         } else if (lower.equals("syncloopwakelock")) {
             toReturn = "This is the WakeLock used by Android SyncManager to Sync accounts like Google+, Twitter, Linkedin, Gmail etc. The higher the unbouncing, the longer the amount of time until your accounts will get synced again.";
         } else if (lower.equals("icing")) {

@@ -23,6 +23,7 @@ public class TaskerReceiver extends BroadcastReceiver {
                 String type = savedBundle.getString(TaskerActivity.BUNDLE_TYPE);
                 if (type.equals("reset")) {
                     Intent resetIntent = new Intent(XposedReceiver.RESET_ACTION);
+                    resetIntent.putExtra(XposedReceiver.STAT_TYPE, UnbounceStatsCollection.STAT_CURRENT);
                     try {
                         context.sendBroadcast(resetIntent);
                     } catch (IllegalStateException ise) {

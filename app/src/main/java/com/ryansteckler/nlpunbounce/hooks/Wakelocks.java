@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.IBinder;
 import android.os.SystemClock;
 
+import com.ryansteckler.nlpunbounce.ActivityReceiver;
 import com.ryansteckler.nlpunbounce.XposedReceiver;
 import com.ryansteckler.nlpunbounce.models.InterimWakelock;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
@@ -33,12 +34,14 @@ import de.robv.android.xposed.XC_MethodHook;
 public class Wakelocks implements IXposedHookLoadPackage {
 
     private static final String TAG = "NlpUnbounce: ";
-    private static final String VERSION = "1.1.9"; //This needs to be pulled from the manifest or gradle build.
+    private static final String VERSION = "1.2"; //This needs to be pulled from the manifest or gradle build.
     private HashMap<String, Long> mLastWakelockAttempts = null; //The last time each wakelock was allowed.
     private HashMap<String, Long> mLastAlarmAttempts = null; //The last time each alarm was allowed.
 
     private long mLastUpdateStats = 0;
-    private long mUpdateStatsFrequency = 60000;
+    private long mUpdateStatsFrequency = 600000; //Send for saving every ten minutes
+    private long mLastReloadPrefs = 0;
+    private long mReloadPrefsFrequency = 60000; //Reload prefs every minute
 
     private static boolean showedUnsupportedAlarmMessage = false;
 
@@ -221,8 +224,6 @@ public class Wakelocks implements IXposedHookLoadPackage {
     }
 
     private void handleWakeLockAcquire(XC_MethodHook.MethodHookParam param, String wakeLockName, IBinder lock) {
-        m_prefs.reload();
-        setupReceiver(param);
 
         //If we're blocking this wakelock
         String prefName = "wakelock_" + wakeLockName + "_enabled";
@@ -232,7 +233,6 @@ public class Wakelocks implements IXposedHookLoadPackage {
             collectorMaxFreq *= 1000; //convert to ms
 
             //Debounce this to our minimum interval.
-            final long now = SystemClock.elapsedRealtime();
             long lastAttempt = 0;
             try {
                 lastAttempt = mLastWakelockAttempts.get(wakeLockName);
@@ -240,6 +240,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
             catch (NullPointerException npe)
             { /* ok.  Just havent attempted yet.  Use 0 */ }
 
+            long now = SystemClock.elapsedRealtime();
             long timeSinceLastWakeLock = now - lastAttempt;
 
             if (timeSinceLastWakeLock < collectorMaxFreq) {
@@ -274,7 +275,6 @@ public class Wakelocks implements IXposedHookLoadPackage {
 
     private void recordAlarmAcquire(Context context, String alarmName) {
         UnbounceStatsCollection.getInstance().incrementAlarmAllowed(context, alarmName);
-        updateStatsIfNeeded(context);
     }
 
     private void handleWakeLockRelease(XC_MethodHook.MethodHookParam param, IBinder lock) {
@@ -284,7 +284,6 @@ public class Wakelocks implements IXposedHookLoadPackage {
             curStats.setTimeStopped(SystemClock.elapsedRealtime());
             Context context = (Context)XposedHelpers.getObjectField(param.thisObject, "mContext");
             UnbounceStatsCollection.getInstance().addInterimWakelock(context, curStats);
-            updateStatsIfNeeded(context);
         }
     }
 
@@ -296,22 +295,43 @@ public class Wakelocks implements IXposedHookLoadPackage {
             long timeSinceLastUpdateStats = now - mLastUpdateStats;
 
             if (timeSinceLastUpdateStats > mUpdateStatsFrequency) {
-                Intent intent = new Intent("com.ryansteckler.nlpunbounce.SEND_STATS");
+                Intent intent = new Intent(ActivityReceiver.SEND_STATS_ACTION);
                 //TODO:  add FLAG_RECEIVER_REGISTERED_ONLY_BEFORE_BOOT to the intent to avoid needing to catch
                 //      the IllegalStateException.  The flag value changed between 4.3 and 4.4  :/
-                intent.putExtra("stats", UnbounceStatsCollection.getInstance().getSerializableStats());
+                intent.putExtra("stats", UnbounceStatsCollection.getInstance().getSerializableStats(UnbounceStatsCollection.STAT_CURRENT));
+                intent.putExtra("stat_type", UnbounceStatsCollection.STAT_CURRENT);
+                intent.putExtra("running_since", UnbounceStatsCollection.getInstance().getRunningSince());
                 try {
                     context.sendBroadcast(intent);
                 } catch (IllegalStateException ise) {
                     //Ignore.  This is because boot hasn't completed yet.
                 }
+
+                Intent intentPush = new Intent(ActivityReceiver.SEND_STATS_ACTION);
+                //TODO:  add FLAG_RECEIVER_REGISTERED_ONLY_BEFORE_BOOT to the intent to avoid needing to catch
+                //      the IllegalStateException.  The flag value changed between 4.3 and 4.4  :/
+                intentPush.putExtra("stats", UnbounceStatsCollection.getInstance().getSerializableStats(UnbounceStatsCollection.STAT_PUSH));
+                intentPush.putExtra("stat_type", UnbounceStatsCollection.STAT_PUSH);
+                try {
+                    context.sendBroadcast(intentPush);
+                } catch (IllegalStateException ise) {
+                    //Ignore.  This is because boot hasn't completed yet.
+                }
+
                 mLastUpdateStats = now;
             }
         }
     }
 
     private void handleAlarm(XC_MethodHook.MethodHookParam param, ArrayList<Object> triggers) {
-        m_prefs.reload();
+        final long now = SystemClock.elapsedRealtime();
+        Context context = (Context)XposedHelpers.getObjectField(param.thisObject, "mContext");
+        long sinceReload = now - mLastReloadPrefs;
+        if (sinceReload > mReloadPrefsFrequency) {
+            setupReceiver(param);
+            m_prefs.reload();
+            updateStatsIfNeeded(context);
+        }
 
         for (int j = triggers.size() - 1; j >= 0; j--) {
             Object curAlarm = triggers.get(j);
@@ -340,8 +360,6 @@ public class Wakelocks implements IXposedHookLoadPackage {
                 continue;
             }
 
-            Context context = (Context)XposedHelpers.getObjectField(param.thisObject, "mContext");
-
             String alarmName = intent.getAction();
             //If we're blocking this wakelock
             String prefName = "alarm_" + alarmName + "_enabled";
@@ -351,7 +369,6 @@ public class Wakelocks implements IXposedHookLoadPackage {
                 collectorMaxFreq *= 1000; //convert to ms
 
                 //Debounce this to our minimum interval.
-                final long now = SystemClock.elapsedRealtime();
                 long lastAttempt = 0;
                 try {
                     lastAttempt = mLastAlarmAttempts.get(alarmName);
