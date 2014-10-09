@@ -2,6 +2,7 @@ package com.ryansteckler.nlpunbounce.models;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
@@ -97,6 +98,8 @@ public class UnbounceStatsCollection implements Serializable {
         long now = SystemClock.elapsedRealtime();
         long running = now - mRunningSince;
 
+        long years = TimeUnit.MILLISECONDS.toDays(running) / 365;
+        running -= TimeUnit.DAYS.toMillis(years * 365);
         long days = TimeUnit.MILLISECONDS.toDays(running);
         running -= TimeUnit.DAYS.toMillis(days);
         long hours = TimeUnit.MILLISECONDS.toHours(running);
@@ -106,6 +109,10 @@ public class UnbounceStatsCollection implements Serializable {
         long seconds = TimeUnit.MILLISECONDS.toSeconds(running);
 
         StringBuilder sb = new StringBuilder(64);
+        if (years > 0) {
+            sb.append(years);
+            sb.append(" y ");
+        }
         sb.append(days);
         sb.append(" d ");
         sb.append(hours);
@@ -183,6 +190,8 @@ public class UnbounceStatsCollection implements Serializable {
         }
 
 
+        long years = TimeUnit.MILLISECONDS.toDays(totalDuration) / 365;
+        totalDuration -= TimeUnit.DAYS.toMillis(years * 365);
         long days = TimeUnit.MILLISECONDS.toDays(totalDuration);
         totalDuration -= TimeUnit.DAYS.toMillis(days);
         long hours = TimeUnit.MILLISECONDS.toHours(totalDuration);
@@ -192,6 +201,10 @@ public class UnbounceStatsCollection implements Serializable {
         long seconds = TimeUnit.MILLISECONDS.toSeconds(totalDuration);
 
         StringBuilder sb = new StringBuilder(64);
+        if (years > 0) {
+            sb.append(years);
+            sb.append(" y ");
+        }
         sb.append(days);
         sb.append(" d ");
         sb.append(hours);
@@ -272,6 +285,8 @@ public class UnbounceStatsCollection implements Serializable {
         }
 
 
+        long years = TimeUnit.MILLISECONDS.toDays(totalDuration) / 365;
+        totalDuration -= TimeUnit.DAYS.toMillis(years * 365);
         long days = TimeUnit.MILLISECONDS.toDays(totalDuration);
         totalDuration -= TimeUnit.DAYS.toMillis(days);
         long hours = TimeUnit.MILLISECONDS.toHours(totalDuration);
@@ -281,6 +296,10 @@ public class UnbounceStatsCollection implements Serializable {
         long seconds = TimeUnit.MILLISECONDS.toSeconds(totalDuration);
 
         StringBuilder sb = new StringBuilder(64);
+        if (years > 0) {
+            sb.append(years);
+            sb.append(" y ");
+        }
         sb.append(days);
         sb.append(" d ");
         sb.append(hours);
@@ -637,14 +656,14 @@ public class UnbounceStatsCollection implements Serializable {
         String filename = "";
         try {
             filename = Environment.getDataDirectory() + "/data/" + "com.ryansteckler.nlpunbounce" + "/files/" + statFilename;
-            Log.d("NlpUnbounce:WLSC", "Loading file: " + filename);
+            Log.d("Unbounce:WLSC", "Loading file: " + filename);
 
             File inFile = new File(filename);
             if (inFile.exists() && !inFile.canRead()) {
-                Log.d("NlpUnbounce:WLSC", "Can't load file yet.  Skipping...");
+                Log.d("Unbounce:WLSC", "Can't load file yet.  Skipping...");
             }
             else if (inFile.exists() && inFile.canRead()) {
-                Log.d("NlpUnbounce:WLSC", "Ready to load file.");
+                Log.d("Unbounce:WLSC", "Ready to load file.");
                 FileInputStream in = new FileInputStream(inFile);
                 ObjectInputStream objIn = new ObjectInputStream(in);
                 if (statFilename == STATS_FILENAME_GLOBAL) {
@@ -660,12 +679,12 @@ public class UnbounceStatsCollection implements Serializable {
                 in.close();
             }
             else {
-                Log.d("NlpUnbounce:WLSC", "Unknown file state.  Resetting.");
+                Log.d("Unbounce:WLSC", "Unknown file state.  Resetting.");
                 statChoice = new HashMap<String, BaseStats>();
             }
 
         } catch (FileNotFoundException e) {
-            Log.d("NlpUnbounce:WLSC", "Please send this log to Ryan.  It's a problem.  FNF: " + filename);
+            Log.d("Unbounce:WLSC", "Please send this log to Ryan.  It's a problem.  FNF: " + filename);
             new Exception().printStackTrace();
             statChoice = new HashMap<String, BaseStats>();
         } catch (StreamCorruptedException e) {
@@ -686,61 +705,70 @@ public class UnbounceStatsCollection implements Serializable {
     }
 
     public void pushStatsToNetwork(final Context context) {
-        //Serialize the collection to JSON
-        if (mSincePushStats != null) {
-            if (mSincePushStats.size() > 0) {
-                final Gson gson = new GsonBuilder().create();
-                String json = gson.toJson(mSincePushStats.values().toArray());
+        //Are we allowed to?
+        SharedPreferences prefs = context.getSharedPreferences("com.ryansteckler.nlpunbounce" + "_preferences", Context.MODE_WORLD_READABLE);
+        if (prefs.getBoolean("global_participation", true)) {
 
-                //Push the JSON to the server
-                NetworkHelper.sendToServer("DeviceStats", json, URL_STATS, new Handler() {
-                    @Override
-                    public void handleMessage(Message msg) {
-                        if (msg.what == 1) {
-                            mLastPush = SystemClock.elapsedRealtime();
+            //Serialize the collection to JSON
+            if (mSincePushStats != null) {
+                if (mSincePushStats.size() > 0) {
+                    final Gson gson = new GsonBuilder().create();
+                    String json = gson.toJson(mSincePushStats.values().toArray());
 
-                            //Update global stats
-                            String globalStats = msg.getData().getString("global_stats");
-                            if (globalStats != null)
-                            {
-                                Type globalType = new TypeToken<HashMap<String, Long>>(){}.getType();
-                                mGlobalStats = gson.fromJson(globalStats, globalType);
+                    //Push the JSON to the server
+                    NetworkHelper.sendToServer("DeviceStats", json, URL_STATS, new Handler() {
+                        @Override
+                        public void handleMessage(Message msg) {
+                            if (msg.what == 1) {
+                                mLastPush = SystemClock.elapsedRealtime();
+
+                                //Update global stats
+                                String globalStats = msg.getData().getString("global_stats");
+                                if (globalStats != null) {
+                                    Type globalType = new TypeToken<HashMap<String, Long>>() {
+                                    }.getType();
+                                    mGlobalStats = gson.fromJson(globalStats, globalType);
+                                }
+
+                                //Reset the push collection, locally and in Xposed
+                                Intent intent = new Intent(XposedReceiver.RESET_ACTION);
+                                intent.putExtra(XposedReceiver.STAT_TYPE, UnbounceStatsCollection.STAT_PUSH);
+                                try {
+                                    context.sendBroadcast(intent);
+                                } catch (IllegalStateException ise) {
+
+                                }
+                                resetStats(context, STAT_PUSH);
+
                             }
-
-                            //Reset the push collection, locally and in Xposed
-                            Intent intent = new Intent(XposedReceiver.RESET_ACTION);
-                            intent.putExtra(XposedReceiver.STAT_TYPE, UnbounceStatsCollection.STAT_PUSH);
-                            try {
-                                context.sendBroadcast(intent);
-                            } catch (IllegalStateException ise) {
-
-                            }
-                            resetStats(context, STAT_PUSH);
-
                         }
-                    }
-                });
+                    });
+                }
             }
         }
     }
 
     public void getStatsFromNetwork(final Context context, final Handler clientHandler) {
         //Push the JSON to the server
-        NetworkHelper.getFromServer(URL_STATS, new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                if (msg.what == 1) {
-                    //Update global stats
-                    String globalStats = msg.getData().getString("global_stats");
-                    if (globalStats != null) {
-                        Type globalType = new TypeToken<HashMap<String, Long>>() {
-                        }.getType();
-                        final Gson gson = new GsonBuilder().create();
-                        mGlobalStats = gson.fromJson(globalStats, globalType);
+        //Are we allowed to?
+        SharedPreferences prefs = context.getSharedPreferences("com.ryansteckler.nlpunbounce" + "_preferences", Context.MODE_WORLD_READABLE);
+        if (prefs.getBoolean("global_participation", true)) {
+            NetworkHelper.getFromServer(URL_STATS, new Handler() {
+                @Override
+                public void handleMessage(Message msg) {
+                    if (msg.what == 1) {
+                        //Update global stats
+                        String globalStats = msg.getData().getString("global_stats");
+                        if (globalStats != null) {
+                            Type globalType = new TypeToken<HashMap<String, Long>>() {
+                            }.getType();
+                            final Gson gson = new GsonBuilder().create();
+                            mGlobalStats = gson.fromJson(globalStats, globalType);
+                        }
                     }
+                    clientHandler.sendEmptyMessage(1);
                 }
-                clientHandler.sendEmptyMessage(1);
-            }
-        });
+            });
+        }
     }
 }

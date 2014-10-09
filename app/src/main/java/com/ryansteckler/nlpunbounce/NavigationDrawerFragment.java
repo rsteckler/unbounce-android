@@ -93,7 +93,7 @@ public class NavigationDrawerFragment extends Fragment {
                         getString(R.string.title_home),
                         getString(R.string.title_wakelocks),
                         getString(R.string.title_alarms),
-                        "Settings"
+                        getString(R.string.title_settings)
                 }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
@@ -237,7 +237,7 @@ public class NavigationDrawerFragment extends Fragment {
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-        actionBar.setTitle("Unbounce");
+        actionBar.setTitle(R.string.app_name);
     }
 
     private ActionBar getActionBar() {

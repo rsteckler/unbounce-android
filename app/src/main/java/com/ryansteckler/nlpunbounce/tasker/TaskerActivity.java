@@ -62,18 +62,18 @@ public class TaskerActivity extends Activity
 
                 if (result.isFailure()) {
                     // update UI accordingly
-                    Log.d("NlpUnbounce", "IAP result failed with code: " + result.getMessage());
+                    Log.d("Unbounce", "IAP result failed with code: " + result.getMessage());
                 }
                 else {
                     // does the user have the premium upgrade?
-                    Log.d("NlpUnbounce", "IAP result succeeded");
+                    Log.d("Unbounce", "IAP result succeeded");
                     if (inventory != null) {
-                        Log.d("NlpUnbounce", "IAP inventory exists");
+                        Log.d("Unbounce", "IAP inventory exists");
 
                         if (inventory.hasPurchase("donate_1") ||
                                 inventory.hasPurchase("donate_5") ||
                                 inventory.hasPurchase("donate_10")) {
-                            Log.d("NlpUnbounce", "IAP inventory contains a donation");
+                            Log.d("Unbounce", "IAP inventory contains a donation");
 
                             mIsPremium = true;
                         };
@@ -91,9 +91,9 @@ public class TaskerActivity extends Activity
                 if (!result.isSuccess()) {
                     Log.d(TAG, "In-app Billing setup failed: " + result);
                     new AlertDialog.Builder(TaskerActivity.this)
-                            .setTitle("Pro features unavailable.")
-                            .setMessage("Your device doesn't support In App Billing.  You won't be able to purchase the Pro features of Unbounce.  This could be because you need to update your Google Play Store application, or because you live in a country where In App Billing is disabled.")
-                            .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                            .setTitle(R.string.alert_noiab_title)
+                            .setMessage(R.string.alert_noiab_content)
+                            .setNeutralButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                 }
                             })
@@ -125,7 +125,10 @@ public class TaskerActivity extends Activity
                     taskerBundle.putString(BUNDLE_NAME, wlFragment.getName());
                     taskerBundle.putLong(BUNDLE_SECONDS, wlFragment.getSeconds());
                     taskerBundle.putBoolean(BUNDLE_ENABLED, wlFragment.getEnabled());
-                    blurb = wlFragment.getName() + " - " + (wlFragment.getEnabled() ? "On" : "Off") + " - " + wlFragment.getSeconds();
+                    blurb = wlFragment.getName() + " - " + (wlFragment.getEnabled() ?
+                            getResources().getString(R.string.tasker_on) :
+                            getResources().getString(R.string.tasker_off)) +
+                            " - " + wlFragment.getSeconds();
                 } else {
                     AlarmDetailFragment alarmFragment = (AlarmDetailFragment)fragmentManager.findFragmentByTag("alarm_detail");
                     if (alarmFragment != null) {
@@ -133,7 +136,10 @@ public class TaskerActivity extends Activity
                         taskerBundle.putString(BUNDLE_NAME, alarmFragment.getName());
                         taskerBundle.putLong(BUNDLE_SECONDS, alarmFragment.getSeconds());
                         taskerBundle.putBoolean(BUNDLE_ENABLED, alarmFragment.getEnabled());
-                        blurb = alarmFragment.getName() + " - " + (alarmFragment.getEnabled() ? "On" : "Off") + " - " + alarmFragment.getSeconds();
+                        blurb = alarmFragment.getName() + " - " + (alarmFragment.getEnabled() ?
+                                getResources().getString(R.string.tasker_on) :
+                                getResources().getString(R.string.tasker_off)) +
+                                " - " + alarmFragment.getSeconds();
                     }
                 }
 
@@ -240,7 +246,7 @@ public class TaskerActivity extends Activity
     public void onTaskerResetSelected() {
         Bundle taskerBundle = new Bundle();
         taskerBundle.putString(BUNDLE_TYPE, "reset");
-        String blurb = "Reset stats";
+        String blurb = getResources().getString(R.string.tasker_reset_stats);
 
         final Intent resultIntent = new Intent();
         resultIntent.putExtra(EXTRA_BUNDLE, taskerBundle);

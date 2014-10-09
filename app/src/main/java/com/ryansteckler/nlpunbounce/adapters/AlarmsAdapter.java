@@ -217,15 +217,15 @@ public class AlarmsAdapter extends ArrayAdapter {
                 }
 
                 if (position == mCategoryBlockedIndex) {
-                    categoryViewHolder.name.setText("Unbounced");
+                    categoryViewHolder.name.setText(R.string.category_unbounced);
                 } else if (position == mCategorySafeIndex) {
-                    categoryViewHolder.name.setText("Safe to Unbounce");
+                    categoryViewHolder.name.setText(R.string.category_safe);
                 } else if (position == mCategoryUnknownIndex) {
-                    categoryViewHolder.name.setText("Unknown");
+                    categoryViewHolder.name.setText(R.string.category_unknown);
                 } else if (position == mCategoryUnsafeIndex) {
-                    categoryViewHolder.name.setText("Not safe to Unbounce");
+                    categoryViewHolder.name.setText(R.string.category_not_safe);
                 } else {
-                    categoryViewHolder.name.setText("Error");
+                    categoryViewHolder.name.setText(R.string.category_error);
                 }
 
                 break;

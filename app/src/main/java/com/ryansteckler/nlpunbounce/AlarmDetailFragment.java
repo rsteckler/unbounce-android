@@ -83,7 +83,7 @@ public class AlarmDetailFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         if (mListener != null) {
             mListener.onAlarmDetailSetTitle(mStat.getName());
-            mListener.onAlarmDetailSetTaskerTitle("Choose the settings you want.");
+            mListener.onAlarmDetailSetTaskerTitle(getResources().getString(R.string.tasker_choose_settings));
         }
 
         loadStatsFromSource(view);
@@ -174,7 +174,7 @@ public class AlarmDetailFragment extends Fragment {
         });
 
         TextView description = (TextView)view.findViewById(R.id.textViewAlarmDescription);
-        String descriptionText = EventLookup.getDescription(mStat.getName());
+        String descriptionText = EventLookup.getDescription(getActivity(), mStat.getName());
         description.setText(descriptionText);
         mKnownSafeAlarm = EventLookup.isSafe(mStat.getName()) == EventLookup.SAFE;
         mFreeAlarm = EventLookup.isFree(mStat.getName());
@@ -205,9 +205,9 @@ public class AlarmDetailFragment extends Fragment {
 
     private void warnLicensing(final Switch onOff) {
         new AlertDialog.Builder(getActivity())
-                .setTitle("This is a Pro feature.")
-                .setMessage("To Unbounce non-standard wakelocks and alarms, you need to purchase a donation package.")
-                .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.alert_nopro_title)
+                .setMessage(R.string.alert_nopro_content)
+                .setNeutralButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         onOff.setChecked(false);
                         updateEnabledAlarm(false);
@@ -219,15 +219,15 @@ public class AlarmDetailFragment extends Fragment {
 
     private void warnUnknownAlarm(final Switch onOff) {
         new AlertDialog.Builder(getActivity())
-            .setTitle("Unbounce unknown alarm?")
-            .setMessage("This alarm hasn't been proven safe to Unbounce.  Would you like to Unbounce it anyway?")
-            .setPositiveButton("UNBOUNCE", new DialogInterface.OnClickListener() {
+            .setTitle(R.string.alert_unknown_alarm_title)
+            .setMessage(R.string.alert_unknown_alarm_content)
+            .setPositiveButton(R.string.dialog_unbounce, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     onOff.setChecked(true);
                     updateEnabledAlarm(true);
                 }
             })
-            .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            .setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     //don't set the switch
                     onOff.setChecked(false);

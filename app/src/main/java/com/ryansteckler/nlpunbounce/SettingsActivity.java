@@ -18,7 +18,7 @@ import com.ryansteckler.nlpunbounce.helpers.SettingsHelper;
 
 public class SettingsActivity extends Activity {
 
-    private static final String TAG = "NlpUnbounceSettings";
+    private static final String TAG = "UnbounceSettings";
 
     IabHelper mHelper;
 
@@ -58,15 +58,15 @@ public class SettingsActivity extends Activity {
                 public boolean onPreferenceClick(Preference preference) {
                     //Make sure
                     new AlertDialog.Builder(getActivity())
-                            .setTitle("Reset to defaults?")
-                            .setMessage("This will reset all of the settings for alarms and wakelocks.")
-                            .setPositiveButton("RESET", new DialogInterface.OnClickListener() {
+                            .setTitle(R.string.alert_reset_settings_title)
+                            .setMessage(R.string.alert_reset_settings_content)
+                            .setPositiveButton(R.string.dialog_reset, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     SettingsHelper.resetToDefaults(sharedPref);
-                                    Toast.makeText(getActivity(), "Settings have been reset to defaults.", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), R.string.reset_settings_confirmation, Toast.LENGTH_SHORT).show();
                                 }
                             })
-                            .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                            .setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                 }
                             })

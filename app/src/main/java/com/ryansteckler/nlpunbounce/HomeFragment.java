@@ -72,7 +72,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mListener.onHomeSetTitle("Home");
+        mListener.onHomeSetTitle(getResources().getString(R.string.title_home));
 
         //Register for stats updates
         refreshReceiver = new BroadcastReceiver() {
@@ -92,9 +92,9 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View textView) {
                 new AlertDialog.Builder(getActivity())
-                        .setTitle("Delete all stats?")
-                        .setMessage("This will reset stats for all of your wakelocks!")
-                        .setPositiveButton("DELETE", new DialogInterface.OnClickListener() {
+                        .setTitle(R.string.alert_delete_stats_title)
+                        .setMessage(R.string.alert_delete_stats_content)
+                        .setPositiveButton(R.string.dialog_delete, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 UnbounceStatsCollection.getInstance().resetStats(getActivity(), UnbounceStatsCollection.STAT_CURRENT);
                                 loadStatsFromSource(view);
@@ -108,7 +108,7 @@ public class HomeFragment extends Fragment {
                                 }
                             }
                         })
-                        .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                        .setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 // do nothing
                             }
@@ -264,7 +264,10 @@ public class HomeFragment extends Fragment {
 
         //Global wakelocks.
         //Kick off a refresh
-        stats.getStatsFromNetwork(c, new Handler() {
+
+        SharedPreferences prefs = getActivity().getSharedPreferences("com.ryansteckler.nlpunbounce" + "_preferences", Context.MODE_WORLD_READABLE);
+        if (prefs.getBoolean("global_participation", true)) {
+            stats.getStatsFromNetwork(c, new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 TextView textView = (TextView)view.findViewById(R.id.textGlobalWakelockDurationAllowed);
@@ -282,8 +285,25 @@ public class HomeFragment extends Fragment {
                 textView = (TextView)view.findViewById(R.id.textGlobalAlarmBlocked);
                 textView.setText(String.valueOf(stats.getTotalBlockAlarmCount(c, UnbounceStatsCollection.STAT_GLOBAL)));
 
-            }
+                    }
         });
+        } else {
+            textView = (TextView)view.findViewById(R.id.textGlobalWakelockDurationAllowed);
+            textView.setText(getResources().getString(R.string.stat_disabled));
+            textView = (TextView)view.findViewById(R.id.textGlobalWakelockAllowed);
+            textView.setText(getResources().getString(R.string.stat_disabled));
+            textView = (TextView)view.findViewById(R.id.textGlobalWakelockBlocked);
+            textView.setText(getResources().getString(R.string.stat_disabled));
+            textView = (TextView)view.findViewById(R.id.textGlobalWakelockDurationBlocked);
+            textView.setText(getResources().getString(R.string.stat_disabled));
+
+            //Global Alarms
+            textView = (TextView)view.findViewById(R.id.textGlobalAlarmAllowed);
+            textView.setText(getResources().getString(R.string.stat_disabled));
+            textView = (TextView)view.findViewById(R.id.textGlobalAlarmBlocked);
+            textView.setText(getResources().getString(R.string.stat_disabled));
+
+        }
     }
 
     @Override
