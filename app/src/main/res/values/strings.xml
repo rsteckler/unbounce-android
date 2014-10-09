@@ -22,7 +22,7 @@
     <string name="card_local_subtitle">View your progress</string>
     <string name="card_settings_title">SETTINGS</string>
     <string name="card_settings_subtitle_alarm">Control this alarm</string>
-    <string name="card_settings_subtitle_wakelock">Control this alarm</string>
+    <string name="card_settings_subtitle_wakelock">Control this wakelock</string>
     <string name="card_description_title">DESCRIPTION</string>
     <string name="card_description_subtitle">Why is this thing eating your battery?</string>
 
