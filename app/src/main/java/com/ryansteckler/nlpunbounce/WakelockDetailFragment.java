@@ -82,7 +82,7 @@ public class WakelockDetailFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         if (mListener != null) {
             mListener.onWakelockDetailSetTitle(mStat.getName());
-            mListener.onWakelockDetailSetTaskerTitle("Choose the settings you want.");
+            mListener.onWakelockDetailSetTaskerTitle(getResources().getString(R.string.tasker_choose_settings));
         }
 
         loadStatsFromSource(view);
@@ -184,7 +184,7 @@ public class WakelockDetailFragment extends Fragment {
         });
 
         TextView description = (TextView)view.findViewById(R.id.textViewWakelockDescription);
-        String descriptionText = EventLookup.getDescription(mStat.getName());
+        String descriptionText = EventLookup.getDescription(getActivity(), mStat.getName());
         description.setText(descriptionText);
         mKnownSafeWakelock = EventLookup.isSafe(mStat.getName()) == EventLookup.SAFE;
         mFreeWakelock = EventLookup.isFree(mStat.getName());
@@ -217,9 +217,9 @@ public class WakelockDetailFragment extends Fragment {
 
     private void warnLicensing(final Switch onOff) {
         new AlertDialog.Builder(getActivity())
-                .setTitle("This is a Pro feature.")
-                .setMessage("To Unbounce non-standard wakelocks and alarms, you need to purchase a donation package.")
-                .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.alert_nopro_title)
+                .setMessage(R.string.alert_nopro_content)
+                .setNeutralButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         onOff.setChecked(false);
                         updateEnabledWakelock(false);
@@ -231,15 +231,15 @@ public class WakelockDetailFragment extends Fragment {
 
     private void warnUnknownWakelock(final Switch onOff) {
         new AlertDialog.Builder(getActivity())
-            .setTitle("Unbounce unknown wakelock?")
-            .setMessage("This wakelock hasn't been proven safe to Unbounce.  Would you like to Unbounce it anyway?")
-            .setPositiveButton("UNBOUNCE", new DialogInterface.OnClickListener() {
+            .setTitle(R.string.alert_unknown_wakelock_title)
+            .setMessage(R.string.alert_unknown_wakelock_content)
+            .setPositiveButton(R.string.dialog_unbounce, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     onOff.setChecked(true);
                     updateEnabledWakelock(true);
                 }
             })
-            .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            .setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     //don't set the switch
                     onOff.setChecked(false);

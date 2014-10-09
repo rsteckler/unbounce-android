@@ -57,13 +57,13 @@
                             android:layout_height="wrap_content"
                             android:enabled="false"
                             android:layout_marginLeft="@dimen/pad_icon"
-                            android:text="DESCRIPTION"
+                            android:text="@string/card_description_title"
                             style="@style/TextTitleLight" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Why is this thing eating your battery?"
+                            android:text="@string/card_description_subtitle"
                             android:layout_marginLeft="@dimen/pad_icon"
                             style="@style/TextCaptionLight" />
 
@@ -126,13 +126,13 @@
                             android:layout_height="wrap_content"
                             android:enabled="false"
                             android:layout_marginLeft="@dimen/pad_icon"
-                            android:text="SETTINGS"
+                            android:text="@string/card_settings_title"
                             style="@style/TextTitleLight" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Control this alarm"
+                            android:text="@string/card_settings_subtitle_alarm"
                             android:layout_marginLeft="@dimen/pad_icon"
                             style="@style/TextCaptionLight" />
 
@@ -176,7 +176,7 @@
                                 <TextView
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:text="Allow every"
+                                    android:text="@string/settings_allow_every"
                                     style="@style/TextBody2"
                                     android:layout_marginRight="@dimen/card_external_padding"
                                     android:layout_weight=".25"
@@ -199,7 +199,7 @@
                                 <TextView
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:text="seconds."
+                                    android:text="@string/settings_seconds"
                                     style="@style/TextBody2"
                                     android:layout_marginLeft="@dimen/card_external_padding"
                                     android:layout_weight=".45"
@@ -248,13 +248,13 @@
                             android:layout_height="wrap_content"
                             android:enabled="false"
                             android:layout_marginLeft="@dimen/pad_icon"
-                            android:text="@string/local_text"
+                            android:text="@string/card_local_title"
                             style="@style/TextTitleLight" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="View your progress"
+                            android:text="@string/card_local_subtitle"
                             android:layout_marginLeft="@dimen/pad_icon"
                             style="@style/TextCaptionLight" />
 
@@ -263,7 +263,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="RESET"
+                        android:text="@string/card_button_reset"
                         android:id="@+id/buttonResetStats"
                         android:background="@drawable/flat_button_background"
                         style="@style/TextButtonLight"
@@ -294,7 +294,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:text="Alarms acquired"
+                            android:text="@string/stat_alarms_acquired"
                             android:gravity="center_vertical"
                             android:layout_weight="1"
                             style="@style/TextBody1" />
@@ -302,7 +302,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:text="4,793,202"
+                            android:text="@string/stat_loading"
                             android:id="@+id/textLocalAlarmAcquired"
                             android:gravity="center_vertical"
                             style="@style/TextBody1Fade" />
@@ -318,7 +318,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:text="Alarms blocked"
+                            android:text="@string/stat_alarms_blocked"
                             android:gravity="center_vertical"
                             android:layout_weight="1"
                             style="@style/TextBody1" />
@@ -326,7 +326,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:text="953,664"
+                            android:text="@string/stat_loading"
                             android:id="@+id/textLocalAlarmBlocked"
                             android:gravity="center_vertical"
                             style="@style/TextBody1Fade" />

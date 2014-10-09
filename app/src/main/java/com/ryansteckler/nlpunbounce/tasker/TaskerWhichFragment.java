@@ -52,7 +52,7 @@ public class TaskerWhichFragment extends Fragment {
                     .commit();
 
                 if (mListener != null)
-                    mListener.onTaskerWhichSetTitle("Choose the wakelock to adjust.");
+                    mListener.onTaskerWhichSetTitle(getResources().getString(R.string.tasker_choose_wakelock));
             }
         });
 
@@ -69,7 +69,7 @@ public class TaskerWhichFragment extends Fragment {
                     .commit();
 
                 if (mListener != null)
-                    mListener.onTaskerWhichSetTitle("Choose the alarm to adjust.");
+                    mListener.onTaskerWhichSetTitle(getResources().getString(R.string.tasker_choose_alarm));
             }
         });
 
@@ -117,7 +117,7 @@ public class TaskerWhichFragment extends Fragment {
         {
             //Set the title again.
             if (mListener != null) {
-                mListener.onTaskerWhichSetTitle("Welcome to Unbounce's Tasker plugin.");
+                mListener.onTaskerWhichSetTitle(getResources().getString(R.string.tasker_welcome));
             }
         }
     }

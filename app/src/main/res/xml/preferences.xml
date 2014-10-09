@@ -9,6 +9,12 @@
             android:title="Show launcher icon"
             android:defaultValue="true"/>
 
+        <CheckBoxPreference
+            android:key="global_participation"
+            android:title="Participate in Global Stats"
+            android:summary="Send and receive anonymous stats"
+            android:defaultValue="true"/>
+
         <Preference
             android:title="Reset to defaults"
             android:key="reset_defaults"

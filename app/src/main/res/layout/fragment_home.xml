@@ -57,13 +57,13 @@
                             android:layout_height="wrap_content"
                             android:enabled="false"
                             android:layout_marginLeft="@dimen/pad_icon"
-                            android:text="@string/local_text"
+                            android:text="@string/card_local_title"
                             style="@style/TextTitleLight" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Your device stats"
+                            android:text="@string/card_local_subtitle"
                             android:layout_marginLeft="@dimen/pad_icon"
                             style="@style/TextCaptionLight" />
 
@@ -72,7 +72,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="RESET"
+                        android:text="@string/card_button_reset"
                         android:id="@+id/buttonResetStats"
                         android:background="@drawable/flat_button_background"
                         style="@style/TextButtonLight"
@@ -101,7 +101,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:text="Stats collected for"
+                            android:text="@string/stat_collected_for"
                             android:gravity="center_vertical"
                             android:layout_weight="1"
                             style="@style/TextBody1" />
@@ -109,7 +109,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:text="Loading..."
+                            android:text="@string/stat_loading"
                             android:id="@+id/textRunningSince"
                             android:gravity="center_vertical"
                             style="@style/TextBody1Fade" />
@@ -125,7 +125,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:text="Wakelock time allowed"
+                            android:text="@string/stat_wake_duration_allowed"
                             android:gravity="center_vertical"
                             android:layout_weight="1"
                             style="@style/TextBody1" />
@@ -133,7 +133,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:text="Loading..."
+                            android:text="@string/stat_loading"
                             android:id="@+id/textLocalWakeTimeAllowed"
                             android:gravity="center_vertical"
                             style="@style/TextBody1Fade" />
@@ -149,7 +149,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:text="Wakelock time blocked"
+                            android:text="@string/stat_wake_duration_blocked"
                             android:gravity="center_vertical"
                             android:layout_weight="1"
                             style="@style/TextBody1" />
@@ -157,7 +157,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:text="Loading..."
+                            android:text="@string/stat_loading"
                             android:id="@+id/textLocalWakeTimeBlocked"
                             android:gravity="center_vertical"
                             style="@style/TextBody1Fade" />
@@ -173,7 +173,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:text="Wakelocks acquired"
+                            android:text="@string/stat_wake_allowed"
                             android:gravity="center_vertical"
                             android:layout_weight="1"
                             style="@style/TextBody1" />
@@ -181,7 +181,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:text="Loading..."
+                            android:text="@string/stat_loading"
                             android:id="@+id/textLocalWakeAcquired"
                             android:gravity="center_vertical"
                             style="@style/TextBody1Fade" />
@@ -197,7 +197,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:text="Wakelocks blocked"
+                            android:text="stat_wake_blocked"
                             android:gravity="center_vertical"
                             android:layout_weight="1"
                             style="@style/TextBody1" />
@@ -205,7 +205,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:text="Loading..."
+                            android:text="@string/stat_loading"
                             android:id="@+id/textLocalWakeBlocked"
                             android:gravity="center_vertical"
                             style="@style/TextBody1Fade" />
@@ -221,7 +221,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:text="Alarms fired"
+                            android:text="@string/stat_alarm_allowed"
                             android:gravity="center_vertical"
                             android:layout_weight="1"
                             style="@style/TextBody1" />
@@ -229,7 +229,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:text="Loading..."
+                            android:text="@string/stat_loading"
                             android:id="@+id/textLocalAlarmsAcquired"
                             android:gravity="center_vertical"
                             style="@style/TextBody1Fade" />
@@ -245,7 +245,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:text="Alarms blocked"
+                            android:text="@string/stat_alarm_blocked"
                             android:gravity="center_vertical"
                             android:layout_weight="1"
                             style="@style/TextBody1" />
@@ -253,7 +253,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:text="Loading..."
+                            android:text="@string/stat_loading"
                             android:id="@+id/textLocalAlarmsBlocked"
                             android:gravity="center_vertical"
                             style="@style/TextBody1Fade" />
@@ -303,13 +303,13 @@
                             android:layout_height="wrap_content"
                             android:enabled="false"
                             android:layout_marginLeft="@dimen/pad_icon"
-                            android:text="@string/global_text" />
+                            android:text="@string/card_global_title" />
 
                         <TextView
                             style="@style/TextCaptionLight"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Our combined stats"
+                            android:text="@string/card_global_subtitle"
                             android:layout_marginLeft="@dimen/pad_icon" />
                     </LinearLayout>
 
@@ -330,7 +330,7 @@
                             style="@style/TextBody1"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:text="Wakelock time allowed"
+                            android:text="@string/stat_wake_duration_allowed"
                             android:gravity="center_vertical"
                             android:layout_weight="1" />
 
@@ -338,7 +338,7 @@
                             style="@style/TextBody1Fade"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:text="Loading..."
+                            android:text="@string/stat_loading"
                             android:id="@+id/textGlobalWakelockDurationAllowed"
                             android:gravity="center_vertical" />
                     </LinearLayout>
@@ -352,7 +352,7 @@
                             style="@style/TextBody1"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:text="Wakelock time blocked"
+                            android:text="@string/stat_wake_duration_blocked"
                             android:gravity="center_vertical"
                             android:layout_weight="1" />
 
@@ -360,7 +360,7 @@
                             style="@style/TextBody1Fade"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:text="Loading..."
+                            android:text="@string/stat_loading"
                             android:id="@+id/textGlobalWakelockDurationBlocked"
                             android:gravity="center_vertical" />
                     </LinearLayout>
@@ -374,7 +374,7 @@
                             style="@style/TextBody1"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:text="Wakelocks acquired"
+                            android:text="@string/stat_wake_allowed"
                             android:gravity="center_vertical"
                             android:layout_weight="1" />
 
@@ -382,7 +382,7 @@
                             style="@style/TextBody1Fade"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:text="Loading..."
+                            android:text="@string/stat_loading"
                             android:id="@+id/textGlobalWakelockAllowed"
                             android:gravity="center_vertical" />
                     </LinearLayout>
@@ -396,7 +396,7 @@
                             style="@style/TextBody1"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:text="Wakelocks blocked"
+                            android:text="@string/stat_wake_blocked"
                             android:gravity="center_vertical"
                             android:layout_weight="1" />
 
@@ -404,7 +404,7 @@
                             style="@style/TextBody1Fade"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:text="Loading..."
+                            android:text="@string/stat_loading"
                             android:id="@+id/textGlobalWakelockBlocked"
                             android:gravity="center_vertical" />
                     </LinearLayout>
@@ -418,7 +418,7 @@
                             style="@style/TextBody1"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:text="Alarms fired"
+                            android:text="@string/stat_alarm_allowed"
                             android:gravity="center_vertical"
                             android:layout_weight="1" />
 
@@ -426,7 +426,7 @@
                             style="@style/TextBody1Fade"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:text="Loading..."
+                            android:text="@string/stat_loading"
                             android:id="@+id/textGlobalAlarmAllowed"
                             android:gravity="center_vertical" />
                     </LinearLayout>
@@ -440,7 +440,7 @@
                             style="@style/TextBody1"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:text="Alarms blocked"
+                            android:text="@string/stat_alarm_blocked"
                             android:gravity="center_vertical"
                             android:layout_weight="1" />
 
@@ -448,7 +448,7 @@
                             style="@style/TextBody1Fade"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:text="Loading..."
+                            android:text="@string/stat_loading"
                             android:id="@+id/textGlobalAlarmBlocked"
                             android:gravity="center_vertical" />
                     </LinearLayout>
@@ -489,13 +489,13 @@
                             android:layout_height="wrap_content"
                             android:enabled="false"
                             android:layout_marginLeft="@dimen/pad_icon"
-                            android:text="@string/donate_text"
+                            android:text="@string/card_donate_title"
                             style="@style/TextTitleLight" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Support your local developer"
+                            android:text="@string/card_donate_subtitle"
                             android:layout_marginLeft="@dimen/pad_icon"
                             style="@style/TextCaptionLight" />
 
@@ -518,7 +518,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="This app will always let you fix the Network Location Provider battery killers for free.  If you'd also like to Unbounce other wakelocks and alarms, you can upgrade to the Pro features by supporting the project below.  Any donation amount will unlock the Pro features."
+                            android:text="@string/donate_text"
                             style="@style/TextBody1"
                             android:layout_marginBottom="@dimen/card_internal_padding" />
 
@@ -537,7 +537,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="fill_parent"
-                                android:text="A cup of coffee while I write code"
+                                android:text="@string/donate_1"
                                 android:layout_weight="1"
                                 style="@style/TextBody1"
                                 android:gravity="center_vertical" />
@@ -563,7 +563,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="fill_parent"
-                                android:text="A latte while I answer forum questions"
+                                android:text="@string/donate_5"
                                 android:gravity="center_vertical"
                                 android:layout_weight="1"
                                 style="@style/TextBody1" />
@@ -589,7 +589,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="fill_parent"
-                                android:text="The joy of not carrying your charger"
+                                android:text="@string/donate_10"
                                 android:gravity="center_vertical"
                                 android:layout_weight="1"
                                 style="@style/TextBody1" />
@@ -615,13 +615,13 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Thank you for your donation.  It means a lot to me.  I work hard in my limited free time to bring you better battery life.  When you donated, you made a difference to the project, and made a difference in my family's life.  You rock."
+                            android:text="@string/donate_thank_you"
                             style="@style/TextBody1" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="HOW CAN I HELP FURTHER?"
+                            android:text="@string/donate_more_button"
                             android:id="@+id/buttonHelpFurther"
                             android:gravity="center_horizontal"
                             style="@style/TextCaption"
@@ -638,7 +638,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="People have asked how they can contribute beyond their initial donation.  The buttons below let you donate further, but don't provide any additional features.  Thank you so much for supporting Unbounce!"
+                                android:text="@string/donate_more_text"
                                 style="@style/TextBody1"
                                 android:paddingBottom="@dimen/card_external_padding" />
 
@@ -657,7 +657,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="fill_parent"
-                                    android:text="A cup of coffee while I read the bug list"
+                                    android:text="@string/donate_1"
                                     android:layout_weight="1"
                                     style="@style/TextBody1"
                                     android:gravity="center_vertical" />
@@ -683,7 +683,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="fill_parent"
-                                    android:text="A latte while I code new features"
+                                    android:text="@string/donate_5"
                                     android:gravity="center_vertical"
                                     android:layout_weight="1"
                                     style="@style/TextBody1" />
@@ -709,7 +709,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="fill_parent"
-                                    android:text="A month of unlimited music!"
+                                    android:text="@string/donate_10"
                                     android:gravity="center_vertical"
                                     android:layout_weight="1"
                                     style="@style/TextBody1" />
@@ -749,7 +749,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Welcome!"
+                android:text="@string/welcome_banner_title"
                 style="@style/TextTitleLight"
                 android:padding="@dimen/card_internal_padding"
                 android:textStyle="bold" />
@@ -769,7 +769,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="You can block wakelocks to stop your phone from staying awake, and block alarms to stop it from waking up in the first place.  We've already set up some battery saving defaults for you."
+            android:text="@string/welcome_banner_text"
             android:layout_margin="@dimen/card_internal_padding"
             style="@style/TextTitleLight" />
 

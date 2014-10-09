@@ -66,7 +66,7 @@ public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (mListener != null)
-            mListener.onAlarmsSetTitle("Alarms");
+            mListener.onAlarmsSetTitle(getResources().getString(R.string.title_alarms));
 
         mAdapter.sort();
 
@@ -161,8 +161,8 @@ public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.
         //Remember the scroll pos so we can reinstate it
         if (!hidden) {
             if (mListener != null) {
-                mListener.onAlarmsSetTitle("Alarms");
-                mListener.onAlarmsSetTaskerTitle("Choose the alarm to adjust.");
+                mListener.onAlarmsSetTitle(getResources().getString(R.string.title_alarms));
+                mListener.onAlarmsSetTaskerTitle(getResources().getString(R.string.tasker_choose_alarm));
             }
             if (mReloadOnShow) {
                 mReloadOnShow = false;

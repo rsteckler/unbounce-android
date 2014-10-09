@@ -10,6 +10,7 @@ import com.ryansteckler.nlpunbounce.models.WakelockStats;
 
 import java.io.InvalidClassException;
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class ActivityReceiver extends BroadcastReceiver {
 
@@ -25,6 +26,13 @@ public class ActivityReceiver extends BroadcastReceiver {
             HashMap<String, BaseStats> stats = null;
             try {
                 stats = (HashMap<String, BaseStats>) intent.getSerializableExtra("stats");
+                Iterator<BaseStats> iter = stats.values().iterator();
+                if (iter.hasNext()) {
+                    BaseStats testStat = iter.next();
+                    if (!(testStat instanceof BaseStats)) {
+                        throw new ClassCastException();
+                    }
+                }
             } catch (RuntimeException rte) {
                 //From upgrading the stats classes.  Just reset the stats.
                 stats = new HashMap<String, BaseStats>();

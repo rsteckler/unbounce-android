@@ -72,7 +72,7 @@ public class WakelocksFragment extends ListFragment implements WakelockDetailFra
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (mListener != null)
-            mListener.onWakelocksSetTitle("Wakelocks");
+            mListener.onWakelocksSetTitle(getResources().getString(R.string.title_wakelocks));
 
         mAdapter.sort(!mSortByTime);
     }
@@ -138,6 +138,10 @@ public class WakelocksFragment extends ListFragment implements WakelockDetailFra
         //Start by getting the bounds of the current list item, as a starting point.
         ListView list = (ListView)getActivity().findViewById(android.R.id.list);
         View listItem = list.getChildAt(position - list.getFirstVisiblePosition());
+        if (listItem == null) {
+            //Let this crash to google so I can get better reports.
+            throw new IndexOutOfBoundsException("Tried to open item that didn't exist: " + position + ". First vis: " + list.getFirstVisiblePosition());
+        }
         final Rect startBounds = new Rect();
         listItem.getGlobalVisibleRect(startBounds);
 
@@ -169,8 +173,8 @@ public class WakelocksFragment extends ListFragment implements WakelockDetailFra
         //Remember the scroll pos so we can reinstate it
         if (!hidden) {
             if (mListener != null) {
-                mListener.onWakelocksSetTitle("Wakelocks");
-                mListener.onWakelocksSetTaskerTitle("Choose the wakelock to adjust.");
+                mListener.onWakelocksSetTitle(getResources().getString(R.string.title_wakelocks));
+                mListener.onWakelocksSetTaskerTitle(getResources().getString(R.string.tasker_choose_wakelock));
             }
             if (mReloadOnShow) {
                 mReloadOnShow = false;
