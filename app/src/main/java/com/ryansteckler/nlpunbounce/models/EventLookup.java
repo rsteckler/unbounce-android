@@ -49,6 +49,7 @@ public class EventLookup {
                 lower.equals("rilj") ||
                 lower.equals("*net_scheduler*") ||
                 lower.equals("gcoreflp") ||
+                lower.equals("wakeful statemachine: geofencerstatemachine") ||
                 lower.equals("com.commonsware.cwac.wakeful.wakefullintentservice") ||
                 lower.equals("wakeful statemachine: geofencerstatemachine") ||
                 lower.equals("fingerprint_scanner_local") ||
@@ -59,7 +60,7 @@ public class EventLookup {
                 lower.equals("ulrdispatchingservice") ||
                 lower.equals("fingerprint_scanner_static") ||
                 lower.equals("nlpcollectorwakelock")) {
-            toReturn = SAFE;
+                    toReturn = SAFE;
         }
         //Wakelocks - unsafe
         else if (lower.equals("alarmmanager") ||

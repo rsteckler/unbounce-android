@@ -10,7 +10,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="Unbounce"
-        android:theme="@style/UnbounceTheme" >
+        android:theme="@style/UnbounceThemeDark" >
         <meta-data
             android:name="xposedmodule"
             android:value="true" />

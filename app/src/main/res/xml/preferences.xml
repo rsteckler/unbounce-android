@@ -46,4 +46,59 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory
+        android:title="Translation Credit"
+        android:key="">
+
+        <Preference
+            android:title=""
+            android:editable="false"
+            android:defaultValue="0"
+            android:summary="Finnish"
+            />
+
+        <Preference
+            android:title="Roberto Fabrizi"
+            android:editable="false"
+            android:defaultValue="0"
+            android:summary="Italian"
+            />
+
+        <Preference
+            android:title="RyokoN (@WedyDQ10)"
+            android:editable="false"
+            android:defaultValue="0"
+            android:summary="Japanese"
+            />
+
+        <Preference
+            android:title="Anonymous"
+            android:editable="false"
+            android:defaultValue="0"
+            android:summary="Japanese"
+            />
+
+        <Preference
+            android:title="Celestial Fury"
+            android:editable="false"
+            android:defaultValue="0"
+            android:summary="Malay"
+            />
+
+        <Preference
+            android:title=""
+            android:editable="false"
+            android:defaultValue="0"
+            android:summary="Turkish"
+            />
+
+        <Preference
+            android:title="Thomas Sokay (Soktomy)"
+            android:editable="false"
+            android:defaultValue="0"
+            android:summary="French"
+            />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>

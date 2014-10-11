@@ -26,7 +26,7 @@
                 android:orientation="vertical"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/card_background"
+                android:background="@drawable/card_background_light"
                 android:layout_margin="@dimen/card_external_padding"
                 android:layout_marginTop="@dimen/activity_vertical_margin">
 
@@ -94,7 +94,7 @@
                 android:orientation="vertical"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/card_background"
+                android:background="@drawable/card_background_light"
                 android:layout_margin="@dimen/card_external_padding"
                 android:layout_marginTop="@dimen/activity_vertical_margin">
 
@@ -217,7 +217,7 @@
                 android:orientation="vertical"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/card_background"
+                android:background="@drawable/card_background_light"
                 android:layout_margin="@dimen/card_external_padding"
                 android:layout_marginTop="@dimen/activity_vertical_margin">
 

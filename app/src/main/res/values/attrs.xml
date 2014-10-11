@@ -1,0 +1,27 @@
+<resources>
+    <declare-styleable name="AppTheme">
+        <attr name="activityRootBackground" format="reference|color" />
+        <attr name="cardBackground" format="reference" />
+        <attr name="cardText" format="reference" />
+        <attr name="cardTextValues" format="reference" />
+        <attr name="background_primary" format="reference|color"></attr>
+        <attr name="background_primary_shaded" format="reference|color"></attr>
+
+        <attr name="background_secondary" format="reference|color"></attr>
+        <attr name="background_secondary_faded" format="reference|color"></attr>
+        <attr name="background_secondary_shaded" format="reference|color"></attr>
+
+        <attr name="background_gray" format="reference|color"></attr>
+
+        <attr name="background_three" format="reference|color"></attr>
+
+        <attr name="background_four" format="reference|color"></attr>
+        <attr name="background_four_faded" format="reference|color"></attr>
+        <attr name="background_four_shaded" format="reference|color"></attr>
+
+        <attr name="background_panel_disabled" format="reference|color"></attr>
+        <attr name="background_panel_enabled" format="reference|color"></attr>
+        <attr name="reset_button_background" format="reference"></attr>
+
+    </declare-styleable>
+</resources>
