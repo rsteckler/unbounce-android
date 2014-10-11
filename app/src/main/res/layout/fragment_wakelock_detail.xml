@@ -160,7 +160,7 @@
                     android:layout_height="fill_parent"
                     android:padding="@dimen/card_internal_padding"
                     android:id="@+id/settingsPanel"
-                    android:background="@color/background_panel_disabled">
+                    android:background="?background_panel_disabled">
 
                     <LinearLayout
                         android:orientation="horizontal"
@@ -177,7 +177,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="@string/settings_allow_every"
-                                style="@style/TextBody2"
+                                style="?cardText"
                                 android:layout_marginRight="@dimen/card_external_padding"
                                 android:layout_weight=".25"
                                 android:layout_gravity="center_vertical" />
@@ -201,7 +201,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="@string/settings_seconds"
-                                style="@style/TextBody2"
+                                style="?cardText"
                                 android:layout_marginLeft="@dimen/card_external_padding"
                                 android:layout_weight=".45"
                                 android:layout_gravity="center_vertical" />
