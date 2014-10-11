@@ -330,6 +330,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
         if (sinceReload > mReloadPrefsFrequency) {
             setupReceiver(param);
             m_prefs.reload();
+            UnbounceStatsCollection.getInstance().refreshPrefs(m_prefs);
             updateStatsIfNeeded(context);
         }
 

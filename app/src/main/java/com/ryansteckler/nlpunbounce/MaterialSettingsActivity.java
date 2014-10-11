@@ -23,6 +23,7 @@ import com.ryansteckler.inappbilling.IabHelper;
 import com.ryansteckler.inappbilling.IabResult;
 import com.ryansteckler.inappbilling.Inventory;
 import com.ryansteckler.inappbilling.Purchase;
+import com.ryansteckler.nlpunbounce.helpers.ThemeHelper;
 
 public class MaterialSettingsActivity extends Activity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks,
@@ -39,6 +40,8 @@ public class MaterialSettingsActivity extends Activity
 
     IabHelper mHelper;
 
+    int mCurTheme = ThemeHelper.THEME_DEFAULT;
+
     private boolean mIsPremium = false;
 
     /**
@@ -46,7 +49,6 @@ public class MaterialSettingsActivity extends Activity
      */
     private CharSequence mTitle;
 
-    private int mCurrentSection = 1;
     int mLastActionbarColor = 0;
 
     private static final String TAG = "NlpUnbounceSettings: ";
@@ -54,6 +56,7 @@ public class MaterialSettingsActivity extends Activity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mCurTheme = ThemeHelper.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_material_settings);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
@@ -131,6 +134,13 @@ public class MaterialSettingsActivity extends Activity
         Tracker tracker = ga.newTracker("UA-11575064-3");
         tracker.setScreenName("MaterialSettingsActivity");
         tracker.send(new HitBuilders.AppViewBuilder().build());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //Update theme
+        mCurTheme = ThemeHelper.onActivityResumeVerifyTheme(this, mCurTheme);
     }
 
     private void updateDonationUi() {

@@ -30,6 +30,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 
+import de.robv.android.xposed.XSharedPreferences;
+
 /**
  * Created by rsteckler on 9/5/14.
  */
@@ -45,7 +47,8 @@ public class UnbounceStatsCollection implements Serializable {
     HashMap<String, BaseStats> mCurrentStats = null;
     HashMap<String, Long> mGlobalStats = null;
     HashMap<String, BaseStats> mSincePushStats = null;
-    public long mRunningSince = 0;
+    private long mRunningSince = 0;
+    private boolean mGlobalParticipation = true;
 
     public static final int STAT_CURRENT = 0;
     public static final int STAT_GLOBAL = 1;
@@ -423,7 +426,9 @@ public class UnbounceStatsCollection implements Serializable {
         loadStats(context);
 
         addInterimWakelock(toAdd, mCurrentStats);
-        addInterimWakelock(toAdd, mSincePushStats);
+        if (mGlobalParticipation) {
+            addInterimWakelock(toAdd, mSincePushStats);
+        }
         //We explicitly don't save here because this method "happens" to only be called by the
         //hook process, which shouldn't save the file because it's root, and our app needs to read the file.
         //Todo:  In the future, we should provide a parameter so the hook process can call this specifying a no-save
@@ -452,7 +457,9 @@ public class UnbounceStatsCollection implements Serializable {
         loadStats(context);
 
         incrementWakelockBlock(statName, mCurrentStats);
-        incrementWakelockBlock(statName, mSincePushStats);
+        if (mGlobalParticipation) {
+            incrementWakelockBlock(statName, mSincePushStats);
+        }
 
         //We explicitly don't save here because this method "happens" to only be called by the
         //hook process, which shouldn't save the file because it's root, and our app needs to read the file.
@@ -479,7 +486,9 @@ public class UnbounceStatsCollection implements Serializable {
         loadStats(context);
 
         incrementAlarmBlock(statName, mCurrentStats);
-        incrementAlarmBlock(statName, mSincePushStats);
+        if (mGlobalParticipation) {
+            incrementAlarmBlock(statName, mSincePushStats);
+        }
 
         //We explicitly don't save here because this method "happens" to only be called by the
         //hook process, which shouldn't save the file because it's root, and our app needs to read the file.
@@ -506,7 +515,9 @@ public class UnbounceStatsCollection implements Serializable {
         loadStats(context);
 
         incrementAlarmAllowed(statName, mCurrentStats);
-        incrementAlarmAllowed(statName, mSincePushStats);
+        if (mGlobalParticipation) {
+            incrementAlarmAllowed(statName, mSincePushStats);
+        }
 
         //We explicitly don't save here because this method "happens" to only be called by the
         //hook process, which shouldn't save the file because it's root, and our app needs to read the file.
@@ -583,7 +594,6 @@ public class UnbounceStatsCollection implements Serializable {
                     pushStatsToNetwork(context);
                 }
             }
-
         }
     }
 
@@ -706,9 +716,7 @@ public class UnbounceStatsCollection implements Serializable {
 
     public void pushStatsToNetwork(final Context context) {
         //Are we allowed to?
-        SharedPreferences prefs = context.getSharedPreferences("com.ryansteckler.nlpunbounce" + "_preferences", Context.MODE_WORLD_READABLE);
-        if (prefs.getBoolean("global_participation", true)) {
-
+        if (mGlobalParticipation) {
             //Serialize the collection to JSON
             if (mSincePushStats != null) {
                 if (mSincePushStats.size() > 0) {
@@ -770,5 +778,10 @@ public class UnbounceStatsCollection implements Serializable {
                 }
             });
         }
+    }
+
+    public void refreshPrefs(XSharedPreferences prefs) {
+        //Refresh the global options from the settings
+        mGlobalParticipation = prefs.getBoolean("global_participation", true);
     }
 }

@@ -13,6 +13,7 @@ import android.widget.ListView;
 
 
 import com.ryansteckler.nlpunbounce.adapters.AlarmsAdapter;
+import com.ryansteckler.nlpunbounce.helpers.ThemeHelper;
 import com.ryansteckler.nlpunbounce.models.AlarmStats;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
 import com.ryansteckler.nlpunbounce.models.WakelockStats;
@@ -75,6 +76,7 @@ public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ThemeHelper.onActivityCreateSetTheme(this.getActivity());
         if (getArguments() != null) {
             mTaskerMode = getArguments().getBoolean(ARG_TASKER_MODE);
         }

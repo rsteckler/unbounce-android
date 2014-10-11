@@ -26,7 +26,7 @@
             android:gravity="center_vertical|center_horizontal"
             android:paddingLeft="@dimen/section_pad"
             android:paddingRight="@dimen/section_pad"
-            style="@style/TextCaption" />
+            style="?textCaption" />
     </LinearLayout>
 
     <LinearLayout
@@ -43,7 +43,7 @@
         android:fontFamily="@string/app_font_family"
         android:layout_weight="1"
         android:singleLine="true"
-        style="@style/TextBody1"
+        style="?cardText"
         android:layout_marginLeft="@dimen/section_pad"
         android:ellipsize="marquee" />
     </LinearLayout>

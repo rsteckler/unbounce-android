@@ -15,6 +15,8 @@
         <item name="background_secondary_shaded">#ef6c00</item>
 
         <item name="background_gray">#9E9E9E</item>
+        <item name="background_lists">#ffffff</item>
+        <item name="background_drawer">#cc666666</item>
 
         <item name="background_three">#FF5722</item>
 
@@ -25,6 +27,10 @@
         <item name="background_panel_disabled">#e0e0e0</item>
         <item name="background_panel_enabled">#ffffff</item>
         <item name="reset_button_background">@drawable/flat_button_background</item>
+        <item name="taskerHeader">@drawable/header_background</item>
+        <item name="taskerHeaderText">@style/TextTitle</item>
+        <item name="textCaption">@style/TextCaption</item>
+        <item name="categoryText">@style/TextTitle</item>
 
     </style>
 
@@ -39,18 +45,25 @@
 
         <item name="background_secondary">#FF9800</item>
         <item name="background_secondary_faded">#ffb74d</item>
-        <item name="background_secondary_shaded">#ef6c00</item>
+        <item name="background_secondary_shaded">#333333</item>
 
         <item name="background_gray">#9E9E9E</item>
+        <item name="background_lists">#000000</item>
+        <item name="background_drawer">#cc000000</item>
 
         <item name="background_three">#FF5722</item>
 
         <item name="background_four">#9c27b0</item>
         <item name="background_four_faded">#ba68c8</item>
-        <item name="background_four_shaded">#7b1fa2</item>
+        <item name="background_four_shaded">#333333</item>
 
         <item name="background_panel_disabled">#e0e0e0</item>
         <item name="reset_button_background">@drawable/flat_button_background_dark</item>
+        <item name="taskerHeader">@drawable/header_background_dark</item>
+        <item name="taskerHeaderText">@style/TextTitle_dark</item>
+        <item name="textCaption">@style/TextCaption_dark</item>
+        <item name="categoryText">@style/TextTitle_dark</item>
+
     </style>
 
 
@@ -130,6 +143,13 @@
         <item name="android:alpha">0.54</item>
     </style>
 
+    <style name="TextCaption_dark">
+        <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:alpha">0.54</item>
+    </style>
+
     <style name="TextCaptionLight">
         <item name="android:textSize">12sp</item>
         <item name="android:fontFamily">sans-serif</item>
@@ -145,6 +165,13 @@
     </style>
 
     <style name="TextTitleLight">
+        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:alpha">0.87</item>
+    </style>
+
+    <style name="TextTitle_dark">
         <item name="android:textSize">20sp</item>
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:textColor">@android:color/white</item>

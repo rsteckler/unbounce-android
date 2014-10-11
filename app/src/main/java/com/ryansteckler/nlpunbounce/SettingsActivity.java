@@ -8,12 +8,14 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.widget.Toast;
 
 import com.ryansteckler.inappbilling.IabHelper;
 import com.ryansteckler.nlpunbounce.helpers.SettingsHelper;
+import com.ryansteckler.nlpunbounce.helpers.ThemeHelper;
 
 
 public class SettingsActivity extends Activity {
@@ -26,12 +28,23 @@ public class SettingsActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mCurTheme = ThemeHelper.onActivityCreateSetTheme(this);
+
         // Display the fragment as the main content.
         if (savedInstanceState == null)
             getFragmentManager().beginTransaction().replace(android.R.id.content,
                     new PrefsFragment()).commit();
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //Update theme
+        mCurTheme = ThemeHelper.onActivityResumeVerifyTheme(this, mCurTheme);
+    }
+
+    int mCurTheme = ThemeHelper.THEME_DEFAULT;
 
     public static class PrefsFragment extends PreferenceFragment
             implements SharedPreferences.OnSharedPreferenceChangeListener {
@@ -93,8 +106,7 @@ public class SettingsActivity extends Activity {
                 boolean value = sharedPreferences.getBoolean(key, false);
                 pref.setChecked(value);
             }
-            else if (key.equals("show_launcher_icon"))
-            {
+            else if (key.equals("show_launcher_icon")) {
                 CheckBoxPreference pref = (CheckBoxPreference) findPreference(key);
                 boolean value = sharedPreferences.getBoolean(key, false);
                 pref.setChecked(value);
@@ -103,6 +115,15 @@ public class SettingsActivity extends Activity {
                 int state = value ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED : PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
                 ComponentName aliasName = new ComponentName(getActivity(), "com.ryansteckler.nlpunbounce.Settings-Alias");
                 packageManager.setComponentEnabledSetting(aliasName, state, PackageManager.DONT_KILL_APP);
+            }
+            else if (key.equals("theme")) {
+                ListPreference pref = (ListPreference) findPreference(key);
+                if (pref.getValue().equals("dark")) {
+                    ThemeHelper.changeToTheme(this.getActivity(), ThemeHelper.THEME_DARK);
+                } else {
+                    ThemeHelper.changeToTheme(this.getActivity(), ThemeHelper.THEME_DEFAULT);
+                }
+
             }
         }
 

@@ -12,6 +12,7 @@
         <attr name="background_secondary_shaded" format="reference|color"></attr>
 
         <attr name="background_gray" format="reference|color"></attr>
+        <attr name="background_lists" format="reference|color"></attr>
 
         <attr name="background_three" format="reference|color"></attr>
 
@@ -22,6 +23,13 @@
         <attr name="background_panel_disabled" format="reference|color"></attr>
         <attr name="background_panel_enabled" format="reference|color"></attr>
         <attr name="reset_button_background" format="reference"></attr>
+
+        <attr name="taskerHeader" format="reference" />
+        <attr name="taskerHeaderText" format="reference" />
+        <attr name="textCaption" format="reference" />
+        <attr name="categoryText" format="reference" />
+        <attr name="background_drawer" format="reference|color"></attr>
+
 
     </declare-styleable>
 </resources>

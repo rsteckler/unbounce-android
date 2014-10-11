@@ -13,7 +13,7 @@
         android:visibility="visible"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:background="@android:color/background_light" />
+        android:background="?background_lists" />
 
 
 </FrameLayout>

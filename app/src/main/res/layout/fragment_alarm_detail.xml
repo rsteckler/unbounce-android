@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context="com.ryansteckler.nlpunbounce.AlarmDetailFragment"
     android:visibility="visible"
-    android:background="@android:color/background_light">
+    android:background="?activityRootBackground">
 
 
     <ScrollView
@@ -26,7 +26,7 @@
                 android:orientation="vertical"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/card_background_light"
+                android:background="?cardBackground"
                 android:layout_margin="@dimen/card_external_padding"
                 android:layout_marginTop="@dimen/activity_vertical_margin">
 
@@ -34,7 +34,7 @@
                     android:orientation="horizontal"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/background_four_shaded"
+                    android:background="?background_four_shaded"
                     android:paddingLeft="@dimen/card_internal_padding"
                     android:paddingTop="@dimen/card_internal_padding"
                     android:paddingBottom="@dimen/card_internal_padding">
@@ -81,7 +81,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=""
-                        style="@style/TextBody1"
+                        style="?cardText"
                         android:id="@+id/textViewAlarmDescription"
                         android:alpha=".87" />
 
@@ -94,7 +94,7 @@
                 android:orientation="vertical"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/card_background_light"
+                android:background="?cardBackground"
                 android:layout_margin="@dimen/card_external_padding"
                 android:layout_marginTop="@dimen/activity_vertical_margin">
 
@@ -102,7 +102,7 @@
                     android:orientation="horizontal"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/background_four_shaded"
+                    android:background="?background_four_shaded"
                     android:paddingLeft="@dimen/card_internal_padding"
                     android:paddingTop="@dimen/card_internal_padding"
                     android:paddingBottom="@dimen/card_internal_padding"
@@ -217,7 +217,7 @@
                 android:orientation="vertical"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/card_background_light"
+                android:background="?cardBackground"
                 android:layout_margin="@dimen/card_external_padding"
                 android:layout_marginTop="@dimen/activity_vertical_margin">
 
@@ -225,7 +225,7 @@
                     android:orientation="horizontal"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/background_four_shaded"
+                    android:background="?background_four_shaded"
                     android:paddingLeft="@dimen/card_internal_padding"
                     android:paddingTop="@dimen/card_internal_padding"
                     android:paddingBottom="@dimen/card_internal_padding">
@@ -265,7 +265,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/card_button_reset"
                         android:id="@+id/buttonResetStats"
-                        android:background="@drawable/flat_button_background"
+                        android:background="?reset_button_background"
                         style="@style/TextButtonLight"
                         android:paddingRight="@dimen/flat_button_long_padding"
                         android:paddingTop="@dimen/card_external_padding"
@@ -297,7 +297,8 @@
                             android:text="@string/stat_alarms_acquired"
                             android:gravity="center_vertical"
                             android:layout_weight="1"
-                            style="@style/TextBody1" />
+                            style="?cardText"
+                            />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -305,7 +306,7 @@
                             android:text="@string/stat_loading"
                             android:id="@+id/textLocalAlarmAcquired"
                             android:gravity="center_vertical"
-                            style="@style/TextBody1Fade" />
+                            style="?cardTextValues" />
 
                     </LinearLayout>
 
@@ -321,7 +322,8 @@
                             android:text="@string/stat_alarms_blocked"
                             android:gravity="center_vertical"
                             android:layout_weight="1"
-                            style="@style/TextBody1" />
+                            style="?cardText"
+                            />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -329,7 +331,7 @@
                             android:text="@string/stat_loading"
                             android:id="@+id/textLocalAlarmBlocked"
                             android:gravity="center_vertical"
-                            style="@style/TextBody1Fade" />
+                            style="?cardTextValues" />
 
                     </LinearLayout>
 

@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.ryansteckler.nlpunbounce.helpers.ThemeHelper;
 import com.ryansteckler.nlpunbounce.models.EventLookup;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
 import com.ryansteckler.nlpunbounce.models.WakelockStats;
@@ -314,6 +315,8 @@ public class WakelockDetailFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ThemeHelper.onActivityCreateSetTheme(this.getActivity());
+
         if (getArguments() != null) {
             mStartTop = getArguments().getInt(ARG_START_TOP);
             mFinalTop = getArguments().getInt(ARG_FINAL_TOP);
