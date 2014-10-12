@@ -28,7 +28,7 @@
         android:fontFamily="@string/app_font_family"
         android:layout_weight="1"
         android:singleLine="true"
-        style="@style/TextTitle"
+        style="?categoryText"
         android:layout_marginLeft="@dimen/section_pad"
         android:ellipsize="marquee"
         android:layout_gravity="center_vertical" />

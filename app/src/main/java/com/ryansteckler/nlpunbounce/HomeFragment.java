@@ -33,6 +33,7 @@ import android.widget.TextView;
 
 import com.ryansteckler.nlpunbounce.helpers.NetworkHelper;
 import com.ryansteckler.nlpunbounce.helpers.SettingsHelper;
+import com.ryansteckler.nlpunbounce.helpers.ThemeHelper;
 import com.ryansteckler.nlpunbounce.models.BaseStats;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
 
@@ -333,6 +334,7 @@ public class HomeFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        ThemeHelper.onActivityCreateSetTheme(this.getActivity());
         getActivity().getMenuInflater().inflate(R.menu.home, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }

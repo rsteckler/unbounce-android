@@ -9,6 +9,14 @@
             android:title="Show launcher icon"
             android:defaultValue="true"/>
 
+        <ListPreference
+            android:key="theme"
+            android:title="Choose theme"
+            android:dialogTitle="Choose theme"
+            android:entries="@array/themeArray"
+            android:entryValues="@array/themeValues"
+            android:defaultValue="default" />
+
         <CheckBoxPreference
             android:key="global_participation"
             android:title="Participate in Global Stats"
@@ -23,7 +31,6 @@
             android:summary="Reset all alarms and wakelocks to default settings"
             />
 
-
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -35,7 +42,7 @@
             android:key="about_author"
             android:editable="false"
             android:defaultValue="0"
-            android:summary="Version: 1.2.2"
+            android:summary="Version: 1.3"
             />
 
         <CheckBoxPreference
@@ -43,6 +50,68 @@
             android:title="Debug Logging"
             android:summary="Enable debug logcat output"
             android:defaultValue="false"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Translation Credit"
+        android:key="">
+
+        <Preference
+            android:title="Köhvwezd"
+            android:editable="false"
+            android:defaultValue="0"
+            android:summary="Finnish"
+            />
+
+        <Preference
+            android:title="Thomas Sokay (Soktomy)"
+            android:editable="false"
+            android:defaultValue="0"
+            android:summary="French"
+            />
+
+        <Preference
+            android:title="Achim Schumacher"
+            android:editable="false"
+            android:defaultValue="0"
+            android:summary="German"
+            />
+
+        <Preference
+            android:title="Roberto Fabrizi"
+            android:editable="false"
+            android:defaultValue="0"
+            android:summary="Italian"
+            />
+
+        <Preference
+            android:title="RyokoN (@WedyDQ10)"
+            android:editable="false"
+            android:defaultValue="0"
+            android:summary="Japanese"
+            />
+
+        <Preference
+            android:title="Anonymous"
+            android:editable="false"
+            android:defaultValue="0"
+            android:summary="Japanese"
+            />
+
+        <Preference
+            android:title="Celestial Fury"
+            android:editable="false"
+            android:defaultValue="0"
+            android:summary="Malay"
+            />
+
+        <Preference
+            android:title=""
+            android:editable="false"
+            android:defaultValue="0"
+            android:summary="Portuguese"
+            />
 
     </PreferenceCategory>
 

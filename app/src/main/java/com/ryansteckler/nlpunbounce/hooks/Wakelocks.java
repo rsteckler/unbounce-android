@@ -34,7 +34,7 @@ import de.robv.android.xposed.XC_MethodHook;
 public class Wakelocks implements IXposedHookLoadPackage {
 
     private static final String TAG = "Unbounce: ";
-    private static final String VERSION = "1.2.2"; //This needs to be pulled from the manifest or gradle build.
+    private static final String VERSION = "1.3"; //This needs to be pulled from the manifest or gradle build.
     private HashMap<String, Long> mLastWakelockAttempts = null; //The last time each wakelock was allowed.
     private HashMap<String, Long> mLastAlarmAttempts = null; //The last time each alarm was allowed.
 
@@ -330,6 +330,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
         if (sinceReload > mReloadPrefsFrequency) {
             setupReceiver(param);
             m_prefs.reload();
+            UnbounceStatsCollection.getInstance().refreshPrefs(m_prefs);
             updateStatsIfNeeded(context);
         }
 

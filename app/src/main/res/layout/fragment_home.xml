@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     tools:context="com.ryansteckler.nlpunbounce.MaterialSettingsActivity.HomeFragment"
     android:id="@+id/home_container"
-    android:background="#dddddd">
+    android:background="?activityRootBackground"
+    >
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -27,14 +28,14 @@
                 android:layout_marginLeft="@dimen/card_external_padding"
                 android:layout_marginRight="@dimen/card_external_padding"
                 android:visibility="visible"
-                android:background="@drawable/card_background"
+                android:background="?cardBackground"
                 android:layout_marginTop="@dimen/card_external_padding">
 
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/background_primary_shaded"
+                    android:background="?background_primary_shaded"
                     android:paddingLeft="@dimen/card_internal_padding"
                     android:paddingTop="@dimen/card_internal_padding"
                     android:paddingBottom="@dimen/card_internal_padding">
@@ -74,7 +75,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/card_button_reset"
                         android:id="@+id/buttonResetStats"
-                        android:background="@drawable/flat_button_background"
+                        android:background="?reset_button_background"
                         style="@style/TextButtonLight"
                         android:paddingRight="@dimen/flat_button_long_padding"
                         android:paddingTop="@dimen/card_external_padding"
@@ -104,7 +105,8 @@
                             android:text="@string/stat_collected_for"
                             android:gravity="center_vertical"
                             android:layout_weight="1"
-                            style="@style/TextBody1" />
+                            style="?cardText"
+                            />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -112,7 +114,7 @@
                             android:text="@string/stat_loading"
                             android:id="@+id/textRunningSince"
                             android:gravity="center_vertical"
-                            style="@style/TextBody1Fade" />
+                            style="?cardTextValues" />
 
                     </LinearLayout>
 
@@ -128,7 +130,7 @@
                             android:text="@string/stat_wake_duration_allowed"
                             android:gravity="center_vertical"
                             android:layout_weight="1"
-                            style="@style/TextBody1" />
+                            style="?cardText" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -136,7 +138,7 @@
                             android:text="@string/stat_loading"
                             android:id="@+id/textLocalWakeTimeAllowed"
                             android:gravity="center_vertical"
-                            style="@style/TextBody1Fade" />
+                            style="?cardTextValues" />
 
                     </LinearLayout>
 
@@ -152,7 +154,7 @@
                             android:text="@string/stat_wake_duration_blocked"
                             android:gravity="center_vertical"
                             android:layout_weight="1"
-                            style="@style/TextBody1" />
+                            style="?cardText" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -160,7 +162,7 @@
                             android:text="@string/stat_loading"
                             android:id="@+id/textLocalWakeTimeBlocked"
                             android:gravity="center_vertical"
-                            style="@style/TextBody1Fade" />
+                            style="?cardTextValues" />
 
                     </LinearLayout>
 
@@ -176,7 +178,7 @@
                             android:text="@string/stat_wake_allowed"
                             android:gravity="center_vertical"
                             android:layout_weight="1"
-                            style="@style/TextBody1" />
+                            style="?cardText" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -184,7 +186,7 @@
                             android:text="@string/stat_loading"
                             android:id="@+id/textLocalWakeAcquired"
                             android:gravity="center_vertical"
-                            style="@style/TextBody1Fade" />
+                            style="?cardTextValues" />
 
                     </LinearLayout>
 
@@ -197,10 +199,10 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
-                            android:text="stat_wake_blocked"
+                            android:text="@string/stat_wake_blocked"
                             android:gravity="center_vertical"
                             android:layout_weight="1"
-                            style="@style/TextBody1" />
+                            style="?cardText" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -208,7 +210,7 @@
                             android:text="@string/stat_loading"
                             android:id="@+id/textLocalWakeBlocked"
                             android:gravity="center_vertical"
-                            style="@style/TextBody1Fade" />
+                            style="?cardTextValues" />
 
                     </LinearLayout>
 
@@ -224,7 +226,7 @@
                             android:text="@string/stat_alarm_allowed"
                             android:gravity="center_vertical"
                             android:layout_weight="1"
-                            style="@style/TextBody1" />
+                            style="?cardText" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -232,7 +234,7 @@
                             android:text="@string/stat_loading"
                             android:id="@+id/textLocalAlarmsAcquired"
                             android:gravity="center_vertical"
-                            style="@style/TextBody1Fade" />
+                            style="?cardTextValues" />
 
                     </LinearLayout>
 
@@ -248,7 +250,7 @@
                             android:text="@string/stat_alarm_blocked"
                             android:gravity="center_vertical"
                             android:layout_weight="1"
-                            style="@style/TextBody1" />
+                            style="?cardText" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -256,7 +258,7 @@
                             android:text="@string/stat_loading"
                             android:id="@+id/textLocalAlarmsBlocked"
                             android:gravity="center_vertical"
-                            style="@style/TextBody1Fade" />
+                            style="?cardTextValues" />
 
                     </LinearLayout>
 
@@ -270,7 +272,7 @@
                 android:layout_height="fill_parent"
                 android:layout_marginLeft="@dimen/card_external_padding"
                 android:layout_marginRight="@dimen/card_external_padding"
-                android:background="@drawable/card_background"
+                android:background="?cardBackground"
                 android:layout_marginTop="@dimen/card_external_padding"
                 android:visibility="visible"
                 android:id="@+id/linearLayout">
@@ -279,7 +281,7 @@
                     android:orientation="horizontal"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/background_primary_shaded"
+                    android:background="?background_primary_shaded"
                     android:paddingLeft="@dimen/card_internal_padding"
                     android:paddingTop="@dimen/card_internal_padding"
                     android:paddingBottom="@dimen/card_internal_padding" >
@@ -327,7 +329,7 @@
                         android:layout_height="wrap_content" >
 
                         <TextView
-                            style="@style/TextBody1"
+                            style="?cardText"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
                             android:text="@string/stat_wake_duration_allowed"
@@ -335,7 +337,7 @@
                             android:layout_weight="1" />
 
                         <TextView
-                            style="@style/TextBody1Fade"
+                            style="?cardTextValues"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
                             android:text="@string/stat_loading"
@@ -349,7 +351,7 @@
                         android:layout_height="wrap_content" >
 
                         <TextView
-                            style="@style/TextBody1"
+                            style="?cardText"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
                             android:text="@string/stat_wake_duration_blocked"
@@ -357,7 +359,7 @@
                             android:layout_weight="1" />
 
                         <TextView
-                            style="@style/TextBody1Fade"
+                            style="?cardTextValues"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
                             android:text="@string/stat_loading"
@@ -371,7 +373,7 @@
                         android:layout_height="wrap_content" >
 
                         <TextView
-                            style="@style/TextBody1"
+                            style="?cardText"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
                             android:text="@string/stat_wake_allowed"
@@ -379,7 +381,7 @@
                             android:layout_weight="1" />
 
                         <TextView
-                            style="@style/TextBody1Fade"
+                            style="?cardTextValues"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
                             android:text="@string/stat_loading"
@@ -393,7 +395,7 @@
                         android:layout_height="wrap_content" >
 
                         <TextView
-                            style="@style/TextBody1"
+                            style="?cardText"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
                             android:text="@string/stat_wake_blocked"
@@ -401,7 +403,7 @@
                             android:layout_weight="1" />
 
                         <TextView
-                            style="@style/TextBody1Fade"
+                            style="?cardTextValues"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
                             android:text="@string/stat_loading"
@@ -415,7 +417,7 @@
                         android:layout_height="wrap_content" >
 
                         <TextView
-                            style="@style/TextBody1"
+                            style="?cardText"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
                             android:text="@string/stat_alarm_allowed"
@@ -423,7 +425,7 @@
                             android:layout_weight="1" />
 
                         <TextView
-                            style="@style/TextBody1Fade"
+                            style="?cardTextValues"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
                             android:text="@string/stat_loading"
@@ -437,7 +439,7 @@
                         android:layout_height="wrap_content" >
 
                         <TextView
-                            style="@style/TextBody1"
+                            style="?cardText"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
                             android:text="@string/stat_alarm_blocked"
@@ -445,7 +447,7 @@
                             android:layout_weight="1" />
 
                         <TextView
-                            style="@style/TextBody1Fade"
+                            style="?cardTextValues"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
                             android:text="@string/stat_loading"
@@ -459,7 +461,7 @@
                 android:orientation="vertical"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:background="@drawable/card_background"
+                android:background="?cardBackground"
                 android:layout_marginTop="@dimen/card_external_padding"
                 android:layout_marginRight="@dimen/card_external_padding"
                 android:layout_marginLeft="@dimen/card_external_padding"
@@ -470,7 +472,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:showDividers="end"
-                    android:background="@color/background_primary_shaded"
+                    android:background="?background_primary_shaded"
                     android:padding="@dimen/card_internal_padding">
 
                     <ImageView
@@ -519,7 +521,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/donate_text"
-                            style="@style/TextBody1"
+                            style="?cardText"
                             android:layout_marginBottom="@dimen/card_internal_padding" />
 
                         <View style="@style/Divider"
@@ -539,7 +541,7 @@
                                 android:layout_height="fill_parent"
                                 android:text="@string/donate_1"
                                 android:layout_weight="1"
-                                style="@style/TextBody1"
+                                style="?cardText"
                                 android:gravity="center_vertical" />
 
                             <ImageView
@@ -566,7 +568,7 @@
                                 android:text="@string/donate_5"
                                 android:gravity="center_vertical"
                                 android:layout_weight="1"
-                                style="@style/TextBody1" />
+                                style="?cardText" />
 
                             <ImageView
                                 android:layout_width="@dimen/sub_icon_size"
@@ -592,7 +594,7 @@
                                 android:text="@string/donate_10"
                                 android:gravity="center_vertical"
                                 android:layout_weight="1"
-                                style="@style/TextBody1" />
+                                style="?cardText" />
 
                             <ImageView
                                 android:layout_width="@dimen/sub_icon_size"
@@ -616,7 +618,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/donate_thank_you"
-                            style="@style/TextBody1" />
+                            style="?cardText" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -624,7 +626,7 @@
                             android:text="@string/donate_more_button"
                             android:id="@+id/buttonHelpFurther"
                             android:gravity="center_horizontal"
-                            style="@style/TextCaption"
+                            style="?cardTextValues"
                             android:paddingTop="@dimen/card_internal_padding"
                             android:paddingBottom="@dimen/card_internal_padding" />
 
@@ -639,7 +641,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/donate_more_text"
-                                style="@style/TextBody1"
+                                style="?cardText"
                                 android:paddingBottom="@dimen/card_external_padding" />
 
                             <View style="@style/Divider"
@@ -659,7 +661,7 @@
                                     android:layout_height="fill_parent"
                                     android:text="@string/donate_1"
                                     android:layout_weight="1"
-                                    style="@style/TextBody1"
+                                    style="?cardText"
                                     android:gravity="center_vertical" />
 
                                 <ImageView
@@ -686,7 +688,7 @@
                                     android:text="@string/donate_5"
                                     android:gravity="center_vertical"
                                     android:layout_weight="1"
-                                    style="@style/TextBody1" />
+                                    style="?cardText" />
 
                                 <ImageView
                                     android:layout_width="@dimen/sub_icon_size"
@@ -712,7 +714,7 @@
                                     android:text="@string/donate_10"
                                     android:gravity="center_vertical"
                                     android:layout_weight="1"
-                                    style="@style/TextBody1" />
+                                    style="?cardText" />
 
                                 <ImageView
                                     android:layout_width="@dimen/sub_icon_size"

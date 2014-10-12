@@ -1,33 +1,86 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="UnbounceTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+    <style name="UnbounceThemeLight" parent="android:Theme.Holo.Light.DarkActionBar">
         <item name="android:actionBarStyle">@style/UnbounceActionBar</item>
-        <!--<item name="android:actionBarTabTextStyle">@style/TabTextStyle</item>-->
-        <!--<item name="android:actionMenuTextColor">@color/actionbar_text</item>-->
+        <item name="activityRootBackground">#dddddd</item>
+        <item name="cardBackground">@drawable/card_background_light</item>
+        <item name="cardText">@style/TextBody1</item>
+        <item name="cardTextValues">@style/TextBody1Fade</item>
+        <item name="background_primary">#009688</item>
+        <item name="background_primary_shaded">#00796b</item>
+
+        <item name="background_secondary">#FF9800</item>
+        <item name="background_secondary_faded">#ffb74d</item>
+        <item name="background_secondary_shaded">#ef6c00</item>
+
+        <item name="background_gray">#9E9E9E</item>
+        <item name="background_lists">#ffffff</item>
+        <item name="background_drawer">#cc666666</item>
+
+        <item name="background_three">#FF5722</item>
+
+        <item name="background_four">#9c27b0</item>
+        <item name="background_four_faded">#ba68c8</item>
+        <item name="background_four_shaded">#7b1fa2</item>
+
+        <item name="background_panel_disabled">@android:color/darker_gray</item>
+        <item name="background_panel_enabled">@android:color/white</item>
+        <item name="reset_button_background">@drawable/flat_button_background</item>
+        <item name="taskerHeader">@drawable/header_background</item>
+        <item name="taskerHeaderText">@style/TextTitle</item>
+        <item name="textCaption">@style/TextCaption</item>
+        <item name="categoryText">@style/TextTitle</item>
+
     </style>
+
+    <style name="UnbounceThemeDark" parent="android:Theme.Holo">
+        <item name="android:actionBarStyle">@style/UnbounceActionBar</item>
+        <item name="activityRootBackground">#000000</item>
+        <item name="cardBackground">@drawable/card_background_dark</item>
+        <item name="cardText">@style/TextBody1_dark</item>
+        <item name="cardTextValues">@style/TextBody1Fade_dark</item>
+        <item name="background_primary">#009688</item>
+        <item name="background_primary_shaded">#333333</item>
+
+        <item name="background_secondary">#FF9800</item>
+        <item name="background_secondary_faded">#ffb74d</item>
+        <item name="background_secondary_shaded">#333333</item>
+
+        <item name="background_gray">#9E9E9E</item>
+        <item name="background_lists">#000000</item>
+        <item name="background_drawer">#cc000000</item>
+
+        <item name="background_three">#FF5722</item>
+
+        <item name="background_four">#9c27b0</item>
+        <item name="background_four_faded">#ba68c8</item>
+        <item name="background_four_shaded">#333333</item>
+
+        <item name="background_panel_enabled">@android:color/black</item>
+        <item name="background_panel_disabled">@android:color/darker_gray</item>
+        <item name="reset_button_background">@drawable/flat_button_background_dark</item>
+        <item name="taskerHeader">@drawable/header_background_dark</item>
+        <item name="taskerHeaderText">@style/TextTitle_dark</item>
+        <item name="textCaption">@style/TextCaption_dark</item>
+        <item name="categoryText">@style/TextTitle_dark</item>
+
+    </style>
+
+
 
     <!-- general styles for the action bar -->
     <style name="UnbounceActionBar" parent="android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
         <item name="android:background">@color/background_primary</item>
-        <!--<item name="android:titleTextStyle">@style/TitleTextStyle</item>-->
-        <!--<item name="android:backgroundStacked">@drawable/actionbar_background</item>-->
-        <!--<item name="android:backgroundSplit">@drawable/actionbar_background</item>-->
     </style>
 
-    <!-- action bar title text -->
-    <!--<style name="TitleTextStyle"-->
-        <!--parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">-->
-        <!--<item name="android:textColor">@color/actionbar_text</item>-->
-    <!--</style>-->
-
-    <!-- action bar tab text -->
-    <!--<style name="TabTextStyle"-->
-        <!--parent="@style/Widget.AppCompat.ActionBar.TabText">-->
-        <!--<item name="android:textColor">@color/actionbar_text</item>-->
-    <!--</style>-->
-
     <style name="Divider">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">?android:attr/listDivider</item>
+    </style>
+
+    <style name="Divider_dark">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">1dp</item>
         <item name="android:background">?android:attr/listDivider</item>
@@ -37,6 +90,13 @@
         <item name="android:textSize">14sp</item>
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:textColor">@android:color/black</item>
+        <item name="android:alpha">0.87</item>
+    </style>
+
+    <style name="TextBody1_dark">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@android:color/white</item>
         <item name="android:alpha">0.87</item>
     </style>
 
@@ -51,6 +111,13 @@
         <item name="android:textSize">14sp</item>
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:textColor">@android:color/black</item>
+        <item name="android:alpha">0.54</item>
+    </style>
+
+    <style name="TextBody1Fade_dark">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@android:color/white</item>
         <item name="android:alpha">0.54</item>
     </style>
 
@@ -77,6 +144,13 @@
         <item name="android:alpha">0.54</item>
     </style>
 
+    <style name="TextCaption_dark">
+        <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:alpha">0.54</item>
+    </style>
+
     <style name="TextCaptionLight">
         <item name="android:textSize">12sp</item>
         <item name="android:fontFamily">sans-serif</item>
@@ -92,6 +166,13 @@
     </style>
 
     <style name="TextTitleLight">
+        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:alpha">0.87</item>
+    </style>
+
+    <style name="TextTitle_dark">
         <item name="android:textSize">20sp</item>
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:textColor">@android:color/white</item>

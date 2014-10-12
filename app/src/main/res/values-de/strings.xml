@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Unbounce</string>
+    <string name="version">Version</string>
+    <string name="title_activity_material_settings">Unbounce</string>
+    <string name="title_home">Home</string>
+    <string name="title_wakelocks">Wakelocks</string>
+    <string name="title_alarms">Alarme</string>
+    <string name="navigation_drawer_open">Navigationsleiste öffnen</string>
+    <string name="navigation_drawer_close">Navigationsleiste schließen</string>
+    <string name="action_search">Suchen</string>
+    <string name="action_sort_by_count">Sortiere nach Anzahl</string>
+    <string name="action_sort_by_time">Sortiere nach Zeit</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="action_reset_stats">Statistik löschen</string>
+    <string name="card_donate_title">KARMA</string>
+    <string name="card_donate_subtitle">Unterstütze deinen lokalen Entwickler</string>
+    <string name="card_global_title">GLOBALE STATISTIK</string>
+    <string name="card_global_subtitle">Unsere kombinierten Statistiken</string>
+    <string name="card_local_title">GERÄTESTATISTIK</string>
+    <string name="card_local_subtitle">Ihr Fortschritt</string>
+    <string name="card_settings_title">EINSTELLUNGEN</string>
+    <string name="card_settings_subtitle_alarm">Diesen Alarm steuern</string>
+    <string name="card_settings_subtitle_wakelock">Diesen Wakelock steuern</string>
+    <string name="card_description_title">BESCHREIBUNG</string>
+    <string name="card_description_subtitle">Warum frisst dieses Ding Ihre Batterie?</string>
+
+    <string name="category_unbounced">Unbounced</string>
+    <string name="category_safe">Sicher zu unbouncen</string>
+    <string name="category_unknown">Unbekannt</string>
+    <string name="category_not_safe">Nicht sicher zu unbouncen</string>
+    <string name="category_error">Fehler</string>
+
+    <string name="alert_noiab_title">Pro-Funktionen nicht verfügbar</string>
+    <string name="alert_noiab_content">Ihr Gerät unterstützt keine In-App-Käufe. Sie werden keine Pro-Funktionen für Unbounce kaufen können.  Es könnte sein, dass Sie den Google Play Store aktualisieren müssen oder Sie leben in einem Land, in dem In-App-Käufe nicht verfügbar sind.</string>
+    <string name="dialog_ok">OK</string>
+    <string name="tasker_on">An</string>
+    <string name="tasker_off">Aus</string>
+    <string name="tasker_reset_stats">Statistik löschen</string>
+    <string name="tasker_choose_wakelock">Wählen Sie den einzustellenden Wakelock aus.</string>
+    <string name="tasker_choose_alarm">Wählen Sie den einzustellenden Alarm aus.</string>
+    <string name="tasker_welcome">Willkommen in Tasker-Plugin von Unbounce.</string>
+    <string name="tasker_which_task">Möchten Sie Einstellungen für einen Wakelock oder einen Alarm ändern oder möchten Sie die Statistik für Ihr Gerät löschen?</string>
+    <string name="tasker_task_wakelock">WAKELOCK ÄNDERN</string>
+    <string name="tasker_task_alarm">ALARM ÄNDERN</string>
+    <string name="tasker_task_reset">STATISTIK LÖSCHEN</string>
+
+    <string name="alert_nopro_title">Die ist eine Pro-Funktion</string>
+    <string name="alert_nopro_content">Um Nicht-Standard-Wakelocks und -Alarme zu unbouncen, müssen Sie ein Spendenpaket kaufen.</string>
+    <string name="alert_unknown_alarm_title">Unbekannten Alarm unbouncen?</string>
+    <string name="alert_unknown_alarm_content">Für diesen Alarm ist noch nicht nachgewiesen, dass er sicher zu unbouncen ist.  Möchten Sie ihn trotzdem unbouncen?</string>
+    <string name="dialog_unbounce">UNBOUNCEN</string>
+    <string name="dialog_cancel">ABBRECHEN</string>
+    <string name="tasker_choose_settings">Wählen Sie die gewünschte Einstellung.</string>
+    <string name="alert_unknown_wakelock_title">Unbekannten Wakelock unbouncen?</string>
+    <string name="alert_unknown_wakelock_content">Für diesen Wakelock ist noch nicht nachgewiesen, dass er sicher zu unbouncen ist.  Möchten Sie ihn trotzem unbouncen?</string>
+    <string name="dialog_delete">LÖSCHEN</string>
+    <string name="alert_delete_stats_title">Alle Statistiken löschen?</string>
+    <string name="alert_delete_stats_content">Dies wird die Statistik für all Ihre Wakelocks und Alarme zurücksetzen!</string>
+    <string name="title_settings">Einstellungen</string>
+    <string name="alert_reset_settings_title">Auf Standardwerte zurücksetzen?</string>
+    <string name="alert_reset_settings_content">Dies wird alle Einstellungen für Alarme und Wakelocks zurücksetzen!</string>
+    <string name="dialog_reset">ZURÜCKSETZEN</string>
+    <string name="reset_settings_confirmation">Einstellungen wurden auf Standardwerte zurückgesetzt.</string>
+    <string name="dialog_save">SPEICHERN</string>
+
+    <string name="desc_unknown">Wir haben über dieses Ereignis bisher noch keine Informationen.  Es könnte unsicher sein, es zu unbouncen.  Bitte tun Sie das nur, wenn Sie wissen, was Sie tun und wenn Sie wissen, wie man Xposed beim Gerätestart deaktivieren kann.  Wir arbeiten hart daran, Informationen über jeden wichtigen Wakelock und Alarm zu sammeln.  Bitte haben Sie etwas Geduld, während wir die Informationen sammeln.</string>
+    <string name="desc_nlpwakelock">NlpWakeLock lässt sich sicher unbouncen.  Er wird von den Google Play-Diensten zur Bestimmung Ihres groben Standorts genutzt, indem eine Kombination aus Mobilfunkzellen und WLAN genutzt wird.  Sobald er Ihre Position hat, speichert er diese lokal, sodass andere Apps wie Google Now auf Ihren Standort zugreifen können ohne GPS zu nutzen oder die Position neu zu ermitteln.  Empfohlene Einstellung zwischen 180 und 600 Sekunden.</string>
+    <string name="desc_nlpcollectorwakelock">NlpCollectorWakeLock lässt sich sicher unbouncen.  Er wird von den Google Play-Diensten zur Bestimmung Ihres Standorts genutzt, indem eine Kombination aus Mobilfunkzellen und WLAN genutzt wird. Sobald er Ihre Position hat, sendet er sie zurück an Google, sodass Google seine WLAN-Ortungs-Datenbank erweitern kann.  Empfohlene Einstellung zwischen 180 und 600 Sekunden.</string>
+    <string name="desc_alarmmanager">Dies erlaubt Zugang zum Alarm-Dienst des Systems.  Wenn ein Alarm ausgelöst wird, wird der Intent, der damit registriert war, vom System verbreitet, wodurch die Ziel-App gestartet wird, wenn sie noch nicht läuft.  Registrierte Alarme werden zurückgehalten, während das Gerät schläft (und können optional das Gerät aufwecken wenn sie genau dann ausgelöst werden müssen), aber sie werden gelöscht wenn das Gerät ausgeschaltet und neu gestartet wird.</string>
+    <string name="desc_audiooffload">Audiowiedergabe wenn der Bildschirm ausgeschaltet ist.  Wenn Sie dies deaktivieren, werden Sie keine Hintergrundklänge oder -musik hören können, wenn der Bildschirm ausgeschaltet ist.</string>
+    <string name="desc_activitymanagerlauncher">Interagiert mit übergreifenden Aktivitäten, die im System laufen.  Wenn Sie dies unbouncen, wird nichts richtig laufen.</string>
+    <string name="desc_windowmanager">Dies ist ein Android-Wakelock auf Systemebene.  Die Schnittstelle, die Apps nutzen, um mit dem Fenstermanager zu kommunizieren - was bedeutet, dass Apps einen WindowManager-lock benötigen, wenn sie etwas auf dem Bildschirm darstellen wollen.</string>
+    <string name="desc_rilj">RILJ hält Ihr Gerät wach während Telefonaktionen verarbeitet werden, wie etwa Telefonanrufe oder Kommunikation mit den Mobilfunkmasten.</string>
+    <string name="desc_syncloopwakelock">Dies ist der Wakelock, der von Androids Synchronisierungsmanager genutzt wird um Accounts wie Google+, Twitter, Linkedin, Gmail usw. zu synchronisieren.  Je höher das Unbouncing, desto länger wird es dauern, bis Ihre Accouns wieder synchronisiert werden.</string>
+    <string name="desc_icing">ICING ist ein Wakelock der Google-Dienste.  Wir suchen nach weiteren Details.</string>
+    <string name="desc_startingalertservice">Dieser Wakelock kann üblicherweise zu einem Kalender gehören, obwohl es andere Apps wie Messaging-Apps beeinflussen kann.  Wenn Ihr Kalender Benachrichtigungen oder Alarme hat, kann er diesen Wakelock halten.</string>
+    <string name="desc_audiomix">Dieser Wakelock behandelt Berührungs- und Alarmklänge und andere.  Er plagt manche Geräte, sogar wenn die Berühungsklänge ausgeschaltet sind.</string>
+    <string name="desc_locationmanagerservice">Wie der Name andeutet, verwaltet dieser Dienst den Standort.  Dies ist normalerweise kein hoher Stromverbraucher, aber bei manchen kann es das Gerät viel wach halten.</string>
+    <string name="desc_audioin">Dieser Wakelock wird genutzt, um das Gerät für die Google-Hot-Word-Suche wach zu halten. "Okay, Google"</string>
+    <string name="desc_nfcservicemroutingwakelock">Verbunden mit dem NFC-Dienst, um bemerkte Tags an die zuständige App zu leiten.</string>
+    <string name="desc_wakefulintentservicegcoreulrlocationreportingservice">Genutzt vom Google-Ortungsdienst, um Ihren aktuellen Standort zu melden.</string>
+    <string name="desc_vzwgpslocationprovider">Verizon-specifischer Ortungsdienst, der für Mobilfunkmasten-Statistik genutzt wird.</string>
+    <string name="desc_hangouts_rtcs">Google Hangouts.  Wenn Sie dies unbouncen, werden Hangouts nicht mehr funktionieren.</string>
+    <string name="desc_gcm_conn">Google Cloud Messaging.  Sendet kleine Nachrichten an Ihre Apps.  Verantwortlich für Pushbenachrichtigungen für viele Apps.</string>
+    <string name="desc_google_c2dm">Cloud to Device Messaging (C2DM) ist ein Dienst, der Entwicklern hilft, Daten an Ihre Apps auf Geräten zu schicken.  Der Dienst bietet einen Mechanismus, den Server nutzen können, um Apps aufzufordern, aktualisierte Anwendungs- oder Benutzerdaten abzurufen.  Der C2DM-Dienst behandelt alle Aspekte, um Nachrichten an Ziel-Apps auf mobilen Geräten einzureihen und auszuliefern.  Dieser Dienst ist seit 2012 überholt, aber es gibt noch Apps, die diesen Dienst statt des neueren und verbesserten Google Cloud Messaging nutzen.</string>
+    <string name="desc_timedeventqueue">Dies ist eine Kernkomponente von Android, die besser in Ruhe gelassen wird.  Sie reiht alle eingehenden Events ein.</string>
+    <string name="desc_comgoogleandroidgmsnlpalarm_wakeup_locator">Dieser Alarm lässt sich sicher unbouncen.  Er wird von den Google Play-Diensten zur Bestimmung Ihres groben Standorts genutzt, indem eine Kombination aus Mobilfunkzellen und WLAN genutzt wird.  Sobald er Ihre Position hat, speichert er diese lokal, sodass andere Apps wie Google Now auf Ihren Standort zugreifen können ohne GPS zu nutzen oder die Position neu zu ermitteln.  Empfohlene Einstellung zwischen 180 und 600 Sekunden.</string>
+    <string name="desc_comgoogleandroidgmsnlpalarm_wakeup_activity_detection">Dieser Alarm lässt sich sicher unbouncen.  Er wird von den Google Play-Diensten zur Bestimmung Ihres Standorts genutzt, indem eine Kombination aus Mobilfunkzellen und WLAN genutzt wird. Sobald er Ihre Position hat, sendet er sie zurück an Google, sodass Google seine WLAN-Ortungs-Datenbank erweitern kann.  Empfohlene Einstellung zwischen 180 und 600 Sekunden.</string>
+    <string name="desc_comgoogleandroidappshangoutsupdate_notification">Der Listener, der Ihre Benachrichtigungen von Google Hangouts aktualisiert.</string>
+    <string name="desc_comandroidinternaltelephonydatastall">Wakelock von com.android.phone (Telefon-App) wenn Daten über Mobilfunkt verwendet werden. Die Nutzung von WLAN wird diesesn Alarm nicht auslösen. Geht normalerweise durch die Decke, wenn mobile Daten genutzt werden, insbesondere bei einer mittelmäßigen Verbindung.</string>
+
+    <string name="settings_allow_every">Erlaube alle</string>
+    <string name="settings_seconds">Sekunden.</string>
+    <string name="card_button_reset">LÖSCHEN</string>
+
+    <string name="stat_alarms_acquired">Alarme erlangt</string>
+    <string name="stat_alarms_blocked">Alarme blockiert</string>
+    <string name="stat_loading">Lade...</string>
+    <string name="stat_collected_for">Statistik gesammelt seit</string>
+    <string name="stat_wake_duration_allowed">Wakelock-Zeit erlaubt</string>
+    <string name="stat_wake_duration_blocked">Wakelock-Zeit blockiert</string>
+    <string name="stat_wake_allowed">Wakelocks erlangt</string>
+    <string name="stat_wake_blocked">Wakelocks blockiert</string>
+    <string name="stat_alarm_allowed">Alarme ausgelöst</string>
+    <string name="stat_alarm_blocked">Alarme blockiert</string>
+    <string name="stat_disabled">Deaktiviert</string>
+    <string name="donate_text">Diese App wird Sie immer kostenlos die Netzwerksortungs-Anbieter (Network Location Provider) Akkufresser beheben lassen.  Wenn Sie andere Wakelocks oder Alarme unbouncen möchten, können Sie Pro-Funktionen erhalten, indem Sie das Projekt unterstützen.  Jede Spende wird die Pro-Funktionen freischalten.</string>
+    <string name="donate_1">Eine Tasse Kaffee während ich Code schreibe</string>
+    <string name="donate_5">Einen Latte während ich Fragen im Forum beantworte</string>
+    <string name="donate_10">Die Freude, kein Ladegerät dabeihaben zu müssen</string>
+    <string name="donate_thank_you">Danke für Ihre Spende.  Es bedeutet mir eine Menge.  Ich arbeite hart in meiner begrenzten Zeit, um Ihnen bessere Akkulaufzeit zu bieten.  Wenn Sie gespendet haben, haben Sie etwas im Projekt bewegt, und Sie haben etwas im Leben meiner Familie Bewegt.  Sie sind toll.</string>
+    <string name="donate_more_button">WIR KANN ICH NOCH WEITER HELFEN?</string>
+    <string name="donate_more_text">Leute haben mich gefragt, wie sie über erste Spende hinaus etwas beitragen können.  Die folgenden Schaltflächen erlauben weitere Spenden, bringen aber keine weiteren Funktionen.  Vielen Dank, dass Sie Unbounce unterstützen!</string>
+    <string name="welcome_banner_title">Willkommen!</string>
+    <string name="welcome_banner_text">Sie können Walkelocks blockieren, um Ihr Telefon davon abzuhalten, wach zu bleiben und Alarme blockieren, um es von vornherein am Aufwachen zu hindern.  Wir haben bereits einige batteriesparende Standardwerte für Sie gesetzt.</string>
+
+    <!--Don't translate this one  :)  -->
+    <string name="app_font_family">sans_serif</string>
+
+
+
+</resources>

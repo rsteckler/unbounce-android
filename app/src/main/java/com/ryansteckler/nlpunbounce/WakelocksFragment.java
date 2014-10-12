@@ -17,6 +17,7 @@ import android.widget.ListView;
 
 
 import com.ryansteckler.nlpunbounce.adapters.WakelocksAdapter;
+import com.ryansteckler.nlpunbounce.helpers.ThemeHelper;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
 import com.ryansteckler.nlpunbounce.models.WakelockStats;
 
@@ -80,6 +81,7 @@ public class WakelocksFragment extends ListFragment implements WakelockDetailFra
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ThemeHelper.onActivityCreateSetTheme(this.getActivity());
 
         if (getArguments() != null) {
             mTaskerMode = getArguments().getBoolean(ARG_TASKER_MODE);
