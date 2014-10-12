@@ -34,7 +34,7 @@ import de.robv.android.xposed.XC_MethodHook;
 public class Wakelocks implements IXposedHookLoadPackage {
 
     private static final String TAG = "Unbounce: ";
-    private static final String VERSION = "1.3"; //This needs to be pulled from the manifest or gradle build.
+    private static final String VERSION = "1.3.1"; //This needs to be pulled from the manifest or gradle build.
     private HashMap<String, Long> mLastWakelockAttempts = null; //The last time each wakelock was allowed.
     private HashMap<String, Long> mLastAlarmAttempts = null; //The last time each alarm was allowed.
 
@@ -89,18 +89,18 @@ public class Wakelocks implements IXposedHookLoadPackage {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
         {
             //Try for alarm hooks for API levels >= 19
-            debugLog("Attempting 19to20 AlarmHook");
+            defaultLog("Attempting 19to20 AlarmHook");
             try19To20AlarmHook(lpparam);
-            debugLog("Successful 19to20 AlarmHook");
+            defaultLog("Successful 19to20 AlarmHook");
             alarmsHooked = true;
         }
         else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1 &&
                 Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN_MR2)
         {
             //Try for alarm hooks for API levels 15-18.
-            debugLog("Attempting 15to18 AlarmHook");
+            defaultLog("Attempting 15to18 AlarmHook");
             try15To18AlarmHook(lpparam);
-            debugLog("Successful 15to18 AlarmHook");
+            defaultLog("Successful 15to18 AlarmHook");
             alarmsHooked = true;
 
         }
@@ -115,26 +115,26 @@ public class Wakelocks implements IXposedHookLoadPackage {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             //Try for wakelock hooks for API levels 19-20
-            debugLog("Attempting 19to20 WakeLockHook");
+            defaultLog("Attempting 19to20 WakeLockHook");
             try19To20WakeLockHook(lpparam);
-            debugLog("Successful 19to20 WakeLockHook");
+            defaultLog("Successful 19to20 WakeLockHook");
             wakeLocksHooked = true;
         }
         else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1 &&
                 Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN_MR2) {
             //Try for wakelock hooks for API levels 17-18
-            debugLog("Attempting 17to18 WakeLockHook");
+            defaultLog("Attempting 17to18 WakeLockHook");
             try17To18WakeLockHook(lpparam);
-            debugLog("Successful 17to18 WakeLockHook");
+            defaultLog("Successful 17to18 WakeLockHook");
             wakeLocksHooked = true;
         }
         else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1 &&
                 Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN)
         {
             //Try for wakelock hooks for API levels 15-16
-            debugLog("Attempting 15to16 WakeLockHook");
+            defaultLog("Attempting 15to16 WakeLockHook");
             try15To16WakeLockHook(lpparam);
-            debugLog("Successful 15to16 WakeLockHook");
+            defaultLog("Successful 15to16 WakeLockHook");
             wakeLocksHooked = true;
         }
 
@@ -252,7 +252,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
 
             } else {
                 //Allow the wakelock
-                XposedBridge.log(TAG + "Allowing " + wakeLockName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
+                defaultLog(TAG + "Allowing " + wakeLockName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
                 mLastWakelockAttempts.put(wakeLockName, now);
                 recordAcquire(wakeLockName, lock);
             }
@@ -389,7 +389,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
 
                 } else {
                     //Allow the wakelock
-                    XposedBridge.log(TAG + "Allowing " + alarmName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastAlarm);
+                    defaultLog(TAG + "Allowing " + alarmName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastAlarm);
                     mLastAlarmAttempts.put(alarmName, now);
                     recordAlarmAcquire(context, alarmName);
                 }
@@ -428,7 +428,17 @@ public class Wakelocks implements IXposedHookLoadPackage {
 
     private void debugLog(String log)
     {
-        if (m_prefs.getBoolean("debug_logging", false))
+        String curLevel = m_prefs.getString("logging_level", "default");
+        if (curLevel.equals("verbose"))
+        {
+            XposedBridge.log(TAG + log);
+        }
+    }
+
+    private void defaultLog(String log)
+    {
+        String curLevel = m_prefs.getString("logging_level", "default");
+        if (curLevel.equals("default") || curLevel.equals("verbose"))
         {
             XposedBridge.log(TAG + log);
         }

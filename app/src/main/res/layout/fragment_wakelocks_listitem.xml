@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:clickable="false"
-    android:background="@drawable/list_background"
+    android:background="?attr/listBackgroundWakelock"
     android:paddingTop="@dimen/separator_pad"
     android:paddingBottom="@dimen/separator_pad"
     android:id="@+id/listitemWakelock"
@@ -27,7 +27,9 @@
             android:gravity="center_vertical|center_horizontal"
             android:paddingLeft="@dimen/section_pad"
             android:paddingRight="@dimen/section_pad"
-            style="?textCaption" />
+            style="@style/TextBody1Light"
+
+            />
     </LinearLayout>
 
     <LinearLayout

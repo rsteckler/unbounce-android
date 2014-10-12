@@ -31,6 +31,10 @@
         <item name="taskerHeaderText">@style/TextTitle</item>
         <item name="textCaption">@style/TextCaption</item>
         <item name="categoryText">@style/TextTitle</item>
+        <item name="listItemDownWakelock">@drawable/list_item_down_wakelock</item>
+        <item name="listItemDownAlarm">@drawable/list_item_down_alarm</item>
+        <item name="listBackgroundWakelock">@drawable/list_background_wakelock</item>
+        <item name="listBackgroundAlarm">@drawable/list_background_alarm</item>
 
     </style>
 
@@ -64,6 +68,10 @@
         <item name="taskerHeaderText">@style/TextTitle_dark</item>
         <item name="textCaption">@style/TextCaption_dark</item>
         <item name="categoryText">@style/TextTitle_dark</item>
+        <item name="listItemDownWakelock">@drawable/list_item_down_dark</item>
+        <item name="listItemDownAlarm">@drawable/list_item_down_dark</item>
+        <item name="listBackgroundWakelock">@drawable/list_background_dark</item>
+        <item name="listBackgroundAlarm">@drawable/list_background_dark</item>
 
     </style>
 

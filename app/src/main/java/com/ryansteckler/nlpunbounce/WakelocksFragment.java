@@ -2,11 +2,13 @@ package com.ryansteckler.nlpunbounce;
 
 import android.app.Activity;
 import android.app.FragmentManager;
-import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.app.ListFragment;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -117,7 +119,12 @@ public class WakelocksFragment extends ListFragment implements WakelockDetailFra
         //This suppresses the android system's click handler, which highlights the button, then fades it
         //back to the background, THEN starts our animation.  We just want it to fade to our desired color and stay
         //there until the animation takes over.  Looks sexier that way.
-        v.setBackgroundResource(R.drawable.list_item_down);
+        TypedValue backgroundValue = new TypedValue();
+        Resources.Theme theme = getActivity().getTheme();
+        boolean success = theme.resolveAttribute(R.attr.listItemDownWakelock, backgroundValue, true);
+        Drawable backgroundColor = getResources().getDrawable(backgroundValue.resourceId);
+
+        v.setBackground(backgroundColor);
 
         //Not great form, but the animation to show the details view takes 400ms.  We'll set our background
         //color back to normal once the animation finishes.  I wish there was a more elegant way to avoid
@@ -125,7 +132,7 @@ public class WakelocksFragment extends ListFragment implements WakelockDetailFra
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
-                        v.setBackgroundResource(R.drawable.list_background);
+                        v.setBackgroundResource(R.drawable.list_background_wakelock);
                     }
                 },
                 400
@@ -247,7 +254,6 @@ public class WakelocksFragment extends ListFragment implements WakelockDetailFra
     * >Communicating with Other Fragments</a> for more information.
     */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         public void onWakelocksSetTitle(String id);
         public void onWakelocksSetTaskerTitle(String id);
     }
