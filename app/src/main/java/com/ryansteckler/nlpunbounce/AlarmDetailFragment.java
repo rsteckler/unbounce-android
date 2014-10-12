@@ -261,9 +261,15 @@ public class AlarmDetailFragment extends Fragment {
         //Enable or disable the seconds setting.
         getView().findViewById(R.id.editAlarmSeconds).setEnabled(b);
         View panel = (View)getView().findViewById(R.id.settingsPanel);
-        panel.setBackgroundColor(b ?
-                getResources().getColor(R.color.background_panel_enabled) :
-                getResources().getColor(R.color.background_panel_disabled));
+        TypedValue backgroundValue = new TypedValue();
+        Resources.Theme theme = getActivity().getTheme();
+        int resId = b ? R.attr.background_panel_enabled : R.attr.background_panel_disabled;
+        boolean success = theme.resolveAttribute(resId, backgroundValue, true);
+        Drawable backgroundColor = getResources().getDrawable(R.drawable.header_background_dark);
+        if (success) {
+            backgroundColor = getResources().getDrawable(backgroundValue.resourceId);
+        }
+        panel.setBackgroundDrawable(backgroundColor);
         panel.setAlpha(b ? 1 : (float) .4);
 
         if (mClearListener != null)
