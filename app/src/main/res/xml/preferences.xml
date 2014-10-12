@@ -107,7 +107,7 @@
             />
 
         <Preference
-            android:title=""
+            android:title="shinra00"
             android:editable="false"
             android:defaultValue="0"
             android:summary="Portuguese"
