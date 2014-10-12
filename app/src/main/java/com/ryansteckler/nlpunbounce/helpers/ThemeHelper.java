@@ -53,4 +53,9 @@ public class ThemeHelper {
 
         return sTheme;
     }
+
+    public static int getTheme() {
+        return sTheme;
+    }
+
 }

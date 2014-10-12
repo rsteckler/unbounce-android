@@ -50,9 +50,7 @@ public class NetworkHelper{
                     }
 
                 } catch (ClientProtocolException e) {
-                    // TODO Auto-generated catch block
                 } catch (IOException e) {
-                    // TODO Auto-generated catch block
                 }
                 handler.sendEmptyMessage(0);
 

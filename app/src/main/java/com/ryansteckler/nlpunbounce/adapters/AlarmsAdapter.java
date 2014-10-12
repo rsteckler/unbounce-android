@@ -12,8 +12,10 @@ import android.widget.TextView;
 
 import com.ryansteckler.nlpunbounce.R;
 import com.ryansteckler.nlpunbounce.helpers.SortWakeLocks;
+import com.ryansteckler.nlpunbounce.helpers.ThemeHelper;
 import com.ryansteckler.nlpunbounce.models.AlarmStats;
 import com.ryansteckler.nlpunbounce.models.EventLookup;
+import com.ryansteckler.nlpunbounce.models.WakelockStats;
 
 
 import java.util.ArrayList;
@@ -195,8 +197,11 @@ public class AlarmsAdapter extends ArrayAdapter {
                 float correctedStat = alarm.getAllowedCount() - mLowCount;
                 float point = 120 - ((correctedStat / mScale) * 120); //this gives us a 1-120 hue number.
 
-                float[] hsv = {point, 1, 1};
+                float[] hsv = getBackColorFromSpectrum(alarm);
                 alarmViewHolder.alarmCount.setBackgroundColor(Color.HSVToColor(hsv));
+
+                hsv = getForeColorFromBack(hsv);
+                alarmViewHolder.alarmCount.setTextColor(Color.HSVToColor(hsv));
 
                 break;
 
@@ -233,6 +238,31 @@ public class AlarmsAdapter extends ArrayAdapter {
 
 
         return convertView;
+    }
+
+    private float[] getBackColorFromSpectrum(AlarmStats alarm) {
+        float correctedStat = alarm.getAllowedCount() - mLowCount;
+        //Set the background color along the reg-green spectrum based on the severity of the count.
+        if (ThemeHelper.getTheme() == ThemeHelper.THEME_DEFAULT) {
+            float point = 120 - ((correctedStat / mScale) * 120); //this gives us a 1-120 hue number.
+            return new float[]{point, 1f, 1f};
+        } else {
+            float point = (((correctedStat / mScale) * 80) / 100) + 0.2f; //this gives us a 40-100 value number.
+            return new float[]{1f, 0f, point};
+        }
+    }
+
+    private float[] getForeColorFromBack(float[] hsvBack) {
+        if (ThemeHelper.getTheme() == ThemeHelper.THEME_DEFAULT) {
+            return new float[]{0, 0, 0};
+        } else {
+            //Set the background color along the reg-green spectrum based on the severity of the count.
+            float point = 1;
+            if (hsvBack[2] > .6) {
+                point = .0f;
+            }
+            return new float[]{291, 0f, point};
+        }
     }
 
     public void sort(boolean categorize) {

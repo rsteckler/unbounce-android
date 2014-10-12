@@ -41,7 +41,6 @@ import com.ryansteckler.nlpunbounce.tasker.TaskerActivity;
  *
  */
 public class AlarmDetailFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_START_TOP = "startTop";
     private static final String ARG_FINAL_TOP = "finalTop";
@@ -294,7 +293,6 @@ public class AlarmDetailFragment extends Fragment {
      *
      * @return A new instance of fragment AlarmlockDetailFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static AlarmDetailFragment newInstance(int startTop, int finalTop, int startBottom, int finalBottom, AlarmStats stat, boolean taskerMode) {
         AlarmDetailFragment fragment = new AlarmDetailFragment();
         Bundle args = new Bundle();
@@ -375,7 +373,6 @@ public class AlarmDetailFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface FragmentInteractionListener {
-        // TODO: Update argument type and name
         public void onAlarmDetailSetTitle(String title);
         public void onAlarmDetailSetTaskerTitle(String title);
     }

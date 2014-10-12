@@ -42,7 +42,6 @@ import com.ryansteckler.nlpunbounce.tasker.TaskerActivity;
  *
  */
 public class WakelockDetailFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_START_TOP = "startTop";
     private static final String ARG_FINAL_TOP = "finalTop";
@@ -392,7 +391,6 @@ public class WakelockDetailFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface FragmentInteractionListener {
-        // TODO: Update argument type and name
         public void onWakelockDetailSetTitle(String title);
         public void onWakelockDetailSetTaskerTitle(String title);
     }

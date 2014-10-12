@@ -30,6 +30,11 @@
         <attr name="categoryText" format="reference" />
         <attr name="background_drawer" format="reference|color"></attr>
 
+        <attr name="listBackgroundWakelock" format="reference"></attr>
+        <attr name="listBackgroundAlarm" format="reference"></attr>
+        <attr name="listItemDownWakelock" format="reference"></attr>
+        <attr name="listItemDownAlarm" format="reference"></attr>
+
 
     </declare-styleable>
 </resources>
