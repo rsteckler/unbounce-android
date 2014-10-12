@@ -24,8 +24,8 @@
         <item name="background_four_faded">#ba68c8</item>
         <item name="background_four_shaded">#7b1fa2</item>
 
-        <item name="background_panel_disabled">#e0e0e0</item>
-        <item name="background_panel_enabled">#ffffff</item>
+        <item name="background_panel_disabled">@android:color/darker_gray</item>
+        <item name="background_panel_enabled">@android:color/white</item>
         <item name="reset_button_background">@drawable/flat_button_background</item>
         <item name="taskerHeader">@drawable/header_background</item>
         <item name="taskerHeaderText">@style/TextTitle</item>
@@ -57,7 +57,8 @@
         <item name="background_four_faded">#ba68c8</item>
         <item name="background_four_shaded">#333333</item>
 
-        <item name="background_panel_disabled">#000000</item>
+        <item name="background_panel_enabled">@android:color/black</item>
+        <item name="background_panel_disabled">@android:color/darker_gray</item>
         <item name="reset_button_background">@drawable/flat_button_background_dark</item>
         <item name="taskerHeader">@drawable/header_background_dark</item>
         <item name="taskerHeaderText">@style/TextTitle_dark</item>

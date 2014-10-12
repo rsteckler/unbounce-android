@@ -5,8 +5,11 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -154,9 +157,15 @@ public class AlarmDetailFragment extends Fragment {
         });
 
         View panel = (View)getView().findViewById(R.id.settingsPanel);
-        panel.setBackgroundColor(enabled ?
-                getResources().getColor(R.color.background_panel_enabled) :
-                getResources().getColor(R.color.background_panel_disabled));
+        TypedValue backgroundValue = new TypedValue();
+        Resources.Theme theme = getActivity().getTheme();
+        int resId = enabled ? R.attr.background_panel_enabled : R.attr.background_panel_disabled;
+        boolean success = theme.resolveAttribute(resId, backgroundValue, true);
+        Drawable backgroundColor = getResources().getDrawable(R.drawable.header_background_dark);
+        if (success) {
+            backgroundColor = getResources().getDrawable(backgroundValue.resourceId);
+        }
+        panel.setBackgroundDrawable(backgroundColor);
         panel.setAlpha(enabled ? 1 : (float) .4);
 
         TextView resetButton = (TextView)view.findViewById(R.id.buttonResetStats);

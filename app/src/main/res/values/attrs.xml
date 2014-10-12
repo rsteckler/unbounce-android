@@ -20,8 +20,8 @@
         <attr name="background_four_faded" format="reference|color"></attr>
         <attr name="background_four_shaded" format="reference|color"></attr>
 
-        <attr name="background_panel_disabled" format="reference|color"></attr>
-        <attr name="background_panel_enabled" format="reference|color"></attr>
+        <attr name="background_panel_disabled" format="reference"></attr>
+        <attr name="background_panel_enabled" format="reference"></attr>
         <attr name="reset_button_background" format="reference"></attr>
 
         <attr name="taskerHeader" format="reference" />
