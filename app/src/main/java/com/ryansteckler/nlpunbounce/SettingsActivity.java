@@ -61,7 +61,7 @@ public class SettingsActivity extends Activity {
             final SharedPreferences sharedPref = getPreferenceScreen().getSharedPreferences();
             sharedPref.registerOnSharedPreferenceChangeListener(this);
 
-            onSharedPreferenceChanged(sharedPref, "debug_logging");
+            onSharedPreferenceChanged(sharedPref, "logging_level");
             onSharedPreferenceChanged(sharedPref, "show_launcher_icon");
 
             //Hook up the custom clicks
@@ -100,11 +100,17 @@ public class SettingsActivity extends Activity {
         @Override
         public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences, String key) {
 
-            if (key.equals("debug_logging"))
+            if (key.equals("logging_level"))
             {
-                CheckBoxPreference pref = (CheckBoxPreference) findPreference(key);
-                boolean value = sharedPreferences.getBoolean(key, false);
-                pref.setChecked(value);
+                ListPreference pref = (ListPreference) findPreference(key);
+                String entry = sharedPreferences.getString(key, "default");
+                if (entry.equals("quiet")) {
+                    pref.setSummary("Quiet");
+                } else if (entry.equals("verbose")) {
+                    pref.setSummary("Verbose");
+                } else {
+                    pref.setSummary("Default");
+                }
             }
             else if (key.equals("show_launcher_icon")) {
                 CheckBoxPreference pref = (CheckBoxPreference) findPreference(key);
@@ -118,7 +124,7 @@ public class SettingsActivity extends Activity {
             }
             else if (key.equals("theme")) {
                 ListPreference pref = (ListPreference) findPreference(key);
-                if (pref.getValue().equals("dark")) {
+                if (sharedPreferences.getString(key, "default").equals("dark")) {
                     ThemeHelper.changeToTheme(this.getActivity(), ThemeHelper.THEME_DARK);
                 } else {
                     ThemeHelper.changeToTheme(this.getActivity(), ThemeHelper.THEME_DEFAULT);

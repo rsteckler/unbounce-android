@@ -45,11 +45,13 @@
             android:summary="Version: 1.3.1"
             />
 
-        <CheckBoxPreference
-            android:key="debug_logging"
-            android:title="Debug Logging"
-            android:summary="Enable debug logcat output"
-            android:defaultValue="false"/>
+        <ListPreference
+            android:key="logging_level"
+            android:title="Logging level"
+            android:dialogTitle="Logging level"
+            android:entries="@array/loggingArray"
+            android:entryValues="@array/loggingValues"
+            android:defaultValue="default" />
 
     </PreferenceCategory>
 
@@ -58,17 +60,17 @@
         android:key="">
 
         <Preference
-            android:title="Köhvwezd"
-            android:editable="false"
-            android:defaultValue="0"
-            android:summary="Finnish"
-            />
-
-        <Preference
             android:title="MIKEMON"
             android:editable="false"
             android:defaultValue="0"
             android:summary="Czech"
+            />
+
+        <Preference
+            android:title="Köhvwezd"
+            android:editable="false"
+            android:defaultValue="0"
+            android:summary="Finnish"
             />
 
         <Preference
@@ -114,7 +116,7 @@
             />
 
         <Preference
-            android:title="shinra00"
+            android:title="Luís FL"
             android:editable="false"
             android:defaultValue="0"
             android:summary="Portuguese"
