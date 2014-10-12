@@ -27,7 +27,7 @@
             android:gravity="center_vertical|center_horizontal"
             android:paddingLeft="@dimen/section_pad"
             android:paddingRight="@dimen/section_pad"
-            style="?textCaption" />
+            style="@style/TextBody1Light" />
     </LinearLayout>
 
     <LinearLayout
