@@ -3,9 +3,9 @@ For the most up-to-date conversation, check the [Xda-Developers thread](http://f
 Please target all pull requests to the "develop" branch.  Thanks! 
 
 ## Builds
-develop (Latest experimental): ![develop build](https://travis-ci.org/rsteckler/unbounce-android.svg?branch=develop)
+![develop build](https://travis-ci.org/rsteckler/unbounce-android.svg?branch=develop) : develop branch (Latest experimental) 
 
-master (Latest stable): ![master build](https://travis-ci.org/rsteckler/unbounce-android.svg?branch=develop)
+![master build](https://travis-ci.org/rsteckler/unbounce-android.svg?branch=develop) : master branch (Latest stable)
 
 ## FAQ
 ### I have a bug or feature request.
