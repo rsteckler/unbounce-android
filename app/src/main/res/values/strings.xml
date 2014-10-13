@@ -116,8 +116,11 @@
     <string name="welcome_banner_title">Welcome!</string>
     <string name="welcome_banner_text">You can block wakelocks to stop your phone from staying awake, and block alarms to stop it from waking up in the first place.  We\'ve already set up some battery saving defaults for you.</string>
 
+    <string name="settings_category_options">Options</string>
+
+
     <!--Don't translate this one  :)  -->
-    <string name="app_font_family">sans_serif</string>
+    <string translatable="false" name="app_font_family">sans_serif</string>
 
 
 
