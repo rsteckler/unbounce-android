@@ -88,6 +88,13 @@
             />
 
         <Preference
+            android:title="Nik Chris"
+            android:editable="false"
+            android:defaultValue="0"
+            android:summary="Greek"
+            />
+
+        <Preference
             android:title="Roberto Fabrizi"
             android:editable="false"
             android:defaultValue="0"
@@ -120,6 +127,13 @@
             android:editable="false"
             android:defaultValue="0"
             android:summary="Portuguese"
+            />
+
+        <Preference
+            android:title="DumF0rGaming"
+            android:editable="false"
+            android:defaultValue="0"
+            android:summary="Russian"
             />
 
     </PreferenceCategory>
