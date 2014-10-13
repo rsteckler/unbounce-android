@@ -1,8 +1,11 @@
-# README
-
 For the most up-to-date conversation, check the [Xda-Developers thread](http://forum.xda-developers.com/xposed/modules/mod-nlpunbounce-reduce-nlp-wakelocks-t2853874).
 
 Please target all pull requests to the "develop" branch.  Thanks! 
+
+## Builds
+![develop build](https://travis-ci.org/rsteckler/unbounce-android.svg?branch=develop) : develop branch (Latest experimental) 
+
+![master build](https://travis-ci.org/rsteckler/unbounce-android.svg?branch=develop) : master branch (Latest stable)
 
 ## FAQ
 ### I have a bug or feature request.

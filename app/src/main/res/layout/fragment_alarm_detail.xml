@@ -16,7 +16,7 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:visibility="visible"
             android:alpha="1">
 
@@ -35,7 +35,10 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:background="?background_four_shaded"
+                    android:paddingStart="@dimen/card_internal_padding"
+                    android:paddingEnd="@dimen/card_internal_padding"
                     android:paddingLeft="@dimen/card_internal_padding"
+                    android:paddingRight="@dimen/card_internal_padding"
                     android:paddingTop="@dimen/card_internal_padding"
                     android:paddingBottom="@dimen/card_internal_padding">
 
