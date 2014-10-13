@@ -79,7 +79,7 @@
 <string name="desc_audiomix"> Tento WakeLock zpracovává položku Zvuky a upozornìní. Zní to mezi ostatními. To trápí nìkterá zaøízení dokonce s nádechem zvuky vypnout.</string>
 <string name="desc_locationmanagerservice">Jak už název napovídá. To není obvykle vysoký baterie odkapávaè pro nìkteré by to mohlo konat velký wakelock. </string>
 <string name="desc_audioin">Tento wakelock je zvyklý na držení zaøízení vzhùru poslech pro Google Search / Hotword detekce. "Dobøe, Google"</string>
-
+<string name="desc_nfcservicemroutingwakelock">Related to NFC service routing detected tags to the appropriate application.</string>
 <string name="desc_wakefulintentservicegcoreulrlocationreportingservice">Používá Google Location Services nahlásit svou aktuální polohu.</string>
 <string name="desc_vzwgpslocationprovider"> Verizon specifické umístìní služby použity pro statistické úèely bunìk vìže.</string>
 <string name="desc_hangouts_rtcs">Google Hangouts. Pokud jste Unbounce to, hospùdky pøestanou fungovat</string>
