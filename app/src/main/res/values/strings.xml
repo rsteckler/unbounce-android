@@ -135,11 +135,36 @@
     <string name="settings_item_force_english_title">Force English</string>
     <string name="settings_item_force_english_summary">Override your locale settings and use English</string>
 
-    <string name="NNNNNNNNN">XXXXXXXX</string>
-    <!--<string name="NNNNNNNNN">XXXXXXXX</string>-->
-    <!--<string name="NNNNNNNNN">XXXXXXXX</string>-->
-    <!--<string name="NNNNNNNNN">XXXXXXXX</string>-->
-    <!--<string name="NNNNNNNNN">XXXXXXXX</string>-->
+    <string name="playstore_short_description">Battery power to the people!</string>
+    <string name="playstore_long_description">
+*** Requires Root and the Xposed Framework ***
+
+Unsolicited quotes from real users:
+"It gave me about 2 hours more use with 30 minutes more screen on time. Saved me from buying a $25 battery."
+"Just donated 5 Dollars to support this masterpiece.. Keep up the good work"
+"Simply amazing"
+"[Unbounce] just revolutionized the true meaning of wakelock managing"
+"This module is awesome! I get less than a half percent drain per hour for idle standby. "
+...and many more.
+
+Unbounce puts you in control of how your device uses your battery by controlling how often your device can wake up, and how long it can stay awake.  Use the recommended settings for easy battery savings, or dig in and customize every alarm and wakelock on your device.
+Here are some highlights:
+
+- A beautiful design, inspired by Material Design principles
+- A stable blocking engine
+- Comprehensive measuring of the time wasted and time saved because of alarms and wakelocks
+- A growing list of descriptions of the alarms and wakelocks in plain English (and other languages coming soon!)
+- A new Pro package that lets you Unbounce any alarm or wakelock on the device
+- An open source codebase so you can see how it works, or build it yourself
+
+
+The In-App purchases allow you to unlock the Pro package that lets you customize the alarms and wakelocks on your device.   Without the pro package, you can control the worst battery hogs:  NlpWakelock, NlpCollectorWakeLock, ALARM_WAKEUP_LOCATOR, and ALARM_WAKE_ACTIVITY_DETECTION.
+
+May you have a long [battery] life!
+    </string>
+
+
+
 
 
     <!--Don't translate this one  :)  -->
