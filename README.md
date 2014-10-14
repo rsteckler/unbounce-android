@@ -11,6 +11,9 @@ Please target all pull requests to the "develop" branch.  Thanks!
 ### I have a bug or feature request.
 Cool. Thanks for helping out! Please go file the issue [here, on BitBucket](https://bitbucket.org/cryptyk/nlpunbounce/issues?status=new&status=open). You can also upvote bugs and feature requests there.
 
+### I'd like to help with translations
+Awesome!  We could use the help!  To start, check [here, on the translation site](https://poeditor.com/join/project?hash=cba2f814b8847c56fda6850f288f2f7d).
+
 ### Why is Play Services such a battery killer:
 1) If Google Location Services are turned on, it sets an alarm to wakeup every 60 seconds, check the network location, and broadcast ALARM_WAKEUP_LOCATOR.
 
