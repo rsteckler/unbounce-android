@@ -3,3 +3,9 @@
 /.idea/workspace.xml
 .DS_Store
 /build
++/app/src/main/bin/
++/app/src/main/gen/
++project.properties
++.project
++.classpath
++app/src/main/.settings

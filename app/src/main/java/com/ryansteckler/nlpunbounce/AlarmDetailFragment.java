@@ -198,7 +198,7 @@ public class AlarmDetailFragment extends Fragment {
                 String blockName = "alarm_" + mStat.getName() + "_seconds";
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putLong(blockName, seconds);
-                editor.commit();
+                editor.apply();
             }
             textView.clearFocus();
             // hide virtual keyboard
@@ -255,7 +255,7 @@ public class AlarmDetailFragment extends Fragment {
             SharedPreferences prefs = getActivity().getSharedPreferences("com.ryansteckler.nlpunbounce" + "_preferences", Context.MODE_WORLD_READABLE);
             SharedPreferences.Editor editor = prefs.edit();
             editor.putBoolean(blockName, b);
-            editor.commit();
+            editor.apply();
         }
 
         //Enable or disable the seconds setting.

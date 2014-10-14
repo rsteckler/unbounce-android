@@ -15,7 +15,7 @@ public class SettingsHelper {
         editor.putBoolean("wakelock_NlpCollectorWakeLock_enabled", true);
         editor.putBoolean("alarm_com.google.android.gms.nlp.ALARM_WAKEUP_LOCATOR_enabled", true);
         editor.putBoolean("alarm_com.google.android.gms.nlp.ALARM_WAKEUP_ACTIVITY_DETECTION_enabled", true);
-        editor.commit();
+        editor.apply();
 
     }
 }

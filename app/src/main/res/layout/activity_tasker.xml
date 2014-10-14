@@ -18,19 +18,19 @@
             android:background="?taskerHeader">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/tasker_welcome"
                 android:id="@+id/textTaskerHeader"
                 style="?taskerHeaderText"
-                android:gravity="left"
+                android:gravity="start"
                 android:layout_weight=".9" />
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
-                android:gravity="right">
+                android:gravity="end">
 
                 <Button
                     android:layout_width="wrap_content"
