@@ -116,9 +116,6 @@
     <string name="welcome_banner_title">Καλώς ήρθες!</string>
     <string name="welcome_banner_text">Μπορείς να μπλοκάρεις wakelocks ώστε το κινητό σου να μην ξανα μείνει "ξύπνιο", και να μπλοκάρεις τα alarms για να σταματήσεις εξ αρχής τον λόγο για να "ξυπνάει".  Έχουμε ήδη βάλει κάποιες προεπιλεγμένες ρυθμίσεις για να έχει καλύτερη μπαταρία το κινητό σου.</string>
 
-    <!--Don't translate this one  :)  -->
-    <string translatable="false" name="app_font_family">sans_serif</string>
-
     <string name="playstore_short_description">Σου εύχομαι να έχει μια καλύτερη ζωή [μπαταρίας]!</string>
     <string name="playstore_long_description">
 *** Απαραίτητο κινητό με Root και εγκατεστημένο το Xposed Framework ***

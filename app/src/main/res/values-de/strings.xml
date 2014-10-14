@@ -116,9 +116,6 @@
     <string name="welcome_banner_title">Willkommen!</string>
     <string name="welcome_banner_text">Sie können Walkelocks blockieren, um Ihr Telefon davon abzuhalten, wach zu bleiben und Alarme blockieren, um es von vornherein am Aufwachen zu hindern.  Wir haben bereits einige batteriesparende Standardwerte für Sie gesetzt.</string>
 
-    <!--Don't translate this one  :)  -->
-    <string translatable="false" name="app_font_family">sans_serif</string>
-
     <string name="playstore_short_description">Wir wünschen Ihnen ein langes (Batterie-) Leben!</string>
     <string name="playstore_long_description">
 *** Benötigt Root und das Xposed-Framework ***

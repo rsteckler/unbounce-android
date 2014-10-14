@@ -146,9 +146,5 @@ Semoga [bateri] anda tahan lama!
     </string>
 
 
-    <!--Don't translate this one  :)  -->
-    <string translatable="false" name="app_font_family">sans_serif</string>
-
-
 
 </resources>

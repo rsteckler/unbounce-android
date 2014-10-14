@@ -117,9 +117,6 @@
     <string name="welcome_banner_title">Benvenuto!</string>
     <string name="welcome_banner_text">Puoi bloccare i wakelock per evitare che il tuo telefono stia sveglio, e bloccare gli allarmi per evitare che si svegli. Ti abbiamo già settato alcune impostazioni di default che ti permetteranno di risparmiare batteria.</string>
 
-    <!--Don't translate this one  :) I wont  -->
-    <string translatable="false" name="app_font_family">sans_serif</string>
-
     <string name="playstore_short_description">Maggior durata della batteria per tutti!</string>
     <string name="playstore_long_description">
 *** Richiede Root e il framework Xposed ***

@@ -116,9 +116,6 @@
 <string name="welcome_banner_title">Vítejte!</string>
 <string name="welcome_banner_text">Mùžete blokovat wakelocks, zabránit telefonu zùstávat vzhùru a blokovat alarmy zastavit je od probuzení v první øadì.Tak jsem již nastavil úsporu výchozí pro vás a vašiùžete blokovat wakelocks zastavit telefonu z zùstávat vzhùru a blokovat alarmy zastavit od probuzení v první øadì. My\'jsem již nastaven úsporu výchozí pro vás nìjakou baterii.ùžete blokovat wakelocks zastavit telefonu z zùstávat vzhùru a blokovat alarmy zastavit od probuzení v první øadì. My\'jsem již nastaven úsporu výchozí pro vás nìjakou baterii.ùžete blokovat wakelocks zastavit telefonu z zùstávat vzhùru a blokovat alarmy zastavit od probuzení v první øadì. My\'jsem již nastaven úsporu výchozí pro vás nìjakou baterii. baterii.</string>
 
-    <!--Don't translate this one  :)  -->
-<string translatable="false" name="app_font_family">sans_serif</string>
-
     <string name="playstore_short_description">Mùžete mít dlouhý [Battery] život!</string>
     <string name="playstore_long_description">
 *** Vyžaduje Root a rámec Xposed ***

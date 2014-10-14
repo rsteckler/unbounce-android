@@ -116,9 +116,5 @@
     <string name="welcome_banner_title">Bienvenue !</string>
     <string name="welcome_banner_text">Vous pouvez bloquer les wakelocks pour empêcher votre téléphone de rester éveillé, et bloquer les alarmes pour l\'empêcher de se réveiller. Nous avons déjà préconfiguré des réglages d\'économie de batterie pour vous.</string>
 
-    <!--Don't translate this one  :)  -->
-    <string translatable="false" name="app_font_family">sans_serif</string>
-
-
 
 </resources>

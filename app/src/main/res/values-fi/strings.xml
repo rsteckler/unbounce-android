@@ -116,9 +116,6 @@
     <string name="welcome_banner_title">Tervetuloa!</string>
     <string name="welcome_banner_text">Voit estää herätyksiä estääksesi puhelimen pysymisen hereillä, ja estää hälytyksiä estääksesi sen heräämisen.  Olemme jo asettaneet joitakin asetuksia valmiiksi.</string>
 
-    <!--Don't translate this one  :)  -->
-    <string translatable="false" name="app_font_family">sans_serif</string>
-
     <string name="playstore_short_description">Pitkää [akku]ikää!</string>
     <string name="playstore_long_description">
 ***Vaatii rootin sekä Xposed Frameworkin***

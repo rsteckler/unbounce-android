@@ -137,9 +137,5 @@ Unbounceは、端末をウェイクしたままにする間隔や端末をウェ
 [バッテリー]の持ちを極限まで高めよう!
     </string>
 
-    <!--Don't translate this one  :)  -->
-    <string translatable="false" name="app_font_family">sans_serif</string>
-
-
 
 </resources>
