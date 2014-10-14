@@ -117,6 +117,29 @@
     <string name="welcome_banner_text">You can block wakelocks to stop your phone from staying awake, and block alarms to stop it from waking up in the first place.  We\'ve already set up some battery saving defaults for you.</string>
 
     <string name="settings_category_options">Options</string>
+    <string name="settings_item_show_launcher">Show launcher icon</string>
+    <string name="settings_item_choose_theme">Choose theme</string>
+    <string name="settings_item_global_stats_title">Participate in Global Stats</string>
+    <string name="settings_item_global_stats_summary">Send and receive anonymous stats</string>
+    <string name="settings_item_reset_defaults_title">Reset to defaults</string>
+    <string name="settings_item_reset_defaults_summary">Reset all alarms and wakelocks to default settings</string>
+    <string name="settings_category_debug">Debug</string>
+    <string name="settings_item_author">Author: Ryan Steckler</string>
+    <string name="settings_item_logging_level">Logging level</string>
+    <string name="settings_category_translation">Translation Credit</string>
+    <string name="settings_theme_material">Material</string>
+    <string name="settings_theme_dark">Dark</string>
+    <string name="settings_logging_quiet">Quiet</string>
+    <string name="settings_logging_default">Default</string>
+    <string name="settings_logging_verbose">Verbose</string>
+    <string name="settings_item_force_english_title">Force English</string>
+    <string name="settings_item_force_english_summary">Override your locale settings and use English</string>
+
+    <string name="NNNNNNNNN">XXXXXXXX</string>
+    <!--<string name="NNNNNNNNN">XXXXXXXX</string>-->
+    <!--<string name="NNNNNNNNN">XXXXXXXX</string>-->
+    <!--<string name="NNNNNNNNN">XXXXXXXX</string>-->
+    <!--<string name="NNNNNNNNN">XXXXXXXX</string>-->
 
 
     <!--Don't translate this one  :)  -->

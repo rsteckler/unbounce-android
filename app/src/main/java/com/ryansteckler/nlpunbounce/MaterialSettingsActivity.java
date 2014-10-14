@@ -7,8 +7,11 @@ import android.app.Activity;
 import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,7 +26,10 @@ import com.ryansteckler.inappbilling.IabHelper;
 import com.ryansteckler.inappbilling.IabResult;
 import com.ryansteckler.inappbilling.Inventory;
 import com.ryansteckler.inappbilling.Purchase;
+import com.ryansteckler.nlpunbounce.helpers.LocaleHelper;
 import com.ryansteckler.nlpunbounce.helpers.ThemeHelper;
+
+import java.util.Locale;
 
 public class MaterialSettingsActivity extends Activity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks,
@@ -41,6 +47,7 @@ public class MaterialSettingsActivity extends Activity
     IabHelper mHelper;
 
     int mCurTheme = ThemeHelper.THEME_DEFAULT;
+    int mCurForceEnglish = -1;
 
     private boolean mIsPremium = false;
 
@@ -57,6 +64,7 @@ public class MaterialSettingsActivity extends Activity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mCurTheme = ThemeHelper.onActivityCreateSetTheme(this);
+        mCurForceEnglish = LocaleHelper.onActivityCreateSetLocale(this);
         setContentView(R.layout.activity_material_settings);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
@@ -141,6 +149,7 @@ public class MaterialSettingsActivity extends Activity
         super.onResume();
         //Update theme
         mCurTheme = ThemeHelper.onActivityResumeVerifyTheme(this, mCurTheme);
+        mCurForceEnglish = LocaleHelper.onActivityResumeVerifyLocale(this, mCurForceEnglish);
     }
 
     private void updateDonationUi() {

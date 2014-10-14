@@ -16,6 +16,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
@@ -31,6 +32,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.ryansteckler.nlpunbounce.helpers.LocaleHelper;
 import com.ryansteckler.nlpunbounce.helpers.NetworkHelper;
 import com.ryansteckler.nlpunbounce.helpers.SettingsHelper;
 import com.ryansteckler.nlpunbounce.helpers.ThemeHelper;
@@ -38,6 +40,7 @@ import com.ryansteckler.nlpunbounce.models.BaseStats;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
 
 import java.util.HashMap;
+import java.util.Locale;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -61,6 +64,8 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LocaleHelper.onActivityCreateSetLocale(this.getActivity());
+        ThemeHelper.onActivityCreateSetTheme(this.getActivity());
         setHasOptionsMenu(true);
     }
 
@@ -232,6 +237,7 @@ public class HomeFragment extends Fragment {
         }
     }
 
+
     private void updatePremiumUi() {
         if (((MaterialSettingsActivity)getActivity()).isPremium()) {
             View againView = (View) getActivity().findViewById(R.id.layoutDonateAgain);
@@ -334,7 +340,6 @@ public class HomeFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        ThemeHelper.onActivityCreateSetTheme(this.getActivity());
         getActivity().getMenuInflater().inflate(R.menu.home, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }

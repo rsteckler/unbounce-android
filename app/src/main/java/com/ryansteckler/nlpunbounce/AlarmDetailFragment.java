@@ -24,6 +24,7 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.ryansteckler.nlpunbounce.helpers.LocaleHelper;
 import com.ryansteckler.nlpunbounce.helpers.ThemeHelper;
 import com.ryansteckler.nlpunbounce.models.AlarmStats;
 import com.ryansteckler.nlpunbounce.models.EventLookup;
@@ -313,6 +314,7 @@ public class AlarmDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ThemeHelper.onActivityCreateSetTheme(this.getActivity());
+        LocaleHelper.onActivityCreateSetLocale(this.getActivity());
 
         if (getArguments() != null) {
             mStartTop = getArguments().getInt(ARG_START_TOP);

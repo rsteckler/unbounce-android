@@ -116,6 +116,8 @@
 <string name="welcome_banner_title">Benvindo!</string>
 <string name="welcome_banner_text">Podes bloquear wakelocks para impedir que o teu telefone se mantenha acordado, e bloquear alarmes que impecam o telefone de acordar antes de mais.  Já definimos algumas coisas base por ti que te vao salvar bateria.</string>
 
+    <string name="settings_category_translation">FANCY STRING PT</string>
+
     <!--Don't translate this one  :)  -->
 <string name="app_font_family">sans_serif</string>
 
