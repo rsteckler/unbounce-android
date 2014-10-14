@@ -117,8 +117,34 @@
     <string name="welcome_banner_text">Voit estää herätyksiä estääksesi puhelimen pysymisen hereillä, ja estää hälytyksiä estääksesi sen heräämisen.  Olemme jo asettaneet joitakin asetuksia valmiiksi.</string>
 
     <!--Don't translate this one  :)  -->
-    <string name="app_font_family">sans_serif</string>
+    <string translatable="false" name="app_font_family">sans_serif</string>
 
+    <string name="playstore_short_description">Pitkää [akku]ikää!</string>
+    <string name="playstore_long_description">
+***Vaatii rootin sekä Xposed Frameworkin***
+Lainauksia oikeilta käyttäjiltä:
+"Antoi minulle noin 2 tuntia lisää akkua ja 30 minuuttia lisää näyttöaikaa. Pelasti minut 25€ akun ostolta"
+"Lahjoitin juuri 5 dollaria tukeakseni tätä mestariteosta. Jatka samaan malliin"
+"Yksinkertaisesti upeaa"
+"[Unbounce] mullisti juuri wakelock-hallinnan oikean merkityksen"
+"Tämä moduuli on upea! Menetän vähemmän kuin puoli prosenttia tunnissa valmiustilassa!"
+...ja monia muita.
 
+Unbounce laittaa sinut laitteesi herätysten hallintaan antamalla sinulle ohjakset mukauttaa
+sitä, kuinka usein laitteesi voi herätä ja kuinka kauan se pysyy hereillä. Käytä oletusasetuksia
+helpon akunsäästön aikaansaamiseksi, tai kaivaudu syvemmälle ja mukauta jokaista hälytystä tai herätystä laitteessasi.
+Tässä joitain yksityiskohtia:
+
+- Kaunis ulkoasu, Googlen Material Design-tyylin pohjalta
+- Vakaa estomoottori
+- Yksityiskohtaisia tilastoja tuhlatusta ja säästetystä ajasta herätysten ja hälytysten takia
+- Uusi maksullinen paketti joka antaa sinun hallita jokaista herätystä ja hälytystä laitteessasi
+- Avoimeen lähdekoodiin perustuva koodikanta, jotta voit nähdä kuinka se toimii tai kääntää sen itse
+
+Sovelluksen sisäiset maksut antavat sinulle maksullisen paketin jolla voit kustomoida jokaista hälytystä (alarm) tai herätystä (wakelock) laitteessasi. Ilman sitä
+voit kesyttää pahimmat akuntuhoajat: NlpWakelock, NlpCollectorWakeLock, ALARM_WAKEUP_LOCATOR, ja ALARM_WAKE_ACTIVITY_DETECTION.
+
+Pitkää [akku]ikää!
+    </string>
 
 </resources>

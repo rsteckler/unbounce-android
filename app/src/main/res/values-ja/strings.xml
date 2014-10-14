@@ -108,6 +108,38 @@
     <string name="donate_more_text">下のボタンでもっと寄付することが出来ますが、追加される機能はありません。Unbounceの開発をサポートしてくださり、本当にありがとうございます!</string>
     <string name="welcome_banner_title">ようこそ!</string>
     <string name="welcome_banner_text">ウェイクロックをブロックしてウェイクされたままにしないようにしたり、アラームをブロックしてウェイクされないようにしたり出来ます。デフォルトで位置情報関連のバッテリー消費を抑えるようになっています。</string>
+
+
+    <string name="playstore_short_description">消費電力を極限まで抑えよう!</string>
+    <string name="playstore_long_description">
+*** root権限とXposedフレームワークが必要です ***
+
+ユーザーの声:
+"12時間経っても0.13%/h!"
+"お布施しました"
+"何これ凄すぎ"
+"ウェイクロック管理できるのはいいね"
+...などなど
+
+Unbounceは、端末をウェイクしたままにする間隔や端末をウェイクする間隔を変更して、バッテリー消費を抑えます。最初からおすすめの省電力設定がされていますが、もっと他のウェイクロックやアラームを変えることも出来ます。
+概要:
+
+- マテリアルデザイン風の美しいデザイン
+- 安定したブロックエンジン
+- アラームやウェイクロックで消費された時間の計測
+- アラームやウェイクロックの説明 (英語の部分もありますが随時翻訳を更新します!)
+- Pro機能でどんなアラームやウェイクロックでもUnbounce (実行間隔の変更)が出来ます
+- オープンソースなので、どんなことをしているか見たり、ビルドしたり出来ます
+
+
+アプリ内購入でPro機能をアンロックすると、どんなアラームやウェイクロックでもUnbounce (実行間隔の変更)出来るようになります。Pro機能を購入しなくても、以下のバッテリー消費が大きいものをUnbounce出来ます: NlpWakelock、NlpCollectorWakeLock、ALARM_WAKEUP_LOCATOR、ALARM_WAKE_ACTIVITY_DETECTION
+
+[バッテリー]の持ちを極限まで高めよう!
+    </string>
+
     <!--Don't translate this one  :)  -->
-    <string name="app_font_family">sans_serif</string>
+    <string translatable="false" name="app_font_family">sans_serif</string>
+
+
+
 </resources>

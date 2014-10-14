@@ -118,8 +118,35 @@
     <string name="welcome_banner_text">Puoi bloccare i wakelock per evitare che il tuo telefono stia sveglio, e bloccare gli allarmi per evitare che si svegli. Ti abbiamo già settato alcune impostazioni di default che ti permetteranno di risparmiare batteria.</string>
 
     <!--Don't translate this one  :) I wont  -->
-    <string name="app_font_family">sans_serif</string>
+    <string translatable="false" name="app_font_family">sans_serif</string>
+
+    <string name="playstore_short_description">Maggior durata della batteria per tutti!</string>
+    <string name="playstore_long_description">
+*** Richiede Root e il framework Xposed ***
+
+Quello che veri utenti dicono di Unbounced:
+"Mi ha dato due ore extra di utilizzo di cui 30 minuti di schermo acceso. Mi ha risparmiato l'acquisto di una batteria di riserva da 25€."
+"Ho appena donato 5 dollari per supportare quest'opera d'arte... Proseguite così"
+"Semplicamente fantastica"
+"[Unbounce] ha appena rivoluzionato il significato di gestione dei wakelock"
+"Questo modulo è fantastico! In standby ho un consumo inferiore dello 0,5% l'ora. "
+...e tanti altri ancora.
+
+Unbounce vi permette di gestire come il vostro dispositivo utilizza la batteria mediante il controllo di quanto spesso il vostro dispositivo si può risvegliare, e per quanto tempo può restare sveglio. Usate le impostazioni di default per un facile risparmio energetico, oppure scavate più a fondo e gestite in maniera personalizzata ogni allarme e wakelock del vostro dispositivo.
+Ecco alcuni punti forti:
+
+- Un bellissimo design, ispirato dalle linee guida del Material Design di Google
+- Un motore di blocco stabile
+- Significative statistiche sia del tempo perso che di quello risparmiato a causa degli allarmi e wakelock
+- Una sempre crescente lista di descrizioni degli allarmi e wakelock (in Inglese, altri linguaggi saranno disponibili a breve!)
+- Un nuovo pacchetto Pro che vi permette di Unbounce qualsiasi allarme e wakelock del vostro device
+- Una codebase open source così che possiate vedere con i vostri occhi come funziona, oppure compilarvelo da soli
 
 
+Gli acquisti in-app vi permettono di sbloccare il pacchetto Pro, che a sua volta vi permetterà di customizzare gli allarmi e wakelock del vostro device.
+Senza il pacchetto Pro, potrete controllare solo i principali nemici della vostra batteria: NlpWakelock, NlpCollectorWakeLock, ALARM_WAKEUP_LOCATOR, e ALARM_WAKE_ACTIVITY_DETECTION.
+
+Che tutti voi possiate avere una lunga vita [della batteria]!
+    </string>
 
 </resources>

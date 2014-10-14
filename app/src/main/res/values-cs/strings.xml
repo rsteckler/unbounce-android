@@ -117,8 +117,28 @@
 <string name="welcome_banner_text">Mùžete blokovat wakelocks, zabránit telefonu zùstávat vzhùru a blokovat alarmy zastavit je od probuzení v první øadì.Tak jsem již nastavil úsporu výchozí pro vás a vašiùžete blokovat wakelocks zastavit telefonu z zùstávat vzhùru a blokovat alarmy zastavit od probuzení v první øadì. My\'jsem již nastaven úsporu výchozí pro vás nìjakou baterii.ùžete blokovat wakelocks zastavit telefonu z zùstávat vzhùru a blokovat alarmy zastavit od probuzení v první øadì. My\'jsem již nastaven úsporu výchozí pro vás nìjakou baterii.ùžete blokovat wakelocks zastavit telefonu z zùstávat vzhùru a blokovat alarmy zastavit od probuzení v první øadì. My\'jsem již nastaven úsporu výchozí pro vás nìjakou baterii. baterii.</string>
 
     <!--Don't translate this one  :)  -->
-<string name="app_font_family">sans_serif</string>
+<string translatable="false" name="app_font_family">sans_serif</string>
 
+    <string name="playstore_short_description">Mùžete mít dlouhý [Battery] život!</string>
+    <string name="playstore_long_description">
+*** Vyžaduje Root a rámec Xposed ***
+ citace reálných uživatelù:
+"Dalo mi to o 2 hodiny více použití s ??30 minutami více obrazovky na èas. Zachránil mì od nákupu baterie."
+"Jen jsem daroval 5 dolarù na podporu tohoto mistrovského díla .. Pokraèujte v dobré práci"
+"Jednoduše úžasné"
+"[Unbounce] je to revoluce a má skuteèný význam pro wakelock správu"
+"Tento modul je úžasný, já mám ménì než pùl procenta za hodinu neèinnosti v pohotovostním režimu."
+... A mnoho dalších.
+Unbounce vám dává kontrolu, jak pøístroj používá baterii tím, že øídí, jak èasto se mùže pøístroj probudit, a jak dlouho mùže zùstat vzhùru. Použijte doporuèené nastavení pro snadnou úsporu baterie, nebo pøizpùsobit každý alarm a wakelock na vašem zaøízení.
+Zde jsou nìkteré které zdùrazòuji:
+- Krásný design, inspirovaný materiálovým provedením zásady
+- Stabilní blokování
+- Komplexní mìøení èasu,protože alarmy a wakelocks zpùsobují vybíjení baterie
+- Rostoucí seznam popisù alarmù a wakelocks v jednoduché angliètinì (a jiných jazycích již brzy!)
+- Nový Pro balíèek, který vám umožní,v Unbounce nemít žádný alarm nebo wakelock v zaøízení
+- Open source codebase, takže mùžete vidìt, jak to funguje, nebo budovat sami
 
+Nákupy In-App vám umožní odemknout Pro balíèek, který vám umožní pøizpùsobit alarmy a wakelocks na vašem zaøízení. Bez profesionálních funkcí, nemùžete ovládat nejhorší baterie žrouty: NlpWakelock, NlpCollectorWakeLock, ALARM_WAKEUP_LOCATOR a ALARM_WAKE_ACTIVITY_DETECTION.
+    </string>
 
     </resources>

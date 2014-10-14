@@ -117,8 +117,33 @@
     <string name="welcome_banner_text">Sie können Walkelocks blockieren, um Ihr Telefon davon abzuhalten, wach zu bleiben und Alarme blockieren, um es von vornherein am Aufwachen zu hindern.  Wir haben bereits einige batteriesparende Standardwerte für Sie gesetzt.</string>
 
     <!--Don't translate this one  :)  -->
-    <string name="app_font_family">sans_serif</string>
+    <string translatable="false" name="app_font_family">sans_serif</string>
 
+    <string name="playstore_short_description">Wir wünschen Ihnen ein langes (Batterie-) Leben!</string>
+    <string name="playstore_long_description">
+*** Benötigt Root und das Xposed-Framework ***
 
+Unaufgeforderte Bewertungen von echten Benutzern:
+"Es gab mir ungefähr 2 Stunden mehr Nutzung bei 30 Minuten mehr Zeit mit eingeschalteten Bildschirm. Hat mich davor bewahrt, eine Batterie für 25 Dollar zu kaufen."
+"Gerade 5 Dollar gespendet, um dieses Meisterwerk zu unterstützen.. Weiter so"
+"Einfach erstaunlich"
+"[Unbounce] hat einfach die wahre Bedeutung von Wakelock-Verwaltung revolutioniert."
+"Dieses Modul ist genial! Ich habe mehr als ein halbes Prozent Batterieverlust pro Stunde im Ruhezustand."
+...und viele weitere.
+
+Unbounce gibt Ihnen die Kontrolle darüber, wie Ihr Gerät die Batterie nutzt. Es erlaubt die Steuerung, wie oft Ihr Gerät aufwachen kann und wie lang es wach bleiben wird. Nutzen Sie die empfohlenen Einstellungen für einfaches Batteriesparen oder graben Sie sich in die Einstellungen und passen Sie jeden Alarm und Wakelock Ihres Geräts individuell an.
+
+Einige der Highlights:
+- Ein hübsches Design, inspiriert von den Material-Design-Prinzipien
+- Eine stabiler Blockiermechanismus
+- Verständliche Messung der durch Wakelocks und Alarme verschwendeten und gesparten Zeit
+- Eine wachsende Liste mit Alarm- und Wakelockbeschreibungen in Deutsch, Englisch und weiteren Sprachen
+- Ein neues Pro-Paket, das Sie jeden Alarm oder Wakelock Ihres Geräts unbouncen lässt
+- Eine Open-Source-Codebasis, sodass Sie sehen können, wie es funktioniert oder es selbst bauen können
+
+Die In-App-Käufe erlauben Ihnen, das Pro-Paket zu entsperren, das Sie die Alarme und Wakelocks Ihres Geräts individuell anpassen lässt. Ohne das Pro-Paket, können Sie die schlimmsten Stromverbraucher kontrollieren: NlpWakelock, NlpCollectorWakeLock, ALARM_WAKEUP_LOCATOR und ALARM_WAKE_ACTIVITY_DETECTION.
+
+Wir wünschen Ihnen ein langes (Batterie-) Leben!
+    </string>
 
 </resources>

@@ -116,8 +116,37 @@
 <string name="welcome_banner_title">Benvindo!</string>
 <string name="welcome_banner_text">Podes bloquear wakelocks para impedir que o teu telefone se mantenha acordado, e bloquear alarmes que impecam o telefone de acordar antes de mais.  Já definimos algumas coisas base por ti que te vao salvar bateria.</string>
 
+
+    <string name="playstore_short_description">Que aproveites uma grande e longa bateria!</string>
+    <string name="playstore_long_description">
+*** É preciso ter o dispositivo com Root e a aplicação Xposed Framework ***
+Frases de utilizadores, retiradas do forum do Unbouce:
+"Ganhei 2 horas adicionais de bateria mesmo com 30 minutos a mais de ecrã ligado. Fez-me poupar $25 na compra de uma bateria."
+"Acabei de doar 5 Dollars para apoiar esta aplicação espectacular.. Continua com o bom trabalho"
+"Simplesmente espectacular"
+"[unbounce] revolicionou o significado de wakelock"
+"Este modulo é espectacular! O consumo da minha bateria é inferior a 0.5% por hora quando o telefone está a dormir"
+...e muitos mais.
+
+        Unbounce deixa-te controlar totalmente o uso da bateria do o teu dispositivo, uma vez que podes configurar quando é que o dispositivo acorda e quanto tempo pode ficar acordado. Usa as configurações padrão para ganhos moderados de bateria, ou pesquisa e configura todos os alarmes e wakelocks do teu dispositivo.
+
+        Algumas das características principais:
+- Um design bonito e apelatico, baseado em Material Design
+- Uma programação muito estável para bloquear convenientemente os alarmes e wakelocks
+- Contadores de tempo gasto e de tempo ganho com os alarmes e wakelocks
+- Uma lista extensa e em crescimento sobre o significado dos alarmes e wakelocks (em Inglês mas com outras línguas brevementeque!)
+- Uma nova versão Pro que permite-te fazer unbounce a qualquer alarme ou wakelock do dispositivo
+- Codificação em open souce para que possas ver como funciona ou para poderes programar ao teu gosto
+
+        Através da compra dentro da aplicação (In-App purchase) podes desbloquear a versão Pro que permite-te configurar todos os alarmes e wakelocks do teu dispositivo. Sem a versão Pro podes configurar os 2 wakelocks e 2 alarmes que mais consomem a bateria: NlpWakelock, NlpCollectorWakeLock, ALARM_WAKEUP_LOCATOR, and ALARM_WAKE_ACTIVITY_DETECTION.
+
+        Que aproveites uma grande e longa bateria!
+
+    </string>
+
+
     <!--Don't translate this one  :)  -->
-<string name="app_font_family">sans_serif</string>
+<string translatable="false" name="app_font_family">sans_serif</string>
 
 
 

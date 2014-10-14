@@ -116,8 +116,38 @@
     <string name="welcome_banner_title">Selamat datang!</string>
     <string name="welcome_banner_text">Anda boleh menghalang kunci berjaga daripada menghalang telefon anda tidur, dan menghalang penggera daripada membangunkannya.  Kami telah menetapkan beberapa tetapan untuk penjimatan bateri.</string>
 
+
+    <string name="playstore_short_description">Kuasa bateri di tangan kita!</string>
+    <string name="playstore_long_description">
+*** Memerlukan Akar dan Rangka Kerja Xposed ***
+
+Petikan yang tidak diminta daripada pengguna-pengguna sebenar:
+"Ia memberikan saya penggunaan lebih daripada 2 jam use dengan masa skrin lebih daripada 30 minit. Menyelamatkan saya daripada membeli bateri yang berharaga $25."
+"Saya baru menderma 5 Dollar untuk menyokong karya ini.. Teruskan kerja yang baik"
+"Sememangnya menakjubkan"
+"[Unbounce] telah merevolusikan maksud sebenar urusan kunci berjaga"
+"Modul ini hebat! Saya mendapat kurang daripada setengah peratus sejam penurunan bateri apabila telefon di dalam mod siap sedia. "
+...dan banyak lagi.
+
+Unbounce memberi anda kawalan ke atas penggunaan bateri peranti anda dengan mengawal kerapan peranti anda boleh bangun, dan berapa lama ia boleh berjaga. Gunakan tetapan yang disyorkan untuk penjimatan bateri mudah, atau gunakan tetapan yang lebih dalam dan menyesuaikan setiap penggera dan kunci berjaga pada peranti anda.
+Berikut adalah beberapa sorotan:
+
+- Satu reka bentuk yang indah, yang diilhamkan oleh prinsip Bahan Rekabentuk
+- Sebuah enjin sekatan yang stabil
+- Pengukuran komprehensif masa yang sia-sia dan masa diselamatkan kerana penggunaan penggera dan kunci berjaga
+- Satu senarai yang semakin meningkat mengenai penggera dan kunci berjaga dalam bahasa Inggeris (bahasa-bahasa lain akan datang!)
+- Pakej baru Premium yang membolehkan anda menghalang lantunan apa-apa penggera atau kunci berjaga pada peranti
+- Sumber pangkalan kod yang terbuka supaya anda boleh melihat bagaimana ia berfungsi, ataupun membinanya sendiri
+
+
+Pembelian Dalam Aplikasi membolehkan anda untuk membuka kunci pakej Premium yang membolehkan anda menyesuaikan penggera dan kunci berjaga pada peranti anda. Tanpa pakej Premium, anda boleh mengawal pengguna bateri yang paling teruk: NlpWakelock, NlpCollectorWakeLock, ALARM_WAKEUP_LOCATOR dan ALARM_WAKE_ACTIVITY_DETECTION.
+
+Semoga [bateri] anda tahan lama!
+    </string>
+
+
     <!--Don't translate this one  :)  -->
-    <string name="app_font_family">sans_serif</string>
+    <string translatable="false" name="app_font_family">sans_serif</string>
 
 
 
