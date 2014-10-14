@@ -7,11 +7,8 @@ import android.app.Activity;
 import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.FragmentManager;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,7 +26,6 @@ import com.ryansteckler.inappbilling.Purchase;
 import com.ryansteckler.nlpunbounce.helpers.LocaleHelper;
 import com.ryansteckler.nlpunbounce.helpers.ThemeHelper;
 
-import java.util.Locale;
 
 public class MaterialSettingsActivity extends Activity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks,
@@ -218,20 +214,28 @@ public class MaterialSettingsActivity extends Activity
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getFragmentManager();
         if (position == 0) {
-            fragmentManager.beginTransaction()
-                    .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, android.R.animator.fade_in, android.R.animator.fade_out)
-                    .replace(R.id.container, HomeFragment.newInstance())
-                    .commit();
+            if (fragmentManager.getBackStackEntryCount() == 0) {
+                fragmentManager.beginTransaction()
+                        .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, android.R.animator.fade_in, android.R.animator.fade_out)
+                        .replace(R.id.container, HomeFragment.newInstance(), "home")
+                        .commit();
+            } else {
+                fragmentManager.beginTransaction()
+                        .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, android.R.animator.fade_in, android.R.animator.fade_out)
+                        .replace(R.id.container, HomeFragment.newInstance(), "home")
+                        .addToBackStack("home")
+                        .commit();
+            }
         } else if (position == 1) {
             fragmentManager.beginTransaction()
                     .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, android.R.animator.fade_in, android.R.animator.fade_out)
-                    .replace(R.id.container, WakelocksFragment.newInstance())
+                    .replace(R.id.container, WakelocksFragment.newInstance(), "wakelocks")
                     .addToBackStack("wakelocks")
                     .commit();
         } else if (position == 2) {
             fragmentManager.beginTransaction()
                     .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, android.R.animator.fade_in, android.R.animator.fade_out)
-                    .replace(R.id.container, AlarmsFragment.newInstance())
+                    .replace(R.id.container, AlarmsFragment.newInstance(), "alarms")
                     .addToBackStack("alarms")
                     .commit();
         } else if (position == 3) {

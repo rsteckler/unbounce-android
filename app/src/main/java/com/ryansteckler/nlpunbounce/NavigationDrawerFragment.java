@@ -35,7 +35,7 @@ public class NavigationDrawerFragment extends Fragment {
      */
     private static final String STATE_SELECTED_POSITION = "selected_navigation_drawer_position";
 
-
+    private boolean mClosing = false;
     /**
      * A pointer to the current callbacks instance (the Activity).
      */
@@ -136,6 +136,7 @@ public class NavigationDrawerFragment extends Fragment {
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
+                mClosing = false;
                 if (!isAdded()) {
                     return;
                 }
@@ -172,6 +173,7 @@ public class NavigationDrawerFragment extends Fragment {
         }
         if (mDrawerLayout != null) {
             mDrawerLayout.closeDrawer(mFragmentContainerView);
+            mClosing = true;
         }
         if (mCallbacks != null) {
             mCallbacks.onNavigationDrawerItemSelected(position);
@@ -211,7 +213,7 @@ public class NavigationDrawerFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // If the drawer is open, show the global app actions in the action bar. See also
         // showGlobalContextActionBar, which controls the top-left area of the action bar.
-        if (mDrawerLayout != null && isDrawerOpen()) {
+        if (mDrawerLayout != null && isDrawerOpen() && !mClosing) {
             inflater.inflate(R.menu.global, menu);
             showGlobalContextActionBar();
         }
