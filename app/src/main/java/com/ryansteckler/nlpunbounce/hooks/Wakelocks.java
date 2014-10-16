@@ -342,9 +342,27 @@ public class Wakelocks implements IXposedHookLoadPackage {
 //
             } catch (NoSuchMethodError nsme) {
                 //API prior to 4.2.2_r1 don't have this.
-                if (!showedUnsupportedAlarmMessage) {
+               /* if (!showedUnsupportedAlarmMessage) {
                     showedUnsupportedAlarmMessage = true;
                     XposedBridge.log(TAG + "Alarm prevention is not yet supported on Android versions less than 4.2.2");
+                }*/
+
+                /*
+                    ---------------- Added for JB 4.1.2 Support ------------------------
+
+                 */
+
+                Object mTarget = XposedHelpers.getObjectField(pi, "mTarget");
+
+                //debugLog("mTarget Class for PendingIntent: " + mTarget.getClass());
+                if (null != mTarget) {
+                    Object pendingIntentRecord$Key = XposedHelpers.getObjectField(mTarget, "key");
+                    //debugLog("PendingIntentRecord$Key Class for PendingIntent: " + pendingIntentRecord$Key.getClass());
+                    if (null != pendingIntentRecord$Key) {
+                        Object requestIntent = XposedHelpers.getObjectField(pendingIntentRecord$Key, "requestIntent");
+                        debugLog("requestIntent Class for PendingIntent: " + requestIntent.getClass() + " " + requestIntent);
+                        intent = (Intent) requestIntent;
+                    }
                 }
             }
 
