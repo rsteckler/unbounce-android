@@ -10,7 +10,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.IBinder;
 import android.os.SystemClock;
 
@@ -21,10 +20,8 @@ import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
-import de.robv.android.xposed.IXposedHookZygoteInit;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -34,14 +31,12 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage.LoadPackageParam;
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 
-
-public class Wakelocks implements IXposedHookZygoteInit, IXposedHookLoadPackage {
+public class Wakelocks implements IXposedHookLoadPackage {
 
     private static final String TAG = "Unbounce: ";
     private static final String VERSION = "1.3.2"; //This needs to be pulled from the manifest or gradle build.
     public static HashMap<IBinder, InterimWakelock> mCurrentWakeLocks;
     private static boolean showedUnsupportedAlarmMessage = false;
-    private HashMap<PendingIntent, List<Intent>> mIntentMap ;
     private final BroadcastReceiver mBroadcastReceiver = new XposedReceiver();
     XSharedPreferences m_prefs;
     private HashMap<String, Long> mLastWakelockAttempts = null; //The last time each wakelock was allowed.
@@ -61,29 +56,22 @@ public class Wakelocks implements IXposedHookZygoteInit, IXposedHookLoadPackage 
     }
 
     @Override
-    public void initZygote(StartupParam startupParam) throws Throwable {
-
-
-        m_prefs = new XSharedPreferences("com.ryansteckler.nlpunbounce");
-        m_prefs.reload();
-
-        mCurrentWakeLocks = new HashMap<IBinder, InterimWakelock>();
-        mLastWakelockAttempts = new HashMap<String, Long>();
-        mLastAlarmAttempts = new HashMap<String, Long>();
-        mIntentMap = new HashMap<PendingIntent, List<Intent>>();
-
-        debugLog("Version " + VERSION);
-    }
-
-    @Override
     public void handleLoadPackage(LoadPackageParam lpparam) throws Throwable {
 
+        if (lpparam.packageName.equals("android")) {
 
-        defaultLog("Package Listing: " + lpparam.packageName);
-        hookAlarms(lpparam);
-        return;
+            XposedBridge.log(TAG + "Version " + VERSION);
 
+            m_prefs = new XSharedPreferences("com.ryansteckler.nlpunbounce");
+            m_prefs.reload();
 
+            mCurrentWakeLocks = new HashMap<IBinder, InterimWakelock>();
+            mLastWakelockAttempts = new HashMap<String, Long>();
+            mLastAlarmAttempts = new HashMap<String, Long>();
+
+            hookAlarms(lpparam);
+            hookWakeLocks(lpparam);
+        }
     }
 
     private void setupReceiver(XC_MethodHook.MethodHookParam param) {
@@ -101,12 +89,20 @@ public class Wakelocks implements IXposedHookZygoteInit, IXposedHookLoadPackage 
     private void hookAlarms(LoadPackageParam lpparam) {
         boolean alarmsHooked = false;
 
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN) {
-            //Try for wakelock hooks for API levels 15-16
-            debugLog("Attempting 16 AlarmHook");
-            try16AlarmHook(lpparam);
-            debugLog("Successful 16 AlarmHook");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            //Try for alarm hooks for API levels >= 19
+            defaultLog("Attempting 19to20 AlarmHook");
+            try19To20AlarmHook(lpparam);
+            defaultLog("Successful 19to20 AlarmHook");
             alarmsHooked = true;
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1 &&
+                Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            //Try for alarm hooks for API levels 15-18.
+            defaultLog("Attempting 15to18 AlarmHook");
+            try15To18AlarmHook(lpparam);
+            defaultLog("Successful 15to18 AlarmHook");
+            alarmsHooked = true;
+
         }
 
         if (!alarmsHooked) {
@@ -117,7 +113,20 @@ public class Wakelocks implements IXposedHookZygoteInit, IXposedHookLoadPackage 
     private void hookWakeLocks(LoadPackageParam lpparam) {
         boolean wakeLocksHooked = false;
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1 &&
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            //Try for wakelock hooks for API levels 19-20
+            defaultLog("Attempting 19to20 WakeLockHook");
+            try19To20WakeLockHook(lpparam);
+            defaultLog("Successful 19to20 WakeLockHook");
+            wakeLocksHooked = true;
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1 &&
+                Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            //Try for wakelock hooks for API levels 17-18
+            defaultLog("Attempting 17to18 WakeLockHook");
+            try17To18WakeLockHook(lpparam);
+            defaultLog("Successful 17to18 WakeLockHook");
+            wakeLocksHooked = true;
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1 &&
                 Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN) {
             //Try for wakelock hooks for API levels 15-16
             defaultLog("Attempting 15to16 WakeLockHook");
@@ -210,140 +219,6 @@ public class Wakelocks implements IXposedHookZygoteInit, IXposedHookLoadPackage 
             }
         });
     }
-
-    private void try16AlarmHook(LoadPackageParam lpparam) {
-
-        findAndHookMethod("android.app.PendingIntent", lpparam.classLoader, "getBroadcast", Context.class, int.class,
-                Intent.class, int.class, new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        if (null != param.getResult()) {
-                            debugLog("Checking PendingIntent getBroadcast: " + param.getResult().hashCode());
-                            insertAdditionalIntentForJB(param);
-                        } else {
-                            debugLog("Null PendingIntent found for getBroadcast");
-                        }
-                    }
-
-                });
-        findAndHookMethod("android.app.PendingIntent", lpparam.classLoader, "getService", Context.class, int.class,
-                Intent.class, int.class, new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        if (null != param.getResult()) {
-                            debugLog("Checking PendingIntent getService: " + param.getResult().hashCode());
-                            insertAdditionalIntentForJB(param);
-                        } else {
-                            debugLog("Null PendingIntent found for getService");
-                        }
-                    }
-
-                });
-        findAndHookMethod("android.app.PendingIntent", lpparam.classLoader, "getActivity", Context.class, int.class,
-                Intent.class, int.class, new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        if (null != param.getResult()) {
-                            debugLog("Checking PendingIntent getActivity: " + param.getResult().hashCode());
-                            insertAdditionalIntentForJB(param);
-                        } else {
-                            debugLog("Null PendingIntent found for getActivity");
-                        }
-                    }
-
-                });
-
-        findAndHookMethod("android.app.PendingIntent", lpparam.classLoader, "getActivity", Context.class, int.class,
-                Intent.class, int.class, Bundle.class, new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        if (null != param.getResult()) {
-                            debugLog("Checking PendingIntent getActivity bundle: " + param.getResult().hashCode());
-                            insertAdditionalIntentForJB(param);
-                        } else {
-                            debugLog("Null PendingIntent found for getActivity bundle:");
-                        }
-                    }
-
-                });
-
-        findAndHookMethod("android.app.PendingIntent", lpparam.classLoader, "getActivities", Context.class, int.class,
-                Intent[].class, int.class, Bundle.class, new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        if (null != param.getResult()) {
-                            debugLog("Checking PendingIntent getActivities bundle: " + param.getResult().hashCode());
-                            insertAdditionalIntentForJB(param);
-                        } else {
-                            debugLog("Null PendingIntent found for getActivity bundle:");
-                        }
-                    }
-
-                });
-
-        findAndHookMethod("android.app.PendingIntent", lpparam.classLoader, "getActivities", Context.class, int.class,
-                Intent[].class, int.class, new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        if (null != param.getResult()) {
-                            debugLog("Checking PendingIntent getActivities: " + param.getResult().hashCode());
-                            insertAdditionalIntentForJB(param);
-                        } else {
-                            debugLog("Null PendingIntent found for getActivities");
-                        }
-                    }
-
-                });
-
-
-        findAndHookMethod("com.android.server.AlarmManagerService", lpparam.classLoader, "triggerAlarmsLocked", ArrayList.class, ArrayList.class, long.class, new XC_MethodHook() {
-            @Override
-            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                ArrayList<Object> triggers = (ArrayList<Object>) param.args[1];
-                handleAlarm(param, triggers);
-            }
-        });
-
-
-    }
-
-    private void insertAdditionalIntentForJB(XC_MethodHook.MethodHookParam param) {
-        if (null != param.args && param.args.length > 0) {
-            for (Object i : param.args) {
-                Object objPendingIntent = param.getResult();
-                if (null != i && i instanceof Intent) {
-                    String intentAction = ((Intent) i).getAction();
-
-                    if (null != objPendingIntent && objPendingIntent instanceof PendingIntent && null != intentAction) {
-                        debugLog("Adding additional intent: " + intentAction + " For Hash: " + objPendingIntent.hashCode());
-                        XposedHelpers.setAdditionalInstanceField(objPendingIntent, "Intent", (Intent) i);
-                        List<Intent> lstIntent = new <Intent>ArrayList();
-                        lstIntent.add((Intent) i);
-                        mIntentMap.put((PendingIntent) objPendingIntent, lstIntent);
-                    } else {
-                        debugLog("Adding additional intent: " + intentAction + " For Hash: " + objPendingIntent.hashCode());
-                    }
-                } else if (null != i && i instanceof Intent[]) {
-
-                    debugLog("Array of Intents found  For Hash: " + objPendingIntent.hashCode());
-                    XposedHelpers.setAdditionalInstanceField(objPendingIntent, "Intent", (Intent[]) i);
-                    List<Intent> lstIntent = new <Intent>ArrayList();
-                    for (Intent intArr : (Intent[]) i) {
-                        String intentAction = intArr.getAction();
-
-                        if (null != objPendingIntent && objPendingIntent instanceof PendingIntent && null != intentAction) {
-                            debugLog("Adding additional intent: " + intentAction + " For Hash: " + objPendingIntent.hashCode());
-                            lstIntent.add(intArr);
-                        } else {
-                            debugLog("Adding additional intent: " + intentAction + " For Hash: " + objPendingIntent.hashCode());
-                        }
-                    }
-                    mIntentMap.put((PendingIntent) objPendingIntent, lstIntent);
-                }
-            }
-        }
-    }
-
 
     private void handleWakeLockAcquire(XC_MethodHook.MethodHookParam param, String wakeLockName, IBinder lock) {
 
@@ -458,82 +333,59 @@ public class Wakelocks implements IXposedHookZygoteInit, IXposedHookLoadPackage 
             Intent intent = null;
             try {
                 intent = (Intent) callMethod(pi, "getIntent");
-                handleIntent(intent, triggers, now,j,param,context);
+//                String debugString = intent.toString();
+//                XposedBridge.log(TAG + "Debug 4.3+ = " + debugString);
+//
+//                IntentSender sender = pi.getIntentSender();
+//                debugString = sender.toString();
+//                XposedBridge.log(TAG + "Debug 4.2.2- = " + debugString);
+//
             } catch (NoSuchMethodError nsme) {
                 //API prior to 4.2.2_r1 don't have this.
                 if (!showedUnsupportedAlarmMessage) {
-                    // debugLog("Alarm prevention is not yet supported on Android versions less than 4.2.2, adding additional logic for intent retrieval");
-
-
-                    try {
-
-                        debugLog("Pending Intent for: "
-                                + pi.getTargetPackage() + " for Hash: " + pi.hashCode());
-
-
-                        List<Intent> lstIntent = mIntentMap.get(pi);
-
-                        if (null != lstIntent && lstIntent.size() > 0) {
-
-                            debugLog("Intents retrieved successfully: "
-                                    + lstIntent);
-                            for (Intent intentItem : lstIntent) {
-                                handleIntent(intentItem, triggers, now,j,param,context);
-                            }
-                        } else {
-                            debugLog("No Intent found for this alarm :" + pi.hashCode());
-                        }
-
-                    } catch (Exception e) {
-                        showedUnsupportedAlarmMessage = true;
-                        debugLog("Alarm prevention is not yet supported on Android versions less than 4.2.2, additional logic failed");
-                        debugLog("Exception" + e);
-
-                    }
+                    showedUnsupportedAlarmMessage = true;
+                    XposedBridge.log(TAG + "Alarm prevention is not yet supported on Android versions less than 4.2.2");
                 }
             }
 
+            if (intent == null || intent.getAction() == null) {
+                //TODO: Why does the system have alarms with null intents?
+                continue;
+            }
 
-        }
-    }
+            String alarmName = intent.getAction();
+            //If we're blocking this wakelock
+            String prefName = "alarm_" + alarmName + "_enabled";
+            if (m_prefs.getBoolean(prefName, false)) {
 
-    private void handleIntent(Intent intent, ArrayList<Object> triggers, long now, int j,XC_MethodHook.MethodHookParam param,Context context ) {
-        if (intent == null || intent.getAction() == null) {
-            //TODO: Why does the system have alarms with null intents?
-            return;
-        }
-        String alarmName = intent.getAction();
-        //If we're blocking this wakelock
-        String prefName = "alarm_" + alarmName + "_enabled";
-        if (m_prefs.getBoolean(prefName, false)) {
+                long collectorMaxFreq = m_prefs.getLong("alarm_" + alarmName + "_seconds", 240);
+                collectorMaxFreq *= 1000; //convert to ms
 
-            long collectorMaxFreq = m_prefs.getLong("alarm_" + alarmName + "_seconds", 240);
-            collectorMaxFreq *= 1000; //convert to ms
+                //Debounce this to our minimum interval.
+                long lastAttempt = 0;
+                try {
+                    lastAttempt = mLastAlarmAttempts.get(alarmName);
+                } catch (NullPointerException npe) { /* ok.  Just havent attempted yet.  Use 0 */ }
 
-            //Debounce this to our minimum interval.
-            long lastAttempt = 0;
-            try {
-                lastAttempt = mLastAlarmAttempts.get(alarmName);
-            } catch (NullPointerException npe) { /* ok.  Just havent attempted yet.  Use 0 */ }
+                long timeSinceLastAlarm = now - lastAttempt;
 
-            long timeSinceLastAlarm = now - lastAttempt;
+                if (timeSinceLastAlarm < collectorMaxFreq) {
+                    //Not enough time has passed since the last wakelock.  Deny the wakelock
+                    //Not enough time has passed since the last alarm.  Remove it from the triggerlist
+                    triggers.remove(j);
+                    recordAlarmBlock(param, alarmName);
 
-            if (timeSinceLastAlarm < collectorMaxFreq) {
-                //Not enough time has passed since the last wakelock.  Deny the wakelock
-                //Not enough time has passed since the last alarm.  Remove it from the triggerlist
-                triggers.remove(j);
-                recordAlarmBlock(param, alarmName);
+                    debugLog("Preventing " + alarmName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastAlarm);
 
-                debugLog("Preventing " + alarmName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastAlarm);
-
+                } else {
+                    //Allow the wakelock
+                    defaultLog(TAG + "Allowing " + alarmName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastAlarm);
+                    mLastAlarmAttempts.put(alarmName, now);
+                    recordAlarmAcquire(context, alarmName);
+                }
             } else {
-                //Allow the wakelock
-                defaultLog(TAG + "Allowing " + alarmName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastAlarm);
-                mLastAlarmAttempts.put(alarmName, now);
                 recordAlarmAcquire(context, alarmName);
             }
-        } else {
-            recordAlarmAcquire(context, alarmName);
         }
     }
 
@@ -567,9 +419,7 @@ public class Wakelocks implements IXposedHookZygoteInit, IXposedHookLoadPackage 
         String curLevel = m_prefs.getString("logging_level", "default");
         if (curLevel.equals("default") || curLevel.equals("verbose")) {
             XposedBridge.log(TAG + log);
-
         }
     }
 }
-
 
