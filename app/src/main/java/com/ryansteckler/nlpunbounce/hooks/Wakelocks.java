@@ -35,25 +35,21 @@ public class Wakelocks implements IXposedHookLoadPackage {
 
     private static final String TAG = "Unbounce: ";
     private static final String VERSION = "1.3.2"; //This needs to be pulled from the manifest or gradle build.
-    public static HashMap<IBinder, InterimWakelock> mCurrentWakeLocks;
-    private static boolean showedUnsupportedAlarmMessage = false;
-    private final BroadcastReceiver mBroadcastReceiver = new XposedReceiver();
-    XSharedPreferences m_prefs;
     private HashMap<String, Long> mLastWakelockAttempts = null; //The last time each wakelock was allowed.
     private HashMap<String, Long> mLastAlarmAttempts = null; //The last time each alarm was allowed.
+
     private long mLastUpdateStats = 0;
     private long mUpdateStatsFrequency = 600000; //Send for saving every ten minutes
     private long mLastReloadPrefs = 0;
     private long mReloadPrefsFrequency = 60000; //Reload prefs every minute
+
+    private static boolean showedUnsupportedAlarmMessage = false;
+
+    private final BroadcastReceiver mBroadcastReceiver = new XposedReceiver();
     private boolean mRegisteredRecevier = false;
 
-    private static int tryParseInt(String s) {
-        try {
-            return Integer.parseInt(s);
-        } catch (NumberFormatException nfe) {
-            return 0;
-        }
-    }
+    XSharedPreferences m_prefs;
+    public static HashMap<IBinder, InterimWakelock> mCurrentWakeLocks;
 
     @Override
     public void handleLoadPackage(LoadPackageParam lpparam) throws Throwable {
@@ -204,7 +200,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
         findAndHookMethod("com.android.server.AlarmManagerService", lpparam.classLoader, "triggerAlarmsLocked", ArrayList.class, long.class, long.class, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                ArrayList<Object> triggers = (ArrayList<Object>) param.args[0];
+                ArrayList<Object> triggers = (ArrayList<Object>)param.args[0];
                 handleAlarm(param, triggers);
             }
         });
@@ -214,7 +210,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
         findAndHookMethod("com.android.server.AlarmManagerService", lpparam.classLoader, "triggerAlarmsLocked", ArrayList.class, ArrayList.class, long.class, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                ArrayList<Object> triggers = (ArrayList<Object>) param.args[1];
+                ArrayList<Object> triggers = (ArrayList<Object>)param.args[1];
                 handleAlarm(param, triggers);
             }
         });
@@ -243,11 +239,11 @@ public class Wakelocks implements IXposedHookLoadPackage {
                 param.setResult(null);
                 recordWakelockBlock(param, wakeLockName);
 
-                debugLog("Preventing " + wakeLockName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
+                debugLog("Preventing Wakelock" + wakeLockName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
 
             } else {
                 //Allow the wakelock
-                defaultLog(TAG + "Allowing " + wakeLockName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
+                defaultLog(TAG + "Allowing Wakelock" + wakeLockName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
                 mLastWakelockAttempts.put(wakeLockName, now);
                 recordAcquire(wakeLockName, lock);
             }
@@ -360,7 +356,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
                     //debugLog("PendingIntentRecord$Key Class for PendingIntent: " + pendingIntentRecord$Key.getClass());
                     if (null != pendingIntentRecord$Key) {
                         Object requestIntent = XposedHelpers.getObjectField(pendingIntentRecord$Key, "requestIntent");
-                        debugLog("requestIntent Class for PendingIntent: " + requestIntent.getClass() + " " + requestIntent);
+                        //debugLog("requestIntent Class for PendingIntent: " + requestIntent.getClass() + " " + requestIntent);
                         intent = (Intent) requestIntent;
                     }
                 }
@@ -393,11 +389,11 @@ public class Wakelocks implements IXposedHookLoadPackage {
                     triggers.remove(j);
                     recordAlarmBlock(param, alarmName);
 
-                    debugLog("Preventing " + alarmName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastAlarm);
+                    debugLog("Preventing Alarm " + alarmName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastAlarm);
 
                 } else {
                     //Allow the wakelock
-                    defaultLog(TAG + "Allowing " + alarmName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastAlarm);
+                    defaultLog(TAG + "Allowing Alarm" + alarmName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastAlarm);
                     mLastAlarmAttempts.put(alarmName, now);
                     recordAlarmAcquire(context, alarmName);
                 }
@@ -426,6 +422,13 @@ public class Wakelocks implements IXposedHookLoadPackage {
 
     }
 
+    private static int tryParseInt(String s) {
+        try {
+            return Integer.parseInt(s);
+        } catch (NumberFormatException nfe) {
+            return 0;
+        }
+    }
     private void debugLog(String log) {
         String curLevel = m_prefs.getString("logging_level", "default");
         if (curLevel.equals("verbose")) {
