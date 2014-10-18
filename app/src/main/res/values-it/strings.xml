@@ -132,7 +132,7 @@
 <string name="settings_item_force_english_summary">"Sovrascrivi il tuo linguaggio di sistema ed usa l'inglese"</string>
 <string name="playstore_short_description">"Maggior durata della batteria per tutti!"</string>
 <string name="playstore_long_description">"
-*** Richiede Root e il framework Xposed ***
+*** Richiede Root ***
 
 Quello che veri utenti dicono di Unbounced:
 Mi ha dato due ore extra di utilizzo di cui 30 minuti di schermo acceso. Mi ha risparmiato lacquisto di una batteria di riserva da 25€.
