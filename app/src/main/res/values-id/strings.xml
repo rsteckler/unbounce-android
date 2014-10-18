@@ -132,7 +132,7 @@
 <string name="settings_item_force_english_title">"Paksa Inggris"</string>
 <string name="settings_item_force_english_summary">"Mengesampingkan pengaturan lokal Anda dan menggunakan bahasa Inggris"</string>
 <string name="playstore_short_description">"Daya tahan baterai untuk manusia!"</string>
-<string name="playstore_long_description">"*** Membutuhkan root dan Xposed Framework *** 
+<string name="playstore_long_description">"*** Membutuhkan root *** 
 
 Kutipan yang tidak diminta dari pengguna yang sebenarnya : 
 Ini memberi saya sekitar 2 jam lebih digunakan dengan 30 menit lagi layar tepat waktu. Menyelamatkan saya dari membeli $25 baterai. 
