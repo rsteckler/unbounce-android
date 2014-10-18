@@ -58,6 +58,13 @@
             android:summary="JellyBean 4.1.2 Fixes"
             />
 
+        <Preference
+            android:title="Additional Code: kagwind"
+            android:editable="false"
+            android:defaultValue="0"
+            android:summary="Various fixes"
+            />
+
         <ListPreference
             android:key="logging_level"
             android:title="@string/settings_item_logging_level"
@@ -73,80 +80,108 @@
         android:key="">
 
         <Preference
-            android:title="MIKEMON"
+            android:title="Chinese"
             android:editable="false"
             android:defaultValue="0"
-            android:summary="Czech"
+            android:summary="kagwind, sulfle"
             />
 
         <Preference
-            android:title="Köhvwezd"
+            android:title="Czech"
             android:editable="false"
             android:defaultValue="0"
-            android:summary="Finnish"
+            android:summary="MIKEMON"
             />
 
         <Preference
-            android:title="Thomas Sokay (Soktomy)"
+            android:title="Finnish"
             android:editable="false"
             android:defaultValue="0"
-            android:summary="French"
+            android:summary="Köhvwezd"
             />
 
         <Preference
-            android:title="Achim Schumacher"
+            android:title="French"
             android:editable="false"
             android:defaultValue="0"
-            android:summary="German"
+            android:summary="Thomas Sokay (Soktomy), Baud, Spoonoid"
             />
 
         <Preference
-            android:title="Nik Chris"
+            android:title="German"
             android:editable="false"
             android:defaultValue="0"
-            android:summary="Greek"
+            android:summary="Achim Schumacher, Bender80, xor"
             />
 
         <Preference
-            android:title="Roberto Fabrizi"
+            android:title="Greek"
             android:editable="false"
             android:defaultValue="0"
-            android:summary="Italian"
+            android:summary="Nik Chris"
             />
 
         <Preference
-            android:title="RyokoN (@WedyDQ10)"
+            android:title="Indonesian"
             android:editable="false"
             android:defaultValue="0"
-            android:summary="Japanese"
+            android:summary="Sandivisi Aditya, setiawanjimmy"
             />
 
         <Preference
-            android:title="Anonymous"
+            android:title="Italian"
             android:editable="false"
             android:defaultValue="0"
-            android:summary="Japanese"
+            android:summary="Roberto Fabrizi, marco"
             />
 
         <Preference
-            android:title="Celestial Fury"
+            android:title="Japanese"
             android:editable="false"
             android:defaultValue="0"
-            android:summary="Malay"
+            android:summary="RyokoN (@WedyDQ10), anonymous"
             />
 
         <Preference
-            android:title="Luís FL"
+            android:title="Malay"
             android:editable="false"
             android:defaultValue="0"
-            android:summary="Portuguese"
+            android:summary="Celestial Fury"
             />
 
         <Preference
-            android:title="DumF0rGaming"
+            android:title="Polish"
             android:editable="false"
             android:defaultValue="0"
-            android:summary="Russian"
+            android:summary="Peter"
+            />
+
+        <Preference
+            android:title="Portuguese"
+            android:editable="false"
+            android:defaultValue="0"
+            android:summary="Luís FL"
+            />
+
+        <Preference
+            android:title="Romanian"
+            android:editable="false"
+            android:defaultValue="0"
+            android:summary="1ceb0x"
+            />
+
+        <Preference
+            android:title="Russian"
+            android:editable="false"
+            android:defaultValue="0"
+            android:summary="DumF0rGaming, Dmitriy Briskin, Ilya"
+            />
+
+        <Preference
+            android:title="Spanish"
+            android:editable="false"
+            android:defaultValue="0"
+            android:summary="Ignacio, Sergio Castell, nbivan, Carlos Bojorges, Luis FL, Víctor M., kevin, Zave Peck, David"
             />
 
     </PreferenceCategory>
