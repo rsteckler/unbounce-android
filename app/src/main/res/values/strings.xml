@@ -143,7 +143,7 @@
     <string name="settings_item_global_stats_summary">Send and receive anonymous stats</string>
     <string name="settings_item_reset_defaults_title">Reset to defaults</string>
     <string name="settings_item_reset_defaults_summary">Reset all alarms and wakelocks to default settings</string>
-    <string name="settings_category_debug">Debug</string>
+    <string name="settings_category_code_credits">Developer Credit</string>
     <string name="settings_item_author">Author: Ryan Steckler</string>
     <string name="settings_item_logging_level">Logging level</string>
     <string name="settings_category_translation">Translation Credit</string>

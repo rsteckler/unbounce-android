@@ -37,10 +37,18 @@
             android:summary="@string/settings_item_reset_defaults_title"
             />
 
+        <ListPreference
+            android:key="logging_level"
+            android:title="@string/settings_item_logging_level"
+            android:dialogTitle="@string/settings_item_logging_level"
+            android:entries="@array/loggingArray"
+            android:entryValues="@array/loggingValues"
+            android:defaultValue="default" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="@string/settings_category_debug"
+        android:title="@string/settings_category_code_credits"
         android:key="">
 
         <Preference
@@ -64,14 +72,6 @@
             android:defaultValue="0"
             android:summary="Various fixes"
             />
-
-        <ListPreference
-            android:key="logging_level"
-            android:title="@string/settings_item_logging_level"
-            android:dialogTitle="@string/settings_item_logging_level"
-            android:entries="@array/loggingArray"
-            android:entryValues="@array/loggingValues"
-            android:defaultValue="default" />
 
     </PreferenceCategory>
 
