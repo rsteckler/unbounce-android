@@ -122,10 +122,10 @@
     <string name="welcome_banner_checking_looks_great">Everything looks great!</string>
     <string name="welcome_banner_checking_uhoh">Something went wrong.  Let\'s find out what and get it fixed...</string>
     <string name="welcome_banner_problem_none">We\'ve setup some battery saving defaults for you.  Enjoy your new battery life!</string>
-    <string name="welcome_banner_problem_service">It looks like you haven\'t enabled the Unbounce module. Click "FIX IT", make sure Unbounce is checked, then reboot.</string>
-    <string name="welcome_banner_problem_xposed_running">Xposed isn\'t running. Click "FIX IT", then click "Install/Update" and reboot your device.</string>
-    <string name="welcome_banner_problem_xposed_installed">Xposed isn\'t installed. Xposed is required for Unbounce and many other root applications.  Once the download is finished, click INSTALL, then launch Unbounce again.\nIf you\'d like to learn more about Xposed, <a href="http://www.tested.com/tech/android/460074-how-use-xposed-framework-android-extreme-customization/">visit Tested.com.</a></string>
-    <string name="welcome_banner_problem_root">It looks like your device isn\'t rooted.  Unbounce requires a rooted device to function properly.  If you\'re interested in rooting your device, please visit <a href='http://www.techverse.net/how-to-root-your-android-phone-tablet-and-why/'>Techverse.net</a> to get started.</string>
+    <string name="welcome_banner_problem_service">It looks like you haven\'t enabled the Unbounce module. Click \"FIX IT\", make sure Unbounce is checked, then reboot.</string>
+    <string name="welcome_banner_problem_xposed_running">Xposed isn\'t running. Click \"FIX IT\", then click \"Install/Update\" and reboot your device.</string>
+    <string name="welcome_banner_problem_xposed_installed">Xposed isn\'t installed. Xposed is required for Unbounce and many other root applications.  Once the download is finished, click INSTALL, then launch Unbounce again.\nIf you\'d like to learn more about Xposed, <![CDATA[<a href="http://www.tested.com/tech/android/460074-how-use-xposed-framework-android-extreme-customization/">visit Tested.com.</a>]]></string>
+    <string name="welcome_banner_problem_root">It looks like your device isn\'t rooted.  Unbounce requires a rooted device to function properly.  If you\'re interested in rooting your device, please visit <![CDATA[<a href="http://www.techverse.net/how-to-root-your-android-phone-tablet-and-why/">Techverse.net</a>]]> to get started.</string>
     <string name="welcome_banner_button_next">NEXT</string>
     <string name="welcome_banner_button_fixit">FIX IT</string>
     <string name="welcome_banner_button_exit">EXIT</string>

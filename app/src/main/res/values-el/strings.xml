@@ -108,27 +108,6 @@
 <string name="donate_more_text">"Πολλοί ρωτάνε πως μπορούν να συνεισφέρουν περισσότερα χρήματα πέραν απο την αρχική δωρεά. Οι επιλογές από κάτω θα σου επιτρέψουν να συνεισφέρεις περισσότερα χρήματα. Σε ευχαριστώ που υποστηρίζεις το Unbounce!"</string>
 <string name="welcome_banner_title">"Καλώς ήρθες!"</string>
 <string name="welcome_banner_text">"Μπορείς να μπλοκάρεις wakelocks ώστε το κινητό σου να μην ξανα μείνει ξύπνιο, και να μπλοκάρεις τα alarms για να σταματήσεις εξ αρχής τον λόγο για να ξυπνάει.  Έχουμε ήδη βάλει κάποιες προεπιλεγμένες ρυθμίσεις για να έχει καλύτερη μπαταρία το κινητό σου."</string>
-
-<!-- Don't translate this one  :) -->
-<string name="app_font_family">"sans_serif"</string>
-<string name="settings_category_options"></string>
-<string name="settings_item_show_launcher"></string>
-<string name="settings_item_choose_theme"></string>
-<string name="settings_item_global_stats_title"></string>
-<string name="settings_item_global_stats_summary"></string>
-<string name="settings_item_reset_defaults_title"></string>
-<string name="settings_item_reset_defaults_summary"></string>
-<string name="settings_category_debug"></string>
-<string name="settings_item_author"></string>
-<string name="settings_item_logging_level"></string>
-<string name="settings_category_translation"></string>
-<string name="settings_theme_material"></string>
-<string name="settings_theme_dark"></string>
-<string name="settings_logging_quiet"></string>
-<string name="settings_logging_default"></string>
-<string name="settings_logging_verbose"></string>
-<string name="settings_item_force_english_title"></string>
-<string name="settings_item_force_english_summary"></string>
 <string name="playstore_short_description">"Σου εύχομαι να έχει μια καλύτερη ζωή [μπαταρίας]!"</string>
 <string name="playstore_long_description">"
 *** Απαραίτητο κινητό με Root ***
@@ -157,27 +136,5 @@
 
 Σου εύχομαι να έχει μια καλύτερη ζωή [μπαταρίας]!
     "</string>
-<string name="welcome_banner_welcome"></string>
-<string name="welcome_banner_checking_service"></string>
-<string name="welcome_banner_checking_xposed"></string>
-<string name="welcome_banner_checking_root"></string>
-<string name="welcome_banner_checking_looks_great"></string>
-<string name="welcome_banner_checking_uhoh"></string>
-<string name="welcome_banner_problem_none"></string>
-<string name="welcome_banner_problem_service"></string>
-<string name="welcome_banner_problem_xposed_running"></string>
-<string name="welcome_banner_problem_xposed_installed"></string>
-<string name="welcome_banner_problem_root"></string>
-<string name="welcome_banner_button_next"></string>
-<string name="welcome_banner_button_fixit"></string>
-<string name="welcome_banner_button_exit"></string>
-<string name="welcome_banner_button_install"></string>
-<string name="welcome_downloading_xposed"></string>
-<string name="welcome_downloaded_xposed"></string>
-<string name="welcome_download_error_xposed"></string>
-<string name="download_xposed_title"></string>
-<string name="download_xposed_description"></string>
-<string name="requires_root"></string>
-<string name="installs_xposed"></string>
-<string name="settings_category_code_credits"></string>
+
 </resources>

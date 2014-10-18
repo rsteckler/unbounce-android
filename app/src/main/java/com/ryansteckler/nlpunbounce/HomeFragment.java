@@ -24,6 +24,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -306,7 +308,8 @@ public class HomeFragment extends Fragment  {
 
         private void handleRootFailure(TextView problemText, TextView nextButtonText, LinearLayout nextButton) {
             nextButtonText.setText(getResources().getString(R.string.welcome_banner_button_exit));
-            problemText.setText(getResources().getString(R.string.welcome_banner_problem_root));
+            problemText.setText(Html.fromHtml(getResources().getString(R.string.welcome_banner_problem_root)));
+            problemText.setMovementMethod(LinkMovementMethod.getInstance());
             nextButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -317,7 +320,8 @@ public class HomeFragment extends Fragment  {
 
         private void handleXposedInstalledFailure(TextView problemText, final TextView nextButtonText, final LinearLayout nextButton) {
             //Set the problem text.
-            problemText.setText(getResources().getString(R.string.welcome_banner_problem_xposed_installed));
+            problemText.setText(Html.fromHtml(getResources().getString(R.string.welcome_banner_problem_xposed_installed)));
+            problemText.setMovementMethod(LinkMovementMethod.getInstance());
 
             //Show the download view
             View welcomeDownload = getActivity().findViewById(R.id.welcomeFrameworkDownload);
@@ -374,7 +378,8 @@ public class HomeFragment extends Fragment  {
 
         private void handleXposedRunningFailure(TextView problemText, TextView nextButtonText, LinearLayout nextButton) {
             nextButtonText.setText(getActivity().getResources().getString(R.string.welcome_banner_button_fixit));
-            problemText.setText(getResources().getString(R.string.welcome_banner_problem_xposed_running));
+            problemText.setText(Html.fromHtml(getResources().getString(R.string.welcome_banner_problem_xposed_running)));
+            problemText.setMovementMethod(LinkMovementMethod.getInstance());
             nextButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -386,7 +391,8 @@ public class HomeFragment extends Fragment  {
 
         private void handleServiceFailure(TextView problemText, TextView nextButtonText, LinearLayout nextButton) {
             nextButtonText.setText(getActivity().getResources().getString(R.string.welcome_banner_button_fixit));
-            problemText.setText(getResources().getString(R.string.welcome_banner_problem_service));
+            problemText.setText(Html.fromHtml(getResources().getString(R.string.welcome_banner_problem_service)));
+            problemText.setMovementMethod(LinkMovementMethod.getInstance());
             nextButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

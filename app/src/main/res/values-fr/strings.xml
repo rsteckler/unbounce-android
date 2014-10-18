@@ -108,9 +108,6 @@
 <string name="donate_more_text">"Certaines personnes ont demandé comment aider en plus de leur donation initiale. Les boutons suivants vous permettent de faire une nouvelle contribution, mais n'apporte aucune fonctionnalité additionnelle. Un grand merci pour votre contribution à cette application !"</string>
 <string name="welcome_banner_title">"Bienvenue !"</string>
 <string name="welcome_banner_text">"Vous pouvez bloquer les wakelocks pour empêcher votre téléphone de rester éveillé, et bloquer les alarmes pour l'empêcher de se réveiller. Nous avons déjà préconfiguré des réglages d'économie de batterie pour vous."</string>
-
-<!-- Don't translate this one  :) -->
-<string name="app_font_family">"sans_serif"</string>
 <string name="settings_category_options">"Options"</string>
 <string name="settings_item_show_launcher">"Afficher l'icone de lancement"</string>
 <string name="settings_item_choose_theme">"Afficher le thème"</string>
@@ -152,27 +149,5 @@ Quelques points à souligner :
 L'achat dans l'application permet de débloquer le module Pro et vous laisse paramétrer les alarmes et wakelocks de votre appareil. Sans le module pro, vous pouvez contrôler les paramètres plus gros consommateurs de batterie : NlpWakelock, NlpCollectorWakeLock, ALARM_WAKEUP_LOCATOR, et ALARM_WAKE_ACTIVITY_DETECTION. 
 
 Vous souhaitant longue vie [à votre batterie] !"</string>
-<string name="welcome_banner_welcome"></string>
-<string name="welcome_banner_checking_service"></string>
-<string name="welcome_banner_checking_xposed"></string>
-<string name="welcome_banner_checking_root"></string>
-<string name="welcome_banner_checking_looks_great"></string>
-<string name="welcome_banner_checking_uhoh"></string>
-<string name="welcome_banner_problem_none"></string>
-<string name="welcome_banner_problem_service"></string>
-<string name="welcome_banner_problem_xposed_running"></string>
-<string name="welcome_banner_problem_xposed_installed"></string>
-<string name="welcome_banner_problem_root"></string>
-<string name="welcome_banner_button_next"></string>
-<string name="welcome_banner_button_fixit"></string>
-<string name="welcome_banner_button_exit"></string>
-<string name="welcome_banner_button_install"></string>
-<string name="welcome_downloading_xposed"></string>
-<string name="welcome_downloaded_xposed"></string>
-<string name="welcome_download_error_xposed"></string>
-<string name="download_xposed_title"></string>
-<string name="download_xposed_description"></string>
-<string name="requires_root"></string>
-<string name="installs_xposed"></string>
-<string name="settings_category_code_credits"></string>
+
 </resources>

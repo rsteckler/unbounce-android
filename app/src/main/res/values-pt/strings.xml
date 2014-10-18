@@ -109,8 +109,6 @@
 <string name="welcome_banner_title">"Bem vindo!"</string>
 <string name="welcome_banner_text">"Podes bloquear wakelocks impedindo que o teu telefone se mantenha acordado, e bloquear os alarmes que fazem com que ele acorde. Já definimos algumas coisas por ti que te vão poupar bateria."</string>
 
-<!-- Don't translate this one  :) -->
-<string name="app_font_family">"sans_serif"</string>
 <string name="settings_category_options">"Opções"</string>
 <string name="settings_item_show_launcher">"Mostrar icon app"</string>
 <string name="settings_item_choose_theme">"Escolher tema"</string>
@@ -154,27 +152,5 @@ Algumas das características principais:
 Através da compra dentro da aplicação (In-App purchase) podes desbloquear a versão Pro que permite-te configurar todos os alarmes e wakelocks do teu dispositivo. Sem a versão Pro podes configurar os 2 wakelocks e 2 alarmes que mais bateria consomem: NlpWakelock, NlpCollectorWakeLock, ALARM_WAKEUP_LOCATOR, e ALARM_WAKE_ACTIVITY_DETECTION.
 
 Que aproveites uma grande e longa bateria!"</string>
-<string name="welcome_banner_welcome"></string>
-<string name="welcome_banner_checking_service"></string>
-<string name="welcome_banner_checking_xposed"></string>
-<string name="welcome_banner_checking_root"></string>
-<string name="welcome_banner_checking_looks_great"></string>
-<string name="welcome_banner_checking_uhoh"></string>
-<string name="welcome_banner_problem_none"></string>
-<string name="welcome_banner_problem_service"></string>
-<string name="welcome_banner_problem_xposed_running"></string>
-<string name="welcome_banner_problem_xposed_installed"></string>
-<string name="welcome_banner_problem_root"></string>
-<string name="welcome_banner_button_next"></string>
-<string name="welcome_banner_button_fixit"></string>
-<string name="welcome_banner_button_exit"></string>
-<string name="welcome_banner_button_install"></string>
-<string name="welcome_downloading_xposed"></string>
-<string name="welcome_downloaded_xposed"></string>
-<string name="welcome_download_error_xposed"></string>
-<string name="download_xposed_title"></string>
-<string name="download_xposed_description"></string>
-<string name="requires_root"></string>
-<string name="installs_xposed"></string>
-<string name="settings_category_code_credits"></string>
+
 </resources>

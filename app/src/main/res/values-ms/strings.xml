@@ -109,8 +109,6 @@
 <string name="welcome_banner_title">"Selamat datang!"</string>
 <string name="welcome_banner_text">"Anda boleh menghalang kunci berjaga daripada menghalang telefon anda tidur, dan menghalang penggera daripada membangunkannya.  Kami telah menetapkan beberapa tetapan untuk penjimatan bateri."</string>
 
-<!-- Don't translate this one  :) -->
-<string name="app_font_family">"sans_serif"</string>
 <string name="settings_category_options">"Pilihan"</string>
 <string name="settings_item_show_launcher">"Tunjuk ikon pelancar"</string>
 <string name="settings_item_choose_theme">"Pilih tema"</string>
@@ -156,27 +154,5 @@ Pembelian Dalam Aplikasi membolehkan anda untuk membuka kunci pakej Premium yang
 
 Semoga [bateri] anda tahan lama!
     "</string>
-<string name="welcome_banner_welcome"></string>
-<string name="welcome_banner_checking_service"></string>
-<string name="welcome_banner_checking_xposed"></string>
-<string name="welcome_banner_checking_root"></string>
-<string name="welcome_banner_checking_looks_great"></string>
-<string name="welcome_banner_checking_uhoh"></string>
-<string name="welcome_banner_problem_none"></string>
-<string name="welcome_banner_problem_service"></string>
-<string name="welcome_banner_problem_xposed_running"></string>
-<string name="welcome_banner_problem_xposed_installed"></string>
-<string name="welcome_banner_problem_root"></string>
-<string name="welcome_banner_button_next"></string>
-<string name="welcome_banner_button_fixit"></string>
-<string name="welcome_banner_button_exit"></string>
-<string name="welcome_banner_button_install"></string>
-<string name="welcome_downloading_xposed"></string>
-<string name="welcome_downloaded_xposed"></string>
-<string name="welcome_download_error_xposed"></string>
-<string name="download_xposed_title"></string>
-<string name="download_xposed_description"></string>
-<string name="requires_root"></string>
-<string name="installs_xposed"></string>
-<string name="settings_category_code_credits"></string>
+
 </resources>

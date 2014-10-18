@@ -109,26 +109,6 @@
 <string name="welcome_banner_title">"ようこそ!"</string>
 <string name="welcome_banner_text">"ウェイクロックをブロックしてウェイクされたままにしないようにしたり、アラームをブロックしてウェイクされないようにしたり出来ます。デフォルトで位置情報関連のバッテリー消費を抑えるようになっています。"</string>
 
-<!-- Don't translate this one  :) -->
-<string name="app_font_family">"sans_serif"</string>
-<string name="settings_category_options"></string>
-<string name="settings_item_show_launcher"></string>
-<string name="settings_item_choose_theme"></string>
-<string name="settings_item_global_stats_title"></string>
-<string name="settings_item_global_stats_summary"></string>
-<string name="settings_item_reset_defaults_title"></string>
-<string name="settings_item_reset_defaults_summary"></string>
-<string name="settings_category_debug"></string>
-<string name="settings_item_author"></string>
-<string name="settings_item_logging_level"></string>
-<string name="settings_category_translation"></string>
-<string name="settings_theme_material"></string>
-<string name="settings_theme_dark"></string>
-<string name="settings_logging_quiet"></string>
-<string name="settings_logging_default"></string>
-<string name="settings_logging_verbose"></string>
-<string name="settings_item_force_english_title"></string>
-<string name="settings_item_force_english_summary"></string>
 <string name="playstore_short_description">"消費電力を極限まで抑えよう!"</string>
 <string name="playstore_long_description">"
 *** root権限とXposedフレームワークが必要です ***
@@ -155,27 +135,4 @@ Unbounceは、端末をウェイクしたままにする間隔や端末をウェ
 
 [バッテリー]の持ちを極限まで高めよう!
     "</string>
-<string name="welcome_banner_welcome"></string>
-<string name="welcome_banner_checking_service"></string>
-<string name="welcome_banner_checking_xposed"></string>
-<string name="welcome_banner_checking_root"></string>
-<string name="welcome_banner_checking_looks_great"></string>
-<string name="welcome_banner_checking_uhoh"></string>
-<string name="welcome_banner_problem_none"></string>
-<string name="welcome_banner_problem_service"></string>
-<string name="welcome_banner_problem_xposed_running"></string>
-<string name="welcome_banner_problem_xposed_installed"></string>
-<string name="welcome_banner_problem_root"></string>
-<string name="welcome_banner_button_next"></string>
-<string name="welcome_banner_button_fixit"></string>
-<string name="welcome_banner_button_exit"></string>
-<string name="welcome_banner_button_install"></string>
-<string name="welcome_downloading_xposed"></string>
-<string name="welcome_downloaded_xposed"></string>
-<string name="welcome_download_error_xposed"></string>
-<string name="download_xposed_title"></string>
-<string name="download_xposed_description"></string>
-<string name="requires_root"></string>
-<string name="installs_xposed"></string>
-<string name="settings_category_code_credits"></string>
 </resources>

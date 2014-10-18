@@ -109,8 +109,6 @@
 <string name="welcome_banner_title">"Добро пожаловать!"</string>
 <string name="welcome_banner_text">"Теперь Вы можете блокировать пробуждения, чтобы предотвращать бодрствование телефона, и события, чтобы те не тревожили устройство.  Мы уже подготовили для Вас пару настроек, продлевающих жизнь батареи."</string>
 
-<!-- Don't translate this one  :) -->
-<string name="app_font_family">"sans_serif"</string>
 <string name="settings_category_options">"Настройки"</string>
 <string name="settings_item_show_launcher">"Показывать иконку программы"</string>
 <string name="settings_item_choose_theme">"Выбрать тему"</string>
@@ -152,27 +150,5 @@ Unbounce позволяет контролировать потребелени�
 Покупки внутри приложений позволят разблокировать платные возможности, позволяющие управлять любыми событиями и пробуждениями на Вашем устройстве. Без пожертвования можно управлять основными пожирателями батареи: NlpWakelock, NlpCollectorWakeLock, ALARM_WAKEUP_LOCATOR, и ALARM_WAKE_ACTIVITY_DETECTION.
 Продлите жизнь батареи от одного заряда!
     "</string>
-<string name="welcome_banner_welcome"></string>
-<string name="welcome_banner_checking_service"></string>
-<string name="welcome_banner_checking_xposed"></string>
-<string name="welcome_banner_checking_root"></string>
-<string name="welcome_banner_checking_looks_great"></string>
-<string name="welcome_banner_checking_uhoh"></string>
-<string name="welcome_banner_problem_none"></string>
-<string name="welcome_banner_problem_service"></string>
-<string name="welcome_banner_problem_xposed_running"></string>
-<string name="welcome_banner_problem_xposed_installed"></string>
-<string name="welcome_banner_problem_root"></string>
-<string name="welcome_banner_button_next"></string>
-<string name="welcome_banner_button_fixit"></string>
-<string name="welcome_banner_button_exit"></string>
-<string name="welcome_banner_button_install"></string>
-<string name="welcome_downloading_xposed"></string>
-<string name="welcome_downloaded_xposed"></string>
-<string name="welcome_download_error_xposed"></string>
-<string name="download_xposed_title"></string>
-<string name="download_xposed_description"></string>
-<string name="requires_root"></string>
-<string name="installs_xposed"></string>
-<string name="settings_category_code_credits"></string>
+
 </resources>
