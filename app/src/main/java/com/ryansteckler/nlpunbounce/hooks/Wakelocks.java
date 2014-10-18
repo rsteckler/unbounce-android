@@ -10,9 +10,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Build;
 import android.os.IBinder;
-import android.os.PowerManager;
 import android.os.SystemClock;
-import android.util.Log;
 
 import com.ryansteckler.nlpunbounce.ActivityReceiver;
 import com.ryansteckler.nlpunbounce.XposedReceiver;
@@ -23,6 +21,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
+import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -30,8 +29,6 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage.LoadPackageParam;
 
 import static de.robv.android.xposed.XposedHelpers.callMethod;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
-
-import de.robv.android.xposed.XC_MethodHook;
 
 public class Wakelocks implements IXposedHookLoadPackage {
 
@@ -84,11 +81,10 @@ public class Wakelocks implements IXposedHookLoadPackage {
 
     }
 
-    private void setupReceiver(XC_MethodHook.MethodHookParam param)
-    {
+    private void setupReceiver(XC_MethodHook.MethodHookParam param) {
         if (!mRegisteredRecevier) {
             mRegisteredRecevier = true;
-            Context context = (Context)XposedHelpers.getObjectField(param.thisObject, "mContext");
+            Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
 
             IntentFilter filter = new IntentFilter();
             filter.addAction(XposedReceiver.RESET_ACTION);
@@ -100,17 +96,14 @@ public class Wakelocks implements IXposedHookLoadPackage {
     private void hookAlarms(LoadPackageParam lpparam) {
         boolean alarmsHooked = false;
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
-        {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             //Try for alarm hooks for API levels >= 19
             defaultLog("Attempting 19to20 AlarmHook");
             try19To20AlarmHook(lpparam);
             defaultLog("Successful 19to20 AlarmHook");
             alarmsHooked = true;
-        }
-        else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1 &&
-                Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN_MR2)
-        {
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1 &&
+                Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN_MR2) {
             //Try for alarm hooks for API levels 15-18.
             defaultLog("Attempting 15to18 AlarmHook");
             try15To18AlarmHook(lpparam);
@@ -133,18 +126,15 @@ public class Wakelocks implements IXposedHookLoadPackage {
             try19To20WakeLockHook(lpparam);
             defaultLog("Successful 19to20 WakeLockHook");
             wakeLocksHooked = true;
-        }
-        else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1 &&
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1 &&
                 Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN_MR2) {
             //Try for wakelock hooks for API levels 17-18
             defaultLog("Attempting 17to18 WakeLockHook");
             try17To18WakeLockHook(lpparam);
             defaultLog("Successful 17to18 WakeLockHook");
             wakeLocksHooked = true;
-        }
-        else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1 &&
-                Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN)
-        {
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1 &&
+                Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN) {
             //Try for wakelock hooks for API levels 15-16
             defaultLog("Attempting 15to16 WakeLockHook");
             try15To16WakeLockHook(lpparam);
@@ -161,8 +151,8 @@ public class Wakelocks implements IXposedHookLoadPackage {
         findAndHookMethod("com.android.server.power.PowerManagerService", lpparam.classLoader, "acquireWakeLockInternal", android.os.IBinder.class, int.class, String.class, String.class, android.os.WorkSource.class, int.class, int.class, new XC_MethodHook() {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                String wakeLockName = (String)param.args[2];
-                IBinder lock = (IBinder)param.args[0];
+                String wakeLockName = (String) param.args[2];
+                IBinder lock = (IBinder) param.args[0];
                 handleWakeLockAcquire(param, wakeLockName, lock);
             }
         });
@@ -170,7 +160,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
         findAndHookMethod("com.android.server.power.PowerManagerService", lpparam.classLoader, "releaseWakeLockInternal", android.os.IBinder.class, int.class, new XC_MethodHook() {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                IBinder lock = (IBinder)param.args[0];
+                IBinder lock = (IBinder) param.args[0];
                 handleWakeLockRelease(param, lock);
             }
         });
@@ -181,8 +171,8 @@ public class Wakelocks implements IXposedHookLoadPackage {
         findAndHookMethod("com.android.server.power.PowerManagerService", lpparam.classLoader, "acquireWakeLockInternal", android.os.IBinder.class, int.class, String.class, android.os.WorkSource.class, int.class, int.class, new XC_MethodHook() {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                String wakeLockName = (String)param.args[2];
-                IBinder lock = (IBinder)param.args[0];
+                String wakeLockName = (String) param.args[2];
+                IBinder lock = (IBinder) param.args[0];
                 handleWakeLockAcquire(param, wakeLockName, lock);
             }
         });
@@ -190,7 +180,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
         findAndHookMethod("com.android.server.power.PowerManagerService", lpparam.classLoader, "releaseWakeLockInternal", android.os.IBinder.class, int.class, new XC_MethodHook() {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                IBinder lock = (IBinder)param.args[0];
+                IBinder lock = (IBinder) param.args[0];
                 handleWakeLockRelease(param, lock);
             }
         });
@@ -201,8 +191,8 @@ public class Wakelocks implements IXposedHookLoadPackage {
         findAndHookMethod("com.android.server.PowerManagerService", lpparam.classLoader, "acquireWakeLockLocked", int.class, android.os.IBinder.class, int.class, int.class, String.class, android.os.WorkSource.class, new XC_MethodHook() {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                String wakeLockName = (String)param.args[4];
-                IBinder lock = (IBinder)param.args[1];
+                String wakeLockName = (String) param.args[4];
+                IBinder lock = (IBinder) param.args[1];
                 handleWakeLockAcquire(param, wakeLockName, lock);
             }
         });
@@ -210,7 +200,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
         findAndHookMethod("com.android.server.PowerManagerService", lpparam.classLoader, "releaseWakeLockLocked", android.os.IBinder.class, int.class, boolean.class, new XC_MethodHook() {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                IBinder lock = (IBinder)param.args[0];
+                IBinder lock = (IBinder) param.args[0];
                 handleWakeLockRelease(param, lock);
             }
         });
@@ -250,9 +240,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
             long lastAttempt = 0;
             try {
                 lastAttempt = mLastWakelockAttempts.get(wakeLockName);
-            }
-            catch (NullPointerException npe)
-            { /* ok.  Just havent attempted yet.  Use 0 */ }
+            } catch (NullPointerException npe) { /* ok.  Just havent attempted yet.  Use 0 */ }
 
             long now = SystemClock.elapsedRealtime();
             long timeSinceLastWakeLock = now - lastAttempt;
@@ -262,11 +250,11 @@ public class Wakelocks implements IXposedHookLoadPackage {
                 param.setResult(null);
                 recordWakelockBlock(param, wakeLockName);
 
-                debugLog("Preventing " + wakeLockName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
+                debugLog("Preventing Wakelock" + wakeLockName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
 
             } else {
                 //Allow the wakelock
-                defaultLog(TAG + "Allowing " + wakeLockName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
+                defaultLog(TAG + "Allowing Wakelock" + wakeLockName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
                 mLastWakelockAttempts.put(wakeLockName, now);
                 recordAcquire(wakeLockName, lock);
             }
@@ -278,8 +266,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
     private void recordAcquire(String wakeLockName, IBinder lock) {
         //Get the lock
         InterimWakelock curStats = mCurrentWakeLocks.get(lock);
-        if (curStats == null)
-        {
+        if (curStats == null) {
             curStats = new InterimWakelock();
             curStats.setName(wakeLockName);
             curStats.setTimeStarted(SystemClock.elapsedRealtime());
@@ -293,16 +280,14 @@ public class Wakelocks implements IXposedHookLoadPackage {
 
     private void handleWakeLockRelease(XC_MethodHook.MethodHookParam param, IBinder lock) {
         InterimWakelock curStats = mCurrentWakeLocks.remove(lock);
-        if (curStats != null)
-        {
+        if (curStats != null) {
             curStats.setTimeStopped(SystemClock.elapsedRealtime());
-            Context context = (Context)XposedHelpers.getObjectField(param.thisObject, "mContext");
+            Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
             UnbounceStatsCollection.getInstance().addInterimWakelock(context, curStats);
         }
     }
 
-    private void updateStatsIfNeeded(Context context)
-    {
+    private void updateStatsIfNeeded(Context context) {
         if (context != null) {
             final long now = SystemClock.elapsedRealtime();
 
@@ -339,7 +324,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
 
     private void handleAlarm(XC_MethodHook.MethodHookParam param, ArrayList<Object> triggers) {
         final long now = SystemClock.elapsedRealtime();
-        Context context = (Context)XposedHelpers.getObjectField(param.thisObject, "mContext");
+        Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
         long sinceReload = now - mLastReloadPrefs;
         if (sinceReload > mReloadPrefsFrequency) {
             setupReceiver(param);
@@ -364,13 +349,31 @@ public class Wakelocks implements IXposedHookLoadPackage {
 //
             } catch (NoSuchMethodError nsme) {
                 //API prior to 4.2.2_r1 don't have this.
-                if (!showedUnsupportedAlarmMessage) {
+               /* if (!showedUnsupportedAlarmMessage) {
                     showedUnsupportedAlarmMessage = true;
                     XposedBridge.log(TAG + "Alarm prevention is not yet supported on Android versions less than 4.2.2");
+                }*/
+
+                /*
+                    ---------------- Added for JB 4.1.2 Support ------------------------
+
+                 */
+
+                Object mTarget = XposedHelpers.getObjectField(pi, "mTarget");
+
+                //debugLog("mTarget Class for PendingIntent: " + mTarget.getClass());
+                if (null != mTarget) {
+                    Object pendingIntentRecord$Key = XposedHelpers.getObjectField(mTarget, "key");
+                    //debugLog("PendingIntentRecord$Key Class for PendingIntent: " + pendingIntentRecord$Key.getClass());
+                    if (null != pendingIntentRecord$Key) {
+                        Object requestIntent = XposedHelpers.getObjectField(pendingIntentRecord$Key, "requestIntent");
+                        //debugLog("requestIntent Class for PendingIntent: " + requestIntent.getClass() + " " + requestIntent);
+                        intent = (Intent) requestIntent;
+                    }
                 }
             }
 
-            if(intent==null || intent.getAction()==null){
+            if (intent == null || intent.getAction() == null) {
                 //TODO: Why does the system have alarms with null intents?
                 continue;
             }
@@ -387,9 +390,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
                 long lastAttempt = 0;
                 try {
                     lastAttempt = mLastAlarmAttempts.get(alarmName);
-                }
-                catch (NullPointerException npe)
-                { /* ok.  Just havent attempted yet.  Use 0 */ }
+                } catch (NullPointerException npe) { /* ok.  Just havent attempted yet.  Use 0 */ }
 
                 long timeSinceLastAlarm = now - lastAttempt;
 
@@ -399,11 +400,11 @@ public class Wakelocks implements IXposedHookLoadPackage {
                     triggers.remove(j);
                     recordAlarmBlock(param, alarmName);
 
-                    debugLog("Preventing " + alarmName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastAlarm);
+                    debugLog("Preventing Alarm " + alarmName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastAlarm);
 
                 } else {
                     //Allow the wakelock
-                    defaultLog(TAG + "Allowing " + alarmName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastAlarm);
+                    defaultLog(TAG + "Allowing Alarm" + alarmName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastAlarm);
                     mLastAlarmAttempts.put(alarmName, now);
                     recordAlarmAcquire(context, alarmName);
                 }
@@ -415,7 +416,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
 
     private void recordWakelockBlock(XC_MethodHook.MethodHookParam param, String name) {
 
-        Context context = (Context)XposedHelpers.getObjectField(param.thisObject, "mContext");
+        Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
 
         if (context != null) {
             UnbounceStatsCollection.getInstance().incrementWakelockBlock(context, name);
@@ -424,7 +425,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
 
     private void recordAlarmBlock(XC_MethodHook.MethodHookParam param, String name) {
 
-        Context context = (Context)XposedHelpers.getObjectField(param.thisObject, "mContext");
+        Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
 
         if (context != null) {
             UnbounceStatsCollection.getInstance().incrementAlarmBlock(context, name);
@@ -439,21 +440,16 @@ public class Wakelocks implements IXposedHookLoadPackage {
             return 0;
         }
     }
-
-    private void debugLog(String log)
-    {
+    private void debugLog(String log) {
         String curLevel = m_prefs.getString("logging_level", "default");
-        if (curLevel.equals("verbose"))
-        {
+        if (curLevel.equals("verbose")) {
             XposedBridge.log(TAG + log);
         }
     }
 
-    private void defaultLog(String log)
-    {
+    private void defaultLog(String log) {
         String curLevel = m_prefs.getString("logging_level", "default");
-        if (curLevel.equals("default") || curLevel.equals("verbose"))
-        {
+        if (curLevel.equals("default") || curLevel.equals("verbose")) {
             XposedBridge.log(TAG + log);
         }
     }
