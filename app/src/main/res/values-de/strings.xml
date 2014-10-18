@@ -121,7 +121,7 @@
 <string name="settings_category_debug">"Debug"</string>
 <string name="settings_item_author">"Autor: Ryan Steckler"</string>
 <string name="settings_item_logging_level">"Log-Level"</string>
-<string name="settings_category_translation">"Für Übersetzung verdient gemacht"</string>
+<string name="settings_category_translation">"Übersetzung"</string>
 <string name="settings_theme_material">"Material"</string>
 <string name="settings_theme_dark">"Dunkel"</string>
 <string name="settings_logging_quiet">"Leise"</string>
@@ -131,7 +131,7 @@
 <string name="settings_item_force_english_summary">"Überschreibt Ihre Systemsprache und nutzt Englisch"</string>
 <string name="playstore_short_description">"Wir wünschen Ihnen ein langes (Batterie-) Leben!"</string>
 <string name="playstore_long_description">"
-*** Benötigt Root und das Xposed-Framework ***
+*** Benötigt Root ***
 
 Unaufgeforderte Bewertungen von echten Benutzern:
 Es gab mir ungefähr 2 Stunden mehr Nutzung bei 30 Minuten mehr Zeit mit eingeschalteten Bildschirm. Hat mich davor bewahrt, eine Batterie für 25 Dollar zu kaufen.
@@ -164,8 +164,8 @@ Wir wünschen Ihnen ein langes (Batterie-) Leben!
 <string name="welcome_banner_problem_none">"Wir haben einige akkusparende Standards für Dich eingestellt. Genieß deine neue Betriebsdauer!"</string>
 <string name="welcome_banner_problem_service">"Es scheint, dass Du das Unbounce Modul nicht aktiviert hast. Klicke erst auf REPARIEREN, dann setze ein Häkchen bei Unbounce und starte danach dein Gerät neu."</string>
 <string name="welcome_banner_problem_xposed_running">"Xposed läuft nicht. Klicke erst auf REPARIEREN, dann auf Installieren/Aktualisieren und starte dann dein Gerät neu."</string>
-<string name="welcome_banner_problem_xposed_installed">"Xposed ist nicht installiert. Es wird für Unbounce und viele weitere Anwendungen mit Rootzugang benötigt. Wenn der Download abgeschlossen ist klicke erst auf INSTALLIEREN und starte Unbounce danach erneut. Wenn du mehr über Xposed lernen möchtest &lt;a href=http://www.tested.com/tech/android/460074-how-use-xposed-framework-android-extreme-customization/&gt;besuche Tested.com.&lt;/a&gt; "</string>
-<string name="welcome_banner_problem_root">"Es sieht danach aus, dass dein Gerät keinen Rootzugang hat. Unbounce benötigt ein Gerät mit Rootzugriff um korrekt zu funktionieren. Wenn du daran interessiert bist dein Gerät zu rooten, besuche bitte &lt;a href=http://www.techverse.net/how-to-root-your-android-phone-tablet-and-why/&gt;Techverse.net&lt;/a&gt; um zu beginnen."</string>
+<string name="welcome_banner_problem_xposed_installed">"Xposed ist nicht installiert. Es wird für Unbounce und viele weitere Anwendungen mit Rootzugang benötigt. Wenn der Download abgeschlossen ist klicke erst auf INSTALLIEREN und starte Unbounce danach erneut. Wenn du mehr über Xposed lernen möchtest &lt;a href=\"http://www.tested.com/tech/android/460074-how-use-xposed-framework-android-extreme-customization\" /&gt;besuche Tested.com.&lt;/a&gt; "</string>
+<string name="welcome_banner_problem_root">"Es sieht danach aus, dass dein Gerät keinen Rootzugang hat. Unbounce benötigt ein Gerät mit Rootzugriff um korrekt zu funktionieren. Wenn du daran interessiert bist dein Gerät zu rooten, besuche bitte &lt;a href=\"http://www.techverse.net/how-to-root-your-android-phone-tablet-and-why\" /&gt;Techverse.net&lt;/a&gt; um zu beginnen."</string>
 <string name="welcome_banner_button_next">"WEITER"</string>
 <string name="welcome_banner_button_fixit">"REPARIEREN"</string>
 <string name="welcome_banner_button_exit">"SCHLIESSEN"</string>
@@ -177,5 +177,5 @@ Wir wünschen Ihnen ein langes (Batterie-) Leben!
 <string name="download_xposed_description">"Benötigt für Unbounce"</string>
 <string name="requires_root">"*** Benötigt ein Gerät mit Rootzugriff ***"</string>
 <string name="installs_xposed">"Unbounce verwendet das Xposed Framework und wird es für Dich installieren, falls du es nicht bereits hast."</string>
-<string name="settings_category_code_credits"></string>
+<string name="settings_category_code_credits">"Entwickler"</string>
 </resources>
