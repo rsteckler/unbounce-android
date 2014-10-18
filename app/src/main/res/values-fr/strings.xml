@@ -107,7 +107,6 @@
 <string name="donate_more_button">"COMMENT PUIS-JE AIDER PLUS ?"</string>
 <string name="donate_more_text">"Certaines personnes ont demandé comment aider en plus de leur donation initiale. Les boutons suivants vous permettent de faire une nouvelle contribution, mais n'apporte aucune fonctionnalité additionnelle. Un grand merci pour votre contribution à cette application !"</string>
 <string name="welcome_banner_title">"Bienvenue !"</string>
-<string name="welcome_banner_text">"Vous pouvez bloquer les wakelocks pour empêcher votre téléphone de rester éveillé, et bloquer les alarmes pour l'empêcher de se réveiller. Nous avons déjà préconfiguré des réglages d'économie de batterie pour vous."</string>
 <string name="settings_category_options">"Options"</string>
 <string name="settings_item_show_launcher">"Afficher l'icone de lancement"</string>
 <string name="settings_item_choose_theme">"Afficher le thème"</string>
@@ -115,7 +114,6 @@
 <string name="settings_item_global_stats_summary">"Envoyer et recevoir les statistiques anonymisées"</string>
 <string name="settings_item_reset_defaults_title">"Remettre les paramétres par défaut"</string>
 <string name="settings_item_reset_defaults_summary">"Remettre les paramètres par défaut des alarmes et wakelocks"</string>
-<string name="settings_category_debug">"Debugage"</string>
 <string name="settings_item_author">"Auteur : Ryan Steckler"</string>
 <string name="settings_item_logging_level">"Niveau de log"</string>
 <string name="settings_category_translation">"Traducteurs"</string>

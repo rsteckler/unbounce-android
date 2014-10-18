@@ -107,7 +107,6 @@
 <string name="donate_more_button">"もっと手助けするには?"</string>
 <string name="donate_more_text">"下のボタンでもっと寄付することが出来ますが、追加される機能はありません。Unbounceの開発をサポートしてくださり、本当にありがとうございます!"</string>
 <string name="welcome_banner_title">"ようこそ!"</string>
-<string name="welcome_banner_text">"ウェイクロックをブロックしてウェイクされたままにしないようにしたり、アラームをブロックしてウェイクされないようにしたり出来ます。デフォルトで位置情報関連のバッテリー消費を抑えるようになっています。"</string>
 
 <string name="playstore_short_description">"消費電力を極限まで抑えよう!"</string>
 <string name="playstore_long_description">"

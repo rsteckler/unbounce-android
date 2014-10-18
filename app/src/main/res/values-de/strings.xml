@@ -106,9 +106,6 @@
 <string name="donate_thank_you">"Danke für Ihre Spende.  Es bedeutet mir eine Menge.  Ich arbeite hart in meiner begrenzten Zeit, um Ihnen eine bessere Akkulaufzeit zu bieten.  Wenn Sie gespendet haben, haben Sie etwas im Projekt bewegt, und Sie haben etwas im Leben meiner Familie bewegt.  Sie sind toll."</string>
 <string name="donate_more_button">"WIE KANN ICH NOCH WEITER HELFEN?"</string>
 <string name="donate_more_text">"Leute haben mich gefragt, wie sie über der ersten Spende hinaus etwas beitragen können.  Die folgenden Schaltflächen erlauben weitere Spenden, bringen aber keine weiteren Funktionen.  Vielen Dank, dass Sie Unbounce unterstützen!"</string>
-<string name="welcome_banner_title">"Willkommen!"</string>
-<string name="welcome_banner_text">"Sie können Wakelocks blockieren, um Ihr Telefon davon abzuhalten, wach zu bleiben. Außerdem können Sie Alarme blockieren, um es von vornherein am Aufwachen zu hindern.  Wir haben bereits einige batteriesparende Standardwerte für Sie gesetzt."</string>
-
 
 <string name="settings_category_options">"Einstellungen"</string>
 <string name="settings_item_show_launcher">"Launcher-Icon zeigen"</string>
@@ -117,7 +114,6 @@
 <string name="settings_item_global_stats_summary">"Anonyme Statistiken senden und empfangen"</string>
 <string name="settings_item_reset_defaults_title">"Standardeinstellungen"</string>
 <string name="settings_item_reset_defaults_summary">"Alle Alarme und Wakelocks auf Standardwerte zurücksetzen"</string>
-<string name="settings_category_debug">"Debug"</string>
 <string name="settings_item_author">"Autor: Ryan Steckler"</string>
 <string name="settings_item_logging_level">"Log-Level"</string>
 <string name="settings_category_translation">"Übersetzung"</string>
