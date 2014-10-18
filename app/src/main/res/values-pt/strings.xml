@@ -131,7 +131,7 @@
 <string name="settings_item_force_english_summary">"Ignorar definições locais e usar Inglês"</string>
 <string name="playstore_short_description">"Que aproveites uma grande e longa bateria!"</string>
 <string name="playstore_long_description">"
-*** É preciso ter o dispositivo com Root e a aplicação Xposed Framework ***
+*** É preciso ter o dispositivo com Root ***
 
 Frases de utilizadores, retiradas do forum Unbouce:
 Ganhei 2 horas adicionais de bateria mesmo com 30 minutos a mais de ecrã ligado. Fez-me poupar $25 na compra de uma bateria.
