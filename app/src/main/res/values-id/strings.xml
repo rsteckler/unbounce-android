@@ -1,2 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+<string name="app_name">"Unbounce"</string>
+<string name="version">"Versi"</string>
+<string name="title_activity_material_settings">"Unbounce"</string>
+<string name="title_home">"Halaman Utama"</string>
+<string name="title_wakelocks">"Wakelocks"</string>
+<string name="title_alarms">"Alarms"</string>
+<string name="navigation_drawer_open">"Buka drawer navigasi"</string>
+<string name="navigation_drawer_close">"Tutup drawer navigasi"</string>
+<string name="action_search">"Cari"</string>
+<string name="action_sort_by_count">"Urut berdasarkan hitungan"</string>
+<string name="action_sort_by_time">"Urut berdasarkan waktu"</string>
+<string name="action_settings">"Pengaturan"</string>
+<string name="action_reset_stats">"Atur ulang Statistik"</string>
+<string name="card_donate_title">"KARMA"</string>
+<string name="card_donate_subtitle">"Mendukung pengembang lokal Anda"</string>
+<string name="card_global_title">"STATISTIK GLOBAL"</string>
+<string name="card_global_subtitle">"Statistik gabungan kami"</string>
+<string name="card_local_title">"STATISTIK PERANGKAT"</string>
+
+<!-- Fuzzy -->
+<string name="card_local_subtitle">"Lihat kemajuan Anda"</string>
+<string name="card_settings_title">"PENGATURAN"</string>
+<string name="card_settings_subtitle_alarm">"Kontrol alarm ini"</string>
+<string name="card_settings_subtitle_wakelock">"Kontrol wakelock ini"</string>
+<string name="card_description_title">"Deskripsi"</string>
+<string name="card_description_subtitle">"Mengapa hal ini memakan baterai Anda?"</string>
+<string name="category_unbounced">"Unbounced"</string>
+<string name="category_safe">"Aman untuk di Unbounce"</string>
+<string name="category_unknown">"Tidak diketahui"</string>
+<string name="category_not_safe">"Tidak aman untuk di Unbounce"</string>
+<string name="category_error">"Kesalahan"</string>
+<string name="alert_noiab_title">"Fitur tambahan tidak tersedia"</string>
+<string name="alert_noiab_content">"Perangkat Anda tidak mendukung di aplikasi penagihan. Anda tidak akan dapat membeli fitur tambahan dari Unbounce. Ini bisa jadi karena Anda perlu memperbarui aplikasi Google Play Sore, atau karena Anda tinggal di negara di mana aplikasi billing dinonaktifkan."</string>
+<string name="dialog_ok">"OK"</string>
+<string name="tasker_on">"Hidup"</string>
+<string name="tasker_off">"Mati"</string>
+<string name="tasker_reset_stats">"Atur ulang statistik"</string>
+<string name="tasker_choose_wakelock">"Pilih wakelock untuk menyesuaikan."</string>
+<string name="tasker_choose_alarm">"Pilih alarm untuk menyesuaikan."</string>
+<string name="tasker_welcome">"Selamat Datang di Unbounce Tasker Plugin"</string>
+<string name="tasker_which_task">"Apakah Anda ingin mengubah pengaturan untuk Wakelock atau Alarm, atau apakah Anda ingin me-reset statistik untuk perangkat Anda?"</string>
+<string name="tasker_task_wakelock">"GANTI WAKELOCK"</string>
+<string name="tasker_task_alarm">"GANTI ALARM"</string>
+<string name="tasker_task_reset">"ATUR ULANG STATISTIK"</string>
+<string name="alert_nopro_title">"Ini adalah fitur tambahan"</string>
+<string name="alert_nopro_content">"Untuk Unbounce wakelocks non-standar dan alarm, Anda perlu membeli paket donasi."</string>
+<string name="alert_unknown_alarm_title">"Unbounce alarm tidak diketahui?"</string>
+<string name="alert_unknown_alarm_content">"Alarm ini belum terbukti aman untuk Unbounce. Apakah Anda ingin Unbounce ini?"</string>
+<string name="dialog_unbounce">"UNBOUNCE"</string>
+<string name="dialog_cancel">"BATAL"</string>
+<string name="tasker_choose_settings">"Pilih pengaturan yang anda inginkan"</string>
+<string name="alert_unknown_wakelock_title">"Unbounce wakelock tidak diketahui?"</string>
+<string name="alert_unknown_wakelock_content">"Wakelock ini belum terbukti aman untuk Unbounce. Apakah Anda ingin Unbounce ini?"</string>
+<string name="dialog_delete">"HAPUS"</string>
+<string name="alert_delete_stats_title">"Hapus semua statistik?"</string>
+<string name="alert_delete_stats_content">"Ini akan mengatur ulang statistik untuk semua wakelocks dan alarm anda!"</string>
+<string name="title_settings">"Pengaturan"</string>
+<string name="alert_reset_settings_title">"Atur ulang ke semula?"</string>
+<string name="alert_reset_settings_content">"Ini akan mengatur ulang statistik untuk semua wakelocks dan alarm anda!"</string>
+<string name="dialog_reset">"ATUR ULANG"</string>
+<string name="reset_settings_confirmation">"Pengaturan telah dikembalikan ke semula."</string>
+<string name="dialog_save">"SIMPAN"</string>
+<string name="desc_unknown">"Kami tidak memiliki informasi tentang acara ini, namun. Hal ini mungkin tidak aman untuk Unbounce. Hanya melakukannya jika Anda tahu apa yang Anda lakukan dan Anda tahu bagaimana menonaktifkan Xposed saat boot. Kami bekerja keras untuk mengumpulkan informasi tentang setiap wakelock dan alarm utama. Mohon bersabar sementara kami mengumpulkan informasi ini"</string>
+<string name="desc_nlpwakelock">"NlpWakeLock aman untuk unbounce. Ini digunakan oleh Layanan Google Play untuk menentukan lokasi anda menggunakan kombinasi jaringan menara dan WiFi. Setelah memiliki lokasi Anda, itu dapat mengakses lokasi Anda tanpa menggunakan GPS. Pengaturan yang direkomendasikan adalah antara 180 dan 600 detik."</string>
+<string name="desc_nlpcollectorwakelock">"NlpCollectorWakeLock aman untuk unbounce. Ini digunakan oleh Layanan Google Play untuk menentukan lokasi anda menggunakan kombinasi jaringan menara dan WiFi. Setelah memiliki lokasi Anda, itu dapat mengakses lokasi Anda tanpa menggunakan GPS. Pengaturan yang direkomendasikan adalah antara 180 dan 600 detik."</string>
+<string name="desc_alarmmanager">"Ini menyediakan akses ke layanan sistem alarm. Ketika alarm berbunyi, Intent yang telah terdaftar untuk itu disiarkan oleh sistem, secara otomatis memulai aplikasi target jika tidak sudah berjalan. Alarm Terdaftar dipertahankan saat perangkat sedang tidur (dan opsional dapat membangunkan perangkat jika mereka pergi selama waktu itu), tapi akan dihapus jika dimatikan."</string>
+<string name="desc_audiooffload">"Audio playback ketika layar dimatikan. Jika Anda menonaktifkan ini, Anda tidak akan memiliki audio latar belakang atau musik bisa bermain ketika layar Anda tidak aktif."</string>
+<string name="desc_activitymanagerlauncher">"Berinteraksi dengan keseluruhan kegiatan berjalan di sistem. Jika Anda Unbounce ini, tidak akan bekerja dengan baik."</string>
+<string name="desc_windowmanager">"Ini adalah tingkat WakeLock Sistem Android. Antarmuka aplikasi yang digunakan untuk berbicara dengan window manager - yang berarti, aplikasi akan memerlukan WindowManager mengunci setiap kali mereka harus ditampilkan pada layar."</string>
+<string name="desc_rilj">"RILJ membuat perangkat Anda terjaga sementara tindakan telepon pengolahan, seperti panggilan telepon dan komunikasi menara seluler."</string>
+<string name="desc_syncloopwakelock"></string>
+<string name="desc_icing"></string>
+<string name="desc_startingalertservice"></string>
+<string name="desc_audiomix"></string>
+<string name="desc_locationmanagerservice"></string>
+<string name="desc_audioin"></string>
+<string name="desc_nfcservicemroutingwakelock"></string>
+<string name="desc_wakefulintentservicegcoreulrlocationreportingservice"></string>
+<string name="desc_vzwgpslocationprovider"></string>
+<string name="desc_hangouts_rtcs"></string>
+<string name="desc_gcm_conn"></string>
+<string name="desc_google_c2dm"></string>
+<string name="desc_timedeventqueue"></string>
+<string name="desc_comgoogleandroidgmsnlpalarm_wakeup_locator"></string>
+<string name="desc_comgoogleandroidgmsnlpalarm_wakeup_activity_detection"></string>
+<string name="desc_comgoogleandroidappshangoutsupdate_notification"></string>
+<string name="desc_comandroidinternaltelephonydatastall"></string>
+<string name="settings_allow_every"></string>
+<string name="settings_seconds"></string>
+<string name="card_button_reset"></string>
+<string name="stat_alarms_acquired"></string>
+<string name="stat_alarms_blocked"></string>
+<string name="stat_loading"></string>
+<string name="stat_collected_for"></string>
+<string name="stat_wake_duration_allowed"></string>
+<string name="stat_wake_duration_blocked"></string>
+<string name="stat_wake_allowed"></string>
+<string name="stat_wake_blocked"></string>
+<string name="stat_alarm_allowed"></string>
+<string name="stat_alarm_blocked"></string>
+<string name="stat_disabled"></string>
+<string name="donate_text"></string>
+<string name="donate_1">"Secangkir kopi sementara saya menulis kode"</string>
+<string name="donate_5"></string>
+<string name="donate_10">"Kegembiraan tidak membawa charger anda"</string>
+<string name="donate_thank_you"></string>
+<string name="donate_more_button">"BAGAIMANA SAYA DAPAT MEMBANTU LEBIH LANJUT?"</string>
+<string name="donate_more_text"></string>
+<string name="welcome_banner_title">"Selamat datang!"</string>
+<string name="welcome_banner_text"></string>
+
+<!-- Don't translate this one  :) -->
+<string name="app_font_family">"sans_serif"</string>
+<string name="settings_category_options">"Pilihan"</string>
+<string name="settings_item_show_launcher">"Tampilkan ikon aplikasi"</string>
+<string name="settings_item_choose_theme">"Pilih tema"</string>
+<string name="settings_item_global_stats_title">"Berpartisipasi dalam Statistik Umum"</string>
+<string name="settings_item_global_stats_summary">"Mengirim dan menerima statistik anonim"</string>
+<string name="settings_item_reset_defaults_title">"Atur ulang ke pengaturan semula"</string>
+<string name="settings_item_reset_defaults_summary">"Atur ulang semua alarm dan wakelocks ke pengaturan semula"</string>
+<string name="settings_category_debug">"Debug"</string>
+<string name="settings_item_author">"Karya: Ryan Steckler"</string>
+<string name="settings_item_logging_level">"Tingkat logging"</string>
+<string name="settings_category_translation">"Penerjemah"</string>
+<string name="settings_theme_material">"Material"</string>
+<string name="settings_theme_dark">"Gelap"</string>
+<string name="settings_logging_quiet">"Tenang"</string>
+<string name="settings_logging_default">"Semula"</string>
+<string name="settings_logging_verbose">"Verbose"</string>
+<string name="settings_item_force_english_title">"Paksa Inggris"</string>
+<string name="settings_item_force_english_summary">"Mengesampingkan pengaturan lokal Anda dan menggunakan bahasa Inggris"</string>
+<string name="playstore_short_description">"Daya tahan baterai untuk manusia!"</string>
+<string name="playstore_long_description">"*** Membutuhkan root dan Xposed Framework *** 
+
+Kutipan yang tidak diminta dari pengguna yang sebenarnya : 
+Ini memberi saya sekitar 2 jam lebih digunakan dengan 30 menit lagi layar tepat waktu. Menyelamatkan saya dari membeli $25 baterai. 
+Hanya menyumbangkan 5 Dollar untuk mendukung karya ini. Menjaga pekerjaan yang baik 
+Cukup menakjubkan 
+[Unbounce] hanya merevolusi makna sebenarnya dari wakelock pengelolaan 
+Modul ini luarbiasa! Saya mendapatkan kurang dari menguras setengah persen per jam untuk layar siaga. 
+... dan masih banyak lagi. 
+
+Unbounce menempatkan Anda mengendalikan bagaimana perangkat menggunakan baterai dengan mengendalikan seberapa sering perangkat Anda bisa bangun, dan berapa lama dapat tetap terjaga. Gunakan pengaturan yang direkomendasikan untuk penghematan baterai, atau menggali dan menyesuaikan setiap alarm dan wakelock pada perangkat Anda. 
+Berikut adalah beberapa ulasan: 
+
+- Sebuah desain yang indah, terinspirasi oleh prinsip-prinsip Material Desain 
+- Sebuah mesin memblokir stabil 
+- Pengukuran Komprehensif waktu terbuang dan waktu diselamatkan karena alarm dan wakelocks 
+- Sebuah daftar tumbuh deskripsi dari alarm dan wakelocks dalam bahasa Inggris (dan bahasa lainnya segera hadir!) 
+- Sebuah paket baru tambahan yang memungkinkan Anda Unbounce apapun alarm atau wakelock pada perangkat 
+- Sebuah basis kode sumber terbuka sehingga Anda dapat melihat cara kerjanya, atau membangun sendiri 
+
+
+Di Aplikasi pembelian memungkinkan Anda untuk membuka paket tambahan yang memungkinkan Anda menyesuaikan alarm dan wakelocks pada perangkat Anda. Tanpa paket tambahan, Anda dapat mengontrol baterai: NlpWakelock, NlpCollectorWakeLock, ALARM_WAKEUP_LOCATOR, dan ALARM_WAKE_ACTIVITY_DETECTION. 
+
+Semoga Anda memiliki umur [baterai] panjang!"</string>
+<string name="welcome_banner_welcome"></string>
+<string name="welcome_banner_checking_service"></string>
+<string name="welcome_banner_checking_xposed"></string>
+<string name="welcome_banner_checking_root"></string>
+<string name="welcome_banner_checking_looks_great"></string>
+<string name="welcome_banner_checking_uhoh"></string>
+<string name="welcome_banner_problem_none"></string>
+<string name="welcome_banner_problem_service"></string>
+<string name="welcome_banner_problem_xposed_running"></string>
+<string name="welcome_banner_problem_xposed_installed"></string>
+<string name="welcome_banner_problem_root"></string>
+<string name="welcome_banner_button_next"></string>
+<string name="welcome_banner_button_fixit"></string>
+<string name="welcome_banner_button_exit"></string>
+<string name="welcome_banner_button_install"></string>
+<string name="welcome_downloading_xposed"></string>
+<string name="welcome_downloaded_xposed"></string>
+<string name="welcome_download_error_xposed"></string>
+<string name="download_xposed_title"></string>
+<string name="download_xposed_description"></string>
+<string name="requires_root"></string>
+<string name="installs_xposed"></string>
+<string name="settings_category_code_credits"></string>
+</resources>
