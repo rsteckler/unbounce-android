@@ -130,7 +130,7 @@
 <string name="settings_item_force_english_title">"Langue anglaise"</string>
 <string name="settings_item_force_english_summary">"Ecraser vos paramétres de langue et utiliser l'anglais"</string>
 <string name="playstore_short_description">"La puissance de votre batterie à votre portée !"</string>
-<string name="playstore_long_description">"*** Nécessite le Mode Root et le Module Xposed Framework ***
+<string name="playstore_long_description">"*** Nécessite le Mode Root ***
 
 Retours non sollicités d'utilisateurs (traduits) :
 \"Cela m'a permis d'avoir 2 heures de plus d'utilisation avec 30 minutes d'écran en plus. J'ai économisé l'achat d'une batterie à 25$. Continuer ce super travail\"
