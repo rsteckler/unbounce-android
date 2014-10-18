@@ -108,7 +108,6 @@
 <string name="donate_more_button">"COME ALTRO POSSO AIUTARE?"</string>
 <string name="donate_more_text">"Alcune persone mi hanno chiesto come contribuire oltre la donazione iniziale. I bottoni sottostanti ti permettono di donare ulteriormente, ma non forniranno funzionalità addizionali. Grazie mille per supportare Unbounce!"</string>
 <string name="welcome_banner_title">"Benvenuto!"</string>
-<string name="welcome_banner_text">"Puoi bloccare i wakelock per evitare che il tuo telefono stia sveglio, e bloccare gli allarmi per evitare che si svegli. Ti abbiamo già settato alcune impostazioni di default che ti permetteranno di risparmiare batteria."</string>
 
 <string name="settings_category_options">"Opzioni"</string>
 <string name="settings_item_show_launcher">"Mostra icona nel launcher"</string>
@@ -117,7 +116,6 @@
 <string name="settings_item_global_stats_summary">"Invia e ricevi statistiche anonime"</string>
 <string name="settings_item_reset_defaults_title">"Resetta ai valori di default"</string>
 <string name="settings_item_reset_defaults_summary">"Resetta tutti gli allarmi e wakelock ai valori di default"</string>
-<string name="settings_category_debug">"Debug"</string>
 <string name="settings_item_author">"Autore: Ryan Steckler"</string>
 <string name="settings_item_logging_level">"Livello di logging"</string>
 <string name="settings_category_translation">"Ringraziamenti per le traduzioni"</string>

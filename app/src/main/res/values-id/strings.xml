@@ -81,7 +81,6 @@
 <string name="settings_item_global_stats_summary">"Mengirim dan menerima statistik anonim"</string>
 <string name="settings_item_reset_defaults_title">"Atur ulang ke pengaturan semula"</string>
 <string name="settings_item_reset_defaults_summary">"Atur ulang semua alarm dan wakelocks ke pengaturan semula"</string>
-<string name="settings_category_debug">"Debug"</string>
 <string name="settings_item_author">"Karya: Ryan Steckler"</string>
 <string name="settings_item_logging_level">"Tingkat logging"</string>
 <string name="settings_category_translation">"Penerjemah"</string>

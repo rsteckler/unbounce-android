@@ -107,7 +107,6 @@
 <string name="donate_more_button">¿CÓMO PUEDO AYUDAR MÁS?</string>
 <string name="donate_more_text">La gente me pregunta cómo pueden contribuir más allá de su donación inicial. Los botones de abajo le permiten donar más, pero no proporcionan características adicionales. Muchas gracias por apoyar Unbounce!</string>
 <string name="welcome_banner_title">Bienvenido</string>
-<string name="welcome_banner_text">Puedes bloquear wakelocks para evitar que el teléfono se mantenga despierto, y además bloquear las alarmas para que deje de despertar. Ya hemos creado algunos ajustes de ahorro por defecto para ahorrar batería.</string>
 
 <string name="settings_category_options">Opciones</string>
 <string name="settings_item_show_launcher">Mostrar icono de launcher</string>
@@ -116,7 +115,6 @@
 <string name="settings_item_global_stats_summary">Enviar y recibir datos anónimos</string>
 <string name="settings_item_reset_defaults_title">Resetear a ajustes por defecto</string>
 <string name="settings_item_reset_defaults_summary">Restablecer todas las alarmas y wakelocks a la configuración predeterminada</string>
-<string name="settings_category_debug">Debug</string>
 <string name="settings_item_author">Autor: Ryan Steckler</string>
 <string name="settings_item_logging_level">Nivel de registro</string>
 <string name="settings_category_translation">Créditos de traducción</string>
