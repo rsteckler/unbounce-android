@@ -159,8 +159,6 @@
     <string name="requires_root">*** Requires a rooted device ***</string>
     <string name="installs_xposed">Unbounce uses the Xposed Framework and will install it for you if you don\'t already have it.</string>
     <string name="playstore_long_description">
-*** Requires Root and the Xposed Framework ***
-
 Unsolicited quotes from real users:
 "It gave me about 2 hours more use with 30 minutes more screen on time. Saved me from buying a $25 battery."
 "Just donated 5 Dollars to support this masterpiece.. Keep up the good work"
@@ -183,7 +181,7 @@ Here are some highlights:
 The In-App purchases allow you to unlock the Pro package that lets you customize the alarms and wakelocks on your device.   Without the pro package, you can control the worst battery hogs:  NlpWakelock, NlpCollectorWakeLock, ALARM_WAKEUP_LOCATOR, and ALARM_WAKE_ACTIVITY_DETECTION.
 
 May you have a long [battery] life!
-    </string>
+</string>
 
 
 
