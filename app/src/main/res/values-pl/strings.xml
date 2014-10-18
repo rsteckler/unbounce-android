@@ -134,7 +134,7 @@
 <string name="desc_activitymanagerlauncher">"Współdziała z ogólnymi aktywnościami w systemie. Jesli zaczniesz kontrolowac nic nie bedzie działać dobrze."</string>
 
 <!-- Fuzzy -->
-<string name="desc_windowmanager">"This is an Android System level WakeLock. The interface that apps use to talk to the window manager - meaning, applications will require a WindowManager lock everytime they need to be shown on the screen."</string>
+<string name="desc_windowmanager">"This is an Android System level WakeLock.  The interface that apps use to talk to the window manager - meaning, applications will require a WindowManager lock everytime they need to be shown on the screen. "</string>
 <string name="desc_rilj">"RILJ utrzymuje Twój telefon aktywny podczas wykonywania akcji takich jak rozmowy i komunikacja z nadajnikami."</string>
 
 <!-- Fuzzy -->
@@ -143,7 +143,7 @@
 
 <!-- Fuzzy -->
 <string name="desc_startingalertservice">"Jest powiązany zazwyczaj z kalendarzem. Może mieć wpływ na inne aplikacje np. wiadomości. Jeśli masz przypomnienia w kalendarzu to wybudzenie może je przechowywać."</string>
-<string name="desc_audiomix">"This WakeLock handles Touch Sounds and Alert Sounds among others. It has plagued some devices even with Touch Sounds turned off."</string>
+<string name="desc_audiomix">"Ten wybudzacz przechowuje dźwięki dotyku oraz alarmów wśród innych. Nęka niektóre urządzenia nawet z wyłączonym dźwiękiem dotyku."</string>
 
 <!-- Fuzzy -->
 <string name="desc_locationmanagerservice">"Jak nazwa mówi. To nie jest typowy zjadacz baterii. Może powodować duże wybudzenia."</string>
@@ -218,25 +218,90 @@ Rządzisz."</string>
 <string name="welcome_banner_title">"Witaj!"</string>
 <string name="welcome_banner_text">"Możesz zablokować wybudzenia aby powstrzymac telefon od bycia aktywnym oraz blokuj alarmy aby nie były wybudzane w pierwszej kolejności. Domyślnie ustawiliśmy już kilka opcji za Ciebie."</string>
 
+<!-- Don't translate this one  :) -->
 <!-- Fuzzy -->
+<string name="app_font_family">"sans_serif"</string>
 <string name="settings_category_options">"opcje"</string>
-<string name="settings_item_show_launcher"></string>
-<string name="settings_item_choose_theme"></string>
-<string name="settings_item_global_stats_title"></string>
-<string name="settings_item_global_stats_summary"></string>
-<string name="settings_item_reset_defaults_title"></string>
-<string name="settings_item_reset_defaults_summary"></string>
-<string name="settings_category_debug"></string>
-<string name="settings_item_author"></string>
-<string name="settings_item_logging_level"></string>
-<string name="settings_category_translation"></string>
-<string name="settings_theme_material"></string>
-<string name="settings_theme_dark"></string>
-<string name="settings_logging_quiet"></string>
-<string name="settings_logging_default"></string>
-<string name="settings_logging_verbose"></string>
-<string name="settings_item_force_english_title"></string>
-<string name="settings_item_force_english_summary"></string>
-<string name="playstore_short_description"></string>
-<string name="playstore_long_description"></string>
+
+<!-- Fuzzy -->
+<string name="settings_item_show_launcher">"Pokaż ikonę launchera"</string>
+<string name="settings_item_choose_theme">"Wybierz skórkę"</string>
+
+<!-- Fuzzy -->
+<string name="settings_item_global_stats_title">"Dołącz do ogólnych statystyk"</string>
+<string name="settings_item_global_stats_summary">"Wysyłając i odbierając anonimowe statystyki"</string>
+
+<!-- Fuzzy -->
+<string name="settings_item_reset_defaults_title">"Reset do ustawień fabrycznych"</string>
+<string name="settings_item_reset_defaults_summary">"Resetuj alarmy i wyburzenia do ustawień fabrycznych"</string>
+
+<!-- Fuzzy -->
+<string name="settings_category_debug">"Debuguj"</string>
+<string name="settings_item_author">"Autor: Ryan Steckler"</string>
+
+<!-- Fuzzy -->
+<string name="settings_item_logging_level">"Poziom logowania"</string>
+<string name="settings_category_translation">"Tłumaczenia"</string>
+
+<!-- Fuzzy -->
+<string name="settings_theme_material">"Material"</string>
+<string name="settings_theme_dark">"Ciemny"</string>
+
+<!-- Fuzzy -->
+<string name="settings_logging_quiet">"Wyjście"</string>
+<string name="settings_logging_default">"Domyślne"</string>
+
+<!-- Fuzzy -->
+<string name="settings_logging_verbose">"Verbose"</string>
+<string name="settings_item_force_english_title">"Wymuś Angielski"</string>
+
+<!-- Fuzzy -->
+<string name="settings_item_force_english_summary">"Zamień język systemu na Angielski"</string>
+<string name="playstore_short_description">"Moc baterii dla wszystkich!"</string>
+
+<!-- Fuzzy -->
+<string name="playstore_long_description">"***Wymagany Root i Xposed Framework***
+
+Dobrowolne zacytowania od użytkowników:
+\"Dodało mi to około 2h więcej czasu pracy przy 30min dłuższego działania ekranu. Oszczędziłem 25$ na nowej baterii.\"
+\"Właśnie wsparłem 5 dolarów ten świetny projekt. Oby tak dalej\"
+\"Po prostu fenomenalne\"
+[Unbounce] zrewolucjonizował sposób zarzadzania wybudzeniami.\"
+\"Ten moduł jest świetny. Myślę, że około 0,5%/h zmniejszyło się drenowanie baterii w stanie spoczynku.\"
+... Oraz wiele innych komentarzy.
+Unbounce pozwala Ci na kontrolowanie jak często Twój telefon wybudza się i jak szybko zjada baterię. Używaj rekomendowanych ustawień dla łatwego oszczędzania baterii lub sprawdzaj i wprowadzaj własne ustawienia kontroli wybudzeń i alarmów na Twoim urządzeniu.
+Kilka głównych funkcji:
+-wspaniale zaprojektowany wygląd
+- stabilny silnik blokowania
+- porównywanie czasu wybudzeń oraz sprawdzanie ile czasu zaoszczędziliśmy na blokowaniu
+- powiększanie listy opisów alarmów i wybudzeń po Angielsku( inne języki już wkrótce!)
+- paczka Pro umożliwiająca kontrolowanie wszystkich wybudzeń i alarmów na urządzeniu
+- opensourcowy kod abyś mógł sprawdzić sam jak to działa lub stworzyć sam od podstaw
+
+Funkcja zakupu w aplikacji pozwoli Ci na odblokowanie funkcji Pro które pozwolą Ci na pełną kontrolę każdego wybudzenia i alarmu na Twoim urządzeniu. Bez paczki Pro możesz kontrolować największe zjadacze baterii: NlpCollectorWakeLock, ALARM_WAKEUP_LOCATOR oraz ALARM_WAKE_ACTIVITY_DETECTION.
+
+Życzę dłuższej pracy na baterii!"</string>
+<string name="welcome_banner_welcome"></string>
+<string name="welcome_banner_checking_service"></string>
+<string name="welcome_banner_checking_xposed"></string>
+<string name="welcome_banner_checking_root"></string>
+<string name="welcome_banner_checking_looks_great"></string>
+<string name="welcome_banner_checking_uhoh"></string>
+<string name="welcome_banner_problem_none"></string>
+<string name="welcome_banner_problem_service"></string>
+<string name="welcome_banner_problem_xposed_running"></string>
+<string name="welcome_banner_problem_xposed_installed"></string>
+<string name="welcome_banner_problem_root"></string>
+<string name="welcome_banner_button_next"></string>
+<string name="welcome_banner_button_fixit"></string>
+<string name="welcome_banner_button_exit"></string>
+<string name="welcome_banner_button_install"></string>
+<string name="welcome_downloading_xposed"></string>
+<string name="welcome_downloaded_xposed"></string>
+<string name="welcome_download_error_xposed"></string>
+<string name="download_xposed_title"></string>
+<string name="download_xposed_description"></string>
+<string name="requires_root"></string>
+<string name="installs_xposed"></string>
+<string name="settings_category_code_credits"></string>
 </resources>
