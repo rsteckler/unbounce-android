@@ -157,7 +157,7 @@
 
     <string name="playstore_short_description">Battery power to the people!</string>
     <string name="requires_root">*** Requires a rooted device ***</string>
-    <string name="installs_xposed">Unbounce uses the Xposed Framework and will install it for you if you don't already have it.</string>
+    <string name="installs_xposed">Unbounce uses the Xposed Framework and will install it for you if you don\'t already have it.</string>
     <string name="playstore_long_description">
 *** Requires Root and the Xposed Framework ***
 

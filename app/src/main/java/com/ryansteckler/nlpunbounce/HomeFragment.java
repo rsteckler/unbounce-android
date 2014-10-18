@@ -211,27 +211,31 @@ public class HomeFragment extends Fragment  {
         @Override
         public void onAnimationUpdate(final ValueAnimator animator) {
             int curValue = (int) animator.getAnimatedValue();
-            mProgressChecking.setProgress(curValue);
+            if (isAdded()) {
+                mProgressChecking.setProgress(curValue);
+            }
         }
 
         @Override
         public void onAnimationEnd(Animator animator) {
             //Each time the animation finishes, handle the next step
             mSetupStep++;
-            final TextView stepText = (TextView)mParentView.findViewById(R.id.welcomeStepText);
 
-            if (mSetupStep == 1) {
-                stepText.setText(getResources().getString(R.string.welcome_banner_checking_xposed));
-                mProgressChecking.setProgress(0);
-                mProgressAnimation.start();
-            } else if (mSetupStep == 2) {
-                stepText.setText(getResources().getString(R.string.welcome_banner_checking_root));
-                mProgressChecking.setProgress(0);
-                mProgressAnimation.start();
-            } else if (mSetupStep == 3) {
-                handleFinalStep();
+            if (isAdded()) {
+                final TextView stepText = (TextView) mParentView.findViewById(R.id.welcomeStepText);
+
+                if (mSetupStep == 1) {
+                    stepText.setText(getResources().getString(R.string.welcome_banner_checking_xposed));
+                    mProgressChecking.setProgress(0);
+                    mProgressAnimation.start();
+                } else if (mSetupStep == 2) {
+                    stepText.setText(getResources().getString(R.string.welcome_banner_checking_root));
+                    mProgressChecking.setProgress(0);
+                    mProgressAnimation.start();
+                } else if (mSetupStep == 3) {
+                    handleFinalStep();
+                }
             }
-
         }
 
         private void handleFinalStep() {
