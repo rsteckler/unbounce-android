@@ -24,6 +24,7 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.ryansteckler.nlpunbounce.helpers.LocaleHelper;
 import com.ryansteckler.nlpunbounce.helpers.ThemeHelper;
 import com.ryansteckler.nlpunbounce.models.AlarmStats;
 import com.ryansteckler.nlpunbounce.models.EventLookup;
@@ -197,7 +198,7 @@ public class AlarmDetailFragment extends Fragment {
                 String blockName = "alarm_" + mStat.getName() + "_seconds";
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putLong(blockName, seconds);
-                editor.commit();
+                editor.apply();
             }
             textView.clearFocus();
             // hide virtual keyboard
@@ -254,7 +255,7 @@ public class AlarmDetailFragment extends Fragment {
             SharedPreferences prefs = getActivity().getSharedPreferences("com.ryansteckler.nlpunbounce" + "_preferences", Context.MODE_WORLD_READABLE);
             SharedPreferences.Editor editor = prefs.edit();
             editor.putBoolean(blockName, b);
-            editor.commit();
+            editor.apply();
         }
 
         //Enable or disable the seconds setting.
@@ -313,6 +314,7 @@ public class AlarmDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ThemeHelper.onActivityCreateSetTheme(this.getActivity());
+        LocaleHelper.onActivityCreateSetLocale(this.getActivity());
 
         if (getArguments() != null) {
             mStartTop = getArguments().getInt(ARG_START_TOP);

@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
@@ -14,21 +16,26 @@ import android.preference.PreferenceFragment;
 import android.widget.Toast;
 
 import com.ryansteckler.inappbilling.IabHelper;
+import com.ryansteckler.nlpunbounce.helpers.LocaleHelper;
 import com.ryansteckler.nlpunbounce.helpers.SettingsHelper;
 import com.ryansteckler.nlpunbounce.helpers.ThemeHelper;
+
+import java.util.Locale;
 
 
 public class SettingsActivity extends Activity {
 
     private static final String TAG = "UnbounceSettings";
 
-    IabHelper mHelper;
+    int mCurTheme = ThemeHelper.THEME_DEFAULT;
+    int mCurForceEnglish = -1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         mCurTheme = ThemeHelper.onActivityCreateSetTheme(this);
+        mCurForceEnglish = LocaleHelper.onActivityCreateSetLocale(this);
 
         // Display the fragment as the main content.
         if (savedInstanceState == null)
@@ -42,9 +49,8 @@ public class SettingsActivity extends Activity {
         super.onResume();
         //Update theme
         mCurTheme = ThemeHelper.onActivityResumeVerifyTheme(this, mCurTheme);
+        mCurForceEnglish = LocaleHelper.onActivityResumeVerifyLocale(this, mCurForceEnglish);
     }
-
-    int mCurTheme = ThemeHelper.THEME_DEFAULT;
 
     public static class PrefsFragment extends PreferenceFragment
             implements SharedPreferences.OnSharedPreferenceChangeListener {
@@ -129,16 +135,30 @@ public class SettingsActivity extends Activity {
                 } else {
                     ThemeHelper.changeToTheme(this.getActivity(), ThemeHelper.THEME_DEFAULT);
                 }
+            } else if (key.equals("force_english")) {
+                CheckBoxPreference pref = (CheckBoxPreference) findPreference(key);
+                boolean value = sharedPreferences.getBoolean(key, false);
+                pref.setChecked(value);
+
+                if (value) {
+                    LocaleHelper.forceEnglish(this.getActivity());
+                } else {
+                    LocaleHelper.revertToSystem(getActivity());
+                }
+
 
             }
-        }
 
+
+        }
 
         @Override
         public void onResume() {
             super.onResume();
+
             getPreferenceScreen().getSharedPreferences()
                     .registerOnSharedPreferenceChangeListener(this);
+
         }
 
         @Override

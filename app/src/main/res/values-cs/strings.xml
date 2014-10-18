@@ -1,124 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+<string name="app_name">"Unbounce"</string>
+<string name="version">"Verze"</string>
+<string name="title_activity_material_settings">"Unbounce_nastavení"</string>
+<string name="title_home">"Home"</string>
+<string name="title_wakelocks">"Wakelocks"</string>
+<string name="title_alarms">"Budíky"</string>
+<string name="navigation_drawer_open">"Otevřít_navigační_pole"</string>
+<string name="navigation_drawer_close">"Zavřít_navigační_pole"</string>
+<string name="action_search">"Vyhledávání"</string>
+<string name="action_sort_by_count">"Seřadit_dle_počtu"</string>
+<string name="action_sort_by_time">"Seřadit_ podle_času"</string>
+<string name="action_settings">"Nastavení"</string>
+<string name="action_reset_stats">"Vynulovat_statistiku_vše"</string>
+<string name="card_donate_title">"Darování"</string>
+<string name="card_donate_subtitle">"Podpora developera"</string>
+<string name="card_global_title">"Souhrnná_ statistika"</string>
+<string name="card_global_subtitle">"Kombinovaná_ statistika"</string>
+<string name="card_local_title">"Zobrazení_ statistiky"</string>
+<string name="card_local_subtitle">"Zobrazení_ celkové: progres"</string>
+<string name="card_settings_title">"Nastavení"</string>
+<string name="card_settings_subtitle_alarm">"Ovládání tohoto alarmu"</string>
+<string name="card_settings_subtitle_wakelock">"Ovládání tohoto wakelock"</string>
+<string name="card_description_title">"Popis"</string>
+<string name="card_description_subtitle">"Co_čerpá_vaši_baterii?"</string>
+<string name="category_unbounced">"Unbounced"</string>
+<string name="category_safe">"Bezpečné_Unbounce"</string>
+<string name="category_unknown">"Neznámé"</string>
+<string name="category_not_safe">"Není_bezpečné_ pro_Unbounce"</string>
+<string name="category_error">"Chyba"</string>
+<string name="alert_noiab_title">"Pro_funkce_není_dostupná"</string>
+<string name="alert_noiab_content">"Zařízení nemá podporu v App Billing.Nejste schopni koupit funkce Unbounce. Budete muset aktualizovat Google Play aplikaci, nebo žijete v zemi, kde v App Billing je toto zakázáno."</string>
+<string name="dialog_ok">"OK"</string>
+<string name="tasker_on">"ON"</string>
+<string name="tasker_off">"OFF"</string>
+<string name="tasker_reset_stats">"Obnovit statistiky"</string>
+<string name="tasker_choose_wakelock">"Zvolte,který_wakelock_změnit"</string>
+<string name="tasker_choose_alarm">"Zvolte,který_Alarm_změnit"</string>
+<string name="tasker_welcome">"Vítá_vás_Unbounce's_Tasker plugin."</string>
+<string name="tasker_which_task">"Chcete-li_změnit_nastavení pro Wakelock nebo alarm, nebo chcete vynulovat statistiky pro vaše_zařízení?"</string>
+<string name="tasker_task_wakelock">"Změna_WAKELOCK"</string>
+<string name="tasker_task_alarm">"Změna_ALARM"</string>
+<string name="tasker_task_reset">"Resetovat statistiky"</string>
+<string name="alert_nopro_title">"To je PRO funkce"</string>
+<string name="alert_nopro_content">"Unbounce_nastavení_nestandardní_wakelocks, alarm, musíte si zakoupit balíček daru."</string>
+<string name="alert_unknown_alarm_title">"Unbounce neznámý alarm?"</string>
+<string name="alert_unknown_alarm_content">"Tento alarm,ne_zcela bezpečný_ pro_Unbounce. Chcete ho přidát_do Unbounce?"</string>
+<string name="dialog_unbounce">"UNBOUNCE"</string>
+<string name="dialog_cancel">"Zrušit"</string>
+<string name="tasker_choose_settings">"Vyberte_nastavení, které_chcete."</string>
+<string name="alert_unknown_wakelock_title">"Unbounce neznámý wakelock?"</string>
+<string name="alert_unknown_wakelock_content">"Tento wakelock_není_zcela_bezpečný
+Chcete_ho_zvolit?"</string>
+<string name="dialog_delete">"Vymazat"</string>
+<string name="alert_delete_stats_title">"Vymazat_všechny_statistiky?"</string>
+<string name="alert_delete_stats_content">"Vymaže_a_resetuje_ statistiky pro_všechny_vaše_wakelocks a alarmy!"</string>
+<string name="title_settings">"Nastavení"</string>
+<string name="alert_reset_settings_title">"Obnovit na výchozí hodnoty?"</string>
+<string name="alert_reset_settings_content">"Obnovení_pro_všechny_alarmy_a_wakelocks!"</string>
+<string name="dialog_reset">"Vynulovat"</string>
+<string name="reset_settings_confirmation">"Nastavení bylo obnoveno na výchozí_hodnoty."</string>
+<string name="dialog_save">"Uložit"</string>
+<string name="desc_unknown">"Nemáme_žádné informace o této vlastnosti, ale_přesto. To_nemusí být bezpečné Unbounce. Učinit_pouze tehdy, pokud víte, co_děláte, a víte, jak zakázat Xposed při startu. My, se_snažíme shromaždovat informace o všech hlavních wakelock a alarmech. Prosím, budeme trpěliví.."</string>
+<string name="desc_nlpwakelock">"NlpWakeLock_je bezpečný_unbounce.Je používán_Google Play Services_určit vaši_přibližnou polohu pomocí mobilních_sítí a Wi-Fi. Jakmile_má svou_polohu, uloží jej na místě, takže další aplikace, jako je Google_Nyní, mùže přistupovat ke svému umístění, bez použití GPS nebo získání nové opravy. Doporučené nastavení je mezi 180_až_600 sekund."</string>
+<string name="desc_nlpcollectorwakelock">"NlpCollectorWakeLock_je_bezpečný_unbounce.Je používán, Google Play Services_určit_vaši_přibližnou polohu pomocí kombinace mobilních sítí a Wi-Fi. Jakmile má svou polohu,tak ji pošle zpět na Google, aby mohli rozšířit svou databázi WiFi. Doporučené_nastavení je mezi 180- 600 sekund."</string>
+<string name="desc_alarmmanager">"Toto poskytuje přístup k systému_alarmu služeb. Když_se spustí alarm, Intent, který_byl zapsán pro něj, vysílá ho do systému, automatické spuštění cílové aplikace, pokud již_není_spuštěna. Registrované_alarmy jsou zachovány, když je zařízení v režimu spánku (a volitelně_probudí_zařízení), ale_budou vymazány, pokud je_telefon vypnut_a_restartován."</string>
+<string name="desc_audiooffload">"Audio_přehrávání, když_je_obrazovka vypnutá. Pokud zakážete toto,nebudete mít zvuk_a_hudbu_na_pozadí, když je_vaše_obrazovka_vypnutá."</string>
+<string name="desc_activitymanagerlauncher">"Komunikuje s celkovými_aktivitami_spuštěných_v_systému. Pokud Unbounce toto nic nebude dobře_fungovat."</string>
+<string name="desc_windowmanager">"To je úroveň WakeLock Android System. Rozhraní, které apps používají_správce oken - význam, aplikace_bude_vyžadovat okenní zámek pokaždé, co ho potřebuje, aby se zobrazil na obrazovce."</string>
+<string name="desc_rilj">"RILJ udržuje_váš přístroj_vzhůru, zatímco zpracovává_telefonní_akce, jako jsou telefonní_hovory_sms_sítě a komunikace. "</string>
+<string name="desc_syncloopwakelock">"To je WakeLock.který používá Android SyncManager Sync_účty, jako je Google+, Twitter, LinkedIn, Gmail_apod_vyšší unbouncing,je_delší množství času, než_se_vaše účty_opět_ znovu_synchronizují. "</string>
+<string name="desc_icing">"Google Services WakeLock. V současné_době_hledáme_ více informací."</string>
+<string name="desc_startingalertservice">"Tento WakeLock_je_obvykle spojený s kalendářem, ale_může ovlivnit i jiné_ _aplikace, jako_je_zasílání zpráv.Pokud_váš_kalendář_má_oznámení / upozornění může mít tento WakeLock_na něj_vliv,."</string>
+<string name="desc_audiomix">"Tento WakeLock zpracovává položku Zvuky a upozornění. To_trápí_některá zařízení."</string>
+<string name="desc_locationmanagerservice">"Jak_už_název_napovídá. To_není_obvykle vysoký baterie odkapávač_ pro některé_by to_mohl_být velký wakelock. "</string>
+<string name="desc_audioin">"Tento wakelock_je_zvyklý_na držení_zařízení_vzhůru poslech pro Google Search / Hotword_detekce. Dobře, Google"</string>
+<string name="desc_nfcservicemroutingwakelock">"Související s NFC službou_směrování_zjištění_tagů_ na příslušné aplikace. "</string>
+<string name="desc_wakefulintentservicegcoreulrlocationreportingservice">"Používá Google Location Services nahlásit svou aktuální polohu."</string>
+<string name="desc_vzwgpslocationprovider">"Verizon konkrétní místo služby, použity pro statistické účely buněk_ sítě. "</string>
+<string name="desc_hangouts_rtcs">"Google Hangouts. Pokud_jste_Unbounce,Hangouts_přestane_ fungovat"</string>
+<string name="desc_gcm_conn">"Google Cloud Messaging. Odešle lehké zprávy vašich aplikací
+Zasílání_push_zpráv"</string>
+<string name="desc_google_c2dm">"Cloud to Device Messaging (C2DM) je služba, která pomáhá vývojářům posílat data do svých aplikací na zařízení. Tato služba poskytuje mechanismus, který servery lze použít říct mobilních aplikací kontaktovat server načíst aktualizovanou aplikaci nebo uživatelská data. C2DM služba se zabývá všemi aspekty front zpráv a dodávka do cílové aplikace běžící na cílové zařízení. Tato služba byla zavržena, protože 2012, ale stále existují aplikace, které používají tuto službu namísto nového a vylepšeného GCM."</string>
+<string name="desc_timedeventqueue">"To je hlavní součástí Androidu, který je sám.Všechny příchozí události."</string>
+<string name="desc_comgoogleandroidgmsnlpalarm_wakeup_locator">"Tento alarm je bezpečný unbounce. Je používán Google Play Services určit vaši přibližnou polohu pomocí kombinace mobilních sítí a Wi-Fi. Jakmile to má své místo, uloží jej na místě, takže další aplikace, jako je Google Nyní můžete přistupovat ke svému umístění bez použití GPS nebo získání nového opravu. Doporučené nastavení je mezi 180 a 600 sekund."</string>
+<string name="desc_comgoogleandroidgmsnlpalarm_wakeup_activity_detection">"Tento alarm je bezpečné unbounce. Je používán ve službě Google Play Services určit vaši přibližnou polohu pomocí kombinace mobilních věží a Wi-Fi. Jakmile to má své místo, ale to pošle zpět na Google, aby mohli rozšířit své databázi WiFi míst. Doporučené nastavení je mezi 180 a 600 sekund"</string>
+<string name="desc_comgoogleandroidappshangoutsupdate_notification">"Uživatel, který aktualizuje_Google_hangouts_ oznámení."</string>
+<string name="desc_comandroidinternaltelephonydatastall">"Wakelock z com.android.phone (Phone app) při použití dat prostřednictvím mobilní_sítě. Pomocí Wi-Fi se nespustí alarm. Obvykle se dostane přes při použití údajù, a to zejména na průměrném připojení."</string>
+<string name="settings_allow_every">"Povolit vždy"</string>
+<string name="settings_seconds">"seconds."</string>
+<string name="card_button_reset">"Vynulovat"</string>
+<string name="stat_alarms_acquired">"Alarmy_ Načtené"</string>
+<string name="stat_alarms_blocked">"Alarmy_Blokované"</string>
+<string name="stat_loading">"Loading..."</string>
+<string name="stat_collected_for">"Statistiky_schromážděné_PRO"</string>
+<string name="stat_wake_duration_allowed">"Wakelock lhùta allowed"</string>
+<string name="stat_wake_duration_blocked">"Wakelock_ čas_blokování"</string>
+<string name="stat_wake_allowed">"Wakelocks_načtené"</string>
+<string name="stat_wake_blocked">"Wakelocks_blokované"</string>
+<string name="stat_alarm_allowed">"Alarmy_povolené"</string>
+<string name="stat_alarm_blocked">"Alarmy_blokované"</string>
+<string name="stat_disabled">"Vypnuté"</string>
+<string name="donate_text">"Tato_aplikace_vám_vždy umožní opravit síťové umístění poskytovatele baterie vrahy zdarma. Pokud byste_také_chtěli_Unbounce_další wakelocks a alarmy, můžete upgradovat na_Pro_ tím_, že_podporujete_ tento_projekt. Každá částka_ dar_odemkne_Pro funkce."</string>
+<string name="donate_1">"šálek kávy, když_píšu_kód "</string>
+<string name="donate_5">"latte, když_jsem_odpověděl_na_fórum_vaše_otázky"</string>
+<string name="donate_10">"Radost_nemusím_často_ používat_ nabíječku."</string>
+<string name="donate_thank_you">"Děkujeme_vám_za_Váš příspěvek. Znamená_to_pro_mě_hodně. Tvrdě_pracuji_ ve_svém_volném čase_a_jsem_omezen, aby_jste_měli_lepší výdrž baterie. Když_jste_daroval,tak_ jste_udělal_rozdíl v projektu, a_to_dělá_i_ rozdíl v mé rodině_a_ životě. Budeš zpívat."</string>
+<string name="donate_more_button">"Jak_mohu_darovat_znovu?"</string>
+<string name="donate_more_text">"Lidé se ptali, jak mohou přispět mimo jejich původní dar. Níže uvedená tlačítka vám umožní darovat dále, ale neposkytují žádné další funkce. Děkuji moc za podporu Unbounce!"</string>
+<string name="welcome_banner_title">"Vítejte!"</string>
 
-    <string name="app_name">Unbounce</string>
-    <string name="version">Verze</string>
-    <string name="title_activity_material_settings">Unbounce</string>
-    <string name="title_home">Home</string>
-    <string name="title_wakelocks">Wakelocks</string>
-    <string name="title_alarms">Budíky</string>
-    <string name="navigation_drawer_open"> Otevøít navigaèní zásuvku</string>
-    <string name="navigation_drawer_close">Zavøít navigaèní zásuvku</string>
-    <string name="action_search">Vyhledávání</string>
-    <string name="action_sort_by_count">Seøadit podle poètu</string>
-    <string name="action_sort_by_time">Seøadit podle èasu</string>
-    <string name="action_settings">Nastavení</string>
-    <string name="action_reset_stats">Vynulovat statistiky</string>
-    <string name="card_donate_title">Darování</string>
-    <string name="card_donate_subtitle">Podpora developera</string>
-    <string name="card_global_title">Souhrnná statistika</string>
-    <string name="card_global_subtitle">Kombinované statistiky</string>
-    <string name="card_local_title">Zaøízení statistika</string>
-    <string name="card_local_subtitle">Zobrazení pokroku, progress</string>
-    <string name="card_settings_title">Nastavení</string>
-    <string name="card_settings_subtitle_alarm">Ovládání tohoto alarmu</string>
-    <string name="card_settings_subtitle_wakelock">Ovládání tohoto alarmu</string>
-    <string name="card_description_title">Popis</string>
-    <string name="card_description_subtitle">Co èerpá vaši baterii?</string>
+<string name="settings_category_options">"Volby"</string>
+<string name="settings_item_show_launcher">"Zobrazit_ikonu_v_launcheru"</string>
+<string name="settings_item_choose_theme">"Zvolte_si_téma"</string>
+<string name="settings_item_global_stats_title">"Zobrazit_globální_statistiku
+"</string>
+<string name="settings_item_global_stats_summary">"Odesílat a přijímat anonymní statistiky "</string>
+<string name="settings_item_reset_defaults_title">"Obnovit_na_výchozí"</string>
+<string name="settings_item_reset_defaults_summary">"Obnovit_všechny_alarmy_a_wakelocks_na_výchozí nastavení "</string>
+<string name="settings_item_author">"Autor: Ryan Steckler "</string>
+<string name="settings_item_logging_level">"Úroveň protokolování "</string>
+<string name="settings_category_translation">"Překlad_Kredity"</string>
+<string name="settings_theme_material">"téma_materiál"</string>
+<string name="settings_theme_dark">"temné"</string>
+<string name="settings_logging_quiet">"Tichý"</string>
+<string name="settings_logging_default">"Výchozí"</string>
+<string name="settings_logging_verbose">"Verbose"</string>
+<string name="settings_item_force_english_title">"Force English"</string>
+<string name="settings_item_force_english_summary">"Přepsat nastavení národního prostředí a používat angličtinu"</string>
+<string name="playstore_short_description">"Mùžete mít dlouhý [Battery] život!"</string>
+<string name="playstore_long_description">"
+*** Vyžaduje Root ***
+ citace reálných uživatelù:
+Dalo mi to o 2 hodiny více použití s ??30 minutami více obrazovky na èas. Zachránil mì od nákupu baterie.
+Jen jsem daroval 5 dolarù na podporu tohoto mistrovského díla .. Pokraèujte v dobré práci
+Jednoduše úžasné
+[Unbounce] je to revoluce a má skuteèný význam pro wakelock správu
+Tento modul je úžasný, já mám ménì než pùl procenta za hodinu neèinnosti v pohotovostním režimu.
+... A mnoho dalších.
+Unbounce vám dává kontrolu, jak pøístroj používá baterii tím, že øídí, jak èasto se mùže pøístroj probudit, a jak dlouho mùže zùstat vzhùru. Použijte doporuèené nastavení pro snadnou úsporu baterie, nebo pøizpùsobit každý alarm a wakelock na vašem zaøízení.
+Zde jsou nìkteré které zdùrazòuji:
+- Krásný design, inspirovaný materiálovým provedením zásady
+- Stabilní blokování
+- Komplexní mìøení èasu,protože alarmy a wakelocks zpùsobují vybíjení baterie
+- Rostoucí seznam popisù alarmù a wakelocks v jednoduché angliètinì (a jiných jazycích již brzy!)
+- Nový Pro balíèek, který vám umožní,v Unbounce nemít žádný alarm nebo wakelock v zaøízení
+- Open source codebase, takže mùžete vidìt, jak to funguje, nebo budovat sami
 
-    <string name="category_unbounced">Unbounced</string>
-    <string name="category_safe">Bezpeèné Unbounce</string>
-    <string name="category_unknown">Neznámé</string>
-    <string name="category_not_safe">Není bezpeèné Unbounce</string>
-    <string name="category_error">Chyba</string>
-
-    <string name="alert_noiab_title">Pro funkce nedostupné</string>
-    <string name="alert_noiab_content"> Zaøízení nejde\'t podpora v App Billing. Vyhráli jste,mùžete být schopni koupit  funkce Unbounce. To by mohlo být, protože budete muset aktualizovat z Google Play aplikaci, nebo proto, že žijete v zemi, kde App Billing je zakázáno.</string>
-    <string name="dialog_ok">OK</string>
-    <string name="tasker_on">On</string>
-    <string name="tasker_off">Off</string>
-    <string name="tasker_reset_stats">Obnovit statistiky</string>
-    <string name="tasker_choose_wakelock">Zvolte,který chcete upravit wakelock</string>
-    <string name="tasker_choose_alarm">Zvolte Alarm,který chcete upravit</string>
-    <string name="tasker_welcome">Vítá vás Unbounce\'s Tasker plugin.</string>
-    <string name="tasker_which_task">Chcete-li zmìnit nastavení pro Wakelock nebo alarm, nebo chcete vynulovat statistiky pro vaše zaøízení?</string>
-    <string name="tasker_task_wakelock">Zmìna WAKELOCK</string>
-    <string name="tasker_task_alarm">Zmìna ALARMU</string>
-    <string name="tasker_task_reset">Resetovat statistiky</string>
-
-    <string name="alert_nopro_title">To je PRO funkce</string>
-    <string name="alert_nopro_content"> Na Unbounce nestandardní wakelocks a alarmy, musíte si zakoupit balíèek daru.</string>
-    <string name="alert_unknown_alarm_title">Unbounce neznámý alarm?</string>
-    <string name="alert_unknown_alarm_content"> Tento alarm,to bylo prokázáno jako bezpeèné Unbounce. Chtìli byste ji Unbounce, vlastnì je?</string>
-    <string name="dialog_unbounce">UNBOUNCE</string>
-    <string name="dialog_cancel">Zrušit</string>
-    <string name="tasker_choose_settings">Vyberte nastavení, které chcete.</string>
-    <string name="alert_unknown_wakelock_title">Unbounce neznámý wakelock?</string>
-    <string name="alert_unknown_wakelock_content">Tento wakelock je bezpeèný</string>
-    <string name="dialog_delete">Vymazat</string>
-    <string name="alert_delete_stats_title">Vymazat všechny statistiky?</string>
-    <string name="alert_delete_stats_content"> To bude resetovat statistiky pro všechny vaše wakelocks a alarmy!</string>
-    <string name="title_settings">Nastavení</string>
-    <string name="alert_reset_settings_title">Obnovit na výchozí hodnoty?</string>
-    <string name="alert_reset_settings_content">Obnovení pro všechny alarmy a wakelocks!</string>
-    <string name="dialog_reset">Vynulovat</string>
-    <string name="reset_settings_confirmation"> Nastavení bylo obnoveno na výchozí hodnoty.</string>
-    <string name="dialog_save">Uložit</string>
-
-    <string name="desc_unknown">Nemáme\' mít nìjaké informace o této vlastnosti, ale pøesto. To nemusí být bezpeèné Unbounce. Uèinit pouze tehdy, pokud víte, co dìláte\'re dìlá a víte, jak zakázat Xposed pøi startu. My\'re snažíme shromažïovat informace o všech hlavních wakelock a alarmech. Prosím, buïte trpìliví, zatímco my tyto informace shromáždíme.</string>
-<string name="desc_nlpwakelock"> NlpWakeLock je bezpeèný unbounce. To\'s používá Google Play Services urèit vaši pøibližnou polohu pomocí kombinace mobilních vìží a Wi-Fi. Jakmile to má své místo, uloží jej na místì, takže další aplikace, jako je Google Nyní mùžete pøistupovat ke svému umístìní bez použití GPS nebo získání nového opravu. Doporuèené nastavení je mezi 180 a 600 sekund.</string>
-<string name="desc_nlpcollectorwakelock">NlpCollectorWakeLock je bezpeèný unbounce. To\'s používá Google Play Services urèit vaši pøibližnou polohu pomocí kombinace mobilních vìží a Wi-Fi. Jakmile to má své místo, ale to pošle zpìt na Google, aby mohli rozšíøit své databázi WiFi míst. Doporuèené nastavení je mezi 180 a 600 sekund.</string>
-<string name="desc_alarmmanager"> Toto poskytuje pøístup k systému alarmu služeb. Když se spustí alarm, Intent, která byla zapsána pro nìj vysílá systém, automatické spuštìní cílové aplikace, pokud již není spuštìna. Registrované alarmy jsou zachovány, když je zaøízení v režimu spánku (a volitelnì probudí zaøízení až když zhasnou v té dobì), ale budou vymazány, pokud je vypnut a restartován.</string>
-<string name="desc_audiooffload"> Audio pøehrávání, když je obrazovka vypnutá. Pokud zakážete toto, jste vyhrál,budete mít zvuk na pozadí nebo hudbu, když vaše obrazovka je vypnutá.</string>
-<string name="desc_activitymanagerlauncher">anagerlauncher"> komunikuje s celkovými aktivitami spuštìných v systému. Pokud Unbounce toho nic nebude dobøe fungovat.</string>
-<string name="desc_windowmanager"> Toto je Android na úrovni systému WakeLock. Rozhraní, které apps používají správce oken.Ve smyslu, aplikace bude vyžadovat okenní zámek pokaždé, co potøebují, aby byli na obrazovce</string>
-<string name="desc_rilj">RILJ udržuje váš pøístroj vzhùru pøi zpracování telefonních akcí, jako jsou telefonní hovory a jiné komunikace.</string>
-<string name="desc_syncloopwakelock"> Toto je WakeLock používá Android SyncManager Sync úèty, jako je Google+, Twitter, LinkedIn, Gmail apod vyšší unbouncing, delší množství èasu, vaše úèty dostanou pozdìji synchronizaci.</string>
-<string name="desc_icing"> Google Services WakeLock. V souèasné dobì hledáme pro více informací.</string>
-<string name="desc_startingalertservice"> Tento WakeLock je obvykle spojen s kalendáøem, ale mohou ovlivnit jiné aplikace, jako je zasílání zpráv. Pokud váš kalendáø má oznámení / upozornìní mùže mít tento WakeLock vliv</string>
-<string name="desc_audiomix"> Tento WakeLock zpracovává položku Zvuky a upozornìní. Zní to mezi ostatními. To trápí nìkterá zaøízení dokonce s nádechem zvuky vypnout.</string>
-<string name="desc_locationmanagerservice">Jak už název napovídá. To není obvykle vysoký baterie odkapávaè pro nìkteré by to mohlo konat velký wakelock. </string>
-<string name="desc_audioin">Tento wakelock je zvyklý na držení zaøízení vzhùru poslech pro Google Search / Hotword detekce. "Dobøe, Google"</string>
-<string name="desc_nfcservicemroutingwakelock">Related to NFC service routing detected tags to the appropriate application.</string>
-<string name="desc_wakefulintentservicegcoreulrlocationreportingservice">Používá Google Location Services nahlásit svou aktuální polohu.</string>
-<string name="desc_vzwgpslocationprovider"> Verizon specifické umístìní služby použity pro statistické úèely bunìk vìže.</string>
-<string name="desc_hangouts_rtcs">Google Hangouts. Pokud jste Unbounce to, hospùdky pøestanou fungovat</string>
-<string name="desc_gcm_conn">Google Cloud Messaging. Odešle lehké zprávy vašich aplikací</string>
-<string name="desc_google_c2dm"> Cloud Zprávy zaøízení (C2DM) je služba, která pomáhá vývojáøùm posílat data do svých aplikací na zaøízení. Tato služba poskytuje mechanismus, který servery lze použít øíct mobilních aplikací kontaktovat server naèíst aktualizovanou aplikaci nebo uživatelská data. C2DM služba se zabývá všemi aspekty front zpráv a dodávka do cílové aplikace bìžící na cílové zaøízení. Tato služba byla zavržena, protože 2012, ale stále existují aplikace, které používají tuto službu namísto nového a vylepšeného GCM.</string>
-<string name="desc_timedeventqueue"> Toto je základní souèástí Androidu, který je nejlépe sám. To fronty všechny pøíchozí události.</string>
-<string name="desc_comgoogleandroidgmsnlpalarm_wakeup_locator">Tento alarm je bezpeèné unbounce. To\'s používá Google Play Services urèit vaši pøibližnou polohu pomocí kombinace mobilních vìží a Wi-Fi. Jakmile to má své místo, uloží jej na místì, takže další aplikace, jako je Google Nyní mùžete pøistupovat ke svému umístìní bez použití GPS nebo získání nového opravu. Doporuèené nastavení je mezi 180 a 600 sekund.</string>
-<string name="desc_comgoogleandroidgmsnlpalarm_wakeup_activity_detection"> Tento alarm je bezpeèné unbounce. To\'s používá Google Play Services urèit vaši pøibližnou polohu pomocí kombinace mobilních vìží a Wi-Fi. Jakmile to má své místo, ale to pošle zpìt na Google, aby mohli rozšíøit své databázi WiFi míst. Doporuèené nastavení je mezi 180 a 600 sekund.</string>
-<string name="desc_comgoogleandroidappshangoutsupdate_notification">posluchaè, který aktualizuje Google hospùdky oznámení.</string>
-<string name="desc_comandroidinternaltelephonydatastall">Wakelock z com.android.phone (Phone app) pøi použití dat prostøednictvím mobilní vìže. Pomocí Wi-Fi se nespustí poplach. Obvykle se dostane pøes støechu pøi použití údajù, a to zejména na prùmìrné pøipojení</string>
-
-<string name="settings_allow_every">Povolit vždy</string>
-<string name="settings_seconds">seconds.</string>
-<string name="card_button_reset">Vynulovat</string>
-
-<string name="stat_alarms_acquired">Alarmy naètené</string>
-<string name="stat_alarms_blocked">Alarmy blokované</string>
-<string name="stat_loading">Loading...</string>
-<string name="stat_collected_for">Statistiky schromáždìné PRO</string>
-<string name="stat_wake_duration_allowed">Wakelock lhùta allowed</string>
-<string name="stat_wake_duration_blocked">Wakelock èas blokování</string>
-<string name="stat_wake_allowed">Wakelocks naètené</string>
-<string name="stat_wake_blocked">Wakelocks blokované</string>
-<string name="stat_alarm_allowed">Alarms fired</string>
-<string name="stat_alarm_blocked">Alarms blokované</string>
-<string name="stat_disabled">Vypnuté</string>
-<string name="donate_text"> Tato aplikace vám vždy umožní opravit síové umístìní zprostøedkovatele a baterie vrahy zdarma. Pokud jste rád na Unbounce, další wakelocks a alarmù, mùžete upgradovat na Pro vlastností tím, že podpoøí projekt níže. Každá èástka daru bude odemknout Pro funkce.</string>
-<string name="donate_1">šálek kávy, když píšu kód </string>
-<string name="donate_5">latte, když jsem odpovìdìl fórum otázky</string>
-<string name="donate_10">Radost ménì používám nabíjeèku</string>
-<string name="donate_thank_you"> Dìkuji za Váš pøíspìvek. Znamená to pro mì hodnì. Já tvrdì pracuji ve svém volném èase omezeném, aby jste mìli lepší výdrž baterie. Když si daroval, že jste udìlali rozdíl v projektu, a dìlal rozdíl v mé rodinì a mým životem. Budeš zpívat.</string>
-<string name="donate_more_button">Jak mohu pomoci DALŠÍ?</string>
-<string name="donate_more_text">Lidé se ptali, jak mohou pøispìt mimo jejich poèáteèního daru. Níže uvedená tlaèítka vám umožní darovat dále, ale nebudou poskytovat žádné další funkce. Dìkuji moc za podporu Unbounce!</string>
-<string name="welcome_banner_title">Vítejte!</string>
-<string name="welcome_banner_text">Mùžete blokovat wakelocks, zabránit telefonu zùstávat vzhùru a blokovat alarmy zastavit je od probuzení v první øadì.Tak jsem již nastavil úsporu výchozí pro vás a vašiùžete blokovat wakelocks zastavit telefonu z zùstávat vzhùru a blokovat alarmy zastavit od probuzení v první øadì. My\'jsem již nastaven úsporu výchozí pro vás nìjakou baterii.ùžete blokovat wakelocks zastavit telefonu z zùstávat vzhùru a blokovat alarmy zastavit od probuzení v první øadì. My\'jsem již nastaven úsporu výchozí pro vás nìjakou baterii.ùžete blokovat wakelocks zastavit telefonu z zùstávat vzhùru a blokovat alarmy zastavit od probuzení v první øadì. My\'jsem již nastaven úsporu výchozí pro vás nìjakou baterii. baterii.</string>
-
-    <!--Don't translate this one  :)  -->
-<string name="app_font_family">sans_serif</string>
-
-
-
-    </resources>
+Nákupy In-App vám umožní odemknout Pro balíèek, který vám umožní pøizpùsobit alarmy a wakelocks na vašem zaøízení. Bez profesionálních funkcí, nemùžete ovládat nejhorší baterie žrouty: NlpWakelock, NlpCollectorWakeLock, ALARM_WAKEUP_LOCATOR a ALARM_WAKE_ACTIVITY_DETECTION."</string>
+<string name="welcome_banner_welcome">"Vítejte"</string>
+<string name="welcome_banner_checking_service">"Kontrola,zda je spuštěn Unbounce"</string>
+<string name="welcome_banner_checking_xposed">"Kontrola,zda je instalován Xposed"</string>
+<string name="welcome_banner_checking_root">"Kontrola Root povolení"</string>
+<string name="welcome_banner_checking_looks_great">"Vypadá vše skvěle"</string>
+<string name="welcome_banner_checking_uhoh">"Něco se pokazilo. Pojďme zjistit, co a opravit problém."</string>
+<string name="welcome_banner_problem_none">"Máme na nastavení nějaké úspory baterie výchozí pro vás. Užijte si svůj nový život baterii!"</string>
+<string name="welcome_banner_problem_service">"Vypadá_ to_že jste povolili Unbounce modul. Klepněte na tlačítko Fix It, ujistěte se, že_ Unbounce_ je zaškrtnuto, pak se restartuje."</string>
+<string name="welcome_banner_problem_xposed_running">"Xposed neběží. Klepněte na tlačítko Fix It, klepněte na tlačítko nainstalovat / aktualizovat a restartovat zařízení."</string>
+<string name="welcome_banner_problem_xposed_installed">"Xposed není nainstalován. Xposed je vyžadováno pro Unbounce a mnoho jiných kořenových aplikací. Jakmile je stahování dokončeno, klepněte na tlačítko Nainstalovat, poté ji spusťte znovu Unbounce. Pokud byste se chtěli dozvědět více o Xposed, <![CDATA[<a href="http://www.tested.com/tech/android/460074-how-use-xposed-framework-android-extreme-customization/"> Tested.com. </a>]]>"</string>
+<string name="welcome_banner_problem_root">"Vypadá_ to_že_ vaše_ zařízení není zakořeněno. Unbounce vyžaduje zakořeněné zařízení,aby správně fungovalo. Máte-li zájem o zakořenění zařízení, navštivte <![CDATA[<a href="http://www.techverse.net/how-to-root-your-android-phone-tablet-and-why/">Techverse.net</a>]]>, abyste mohli začít."</string>
+<string name="welcome_banner_button_next">"Vítej,stiskni další"</string>
+<string name="welcome_banner_button_fixit">"Vítej zde,stiskni zde"</string>
+<string name="welcome_banner_button_exit">"Vítej a ukončit."</string>
+<string name="welcome_banner_button_install">"Zde pro instalaci."</string>
+<string name="welcome_downloading_xposed">"vítejte, stahování Xposed"</string>
+<string name="welcome_downloaded_xposed">"Stažení,dokončeno"</string>
+<string name="welcome_download_error_xposed">"Stažení se nezdařilo,Zkuste to prosím později.."</string>
+<string name="download_xposed_title">"Stahování Xposed"</string>
+<string name="download_xposed_description">"Požadováno pro Unbounce"</string>
+<string name="requires_root">"vyžaduje Root zařízení."</string>
+<string name="installs_xposed">"Unbounce používá rámec Xposed a bude jej instalovat, pro, vás, pokud ještě ho nemáte. "</string>
+</resources>

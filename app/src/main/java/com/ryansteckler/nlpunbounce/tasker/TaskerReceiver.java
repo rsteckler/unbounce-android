@@ -42,7 +42,7 @@ public class TaskerReceiver extends BroadcastReceiver {
                     SharedPreferences.Editor editor = prefs.edit();
                     editor.putBoolean(enabledName, enabled);
                     editor.putLong(secondsName, seconds);
-                    editor.commit();
+                    editor.apply();
                 }
             }
 

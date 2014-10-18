@@ -4,8 +4,8 @@
     tools:ignore="MissingTranslation" >
 
     <string-array name="themeArray">
-        <item>Material</item>
-        <item>Dark</item>
+        <item>@string/settings_theme_material</item>
+        <item>@string/settings_theme_dark</item>
     </string-array>
 
     <string-array name="themeValues">
@@ -14,9 +14,9 @@
     </string-array>
 
     <string-array name="loggingArray">
-        <item>Quiet</item>
-        <item>Default</item>
-        <item>Verbose</item>
+        <item>@string/settings_logging_quiet</item>
+        <item>@string/settings_logging_default</item>
+        <item>@string/settings_logging_verbose</item>
     </string-array>
 
     <string-array name="loggingValues">

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources   xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingTranslation" >
 
     <string name="app_name">Unbounce</string>
     <string name="version">Version</string>
@@ -113,12 +114,82 @@
     <string name="donate_thank_you">Thank you for your donation.  It means a lot to me.  I work hard in my limited free time to bring you better battery life.  When you donated, you made a difference to the project, and made a difference in my family\'s life.  You rock.</string>
     <string name="donate_more_button">HOW CAN I HELP FURTHER?</string>
     <string name="donate_more_text">People have asked how they can contribute beyond their initial donation.  The buttons below let you donate further, but don\'t provide any additional features.  Thank you so much for supporting Unbounce!</string>
-    <string name="welcome_banner_title">Welcome!</string>
-    <string name="welcome_banner_text">You can block wakelocks to stop your phone from staying awake, and block alarms to stop it from waking up in the first place.  We\'ve already set up some battery saving defaults for you.</string>
+
+    <string name="welcome_banner_welcome">Welcome!</string>
+    <string name="welcome_banner_title">Let\'s make sure everything is setup.</string>
+    <string name="welcome_banner_checking_service">Checking if Unbounce is running...</string>
+    <string name="welcome_banner_checking_xposed">Checking if Xposed is installed...</string>
+    <string name="welcome_banner_checking_root">Checking for root access...</string>
+    <string name="welcome_banner_checking_looks_great">Everything looks great!</string>
+    <string name="welcome_banner_checking_uhoh">Something went wrong.  Let\'s find out what and get it fixed...</string>
+    <string name="welcome_banner_problem_none">We\'ve setup some battery saving defaults for you.  Enjoy your new battery life!</string>
+    <string name="welcome_banner_problem_service">It looks like you haven\'t enabled the Unbounce module. Click \"FIX IT\", make sure Unbounce is checked, then reboot.</string>
+    <string name="welcome_banner_problem_xposed_running">Xposed isn\'t running. Click \"FIX IT\", then click \"Install/Update\" and reboot your device.</string>
+    <string name="welcome_banner_problem_xposed_installed">Xposed isn\'t installed. Xposed is required for Unbounce and many other root applications.  Once the download is finished, click INSTALL, then launch Unbounce again.\nIf you\'d like to learn more about Xposed, <![CDATA[<a href="http://www.tested.com/tech/android/460074-how-use-xposed-framework-android-extreme-customization/">visit Tested.com.</a>]]></string>
+    <string name="welcome_banner_problem_root">It looks like your device isn\'t rooted.  Unbounce requires a rooted device to function properly.  If you\'re interested in rooting your device, please visit <![CDATA[<a href="http://www.techverse.net/how-to-root-your-android-phone-tablet-and-why/">Techverse.net</a>]]> to get started.</string>
+    <string name="welcome_banner_button_next">NEXT</string>
+    <string name="welcome_banner_button_fixit">FIX IT</string>
+    <string name="welcome_banner_button_exit">EXIT</string>
+    <string name="welcome_banner_button_install">INSTALL</string>
+    <string name="welcome_downloading_xposed">Downloading Xposed...</string>
+    <string name="welcome_downloaded_xposed">Download complete.</string>
+    <string name="welcome_download_error_xposed">Download failed.  Please try again later.</string>
+    <string name="download_xposed_title">Downloading Xposed</string>
+    <string name="download_xposed_description">Required for Unbounce</string>
+
+    <string name="settings_category_options">Options</string>
+    <string name="settings_item_show_launcher">Show launcher icon</string>
+    <string name="settings_item_choose_theme">Choose theme</string>
+    <string name="settings_item_global_stats_title">Participate in Global Stats</string>
+    <string name="settings_item_global_stats_summary">Send and receive anonymous stats</string>
+    <string name="settings_item_reset_defaults_title">Reset to defaults</string>
+    <string name="settings_item_reset_defaults_summary">Reset all alarms and wakelocks to default settings</string>
+    <string name="settings_category_code_credits">Developer Credit</string>
+    <string name="settings_item_author">Author: Ryan Steckler</string>
+    <string name="settings_item_logging_level">Logging level</string>
+    <string name="settings_category_translation">Translation Credit</string>
+    <string name="settings_theme_material">Material</string>
+    <string name="settings_theme_dark">Dark</string>
+    <string name="settings_logging_quiet">Quiet</string>
+    <string name="settings_logging_default">Default</string>
+    <string name="settings_logging_verbose">Verbose</string>
+    <string name="settings_item_force_english_title">Force English</string>
+    <string name="settings_item_force_english_summary">Override your locale settings and use English</string>
+
+    <string name="playstore_short_description">Battery power to the people!</string>
+    <string name="requires_root">*** Requires a rooted device ***</string>
+    <string name="installs_xposed">Unbounce uses the Xposed Framework and will install it for you if you don\'t already have it.</string>
+    <string name="playstore_long_description">
+Unsolicited quotes from real users:
+"It gave me about 2 hours more use with 30 minutes more screen on time. Saved me from buying a $25 battery."
+"Just donated 5 Dollars to support this masterpiece.. Keep up the good work"
+"Simply amazing"
+"[Unbounce] just revolutionized the true meaning of wakelock managing"
+"This module is awesome! I get less than a half percent drain per hour for idle standby. "
+...and many more.
+
+Unbounce puts you in control of how your device uses your battery by controlling how often your device can wake up, and how long it can stay awake.  Use the recommended settings for easy battery savings, or dig in and customize every alarm and wakelock on your device.
+Here are some highlights:
+
+- A beautiful design, inspired by Material Design principles
+- A stable blocking engine
+- Comprehensive measuring of the time wasted and time saved because of alarms and wakelocks
+- A growing list of descriptions of the alarms and wakelocks in plain English (and other languages coming soon!)
+- A new Pro package that lets you Unbounce any alarm or wakelock on the device
+- An open source codebase so you can see how it works, or build it yourself
+
+
+The In-App purchases allow you to unlock the Pro package that lets you customize the alarms and wakelocks on your device.   Without the pro package, you can control the worst battery hogs:  NlpWakelock, NlpCollectorWakeLock, ALARM_WAKEUP_LOCATOR, and ALARM_WAKE_ACTIVITY_DETECTION.
+
+May you have a long [battery] life!
+</string>
+
+
+
+
 
     <!--Don't translate this one  :)  -->
-    <string name="app_font_family">sans_serif</string>
-
+    <string translatable="false" name="app_font_family">sans_serif</string>
 
 
 </resources>

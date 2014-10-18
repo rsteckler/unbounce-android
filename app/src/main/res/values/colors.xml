@@ -10,6 +10,7 @@
     <color name="background_gray">#9E9E9E</color>
 
     <color name="background_three">#FF5722</color>
+    <color name="background_three_shaded">#a83916</color>
 
     <color name="background_four">#9c27b0</color>
     <color name="background_four_faded">#ba68c8</color>

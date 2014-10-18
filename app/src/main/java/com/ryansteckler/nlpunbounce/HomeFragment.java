@@ -4,9 +4,11 @@ package com.ryansteckler.nlpunbounce;
  * Created by rsteckler on 9/7/14.
  */
 
+import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.LayoutTransition;
 import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
@@ -16,10 +18,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -27,24 +33,45 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.ryansteckler.nlpunbounce.helpers.NetworkHelper;
+import com.ryansteckler.nlpunbounce.helpers.DownloadHelper;
+import com.ryansteckler.nlpunbounce.helpers.LocaleHelper;
+import com.ryansteckler.nlpunbounce.helpers.RootHelper;
 import com.ryansteckler.nlpunbounce.helpers.SettingsHelper;
 import com.ryansteckler.nlpunbounce.helpers.ThemeHelper;
-import com.ryansteckler.nlpunbounce.models.BaseStats;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
 
-import java.util.HashMap;
+
+import org.w3c.dom.Text;
+
+import java.io.File;
+
 
 /**
  * A placeholder fragment containing a simple view.
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment  {
 
     private OnFragmentInteractionListener mListener;
+
+
+    private int mSetupStep = 0;
+
+    private int mSetupFailureStep = SETUP_FAILURE_NONE; //We're optimists  :)
+    private final static int SETUP_FAILURE_NONE = 0; //We're good.  The service is running.
+    private final static int SETUP_FAILURE_SERVICE = 1; //The service isn't running, but Xposed is installed.
+    private final static int SETUP_FAILURE_XPOSED_RUNNING = 2; //Xposed isn't running ("installed")
+    private final static int SETUP_FAILURE_XPOSED_INSTALL = 3; //Xposed isn't installed
+    private final static int SETUP_FAILURE_ROOT = 4; //There's no root access.
+
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -61,6 +88,8 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LocaleHelper.onActivityCreateSetLocale(this.getActivity());
+        ThemeHelper.onActivityCreateSetTheme(this.getActivity());
         setHasOptionsMenu(true);
     }
 
@@ -84,75 +113,339 @@ public class HomeFragment extends Fragment {
         };
         //Register when new stats come in.
         getActivity().registerReceiver(refreshReceiver, new IntentFilter(ActivityReceiver.SEND_STATS_ACTION));
-
         loadStatsFromSource(view);
-        TextView textView;
 
-        textView = (TextView)view.findViewById(R.id.buttonResetStats);
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View textView) {
-                new AlertDialog.Builder(getActivity())
-                        .setTitle(R.string.alert_delete_stats_title)
-                        .setMessage(R.string.alert_delete_stats_content)
-                        .setPositiveButton(R.string.dialog_delete, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                UnbounceStatsCollection.getInstance().resetStats(getActivity(), UnbounceStatsCollection.STAT_CURRENT);
-                                loadStatsFromSource(view);
+        setupResetStatsButton(view);
 
-                                Intent intent = new Intent(XposedReceiver.RESET_ACTION);
-                                intent.putExtra(XposedReceiver.STAT_TYPE, UnbounceStatsCollection.STAT_CURRENT);
-                                try {
-                                    getActivity().sendBroadcast(intent);
-                                } catch (IllegalStateException ise) {
+        setupKarma(view);
 
-                                }
-                            }
-                        })
-                        .setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                // do nothing
-                            }
-                        })
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .show();
+        updatePremiumUi();
+
+        requestRefresh();
+
+        handleSetup(view);
+
+    }
+
+    private void handleSetup(final View view) {
+        //All the first run stuff:
+        final SharedPreferences prefs = getActivity().getSharedPreferences("com.ryansteckler.nlpunbounce" + "_preferences", Context.MODE_WORLD_READABLE);
+        boolean firstRun = prefs.getBoolean("first_launch", true);
+
+        if (!isUnbounceServiceRunning() || firstRun) {
+
+            //Show the banner
+            final LinearLayout banner = (LinearLayout)view.findViewById(R.id.banner);
+            banner.setVisibility(View.VISIBLE);
+
+            //Let's find out why the service isn't running:
+            if (!isUnbounceServiceRunning()) {
+                mSetupFailureStep = SETUP_FAILURE_SERVICE;
             }
-        });
+            if (!isXposedRunning()) {
+                mSetupFailureStep = SETUP_FAILURE_XPOSED_RUNNING;
+            }
+            if (!isXposedInstalled()) {
+                mSetupFailureStep = SETUP_FAILURE_XPOSED_INSTALL;
+            }
+            if (!RootHelper.isDeviceRooted()) {
+                mSetupFailureStep = SETUP_FAILURE_ROOT;
+            }
 
-        SharedPreferences prefs = getActivity().getSharedPreferences("com.ryansteckler.nlpunbounce" + "_preferences", Context.MODE_WORLD_READABLE);
-        if (prefs.getBoolean("first_launch", true)) {
-            SettingsHelper.resetToDefaults(prefs);
-            textView = (TextView)view.findViewById(R.id.textviewCloseBanner);
+            //Disable navigation away from the welcome banner. //TODO:  Fade the home bar?
+            getActivity().getActionBar().setHomeButtonEnabled(false);
 
-            textView.setOnClickListener(new View.OnClickListener() {
+            //Setup animations on the banner
+            view.post(new Runnable() {
                 @Override
-                public void onClick(View textview) {
-                    //Animate this view out of sight
-                    ViewGroup bannerContainer = (ViewGroup)view;
-                    LayoutTransition lt = new LayoutTransition();
-
-                    float endLocation = view.getHeight();
-                    DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
-                    float dp = endLocation / (metrics.densityDpi / 160f);
-
-                    AnimatorSet animator = new AnimatorSet();
-                    ObjectAnimator moveBanner = ObjectAnimator.ofFloat(null, View.TRANSLATION_Y, 0, dp);
-                    ObjectAnimator fadeBanner = ObjectAnimator.ofFloat(null, View.ALPHA, 1, 0);
-                    animator.playTogether(moveBanner, fadeBanner);
-
-                    lt.setAnimator(LayoutTransition.DISAPPEARING, animator);
-                    bannerContainer.setLayoutTransition(lt);
-                    View banner = (View)view.findViewById(R.id.banner);
-                    bannerContainer.removeView(banner);
+                public void run() {
+                    ViewGroup container = (ViewGroup)getActivity().findViewById(R.id.bannerSwitcher);
+                    setupBannerAnimations(container);
+                    ViewGroup buttonContainer = (ViewGroup)getActivity().findViewById(R.id.welcomeButtonContainer);
+                    animateButtonContainer(buttonContainer);
                 }
             });
 
-            View banner = view.findViewById(R.id.banner);
-            banner.setVisibility(View.VISIBLE);
+            //Blur the background and store the animation so we can reverse it when we're done
+            ValueAnimator blurAnimation = blurBackground(view);
+
+            //This progress animation drives the rest of the logic.  At different steps in the animation, we do
+            //different things.  The last step takes care of "fixing" whatever problems exist.
+            final ProgressBar progressChecking = (ProgressBar) view.findViewById(R.id.progressDetect);
+            progressChecking.setProgress(0);
+
+            final ValueAnimator progressAnimation = ValueAnimator.ofInt(0, 100);
+            WelcomeAnimationListener welcomeListener = new WelcomeAnimationListener(banner, blurAnimation, progressChecking, progressAnimation);
+            progressAnimation.addListener(welcomeListener);
+            progressAnimation.addUpdateListener(welcomeListener);
+            progressAnimation.setDuration(2000);
+            progressAnimation.setStartDelay(200); //Create a small gap between each step, so they look discrete
+            progressAnimation.setInterpolator(new LinearInterpolator());
+
+            //Start the animations.
+            blurAnimation.start();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    progressAnimation.start();
+                }
+            }, 800); //Let the screen "come up" and blur start.  Let the user take in the screen before starting things moving.
 
         }
+    }
 
+    private class WelcomeAnimationListener implements Animator.AnimatorListener, ValueAnimator.AnimatorUpdateListener {
+        @Override
+        public void onAnimationCancel(Animator animator) {}
+        @Override
+        public void onAnimationRepeat(Animator animator) {}
+        @Override
+        public void onAnimationStart(Animator animator) {}
 
+        private View mParentView;
+        private ValueAnimator mReverseWhenDone;
+        private ProgressBar mProgressChecking;
+        ValueAnimator mProgressAnimation;
+        public WelcomeAnimationListener(View parentView, final ValueAnimator reverseWhenDone, ProgressBar progressChecking, ValueAnimator progressAnimation) {
+            mParentView = parentView;
+            mReverseWhenDone = reverseWhenDone;
+            mProgressChecking = progressChecking;
+            mProgressAnimation = progressAnimation;
+        }
+
+        @Override
+        public void onAnimationUpdate(final ValueAnimator animator) {
+            int curValue = (int) animator.getAnimatedValue();
+            if (isAdded()) {
+                mProgressChecking.setProgress(curValue);
+            }
+        }
+
+        @Override
+        public void onAnimationEnd(Animator animator) {
+            //Each time the animation finishes, handle the next step
+            mSetupStep++;
+
+            if (isAdded()) {
+                final TextView stepText = (TextView) mParentView.findViewById(R.id.welcomeStepText);
+
+                if (mSetupStep == 1) {
+                    stepText.setText(getResources().getString(R.string.welcome_banner_checking_xposed));
+                    mProgressChecking.setProgress(0);
+                    mProgressAnimation.start();
+                } else if (mSetupStep == 2) {
+                    stepText.setText(getResources().getString(R.string.welcome_banner_checking_root));
+                    mProgressChecking.setProgress(0);
+                    mProgressAnimation.start();
+                } else if (mSetupStep == 3) {
+                    handleFinalStep();
+                }
+            }
+        }
+
+        private void handleFinalStep() {
+
+            //Setup the text on the final screen to good/bad to set user expectations
+            final TextView stepText = (TextView)mParentView.findViewById(R.id.welcomeStepText);
+            if (mSetupFailureStep == SETUP_FAILURE_NONE) {
+                stepText.setText(getResources().getString(R.string.welcome_banner_checking_looks_great));
+            } else {
+                stepText.setText(getResources().getString(R.string.welcome_banner_checking_uhoh));
+            }
+
+            //This is the next button that we hide, show, and replace the text of.  Make it visible so the
+            //user can move forward
+            final LinearLayout nextButton = (LinearLayout)mParentView.findViewById(R.id.buttonWelcomeNext);
+            nextButton.setVisibility(View.VISIBLE);
+            nextButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //When the user clicks the button, hide it so it doens't move during re-layout
+                    nextButton.setVisibility(View.INVISIBLE);
+
+                    //The text of the problem, and how to fix it
+                    TextView problemText = (TextView) getActivity().findViewById(R.id.textWelcomeProblemDescription);
+                    //The text of the next button
+                    final TextView nextButtonText = (TextView) getActivity().findViewById(R.id.buttonTextWelcomeNext);
+
+                    if (mSetupFailureStep == SETUP_FAILURE_NONE) {
+                        //Everything is good!
+                        handleNoFailure(problemText, nextButton);
+                    } else if (mSetupFailureStep == SETUP_FAILURE_SERVICE) {
+                        //Service isn't running
+                        handleServiceFailure(problemText, nextButtonText, nextButton);
+                    } else if (mSetupFailureStep == SETUP_FAILURE_XPOSED_RUNNING) {
+                        //Xposed isn't running
+                        handleXposedRunningFailure(problemText, nextButtonText, nextButton);
+                    } else if (mSetupFailureStep == SETUP_FAILURE_XPOSED_INSTALL) {
+                        //Xposed isn't installed
+                        //This is the tricky one...
+                        handleXposedInstalledFailure(problemText, nextButtonText, nextButton);
+                    } else if (mSetupFailureStep == SETUP_FAILURE_ROOT) {
+                        //The device isn't rooted
+                        handleRootFailure(problemText, nextButtonText, nextButton);
+                    }
+
+                    //The views should be setup now.  Swap out the "checking" view, and swap in the "fixit" view
+                    View vOut = getActivity().findViewById(R.id.welcomeDetection);
+                    final View vIn = getActivity().findViewById(R.id.welcomeProblem);
+                    vOut.setVisibility(View.GONE);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            vIn.setVisibility(View.VISIBLE);
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    nextButton.setVisibility(View.VISIBLE);
+                                }
+                            }, 300);
+                        }
+                    }, 300);
+                }
+            });
+        }
+
+        private void handleRootFailure(TextView problemText, TextView nextButtonText, LinearLayout nextButton) {
+            nextButtonText.setText(getResources().getString(R.string.welcome_banner_button_exit));
+            problemText.setText(Html.fromHtml(getResources().getString(R.string.welcome_banner_problem_root)));
+            problemText.setMovementMethod(LinkMovementMethod.getInstance());
+            nextButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    getActivity().finish();
+                }
+            });
+        }
+
+        private void handleXposedInstalledFailure(TextView problemText, final TextView nextButtonText, final LinearLayout nextButton) {
+            //Set the problem text.
+            problemText.setText(Html.fromHtml(getResources().getString(R.string.welcome_banner_problem_xposed_installed)));
+            problemText.setMovementMethod(LinkMovementMethod.getInstance());
+
+            //Show the download view
+            View welcomeDownload = getActivity().findViewById(R.id.welcomeFrameworkDownload);
+            welcomeDownload.setVisibility(View.VISIBLE);
+
+            //Set the download progress bar
+            ProgressBar downloadProgress = (ProgressBar) getActivity().findViewById(R.id.progressDownloadXposed);
+            downloadProgress.setProgress(0);
+
+            //Start the download
+            new DownloadHelper().startDownload(getActivity(), downloadProgress, new DownloadHelper.DownloadListener() {
+                @Override
+                public void onFinished(final boolean success, final String filename) {
+                    //When the download is finished (which happens on a non-ui thread)
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            //If the download was successful...
+                            if (success) {
+                                //Update the downloading text
+                                TextView downloadText = (TextView)getActivity().findViewById(R.id.welcome_download_status);
+                                downloadText.setText(getString(R.string.welcome_downloaded_xposed));
+                                //Let them install the framework
+                                nextButton.setVisibility(View.VISIBLE);
+                                nextButtonText.setText(R.string.welcome_banner_button_install);
+                                nextButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        //Install the Xposed apk, then exit. (Ideally, install, then install/update)
+                                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                                        intent.setDataAndType(Uri.fromFile(new File(filename)), "application/vnd.android.package-archive");
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent);
+                                        getActivity().finish();
+                                    }
+                                });
+                            } else {
+                                TextView downloadText = (TextView)getActivity().findViewById(R.id.welcome_download_status);
+                                downloadText.setText(getString(R.string.welcome_download_error_xposed));
+                                nextButton.setVisibility(View.VISIBLE);
+                                nextButtonText.setText(R.string.welcome_banner_button_exit);
+                                nextButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        getActivity().finish();
+                                    }
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        }
+
+        private void handleXposedRunningFailure(TextView problemText, TextView nextButtonText, LinearLayout nextButton) {
+            nextButtonText.setText(getActivity().getResources().getString(R.string.welcome_banner_button_fixit));
+            problemText.setText(Html.fromHtml(getResources().getString(R.string.welcome_banner_problem_xposed_running)));
+            problemText.setMovementMethod(LinkMovementMethod.getInstance());
+            nextButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    launchXposedFramework();
+                    getActivity().finish();
+                }
+            });
+        }
+
+        private void handleServiceFailure(TextView problemText, TextView nextButtonText, LinearLayout nextButton) {
+            nextButtonText.setText(getActivity().getResources().getString(R.string.welcome_banner_button_fixit));
+            problemText.setText(Html.fromHtml(getResources().getString(R.string.welcome_banner_problem_service)));
+            problemText.setMovementMethod(LinkMovementMethod.getInstance());
+            nextButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    launchXposedModules();
+                    getActivity().finish();
+                }
+            });
+        }
+
+        private void handleNoFailure(TextView problemText, LinearLayout nextButton) {
+            problemText.setText(getResources().getString(R.string.welcome_banner_problem_none));
+            SharedPreferences prefs = getActivity().getSharedPreferences("com.ryansteckler.nlpunbounce" + "_preferences", Context.MODE_WORLD_READABLE);
+            SettingsHelper.resetToDefaults(prefs);
+            nextButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    getActivity().getActionBar().setHomeButtonEnabled(true);
+                    //When we're done, hide the parent view
+                    mParentView.setVisibility(View.GONE);
+                    mReverseWhenDone.reverse();
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            ImageView unblur = (ImageView) getActivity().findViewById(R.id.imageBlur);
+                            unblur.setVisibility(View.GONE);
+                        }
+                    }, mReverseWhenDone.getDuration());
+                }
+            });
+        }
+    }
+
+    private ValueAnimator blurBackground(View view) {
+        //Blur the background
+        //Show the image (now transparent)
+        final ImageView imageBlur = (ImageView) view.findViewById(R.id.imageBlur);
+        imageBlur.setVisibility(View.VISIBLE);
+        //Fade it to opaque
+        ValueAnimator blurAnimation = ValueAnimator.ofFloat(0, 0.8f);
+        blurAnimation.setDuration(1000);
+        blurAnimation.setInterpolator(new AccelerateDecelerateInterpolator());
+        blurAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+            @Override
+            public void onAnimationUpdate(final ValueAnimator animator) {
+                float curValue = (float) animator.getAnimatedValue();
+                imageBlur.setAlpha(curValue);
+            }
+        });
+        return blurAnimation;
+    }
+
+    private void setupKarma(View view) {
         LinearLayout layout = (LinearLayout) view.findViewById(R.id.buttonKarma1);
         layout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -201,10 +494,10 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        textView = (TextView) view.findViewById(R.id.buttonHelpFurther);
+        TextView helpFurtherButton = (TextView) view.findViewById(R.id.buttonHelpFurther);
         final LinearLayout expanded = (LinearLayout) view.findViewById(R.id.layoutExpandedDonateAgain);
         final ScrollView scroll = (ScrollView) view.findViewById(R.id.scrollView);
-        textView.setOnClickListener(new View.OnClickListener() {
+        helpFurtherButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 expanded.setVisibility(View.VISIBLE);
@@ -216,9 +509,118 @@ public class HomeFragment extends Fragment {
                 });
             }
         });
-        updatePremiumUi();
+    }
 
-        requestRefresh();
+    private void setupResetStatsButton(final View view) {
+        TextView resetStatsButton = (TextView)view.findViewById(R.id.buttonResetStats);
+        resetStatsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View textView) {
+                new AlertDialog.Builder(getActivity())
+                        .setTitle(R.string.alert_delete_stats_title)
+                        .setMessage(R.string.alert_delete_stats_content)
+                        .setPositiveButton(R.string.dialog_delete, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                UnbounceStatsCollection.getInstance().resetStats(getActivity(), UnbounceStatsCollection.STAT_CURRENT);
+                                loadStatsFromSource(view);
+
+                                Intent intent = new Intent(XposedReceiver.RESET_ACTION);
+                                intent.putExtra(XposedReceiver.STAT_TYPE, UnbounceStatsCollection.STAT_CURRENT);
+                                try {
+                                    getActivity().sendBroadcast(intent);
+                                } catch (IllegalStateException ise) {
+
+                                }
+                            }
+                        })
+                        .setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // do nothing
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+            }
+        });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+
+    private boolean isXposedInstalled() {
+        PackageManager pm = getActivity().getPackageManager();
+
+        try {
+            pm.getPackageInfo("de.robv.android.xposed.installer", PackageManager.GET_ACTIVITIES);
+            return true;
+        }
+        catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
+    }
+
+    private boolean isInstalledFromPlay() {
+        String installer = getActivity().getPackageManager().getInstallerPackageName("com.ryansteckler.nlpunbounce");
+
+        if (installer == null) {
+            return false;
+        }
+        else {
+            return installer.equals("com.android.vending");
+        }
+    }
+
+    private boolean launchXposedModules() {
+        Intent LaunchIntent = null;
+
+        try {
+            LaunchIntent = getActivity().getPackageManager().getLaunchIntentForPackage("de.robv.android.xposed.installer");
+            if (LaunchIntent == null) {
+                return false;
+            } else {
+                Intent intent = new Intent("de.robv.android.xposed.installer.OPEN_SECTION");
+                intent.setPackage("de.robv.android.xposed.installer");
+                intent.putExtra("section", "modules");
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        } catch (Exception e) {
+            if (LaunchIntent != null) {
+                LaunchIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(LaunchIntent);
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean launchXposedFramework() {
+        Intent LaunchIntent = null;
+
+        try {
+            LaunchIntent = getActivity().getPackageManager().getLaunchIntentForPackage("de.robv.android.xposed.installer");
+            if (LaunchIntent == null) {
+                return false;
+            } else {
+                Intent intent = new Intent("de.robv.android.xposed.installer.OPEN_SECTION");
+                intent.setPackage("de.robv.android.xposed.installer");
+                intent.putExtra("section", "install");
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        } catch (Exception e) {
+            if (LaunchIntent != null) {
+                LaunchIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(LaunchIntent);
+            } else {
+                return false;
+            }
+        }
+        return true;
     }
 
     private BroadcastReceiver refreshReceiver;
@@ -231,6 +633,7 @@ public class HomeFragment extends Fragment {
             updatePremiumUi();
         }
     }
+
 
     private void updatePremiumUi() {
         if (((MaterialSettingsActivity)getActivity()).isPremium()) {
@@ -334,7 +737,6 @@ public class HomeFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        ThemeHelper.onActivityCreateSetTheme(this.getActivity());
         getActivity().getMenuInflater().inflate(R.menu.home, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
@@ -360,12 +762,6 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onPrepareOptionsMenu(Menu menu) {
-        super.onPrepareOptionsMenu(menu);
-    }
-
-
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -379,5 +775,67 @@ public class HomeFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         public void onHomeSetTitle(String id);
     }
+
+    private void animateButtonContainer(final ViewGroup container) {
+        LayoutTransition lt = container.getLayoutTransition();
+        if (lt == null) {
+            lt = new LayoutTransition();
+        }
+        lt.enableTransitionType(LayoutTransition.APPEARING);
+        lt.disableTransitionType(LayoutTransition.DISAPPEARING);
+        lt.setDuration(300);
+        container.setLayoutTransition(lt);
+    }
+
+    private void setupBannerAnimations(ViewGroup container) {
+        AnimatorSet animatorDisappear = getDisappearAnimation(container);
+        AnimatorSet animatorAppear = getAppearAnimation(container);
+
+        LayoutTransition lt = container.getLayoutTransition();
+        if (lt == null) {
+            lt = new LayoutTransition();
+        }
+        lt.setAnimator(LayoutTransition.DISAPPEARING, animatorDisappear);
+        lt.setAnimator(LayoutTransition.APPEARING, animatorAppear);
+        lt.setStartDelay(LayoutTransition.APPEARING, 0);
+        lt.setDuration(300);
+        container.setLayoutTransition(lt);
+
+    }
+
+    private AnimatorSet getDisappearAnimation(ViewGroup container) {
+        float endLocation = container.getHeight();
+        DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
+        float dp = endLocation / (metrics.densityDpi / 160f);
+
+        AnimatorSet animator = new AnimatorSet();
+        ObjectAnimator moveBanner = ObjectAnimator.ofFloat(null, View.TRANSLATION_Y, 0, dp);
+        ObjectAnimator fadeBanner = ObjectAnimator.ofFloat(null, View.ALPHA, 1, 0);
+        animator.playTogether(moveBanner, fadeBanner);
+        return animator;
+    }
+
+    private AnimatorSet getAppearAnimation(ViewGroup container) {
+        float endLocation = container.getHeight() * -1;
+        DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
+        float dp = endLocation / (metrics.densityDpi / 160f);
+
+        AnimatorSet animator = new AnimatorSet();
+        ObjectAnimator moveBanner = ObjectAnimator.ofFloat(null, View.TRANSLATION_Y, dp, 0);
+        ObjectAnimator fadeBanner = ObjectAnimator.ofFloat(null, View.ALPHA, 0, 1);
+        animator.playTogether(moveBanner, fadeBanner);
+        return animator;
+    }
+
+
+    public boolean isUnbounceServiceRunning() {
+        //The Unbounce hook changes this to true.
+        return false;
+    }
+
+    public boolean isXposedRunning() {
+        return new File("/data/data/de.robv.android.xposed.installer/bin/XposedBridge.jar").exists();
+    }
+
 
 }

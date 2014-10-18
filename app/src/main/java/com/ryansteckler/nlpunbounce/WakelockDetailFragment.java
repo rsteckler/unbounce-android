@@ -209,7 +209,7 @@ public class WakelockDetailFragment extends Fragment {
                 String blockName = "wakelock_" + mStat.getName() + "_seconds";
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putLong(blockName, seconds);
-                editor.commit();
+                editor.apply();
             }
 
             textView.clearFocus();
@@ -267,7 +267,7 @@ public class WakelockDetailFragment extends Fragment {
             SharedPreferences prefs = getActivity().getSharedPreferences("com.ryansteckler.nlpunbounce" + "_preferences", Context.MODE_WORLD_READABLE);
             SharedPreferences.Editor editor = prefs.edit();
             editor.putBoolean(blockName, b);
-            editor.commit();
+            editor.apply();
         }
 
         //Enable or disable the seconds setting.

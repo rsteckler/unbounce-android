@@ -3,13 +3,16 @@ For the most up-to-date conversation, check the [Xda-Developers thread](http://f
 Please target all pull requests to the "develop" branch.  Thanks! 
 
 ## Builds
-![develop build](https://travis-ci.org/rsteckler/unbounce-android.svg?branch=develop) : develop branch (Latest experimental) 
+[![develop build](https://travis-ci.org/rsteckler/unbounce-android.svg?branch=develop)](https://travis-ci.org/rsteckler/unbounce-android) : develop branch (Latest experimental) 
 
-![master build](https://travis-ci.org/rsteckler/unbounce-android.svg?branch=develop) : master branch (Latest stable)
+[![master build](https://travis-ci.org/rsteckler/unbounce-android.svg?branch=master)](https://travis-ci.org/rsteckler/unbounce-android) : master branch (Latest stable) 
 
 ## FAQ
 ### I have a bug or feature request.
-Cool. Thanks for helping out! Please go file the issue [here, on BitBucket](https://bitbucket.org/cryptyk/nlpunbounce/issues?status=new&status=open). You can also upvote bugs and feature requests there.
+Cool. Thanks for helping out! Please go file the issue [here, on GitHub](https://github.com/rsteckler/unbounce-android/issues). You can also upvote bugs and feature requests there.
+
+### I'd like to help with translations
+Awesome!  We could use the help!  To start, check [here, on the translation site](https://poeditor.com/join/project?hash=cba2f814b8847c56fda6850f288f2f7d).
 
 ### Why is Play Services such a battery killer:
 1) If Google Location Services are turned on, it sets an alarm to wakeup every 60 seconds, check the network location, and broadcast ALARM_WAKEUP_LOCATOR.
@@ -34,16 +37,6 @@ After looking at the code, there looks to be a google bug where any broadcast th
 
 ### Why is it called Unbounce?
 Debouncing is the process of taking a signal that's "bouncing" and interpreting it as a single "hit". This is a similar concept to what termpering the wakelocks does. It let's one of them come through, then turns them off for a certain amount of time. After I fixed the wakelocks, I realized that the alarms were causing them and I could actually stop the device from even waking up by killing the alarm. If DEbounce is a good term for denying the wakelock, UNbounce seemed like a good term for stopping them at the source.
-
-### Where's the source code?
-It's here: [https://bitbucket.org/cryptyk/nlpunbounce](https://bitbucket.org/cryptyk/nlpunbounce)
-
-A couple of things:
- 
-1) Don't judge. I need to do some cleanup, but wanted to post the repo early so people can take a look at what it does.
-  
-2) Pull requests are welcome.
-
 
 ### Where's the change log?
 It's here: [https://bitbucket.org/cryptyk/nlpunbounce/commits/branch/master](https://bitbucket.org/cryptyk/nlpunbounce/commits/branch/master)

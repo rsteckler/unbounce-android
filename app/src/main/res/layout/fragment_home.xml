@@ -7,548 +7,122 @@
     android:background="?activityRootBackground"
     >
 
-    <ScrollView
+    <FrameLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/scrollView"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_height="fill_parent">
 
-
-        <LinearLayout
-            android:orientation="vertical"
+        <ScrollView
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="fill_parent"
+            android:id="@+id/scrollView">
+
 
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_marginLeft="@dimen/card_external_padding"
-                android:layout_marginRight="@dimen/card_external_padding"
-                android:visibility="visible"
-                android:background="?cardBackground"
-                android:layout_marginTop="@dimen/card_external_padding">
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?background_primary_shaded"
-                    android:paddingLeft="@dimen/card_internal_padding"
-                    android:paddingTop="@dimen/card_internal_padding"
-                    android:paddingBottom="@dimen/card_internal_padding">
-
-                    <ImageView
-                        android:layout_width="@dimen/header_icon_size"
-                        android:layout_height="@dimen/header_icon_size"
-                        android:src="@drawable/ic_local" />
-
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:gravity="center_vertical"
-                        android:layout_weight="1">
-
-                        <TextView
-                            android:id="@+id/lb_local"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:enabled="false"
-                            android:layout_marginLeft="@dimen/pad_icon"
-                            android:text="@string/card_local_title"
-                            style="@style/TextTitleLight" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/card_local_subtitle"
-                            android:layout_marginLeft="@dimen/pad_icon"
-                            style="@style/TextCaptionLight" />
-
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/card_button_reset"
-                        android:id="@+id/buttonResetStats"
-                        android:background="?reset_button_background"
-                        style="@style/TextButtonLight"
-                        android:paddingRight="@dimen/flat_button_long_padding"
-                        android:paddingTop="@dimen/card_external_padding"
-                        android:paddingBottom="@dimen/card_external_padding"
-                        android:paddingLeft="@dimen/card_external_padding"
-                        android:alpha="1"
-                        android:gravity="center_vertical" />
-
-
-                </LinearLayout>
+                android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:padding="@dimen/card_internal_padding">
+                    android:layout_marginLeft="@dimen/card_external_padding"
+                    android:layout_marginRight="@dimen/card_external_padding"
+                    android:visibility="visible"
+                    android:background="?cardBackground"
+                    android:layout_marginTop="@dimen/card_external_padding">
 
                     <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        >
+                        android:background="?background_primary_shaded"
+                        android:paddingLeft="@dimen/card_internal_padding"
+                        android:paddingStart="@dimen/card_internal_padding"
+                        android:paddingTop="@dimen/card_internal_padding"
+                        android:paddingBottom="@dimen/card_internal_padding"
+                        tools:ignore="RtlSymmetry">
+
+                        <ImageView
+                            android:layout_width="@dimen/header_icon_size"
+                            android:layout_height="@dimen/header_icon_size"
+                            android:src="@drawable/ic_local"
+                            android:contentDescription="@string/card_local_title" />
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent"
+                            android:gravity="center_vertical"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:id="@+id/lb_local"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:enabled="false"
+                                android:layout_marginLeft="@dimen/pad_icon"
+                                android:layout_marginStart="@dimen/pad_icon"
+                                android:text="@string/card_local_title"
+                                style="@style/TextTitleLight" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/card_local_subtitle"
+                                android:layout_marginLeft="@dimen/pad_icon"
+                                android:layout_marginStart="@dimen/pad_icon"
+                                style="@style/TextCaptionLight" />
+
+                        </LinearLayout>
 
                         <TextView
                             android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="@string/stat_collected_for"
-                            android:gravity="center_vertical"
-                            android:layout_weight="1"
-                            style="?cardText"
-                            />
+                            android:layout_height="wrap_content"
+                            android:text="@string/card_button_reset"
+                            android:id="@+id/buttonResetStats"
+                            android:background="?reset_button_background"
+                            style="@style/TextButtonLight"
+                            android:paddingRight="@dimen/flat_button_long_padding"
+                            android:paddingEnd="@dimen/flat_button_long_padding"
+                            android:paddingTop="@dimen/card_external_padding"
+                            android:paddingBottom="@dimen/card_external_padding"
+                            android:paddingLeft="@dimen/card_external_padding"
+                            android:paddingStart="@dimen/card_external_padding"
+                            android:alpha="1"
+                            android:gravity="center_vertical" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="@string/stat_loading"
-                            android:id="@+id/textRunningSince"
-                            android:gravity="center_vertical"
-                            style="?cardTextValues" />
 
                     </LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="@string/stat_wake_duration_allowed"
-                            android:gravity="center_vertical"
-                            android:layout_weight="1"
-                            style="?cardText" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="@string/stat_loading"
-                            android:id="@+id/textLocalWakeTimeAllowed"
-                            android:gravity="center_vertical"
-                            style="?cardTextValues" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="@string/stat_wake_duration_blocked"
-                            android:gravity="center_vertical"
-                            android:layout_weight="1"
-                            style="?cardText" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="@string/stat_loading"
-                            android:id="@+id/textLocalWakeTimeBlocked"
-                            android:gravity="center_vertical"
-                            style="?cardTextValues" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="@string/stat_wake_allowed"
-                            android:gravity="center_vertical"
-                            android:layout_weight="1"
-                            style="?cardText" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="@string/stat_loading"
-                            android:id="@+id/textLocalWakeAcquired"
-                            android:gravity="center_vertical"
-                            style="?cardTextValues" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="@string/stat_wake_blocked"
-                            android:gravity="center_vertical"
-                            android:layout_weight="1"
-                            style="?cardText" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="@string/stat_loading"
-                            android:id="@+id/textLocalWakeBlocked"
-                            android:gravity="center_vertical"
-                            style="?cardTextValues" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="@string/stat_alarm_allowed"
-                            android:gravity="center_vertical"
-                            android:layout_weight="1"
-                            style="?cardText" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="@string/stat_loading"
-                            android:id="@+id/textLocalAlarmsAcquired"
-                            android:gravity="center_vertical"
-                            style="?cardTextValues" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="@string/stat_alarm_blocked"
-                            android:gravity="center_vertical"
-                            android:layout_weight="1"
-                            style="?cardText" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="@string/stat_loading"
-                            android:id="@+id/textLocalAlarmsBlocked"
-                            android:gravity="center_vertical"
-                            style="?cardTextValues" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_marginLeft="@dimen/card_external_padding"
-                android:layout_marginRight="@dimen/card_external_padding"
-                android:background="?cardBackground"
-                android:layout_marginTop="@dimen/card_external_padding"
-                android:visibility="visible"
-                android:id="@+id/linearLayout">
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?background_primary_shaded"
-                    android:paddingLeft="@dimen/card_internal_padding"
-                    android:paddingTop="@dimen/card_internal_padding"
-                    android:paddingBottom="@dimen/card_internal_padding" >
-
-                    <ImageView
-                        android:layout_width="@dimen/header_icon_size"
-                        android:layout_height="@dimen/header_icon_size"
-                        android:src="@drawable/ic_global" />
 
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:gravity="center_vertical"
-                        android:layout_weight="1" >
-
-                        <TextView
-                            style="@style/TextTitleLight"
-                            android:id="@+id/textView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:enabled="false"
-                            android:layout_marginLeft="@dimen/pad_icon"
-                            android:text="@string/card_global_title" />
-
-                        <TextView
-                            style="@style/TextCaptionLight"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/card_global_subtitle"
-                            android:layout_marginLeft="@dimen/pad_icon" />
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:padding="@dimen/card_internal_padding" >
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content" >
-
-                        <TextView
-                            style="?cardText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="@string/stat_wake_duration_allowed"
-                            android:gravity="center_vertical"
-                            android:layout_weight="1" />
-
-                        <TextView
-                            style="?cardTextValues"
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="@string/stat_loading"
-                            android:id="@+id/textGlobalWakelockDurationAllowed"
-                            android:gravity="center_vertical" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content" >
-
-                        <TextView
-                            style="?cardText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="@string/stat_wake_duration_blocked"
-                            android:gravity="center_vertical"
-                            android:layout_weight="1" />
-
-                        <TextView
-                            style="?cardTextValues"
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="@string/stat_loading"
-                            android:id="@+id/textGlobalWakelockDurationBlocked"
-                            android:gravity="center_vertical" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content" >
-
-                        <TextView
-                            style="?cardText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="@string/stat_wake_allowed"
-                            android:gravity="center_vertical"
-                            android:layout_weight="1" />
-
-                        <TextView
-                            style="?cardTextValues"
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="@string/stat_loading"
-                            android:id="@+id/textGlobalWakelockAllowed"
-                            android:gravity="center_vertical" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content" >
-
-                        <TextView
-                            style="?cardText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="@string/stat_wake_blocked"
-                            android:gravity="center_vertical"
-                            android:layout_weight="1" />
-
-                        <TextView
-                            style="?cardTextValues"
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="@string/stat_loading"
-                            android:id="@+id/textGlobalWakelockBlocked"
-                            android:gravity="center_vertical" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content" >
-
-                        <TextView
-                            style="?cardText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="@string/stat_alarm_allowed"
-                            android:gravity="center_vertical"
-                            android:layout_weight="1" />
-
-                        <TextView
-                            style="?cardTextValues"
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="@string/stat_loading"
-                            android:id="@+id/textGlobalAlarmAllowed"
-                            android:gravity="center_vertical" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content" >
-
-                        <TextView
-                            style="?cardText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="@string/stat_alarm_blocked"
-                            android:gravity="center_vertical"
-                            android:layout_weight="1" />
-
-                        <TextView
-                            style="?cardTextValues"
-                            android:layout_width="wrap_content"
-                            android:layout_height="fill_parent"
-                            android:text="@string/stat_loading"
-                            android:id="@+id/textGlobalAlarmBlocked"
-                            android:gravity="center_vertical" />
-                    </LinearLayout>
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="?cardBackground"
-                android:layout_marginTop="@dimen/card_external_padding"
-                android:layout_marginRight="@dimen/card_external_padding"
-                android:layout_marginLeft="@dimen/card_external_padding"
-                android:layout_marginBottom="@dimen/card_external_padding">
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:showDividers="end"
-                    android:background="?background_primary_shaded"
-                    android:padding="@dimen/card_internal_padding">
-
-                    <ImageView
-                        android:layout_width="@dimen/header_icon_size"
-                        android:layout_height="@dimen/header_icon_size"
-                        android:src="@drawable/ic_gift" />
-
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:gravity="center_vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:enabled="false"
-                            android:layout_marginLeft="@dimen/pad_icon"
-                            android:text="@string/card_donate_title"
-                            style="@style/TextTitleLight" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/card_donate_subtitle"
-                            android:layout_marginLeft="@dimen/pad_icon"
-                            style="@style/TextCaptionLight" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <FrameLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent">
-
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:padding="@dimen/card_internal_padding"
-                        android:id="@+id/layoutDonate"
-                        android:visibility="visible">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/donate_text"
-                            style="?cardText"
-                            android:layout_marginBottom="@dimen/card_internal_padding" />
-
-                        <View style="@style/Divider"
-                            android:layout_marginBottom="@dimen/card_internal_padding" />
+                        android:padding="@dimen/card_internal_padding">
 
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/separator_pad"
-                            android:clickable="true"
-                            android:background="?android:attr/selectableItemBackground"
-                            android:id="@+id/buttonKarma1">
+                            >
 
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="fill_parent"
-                                android:text="@string/donate_1"
+                                android:text="@string/stat_collected_for"
+                                android:gravity="center_vertical"
                                 android:layout_weight="1"
                                 style="?cardText"
-                                android:gravity="center_vertical" />
+                                />
 
-                            <ImageView
-                                android:layout_width="@dimen/sub_icon_size"
-                                android:layout_height="@dimen/sub_icon_size"
-                                android:src="@drawable/ic_donate_1"
-                                android:layout_gravity="right"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:text="@string/stat_loading"
+                                android:id="@+id/textRunningSince"
+                                android:gravity="center_vertical"
+                                style="?cardTextValues" />
 
                         </LinearLayout>
 
@@ -556,25 +130,23 @@
                             android:orientation="horizontal"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/separator_pad"
-                            android:layout_marginBottom="@dimen/separator_pad"
-                            android:clickable="true"
-                            android:background="?android:attr/selectableItemBackground"
-                            android:id="@+id/buttonKarma5">
+                            >
 
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="fill_parent"
-                                android:text="@string/donate_5"
+                                android:text="@string/stat_wake_duration_allowed"
                                 android:gravity="center_vertical"
                                 android:layout_weight="1"
                                 style="?cardText" />
 
-                            <ImageView
-                                android:layout_width="@dimen/sub_icon_size"
-                                android:layout_height="@dimen/sub_icon_size"
-                                android:src="@drawable/ic_donate_5"
-                                android:layout_gravity="right"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:text="@string/stat_loading"
+                                android:id="@+id/textLocalWakeTimeAllowed"
+                                android:gravity="center_vertical"
+                                style="?cardTextValues" />
 
                         </LinearLayout>
 
@@ -582,26 +154,179 @@
                             android:orientation="horizontal"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/separator_pad"
-                            android:layout_marginBottom="@dimen/separator_pad"
-                            android:clickable="true"
-                            android:background="?android:attr/selectableItemBackground"
-                            android:id="@+id/buttonKarma10">
+                            >
 
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="fill_parent"
-                                android:text="@string/donate_10"
+                                android:text="@string/stat_wake_duration_blocked"
                                 android:gravity="center_vertical"
                                 android:layout_weight="1"
                                 style="?cardText" />
 
-                            <ImageView
-                                android:layout_width="@dimen/sub_icon_size"
-                                android:layout_height="@dimen/sub_icon_size"
-                                android:src="@drawable/ic_donate_10"
-                                android:layout_gravity="right"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:text="@string/stat_loading"
+                                android:id="@+id/textLocalWakeTimeBlocked"
+                                android:gravity="center_vertical"
+                                style="?cardTextValues" />
 
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            >
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="fill_parent"
+                                android:text="@string/stat_wake_allowed"
+                                android:gravity="center_vertical"
+                                android:layout_weight="1"
+                                style="?cardText" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:text="@string/stat_loading"
+                                android:id="@+id/textLocalWakeAcquired"
+                                android:gravity="center_vertical"
+                                style="?cardTextValues" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            >
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="fill_parent"
+                                android:text="@string/stat_wake_blocked"
+                                android:gravity="center_vertical"
+                                android:layout_weight="1"
+                                style="?cardText" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:text="@string/stat_loading"
+                                android:id="@+id/textLocalWakeBlocked"
+                                android:gravity="center_vertical"
+                                style="?cardTextValues" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            >
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="fill_parent"
+                                android:text="@string/stat_alarm_allowed"
+                                android:gravity="center_vertical"
+                                android:layout_weight="1"
+                                style="?cardText" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:text="@string/stat_loading"
+                                android:id="@+id/textLocalAlarmsAcquired"
+                                android:gravity="center_vertical"
+                                style="?cardTextValues" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            >
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="fill_parent"
+                                android:text="@string/stat_alarm_blocked"
+                                android:gravity="center_vertical"
+                                android:layout_weight="1"
+                                style="?cardText" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:text="@string/stat_loading"
+                                android:id="@+id/textLocalAlarmsBlocked"
+                                android:gravity="center_vertical"
+                                style="?cardTextValues" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="@dimen/card_external_padding"
+                    android:layout_marginRight="@dimen/card_external_padding"
+                    android:background="?cardBackground"
+                    android:layout_marginTop="@dimen/card_external_padding"
+                    android:visibility="visible"
+                    android:id="@+id/linearLayout">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?background_primary_shaded"
+                        android:paddingLeft="@dimen/card_internal_padding"
+                        android:paddingStart="@dimen/card_internal_padding"
+                        android:paddingRight="@dimen/card_internal_padding"
+                        android:paddingEnd="@dimen/card_internal_padding"
+                        android:paddingTop="@dimen/card_internal_padding"
+                        android:paddingBottom="@dimen/card_internal_padding" >
+
+                        <ImageView
+                            android:layout_width="@dimen/header_icon_size"
+                            android:layout_height="@dimen/header_icon_size"
+                            android:src="@drawable/ic_global"
+                            android:contentDescription="@string/card_global_title" />
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent"
+                            android:gravity="center_vertical"
+                            android:layout_weight="1" >
+
+                            <TextView
+                                style="@style/TextTitleLight"
+                                android:id="@+id/textView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:enabled="false"
+                                android:layout_marginLeft="@dimen/pad_icon"
+                                android:layout_marginStart="@dimen/pad_icon"
+                                android:text="@string/card_global_title" />
+
+                            <TextView
+                                style="@style/TextCaptionLight"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/card_global_subtitle"
+                                android:layout_marginLeft="@dimen/pad_icon"
+                                android:layout_marginStart="@dimen/pad_icon" />
                         </LinearLayout>
 
                     </LinearLayout>
@@ -609,43 +334,215 @@
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:padding="@dimen/card_internal_padding" >
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content" >
+
+                            <TextView
+                                style="?cardText"
+                                android:layout_width="0dp"
+                                android:layout_height="fill_parent"
+                                android:text="@string/stat_wake_duration_allowed"
+                                android:gravity="center_vertical"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                style="?cardTextValues"
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:text="@string/stat_loading"
+                                android:id="@+id/textGlobalWakelockDurationAllowed"
+                                android:gravity="center_vertical" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content" >
+
+                            <TextView
+                                style="?cardText"
+                                android:layout_width="0dp"
+                                android:layout_height="fill_parent"
+                                android:text="@string/stat_wake_duration_blocked"
+                                android:gravity="center_vertical"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                style="?cardTextValues"
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:text="@string/stat_loading"
+                                android:id="@+id/textGlobalWakelockDurationBlocked"
+                                android:gravity="center_vertical" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content" >
+
+                            <TextView
+                                style="?cardText"
+                                android:layout_width="0dp"
+                                android:layout_height="fill_parent"
+                                android:text="@string/stat_wake_allowed"
+                                android:gravity="center_vertical"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                style="?cardTextValues"
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:text="@string/stat_loading"
+                                android:id="@+id/textGlobalWakelockAllowed"
+                                android:gravity="center_vertical" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content" >
+
+                            <TextView
+                                style="?cardText"
+                                android:layout_width="0dp"
+                                android:layout_height="fill_parent"
+                                android:text="@string/stat_wake_blocked"
+                                android:gravity="center_vertical"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                style="?cardTextValues"
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:text="@string/stat_loading"
+                                android:id="@+id/textGlobalWakelockBlocked"
+                                android:gravity="center_vertical" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content" >
+
+                            <TextView
+                                style="?cardText"
+                                android:layout_width="0dp"
+                                android:layout_height="fill_parent"
+                                android:text="@string/stat_alarm_allowed"
+                                android:gravity="center_vertical"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                style="?cardTextValues"
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:text="@string/stat_loading"
+                                android:id="@+id/textGlobalAlarmAllowed"
+                                android:gravity="center_vertical" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content" >
+
+                            <TextView
+                                style="?cardText"
+                                android:layout_width="0dp"
+                                android:layout_height="fill_parent"
+                                android:text="@string/stat_alarm_blocked"
+                                android:gravity="center_vertical"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                style="?cardTextValues"
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:text="@string/stat_loading"
+                                android:id="@+id/textGlobalAlarmBlocked"
+                                android:gravity="center_vertical" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="?cardBackground"
+                    android:layout_marginTop="@dimen/card_external_padding"
+                    android:layout_marginRight="@dimen/card_external_padding"
+                    android:layout_marginLeft="@dimen/card_external_padding"
+                    android:layout_marginBottom="@dimen/card_external_padding">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/layoutDonateAgain"
-                        android:padding="@dimen/card_internal_padding"
-                        android:visibility="gone">
+                        android:showDividers="end"
+                        android:background="?background_primary_shaded"
+                        android:padding="@dimen/card_internal_padding">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/donate_thank_you"
-                            style="?cardText" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/donate_more_button"
-                            android:id="@+id/buttonHelpFurther"
-                            android:gravity="center_horizontal"
-                            style="?cardTextValues"
-                            android:paddingTop="@dimen/card_internal_padding"
-                            android:paddingBottom="@dimen/card_internal_padding" />
+                        <ImageView
+                            android:layout_width="@dimen/header_icon_size"
+                            android:layout_height="@dimen/header_icon_size"
+                            android:src="@drawable/ic_gift"
+                            android:contentDescription="@string/card_donate_title" />
 
                         <LinearLayout
                             android:orientation="vertical"
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
-                            android:id="@+id/layoutExpandedDonateAgain"
-                            android:visibility="gone">
+                            android:gravity="center_vertical">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/donate_more_text"
+                                android:enabled="false"
+                                android:layout_marginLeft="@dimen/pad_icon"
+                                android:layout_marginStart="@dimen/pad_icon"
+                                android:text="@string/card_donate_title"
+                                style="@style/TextTitleLight" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/card_donate_subtitle"
+                                android:layout_marginLeft="@dimen/pad_icon"
+                                android:layout_marginStart="@dimen/pad_icon"
+                                style="@style/TextCaptionLight" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <FrameLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent">
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:padding="@dimen/card_internal_padding"
+                            android:id="@+id/layoutDonate"
+                            android:visibility="visible">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/donate_text"
                                 style="?cardText"
-                                android:paddingBottom="@dimen/card_external_padding" />
+                                android:layout_marginBottom="@dimen/card_internal_padding" />
 
                             <View style="@style/Divider"
-                                android:layout_marginBottom="@dimen/card_external_padding" />
+                                android:layout_marginBottom="@dimen/card_internal_padding" />
 
                             <LinearLayout
                                 android:orientation="horizontal"
@@ -654,10 +551,10 @@
                                 android:layout_marginBottom="@dimen/separator_pad"
                                 android:clickable="true"
                                 android:background="?android:attr/selectableItemBackground"
-                                android:id="@+id/buttonKarma1Again">
+                                android:id="@+id/buttonKarma1">
 
                                 <TextView
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="0dp"
                                     android:layout_height="fill_parent"
                                     android:text="@string/donate_1"
                                     android:layout_weight="1"
@@ -668,7 +565,8 @@
                                     android:layout_width="@dimen/sub_icon_size"
                                     android:layout_height="@dimen/sub_icon_size"
                                     android:src="@drawable/ic_donate_1"
-                                    android:layout_gravity="right"/>
+                                    android:layout_gravity="end"
+                                    android:contentDescription="@string/donate_1" />
 
                             </LinearLayout>
 
@@ -680,10 +578,10 @@
                                 android:layout_marginBottom="@dimen/separator_pad"
                                 android:clickable="true"
                                 android:background="?android:attr/selectableItemBackground"
-                                android:id="@+id/buttonKarma5Again">
+                                android:id="@+id/buttonKarma5">
 
                                 <TextView
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="0dp"
                                     android:layout_height="fill_parent"
                                     android:text="@string/donate_5"
                                     android:gravity="center_vertical"
@@ -694,7 +592,8 @@
                                     android:layout_width="@dimen/sub_icon_size"
                                     android:layout_height="@dimen/sub_icon_size"
                                     android:src="@drawable/ic_donate_5"
-                                    android:layout_gravity="right"/>
+                                    android:layout_gravity="end"
+                                    android:contentDescription="@string/donate_5" />
 
                             </LinearLayout>
 
@@ -706,10 +605,10 @@
                                 android:layout_marginBottom="@dimen/separator_pad"
                                 android:clickable="true"
                                 android:background="?android:attr/selectableItemBackground"
-                                android:id="@+id/buttonKarma10Again">
+                                android:id="@+id/buttonKarma10">
 
                                 <TextView
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="0dp"
                                     android:layout_height="fill_parent"
                                     android:text="@string/donate_10"
                                     android:gravity="center_vertical"
@@ -720,60 +619,360 @@
                                     android:layout_width="@dimen/sub_icon_size"
                                     android:layout_height="@dimen/sub_icon_size"
                                     android:src="@drawable/ic_donate_10"
-                                    android:layout_gravity="right"/>
+                                    android:layout_gravity="end"
+                                    android:contentDescription="@string/donate_10" />
 
                             </LinearLayout>
+
                         </LinearLayout>
 
-                    </LinearLayout>
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/layoutDonateAgain"
+                            android:padding="@dimen/card_internal_padding"
+                            android:visibility="gone">
 
-                </FrameLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/donate_thank_you"
+                                style="?cardText" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/donate_more_button"
+                                android:id="@+id/buttonHelpFurther"
+                                android:gravity="center_horizontal"
+                                style="?cardTextValues"
+                                android:paddingTop="@dimen/card_internal_padding"
+                                android:paddingBottom="@dimen/card_internal_padding" />
+
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:id="@+id/layoutExpandedDonateAgain"
+                                android:visibility="gone">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/donate_more_text"
+                                    style="?cardText"
+                                    android:paddingBottom="@dimen/card_external_padding" />
+
+                                <View style="@style/Divider"
+                                    android:layout_marginBottom="@dimen/card_external_padding" />
+
+                                <LinearLayout
+                                    android:orientation="horizontal"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="@dimen/separator_pad"
+                                    android:clickable="true"
+                                    android:background="?android:attr/selectableItemBackground"
+                                    android:id="@+id/buttonKarma1Again">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="fill_parent"
+                                        android:text="@string/donate_1"
+                                        android:layout_weight="1"
+                                        style="?cardText"
+                                        android:gravity="center_vertical" />
+
+                                    <ImageView
+                                        android:layout_width="@dimen/sub_icon_size"
+                                        android:layout_height="@dimen/sub_icon_size"
+                                        android:src="@drawable/ic_donate_1"
+                                        android:layout_gravity="end"
+                                        android:contentDescription="@string/donate_1" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:orientation="horizontal"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/separator_pad"
+                                    android:layout_marginBottom="@dimen/separator_pad"
+                                    android:clickable="true"
+                                    android:background="?android:attr/selectableItemBackground"
+                                    android:id="@+id/buttonKarma5Again">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="fill_parent"
+                                        android:text="@string/donate_5"
+                                        android:gravity="center_vertical"
+                                        android:layout_weight="1"
+                                        style="?cardText" />
+
+                                    <ImageView
+                                        android:layout_width="@dimen/sub_icon_size"
+                                        android:layout_height="@dimen/sub_icon_size"
+                                        android:src="@drawable/ic_donate_5"
+                                        android:layout_gravity="end"
+                                        android:contentDescription="@string/donate_5" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:orientation="horizontal"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/separator_pad"
+                                    android:layout_marginBottom="@dimen/separator_pad"
+                                    android:clickable="true"
+                                    android:background="?android:attr/selectableItemBackground"
+                                    android:id="@+id/buttonKarma10Again">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="fill_parent"
+                                        android:text="@string/donate_10"
+                                        android:gravity="center_vertical"
+                                        android:layout_weight="1"
+                                        style="?cardText" />
+
+                                    <ImageView
+                                        android:layout_width="@dimen/sub_icon_size"
+                                        android:layout_height="@dimen/sub_icon_size"
+                                        android:src="@drawable/ic_donate_10"
+                                        android:layout_gravity="end"
+                                        android:contentDescription="@string/donate_10" />
+
+                                </LinearLayout>
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </FrameLayout>
+
+                </LinearLayout>
 
             </LinearLayout>
+        </ScrollView>
 
-        </LinearLayout>
-    </ScrollView>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/imageBlur"
+            android:background="#000000"
+            android:alpha="0"
+            android:visibility="gone"
+            android:focusable="true"
+            android:clickable="true" />
+    </FrameLayout>
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@color/background_three"
+        android:background="@color/background_three_shaded"
         android:visibility="gone"
         android:id="@+id/banner"
-        android:layout_marginTop="80sp">
+        android:gravity="bottom"
+        android:measureWithLargestChild="false"
+        android:layout_gravity="center_vertical">
 
-        <LinearLayout
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/bannerSwitcher"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/welcomeDetection"
+                android:visibility="visible">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/welcome_banner_welcome"
+                    style="@style/TextTitleLight"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/card_internal_padding" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/welcome_banner_title"
+                    style="@style/TextBody1Light"
+                    android:textStyle="bold"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/card_external_padding"
+                    android:layout_marginBottom="@dimen/card_internal_padding" />
+
+                <FrameLayout
+                    android:layout_width="85sp"
+                    android:layout_height="85sp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/card_internal_padding"
+                    android:layout_marginTop="@dimen/card_internal_padding"
+                    android:clipChildren="false">
+
+                    <ImageView
+                        android:layout_width="80sp"
+                        android:layout_height="80sp"
+                        android:src="@drawable/ic_welcome"
+                        android:layout_gravity="center"
+                        android:visibility="visible" />
+
+                    <ProgressBar
+                    android:id="@+id/progressDetect"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="80sp"
+                    android:layout_height="80sp"
+                    android:indeterminate="false"
+                    android:max="100"
+                    android:progress="20"
+                    android:progressDrawable="@drawable/progress_ring"
+                    android:visibility="visible"
+                    android:layout_gravity="center"
+                    android:focusableInTouchMode="false" />
+
+
+                </FrameLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/welcome_banner_checking_service"
+                    style="@style/TextTitleLight"
+                    android:id="@+id/welcomeStepText"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/card_internal_padding"
+                    android:layout_marginLeft="@dimen/card_internal_padding"
+                    android:layout_marginRight="@dimen/card_internal_padding" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/welcomeProblem"
+                android:padding="@dimen/card_internal_padding"
+                android:alpha="1"
+                android:visibility="invisible">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textWelcomeProblemDescription"
+                    style="@style/TextTitleLight"
+                    android:text="It looks like your device isn't rooted.  Unfortunately, Unbounce requires a rooted device to function.  For more information on rooting your device, check here, on howtoroot.com"
+                    android:linksClickable="true"
+                    android:visibility="visible" />
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/welcomeFrameworkDownload"
+                    android:visibility="gone">
+
+                    <ProgressBar
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginBottom="@dimen/card_external_padding"
+                        android:id="@+id/progressDownloadXposed"
+                        android:progressDrawable="@drawable/progress_download"
+                        android:layout_marginTop="@dimen/card_internal_padding" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/welcome_download_status"
+                        android:text="@string/welcome_downloading_xposed"
+                        style="@style/TextBody1Light" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <RelativeLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/welcome_banner_title"
-                style="@style/TextTitleLight"
-                android:padding="@dimen/card_internal_padding"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="X"
-                android:id="@+id/textviewCloseBanner"
-                style="@style/TextTitleLight"
-                android:layout_weight="1"
-                android:gravity="center_vertical|right"
-                android:layout_marginRight="@dimen/card_internal_padding"
-                android:clickable="true" />
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/welcome_banner_text"
             android:layout_margin="@dimen/card_internal_padding"
-            style="@style/TextTitleLight" />
+            android:gravity="bottom"
+            android:id="@+id/welcomeButtonContainer"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:id="@+id/buttonWelcomeExit"
+                android:clickable="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:visibility="gone"
+                android:gravity="bottom|left"
+                android:layout_alignParentBottom="false">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_action_cancel"
+                    android:visibility="visible"
+                    android:clickable="false"
+                    android:layout_gravity="center_vertical" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/buttonTextWelcomeExit"
+                    style="@style/TextTitleLight"
+                    android:text="@string/welcome_banner_button_exit"
+                    android:layout_gravity="center_vertical" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:id="@+id/buttonWelcomeNext"
+                android:clickable="true"
+                android:gravity="bottom|right"
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentTop="true"
+                android:visibility="gone"
+                android:layout_alignParentBottom="false"
+                android:layout_alignParentRight="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/buttonTextWelcomeNext"
+                    style="@style/TextTitleLight"
+                    android:text="@string/welcome_banner_button_next"
+                    android:layout_gravity="center_vertical" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_action_forward"
+                    android:visibility="visible"
+                    android:clickable="false"
+                    android:layout_gravity="center_vertical" />
+            </LinearLayout>
+        </RelativeLayout>
+
 
     </LinearLayout>
 

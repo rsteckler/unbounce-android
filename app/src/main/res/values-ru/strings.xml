@@ -1,125 +1,152 @@
-
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+<string name="app_name">"Unbounce"</string>
+<string name="version">"Версия"</string>
+<string name="title_activity_material_settings">"Unbounce"</string>
+<string name="title_home">"Сведения"</string>
+<string name="title_wakelocks">"Пробуждения"</string>
+<string name="title_alarms">"События"</string>
+<string name="navigation_drawer_open">"Открыть меню навигации"</string>
+<string name="navigation_drawer_close">"Закрыть меню навигации"</string>
+<string name="action_search">"Поиск"</string>
+<string name="action_sort_by_count">"Сортировать по количеству"</string>
+<string name="action_sort_by_time">"Сортировать по длительности"</string>
+<string name="action_settings">"Настройки"</string>
+<string name="action_reset_stats">"Сбросить статистику"</string>
+<string name="card_donate_title">"КАРМА"</string>
+<string name="card_donate_subtitle">"Поддержите разработчика сего модуля"</string>
+<string name="card_global_title">"ГЛОБАЛЬНАЯ СТАТИСТИКА"</string>
+<string name="card_global_subtitle">"Наши всемирные результаты"</string>
+<string name="card_local_title">"СТАТИСТИКА УСТРОЙСТВА"</string>
+<string name="card_local_subtitle">"Ваши результаты"</string>
+<string name="card_settings_title">"НАСТРОЙКИ"</string>
+<string name="card_settings_subtitle_alarm">"Сдерживать это событие"</string>
+<string name="card_settings_subtitle_wakelock">"Сдерживать это пробуждение"</string>
+<string name="card_description_title">"ОПИСАНИЕ"</string>
+<string name="card_description_subtitle">"Почему оно ест мою батарею?"</string>
+<string name="category_unbounced">"Усмирённые"</string>
+<string name="category_safe">"Безвредно усмиряемые"</string>
+<string name="category_unknown">"Неизвестные"</string>
+<string name="category_not_safe">"Нежелательны для усмирения"</string>
+<string name="category_error">"Ошибка"</string>
+<string name="alert_noiab_title">"Оплата возможности недоступна"</string>
+<string name="alert_noiab_content">"Ваше устройство не поддерживает покупки внутри приложений.  Вы не сможете приобрести платные возможности Unbounce.  Скорее всего это связано с тем, что у Вас устарели Сервисы Google Play, или Вы живёте в стране, где покупки внутри приложений недоступны."</string>
+<string name="dialog_ok">"OK"</string>
+<string name="tasker_on">"Вкл"</string>
+<string name="tasker_off">"Выкл"</string>
+<string name="tasker_reset_stats">"Сбросить статистику"</string>
+<string name="tasker_choose_wakelock">"Выберите пробуждение для настройки."</string>
+<string name="tasker_choose_alarm">"Выберите событие для настройки."</string>
+<string name="tasker_welcome">"Добро пожаловать в плагин Unbounce для Tasker."</string>
+<string name="tasker_which_task">"Изменить настройки для пробуждения или события, или сбросить статистику устройства?"</string>
+<string name="tasker_task_wakelock">"НАСТРОИТЬ ПРОБУЖДЕНИЕ"</string>
+<string name="tasker_task_alarm">"НАСТРОИТЬ СОБЫТИЕ"</string>
+<string name="tasker_task_reset">"СБРОС СТАТИСТИКИ"</string>
+<string name="alert_nopro_title">"Это платная функция"</string>
+<string name="alert_nopro_content">"Для усмирения необычных пробуждений и событий, требуется внести пожертвование внутри приложения."</string>
+<string name="alert_unknown_alarm_title">"Усмирить неизвестное событие?"</string>
+<string name="alert_unknown_alarm_content">"Последствия усмирения данного события неизвестны.  Вы уверены в своих действиях?"</string>
+<string name="dialog_unbounce">"УСМИРИТЬ"</string>
+<string name="dialog_cancel">"ОТМЕНА"</string>
+<string name="tasker_choose_settings">"Выберите настройки."</string>
+<string name="alert_unknown_wakelock_title">"Усмирить неизвестное пробуждение?"</string>
+<string name="alert_unknown_wakelock_content">"Последствия усмирения данного пробуждения неизвестны.  Вы уверены в своих действиях?"</string>
+<string name="dialog_delete">"УДАЛИТЬ"</string>
+<string name="alert_delete_stats_title">"Очистить статистику?"</string>
+<string name="alert_delete_stats_content">"Статистика обо всех событиях и пробуждениях будет очищена!"</string>
+<string name="title_settings">"Настройки"</string>
+<string name="alert_reset_settings_title">"Сбросить настройки по умолчанию?"</string>
+<string name="alert_reset_settings_content">"Будут сброшены параметры для всех событий и пробуждений!!"</string>
+<string name="dialog_reset">"СБРОСИТЬ"</string>
+<string name="reset_settings_confirmation">"Настройки приведены в изначальное состояние."</string>
+<string name="dialog_save">"СОХРАНИТЬ"</string>
+<string name="desc_unknown">"Информация об этом процессе пока отсутствует. Усмирение может пагубно сказаться на работе устройства.  Продолжайте только если знаете его предназначения и как отключить Xposed при запуске системы.  Мы упорно работаем над сбором сведений о каждом событии или пробуждении.  Пожалуйста, будьте терпеливы и дождитесь появления информации."</string>
+<string name="desc_nlpwakelock">"NlpWakeLock усмиряется без вреда системе и используется Сервисами Google Play для определения Вашего местоположения с помощью мобильной сети и WiFi.  Как только расположение будет определено, процесс предоставит его различным приложениям, например Google Now, чтобы те имели доступ к нему без использования GPS или других средств.  Рекомендуемые параметры - от 180 до 600 секунд."</string>
+<string name="desc_nlpcollectorwakelock">"NlpCollectorWakeLock усмиряется без вреда системе и используется Сервисами Google Play для определения Вашего местоположения с помощью мобильной сети и WiFi.  Как только расположение будет определено, процесс отправит его непосредственно в Google, дабы те расширили их базу данных о нахождении точек доступа WiFi.  Рекомендуемые параметры - от 180 до 600 секунд."</string>
+<string name="desc_alarmmanager">"Предоставляет доступ системным службам. Потревожив устройство, направленная системе задача автоматически запустит целевое приложение, если оно уже не запущено. Случившиеся события запоминаются в то время как устройство спит (и могут пробудить его, если отключатся за этот промежуток времени), но будут сброшены при его отключении или перезагрузке."</string>
+<string name="desc_audiooffload">"Воспроизводит аудио при выключенном экране.  Вы не услышите фоновых уведомлений или музыки при выключенном экране, если отключите процесс."</string>
+<string name="desc_activitymanagerlauncher">"Взаимодействует со всеми задачами, выполняемыми в системе. Если усмирите этот процесс - сломаете всё, что можно."</string>
+<string name="desc_windowmanager">"Это пробуждение системного уровня.  Интерфейс, используемый приложениями для общения с менеджером окон, соответственно приложения будут обращаться к нему каждый раз, при необходимости их появления на экране."</string>
+<string name="desc_rilj">"RILJ держит устройство пробуждённым во время телефонных звонков и действий, связанных с сетью."</string>
+<string name="desc_syncloopwakelock">"Это пробуждение SyncManager'а Android для синхронизации аккаунтов наподобии Google+, Twitter, Linkedin, Gmail итд. Чем значительнее усмирение, тем дольше интервал между последующими синхронизациями Ваших аккаунтов."</string>
+<string name="desc_icing">"ICING это пробуждение, связанное с Сервисами Google Play.  Поведение на данный момент не изучено."</string>
+<string name="desc_startingalertservice">"Данное пробуждение обычно связано с работой Календаря, возможно его задействование и другими приложениями, например мессенджерами. Если Ваш календарь присылает Вам уведомления, он может быть причиной этого пробуждения."</string>
+<string name="desc_audiomix">"Данный процесс накладывает звуки касаний и уведомлений поверх прочих. Затрагивает некоторые устройства даже с отключенным звуком при касаниях."</string>
+<string name="desc_locationmanagerservice">"Название говорит за себя. Ест батарею не так уж и страшно, но для некоторых является причиной долгих пробуждений."</string>
+<string name="desc_audioin">"Данный процесс заствляет устройство вести прослушку ради Поиска Google/Распознавания ключевых слов. О'кей Google"</string>
+<string name="desc_nfcservicemroutingwakelock">"Относящаяся к NFC служба распределения распознанных меток между подходящими приложениями."</string>
+<string name="desc_wakefulintentservicegcoreulrlocationreportingservice">"Используется Геоданными из нескольких источников Google для определения Вашего текущего нахождения."</string>
+<string name="desc_vzwgpslocationprovider">"Специализированная служба определения местонахождения от Verizon, используемая для сбора стастики по сотовым вышкам."</string>
+<string name="desc_hangouts_rtcs">"Google Hangouts. Если Вы это усмирите, Hangouts перестанет работать."</string>
+<string name="desc_gcm_conn">"Google Cloud Messaging. Отправляет маловесящие сообщения Вашим приложениям. Ответственно за отправку push-увидомлений на Ваш телефон, затрагивая все приложения."</string>
+<string name="desc_google_c2dm">"Cloud to Device Messaging (C2DM) это сервис для отправки разработчиками данных в их приложения на различных устройствах. Предоставляет механизм для серверов, позволяющий мобильным приложениям подхватывать обновление приложения или актуальные данные. Сервис C2DM учитывает все аспекты очерёдности сообщений и доставки для конкретных приложений и конкретных устройств. Устарел в 2012, однако до сих пор встречается в некоторых приложениях."</string>
+<string name="desc_timedeventqueue">"Это важная часть Android, которую лучше оставить в покое. Упорядочивает все входящие события."</string>
+<string name="desc_comgoogleandroidgmsnlpalarm_wakeup_locator">"Это событие усмиряется без вреда системе и используется Сервисами Google Play для определения Вашего местоположения с помощью мобильной сети и WiFi.  Как только расположение будет определено, процесс предоставит его различным приложениям, например Google Now, чтобы те имели доступ к нему без использования GPS или других средств.  Рекомендуемые параметры - от 180 до 600 секунд."</string>
+<string name="desc_comgoogleandroidgmsnlpalarm_wakeup_activity_detection">"Это событие усмиряется без вреда системе и используется Сервисами Google Play для определения Вашего местоположения с помощью мобильной сети и WiFi.  Как только расположение будет определено, процесс отправит его непосредственно в Google, дабы те расширили их базу данных о нахождении точек доступа WiFi.  Рекомендуемые параметры - от 180 до 600 секунд."</string>
+<string name="desc_comgoogleandroidappshangoutsupdate_notification">"Прослушиватель для обновления уведомлений от Google Hangouts."</string>
+<string name="desc_comandroidinternaltelephonydatastall">"Пробуждение от com.android.phone (звонилки) при передаче данных через сотовые вышки. Использование WiFi не затрагивает это событие. Как правило проявляется при использовании мобильного Интеренета, особенно при посредственном соединении."</string>
+<string name="settings_allow_every">"Разрешать каждые"</string>
+<string name="settings_seconds">"секунд."</string>
+<string name="card_button_reset">"СБРОС"</string>
+<string name="stat_alarms_acquired">"Событий учтено"</string>
+<string name="stat_alarms_blocked">"Событий заблокировано"</string>
+<string name="stat_loading">"Загрузка..."</string>
+<string name="stat_collected_for">"Статистика собрана за"</string>
+<string name="stat_wake_duration_allowed">"Длительность допущ. пробужд."</string>
+<string name="stat_wake_duration_blocked">"Длительность блок. пробужд."</string>
+<string name="stat_wake_allowed">"Пробуждений учтено"</string>
+<string name="stat_wake_blocked">"Пробуждений заблокировано"</string>
+<string name="stat_alarm_allowed">"Событий отменено"</string>
+<string name="stat_alarm_blocked">"Событий заблокировано"</string>
+<string name="stat_disabled">"Отключена"</string>
+<string name="donate_text">"Данный модуль позволит исправить поедание батареи Сервисами нахождения локации по сети в любом случае.  Если Вам угодно заблокировать и другие события или пробуждения — поддержите проект, приобретя платные возможности ниже.  Любая сумма пожертвования откроет платные функции."</string>
+<string name="donate_1">"Чашка кофе на написание кода"</string>
+<string name="donate_5">"Латте для тех. поддержки на форуме"</string>
+<string name="donate_10">"Удовольствие от неношения подзарядчика"</string>
+<string name="donate_thank_you">"Благодарю.  Для меня это ценно.  Я тружусь в свободное время над тем, чтобы продлить время от заряда к заряду.  Оплатив модуль, Вы продвинули проект, предали значимость и моей семье.  Вы бесподобны."</string>
+<string name="donate_more_button">"ЧЕМ Я МОГУ ПОМОЧЬ В ДАЛЬНЕЙШЕМ?"</string>
+<string name="donate_more_text">"Люди часто спрашивают, чем они могут помочь после начального пожертвования.  Кнопки ниже позволят Вам и дальше жертвовать деньги, но уже без предоставления дополнительных возможностей.  Огромное спасибо за поддержку Unbounce!"</string>
+<string name="welcome_banner_title">"Добро пожаловать!"</string>
 
-    <string name="app_name">Unbounce</string>
-    <string name="version">Версия</string>
-    <string name="title_activity_material_settings">Unbounce</string>
-    <string name="title_home">Сведения</string>
-    <string name="title_wakelocks">Пробуждения</string>
-    <string name="title_alarms">События</string>
-    <string name="navigation_drawer_open">Открыть меню навигации</string>
-    <string name="navigation_drawer_close">Закрыть меню навигации</string>
-    <string name="action_search">Найти</string>
-    <string name="action_sort_by_count">Сортировать по количеству</string>
-    <string name="action_sort_by_time">Сортировать по длительности</string>
-    <string name="action_settings">Настройки</string>
-    <string name="action_reset_stats">Сбросить статистику</string>
-    <string name="card_donate_title">КАРМА</string>
-    <string name="card_donate_subtitle">Поддержите разработчика сего модуля</string>
-    <string name="card_global_title">ГЛОБАЛЬНАЯ СТАТИСТИКА</string>
-    <string name="card_global_subtitle">Наши всемирные результаты</string>
-    <string name="card_local_title">СТАТИСТИКА УСТРОЙСТВА</string>
-    <string name="card_local_subtitle">Ваши результаты</string>
-    <string name="card_settings_title">ПАРАМЕТРЫ</string>
-    <string name="card_settings_subtitle_alarm">Сдерживать это событие</string>
-    <string name="card_settings_subtitle_wakelock">Сдерживать это пробуждение</string>
-    <string name="card_description_title">ОПИСАНИЕ</string>
-    <string name="card_description_subtitle">Что за нечто ест мою батарею?</string>
+<string name="settings_category_options">"Настройки"</string>
+<string name="settings_item_show_launcher">"Показывать иконку программы"</string>
+<string name="settings_item_choose_theme">"Выбрать тему"</string>
+<string name="settings_item_global_stats_title">"Участвовать в Глобальной Статистике"</string>
+<string name="settings_item_global_stats_summary">"Отсылать и заполучать анонимную статистику"</string>
+<string name="settings_item_reset_defaults_title">"Сброс на исходные"</string>
+<string name="settings_item_reset_defaults_summary">"Сбросить все настройки событий и пробуждений на исходные"</string>
+<string name="settings_item_author">"Автор: Раян Стеклер"</string>
+<string name="settings_item_logging_level">"Уровень журнализации"</string>
+<string name="settings_category_translation">"Переводчики"</string>
+<string name="settings_theme_material">"Материальная"</string>
+<string name="settings_theme_dark">"Тёмная"</string>
+<string name="settings_logging_quiet">"Светлая"</string>
+<string name="settings_logging_default">"По умолчанию"</string>
+<string name="settings_logging_verbose">"Подробный"</string>
+<string name="settings_item_force_english_title">"Принудительно Англ."</string>
+<string name="settings_item_force_english_summary">"Заместить выбранный в системе язык английским"</string>
+<string name="playstore_short_description">"Продлите жизнь батареи от одного заряда!"</string>
+<string name="playstore_long_description">"
+*** Требует наличия Root-прав ***
+Вот лишь несколько комментариев от реальных пользователей:
+Телефон проработал на 2 часа дольше, при этом я пользовался им дополнительные полчаса! Чуть не купил батарею за $25.
+Заплатил 5 баксов для поддержки этого шедевра.. Продолжайте в том же духе
+Просто замечательно!
+[Unbounce] сделал революцию в управлении пробуждениями
+Этот модуль прекрасен! Батарея не съедается и на процент во время сна! 
+...и многие другие.
 
-    <string name="category_unbounced">Усмирённые</string>
-    <string name="category_safe">Безвредно усмиряемые</string>
-    <string name="category_unknown">Неизвестные</string>
-    <string name="category_not_safe">Нежелательны для усмирения</string>
-    <string name="category_error">Ошибка</string>
+Unbounce позволяет контролировать потребеление заряда за счёт управления частотой и длительностью пробуждений. С лёгкостью продлите жизнь батареи, воспользовавшись рекомендуемыми парараметрами или углубитесь в настройку, изменив каждое пробуждение под себя.
+Особенности:
+- Прекрасный и современный внешний вид
+- Стабильная система блокирования
+- Комплексное измерение сохранённого и затраченного на пробуждения времени
+- Постоянно пополняющиеся описания событий и пробуждений на чистом русском (и на других языках в скором времени!)
+- Возможность усмирять любое пробуждение или событие за внесение пожертвования
+- Открытый исходный код, Вы можете сами оценить механизм приложения или собрать его сами
 
-    <string name="alert_noiab_title">Оплата возможности недоступна</string>
-    <string name="alert_noiab_content">Ваше устройство не поддерживает покупки внутри приложений.  Вы не сможете приобрести платные возможности Unbounce.  Скорее всего это связано с тем, что у Вас устарели Сервисы Google Play, или Вы живёте в стране, где покупки внутри приложений недоступны.</string>
-    <string name="dialog_ok">OK</string>
-    <string name="tasker_on">Вкл</string>
-    <string name="tasker_off">Выкл</string>
-    <string name="tasker_reset_stats">Сбросить статистику</string>
-    <string name="tasker_choose_wakelock">Выберите пробуждение для настройки.</string>
-    <string name="tasker_choose_alarm">Выберите событие для настройки.</string>
-    <string name="tasker_welcome">Добро пожаловать в плагин Unbounce\'а для Tasker\'а.</string>
-    <string name="tasker_which_task">Вы хотите изменить настройки для пробуждения или события, или же сбросить статистику устройства?</string>
-    <string name="tasker_task_wakelock">НАСТРОИТЬ ПРОБУЖДЕНИЕ</string>
-    <string name="tasker_task_alarm">НАСТРОИТЬ СОБЫТИЕ</string>
-    <string name="tasker_task_reset">СБРОС СТАТИСТИКИ</string>
-
-    <string name="alert_nopro_title">Это платная функция</string>
-    <string name="alert_nopro_content">Для усмирения необычных пробуждений и событий, требуется внести пожертвования внутри приложения.</string>
-    <string name="alert_unknown_alarm_title">Усмирить неизвестное событие?</string>
-    <string name="alert_unknown_alarm_content">Последствия усмирения данного события неизвестны.  Вы уверены в своих действиях?</string>
-    <string name="dialog_unbounce">УСМИРИТЬ</string>
-    <string name="dialog_cancel">ОТМЕНА</string>
-    <string name="tasker_choose_settings">Выберите нужную настройку.</string>
-    <string name="alert_unknown_wakelock_title">Усмирить неизвестное пробуждение?</string>
-    <string name="alert_unknown_wakelock_content">Последствия усмирения данного пробуждения неизвестны.  Вы уверены в своих действиях?</string>
-    <string name="dialog_delete">УДАЛИТЬ</string>
-    <string name="alert_delete_stats_title">Обнулить статистику?</string>
-    <string name="alert_delete_stats_content">Будут сброшены результаты для всех событий и пробуждений!</string>
-    <string name="title_settings">Настройки</string>
-    <string name="alert_reset_settings_title">Сбросить настройки?</string>
-    <string name="alert_reset_settings_content">Будут сброшены параметры для всех событий и пробуждений!!</string>
-    <string name="dialog_reset">СБРОСИТЬ</string>
-    <string name="reset_settings_confirmation">Настройки приведены в изначальное состояние.</string>
-    <string name="dialog_save">СОХРАНИТЬ</string>
-
-    <string name="desc_unknown">Информация об этом процессе пока отсутствует. Усмирение может пагубно сказаться на работе устройства.  Не трогайте процесс, если не знаете его предназначения и как отключить Xposed при запуске системы.  Мы упорно работаем над сбором сведений о каждом событии или пробуждении.  Пожалуйста, будьте терпеливы и дождитесь появления информации.</string>
-    <string name="desc_nlpwakelock">NlpWakeLock усмиряется без вреда системе и используется Сервисами Google Play для определения Вашего местоположения с помощью мобильной сети и WiFi.  Как только расположение будет определено, процесс предоставит его различным приложениям, например Google Now, чтобы те имели доступ к нему без использования GPS или других средств.  Рекомендуемые параметры - от 180 до 600 секунд.</string>
-    <string name="desc_nlpcollectorwakelock">NlpCollectorWakeLock усмиряется без вреда системе и используется Сервисами Google Play для определения Вашего местоположения с помощью мобильной сети и WiFi.  Как только расположение будет определено, процесс отправит его непосредственно в Google, дабы те расширили их базу данных о нахождении точек доступа WiFi.  Рекомендуемые параметры - от 180 до 600 секунд.</string>
-    <string name="desc_alarmmanager">Предоставляет доступ системным службам. Потревожив устройство, направленная системе задача автоматически запустит целевое приложение, если оно уже не запущено. Случившиеся события запоминаются в то время как устройство спит (и могут пробудить его, если отключатся за этот промежуток времени), но будут сброшены при его отключении или перезагрузке.</string>
-    <string name="desc_audiooffload">Воспроизводит аудио при выключенном экране.  Вы не услышите фоновых уведомлений или музыки при выключенном экране, если отключите процесс.</string>
-    <string name="desc_activitymanagerlauncher">Взаимодействует со всеми задачами, выполняемыми в системе. Если усмирите этот процесс - сломаете всё, что можно.</string>
-    <string name="desc_windowmanager">Это пробуждение системного уровня.  Интерфейс, используемый приложениями для общения с менеджером окон, соответственно приложения будут обращаться к нему каждый раз, при необходимости их появления на экране.</string>
-    <string name="desc_rilj">RILJ держит устройство пробуждённым во время телефонных звонков и действий, связанных с сетью.</string>
-    <string name="desc_syncloopwakelock">Это пробуждение SyncManager'а Android для синхронизации аккаунтов наподобии Google+, Twitter, Linkedin, Gmail итд. Чем значительнее усмирение, тем дольше интервал между последующими синхронизациями Ваших аккаунтов.</string>
-    <string name="desc_icing">ICING это пробуждение, связанное с Сервисами Google Play.  Поведение на данный момент не изучено.</string>
-    <string name="desc_startingalertservice">Данное пробуждение обычно связано с работой Календаря, возможно его задействование и другими приложениями, например мессенджерами. Если Ваш календарь присылает Вам уведомления, он может быть причиной этого пробуждения.</string>
-    <string name="desc_audiomix">Данное процесс накладывает звуки касаний и уведомлений поверх прочих. Затрагивает некоторые устройства даже с отключенным звуком при касаниях.</string>
-    <string name="desc_locationmanagerservice">Название говорит за себя. Ест батарею не так уж и страшно, но для некоторых является причиной долгих пробуждений.</string>
-    <string name="desc_audioin">Данный процесс заствляет устройство вести прослушку ради Поиска Google/Распознавания ключевых слов. "О'кей Google"</string>
-    <string name="desc_nfcservicemroutingwakelock">Относящаяся к NFC служба распределения распознанных меток между подходящими приложениями.</string>
-    <string name="desc_wakefulintentservicegcoreulrlocationreportingservice">Используется "Геоданными из нескольких источников" Google для определения Вашего текущего нахождения.</string>
-    <string name="desc_vzwgpslocationprovider">Специализированная служба определения местонахождения от Verizon, используемая для сбора стастики по сотовым вышкам.</string>
-    <string name="desc_hangouts_rtcs">Google Hangouts. Если Вы это усмирите, Hangouts перестанет работать.</string>
-    <string name="desc_gcm_conn">Google Cloud Messaging. Отправляет маловесящие сообщения Вашим приложениям. Ответственно за отправку push-увидомлений на Ваш телефон, затрагивая все приложения.</string>
-    <string name="desc_google_c2dm">Cloud to Device Messaging (C2DM) это сервис для отправки разработчиками данных в их приложения на различных устройствах. Предоставляет механизм для серверов, позволяющий мобильным приложениям подхватывать обновление приложения или актуальные данные. Сервис C2DM учитывает все аспекты очерёдности сообщений и доставки для конкретных приложений и конкретных устройств. Устарел в 2012, однако до сих пор встречается в некоторых приложениях.</string>
-    <string name="desc_timedeventqueue">Это важная часть Android'а, которую лучше оставить в покое. Упорядочивает все входящие события.</string>
-    <string name="desc_comgoogleandroidgmsnlpalarm_wakeup_locator">Это событие усмиряется без вреда системе и используется Сервисами Google Play для определения Вашего местоположения с помощью мобильной сети и WiFi.  Как только расположение будет определено, процесс предоставит его различным приложениям, например Google Now, чтобы те имели доступ к нему без использования GPS или других средств.  Рекомендуемые параметры - от 180 до 600 секунд.</string>
-    <string name="desc_comgoogleandroidgmsnlpalarm_wakeup_activity_detection">Это событие усмиряется без вреда системе и используется Сервисами Google Play для определения Вашего местоположения с помощью мобильной сети и WiFi.  Как только расположение будет определено, процесс отправит его непосредственно в Google, дабы те расширили их базу данных о нахождении точек доступа WiFi.  Рекомендуемые параметры - от 180 до 600 секунд.</string>
-    <string name="desc_comgoogleandroidappshangoutsupdate_notification">Прослушиватель для обновления уведомлений от Google Hangouts.</string>
-    <string name="desc_comandroidinternaltelephonydatastall">Пробуждение от com.android.phone (звонилки) при передаче данных через сотовые вышки. Использование WiFi не затрагивает это событие. Как правило проявляется при использовании мобильного Интеренета, особенно при посредственном соединении.</string>
-
-    <string name="settings_allow_every">Разрешать каждые</string>
-    <string name="settings_seconds">секунд.</string>
-    <string name="card_button_reset">СБРОС</string>
-
-    <string name="stat_alarms_acquired">Событий учтено</string>
-    <string name="stat_alarms_blocked">Событий заблокировано</string>
-    <string name="stat_loading">Загрузка...</string>
-    <string name="stat_collected_for">Статистика собрана за</string>
-    <string name="stat_wake_duration_allowed">Длительность допущ. пробужд.</string>
-    <string name="stat_wake_duration_blocked">Длительность блок. пробужд.</string>
-    <string name="stat_wake_allowed">Пробуждений учтено</string>
-    <string name="stat_wake_blocked">Пробуждений заблокировано</string>
-    <string name="stat_alarm_allowed">Событий отменено</string>
-    <string name="stat_alarm_blocked">Событий заблокировано</string>
-    <string name="stat_disabled">Отключена</string>
-    <string name="donate_text">Данный модуль позволит исправить поедание батареи Сервисами нахождения локации по сети в любом случае.  Если Вам угодно заблокировать и другие события или пробуждения — поддержите проект, приобретя платные возможности ниже.  Любая сумма пожертвования откроет платные функции.</string>
-    <string name="donate_1">Чашка кофе на написание кода</string>
-    <string name="donate_5">Латте для тех. поддержки на форуме</string>
-    <string name="donate_10">Удовольствие от неношения зарядки</string>
-    <string name="donate_thank_you">Благодарю.  Для меня это ценно.  Я тружусь в свободное время над тем, чтобы продлить время от заряда к заряду.  Оплатив модуль, Вы продвинули проект, предали значимость и моей семье.  Вы бесподобны.</string>
-    <string name="donate_more_button">ЧЕМ Я МОГУ ПОМОЧЬ В ДАЛЬНЕЙШЕМ?</string>
-    <string name="donate_more_text">Люди часто спрашивают, чем они могут помочь после начального пожертвования.  Кнопки ниже позволят Вам и дальше жертвовать деньги, но уже без предоставления дополнительных возможностей.  Огромное спасибо за поддержку Unbounce!</string>
-    <string name="welcome_banner_title">Добро пожаловать!</string>
-    <string name="welcome_banner_text">Теперь Вы можете блокировать пробуждения, чтобы предотвращать бодрствование телефона, и события, чтобы те не тревожили устройство.  Мы уже подготовили для Вас пару настроек, продлевающих жизнь батареи.</string>
-
-    <!--Don't translate this one  :)  -->
-    <string name="app_font_family">sans_serif</string>
-
-
+Покупки внутри приложений позволят разблокировать платные возможности, позволяющие управлять любыми событиями и пробуждениями на Вашем устройстве. Без пожертвования можно управлять основными пожирателями батареи: NlpWakelock, NlpCollectorWakeLock, ALARM_WAKEUP_LOCATOR, и ALARM_WAKE_ACTIVITY_DETECTION.
+Продлите жизнь батареи от одного заряда!
+    "</string>
 
 </resources>

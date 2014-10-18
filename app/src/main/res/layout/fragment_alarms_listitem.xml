@@ -19,7 +19,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="486,652"
+            android:text="@string/stat_loading"
             android:id="@+id/textViewAlarmCount"
             android:singleLine="false"
             android:visibility="visible"
@@ -38,14 +38,14 @@
 
     <TextView
         android:id="@+id/textviewAlarmName"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="NlpCollectorWakeLock"
+        android:text="@string/stat_loading"
         android:fontFamily="@string/app_font_family"
-        android:layout_weight="1"
         android:singleLine="true"
         style="?cardText"
         android:layout_marginLeft="@dimen/section_pad"
+        android:layout_marginStart="@dimen/section_pad"
         android:ellipsize="marquee" />
     </LinearLayout>
 </LinearLayout>

@@ -1,124 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+<string name="app_name">"Unbounce"</string>
+<string name="version">"Versão"</string>
+<string name="title_activity_material_settings">"Unbounce"</string>
+<string name="title_home">"Menu inicial"</string>
+<string name="title_wakelocks">"Wakelocks"</string>
+<string name="title_alarms">"Alarmes"</string>
+<string name="navigation_drawer_open">"Abrir menu"</string>
+<string name="navigation_drawer_close">"Fechar menu"</string>
+<string name="action_search">"Pesquisar"</string>
+<string name="action_sort_by_count">"Listar por nº"</string>
+<string name="action_sort_by_time">"Listar por tempo"</string>
+<string name="action_settings">"Definições"</string>
+<string name="action_reset_stats">"Reiniciar dados"</string>
+<string name="card_donate_title">"KARMA"</string>
+<string name="card_donate_subtitle">"Suportar o desenvolvedor"</string>
+<string name="card_global_title">"DADOS GLOBAIS"</string>
+<string name="card_global_subtitle">"Dados de todos os utilizadores"</string>
+<string name="card_local_title">"DADOS DO DISPOSITIVO "</string>
+<string name="card_local_subtitle">"Os teus dados"</string>
+<string name="card_settings_title">"DEFINIÇÕES"</string>
+<string name="card_settings_subtitle_alarm">"Controle este alarme"</string>
+<string name="card_settings_subtitle_wakelock">"Controle este wakelock"</string>
+<string name="card_description_title">"DESCRIÇÃO"</string>
+<string name="card_description_subtitle">"Porque é que isto consome a bateria?"</string>
+<string name="category_unbounced">"Unbounced"</string>
+<string name="category_safe">"seguro fazer Unbounce"</string>
+<string name="category_unknown">"Desconhecido"</string>
+<string name="category_not_safe">"NÃO é seguro Unbounce"</string>
+<string name="category_error">"Erro"</string>
+<string name="alert_noiab_title">"Funções Pro indisponíveis"</string>
+<string name="alert_noiab_content">"O teu dispositivo não suporta compras através da Aplicação.  Não podes comprar as funções Pro do Unbounce. Possíveis motivos: aplicação Google Play Store desactualizada / vives num país onde a Compra através da Aplicação está desactivada."</string>
+<string name="dialog_ok">"OK"</string>
+<string name="tasker_on">"On"</string>
+<string name="tasker_off">"Off"</string>
+<string name="tasker_reset_stats">"Reinicia dados"</string>
+<string name="tasker_choose_wakelock">"Escolhe o wakelock a ajustar."</string>
+<string name="tasker_choose_alarm">"Escolhe o alarme a ajustar."</string>
+<string name="tasker_welcome">"Benvindo ao Plugin Unbounce do Tasker."</string>
+<string name="tasker_which_task">"Queres alterar as definicoes de um Wakelock ou Alarm, ou queres reiniciar a contagem do teu do teu dispositivo?"</string>
+<string name="tasker_task_wakelock">"MUDAR WAKELOCK"</string>
+<string name="tasker_task_alarm">"MUDAR ALARME"</string>
+<string name="tasker_task_reset">"RESET STATS"</string>
+<string name="alert_nopro_title">"Opção da versão Pro"</string>
+<string name="alert_nopro_content">"Para Unbounce qualquer wakelocks ou alarme, tens que comprar a versão Pro."</string>
+<string name="alert_unknown_alarm_title">"Unbounce alames desconhecidos?"</string>
+<string name="alert_unknown_alarm_content">"Não está provado que é seguro Unbounce este alarme.  Mesmo assim queres fazer Unbounce?"</string>
+<string name="dialog_unbounce">"UNBOUNCE"</string>
+<string name="dialog_cancel">"CANCELAR"</string>
+<string name="tasker_choose_settings">"Escolhe as definicoes que queres."</string>
+<string name="alert_unknown_wakelock_title">"Unbounce um wakelock desconhecido?"</string>
+<string name="alert_unknown_wakelock_content">"Não está provado que é seguro Unbounce este wakelock.  Mesmo assim queres fazer Unbounce?"</string>
+<string name="dialog_delete">"APAGAR"</string>
+<string name="alert_delete_stats_title">"Apagar todos os dados?"</string>
+<string name="alert_delete_stats_content">"Isto vai apagar toda a estatística dos wakelocks e alarmes!"</string>
+<string name="title_settings">"Definições"</string>
+<string name="alert_reset_settings_title">"Voltar às configurações iniciais?"</string>
+<string name="alert_reset_settings_content">"Isto vai apagar todas as tuas definições dos alarmes e wakelocks!"</string>
+<string name="dialog_reset">"APAGAR"</string>
+<string name="reset_settings_confirmation">"Definições voltaram à versão inicial."</string>
+<string name="dialog_save">"SALVAR"</string>
+<string name="desc_unknown">"Ainda nao temos nenhuma informação sobre este evento.  Pode não ser seguro fazer Unbounce.  Muda só se souberes o que estás a fazer e se souberes desactivar o Xposed durante o iniciar do dispositivo. Estamo-nos a esforçar para recolher informação sobre a todos os wakelocks e alarmes.  Por favor aguarda pacientemente."</string>
+<string name="desc_nlpwakelock">"NlpWakeLock é seguro fazer unbounce.  É usado pelo Google Play Services para determinar a tua localização aproximada através das torres de transmissão de sinal e de WiFi.  Uma vez que a tua localização  está definida, é guardada localmente para que outras aplicações, como o Google Now, possam  aceder à tua localização sem ter que usar o GPS ou terem de voltar a procurar.  Definições recomendadas, valores entre: 180 e 600 segundos."</string>
+<string name="desc_nlpcollectorwakelock">"NlpCollectorWakeLock é seguro fazer unbounce.  É usado pelo Google Play Services para determinar a tua localização aproximada através das torres de transmissão de sinal e de WiFi.  Uma vez que a tua localizacao  está definida, esta informação é enviada para o Google para que eles possam estender a sua base de dados de localizações WiFi.  Definições recomendadas, valores entre: 180 e 600 segundos."</string>
+<string name="desc_alarmmanager">"Isto garante acesso ao serviço de alarmes do sistema. Quando um alarme é activado, esta acção é emitida pelo sistema iniciando a aplicação alvo se esta estiver desactivada.Alarmes registados são retidos enquanto o dispositivo está a dormir (mas podem acordar o dispositivo se forem activados durante este período), no entanto são apagados se reiniciar o dispositivo."</string>
+<string name="desc_audiooffload">"Reprodução de audio quando o ecrã está desligado.  Se desactivares isto poderás não ter audio se a aplicação estiver em 2º plano ou reproduzir musicas quando o ecrã estiver desligado."</string>
+<string name="desc_activitymanagerlauncher">"Interage com a generalidade das actividades do sistema. Se fizeres Unbounce a isto, nada irá funcionar bem."</string>
+<string name="desc_windowmanager">"Isto é um wakelock do sistema Android.  O interface das aplicações costumam comunicar com a janela de  administração - isto significa que as aplicações irão precisar de adquirir uma Janela de Administração todas as vezes que precisem de aparecer no ecrã."</string>
+<string name="desc_rilj">"RILJ mantém o teu dispositivo acordado enquanto processa acções relacionadas com o telefone, como chamadas e a comunicação com as torres emissoras de sinal."</string>
+<string name="desc_syncloopwakelock">"Este é um WakeLock usado por Android SyncManager para sincronizar contas como Google+, Twitter, Linkedin, Gmail etc. Quanto maior o valor de unbounce, maior o tempo entre sincronizações."</string>
+<string name="desc_icing">"ICING é um wakelock dos Serviços Google. À procura de mais informação detalhada."</string>
+<string name="desc_startingalertservice">"Este WakeLock está normalmente associado com o Calendário, apesar de poder afectar outras aplicações como as mensagens. Se o Calendário tiver notificações este Wakelock pode ser accionado."</string>
+<string name="desc_audiomix">"Este WakeLock é responsável pelos barulhos de Toque no Ecrã e alarmes. Mesmo quando os sons de Toque de Ecrã estão desactivados este wakelock aparece em alguns dispositivos."</string>
+<string name="desc_locationmanagerservice">"Este não costuma ser responsável por gastar muita bateria, para alguns dispositivos pode disparar demasiadas vezes."</string>
+<string name="desc_audioin">"Este wakelock é usado para manter o dispositivo acordados enquanto fica a ouvir pelo comando \"Okay Google\" que acciona o serviço Google Search."</string>
+<string name="desc_nfcservicemroutingwakelock">"Relacionado com o serviço NFC que determina as etiquetas apropriadas para cada aplicação."</string>
+<string name="desc_wakefulintentservicegcoreulrlocationreportingservice">"Usado pelo Google Location Services para reportar a tua localização actual."</string>
+<string name="desc_vzwgpslocationprovider">"Serviço de estatística da Verizon para localizar as torres emissoras de sinal."</string>
+<string name="desc_hangouts_rtcs">"Google Hangouts.  Se fizeres Unbounce a isto, o Hangouts nao vai funcionar."</string>
+<string name="desc_gcm_conn">"Google Cloud Messaging. Envia pequenas mensagens para as tuas aplicações. Responsável por enviar notificações Push para o telefone, para todas as aplicações."</string>
+<string name="desc_google_c2dm">"Cloud to Device Messaging (C2DM) é um serviço que ajuda os criadores a enviar informação para as suas aplicações. O serviço fornece um mecanismo que os servidores podem usar para comunicar com as aplicações móveis, exemplo procurarem por actualizações ou dados. O serviço C2DM controla todos os aspectos necessários para a entrega e recepção de mensagens das aplicações que correm no dispositivo. Este serviço está obsoleto desde 2012, no entanto há aplicações que ainda usam este serviço em vez de do novo e melhorado GCM."</string>
+<string name="desc_timedeventqueue">"Este faz parte do funcionamento nuclear do Android e deve ser deixado em paz. É responsável por organizar todos os eventos."</string>
+<string name="desc_comgoogleandroidgmsnlpalarm_wakeup_locator">"É seguro fazer unbounce a este alarme. É usado pelo Google Play Services para determinar aproximadamente a tua localização através de WiFi e das torres de transmissão de sinal movél. Uma vez que a tua localização está definida, é guardada localmente para que outras aplicações, como o Google Now, possam  aceder à tua localização sem terem que usar o GPS ou terem de voltar a procurar. Definições recomendadas, valores entre: 180 e 600 segundos."</string>
+<string name="desc_comgoogleandroidgmsnlpalarm_wakeup_activity_detection">"É seguro fazer unbounce a este alarme. É usado pelo Google Play Services para determinar aproximadamente a tua localização através de WiFi e das torres de transmissão de sinal móvel. Uma vez que a tua localização está definida, esta informação é enviada para o Google para que eles possam estender a sua base de dados de localizações WiFi. Definições recomendadas, valores entre: 180 e 600 segundos."</string>
+<string name="desc_comgoogleandroidappshangoutsupdate_notification">"Responsável por actualizar as notificações do Google Hangouts."</string>
+<string name="desc_comandroidinternaltelephonydatastall">"com.android.phone (Phone app) wakelock accionado quando estás a usar Dados. Enquanto usas Wifi este alarme não é activado. Normalmente este alarme dispara inúmeras vezes quando usas dados móveis, especialmente quando a conexão é medíocre."</string>
+<string name="settings_allow_every">"Permite todos"</string>
+<string name="settings_seconds">"segundos."</string>
+<string name="card_button_reset">"REINICIA"</string>
+<string name="stat_alarms_acquired">"Alarmes adquiridos"</string>
+<string name="stat_alarms_blocked">"Alarmes bloqueados"</string>
+<string name="stat_loading">"A carregar..."</string>
+<string name="stat_collected_for">"Dados guardados para"</string>
+<string name="stat_wake_duration_allowed">"Nº de Wakelock permitidos"</string>
+<string name="stat_wake_duration_blocked">"Nº de Wakelock bloqueados"</string>
+<string name="stat_wake_allowed">"Wakelocks adquiridos"</string>
+<string name="stat_wake_blocked">"Wakelocks bloqueados"</string>
+<string name="stat_alarm_allowed">"Alarmes accionado"</string>
+<string name="stat_alarm_blocked">"Alarms bloqueados"</string>
+<string name="stat_disabled">"Desactivado"</string>
+<string name="donate_text">"Esta aplicação irá sempre permitir-te configurar de graça os Network Location Provider - responsáceis por descarregarem a bateria. Se quiseres fazer Unbounce a outros wakelocks e alarms, podes ter acesso à versão Pro suportando o projecto. Qualquer valor doado irá desbloquear a versão Pro."</string>
+<string name="donate_1">"Uma chávena de café enquanto escrevo código"</string>
+<string name="donate_5">"Um café com leite enquanto respondo às perguntar feitas no forum"</string>
+<string name="donate_10">"O prazer de poderes andar sem um carregador"</string>
+<string name="donate_thank_you">"Muito obrigado pela tua doação. Tem um grande significado para mim. Eu trabalho muito neste projecto durante o pouco tempo livre que tenho, para que possas ter uma bateria mais saudável. Ao fazeres esta doação, estás a fazer com que este projecto possa continuar a existir e melhoraste a minha e a vida da minha família. És o maior!"</string>
+<string name="donate_more_button">"COMO POSSO AJUDAR MAIS?"</string>
+<string name="donate_more_text">"Muitas pessoas perguntaram como é que poderiam ajudar para além do donativo inicial. Os botões em baixo deixam-te doar outra vez, mas não vão desbloquear nada mais. Muito obrigado por suportares o Unbounce!"</string>
+<string name="welcome_banner_title">"Bem vindo!"</string>
 
-    <string name="app_name">Unbounce</string>
-<string name="version">Versao</string>
-<string name="title_activity_material_settings">Unbounce</string>
-<string name="title_home">Menu inicial</string>
-<string name="title_wakelocks">Wakelocks</string>
-<string name="title_alarms">Alarmes</string>
-<string name="navigation_drawer_open">Abrir menu</string>
-<string name="navigation_drawer_close">Fechar menu</string>
-<string name="action_search">Pesquisar</string>
-<string name="action_sort_by_count">Listar por contagem (nº)</string>
-<string name="action_sort_by_time">Listar por tempo (s)</string>
-<string name="action_settings">Definiçoes</string>
-<string name="action_reset_stats">Reiniciar dados</string>
-<string name="card_donate_title">KARMA</string>
-<string name="card_donate_subtitle">Suportar o nosso desenvolvedor</string>
-<string name="card_global_title">DADOS GLOBAIS</string>
-<string name="card_global_subtitle">Dados de todos os utilizadores</string>
-<string name="card_local_title">DADOS DO DISPOSITIVO</string>
-<string name="card_local_subtitle">Os teus dados</string>
-<string name="card_settings_title">DEFINIcÔES</string>
-<string name="card_settings_subtitle_alarm">Controle este alarme</string>
-<string name="card_settings_subtitle_wakelock">Controle este alarme</string>
-<string name="card_description_title">DESCRIcaO</string>
-<string name="card_description_subtitle">Porque é que isto consome a bateria?</string>
+<string name="settings_category_options">"Opções"</string>
+<string name="settings_item_show_launcher">"Mostrar icon app"</string>
+<string name="settings_item_choose_theme">"Escolher tema"</string>
+<string name="settings_item_global_stats_title">"Participar na estatística global"</string>
+<string name="settings_item_global_stats_summary">"Enviar e receber estatística"</string>
+<string name="settings_item_reset_defaults_title">"Reiniciar para definições padrão"</string>
+<string name="settings_item_reset_defaults_summary">"Mudar para as config inicíais de todos os alarmes e wakelocks"</string>
+<string name="settings_item_author">"Autor: Ryan Steckles"</string>
+<string name="settings_item_logging_level">"Nível de conexão"</string>
+<string name="settings_category_translation">"Tradutores"</string>
+<string name="settings_theme_material">"Material"</string>
+<string name="settings_theme_dark">"Escuro"</string>
+<string name="settings_logging_quiet">"Silêncio"</string>
+<string name="settings_logging_default">"Padrão"</string>
+<string name="settings_logging_verbose">"Língua usada"</string>
+<string name="settings_item_force_english_title">"Forçar Inglês"</string>
+<string name="settings_item_force_english_summary">"Ignorar definições locais e usar Inglês"</string>
+<string name="playstore_short_description">"Que aproveites uma grande e longa bateria!"</string>
+<string name="playstore_long_description">"
+*** É preciso ter o dispositivo com Root ***
 
-<string name="category_unbounced">Unbounced</string>
-<string name="category_safe">seguro para Unbounce</string>
-<string name="category_unknown">Desconhecido</string>
-<string name="category_not_safe">NaO é seguro Unbounce</string>
-<string name="category_error">Erro</string>
+Frases de utilizadores, retiradas do forum Unbouce:
+Ganhei 2 horas adicionais de bateria mesmo com 30 minutos a mais de ecrã ligado. Fez-me poupar $25 na compra de uma bateria.
+Acabei de doar 5 dólares para apoiar esta aplicação espectacular.. Continua com o bom trabalho
+Simplesmente espectacular
+[unbounce] revolucionou o significado de wakelock
+Este modulo é espectacular! O consumo da minha bateria é inferior a 0.5% por hora quando o telefone está a dormir
+...e muitos mais.
 
-<string name="alert_noiab_title">Funcoes Pro indisponíveis</string>
-<string name="alert_noiab_content">O teu dispositivo nao suporta Faturamento pela Aplicacao.  Nao podes comprar as funcoes Pro do Unbounce.  Isto pode ser causado por: actualiza a aplicacao Google Play Store, ou porque vives num país onde o Faturamente pela Aplicacao está desactivado.</string>
-<string name="dialog_ok">OK</string>
-<string name="tasker_on">On</string>
-<string name="tasker_off">Off</string>
-<string name="tasker_reset_stats">Reinicia dados</string>
-<string name="tasker_choose_wakelock">Escolhe o wakelock a ajustar.</string>
-<string name="tasker_choose_alarm">Escolhe o alarme a ajustar.</string>
-<string name="tasker_welcome">Benvindo ao Plugin Unbounce do Tasker.</string>
-<string name="tasker_which_task">Queres alterar as definicoes de um Wakelock ou Alarm, ou queres reiniciar a contagem do teu do teu dispositivo?</string>
-<string name="tasker_task_wakelock">MUDAR WAKELOCK</string>
-<string name="tasker_task_alarm">MUDAR ALARME</string>
-<string name="tasker_task_reset">RESET STATS</string>
+Unbounce deixa-te controlar totalmente o uso da bateria do teu dispositivo, uma vez que podes configurar quando é que o dispositivo acorda e quanto tempo fica acordado. Usa as configurações padrão para ganhos moderados de bateria, ou pesquisa e configura todos os alarmes e wakelocks do teu dispositivo.
 
-<string name="alert_nopro_title">Esta é uma opcao da versao Pro</string>
-<string name="alert_nopro_content">Para Unbounce qualquer wakelocks ou alarme, tens que comprar / doar a versao Pro.</string>
-<string name="alert_unknown_alarm_title">Unbounce alames desconhecidos?</string>
-<string name="alert_unknown_alarm_content">Nao está provado que é seguro Unbounce este alarme.  Mesmo assim queres fazer Unbounce?</string>
-<string name="dialog_unbounce">UNBOUNCE</string>
-<string name="dialog_cancel">CANCELAR</string>
-<string name="tasker_choose_settings">Escolhe as definicoes que queres.</string>
-<string name="alert_unknown_wakelock_title">Unbounce um wakelock desconhecido?</string>
-<string name="alert_unknown_wakelock_content">Nao está provado que é seguro Unbounce este wakelock.  Mesmo assim queres fazer Unbounce?</string>
-<string name="dialog_delete">APAGAR</string>
-<string name="alert_delete_stats_title">Apagar todos os dados?</string>
-<string name="alert_delete_stats_content">Isto vai apagar todas as tuas definicoes dos wakelocks e alarmes!</string>
-<string name="title_settings">Definicoes</string>
-<string name="alert_reset_settings_title">Voltar às definicoes iniciais?</string>
-<string name="alert_reset_settings_content">Isto vai apagar todas as tuas definicoes dos alarms e wakelocks!</string>
-<string name="dialog_reset">APAGAR</string>
-<string name="reset_settings_confirmation">Definicoes voltaram à versao inicial.</string>
-<string name="dialog_save">SALVAR</string>
+Algumas das características principais:
+- Um design bonito e apelativo, baseado em Material Design
+- Uma programação muito estável para bloquear convenientemente os alarmes e wakelocks
+- Contadores de tempo gasto e de tempo ganho com os alarmes e wakelocks
+- Uma lista extensa e em crescimento sobre o significado dos alarmes e wakelocks (em Inglês mas com outras línguas brevemente!)
+- Uma nova versão Pro que permite-te fazer unbounce a qualquer alarme ou wakelock do dispositivo
+- Codificação em open souce para que possas ver como funciona ou para poderes programar ao teu gosto
 
-<string name="desc_unknown">Ainda nao temos nenhuma informacao sobre este evento.  Pode nao ser seguro fazer Unbounce.  Muda só se souberes o que estás a fazer e se souberes desactivar o Xposed durante o iniciar do dispositivo. Estamo-nos a esforcar para recolher informacao sobre a todos os wakelocks e alarmes.  Por favor aguarda pacientemente enquanto recolhemos esta informacao.</string>
-<string name="desc_nlpwakelock">NlpWakeLock é seguro fazer unbounce.  É usado pelo Google Play Services para determinar a tua localizacao aproximadamente através das torres de transmissao de sinal e de WiFi.  Uma vez que a tua localizacao  está definida, é guardada localmente para que outras aplicacoes, como o Google Now, possam  aceder à tua localizacao sem ter que usar o GPS ou terem de voltar a procurar.  Definicoes recomendadas, valores entre: 180 e 600 segundos.</string>
-<string name="desc_nlpcollectorwakelock">NlpCollectorWakeLock é seguro fazer unbounce.  É usado pelo Google Play Services para determinar a tua localizacao aproximadamenteatravés das torres de transmissao de sinal e de WiFi.  Uma vez que a tua localizacao  está definida, esta informacao é enviada para o Google para que eles possam extender a sua base de dados de localizacoes WiFi.  Definicoes recomendadas, valores entre: 180 e 600 segundos.</string>
-<string name="desc_alarmmanager">Isto garante acesso ao servico de alarmes do sistema. Quando um alarme é activado, the Intent that had been registered for it is broadcast by the system, automatically starting the target application if it is not already running. Registered alarms are retained while the device is asleep (and can optionally wake the device up if they go off during that time), but will be cleared if it is turned off and rebooted.</string>
-<string name="desc_audiooffload">Reproducao de audio quando o ecra está desligado.  Se desactivares isto poderás nao ter audio de segundo plano ou reproduzir musicas quando o ecra estiver desligado.</string>
-<string name="desc_activitymanagerlauncher">Interage com a generalidade das actividades do sistema. Se fizeres Unbounce a isto, nada irá funcionar bem.</string>
-<string name="desc_windowmanager">Isto é um wakelock do sistema Android.  O interface das aplicacoes costumam comunicar com a janela de  administracao - isto significa que as aplicacoes irao precisar de adquirir uma Janela de Admnistracao todas as vezes que precisem de aparecer no ecra.</string>
-<string name="desc_rilj">RILJ mantém o teu dispositivo acordado enquanto processa accoes relacionadas com o telefone, como chamadas e a comunicacao com as torres emissoras de sinal.</string>
-<string name="desc_syncloopwakelock">This is the WakeLock used by Android SyncManager to Sync accounts like Google+, Twitter, Linkedin, Gmail etc. The higher the unbouncing, the longer the amount of time until your accounts will get synced again.</string>
-<string name="desc_icing">ICING is a Google Services WakeLock.  Currently looking for more details.</string>
-<string name="desc_startingalertservice">Este WakeLock está normalmente associado com o Calendário, apesar de poder afectar outras aplicacoes como as mensagens. Se o Calendário tiver notificacoes este Wakelock pode ser acionado.</string>
-<string name="desc_audiomix">Este WakeLock é responsável por barulhos provenientes pelos Toques no Ecra e alarmes. Mesmo quando os sons de Toque de Ecra estao desactivados este wakelock aparece em alguns dispositivos.</string>
-<string name="desc_locationmanagerservice">Este nao costuma ser responsável por gastar muita bateria, para alguns dispositivos pode disparar múltiplas vezes.</string>
-<string name="desc_audioin">Este wakelock é usado para manter o dispositivo acordados enquanto fica a "ouvir" pelo comando "Okay, Google" que aciona o servico Google Search.</string>
-<string name="desc_nfcservicemroutingwakelock">Relacionado com o servico NFC que determina as etiquetas apropriadas para cada aplicacao.</string>
-<string name="desc_wakefulintentservicegcoreulrlocationreportingservice">Usado pelo Google Location Services para reportar a tua localizacao actual.</string>
-<string name="desc_vzwgpslocationprovider">Servico de estatística da Verizon para localizar as torres emissoras de sinale.</string>
-<string name="desc_hangouts_rtcs">Google Hangouts.  Se fizeres Unbounce a isto, o Hangouts nao vai funcionar.</string>
-<string name="desc_gcm_conn">Google Cloud Messaging. Envia pequenas mensagens para as tuas aplicacoes. Responsavel por enviar notificacoes push para o teu telefone, para todas as aplicacoes.</string>
-<string name="desc_google_c2dm">Cloud to Device Messaging (C2DM) é um servico que ajuda os desenvolvedores a enviar informacao para as suas aplicacoes. O servico fornece um mecanismo que os servidores podem usar para comunicar com as aplicacoes móveis para procurarem por actualizacoes ou dados. O servico C2DM controla todos os aspectos necessários para a entrega e recepcao de mensagens das aplicacoes que correm no dispositivo. Este servico está obsoleto desde 2012, no entanto ainda há aplicacoes que usam este servico em vez de do novo e melhorado GCM.</string>
-<string name="desc_timedeventqueue">Este faz parte do funcionamento do núcleo do Android e deve ser deixado em paz. É responsável por organizar todos os eventos.</string>
-<string name="desc_comgoogleandroidgmsnlpalarm_wakeup_locator">É seguro fazer unbounce a este alarme.  É usado pelo Google Play Services para determinar proximadamente a tua localizacao atravéz das torres de transmissao de sinal e de WiFi.  Uma vez que a tua localizacao está definida, é guardada localmente para que outras aplicacoes, como o Google Now, possam  aceder à tua localizacao sem ter que usar o GPS ou terem de voltar a procurar.  Definicoes recomendadas, valores entre: 180 e 600 segundos.</string>
-<string name="desc_comgoogleandroidgmsnlpalarm_wakeup_activity_detection">É seguro fazer unbounce a este alarme.  É usado pelo Google Play Services para determinar proximadamente a tua localizacao atravéz das torres de transmissao de sinal e de WiFi.  Uma vez que a tua localizacao está definida, esta informacao é enviada para o Google para que eles possam extender a sua base de dados de localizacoes WiFi.  Definicoes recomendadas, valores entre: 180 e 600 segundos.</string>
-<string name="desc_comgoogleandroidappshangoutsupdate_notification">Responsável por actualizar as notificacoes do Google Hangouts.</string>
-<string name="desc_comandroidinternaltelephonydatastall">Wakelock do com.android.phone (Phone app) Quando estás a usar Dados através das Torres emissoras de sinal. Enquanto usas Wifi este alarme nao é activado. Normalmente este alarme dispara inúmeras vezes quando usas dados móveis, especialmente quando a conneccao é mediocre.</string>
+Através da compra dentro da aplicação (In-App purchase) podes desbloquear a versão Pro que permite-te configurar todos os alarmes e wakelocks do teu dispositivo. Sem a versão Pro podes configurar os 2 wakelocks e 2 alarmes que mais bateria consomem: NlpWakelock, NlpCollectorWakeLock, ALARM_WAKEUP_LOCATOR, e ALARM_WAKE_ACTIVITY_DETECTION.
 
-<string name="settings_allow_every">Permite todos</string>
-<string name="settings_seconds">segundos.</string>
-<string name="card_button_reset">REINICIA</string>
+Que aproveites uma grande e longa bateria!"</string>
 
-<string name="stat_alarms_acquired">Alarmes adquiridos</string>
-<string name="stat_alarms_blocked">Alarmes bloqueados</string>
-<string name="stat_loading">A carregar...</string>
-<string name="stat_collected_for">Dados guardados para</string>
-<string name="stat_wake_duration_allowed">Nº de Wakelock permitidos</string>
-<string name="stat_wake_duration_blocked">Nº de Wakelock bloqueados</string>
-<string name="stat_wake_allowed">Wakelocks adquiridos</string>
-<string name="stat_wake_blocked">Wakelocks bloqueados</string>
-<string name="stat_alarm_allowed">Alarmes acionados</string>
-<string name="stat_alarm_blocked">Alarms bloqueados</string>
-<string name="stat_disabled">Desactivado</string>
-<string name="donate_text">Esta aplicacao irá sempre permitir-te definir os Network Location Provider que descarregam a tua bateria de graca.  Se quiseres fazer Unbounce a outros wakelocks e alarms, podes ter acesso aos comandos Pro suportando o projecto.  Qualquer valor doado irá desbloquear a versao Pro.</string>
-<string name="donate_1">Uma chávena de café enquanto escrevo código</string>
-<string name="donate_5">Um café com leite enquanto responde às perguntar feitas no forum</string>
-<string name="donate_10">O prazer de poderes andar sem o teu carregador</string>
-<string name="donate_thank_you">Muito obrigado pela tua doacao.  Tem um grande significado para mim.  Eu trabalho muito neste projecto durante o pouco tempo livre que tenho, para que possas ter uma bateria mais saudável.  Quando fizeste uma doacao, estás a fazer a diferenca para este projecto poder continuar a existir e fizeste uma diferenca na minha vida e da minha família.  És o maior!.</string>
-<string name="donate_more_button">COMO POSSO AJUDAR?</string>
-<string name="donate_more_text">Muitas pessoas perguntaram como é que poderiam ajudar para além do donativo inicial.  Os botoes em baixo deixam-te doar outra vez, mas nao vao desbloquear nada mais.  Muito obrigado por suportares o Unbounce!</string>
-<string name="welcome_banner_title">Benvindo!</string>
-<string name="welcome_banner_text">Podes bloquear wakelocks para impedir que o teu telefone se mantenha acordado, e bloquear alarmes que impecam o telefone de acordar antes de mais.  Já definimos algumas coisas base por ti que te vao salvar bateria.</string>
-
-    <!--Don't translate this one  :)  -->
-<string name="app_font_family">sans_serif</string>
-
-
-
-    </resources>
+</resources>

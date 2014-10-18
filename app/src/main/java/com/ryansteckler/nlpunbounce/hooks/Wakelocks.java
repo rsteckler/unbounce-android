@@ -3,7 +3,6 @@ package com.ryansteckler.nlpunbounce.hooks;
 /**
  * Created by ryan steckler on 8/18/14.
  */
-
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -34,7 +33,7 @@ import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 public class Wakelocks implements IXposedHookLoadPackage {
 
     private static final String TAG = "Unbounce: ";
-    private static final String VERSION = "1.3.2"; //This needs to be pulled from the manifest or gradle build.
+    private static final String VERSION = "1.4"; //This needs to be pulled from the manifest or gradle build.
     private HashMap<String, Long> mLastWakelockAttempts = null; //The last time each wakelock was allowed.
     private HashMap<String, Long> mLastAlarmAttempts = null; //The last time each alarm was allowed.
 
@@ -67,7 +66,19 @@ public class Wakelocks implements IXposedHookLoadPackage {
 
             hookAlarms(lpparam);
             hookWakeLocks(lpparam);
+        } else if (lpparam.packageName.equals("com.ryansteckler.nlpunbounce")) {
+            hookSettingsActivity(lpparam);
         }
+    }
+
+    private void hookSettingsActivity(LoadPackageParam lpparam) {
+        findAndHookMethod("com.ryansteckler.nlpunbounce.HomeFragment", lpparam.classLoader, "isUnbounceServiceRunning", new XC_MethodHook() {
+            @Override
+            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                param.setResult(true);
+            }
+        });
+
     }
 
     private void setupReceiver(XC_MethodHook.MethodHookParam param) {
@@ -443,4 +454,5 @@ public class Wakelocks implements IXposedHookLoadPackage {
         }
     }
 }
+
 

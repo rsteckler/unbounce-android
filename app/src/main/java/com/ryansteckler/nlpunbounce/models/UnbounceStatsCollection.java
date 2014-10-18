@@ -429,11 +429,7 @@ public class UnbounceStatsCollection implements Serializable {
         if (mGlobalParticipation) {
             addInterimWakelock(toAdd, mSincePushStats);
         }
-        //We explicitly don't save here because this method "happens" to only be called by the
-        //hook process, which shouldn't save the file because it's root, and our app needs to read the file.
-        //Todo:  In the future, we should provide a parameter so the hook process can call this specifying a no-save
-        //condition.
-        //        saveIfNeeded(context);
+
 
     }
 
@@ -461,12 +457,6 @@ public class UnbounceStatsCollection implements Serializable {
             incrementWakelockBlock(statName, mSincePushStats);
         }
 
-        //We explicitly don't save here because this method "happens" to only be called by the
-        //hook process, which shouldn't save the file because it's root, and our app needs to read the file.
-        //Todo:  In the future, we should provide a parameter so the hook process can call this specifying a no-save
-        //condition.
-        //        saveIfNeeded(context);
-
     }
 
     private void incrementWakelockBlock(String statName, HashMap<String, BaseStats> statChoice) {
@@ -490,12 +480,6 @@ public class UnbounceStatsCollection implements Serializable {
             incrementAlarmBlock(statName, mSincePushStats);
         }
 
-        //We explicitly don't save here because this method "happens" to only be called by the
-        //hook process, which shouldn't save the file because it's root, and our app needs to read the file.
-        //Todo:  In the future, we should provide a parameter so the hook process can call this specifying a no-save
-        //condition.
-        //        saveIfNeeded(context);
-
     }
 
     private void incrementAlarmBlock(String statName, HashMap<String, BaseStats> statChoice) {
@@ -518,12 +502,6 @@ public class UnbounceStatsCollection implements Serializable {
         if (mGlobalParticipation) {
             incrementAlarmAllowed(statName, mSincePushStats);
         }
-
-        //We explicitly don't save here because this method "happens" to only be called by the
-        //hook process, which shouldn't save the file because it's root, and our app needs to read the file.
-        //Todo:  In the future, we should provide a parameter so the hook process can call this specifying a no-save
-        //condition.
-        //        saveIfNeeded(context);
 
     }
 
@@ -567,6 +545,7 @@ public class UnbounceStatsCollection implements Serializable {
     {
         if (statType == STAT_CURRENT) {
             mCurrentStats.clear();
+            mRunningSince = SystemClock.elapsedRealtime();
         }
         else if (statType == STAT_PUSH) {
             mSincePushStats.clear();
