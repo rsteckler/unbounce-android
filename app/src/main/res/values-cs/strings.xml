@@ -134,7 +134,7 @@ Zasílání_push_zpráv"</string>
 <string name="settings_item_force_english_summary">"Přepsat nastavení národního prostředí a používat angličtinu"</string>
 <string name="playstore_short_description">"Mùžete mít dlouhý [Battery] život!"</string>
 <string name="playstore_long_description">"
-*** Vyžaduje Root a rámec Xposed ***
+*** Vyžaduje Root ***
  citace reálných uživatelù:
 Dalo mi to o 2 hodiny více použití s ??30 minutami více obrazovky na èas. Zachránil mì od nákupu baterie.
 Jen jsem daroval 5 dolarù na podporu tohoto mistrovského díla .. Pokraèujte v dobré práci
@@ -151,8 +151,7 @@ Zde jsou nìkteré které zdùrazòuji:
 - Nový Pro balíèek, který vám umožní,v Unbounce nemít žádný alarm nebo wakelock v zaøízení
 - Open source codebase, takže mùžete vidìt, jak to funguje, nebo budovat sami
 
-Nákupy In-App vám umožní odemknout Pro balíèek, který vám umožní pøizpùsobit alarmy a wakelocks na vašem zaøízení. Bez profesionálních funkcí, nemùžete ovládat nejhorší baterie žrouty: NlpWakelock, NlpCollectorWakeLock, ALARM_WAKEUP_LOCATOR a ALARM_WAKE_ACTIVITY_DETECTION.
-    "</string>
+Nákupy In-App vám umožní odemknout Pro balíèek, který vám umožní pøizpùsobit alarmy a wakelocks na vašem zaøízení. Bez profesionálních funkcí, nemùžete ovládat nejhorší baterie žrouty: NlpWakelock, NlpCollectorWakeLock, ALARM_WAKEUP_LOCATOR a ALARM_WAKE_ACTIVITY_DETECTION."</string>
 <string name="welcome_banner_welcome">"Vítejte"</string>
 <string name="welcome_banner_checking_service">"Kontrola,zda je spuštěn Unbounce"</string>
 <string name="welcome_banner_checking_xposed">"Kontrola,zda je instalován Xposed"</string>
@@ -162,8 +161,8 @@ Nákupy In-App vám umožní odemknout Pro balíèek, který vám umožní pøiz
 <string name="welcome_banner_problem_none">"Máme na nastavení nějaké úspory baterie výchozí pro vás. Užijte si svůj nový život baterii!"</string>
 <string name="welcome_banner_problem_service">"Vypadá_ to_že jste povolili Unbounce modul. Klepněte na tlačítko Fix It, ujistěte se, že_ Unbounce_ je zaškrtnuto, pak se restartuje."</string>
 <string name="welcome_banner_problem_xposed_running">"Xposed neběží. Klepněte na tlačítko Fix It, klepněte na tlačítko nainstalovat / aktualizovat a restartovat zařízení."</string>
-<string name="welcome_banner_problem_xposed_installed">"Xposed není nainstalován. Xposed je vyžadováno pro Unbounce a mnoho jiných kořenových aplikací. Jakmile je stahování dokončeno, klepněte na tlačítko Nainstalovat, poté ji spusťte znovu Unbounce. Pokud byste se chtěli dozvědět více o Xposed, &lt;a Tested.com. &lt;/a&gt;"</string>
-<string name="welcome_banner_problem_root">"Vypadá_ to_že_ vaše_ zařízení není zakořeněno. Unbounce vyžaduje zakořeněné zařízení,aby správně fungovalo. Máte-li zájem o zakořenění zařízení, navštivte &lt;a href=http://www.techverse.net/how-to-root-your-android-phone-tablet-and-why/&gt; Techverse.net &lt;/ &gt;, abyste mohli začít."</string>
+<string name="welcome_banner_problem_xposed_installed">"Xposed není nainstalován. Xposed je vyžadováno pro Unbounce a mnoho jiných kořenových aplikací. Jakmile je stahování dokončeno, klepněte na tlačítko Nainstalovat, poté ji spusťte znovu Unbounce. Pokud byste se chtěli dozvědět více o Xposed, &lt;a href=\"http://www.tested.com/tech/android/460074-how-use-xposed-framework-android-extreme-customization\" /&gt; Tested.com. &lt;/a&gt;"</string>
+<string name="welcome_banner_problem_root">"Vypadá_ to_že_ vaše_ zařízení není zakořeněno. Unbounce vyžaduje zakořeněné zařízení,aby správně fungovalo. Máte-li zájem o zakořenění zařízení, navštivte &lt;a href=\"http://www.techverse.net/how-to-root-your-android-phone-tablet-and-why\" /&gt; Techverse.net &lt;/ &gt;, abyste mohli začít."</string>
 <string name="welcome_banner_button_next">"Vítej,stiskni další"</string>
 <string name="welcome_banner_button_fixit">"Vítej zde,stiskni zde"</string>
 <string name="welcome_banner_button_exit">"Vítej a ukončit."</string>
