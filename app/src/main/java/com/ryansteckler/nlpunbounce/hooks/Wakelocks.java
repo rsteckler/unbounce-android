@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.SystemClock;
+import android.util.Log;
 
 import com.ryansteckler.nlpunbounce.ActivityReceiver;
 import com.ryansteckler.nlpunbounce.XposedReceiver;
@@ -68,7 +69,19 @@ public class Wakelocks implements IXposedHookLoadPackage {
 
             hookAlarms(lpparam);
             hookWakeLocks(lpparam);
+        } else if (lpparam.packageName.equals("com.ryansteckler.nlpunbounce")) {
+            hookSettingsActivity(lpparam);
         }
+    }
+
+    private void hookSettingsActivity(LoadPackageParam lpparam) {
+        findAndHookMethod("com.ryansteckler.nlpunbounce.HomeFragment", lpparam.classLoader, "isUnbounceServiceRunning", new XC_MethodHook() {
+            @Override
+            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                param.setResult(true);
+            }
+        });
+
     }
 
     private void setupReceiver(XC_MethodHook.MethodHookParam param)

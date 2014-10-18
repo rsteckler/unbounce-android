@@ -1,5 +1,6 @@
 package com.ryansteckler.nlpunbounce;
 
+import android.animation.Animator;
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
@@ -9,11 +10,18 @@ import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.LinearInterpolator;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.analytics.GoogleAnalytics;
@@ -24,7 +32,12 @@ import com.ryansteckler.inappbilling.IabResult;
 import com.ryansteckler.inappbilling.Inventory;
 import com.ryansteckler.inappbilling.Purchase;
 import com.ryansteckler.nlpunbounce.helpers.LocaleHelper;
+import com.ryansteckler.nlpunbounce.helpers.RootHelper;
 import com.ryansteckler.nlpunbounce.helpers.ThemeHelper;
+
+import org.w3c.dom.Text;
+
+import java.io.File;
 
 
 public class MaterialSettingsActivity extends Activity
@@ -52,7 +65,7 @@ public class MaterialSettingsActivity extends Activity
      */
     private CharSequence mTitle;
 
-    int mLastActionbarColor = 0;
+    private int mLastActionbarColor = 0;
 
     private static final String TAG = "NlpUnbounceSettings: ";
 
@@ -146,6 +159,7 @@ public class MaterialSettingsActivity extends Activity
         //Update theme
         mCurTheme = ThemeHelper.onActivityResumeVerifyTheme(this, mCurTheme);
         mCurForceEnglish = LocaleHelper.onActivityResumeVerifyLocale(this, mCurForceEnglish);
+
     }
 
     private void updateDonationUi() {
@@ -327,5 +341,6 @@ public class MaterialSettingsActivity extends Activity
     public void onAlarmsSetTaskerTitle(String title) {
         //Do nothing because we're not in Tasker mode.
     }
+
 
 }
