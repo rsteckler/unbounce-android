@@ -137,14 +137,17 @@ public class HomeFragment extends Fragment  {
             banner.setVisibility(View.VISIBLE);
 
             //Let's find out why the service isn't running:
-            //We know at least the Unbounce service isn't running
-            mSetupFailureStep = SETUP_FAILURE_SERVICE;
+            if (!isUnbounceServiceRunning()) {
+                mSetupFailureStep = SETUP_FAILURE_SERVICE;
+            }
+            if (!isXposedRunning()) {
+                mSetupFailureStep = SETUP_FAILURE_XPOSED_RUNNING;
+            }
+            if (!isXposedInstalled()) {
+                mSetupFailureStep = SETUP_FAILURE_XPOSED_INSTALL;
+            }
             if (!RootHelper.isDeviceRooted()) {
                 mSetupFailureStep = SETUP_FAILURE_ROOT;
-            } else  if (!isXposedInstalled()) {
-                mSetupFailureStep = SETUP_FAILURE_XPOSED_INSTALL;
-            } else if (!isXposedRunning()) {
-                mSetupFailureStep = SETUP_FAILURE_XPOSED_RUNNING;
             }
 
             //Disable navigation away from the welcome banner. //TODO:  Fade the home bar?
