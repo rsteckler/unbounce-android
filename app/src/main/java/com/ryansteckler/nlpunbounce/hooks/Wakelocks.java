@@ -340,25 +340,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
             Intent intent = null;
             try {
                 intent = (Intent) callMethod(pi, "getIntent");
-//                String debugString = intent.toString();
-//                XposedBridge.log(TAG + "Debug 4.3+ = " + debugString);
-//
-//                IntentSender sender = pi.getIntentSender();
-//                debugString = sender.toString();
-//                XposedBridge.log(TAG + "Debug 4.2.2- = " + debugString);
-//
             } catch (NoSuchMethodError nsme) {
-                //API prior to 4.2.2_r1 don't have this.
-               /* if (!showedUnsupportedAlarmMessage) {
-                    showedUnsupportedAlarmMessage = true;
-                    XposedBridge.log(TAG + "Alarm prevention is not yet supported on Android versions less than 4.2.2");
-                }*/
-
-                /*
-                    ---------------- Added for JB 4.1.2 Support ------------------------
-
-                 */
-
                 Object mTarget = XposedHelpers.getObjectField(pi, "mTarget");
 
                 //debugLog("mTarget Class for PendingIntent: " + mTarget.getClass());
@@ -373,12 +355,24 @@ public class Wakelocks implements IXposedHookLoadPackage {
                 }
             }
 
-            if (intent == null || intent.getAction() == null) {
+            if (intent == null) {
                 //TODO: Why does the system have alarms with null intents?
                 continue;
             }
 
-            String alarmName = intent.getAction();
+            String alarmName = null;
+            //Make sure one of the tags exists.
+            if (intent.getAction() != null) {
+                alarmName = intent.getAction();
+            } else if (intent.getComponent() != null) {
+                alarmName = intent.getComponent().flattenToShortString();
+            }
+
+            if (alarmName == null) {
+                //TODO: Why does the system have alarms with null intents?
+                continue;
+            }
+
             //If we're blocking this wakelock
             String prefName = "alarm_" + alarmName + "_enabled";
             if (m_prefs.getBoolean(prefName, false)) {

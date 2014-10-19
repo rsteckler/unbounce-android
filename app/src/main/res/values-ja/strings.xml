@@ -170,6 +170,5 @@ Unbounceは、端末をウェイクしたままにする間隔や端末をウェ
 アプリ内購入でPro機能をアンロックすると、どんなアラームやウェイクロックでもUnbounce (実行間隔の変更)出来るようになります。Pro機能を購入しなくても、以下のバッテリー消費が大きいものをUnbounce出来ます: NlpWakelock、NlpCollectorWakeLock、ALARM_WAKEUP_LOCATOR、ALARM_WAKE_ACTIVITY_DETECTION
 
 [バッテリー]の持ちを極限まで高めよう!</string>
-    <!--Don't translate this one  :)  -->
-    <string translatable="false" name="app_font_family">sans_serif</string>
+
 </resources>
