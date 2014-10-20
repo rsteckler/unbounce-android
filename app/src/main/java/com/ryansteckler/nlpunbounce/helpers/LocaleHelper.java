@@ -12,30 +12,32 @@ import java.util.Locale;
  * Created by rsteckler on 10/13/14.
  */
 public class LocaleHelper {
-    private static String sLocale = null;
     public static int sForceEnglish = -1;
+    private static String sLocale = null;
+
     /**
      * Set the locale of the Activity, and restart it by creating a new Activity of the same type.
      */
 
-    private LocaleHelper(){}
-    public static void forceEnglish(Activity activity)
-    {
+    private LocaleHelper() {
+    }
+
+    public static void forceEnglish(Activity activity) {
         sForceEnglish = 1;
         activity.finish();
         activity.startActivity(new Intent(activity, activity.getClass()));
     }
 
-    public static void revertToSystem(Activity activity)
-    {
+    public static void revertToSystem(Activity activity) {
         sForceEnglish = 0;
         activity.finish();
         activity.startActivity(new Intent(activity, activity.getClass()));
     }
 
-    /** Set the theme of the activity, according to the configuration. */
-    public static int onActivityCreateSetLocale(Activity activity)
-    {
+    /**
+     * Set the theme of the activity, according to the configuration.
+     */
+    public static int onActivityCreateSetLocale(Activity activity) {
         if (sForceEnglish == -1) {
             // Load from prefs
             SharedPreferences prefs = activity.getSharedPreferences("com.ryansteckler.nlpunbounce" + "_preferences", Context.MODE_WORLD_READABLE);
@@ -58,8 +60,7 @@ public class LocaleHelper {
         return sForceEnglish;
     }
 
-    public static int onActivityResumeVerifyLocale(Activity activity, int curForceEnglish)
-    {
+    public static int onActivityResumeVerifyLocale(Activity activity, int curForceEnglish) {
         if (curForceEnglish != sForceEnglish) {
             if (sForceEnglish == 1) {
                 forceEnglish(activity);
@@ -73,6 +74,16 @@ public class LocaleHelper {
 
     public static int getForceEnglish() {
         return sForceEnglish;
+    }
+
+    public static String getFormattedTime(java.lang.Object... paramTimes) {
+        StringBuilder sbuf= new StringBuilder();
+        for (Object param : paramTimes) {
+            sbuf.append(String.format("%02d",param));
+            sbuf.append(":");
+        }
+        sbuf.deleteCharAt(sbuf.lastIndexOf(":"));
+        return sbuf.toString();
     }
 }
 
