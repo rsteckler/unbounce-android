@@ -14,7 +14,7 @@
 <string name="action_settings">"Einstellungen"</string>
 <string name="action_reset_stats">"Statistik löschen"</string>
 <string name="card_donate_title">"KARMA"</string>
-<string name="card_donate_subtitle">"Unterstütze diesen Entwickler"</string>
+<string name="card_donate_subtitle">"Diesen Entwickler unterstützen"</string>
 <string name="card_global_title">"GLOBALE STATISTIK"</string>
 <string name="card_global_subtitle">"Unsere kombinierten Statistiken"</string>
 <string name="card_local_title">"GERÄTESTATISTIK"</string>
@@ -30,7 +30,7 @@
 <string name="category_not_safe">"Nicht sicher zu unbouncen"</string>
 <string name="category_error">"Fehler"</string>
 <string name="alert_noiab_title">"Pro-Funktionen nicht verfügbar"</string>
-<string name="alert_noiab_content">"Ihr Gerät unterstützt keine In-App-Käufe. Sie werden keine Pro-Funktionen für Unbounce kaufen können.  Es könnte sein, dass Sie den Google Play Store aktualisieren müssen, oder Sie leben in einem Land, in dem In-App-Käufe nicht verfügbar sind."</string>
+<string name="alert_noiab_content">"Ihr Gerät unterstützt keine In-App-Käufe. Sie werden keine Pro-Funktionen für Unbounce kaufen können. Es könnte sein, dass Sie den Google Play Store aktualisieren müssen, oder Sie leben in einem Land, in dem In-App-Käufe nicht verfügbar sind."</string>
 <string name="dialog_ok">"OK"</string>
 <string name="tasker_on">"An"</string>
 <string name="tasker_off">"Aus"</string>
@@ -60,7 +60,7 @@
 <string name="dialog_reset">"ZURÜCKSETZEN"</string>
 <string name="reset_settings_confirmation">"Einstellungen wurden auf Standardwerte zurückgesetzt."</string>
 <string name="dialog_save">"SPEICHERN"</string>
-<string name="desc_unknown">"Wir haben über dieses Ereignis bisher noch keine Informationen.  Es könnte unsicher sein, es zu unbouncen.  Bitte tun Sie das nur, wenn Sie wissen, was Sie tun, und wenn Sie wissen, wie man Xposed beim Gerätestart deaktivieren kann.  Wir arbeiten hart daran, Informationen über jeden wichtigen Wakelock und Alarm zu sammeln.  Bitte haben Sie etwas Geduld, während wir die Informationen sammeln."</string>
+<string name="desc_unknown">"Wir haben über dieses Ereignis bisher noch keine Informationen. Es könnte unsicher sein, es zu unbouncen. Bitte tun Sie das nur, wenn Sie wissen, was Sie tun, und wenn Sie wissen, wie man Xposed beim Gerätestart deaktivieren kann. Wir arbeiten hart daran, Informationen über jeden wichtigen Wakelock und Alarm zu sammeln. Bitte haben Sie etwas Geduld, während wir die Informationen sammeln."</string>
 <string name="desc_nlpwakelock">"NlpWakeLock lässt sich sicher unbouncen.  Er wird von den Google Play-Diensten zur Bestimmung Ihres groben Standorts genutzt, indem eine Kombination aus Mobilfunkzellen und WLAN genutzt wird.  Sobald er Ihre Position hat, speichert er diese lokal, sodass andere Apps wie Google Now auf Ihren Standort zugreifen können ohne GPS zu nutzen oder die Position neu zu ermitteln.  Empfohlene Einstellung zwischen 180 und 600 Sekunden."</string>
 <string name="desc_nlpcollectorwakelock">"NlpCollectorWakeLock lässt sich sicher unbouncen.  Er wird von den Google Play-Diensten zur Bestimmung Ihres Standorts genutzt, indem eine Kombination aus Mobilfunkzellen und WLAN genutzt wird. Sobald er Ihre Position hat, sendet er sie zurück an Google, sodass Google seine WLAN-Ortungs-Datenbank erweitern kann.  Empfohlene Einstellung zwischen 180 und 600 Sekunden."</string>
 <string name="desc_alarmmanager">"Dies erlaubt Zugang zum Alarm-Dienst des Systems.  Wenn ein Alarm ausgelöst wird, wird der Intent, der damit registriert war, vom System verbreitet, wodurch die Ziel-App gestartet wird, wenn sie noch nicht läuft.  Registrierte Alarme werden zurückgehalten, während das Gerät schläft (und können optional das Gerät aufwecken, wenn sie genau dann ausgelöst werden müssen), aber sie werden gelöscht wenn das Gerät ausgeschaltet und neu gestartet wird."</string>
@@ -103,10 +103,14 @@
 <string name="donate_1">"Eine Tasse Kaffee, während ich Code schreibe"</string>
 <string name="donate_5">"Einen Latte, während ich Fragen im Forum beantworte"</string>
 <string name="donate_10">"Die Freude, kein Ladegerät dabeihaben zu müssen"</string>
-<string name="donate_thank_you">"Danke für Ihre Spende.  Es bedeutet mir eine Menge.  Ich arbeite hart in meiner begrenzten Zeit, um Ihnen eine bessere Akkulaufzeit zu bieten.  Wenn Sie gespendet haben, haben Sie etwas im Projekt bewegt, und Sie haben etwas im Leben meiner Familie bewegt.  Sie sind toll."</string>
+<string name="donate_thank_you">"Danke für Ihre Spende. Es bedeutet mir eine Menge. Ich arbeite hart in meiner begrenzten Zeit, um Ihnen eine bessere Akkulaufzeit zu bieten. Wenn Sie gespendet haben, haben Sie etwas im Projekt bewegt, und Sie haben etwas im Leben meiner Familie bewegt. Sie sind toll."</string>
 <string name="donate_more_button">"WIE KANN ICH NOCH WEITER HELFEN?"</string>
 <string name="donate_more_text">"Leute haben mich gefragt, wie sie über der ersten Spende hinaus etwas beitragen können.  Die folgenden Schaltflächen erlauben weitere Spenden, bringen aber keine weiteren Funktionen.  Vielen Dank, dass Sie Unbounce unterstützen!"</string>
+<string name="welcome_banner_title">"Willkommen!"</string>
+<string name="welcome_banner_text">"Sie können Wakelocks blockieren, um Ihr Telefon davon abzuhalten, wach zu bleiben. Außerdem können Sie Alarme blockieren, um es von vornherein am Aufwachen zu hindern.  Wir haben bereits einige batteriesparende Standardwerte für Sie gesetzt."</string>
 
+<!-- Don't translate this one  :) -->
+<string name="app_font_family">"sans_serif"</string>
 <string name="settings_category_options">"Einstellungen"</string>
 <string name="settings_item_show_launcher">"Launcher-Icon zeigen"</string>
 <string name="settings_item_choose_theme">"Farbschema wählen"</string>
@@ -114,9 +118,10 @@
 <string name="settings_item_global_stats_summary">"Anonyme Statistiken senden und empfangen"</string>
 <string name="settings_item_reset_defaults_title">"Standardeinstellungen"</string>
 <string name="settings_item_reset_defaults_summary">"Alle Alarme und Wakelocks auf Standardwerte zurücksetzen"</string>
+<string name="settings_category_debug">"Debug"</string>
 <string name="settings_item_author">"Autor: Ryan Steckler"</string>
 <string name="settings_item_logging_level">"Log-Level"</string>
-<string name="settings_category_translation">"Übersetzung"</string>
+<string name="settings_category_translation">"Übersetzungen von"</string>
 <string name="settings_theme_material">"Material"</string>
 <string name="settings_theme_dark">"Dunkel"</string>
 <string name="settings_logging_quiet">"Leise"</string>
@@ -155,22 +160,22 @@ Wir wünschen Ihnen ein langes (Batterie-) Leben!
 <string name="welcome_banner_checking_xposed">"Es wird überprüft, ob Xposed installiert ist..."</string>
 <string name="welcome_banner_checking_root">"Rootzugang wird überprüft..."</string>
 <string name="welcome_banner_checking_looks_great">"Alles sieht gut aus!"</string>
-<string name="welcome_banner_checking_uhoh">"Etwas lief falsch. Lass uns herausfinden was und es reparieren..."</string>
-<string name="welcome_banner_problem_none">"Wir haben einige akkusparende Standards für Dich eingestellt. Genieß deine neue Betriebsdauer!"</string>
-<string name="welcome_banner_problem_service">"Es scheint, dass Du das Unbounce Modul nicht aktiviert hast. Klicke erst auf REPARIEREN, dann setze ein Häkchen bei Unbounce und starte danach dein Gerät neu."</string>
-<string name="welcome_banner_problem_xposed_running">"Xposed läuft nicht. Klicke erst auf REPARIEREN, dann auf Installieren/Aktualisieren und starte dann dein Gerät neu."</string>
-<string name="welcome_banner_problem_xposed_installed">"Xposed ist nicht installiert. Es wird für Unbounce und viele weitere Anwendungen mit Rootzugang benötigt. Wenn der Download abgeschlossen ist klicke erst auf INSTALLIEREN und starte Unbounce danach erneut. Wenn du mehr über Xposed lernen möchtest <![CDATA[<a href="http://www.tested.com/tech/android/460074-how-use-xposed-framework-android-extreme-customization/">besuche Tested.com.</a>]]>"</string>
-<string name="welcome_banner_problem_root">"Es sieht danach aus, dass dein Gerät keinen Rootzugang hat. Unbounce benötigt ein Gerät mit Rootzugriff um korrekt zu funktionieren. Wenn du daran interessiert bist dein Gerät zu rooten, besuche bitte <![CDATA[<a href="http://www.techverse.net/how-to-root-your-android-phone-tablet-and-why/">Techverse.net</a>]]> um zu beginnen."</string>
+<string name="welcome_banner_checking_uhoh">"Etwas lief falsch. Lassen Sie uns herausfinden was, um es zu reparieren..."</string>
+<string name="welcome_banner_problem_none">"Wir haben einige akkusparende Standardwerte für Sie eingestellt. Genießen Sie Ihre neue Akkulaufzeit!"</string>
+<string name="welcome_banner_problem_service">"Es scheint, dass Sie das Unbounce Modul nicht aktiviert haben. Klicken Sie auf REPARIEREN, stellen sicher, dass Unbounce markiert ist, und starten danach Ihr Gerät neu."</string>
+<string name="welcome_banner_problem_xposed_running">"Xposed läuft nicht. Klicken Sie erst auf REPARIEREN, dann auf Installieren/Aktualisieren und starten dann Ihr Gerät neu."</string>
+<string name="welcome_banner_problem_xposed_installed">"Xposed ist nicht installiert. Es wird für Unbounce und viele weitere Anwendungen mit Rootzugang benötigt. Wenn der Download abgeschlossen ist, klicken Sie erst auf INSTALLIEREN und starten Unbounce danach erneut. Wenn Sie mehr über Xposed lernen möchten &lt;a href=\"http://www.tested.com/tech/android/460074-how-use-xposed-framework-android-extreme-customization\" /&gt;besuche Tested.com.&lt;/a&gt; "</string>
+<string name="welcome_banner_problem_root">"Es sieht danach aus, dass Ihr Gerät keinen Rootzugang hat. Unbounce benötigt ein Gerät mit Rootzugriff, um korrekt zu funktionieren. Wenn Sie daran interessiert sind Ihr Gerät zu rooten, besuchen Sie bitte &lt;a href=\"http://www.techverse.net/how-to-root-your-android-phone-tablet-and-why\" /&gt;Techverse.net&lt;/a&gt; um zu beginnen."</string>
 <string name="welcome_banner_button_next">"WEITER"</string>
 <string name="welcome_banner_button_fixit">"REPARIEREN"</string>
 <string name="welcome_banner_button_exit">"SCHLIESSEN"</string>
 <string name="welcome_banner_button_install">"INSTALLIEREN"</string>
 <string name="welcome_downloading_xposed">"Xposed wird heruntergeladen..."</string>
 <string name="welcome_downloaded_xposed">"Download abgeschlossen."</string>
-<string name="welcome_download_error_xposed">"Download fehlgeschlagen. Versuch es später nochmal."</string>
+<string name="welcome_download_error_xposed">"Download fehlgeschlagen. Versuchen Sie es später noch einmal."</string>
 <string name="download_xposed_title">"Xposed wird heruntergeladen"</string>
 <string name="download_xposed_description">"Benötigt für Unbounce"</string>
 <string name="requires_root">"*** Benötigt ein Gerät mit Rootzugriff ***"</string>
-<string name="installs_xposed">"Unbounce verwendet das Xposed Framework und wird es für Dich installieren, falls du es nicht bereits hast."</string>
+<string name="installs_xposed">"Unbounce verwendet das Xposed Framework und wird es für Sie installieren, falls Sie es nicht bereits getan haben."</string>
 <string name="settings_category_code_credits">"Entwickler"</string>
 </resources>
