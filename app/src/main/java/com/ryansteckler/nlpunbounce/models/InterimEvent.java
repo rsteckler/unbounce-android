@@ -3,7 +3,7 @@ package com.ryansteckler.nlpunbounce.models;
 /**
  * Created by rsteckler on 9/5/14.
  */
-public class InterimWakelock implements java.io.Serializable{
+public class InterimEvent implements java.io.Serializable{
     public long getTimeStarted() {
         return mTimeStarted;
     }

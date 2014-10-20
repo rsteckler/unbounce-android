@@ -13,7 +13,7 @@ public class RootHelper {
     /** @author Kevin Kowalewski */
 
         public static boolean isDeviceRooted() {
-            return checkRootMethod1() || checkRootMethod2() || checkRootMethod3();
+            return checkRootMethod1() || checkRootMethod2() || checkRootMethod3() || checkRootMethod4();
         }
 
         public static boolean checkRootMethod1() {
@@ -21,14 +21,21 @@ public class RootHelper {
             return buildTags != null && buildTags.contains("test-keys");
         }
 
-        public static boolean checkRootMethod2() {
-            try {
-                File file = new File("/system/app/Superuser.apk");
-                return file.exists();
-            } catch (Exception e) {return false;}
-        }
+    public static boolean checkRootMethod2() {
+        try {
+            File file = new File("/system/app/Superuser.apk");
+            return file.exists();
+        } catch (Exception e) {return false;}
+    }
 
-        public static boolean checkRootMethod3() {
+    public static boolean checkRootMethod4() {
+        try {
+            File file = new File("/system/xbin/su");
+            return file.exists();
+        } catch (Exception e) {return false;}
+    }
+
+    public static boolean checkRootMethod3() {
             return new ExecShell().executeCommand(ExecShell.SHELL_CMD.check_su_binary)!=null;
         }
     }

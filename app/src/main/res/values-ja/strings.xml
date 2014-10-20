@@ -1,122 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-<string name="app_name">"Unbounce"</string>
-<string name="version">"バージョン"</string>
-<string name="title_activity_material_settings">"Unbounce"</string>
-<string name="title_home">"ホーム"</string>
-<string name="title_wakelocks">"ウェイクロック"</string>
-<string name="title_alarms">"アラーム"</string>
-<string name="navigation_drawer_open">"ナビドロワを開く"</string>
-<string name="navigation_drawer_close">"ナビドロワを閉じる"</string>
-<string name="action_search">"検索"</string>
-<string name="action_sort_by_count">"回数で並び替え"</string>
-<string name="action_sort_by_time">"時間で並び替え"</string>
-<string name="action_settings">"設定"</string>
-<string name="action_reset_stats">"統計の初期化"</string>
-<string name="card_donate_title">"サポート"</string>
-<string name="card_donate_subtitle">"開発者をサポートしよう"</string>
-<string name="card_global_title">"全体の統計"</string>
-<string name="card_global_subtitle">"ユーザー全体の統計です"</string>
-<string name="card_local_title">"端末の統計"</string>
-<string name="card_local_subtitle">"あなたの統計です"</string>
-<string name="card_settings_title">"設定"</string>
-<string name="card_settings_subtitle_alarm">"このアラームを操作します"</string>
-<string name="card_settings_subtitle_wakelock">"このウェイクロックを操作します"</string>
-<string name="card_description_title">"説明"</string>
-<string name="card_description_subtitle">"どのように使われているかの説明です"</string>
-<string name="category_unbounced">"Unbounce済み"</string>
-<string name="category_safe">"安全にUnbounce可能"</string>
-<string name="category_unknown">"不明"</string>
-<string name="category_not_safe">"Unbounce非推奨"</string>
-<string name="category_error">"エラー"</string>
-<string name="alert_noiab_title">"Pro機能は使えません"</string>
-<string name="alert_noiab_content">"端末がアプリ内購入をサポートしていないため、UnbounceのPro機能を購入できません。このエラーはGoogle Playストアが古いか、アプリ内購入が制限されている地域に住んでいる場合に起こります。"</string>
-<string name="dialog_ok">"OK"</string>
-<string name="tasker_on">"オン"</string>
-<string name="tasker_off">"オフ"</string>
-<string name="tasker_reset_stats">"統計の初期化"</string>
-<string name="tasker_choose_wakelock">"調整するウェイクロックを選んでください。"</string>
-<string name="tasker_choose_alarm">"調整するアラームを選んでください。"</string>
-<string name="tasker_welcome">"Unbounce Taskerプラグインにようこそ。"</string>
-<string name="tasker_which_task">"ウェイクロックやアラームの調整と、統計の初期化のどちらをしたいですか?"</string>
-<string name="tasker_task_wakelock">"ウェイクロックの調整"</string>
-<string name="tasker_task_alarm">"アラームの調整"</string>
-<string name="tasker_task_reset">"統計の初期化"</string>
-<string name="alert_nopro_title">"これはPro機能です"</string>
-<string name="alert_nopro_content">"通常ではないウェイクロックをUnbounceしたい場合は、どの金額でも良いので寄付パッケージを購入してください。"</string>
-<string name="alert_unknown_alarm_title">"不明なアラームをUnbounceしますか?"</string>
-<string name="alert_unknown_alarm_content">"このアラームは安全にUnbounceできると確認されていません。Unbounceしますか?"</string>
-<string name="dialog_unbounce">"Unbounce"</string>
-<string name="dialog_cancel">"キャンセル"</string>
-<string name="tasker_choose_settings">"設定を選んでください。"</string>
-<string name="alert_unknown_wakelock_title">"不明なウェイクロックをUnbounceしますか?"</string>
-<string name="alert_unknown_wakelock_content">"このウェイクロックは安全にUnbounceできると確認されていません。Unbounceしますか?"</string>
-<string name="dialog_delete">"削除"</string>
-<string name="alert_delete_stats_title">"全ての統計を削除しますか?"</string>
-<string name="alert_delete_stats_content">"ウェイクロックとアラームの統計を初期化します!"</string>
-<string name="title_settings">"設定"</string>
-<string name="alert_reset_settings_title">"デフォルトに戻しますか?"</string>
-<string name="alert_reset_settings_content">"ウェイクロックとアラームの設定を全て初期化します!"</string>
-<string name="dialog_reset">"初期化"</string>
-<string name="reset_settings_confirmation">"設定をデフォルトに戻しました。"</string>
-<string name="dialog_save">"保存"</string>
-<string name="desc_unknown">"これについての情報がまだないため、Unbounceしても大丈夫か分かりません。これが何をしているのか、Xposedフレームワークを無効化するにはどうすればいいか分かっている場合だけUnbounceしてください。"</string>
-<string name="desc_nlpwakelock">"NlpWakeLockはUnbounceしても大丈夫です。Google Playサービスで、セルとWi-Fiの情報を使って位置情報を取得するために使われます。一度取得された位置情報は、Google Nowのような他のアプリでGPSなしに位置情報を使えるよう、ローカルに保存されます。おすすめの設定は180から600秒です。"</string>
-<string name="desc_nlpcollectorwakelock">"NlpCollectorWakeLockはUnbounceしても大丈夫です。Google Playサービスで、セルとWi-Fiの情報を使って位置情報を取得するために使われます。一度取得された位置情報は、Wi-Fiデータベースを改善するためGoogleに送信されます。おすすめの設定は180から600秒です。"</string>
-<string name="desc_alarmmanager">"これはシステムのアラームサービスへのアクセスを提供します。アラームがオフになったとき、システムによりインテントが発行され、ターゲットのアプリが実行されていない場合は自動的に実行されます。登録されたアラームはスリープ中 (その間にアラームがオフになった時はウェイクアップする場合もあり)は保留されますが、無効にされて再起動した場合は消去されます。"</string>
-<string name="desc_audiooffload">"画面が点灯していない時に音楽を再生します。これを無効にすると、画面を消灯している間、音楽などを再生できないようになります。"</string>
-<string name="desc_activitymanagerlauncher">"システムで動作しているアクティビティ全てに影響します。Unbounceすると何も動作しなくなります。"</string>
-<string name="desc_windowmanager">"これはAndroidのシステムレベルのウェイクロックです。アプリが画面に表示される時にWindowManagerロックが必要となります。"</string>
-<string name="desc_rilj">"RILJは、通話やデータ通信などのアクションを実行している間ウェイクしたままにするために使われます。"</string>
-<string name="desc_syncloopwakelock">"これはAndroid SyncManagerによってGoogle+、Twitter、Linkedin、Gmailなどのアカウントを同期するために使われるウェイクロックです。許可する時間を延ばすと、その分次に同期されるまでの間隔が長くなります。"</string>
-<string name="desc_icing">"ICINGはGoogleサービスのウェイクロックです。詳細は調査中です。"</string>
-<string name="desc_startingalertservice">"このウェイクロックはカレンダーやメッセージアプリなどに関連しています。カレンダーなどに通知やアラート機能がある場合は、このウェイクロックを使用している可能性があります。"</string>
-<string name="desc_audiomix">"このウェイクロックはタッチ音やアラート音などの再生に使われます。一部の端末では設定でタッチ音などを無効にしていてもウェイクロックされることがあります。"</string>
-<string name="desc_locationmanagerservice">"名前の通り、位置情報を管理します。通常はあまりバッテリーを消費しません。"</string>
-<string name="desc_audioin">"このウェイクロックはGoogle検索の「OK, Google」コマンドを使う場合に使われます。"</string>
-<string name="desc_nfcservicemroutingwakelock">"NFCサービスに関連しています。検出したタグ情報を適切なアプリに渡す際に使われます。"</string>
-<string name="desc_wakefulintentservicegcoreulrlocationreportingservice">"Google位置情報サービスが現在の位置情報を送信する際に使われます。"</string>
-<string name="desc_vzwgpslocationprovider">"Verizon用のセル統計に使われる位置情報サービスです。"</string>
-<string name="desc_hangouts_rtcs">"Googleハングアウトです。これをUnbounceすると、ハングアウトが動作しなくなります。"</string>
-<string name="desc_gcm_conn">"Google Cloud Messaging (GCM)です。アプリにメッセージを送信する際に使われ、全てのアプリのプッシュ通知機能に関係しています。"</string>
-<string name="desc_google_c2dm">"Cloud to Device Messaging (C2DM)は開発者がアプリにデータを送信するのを手助けするサービスです。アプリがサーバーと通信して、アプリやデータをダウンロードできるようにします。2012年に非推奨となった機能ですが、未だにGCMの代わりに使っているアプリがあります。"</string>
-<string name="desc_timedeventqueue">"Androidのコアな部分です。何も変更しないことをおすすめします。"</string>
-<string name="desc_comgoogleandroidgmsnlpalarm_wakeup_locator">"このアラームはUnbounceしても大丈夫です。Google PlayサービスがセルとWi-Fiの情報を使って位置情報を取得するために使われます。一度取得された位置情報は、Google Nowのような他のアプリでGPSなしに位置情報を使えるよう、ローカルに保存されます。おすすめの設定は180から600秒です。"</string>
-<string name="desc_comgoogleandroidgmsnlpalarm_wakeup_activity_detection">"このアラームはUnbounceしても大丈夫です。Google Playサービスで、セルとWi-Fiの情報を使って位置情報を取得するために使われます。一度取得された位置情報は、Wi-Fiデータベースを改善するためGoogleに送信されます。おすすめの設定は180から600秒です。"</string>
-<string name="desc_comgoogleandroidappshangoutsupdate_notification">"Googleハングアウトの通知を更新するリスナーです。"</string>
-<string name="desc_comandroidinternaltelephonydatastall">"モバイルデータ通信を使用する際のcom.android.phone (電話)からのウェイクロックです。Wi-Fiを使用しているときはトリガーされません。通信環境が悪い場合は誤作動することがあります。"</string>
-<string name="settings_allow_every">"許可間隔"</string>
-<string name="settings_seconds">"秒毎"</string>
-<string name="card_button_reset">"初期化"</string>
-<string name="stat_alarms_acquired">"発生したアラーム"</string>
-<string name="stat_alarms_blocked">"ブロックしたアラーム"</string>
-<string name="stat_loading">"読み込み中…"</string>
-<string name="stat_collected_for">"統計取得時間"</string>
-<string name="stat_wake_duration_allowed">"ウェイクロック許可時間"</string>
-<string name="stat_wake_duration_blocked">"ウェイクロックブロック時間"</string>
-<string name="stat_wake_allowed">"発生したウェイクロック"</string>
-<string name="stat_wake_blocked">"ブロックしたウェイクロック"</string>
-<string name="stat_alarm_allowed">"実行されたアラーム"</string>
-<string name="stat_alarm_blocked">"ブロックしたアラーム"</string>
-<string name="stat_disabled">"無効"</string>
-<string name="donate_text">"このアプリは無料で位置情報関連のバッテリー消費を改善できます。他のウェイクロックやアラームもUnbounce (実行間隔の変更)したい場合は、プロジェクトを寄付してサポートしてください。どの金額の寄付でもPro機能が使えるようになります。"</string>
-<string name="donate_1">"コードを書くときのお供を買ってあげる"</string>
-<string name="donate_5">"サポートするときのおやつを買ってあげる"</string>
-<string name="donate_10">"感謝してもしたりない場合は…"</string>
-<string name="donate_thank_you">"寄付していただきありがとうございます。開発に携われる時間は限られていますが、今後もよりバッテリー消費を抑えられるようにがんばります。あなたの寄付でプロジェクトも、家族も助かりました。"</string>
-<string name="donate_more_button">"もっと手助けするには?"</string>
-<string name="donate_more_text">"下のボタンでもっと寄付することが出来ますが、追加される機能はありません。Unbounceの開発をサポートしてくださり、本当にありがとうございます!"</string>
-<string name="welcome_banner_title">"ようこそ!"</string>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+    <string name="app_name">Unbounce</string>
+    <string name="version">バージョン</string>
+    <string name="title_activity_material_settings">Unbounce</string>
+    <string name="title_home">ホーム</string>
+    <string name="title_wakelocks">ウェイクロック</string>
+    <string name="title_alarms">アラーム</string>
+    <string name="navigation_drawer_open">ナビドロワを開く</string>
+    <string name="navigation_drawer_close">ナビドロワを閉じる</string>
+    <string name="action_search">検索</string>
+    <string name="action_sort_by_count">回数で並び替え</string>
+    <string name="action_sort_by_time">時間で並び替え</string>
+    <string name="action_settings">設定</string>
+    <string name="action_reset_stats">統計の初期化</string>
+    <string name="card_donate_title">サポート</string>
+    <string name="card_donate_subtitle">開発者をサポートしよう</string>
+    <string name="card_global_title">全体の統計</string>
+    <string name="card_global_subtitle">ユーザー全体の統計です</string>
+    <string name="card_local_title">端末の統計</string>
+    <string name="card_local_subtitle">あなたの統計です</string>
+    <string name="card_settings_title">設定</string>
+    <string name="card_settings_subtitle_alarm">間隔を変更します</string>
+    <string name="card_settings_subtitle_wakelock">間隔を変更します</string>
+    <string name="card_description_title">説明</string>
+    <string name="card_description_subtitle">どのように使われているかの説明です</string>
+    <string name="category_unbounced">Unbounce済み</string>
+    <string name="category_safe">安全にUnbounce可能</string>
+    <string name="category_unknown">不明</string>
+    <string name="category_not_safe">Unbounce非推奨</string>
+    <string name="category_error">エラー</string>
+    <string name="alert_noiab_title">Pro機能は使えません</string>
+    <string name="alert_noiab_content">端末がアプリ内購入をサポートしていないため、UnbounceのPro機能を購入できません。このエラーはGoogle Playストアが古いか、アプリ内購入が制限されている地域に住んでいる場合に起こります。</string>
+    <string name="dialog_ok">OK</string>
+    <string name="tasker_on">オン</string>
+    <string name="tasker_off">オフ</string>
+    <string name="tasker_reset_stats">統計の初期化</string>
+    <string name="tasker_choose_wakelock">調整するウェイクロックを選んでください。</string>
+    <string name="tasker_choose_alarm">調整するアラームを選んでください。</string>
+    <string name="tasker_welcome">Unbounce Taskerプラグインにようこそ。</string>
+    <string name="tasker_which_task">ウェイクロックやアラームの調整と、統計の初期化のどちらをしたいですか?</string>
+    <string name="tasker_task_wakelock">ウェイクロックの調整</string>
+    <string name="tasker_task_alarm">アラームの調整</string>
+    <string name="tasker_task_reset">統計の初期化</string>
+    <string name="alert_nopro_title">これはPro機能です</string>
+    <string name="alert_nopro_content">通常ではないウェイクロックをUnbounceしたい場合は、どの金額でも良いので寄付パッケージを購入してください。</string>
+    <string name="alert_unknown_alarm_title">不明なアラームをUnbounceしますか?</string>
+    <string name="alert_unknown_alarm_content">このアラームは安全にUnbounceできると確認されていません。Unbounceしますか?</string>
+    <string name="dialog_unbounce">Unbounce</string>
+    <string name="dialog_cancel">キャンセル</string>
+    <string name="tasker_choose_settings">設定を選んでください。</string>
+    <string name="alert_unknown_wakelock_title">不明なウェイクロックをUnbounceしますか?</string>
+    <string name="alert_unknown_wakelock_content">このウェイクロックは安全にUnbounceできると確認されていません。Unbounceしますか?</string>
+    <string name="dialog_delete">削除</string>
+    <string name="alert_delete_stats_title">全ての統計を削除しますか?</string>
+    <string name="alert_delete_stats_content">ウェイクロックとアラームの統計を初期化します!</string>
+    <string name="title_settings">設定</string>
+    <string name="alert_reset_settings_title">デフォルトに戻しますか?</string>
+    <string name="alert_reset_settings_content">ウェイクロックとアラームの設定を全て初期化します!</string>
+    <string name="dialog_reset">初期化</string>
+    <string name="reset_settings_confirmation">設定をデフォルトに戻しました。</string>
+    <string name="dialog_save">保存</string>
+    <string name="desc_unknown">これについての情報がまだないため、Unbounceしても大丈夫か分かりません。これが何をしているのか、Xposedフレームワークを無効化するにはどうすればいいか分かっている場合だけUnbounceしてください。</string>
+    <string name="desc_nlpwakelock">NlpWakeLockはUnbounceしても大丈夫です。Google Playサービスで、セルとWi-Fiの情報を使って位置情報を取得するために使われます。一度取得された位置情報は、Google Nowのような他のアプリでGPSなしに位置情報を使えるよう、ローカルに保存されます。おすすめの設定は180から600秒です。</string>
+    <string name="desc_nlpcollectorwakelock">NlpCollectorWakeLockはUnbounceしても大丈夫です。Google Playサービスで、セルとWi-Fiの情報を使って位置情報を取得するために使われます。一度取得された位置情報は、Wi-Fiデータベースを改善するためGoogleに送信されます。おすすめの設定は180から600秒です。</string>
+    <string name="desc_alarmmanager">これはシステムのアラームサービスへのアクセスを提供します。アラームがオフになったとき、システムによりインテントが発行され、ターゲットのアプリが実行されていない場合は自動的に実行されます。登録されたアラームはスリープ中 (その間にアラームがオフになった時はウェイクアップする場合もあり)は保留されますが、無効にされて再起動した場合は消去されます。</string>
+    <string name="desc_audiooffload">画面が点灯していない時に音楽を再生します。これを無効にすると、画面を消灯している間、音楽などを再生できないようになります。</string>
+    <string name="desc_activitymanagerlauncher">システムで動作しているアクティビティ全てに影響します。Unbounceすると何も動作しなくなります。</string>
+    <string name="desc_windowmanager">これはAndroidのシステムレベルのウェイクロックです。アプリが画面に表示される時にWindowManagerロックが必要となります。</string>
+    <string name="desc_rilj">RILJは、通話やデータ通信などのアクションを実行している間ウェイクしたままにするために使われます。</string>
+    <string name="desc_syncloopwakelock">これはAndroid SyncManagerによってGoogle+、Twitter、Linkedin、Gmailなどのアカウントを同期するために使われるウェイクロックです。許可する時間を延ばすと、その分次に同期されるまでの間隔が長くなります。</string>
+    <string name="desc_icing">ICINGはGoogleサービスのウェイクロックです。詳細は調査中です。</string>
+    <string name="desc_startingalertservice">このウェイクロックはカレンダーやメッセージアプリなどに関連しています。カレンダーなどに通知やアラート機能がある場合は、このウェイクロックを使用している可能性があります。</string>
+    <string name="desc_audiomix">このウェイクロックはタッチ音やアラート音などの再生に使われます。一部の端末では設定でタッチ音などを無効にしていてもウェイクロックされることがあります。</string>
+    <string name="desc_locationmanagerservice">名前の通り、位置情報を管理します。通常はあまりバッテリーを消費しません。</string>
+    <string name="desc_audioin">このウェイクロックはGoogle検索の「OK, Google」コマンドを使う場合に使われます。</string>
+    <string name="desc_nfcservicemroutingwakelock">NFCサービスに関連しています。検出したタグ情報を適切なアプリに渡す際に使われます。</string>
+    <string name="desc_wakefulintentservicegcoreulrlocationreportingservice">Google位置情報サービスが現在の位置情報を送信する際に使われます。</string>
+    <string name="desc_vzwgpslocationprovider">Verizon用のセル統計に使われる位置情報サービスです。</string>
+    <string name="desc_hangouts_rtcs">Googleハングアウトです。これをUnbounceすると、ハングアウトが動作しなくなります。</string>
+    <string name="desc_gcm_conn">Google Cloud Messaging (GCM)です。アプリにメッセージを送信する際に使われ、全てのアプリのプッシュ通知機能に関係しています。</string>
+    <string name="desc_google_c2dm">Cloud to Device Messaging (C2DM)は開発者がアプリにデータを送信するのを手助けするサービスです。アプリがサーバーと通信して、アプリやデータをダウンロードできるようにします。2012年に非推奨となった機能ですが、未だにGCMの代わりに使っているアプリがあります。</string>
+    <string name="desc_timedeventqueue">Androidのコアな部分です。何も変更しないことをおすすめします。</string>
+    <string name="desc_comgoogleandroidgmsnlpalarm_wakeup_locator">このアラームはUnbounceしても大丈夫です。Google PlayサービスがセルとWi-Fiの情報を使って位置情報を取得するために使われます。一度取得された位置情報は、Google Nowのような他のアプリでGPSなしに位置情報を使えるよう、ローカルに保存されます。おすすめの設定は180から600秒です。</string>
+    <string name="desc_comgoogleandroidgmsnlpalarm_wakeup_activity_detection">このアラームはUnbounceしても大丈夫です。Google Playサービスで、セルとWi-Fiの情報を使って位置情報を取得するために使われます。一度取得された位置情報は、Wi-Fiデータベースを改善するためGoogleに送信されます。おすすめの設定は180から600秒です。</string>
+    <string name="desc_comgoogleandroidappshangoutsupdate_notification">Googleハングアウトの通知を更新するリスナーです。</string>
+    <string name="desc_comandroidinternaltelephonydatastall">モバイルデータ通信を使用する際のcom.android.phone (電話)からのウェイクロックです。Wi-Fiを使用しているときはトリガーされません。通信環境が悪い場合は誤作動することがあります。</string>
+    <string name="settings_allow_every">許可間隔</string>
+    <string name="settings_seconds">秒毎</string>
+    <string name="card_button_reset">初期化</string>
+    <string name="stat_alarms_acquired">発生したアラーム</string>
+    <string name="stat_alarms_blocked">ブロックしたアラーム</string>
+    <string name="stat_loading">読み込み中…</string>
+    <string name="stat_collected_for">統計取得時間</string>
+    <string name="stat_wake_duration_allowed">ウェイクロック許可時間</string>
+    <string name="stat_wake_duration_blocked">ウェイクロックブロック時間</string>
+    <string name="stat_wake_allowed">発生したウェイクロック</string>
+    <string name="stat_wake_blocked">ブロックしたウェイクロック</string>
+    <string name="stat_alarm_allowed">実行されたアラーム</string>
+    <string name="stat_alarm_blocked">ブロックしたアラーム</string>
+    <string name="stat_disabled">無効</string>
+    <string name="donate_text">このアプリは無料で位置情報関連のバッテリー消費を改善できます。他のウェイクロックやアラームもUnbounce (実行間隔の変更)したい場合は、プロジェクトを寄付してサポートしてください。どの金額の寄付でもPro機能が使えるようになります。</string>
+    <string name="donate_1">コードを書くときのお供を買ってあげる</string>
+    <string name="donate_5">サポートするときのおやつを買ってあげる</string>
+    <string name="donate_10">感謝してもしたりない場合は…</string>
+    <string name="donate_thank_you">寄付していただきありがとうございます。開発に携われる時間は限られていますが、今後もよりバッテリー消費を抑えられるようにがんばります。あなたの寄付でプロジェクトも、家族も助かりました。</string>
+    <string name="donate_more_button">もっと手助けするには?</string>
+    <string name="donate_more_text">下のボタンでもっと寄付することが出来ますが、追加される機能はありません。Unbounceの開発をサポートしてくださり、本当にありがとうございます!</string>
+    <string name="welcome_banner_welcome">ようこそ!</string>
+    <string name="welcome_banner_title">準備が完了しているか確認しましょう。</string>
+    <string name="welcome_banner_checking_service">Unbounceが動作しているか確認しています…</string>
+    <string name="welcome_banner_checking_xposed">Xposedがインストールされているか確認しています…</string>
+    <string name="welcome_banner_checking_root">root権限があるか確認しています…</string>
+    <string name="welcome_banner_checking_looks_great">準備完了!</string>
+    <string name="welcome_banner_checking_uhoh">何かが準備不足です。調べてみましょう…</string>
+    <string name="welcome_banner_problem_none">バッテリー消費を抑える設定をしました。長持ちするバッテリーで楽しみましょう!</string>
+    <string name="welcome_banner_problem_service">Unbounceモジュールが有効にされていないか、更新後に再起動されていません。「修正する」をタップした後Unbounceを有効にして、再起動してください。</string>
+    <string name="welcome_banner_problem_xposed_running">Xposedが動作していません。「修正する」をタップした後「インストール/更新」をタップして、再起動してください。</string>
+    <string name="welcome_banner_problem_xposed_installed">Xposedがインストールされていません。Unbounceを動作させるにはXposedが必要です。ダウンロードが完了したら、インストールをタップしてUnbounceを起動し直してください。\nXposedについて詳しく知りたい場合は<![CDATA[<a href="http://www.tested.com/tech/android/460074-how-use-xposed-framework-android-extreme-customization/">Tested.com (英語)</a>]]>か<![CDATA[<a href="http://androplus.org/Entry/227/">このサイト</a>]]>などを見てください。</string>
+    <string name="welcome_banner_problem_root">root化されていないようです。Unbounceはroot化された端末でないと動作しません。お使いの端末をroot化する方法は検索してください。<![CDATA[<a href="http://www.techverse.net/how-to-root-your-android-phone-tablet-and-why/">Techverse.net (英語)</a>]]>でなぜroot化するといいのか分かります。</string>
+    <string name="welcome_banner_button_next">次へ</string>
+    <string name="welcome_banner_button_fixit">修正する</string>
+    <string name="welcome_banner_button_exit">終了</string>
+    <string name="welcome_banner_button_install">インストール</string>
+    <string name="welcome_downloading_xposed">Xposedのダウンロード中…</string>
+    <string name="welcome_downloaded_xposed">完了しました。</string>
+    <string name="welcome_download_error_xposed">失敗しました。後でやり直してください。</string>
+    <string name="download_xposed_title">Xposedのダウンロード中</string>
+    <string name="download_xposed_description">Unbounceに必要です</string>
+    <string name="settings_category_options">オプション</string>
+    <string name="settings_item_show_launcher">ホームアプリアイコンの表示</string>
+    <string name="settings_item_choose_theme">テーマの選択</string>
+    <string name="settings_item_global_stats_title">全体の統計に参加する</string>
+    <string name="settings_item_reset_defaults_title">デフォルトに戻す</string>
+    <string name="settings_item_reset_defaults_summary">アラームとウェイクロックの設定を全てデフォルトに戻します。</string>
+    <string name="settings_category_code_credits">開発者のクレジット</string>
+    <string name="settings_item_author">開発者: Ryan Steckler</string>
+    <string name="settings_item_logging_level">ログのレベル</string>
+    <string name="settings_category_translation">翻訳者のクレジット</string>
+    <string name="settings_theme_material">Material</string>
+    <string name="settings_theme_dark">Dark</string>
+    <string name="settings_logging_quiet">Quiet</string>
+    <string name="settings_logging_default">デフォルト</string>
+    <string name="settings_logging_verbose">Verbose</string>
+    <string name="settings_item_force_english_title">英語にする</string>
+    <string name="settings_item_force_english_summary">アプリの言語を英語にします。</string>
+    <string name="playstore_short_description">消費電力を極限まで抑えよう!</string>
+    <string name="requires_root">*** root権限とXposedフレームワークが必要です ***</string>
+    <string name="installs_xposed">UnbounceはXposedフレームワークを使用するため、インストールされていない場合は自動でインストールします。</string>
+    <string name="playstore_long_description">ユーザーの声:
 
-<string name="playstore_short_description">"消費電力を極限まで抑えよう!"</string>
-<string name="playstore_long_description">"
-*** root権限とXposedフレームワークが必要です ***
-
-ユーザーの声:
-12時間経っても0.13%/h!
-お布施しました
-何これ凄すぎ
-ウェイクロック管理できるのはいいね
+"12時間経っても0.13%/h!"
+"お布施しました"
+"何これ凄すぎ"
+"ウェイクロック管理できるのはいいね"
+"これはうまく使えば化けるぞ"
 ...などなど
 
 Unbounceは、端末をウェイクしたままにする間隔や端末をウェイクする間隔を変更して、バッテリー消費を抑えます。最初からおすすめの省電力設定がされていますが、もっと他のウェイクロックやアラームを変えることも出来ます。
@@ -132,6 +169,6 @@ Unbounceは、端末をウェイクしたままにする間隔や端末をウェ
 
 アプリ内購入でPro機能をアンロックすると、どんなアラームやウェイクロックでもUnbounce (実行間隔の変更)出来るようになります。Pro機能を購入しなくても、以下のバッテリー消費が大きいものをUnbounce出来ます: NlpWakelock、NlpCollectorWakeLock、ALARM_WAKEUP_LOCATOR、ALARM_WAKE_ACTIVITY_DETECTION
 
-[バッテリー]の持ちを極限まで高めよう!
-    "</string>
+[バッテリー]の持ちを極限まで高めよう!</string>
+
 </resources>

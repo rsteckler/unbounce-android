@@ -231,6 +231,56 @@
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="fill_parent"
+                                android:text="@string/stat_service_allowed"
+                                android:gravity="center_vertical"
+                                android:layout_weight="1"
+                                style="?cardText" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:text="@string/stat_loading"
+                                android:id="@+id/textLocalServiceAcquired"
+                                android:gravity="center_vertical"
+                                style="?cardTextValues" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            >
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="fill_parent"
+                                android:text="@string/stat_service_blocked"
+                                android:gravity="center_vertical"
+                                android:layout_weight="1"
+                                style="?cardText" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:text="@string/stat_loading"
+                                android:id="@+id/textLocalServiceBlocked"
+                                android:gravity="center_vertical"
+                                style="?cardTextValues" />
+
+                        </LinearLayout>
+
+
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            >
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="fill_parent"
                                 android:text="@string/stat_alarm_allowed"
                                 android:gravity="center_vertical"
                                 android:layout_weight="1"
@@ -424,6 +474,55 @@
                                 android:id="@+id/textGlobalWakelockBlocked"
                                 android:gravity="center_vertical" />
                         </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            >
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="fill_parent"
+                                android:text="@string/stat_service_allowed"
+                                android:gravity="center_vertical"
+                                android:layout_weight="1"
+                                style="?cardText" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:text="@string/stat_loading"
+                                android:id="@+id/textGlobalServiceAllowed"
+                                android:gravity="center_vertical"
+                                style="?cardTextValues" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            >
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="fill_parent"
+                                android:text="@string/stat_service_blocked"
+                                android:gravity="center_vertical"
+                                android:layout_weight="1"
+                                style="?cardText" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:text="@string/stat_loading"
+                                android:id="@+id/textGlobalServiceBlocked"
+                                android:gravity="center_vertical"
+                                style="?cardTextValues" />
+
+                        </LinearLayout>
+
 
                         <LinearLayout
                             android:orientation="horizontal"
