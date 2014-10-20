@@ -107,7 +107,10 @@
 <string name="donate_more_button">"COMO POSSO AJUDAR MAIS?"</string>
 <string name="donate_more_text">"Muitas pessoas perguntaram como é que poderiam ajudar para além do donativo inicial. Os botões em baixo deixam-te doar outra vez, mas não vão desbloquear nada mais. Muito obrigado por suportares o Unbounce!"</string>
 <string name="welcome_banner_title">"Bem vindo!"</string>
+<string name="welcome_banner_text">"Podes bloquear wakelocks impedindo que o teu telefone se mantenha acordado, e bloquear os alarmes que fazem com que ele acorde. Já definimos algumas coisas por ti que te vão poupar bateria."</string>
 
+<!-- Don't translate this one  :) -->
+<string name="app_font_family">"sans_serif"</string>
 <string name="settings_category_options">"Opções"</string>
 <string name="settings_item_show_launcher">"Mostrar icon app"</string>
 <string name="settings_item_choose_theme">"Escolher tema"</string>
@@ -115,6 +118,7 @@
 <string name="settings_item_global_stats_summary">"Enviar e receber estatística"</string>
 <string name="settings_item_reset_defaults_title">"Reiniciar para definições padrão"</string>
 <string name="settings_item_reset_defaults_summary">"Mudar para as config inicíais de todos os alarmes e wakelocks"</string>
+<string name="settings_category_debug">"Resolver problema"</string>
 <string name="settings_item_author">"Autor: Ryan Steckles"</string>
 <string name="settings_item_logging_level">"Nível de conexão"</string>
 <string name="settings_category_translation">"Tradutores"</string>
@@ -150,5 +154,27 @@ Algumas das características principais:
 Através da compra dentro da aplicação (In-App purchase) podes desbloquear a versão Pro que permite-te configurar todos os alarmes e wakelocks do teu dispositivo. Sem a versão Pro podes configurar os 2 wakelocks e 2 alarmes que mais bateria consomem: NlpWakelock, NlpCollectorWakeLock, ALARM_WAKEUP_LOCATOR, e ALARM_WAKE_ACTIVITY_DETECTION.
 
 Que aproveites uma grande e longa bateria!"</string>
-
+<string name="welcome_banner_welcome">"Bem vindo! "</string>
+<string name="welcome_banner_checking_service">"A verificar Unbounce ..."</string>
+<string name="welcome_banner_checking_xposed">"A verificar se Xposed está instalado..."</string>
+<string name="welcome_banner_checking_root">"A verificar root..."</string>
+<string name="welcome_banner_checking_looks_great">"Parece que tudo está a funcionar!"</string>
+<string name="welcome_banner_checking_uhoh">"Alguma coisa correu mal. Vamos resolver o problema..."</string>
+<string name="welcome_banner_problem_none">"Configurámos algumas coisas por ti. Vais começar a poupar bateria, aproveita!"</string>
+<string name="welcome_banner_problem_service">"Parece que não activaste o modulo Unbounce. Clica em ARRANJAR, certifica-te que Unbouce está activo e reinicia o dispositivo."</string>
+<string name="welcome_banner_problem_xposed_running">"Xposed não está a funcionar. Clica em ARRANJAR, depois clica em Intall/Update e reinicia o dispositivo."</string>
+<string name="welcome_banner_problem_xposed_installed">"Xposed não está instalado. Xposed é fundamental para que Unbouce e outras aplicações que precisam de root funcionem. Quando o download acabar, clica em INSTALAR, depois inicia Unbouce outra vez. Se quiseres aprender mais sobre Xposed vai a: &lt;a href=http://www.tested.com/tech/android/460074-how-use-xposed-framework-android-extreme-customization/&gt;visit Tested.com.&lt;/a&gt; "</string>
+<string name="welcome_banner_problem_root">"Parece que o teu dispositivo não tem root. Para que Unbouce funcione tens que ter o dispositivo com root. Se estás interessado em fazer root, para começar vai a: &lt;a href=http://www.techverse.net/how-to-root-your-android-phone-tablet-and-why/&gt;Techverse.net&lt;/a&gt;"</string>
+<string name="welcome_banner_button_next">"PRÓXIMO"</string>
+<string name="welcome_banner_button_fixit">"ARRANJAR"</string>
+<string name="welcome_banner_button_exit">"SAIR"</string>
+<string name="welcome_banner_button_install">"INSTALAR"</string>
+<string name="welcome_downloading_xposed">"A descarregar Xposed..."</string>
+<string name="welcome_downloaded_xposed">"Download completo."</string>
+<string name="welcome_download_error_xposed">"O dowload falhou. Tenta outra vez mais tarde."</string>
+<string name="download_xposed_title">"A descarregar Xposed"</string>
+<string name="download_xposed_description">"Necessário para Unbouce"</string>
+<string name="requires_root">"*** Precisa de dispositivo com root ***"</string>
+<string name="installs_xposed">"Unbounce precisa de Xposed Framework e vai instalá-lo se não o tiveres."</string>
+<string name="settings_category_code_credits">"Créditos"</string>
 </resources>
