@@ -15,8 +15,6 @@ import com.ryansteckler.nlpunbounce.helpers.SortWakeLocks;
 import com.ryansteckler.nlpunbounce.helpers.ThemeHelper;
 import com.ryansteckler.nlpunbounce.models.AlarmStats;
 import com.ryansteckler.nlpunbounce.models.EventLookup;
-import com.ryansteckler.nlpunbounce.models.WakelockStats;
-
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -56,10 +54,10 @@ public class AlarmsAdapter extends ArrayAdapter {
         boolean foundSafe = false;
         boolean foundUnknown = false;
 
-        Iterator<AlarmStats> iter = alarmStatList.iterator();
-        while (iter.hasNext()) {
 
-            AlarmStats curStat = iter.next();
+       for(AlarmStats curStat:alarmStatList){
+
+
 
             if (!curStat.getBlockingEnabled()) {
                 foundSafe = true;

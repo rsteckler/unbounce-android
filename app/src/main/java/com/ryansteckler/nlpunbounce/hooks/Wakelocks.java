@@ -250,7 +250,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
                 param.setResult(null);
                 recordWakelockBlock(param, wakeLockName);
 
-                debugLog("Preventing Wakelock" + wakeLockName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
+                debugLog("Preventing Wakelock " + wakeLockName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
 
             } else {
                 //Allow the wakelock
@@ -358,18 +358,22 @@ public class Wakelocks implements IXposedHookLoadPackage {
                     ---------------- Added for JB 4.1.2 Support ------------------------
 
                  */
+                try {
+                    Object mTarget = XposedHelpers.getObjectField(pi, "mTarget");
 
-                Object mTarget = XposedHelpers.getObjectField(pi, "mTarget");
-
-                //debugLog("mTarget Class for PendingIntent: " + mTarget.getClass());
-                if (null != mTarget) {
-                    Object pendingIntentRecord$Key = XposedHelpers.getObjectField(mTarget, "key");
-                    //debugLog("PendingIntentRecord$Key Class for PendingIntent: " + pendingIntentRecord$Key.getClass());
-                    if (null != pendingIntentRecord$Key) {
-                        Object requestIntent = XposedHelpers.getObjectField(pendingIntentRecord$Key, "requestIntent");
-                        //debugLog("requestIntent Class for PendingIntent: " + requestIntent.getClass() + " " + requestIntent);
-                        intent = (Intent) requestIntent;
+                    //debugLog("mTarget Class for PendingIntent: " + mTarget.getClass());
+                    if (null != mTarget) {
+                        Object pendingIntentRecord$Key = XposedHelpers.getObjectField(mTarget, "key");
+                        //debugLog("PendingIntentRecord$Key Class for PendingIntent: " + pendingIntentRecord$Key.getClass());
+                        if (null != pendingIntentRecord$Key) {
+                            Object requestIntent = XposedHelpers.getObjectField(pendingIntentRecord$Key, "requestIntent");
+                            //debugLog("requestIntent Class for PendingIntent: " + requestIntent.getClass() + " " + requestIntent);
+                            intent = (Intent) requestIntent;
+                        }
                     }
+                }
+                catch(Exception e){
+                        XposedBridge.log(TAG + "Additional logic to detect alarms on 4.1.2 failed for: "+ pi);
                 }
             }
 

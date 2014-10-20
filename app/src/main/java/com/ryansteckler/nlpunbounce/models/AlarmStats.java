@@ -1,7 +1,5 @@
 package com.ryansteckler.nlpunbounce.models;
 
-import com.ryansteckler.nlpunbounce.AlarmDetailFragment;
-
 import java.io.Serializable;
 
 /**

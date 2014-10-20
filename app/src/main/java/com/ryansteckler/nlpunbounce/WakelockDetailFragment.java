@@ -2,15 +2,14 @@ package com.ryansteckler.nlpunbounce;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -100,10 +99,7 @@ public class WakelockDetailFragment extends Fragment {
         edit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                if (i == EditorInfo.IME_ACTION_DONE) {
-                    return handleTextChange(textView, edit);
-                }
-                return false;
+                return i == EditorInfo.IME_ACTION_DONE && handleTextChange(textView, edit);
             }
         });
         edit.setOnFocusChangeListener(new View.OnFocusChangeListener() {

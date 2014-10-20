@@ -34,7 +34,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -48,9 +47,6 @@ import com.ryansteckler.nlpunbounce.helpers.RootHelper;
 import com.ryansteckler.nlpunbounce.helpers.SettingsHelper;
 import com.ryansteckler.nlpunbounce.helpers.ThemeHelper;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
-
-
-import org.w3c.dom.Text;
 
 import java.io.File;
 
@@ -565,12 +561,7 @@ public class HomeFragment extends Fragment  {
     private boolean isInstalledFromPlay() {
         String installer = getActivity().getPackageManager().getInstallerPackageName("com.ryansteckler.nlpunbounce");
 
-        if (installer == null) {
-            return false;
-        }
-        else {
-            return installer.equals("com.android.vending");
-        }
+        return installer != null && installer.equals("com.android.vending");
     }
 
     private boolean launchXposedModules() {

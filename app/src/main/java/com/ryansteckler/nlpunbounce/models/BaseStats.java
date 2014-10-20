@@ -1,9 +1,6 @@
 package com.ryansteckler.nlpunbounce.models;
 
-import android.util.Log;
-
 import java.io.Serializable;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by rsteckler on 9/10/14.

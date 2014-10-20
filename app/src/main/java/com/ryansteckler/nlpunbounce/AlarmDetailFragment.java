@@ -2,13 +2,13 @@ package com.ryansteckler.nlpunbounce;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -19,7 +19,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -76,8 +75,7 @@ public class AlarmDetailFragment extends Fragment {
     public long getSeconds() {
         EditText editSeconds = (EditText)getActivity().findViewById(R.id.editAlarmSeconds);
         String text = editSeconds.getText().toString();
-        long seconds = Long.parseLong(text);
-        return seconds;
+        return Long.parseLong(text);
     }
 
     @Override
@@ -100,10 +98,7 @@ public class AlarmDetailFragment extends Fragment {
         edit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                if (i == EditorInfo.IME_ACTION_DONE) {
-                    return handleTextChange(textView, edit);
-                }
-                return false;
+                return i == EditorInfo.IME_ACTION_DONE && handleTextChange(textView, edit);
             }
         });
         edit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -331,8 +326,8 @@ public class AlarmDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_alarm_detail, container, false);
-        return view;
+        return inflater.inflate(R.layout.fragment_alarm_detail, container, false);
+
     }
 
     @Override

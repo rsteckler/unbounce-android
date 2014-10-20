@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 
-import com.ryansteckler.nlpunbounce.R;
-
 import java.util.Locale;
 
 /**
@@ -19,6 +17,8 @@ public class LocaleHelper {
     /**
      * Set the locale of the Activity, and restart it by creating a new Activity of the same type.
      */
+
+    private LocaleHelper(){}
     public static void forceEnglish(Activity activity)
     {
         sForceEnglish = 1;
