@@ -3,14 +3,8 @@ package com.ryansteckler.nlpunbounce;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 
-import com.ryansteckler.nlpunbounce.models.BaseStats;
-import com.ryansteckler.nlpunbounce.models.InterimWakelock;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
-import com.ryansteckler.nlpunbounce.models.WakelockStats;
-
-import java.util.HashMap;
 
 public class XposedReceiver extends BroadcastReceiver {
 
