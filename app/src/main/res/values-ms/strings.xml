@@ -109,8 +109,6 @@
 <string name="welcome_banner_title">"Selamat datang!"</string>
 <string name="welcome_banner_text">"Anda boleh menghalang kunci berjaga daripada menghalang telefon anda tidur, dan menghalang penggera daripada membangunkannya.  Kami telah menetapkan beberapa tetapan untuk penjimatan bateri."</string>
 
-<!-- Don't translate this one  :) -->
-<string name="app_font_family">"sans_serif"</string>
 <string name="settings_category_options">"Pilihan"</string>
 <string name="settings_item_show_launcher">"Tunjuk ikon pelancar"</string>
 <string name="settings_item_choose_theme">"Pilih tema"</string>
@@ -165,8 +163,8 @@ Semoga [bateri] anda tahan lama!
 <string name="welcome_banner_problem_none">"Kami telah menyediakan beberapa tetapan penjimatan bateri untuk anda. Sila menikmati kehidupan bateri baru anda!"</string>
 <string name="welcome_banner_problem_service">"Nampaknya seperti anda belum lagi membolehkan modul Unbounce. Klik BETULKANNYA, pastikan Unbounce dipilih, kemudian mulakan peranti anda semula."</string>
 <string name="welcome_banner_problem_xposed_running">"Xposed tidak berjalan. Klik BETULKANNYA, kemudian klik Pasang/Kemaskini dan mulakan peranti anda semula."</string>
-<string name="welcome_banner_problem_xposed_installed">"Xposed tidak dipasang. Xposed diperlukan untuk Unbounce dan banyak aplikasi lain yang memerlukan root. Sebaik sahaja muat turun selesai, klik PASANG, kemudian lancarkan Unbounce sekali lagi. Jika anda ingin mengetahui lebih lanjut mengenai Xposed, &lt;a href=http://www.tested.com/tech/android/460074-how-use-xposed-framework-android-extreme-customization/&gt;lawat Tested.com. &lt;/a&gt;"</string>
-<string name="welcome_banner_problem_root">"Nampaknya seperti peranti anda tidak mempunyai root. Unbounce memerlukan peranti yang mempunyai root untuk berfungsi dengan baik. Jika anda berminat untuk mendapatkan root, sila layari &lt;a href=http://www.techverse.net/how-to-root-your-android-phone-tablet-and-why/&gt;Techverse.net&lt;/a&gt; untuk mula. "</string>
+<string name="welcome_banner_problem_xposed_installed">"Xposed tidak dipasang. Xposed diperlukan untuk Unbounce dan banyak aplikasi lain yang memerlukan root. Sebaik sahaja muat turun selesai, klik PASANG, kemudian lancarkan Unbounce sekali lagi. Jika anda ingin mengetahui lebih lanjut mengenai Xposed, <![CDATA[<a href="http://www.tested.com/tech/android/460074-how-use-xposed-framework-android-extreme-customization"/>lawat Tested.com. </a>]]>"</string>
+<string name="welcome_banner_problem_root">"Nampaknya seperti peranti anda tidak mempunyai root. Unbounce memerlukan peranti yang mempunyai root untuk berfungsi dengan baik. Jika anda berminat untuk mendapatkan root, sila layari <![CDATA[<a href="http://www.techverse.net/how-to-root-your-android-phone-tablet-and-why"/>Techverse.net</a> ]]>untuk mula. "</string>
 <string name="welcome_banner_button_next">"SETERUSNYA"</string>
 <string name="welcome_banner_button_fixit">"BETULKANNYA"</string>
 <string name="welcome_banner_button_exit">"KELUAR"</string>

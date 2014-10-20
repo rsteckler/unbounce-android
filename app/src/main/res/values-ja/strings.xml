@@ -109,16 +109,13 @@
 <string name="welcome_banner_title">"準備が完了しているか確認しましょう。"</string>
 <string name="welcome_banner_text">"ウェイクロックをブロックしてウェイクされたままにしないようにしたり、アラームをブロックしてウェイクされないようにしたり出来ます。デフォルトで位置情報関連のバッテリー消費を抑えるようになっています。"</string>
 
-<!-- Don't translate this one  :) -->
-<string name="app_font_family">"sans_serif"</string>
+
 <string name="settings_category_options">"オプション"</string>
 <string name="settings_item_show_launcher">"ホームアプリアイコンの表示"</string>
 <string name="settings_item_choose_theme">"テーマの選択"</string>
 <string name="settings_item_global_stats_title">"全体の統計に参加する"</string>
-<string name="settings_item_global_stats_summary"></string>
 <string name="settings_item_reset_defaults_title">"デフォルトに戻す"</string>
 <string name="settings_item_reset_defaults_summary">"アラームとウェイクロックの設定を全てデフォルトに戻します。"</string>
-<string name="settings_category_debug"></string>
 <string name="settings_item_author">"開発者: Ryan Steckler"</string>
 <string name="settings_item_logging_level">"ログのレベル"</string>
 <string name="settings_category_translation">"翻訳者のクレジット"</string>
@@ -163,8 +160,8 @@ Unbounceは、端末をウェイクしたままにする間隔や端末をウェ
 <string name="welcome_banner_problem_service">"Unbounceモジュールが有効にされていないか、更新後に再起動されていません。「修正する」をタップした後Unbounceを有効にして、再起動してください。"</string>
 <string name="welcome_banner_problem_xposed_running">"Xposedが動作していません。「修正する」をタップした後「インストール/更新」をタップして、再起動してください。"</string>
 <string name="welcome_banner_problem_xposed_installed">"Xposedがインストールされていません。Unbounceを動作させるにはXposedが必要です。ダウンロードが完了したら、インストールをタップしてUnbounceを起動し直してください。
-Xposedについて詳しく知りたい場合は&lt;![CDATA[&lt;a href=http://www.tested.com/tech/android/460074-how-use-xposed-framework-android-extreme-customization/&gt;Tested.com (英語)&lt;/a&gt;]]&gt;か&lt;![CDATA[&lt;a href=http://androplus.org/Entry/227/&gt;このサイト&lt;/a&gt;]]&gt;などを見てください。"</string>
-<string name="welcome_banner_problem_root">"root化されていないようです。Unbounceはroot化された端末でないと動作しません。お使いの端末をroot化する方法は検索してください。&lt;![CDATA[&lt;a href=http://www.techverse.net/how-to-root-your-android-phone-tablet-and-why/&gt;Techverse.net (英語)&lt;/a&gt;]]&gt;でなぜroot化するといいのか分かります。"</string>
+Xposedについて詳しく知りたい場合は<![CDATA[<a href="http://www.tested.com/tech/android/460074-how-use-xposed-framework-android-extreme-customization"/>Tested.com (英語)</a>]]>か<![CDATA[<a href="http://androplus.org/Entry/227"/>このサイト</a>]]>などを見てください。"</string>
+<string name="welcome_banner_problem_root">"root化されていないようです。Unbounceはroot化された端末でないと動作しません。お使いの端末をroot化する方法は検索してください。<![CDATA[<a href="http://www.techverse.net/how-to-root-your-android-phone-tablet-and-why"/>Techverse.net (英語)</a>]]>でなぜroot化するといいのか分かります。"</string>
 <string name="welcome_banner_button_next">"次へ"</string>
 <string name="welcome_banner_button_fixit">"修正する"</string>
 <string name="welcome_banner_button_exit">"終了"</string>

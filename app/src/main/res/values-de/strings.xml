@@ -109,8 +109,6 @@
 <string name="welcome_banner_title">"Willkommen!"</string>
 <string name="welcome_banner_text">"Sie können Wakelocks blockieren, um Ihr Telefon davon abzuhalten, wach zu bleiben. Außerdem können Sie Alarme blockieren, um es von vornherein am Aufwachen zu hindern.  Wir haben bereits einige batteriesparende Standardwerte für Sie gesetzt."</string>
 
-<!-- Don't translate this one  :) -->
-<string name="app_font_family">"sans_serif"</string>
 <string name="settings_category_options">"Einstellungen"</string>
 <string name="settings_item_show_launcher">"Launcher-Icon zeigen"</string>
 <string name="settings_item_choose_theme">"Farbschema wählen"</string>
@@ -164,8 +162,8 @@ Wir wünschen Ihnen ein langes (Batterie-) Leben!
 <string name="welcome_banner_problem_none">"Wir haben einige akkusparende Standardwerte für Sie eingestellt. Genießen Sie Ihre neue Akkulaufzeit!"</string>
 <string name="welcome_banner_problem_service">"Es scheint, dass Sie das Unbounce Modul nicht aktiviert haben. Klicken Sie auf REPARIEREN, stellen sicher, dass Unbounce markiert ist, und starten danach Ihr Gerät neu."</string>
 <string name="welcome_banner_problem_xposed_running">"Xposed läuft nicht. Klicken Sie erst auf REPARIEREN, dann auf Installieren/Aktualisieren und starten dann Ihr Gerät neu."</string>
-<string name="welcome_banner_problem_xposed_installed">"Xposed ist nicht installiert. Es wird für Unbounce und viele weitere Anwendungen mit Rootzugang benötigt. Wenn der Download abgeschlossen ist, klicken Sie erst auf INSTALLIEREN und starten Unbounce danach erneut. Wenn Sie mehr über Xposed lernen möchten &lt;a href=\"http://www.tested.com/tech/android/460074-how-use-xposed-framework-android-extreme-customization\" /&gt;besuche Tested.com.&lt;/a&gt; "</string>
-<string name="welcome_banner_problem_root">"Es sieht danach aus, dass Ihr Gerät keinen Rootzugang hat. Unbounce benötigt ein Gerät mit Rootzugriff, um korrekt zu funktionieren. Wenn Sie daran interessiert sind Ihr Gerät zu rooten, besuchen Sie bitte &lt;a href=\"http://www.techverse.net/how-to-root-your-android-phone-tablet-and-why\" /&gt;Techverse.net&lt;/a&gt; um zu beginnen."</string>
+<string name="welcome_banner_problem_xposed_installed">"Xposed ist nicht installiert. Es wird für Unbounce und viele weitere Anwendungen mit Rootzugang benötigt. Wenn der Download abgeschlossen ist, klicken Sie erst auf INSTALLIEREN und starten Unbounce danach erneut. Wenn Sie mehr über Xposed lernen möchten <![CDATA[<a href="http://www.tested.com/tech/android/460074-how-use-xposed-framework-android-extreme-customization" />besuche Tested.com.</a>]]> "</string>
+<string name="welcome_banner_problem_root">"Es sieht danach aus, dass Ihr Gerät keinen Rootzugang hat. Unbounce benötigt ein Gerät mit Rootzugriff, um korrekt zu funktionieren. Wenn Sie daran interessiert sind Ihr Gerät zu rooten, besuchen Sie bitte <![CDATA[<a href="http://www.techverse.net/how-to-root-your-android-phone-tablet-and-why" />Techverse.net</a>]]> um zu beginnen."</string>
 <string name="welcome_banner_button_next">"WEITER"</string>
 <string name="welcome_banner_button_fixit">"REPARIEREN"</string>
 <string name="welcome_banner_button_exit">"SCHLIESSEN"</string>
