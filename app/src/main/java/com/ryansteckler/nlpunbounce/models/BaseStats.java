@@ -12,6 +12,15 @@ public class BaseStats implements Serializable {
     private boolean mBlockingEnabled;
 
     private String mType;
+    private String mPackage;
+
+    public String getmPackage() {
+        return mPackage;
+    }
+
+    public void setmPackage(String mPackage) {
+        this.mPackage = mPackage;
+    }
 
     public String getType() {
         return mType;
