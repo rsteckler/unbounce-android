@@ -6,6 +6,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ import com.ryansteckler.nlpunbounce.models.AlarmStats;
 import com.ryansteckler.nlpunbounce.models.EventLookup;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
 import com.ryansteckler.nlpunbounce.tasker.TaskerActivity;
+import android.content.pm.PackageManager;
 
 
 /**
@@ -180,6 +182,19 @@ public class AlarmDetailFragment extends Fragment {
 
         TextView description = (TextView)view.findViewById(R.id.textViewAlarmDescription);
         String descriptionText = EventLookup.getDescription(getActivity(), mStat.getName());
+        String packageName = mStat.getmPackage();
+
+        PackageManager pm = getActivity().getPackageManager();
+        ApplicationInfo ai;
+        try {
+            ai = pm.getApplicationInfo( packageName, 0);
+        } catch (final PackageManager.NameNotFoundException e) {
+            ai = null;
+        }
+        final String applicationName = (String) (ai != null ? pm.getApplicationLabel(ai) : "(unknown)");
+
+        descriptionText = descriptionText + "\n\n"+"Package Name: " + applicationName;
+
         description.setText(descriptionText);
         mKnownSafeAlarm = EventLookup.isSafe(mStat.getName()) == EventLookup.SAFE;
         mFreeAlarm = EventLookup.isFree(mStat.getName());
