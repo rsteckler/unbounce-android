@@ -8,7 +8,6 @@ import com.ryansteckler.nlpunbounce.models.BaseStats;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
 
 import java.util.HashMap;
-import java.util.Iterator;
 
 public class ActivityReceiver extends BroadcastReceiver {
 
@@ -24,9 +23,7 @@ public class ActivityReceiver extends BroadcastReceiver {
             HashMap<String, BaseStats> stats = null;
             try {
                 stats = (HashMap<String, BaseStats>) intent.getSerializableExtra("stats");
-                Iterator<BaseStats> iter = stats.values().iterator();
-                if (iter.hasNext()) {
-                    BaseStats testStat = iter.next();
+                for (BaseStats testStat : stats.values()) {
                     if (!(testStat instanceof BaseStats)) {
                         throw new ClassCastException();
                     }
