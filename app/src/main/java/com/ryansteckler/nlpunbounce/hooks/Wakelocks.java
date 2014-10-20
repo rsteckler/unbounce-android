@@ -274,8 +274,8 @@ public class Wakelocks implements IXposedHookLoadPackage {
         }
     }
 
-    private void recordAlarmAcquire(Context context, String alarmName) {
-        UnbounceStatsCollection.getInstance().incrementAlarmAllowed(context, alarmName);
+    private void recordAlarmAcquire(Context context, String alarmName,String packageName) {
+        UnbounceStatsCollection.getInstance().incrementAlarmAllowed(context, alarmName,packageName);
     }
 
     private void handleWakeLockRelease(XC_MethodHook.MethodHookParam param, IBinder lock) {
@@ -383,6 +383,8 @@ public class Wakelocks implements IXposedHookLoadPackage {
             }
 
             String alarmName = intent.getAction();
+            //debugLog("Alarm TargetPackage: " +pi.getTargetPackage());
+
             //If we're blocking this wakelock
             String prefName = "alarm_" + alarmName + "_enabled";
             if (m_prefs.getBoolean(prefName, false)) {
@@ -402,7 +404,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
                     //Not enough time has passed since the last wakelock.  Deny the wakelock
                     //Not enough time has passed since the last alarm.  Remove it from the triggerlist
                     triggers.remove(j);
-                    recordAlarmBlock(param, alarmName);
+                    recordAlarmBlock(param, alarmName,pi.getTargetPackage());
 
                     debugLog("Preventing Alarm " + alarmName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastAlarm);
 
@@ -410,10 +412,10 @@ public class Wakelocks implements IXposedHookLoadPackage {
                     //Allow the wakelock
                     defaultLog(TAG + "Allowing Alarm" + alarmName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastAlarm);
                     mLastAlarmAttempts.put(alarmName, now);
-                    recordAlarmAcquire(context, alarmName);
+                    recordAlarmAcquire(context, alarmName,pi.getTargetPackage());
                 }
             } else {
-                recordAlarmAcquire(context, alarmName);
+                recordAlarmAcquire(context, alarmName,pi.getTargetPackage());
             }
         }
     }
@@ -427,12 +429,12 @@ public class Wakelocks implements IXposedHookLoadPackage {
         }
     }
 
-    private void recordAlarmBlock(XC_MethodHook.MethodHookParam param, String name) {
+    private void recordAlarmBlock(XC_MethodHook.MethodHookParam param, String name,String packageName) {
 
         Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
 
         if (context != null) {
-            UnbounceStatsCollection.getInstance().incrementAlarmBlock(context, name);
+            UnbounceStatsCollection.getInstance().incrementAlarmBlock(context, name,packageName);
         }
 
     }
