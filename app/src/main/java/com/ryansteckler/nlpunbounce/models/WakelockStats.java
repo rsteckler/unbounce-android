@@ -3,6 +3,8 @@ package com.ryansteckler.nlpunbounce.models;
 import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
 
+import static com.ryansteckler.nlpunbounce.helpers.LocaleHelper.getFormattedTime;
+
 /**
  * Created by rsteckler on 9/10/14.
  */
@@ -54,11 +56,12 @@ public class WakelockStats extends BaseStats implements Serializable {
         sb.append(seconds);
         sb.append(" s");*/
 
-        String strLog =days + "d" +hours +"h"+minutes +"m"+seconds +"s" ;
+       // String strLog =days + "d:" +hours +"h:"+minutes +"m:"+seconds +"s" ;
 
        // return (sb.toString());
 
-        return strLog;
+        //return strLog;
+        return getFormattedTime(days,hours,minutes,seconds);
     }
 
     public long getBlockedDuration()
@@ -96,11 +99,11 @@ public class WakelockStats extends BaseStats implements Serializable {
         sb.append(" s");
 */
 
-
-        String strLog =days + "d" +hours +"h"+minutes +"m"+seconds +"s" ;
+        return getFormattedTime(days,hours,minutes,seconds);
+       // String strLog =days + "d:" +hours +"h:"+minutes +"m:"+seconds +"s" ;
 
         //return (sb.toString());
-        return strLog;
+       // return strLog;
     }
 
 
