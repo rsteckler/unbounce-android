@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string name="app_name">"Unbounce"</string>
+<string name="app_name">"Unbounced"</string>
 <string name="version">"Версия"</string>
 <string name="title_activity_material_settings">"Unbounce"</string>
 <string name="title_home">"Сведения"</string>
@@ -101,13 +101,16 @@
 <string name="stat_disabled">"Отключена"</string>
 <string name="donate_text">"Данный модуль позволит исправить поедание батареи Сервисами нахождения локации по сети в любом случае.  Если Вам угодно заблокировать и другие события или пробуждения — поддержите проект, приобретя платные возможности ниже.  Любая сумма пожертвования откроет платные функции."</string>
 <string name="donate_1">"Чашка кофе на написание кода"</string>
-<string name="donate_5">"Латте для тех. поддержки на форуме"</string>
-<string name="donate_10">"Удовольствие от неношения подзарядчика"</string>
+<string name="donate_5">"Латте для тех-поддержки на форуме"</string>
+<string name="donate_10">"Удовольствие от не ношения подзарядчика"</string>
 <string name="donate_thank_you">"Благодарю.  Для меня это ценно.  Я тружусь в свободное время над тем, чтобы продлить время от заряда к заряду.  Оплатив модуль, Вы продвинули проект, предали значимость и моей семье.  Вы бесподобны."</string>
 <string name="donate_more_button">"ЧЕМ Я МОГУ ПОМОЧЬ В ДАЛЬНЕЙШЕМ?"</string>
 <string name="donate_more_text">"Люди часто спрашивают, чем они могут помочь после начального пожертвования.  Кнопки ниже позволят Вам и дальше жертвовать деньги, но уже без предоставления дополнительных возможностей.  Огромное спасибо за поддержку Unbounce!"</string>
 <string name="welcome_banner_title">"Добро пожаловать!"</string>
+<string name="welcome_banner_text">"Теперь Вы можете блокировать пробуждения, чтобы предотвращать бодрствование телефона, и события, чтобы те не тревожили устройство.  Мы уже подготовили для Вас пару настроек, продлевающих жизнь батареи."</string>
 
+<!-- Don't translate this one  :) -->
+<string name="app_font_family">"sans_serif"</string>
 <string name="settings_category_options">"Настройки"</string>
 <string name="settings_item_show_launcher">"Показывать иконку программы"</string>
 <string name="settings_item_choose_theme">"Выбрать тему"</string>
@@ -115,6 +118,7 @@
 <string name="settings_item_global_stats_summary">"Отсылать и заполучать анонимную статистику"</string>
 <string name="settings_item_reset_defaults_title">"Сброс на исходные"</string>
 <string name="settings_item_reset_defaults_summary">"Сбросить все настройки событий и пробуждений на исходные"</string>
+<string name="settings_category_debug">"Наладки"</string>
 <string name="settings_item_author">"Автор: Раян Стеклер"</string>
 <string name="settings_item_logging_level">"Уровень журнализации"</string>
 <string name="settings_category_translation">"Переводчики"</string>
@@ -148,5 +152,27 @@ Unbounce позволяет контролировать потребелени�
 Покупки внутри приложений позволят разблокировать платные возможности, позволяющие управлять любыми событиями и пробуждениями на Вашем устройстве. Без пожертвования можно управлять основными пожирателями батареи: NlpWakelock, NlpCollectorWakeLock, ALARM_WAKEUP_LOCATOR, и ALARM_WAKE_ACTIVITY_DETECTION.
 Продлите жизнь батареи от одного заряда!
     "</string>
-
+<string name="welcome_banner_welcome">"Добро пожаловать!"</string>
+<string name="welcome_banner_checking_service">"Проверяем,не запущен ли Unbounced..."</string>
+<string name="welcome_banner_checking_xposed">"Проверка установки Xposed..."</string>
+<string name="welcome_banner_checking_root">"Получаем ROOT доступ..."</string>
+<string name="welcome_banner_checking_looks_great">"Все круто!"</string>
+<string name="welcome_banner_checking_uhoh">"Произошла ошибка. Давайте выясним подробности, и починим."</string>
+<string name="welcome_banner_problem_none">"Программа установила некоторые исходные настройки. Наслаждайтесь экономией батарейки!"</string>
+<string name="welcome_banner_problem_service">"Ubounce модуль не включен. Нажмите \"ПОЧИНИТЬ\", отметьте Ubounce галкой, и перегрузите устройство."</string>
+<string name="welcome_banner_problem_xposed_running">"Xposed не запущена. Нажмите \"ПОЧИНИТЬ\", установите/обновите программу, и перегрузите устройство."</string>
+<string name="welcome_banner_problem_xposed_installed">"Xposed не установлена. Эта программа необходима для работы Ubounce и многих других модулей. По завершению загрузки, нажмите \"УСТАНОВИТЬ\", и потом запустите Ubounce повторно. Подробнее об Xposed &lt;a href=http://www.tested.com/tech/android/460074-how-use-xposed-framework-android-extreme-customization/&gt;здесь&lt;/a&gt;."</string>
+<string name="welcome_banner_problem_root">"Похоже что ваше устройство не имеет root доступа. Root доступ необходим для работы Ubounce модуля. Пожалуйста, прочитайте &lt;a href=http://www.techverse.net/how-to-root-your-android-phone-tablet-and-why/&gt;эту статью&lt;/a&gt; про заполучaние root доступа."</string>
+<string name="welcome_banner_button_next">"ДАЛЕЕ"</string>
+<string name="welcome_banner_button_fixit">"ПОЧИНИТЬ"</string>
+<string name="welcome_banner_button_exit">"ВЫХОД"</string>
+<string name="welcome_banner_button_install">"УСТАНОВИТЬ"</string>
+<string name="welcome_downloading_xposed">"Xposed загружается..."</string>
+<string name="welcome_downloaded_xposed">"Загрузка завершена."</string>
+<string name="welcome_download_error_xposed">"Ошибка при загрузке. Попробуйте позже."</string>
+<string name="download_xposed_title">"Загрузка Xposed"</string>
+<string name="download_xposed_description">"Необходимо для Unbounce"</string>
+<string name="requires_root">"*** Необходим root доступ ***"</string>
+<string name="installs_xposed">"Для Unbounce требуется Xposed,и Xposed будет автоматически загружен если отсутствует."</string>
+<string name="settings_category_code_credits">"Разработчики"</string>
 </resources>
