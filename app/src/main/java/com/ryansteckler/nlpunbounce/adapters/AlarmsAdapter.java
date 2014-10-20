@@ -87,19 +87,15 @@ public class AlarmsAdapter extends ArrayAdapter {
         SharedPreferences prefs = context.getSharedPreferences("com.ryansteckler.nlpunbounce" + "_preferences", Context.MODE_WORLD_READABLE);
 
         //Get the max and min values for the red-green spectrum of counts
-        Iterator<AlarmStats> iter = alarmStatList.iterator();
-        while (iter.hasNext())
-        {
-            AlarmStats curStat = iter.next();
+
+        for(AlarmStats curStat:alarmStatList){
             if (curStat.getAllowedCount() > mHighCount)
                 mHighCount = curStat.getAllowedCount();
             if (curStat.getAllowedCount() < mLowCount || mLowCount == 0)
                 mLowCount = curStat.getAllowedCount();
-
             //Set the blocking flag
             String blockName = "alarm_" + curStat.getName() + "_enabled";
             curStat.setBlockingEnabled(prefs.getBoolean(blockName, false));
-
         }
         mScale = mHighCount - mLowCount;
 
