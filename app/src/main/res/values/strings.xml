@@ -104,6 +104,8 @@
     <string name="stat_wake_duration_blocked">Wakelock time blocked</string>
     <string name="stat_wake_allowed">Wakelocks acquired</string>
     <string name="stat_wake_blocked">Wakelocks blocked</string>
+    <string name="stat_service_allowed">Services started</string>
+    <string name="stat_service_blocked">Services blocked</string>
     <string name="stat_alarm_allowed">Alarms fired</string>
     <string name="stat_alarm_blocked">Alarms blocked</string>
     <string name="stat_disabled">Disabled</string>

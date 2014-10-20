@@ -48,6 +48,7 @@ import com.ryansteckler.nlpunbounce.helpers.SettingsHelper;
 import com.ryansteckler.nlpunbounce.helpers.ThemeHelper;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
 
+
 import java.io.File;
 
 
@@ -137,15 +138,15 @@ public class HomeFragment extends Fragment  {
             //Let's find out why the service isn't running:
             if (!isUnbounceServiceRunning()) {
                 mSetupFailureStep = SETUP_FAILURE_SERVICE;
-            }
-            if (!isXposedRunning()) {
-                mSetupFailureStep = SETUP_FAILURE_XPOSED_RUNNING;
-            }
-            if (!isXposedInstalled()) {
-                mSetupFailureStep = SETUP_FAILURE_XPOSED_INSTALL;
-            }
-            if (!RootHelper.isDeviceRooted()) {
-                mSetupFailureStep = SETUP_FAILURE_ROOT;
+                if (!isXposedRunning()) {
+                    mSetupFailureStep = SETUP_FAILURE_XPOSED_RUNNING;
+                    if (!isXposedInstalled()) {
+                        mSetupFailureStep = SETUP_FAILURE_XPOSED_INSTALL;
+                        if (!RootHelper.isDeviceRooted()) {
+                            mSetupFailureStep = SETUP_FAILURE_ROOT;
+                        }
+                    }
+                }
             }
 
             //Disable navigation away from the welcome banner. //TODO:  Fade the home bar?
@@ -561,7 +562,12 @@ public class HomeFragment extends Fragment  {
     private boolean isInstalledFromPlay() {
         String installer = getActivity().getPackageManager().getInstallerPackageName("com.ryansteckler.nlpunbounce");
 
-        return installer != null && installer.equals("com.android.vending");
+        if (installer == null) {
+            return false;
+        }
+        else {
+            return installer.equals("com.android.vending");
+        }
     }
 
     private boolean launchXposedModules() {
@@ -638,7 +644,7 @@ public class HomeFragment extends Fragment  {
     private void loadStatsFromSource(final View view) {
         final UnbounceStatsCollection stats = UnbounceStatsCollection.getInstance();
         final Context c = getActivity();
-        String duration = stats.getDurationAllowedFormatted(c, UnbounceStatsCollection.STAT_CURRENT);
+        String duration = stats.getWakelockDurationAllowedFormatted(c, UnbounceStatsCollection.STAT_CURRENT);
         //Wakelocks
         TextView textView = (TextView)view.findViewById(R.id.textLocalWakeTimeAllowed);
         textView.setText(duration);
@@ -649,7 +655,13 @@ public class HomeFragment extends Fragment  {
         textView = (TextView)view.findViewById(R.id.textLocalWakeBlocked);
         textView.setText(String.valueOf(stats.getTotalBlockWakelockCount(c, UnbounceStatsCollection.STAT_CURRENT)));
         textView = (TextView)view.findViewById(R.id.textLocalWakeTimeBlocked);
-        textView.setText(stats.getDurationBlockedFormatted(c, UnbounceStatsCollection.STAT_CURRENT));
+        textView.setText(stats.getWakelockDurationBlockedFormatted(c, UnbounceStatsCollection.STAT_CURRENT));
+
+        //Services
+        textView = (TextView)view.findViewById(R.id.textLocalServiceAcquired);
+        textView.setText(String.valueOf(stats.getTotalAllowedServiceCount(c, UnbounceStatsCollection.STAT_CURRENT)));
+        textView = (TextView)view.findViewById(R.id.textLocalServiceBlocked);
+        textView.setText(String.valueOf(stats.getTotalBlockServiceCount(c, UnbounceStatsCollection.STAT_CURRENT)));
 
         //Alarms
         textView = (TextView)view.findViewById(R.id.textLocalAlarmsAcquired);
@@ -665,14 +677,21 @@ public class HomeFragment extends Fragment  {
             stats.getStatsFromNetwork(c, new Handler() {
             @Override
             public void handleMessage(Message msg) {
+                //Global wakelocks
                 TextView textView = (TextView)view.findViewById(R.id.textGlobalWakelockDurationAllowed);
-                textView.setText(stats.getDurationAllowedFormatted(c, UnbounceStatsCollection.STAT_GLOBAL));
+                textView.setText(stats.getWakelockDurationAllowedFormatted(c, UnbounceStatsCollection.STAT_GLOBAL));
                 textView = (TextView)view.findViewById(R.id.textGlobalWakelockAllowed);
                 textView.setText(String.valueOf(stats.getTotalAllowedWakelockCount(c, UnbounceStatsCollection.STAT_GLOBAL)));
                 textView = (TextView)view.findViewById(R.id.textGlobalWakelockBlocked);
                 textView.setText(String.valueOf(stats.getTotalBlockWakelockCount(c, UnbounceStatsCollection.STAT_GLOBAL)));
                 textView = (TextView)view.findViewById(R.id.textGlobalWakelockDurationBlocked);
-                textView.setText(stats.getDurationBlockedFormatted(c, UnbounceStatsCollection.STAT_GLOBAL));
+                textView.setText(stats.getWakelockDurationBlockedFormatted(c, UnbounceStatsCollection.STAT_GLOBAL));
+
+                //Global services
+                textView = (TextView)view.findViewById(R.id.textGlobalServiceAllowed);
+                textView.setText(String.valueOf(stats.getTotalAllowedServiceCount(c, UnbounceStatsCollection.STAT_GLOBAL)));
+                textView = (TextView)view.findViewById(R.id.textGlobalServiceBlocked);
+                textView.setText(String.valueOf(stats.getTotalBlockServiceCount(c, UnbounceStatsCollection.STAT_GLOBAL)));
 
                 //Global Alarms
                 textView = (TextView)view.findViewById(R.id.textGlobalAlarmAllowed);
@@ -683,6 +702,7 @@ public class HomeFragment extends Fragment  {
                     }
         });
         } else {
+            //Global wakelocks
             textView = (TextView)view.findViewById(R.id.textGlobalWakelockDurationAllowed);
             textView.setText(getResources().getString(R.string.stat_disabled));
             textView = (TextView)view.findViewById(R.id.textGlobalWakelockAllowed);
@@ -690,6 +710,12 @@ public class HomeFragment extends Fragment  {
             textView = (TextView)view.findViewById(R.id.textGlobalWakelockBlocked);
             textView.setText(getResources().getString(R.string.stat_disabled));
             textView = (TextView)view.findViewById(R.id.textGlobalWakelockDurationBlocked);
+            textView.setText(getResources().getString(R.string.stat_disabled));
+
+            //Global services
+            textView = (TextView)view.findViewById(R.id.textGlobalServiceAllowed);
+            textView.setText(getResources().getString(R.string.stat_disabled));
+            textView = (TextView)view.findViewById(R.id.textGlobalServiceBlocked);
             textView.setText(getResources().getString(R.string.stat_disabled));
 
             //Global Alarms
