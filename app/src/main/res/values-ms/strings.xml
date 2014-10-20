@@ -107,7 +107,10 @@
 <string name="donate_more_button">"BAGAIMANA SAYA BOLEH MENOLONG LAGI?"</string>
 <string name="donate_more_text">"Ramai telah bertanya bagaiman mereka boleh menolong selepas menderma.  Butang-butang di bawah membolehkan anda derma lagi, tetapi tidak mengaktifkan apa-apa ciri tambahan.  Terima kasih kerana menyokong Unbounce!"</string>
 <string name="welcome_banner_title">"Selamat datang!"</string>
+<string name="welcome_banner_text">"Anda boleh menghalang kunci berjaga daripada menghalang telefon anda tidur, dan menghalang penggera daripada membangunkannya.  Kami telah menetapkan beberapa tetapan untuk penjimatan bateri."</string>
 
+<!-- Don't translate this one  :) -->
+<string name="app_font_family">"sans_serif"</string>
 <string name="settings_category_options">"Pilihan"</string>
 <string name="settings_item_show_launcher">"Tunjuk ikon pelancar"</string>
 <string name="settings_item_choose_theme">"Pilih tema"</string>
@@ -115,6 +118,7 @@
 <string name="settings_item_global_stats_summary">"Hantar dan menerima statistik tanpa nama"</string>
 <string name="settings_item_reset_defaults_title">"Kembali kepada tetapan asal"</string>
 <string name="settings_item_reset_defaults_summary">"Tetapkan semula semua penggera dan kunci berjaga ke tetapan asal"</string>
+<string name="settings_category_debug">"Nyahpepijat"</string>
 <string name="settings_item_author">"Pencipta: Ryan Steckler"</string>
 <string name="settings_item_logging_level">"Tahap"</string>
 <string name="settings_category_translation">"Terjemahan oleh"</string>
@@ -152,5 +156,27 @@ Pembelian Dalam Aplikasi membolehkan anda untuk membuka kunci pakej Premium yang
 
 Semoga [bateri] anda tahan lama!
     "</string>
-
+<string name="welcome_banner_welcome">"Selamat Datang!"</string>
+<string name="welcome_banner_checking_service">"Memeriksa jika Halang Lantun sedang berjalan..."</string>
+<string name="welcome_banner_checking_xposed">"Memeriksa jika Xposed telah dipasang..."</string>
+<string name="welcome_banner_checking_root">"Memeriksa jika terdapat akses root..."</string>
+<string name="welcome_banner_checking_looks_great">"Semuanya nampak elok!"</string>
+<string name="welcome_banner_checking_uhoh">"Sesuatu masalah telah berlaku. Mari kita siasat dan betulkannya..."</string>
+<string name="welcome_banner_problem_none">"Kami telah menyediakan beberapa tetapan penjimatan bateri untuk anda. Sila menikmati kehidupan bateri baru anda!"</string>
+<string name="welcome_banner_problem_service">"Nampaknya seperti anda belum lagi membolehkan modul Unbounce. Klik BETULKANNYA, pastikan Unbounce dipilih, kemudian mulakan peranti anda semula."</string>
+<string name="welcome_banner_problem_xposed_running">"Xposed tidak berjalan. Klik BETULKANNYA, kemudian klik Pasang/Kemaskini dan mulakan peranti anda semula."</string>
+<string name="welcome_banner_problem_xposed_installed">"Xposed tidak dipasang. Xposed diperlukan untuk Unbounce dan banyak aplikasi lain yang memerlukan root. Sebaik sahaja muat turun selesai, klik PASANG, kemudian lancarkan Unbounce sekali lagi. Jika anda ingin mengetahui lebih lanjut mengenai Xposed, &lt;a href=http://www.tested.com/tech/android/460074-how-use-xposed-framework-android-extreme-customization/&gt;lawat Tested.com. &lt;/a&gt;"</string>
+<string name="welcome_banner_problem_root">"Nampaknya seperti peranti anda tidak mempunyai root. Unbounce memerlukan peranti yang mempunyai root untuk berfungsi dengan baik. Jika anda berminat untuk mendapatkan root, sila layari &lt;a href=http://www.techverse.net/how-to-root-your-android-phone-tablet-and-why/&gt;Techverse.net&lt;/a&gt; untuk mula. "</string>
+<string name="welcome_banner_button_next">"SETERUSNYA"</string>
+<string name="welcome_banner_button_fixit">"BETULKANNYA"</string>
+<string name="welcome_banner_button_exit">"KELUAR"</string>
+<string name="welcome_banner_button_install">"PASANG"</string>
+<string name="welcome_downloading_xposed">"Memuat turun Xposed..."</string>
+<string name="welcome_downloaded_xposed">"Muat turun selesai"</string>
+<string name="welcome_download_error_xposed">"Muat turun gagal. Sila cuba lagi kemudian."</string>
+<string name="download_xposed_title">"Memuat turun Xposed"</string>
+<string name="download_xposed_description">"Diperlukan untuk Unbounce"</string>
+<string name="requires_root">"*** Memerlukan peranti yang mempunyai root *** "</string>
+<string name="installs_xposed">"Unbounce menggunakan Rangka Kerja Xposed dan akan memasangnya untuk anda jika ia belum lagi dipasang."</string>
+<string name="settings_category_code_credits">"Kepujian Pemaju"</string>
 </resources>
