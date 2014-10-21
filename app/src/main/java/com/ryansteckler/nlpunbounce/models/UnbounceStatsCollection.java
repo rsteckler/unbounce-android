@@ -1,6 +1,5 @@
 package com.ryansteckler.nlpunbounce.models;
 
-import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -776,10 +775,20 @@ public class UnbounceStatsCollection implements Serializable {
                     statChoice = (HashMap)objIn.readObject();
                 } else {
                     BaseStatsWrapper wrap = (BaseStatsWrapper) objIn.readObject();
+                    //Validate all stats are of the correct basetype
+                    Iterator<BaseStats> iter = wrap.mStats.values().iterator();
+                    while (iter.hasNext()) {
+                        //Check if this is castable.
+                        BaseStats curStat = iter.next();
+                    }
+
+                    //Looks good.
                     statChoice = wrap.mStats;
+
                     if (wrap.mRunningSince != -1) {
                         mRunningSince = wrap.mRunningSince;
                     }
+
                 }
                 objIn.close();
                 in.close();

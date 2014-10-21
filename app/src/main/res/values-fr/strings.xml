@@ -85,7 +85,7 @@
 <string name="desc_comgoogleandroidgmsnlpalarm_wakeup_activity_detection">"Cette alarme peut être bloquée sans risque. Elle est utilisée par les services Google Play pour déterminer votre localisation approximative en utilisant les antennes cellulaires à proximité et le WiFi. Dés que votre localisation est déterminée, elle est envoyée à Google pour qu'ils puissent améliorer leur base de données de position des points d'accès WiFi. Il est recommandé de spécifier une durée entre 180 et 600 secondes."</string>
 <string name="desc_comgoogleandroidappshangoutsupdate_notification">"Écoute et déclenche les notifications de Google Hangouts."</string>
 <string name="desc_comandroidinternaltelephonydatastall">"Wakelock de l'application système 'com.android.phone' (application Téléphone) lorsque le téléphone utilise la connexion de données de l'opérateur. Utiliser une connexion WiFi ne déclenchera pas cette alarme. Peut augmenter grandement lors de l'utilisation des données mobiles, en particulier lorsque la réception est mauvaise."</string>
-<string name="settings_allow_every">"Tous les autoriser"</string>
+<string name="settings_allow_every">"Autoriser toutes les"</string>
 <string name="settings_seconds">"secondes."</string>
 <string name="card_button_reset">"REMISE À ZÉRO"</string>
 <string name="stat_alarms_acquired">"Alarmes captées"</string>
@@ -107,6 +107,8 @@
 <string name="donate_more_button">"COMMENT PUIS-JE AIDER PLUS ?"</string>
 <string name="donate_more_text">"Certaines personnes ont demandé comment aider en plus de leur donation initiale. Les boutons suivants vous permettent de faire une nouvelle contribution, mais n'apporte aucune fonctionnalité additionnelle. Un grand merci pour votre contribution à cette application !"</string>
 <string name="welcome_banner_title">"Bienvenue !"</string>
+<string name="welcome_banner_text">"Vous pouvez bloquer les wakelocks pour empêcher votre téléphone de rester éveillé, et bloquer les alarmes pour l'empêcher de se réveiller. Nous avons déjà préconfiguré des réglages d'économie de batterie pour vous."</string>
+
 <string name="settings_category_options">"Options"</string>
 <string name="settings_item_show_launcher">"Afficher l'icone de lancement"</string>
 <string name="settings_item_choose_theme">"Afficher le thème"</string>
@@ -114,6 +116,7 @@
 <string name="settings_item_global_stats_summary">"Envoyer et recevoir les statistiques anonymisées"</string>
 <string name="settings_item_reset_defaults_title">"Remettre les paramétres par défaut"</string>
 <string name="settings_item_reset_defaults_summary">"Remettre les paramètres par défaut des alarmes et wakelocks"</string>
+<string name="settings_category_debug">"Debugage"</string>
 <string name="settings_item_author">"Auteur : Ryan Steckler"</string>
 <string name="settings_item_logging_level">"Niveau de log"</string>
 <string name="settings_category_translation">"Traducteurs"</string>
@@ -125,14 +128,13 @@
 <string name="settings_item_force_english_title">"Langue anglaise"</string>
 <string name="settings_item_force_english_summary">"Ecraser vos paramétres de langue et utiliser l'anglais"</string>
 <string name="playstore_short_description">"La puissance de votre batterie à votre portée !"</string>
-<string name="playstore_long_description">"*** Nécessite le Mode Root ***
-
+<string name="playstore_long_description">"
 Retours non sollicités d'utilisateurs (traduits) :
-\"Cela m'a permis d'avoir 2 heures de plus d'utilisation avec 30 minutes d'écran en plus. J'ai économisé l'achat d'une batterie à 25$. Continuer ce super travail\"
+\"Cela m'a permis d'avoir 2 heures de plus d'utilisation avec 30 minutes d'écran en plus. J'ai économisé l'achat d'une batterie à 25$. Continue ce super travail\"
 \"Simplement génial\"
-\"[Unbounce] Révolutionne simplement le management des wakelocks\"
+\"[Unbounce] Révolutionne simplement la gestion des wakelocks\"
 \"Ce module est extraordinaire ! J'ai obtenu moins de la moité d'un pourcent d'utilisation par heure en veille\"
-... et bien plus
+... et bien d'autres retours.
 
 Unbounce vous permet de contrôler comment votre appareil utilise votre batterie, par le fait de contrôler combien de fois votre appareil se réveille, et combien de temps il reste éveillé. Utiliser les paramétres recommandés pour une économie de batterie, ou investiguer et customiser chaque alarme et wakelock sur votre téléphone.
 
@@ -147,5 +149,28 @@ Quelques points à souligner :
 L'achat dans l'application permet de débloquer le module Pro et vous laisse paramétrer les alarmes et wakelocks de votre appareil. Sans le module pro, vous pouvez contrôler les paramètres plus gros consommateurs de batterie : NlpWakelock, NlpCollectorWakeLock, ALARM_WAKEUP_LOCATOR, et ALARM_WAKE_ACTIVITY_DETECTION. 
 
 Vous souhaitant longue vie [à votre batterie] !"</string>
-
+<string name="welcome_banner_welcome">"Bienvenue !"</string>
+<string name="welcome_banner_checking_service">"Vérification de l'activation d'Unbounce..."</string>
+<string name="welcome_banner_checking_xposed">"Verification de l'installation de Xposed..."</string>
+<string name="welcome_banner_checking_root">"Verification de l'activation du 'root'..."</string>
+<string name="welcome_banner_checking_looks_great">"Tout semble prêt !"</string>
+<string name="welcome_banner_checking_uhoh">"Une erreur est survenue. Cherchons pourquoi, et corrigeons cela..."</string>
+<string name="welcome_banner_problem_none">"Des réglages par défaut sont activés. Profitez de cette autonomie prolongée !"</string>
+<string name="welcome_banner_problem_service">"Il semblerait que vous n'ayez pas activé le module Unbounce dans Xposed. Cliquer sur 'RÉPARER', assurez-vous que Unbounce soit coché, et redémarrez."</string>
+<string name="welcome_banner_problem_xposed_running">"Xposed n'est pas lancé. Cliquez sur 'RÉPARER', puis \"Installer/Mettre a jour\" dans Xposed et redémarrez."</string>
+<string name="welcome_banner_problem_xposed_installed">"Xposed n'est pas installé. Xposed est necessaire pour le fonctionnement d'un bounce et de biens d'autres modules. Une fois le téléchargement terminé, cliquer sur Installer, puis relancez Unbounce.
+Si vous voulez en savoir plus sur Xposed, <![CDATA[<a href="http://www.tested.com/tech/android/460074-how-use-xposed-framework-android-extreme-customization"/>visitez Tested.com.</a>]]> "</string>
+<string name="welcome_banner_problem_root">"Il semblerait que votre appareil ne soit pas 'rooté'. Unbounce necessite un appareil avec le 'root' activé pour fonctionner. Si vous voulez rooter votre appareil,visitez <![CDATA[<a href="http://www.techverse.net/how-to-root-your-android-phone-tablet-and-why"/>Techverse.net</a>]]> pour Commencer."</string>
+<string name="welcome_banner_button_next">"SUIVANT"</string>
+<string name="welcome_banner_button_fixit">"RÉPARER"</string>
+<string name="welcome_banner_button_exit">"QUITTER"</string>
+<string name="welcome_banner_button_install">"INSTALLER"</string>
+<string name="welcome_downloading_xposed">"Téléchargement de Xposed..."</string>
+<string name="welcome_downloaded_xposed">"Telechargement terminé."</string>
+<string name="welcome_download_error_xposed">"Erreur de telechargement. Réessayez plus tard."</string>
+<string name="download_xposed_title">"Téléchargement de Xposed"</string>
+<string name="download_xposed_description">"Nécessaire pour Unbounce"</string>
+<string name="requires_root">"*** Nécessite un appareil avec 'root' activé ***"</string>
+<string name="installs_xposed">"Unbounce utilise le framework Xposed et va l'installer pour vous, si vous ne l'avez pas déjà."</string>
+<string name="settings_category_code_credits">"Crédits de developpement"</string>
 </resources>

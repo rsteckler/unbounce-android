@@ -1,21 +1,18 @@
 package com.ryansteckler.nlpunbounce;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.content.pm.ApplicationInfo;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.app.Fragment;
 import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
@@ -24,13 +21,7 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.ryansteckler.nlpunbounce.helpers.LocaleHelper;
-import com.ryansteckler.nlpunbounce.helpers.ThemeHelper;
-import com.ryansteckler.nlpunbounce.models.AlarmStats;
-import com.ryansteckler.nlpunbounce.models.EventLookup;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
-import com.ryansteckler.nlpunbounce.tasker.TaskerActivity;
-import android.content.pm.PackageManager;
 
 
 /**
@@ -42,65 +33,32 @@ import android.content.pm.PackageManager;
  * create an instance of this fragment.
  *
  */
-public class AlarmDetailFragment extends Fragment {
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_START_TOP = "startTop";
-    private static final String ARG_FINAL_TOP = "finalTop";
-    private static final String ARG_START_BOTTOM = "startBottom";
-    private static final String ARG_FINAL_BOTTOM = "finalBottom";
-    private static final String ARG_CUR_STAT = "curStat";
-    private static final String ARG_TASKER_MODE = "taskerMode";
-
-    private int mStartTop;
-    private int mFinalTop;
-    private int mStartBottom;
-    private int mFinalBottom;
-    private AlarmStats mStat;
-    private boolean mTaskerMode;
-
-    private FragmentClearListener mClearListener = null;
-
-    private boolean mKnownSafeAlarm = false;
-    private boolean mFreeAlarm = false;
-
-    private FragmentInteractionListener mListener;
-
-    public String getName() {
-        return mStat.getName();
-    }
-
-    public boolean getEnabled() {
-        Switch onOff = (Switch)getActivity().findViewById(R.id.switchAlarm);
-        return onOff.isChecked();
-    }
+public class AlarmDetailFragment extends BaseDetailFragment {
 
     public long getSeconds() {
         EditText editSeconds = (EditText)getActivity().findViewById(R.id.editAlarmSeconds);
         String text = editSeconds.getText().toString();
-        return Long.parseLong(text);
+        long seconds = Long.parseLong(text);
+        return seconds;
     }
 
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
-        ExpandingLayout anim = (ExpandingLayout) getActivity().findViewById(R.id.layoutDetails);
-        anim.setAnimationBounds(mStartTop, mFinalTop, mStartBottom, mFinalBottom);
         super.onViewCreated(view, savedInstanceState);
-        if (mListener != null) {
-            mListener.onAlarmDetailSetTitle(mStat.getName());
-            mListener.onAlarmDetailSetTaskerTitle(getResources().getString(R.string.tasker_choose_settings));
-        }
 
-        loadStatsFromSource(view);
+        SharedPreferences prefs = getActivity().getSharedPreferences(AlarmDetailFragment.class.getPackage().getName() + "_preferences", Context.MODE_WORLD_READABLE);
 
         final EditText edit = (EditText) view.findViewById(R.id.editAlarmSeconds);
 
-        SharedPreferences prefs = getActivity().getSharedPreferences(AlarmDetailFragment.class.getPackage().getName() + "_preferences", Context.MODE_WORLD_READABLE);
         String blockSeconds = "alarm_" + mStat.getName() + "_seconds";
         edit.setText(String.valueOf(prefs.getLong(blockSeconds, 240)));
         edit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                return i == EditorInfo.IME_ACTION_DONE && handleTextChange(textView, edit);
+                if (i == EditorInfo.IME_ACTION_DONE) {
+                    return handleTextChange(textView, edit);
+                }
+                return false;
             }
         });
         edit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -112,46 +70,12 @@ public class AlarmDetailFragment extends Fragment {
             }
         });
 
-        final Switch onOff = (Switch) view.findViewById(R.id.switchAlarm);
-        //TODO:  If we're in tasker mode, and have an existing configuration, load that instead of prefs.
+        final Switch onOff = (Switch) view.findViewById(R.id.switchStat);
         String blockName = "alarm_" + mStat.getName() + "_enabled";
         boolean enabled = prefs.getBoolean(blockName, false);
         onOff.setChecked(enabled);
+
         getView().findViewById(R.id.editAlarmSeconds).setEnabled(onOff.isChecked());
-
-        onOff.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                    //Check license
-                    boolean isPremium = false;
-                    //We may be running under the TaskerActivity or the MaterialSettingsActivity.
-                    Activity baseActivity = getActivity();
-                    if (baseActivity instanceof MaterialSettingsActivity) {
-                        isPremium = ((MaterialSettingsActivity) getActivity()).isPremium();
-                    }
-                    else if (baseActivity instanceof TaskerActivity) {
-                        isPremium = ((TaskerActivity) getActivity()).isPremium();
-                    }
-
-                    if (isPremium || mFreeAlarm) {
-                        final boolean b = !onOff.isChecked();
-                        if (b && !mKnownSafeAlarm) {
-                            warnUnknownAlarm(onOff);
-                        } else {
-                            updateEnabledAlarm(b);
-                            return false;
-                        }
-                    } else {
-                        //Deny based on licensing.
-                        warnLicensing(onOff);
-                    }
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        });
 
         View panel = (View)getView().findViewById(R.id.settingsPanel);
         TypedValue backgroundValue = new TypedValue();
@@ -165,39 +89,6 @@ public class AlarmDetailFragment extends Fragment {
         panel.setBackgroundDrawable(backgroundColor);
         panel.setAlpha(enabled ? 1 : (float) .4);
 
-        TextView resetButton = (TextView)view.findViewById(R.id.buttonResetStats);
-        resetButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View resetView) {
-                //Reset stats
-                UnbounceStatsCollection stats = UnbounceStatsCollection.getInstance();
-                stats.resetStats(getActivity(), mStat.getName());
-                loadStatsFromSource(view);
-                if (mClearListener != null)
-                {
-                    mClearListener.onAlarmCleared();
-                }
-            }
-        });
-
-        TextView description = (TextView)view.findViewById(R.id.textViewAlarmDescription);
-        String descriptionText = EventLookup.getDescription(getActivity(), mStat.getName());
-        String packageName = mStat.getmPackage();
-
-        PackageManager pm = getActivity().getPackageManager();
-        ApplicationInfo ai;
-        try {
-            ai = pm.getApplicationInfo( packageName, 0);
-        } catch (final PackageManager.NameNotFoundException e) {
-            ai = null;
-        }
-        final String applicationName = (String) (ai != null ? pm.getApplicationLabel(ai) : "(unknown)");
-
-        descriptionText = descriptionText + "\n\n"+"Package Name: " + applicationName;
-
-        description.setText(descriptionText);
-        mKnownSafeAlarm = EventLookup.isSafe(mStat.getName()) == EventLookup.SAFE;
-        mFreeAlarm = EventLookup.isFree(mStat.getName());
     }
 
     private boolean handleTextChange(TextView textView, EditText edit) {
@@ -223,35 +114,22 @@ public class AlarmDetailFragment extends Fragment {
         return false;
     }
 
-    private void warnLicensing(final Switch onOff) {
-        new AlertDialog.Builder(getActivity())
-                .setTitle(R.string.alert_nopro_title)
-                .setMessage(R.string.alert_nopro_content)
-                .setNeutralButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        onOff.setChecked(false);
-                        updateEnabledAlarm(false);
-                    }
-                })
-                .setIcon(android.R.drawable.ic_dialog_info)
-                .show();
-    }
-
-    private void warnUnknownAlarm(final Switch onOff) {
+    @Override
+    protected void warnUnknown(final Switch onOff) {
         new AlertDialog.Builder(getActivity())
             .setTitle(R.string.alert_unknown_alarm_title)
             .setMessage(R.string.alert_unknown_alarm_content)
             .setPositiveButton(R.string.dialog_unbounce, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     onOff.setChecked(true);
-                    updateEnabledAlarm(true);
+                    updateEnabled(true);
                 }
             })
             .setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     //don't set the switch
                     onOff.setChecked(false);
-                    updateEnabledAlarm(false);
+                    updateEnabled(false);
                 }
             })
             .setIcon(android.R.drawable.ic_dialog_alert)
@@ -259,7 +137,8 @@ public class AlarmDetailFragment extends Fragment {
     }
 
 
-    private void updateEnabledAlarm(boolean b) {
+    @Override
+    protected void updateEnabled(boolean b) {
         String blockName = "alarm_" + mStat.getName() + "_enabled";
         if (!mTaskerMode) {
             SharedPreferences prefs = getActivity().getSharedPreferences("com.ryansteckler.nlpunbounce" + "_preferences", Context.MODE_WORLD_READABLE);
@@ -284,65 +163,36 @@ public class AlarmDetailFragment extends Fragment {
 
         if (mClearListener != null)
         {
-            mClearListener.onAlarmCleared();
+            mClearListener.onCleared();
         }
-    }
-
-    private void loadStatsFromSource(View view) {
-        UnbounceStatsCollection coll = UnbounceStatsCollection.getInstance();
-        mStat = coll.getAlarmStats(getActivity(), mStat.getName());
-
-        TextView textView = (TextView)view.findViewById(R.id.textLocalAlarmBlocked);
-        textView.setText(String.valueOf(mStat.getBlockCount()));
-        textView = (TextView)view.findViewById(R.id.textLocalAlarmAcquired);
-        textView.setText(String.valueOf(mStat.getAllowedCount()));
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment AlarmlockDetailFragment.
-     */
-    public static AlarmDetailFragment newInstance(int startTop, int finalTop, int startBottom, int finalBottom, AlarmStats stat, boolean taskerMode) {
-        AlarmDetailFragment fragment = new AlarmDetailFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_START_TOP, startTop);
-        args.putInt(ARG_FINAL_TOP, finalTop);
-        args.putInt(ARG_START_BOTTOM, startBottom);
-        args.putInt(ARG_FINAL_BOTTOM, finalBottom);
-        args.putSerializable(ARG_CUR_STAT, stat);
-        args.putBoolean(ARG_TASKER_MODE, taskerMode);
-        fragment.setArguments(args);
-        return fragment;
-    }
-    public AlarmDetailFragment() {
-        // Required empty public constructor
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        ThemeHelper.onActivityCreateSetTheme(this.getActivity());
-        LocaleHelper.onActivityCreateSetLocale(this.getActivity());
+    protected void loadStatsFromSource(View view) {
+        UnbounceStatsCollection coll = UnbounceStatsCollection.getInstance();
+        mStat = coll.getAlarmStats(getActivity(), mStat.getName());
 
-        if (getArguments() != null) {
-            mStartTop = getArguments().getInt(ARG_START_TOP);
-            mFinalTop = getArguments().getInt(ARG_FINAL_TOP);
-            mStartBottom = getArguments().getInt(ARG_START_BOTTOM);
-            mFinalBottom = getArguments().getInt(ARG_FINAL_BOTTOM);
-            mStat = (AlarmStats)getArguments().getSerializable(ARG_CUR_STAT);
-            mTaskerMode = getArguments().getBoolean(ARG_TASKER_MODE);
-        }
-        setHasOptionsMenu(true);
+        TextView textView = (TextView)view.findViewById(R.id.textLocalBlocked);
+        textView.setText(String.valueOf(mStat.getBlockCount()));
+        textView = (TextView)view.findViewById(R.id.textLocalAcquired);
+        textView.setText(String.valueOf(mStat.getAllowedCount()));
+    }
+
+    @Override
+    public AlarmDetailFragment newInstance() {
+        return new AlarmDetailFragment();
+    }
+
+    public AlarmDetailFragment() {
+        // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_alarm_detail, container, false);
-
+        View view = inflater.inflate(R.layout.fragment_alarm_detail, container, false);
+        return view;
     }
 
     @Override
@@ -353,51 +203,9 @@ public class AlarmDetailFragment extends Fragment {
     }
 
     @Override
-    public void onPrepareOptionsMenu(Menu menu) {
-        super.onPrepareOptionsMenu(menu);
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mListener = (FragmentInteractionListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
     }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface FragmentInteractionListener {
-        public void onAlarmDetailSetTitle(String title);
-        public void onAlarmDetailSetTaskerTitle(String title);
-    }
-
-    public interface FragmentClearListener {
-        public void onAlarmCleared();
-    }
-
-    public void attachClearListener(FragmentClearListener fragment)
-    {
-        mClearListener = fragment;
-    }
-
-
 
 }

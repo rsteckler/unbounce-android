@@ -74,6 +74,8 @@
 <string name="donate_10">"Kegembiraan tidak membawa charger anda"</string>
 <string name="donate_more_button">"BAGAIMANA SAYA DAPAT MEMBANTU LEBIH LANJUT?"</string>
 <string name="welcome_banner_title">"Selamat datang!"</string>
+
+
 <string name="settings_category_options">"Pilihan"</string>
 <string name="settings_item_show_launcher">"Tampilkan ikon aplikasi"</string>
 <string name="settings_item_choose_theme">"Pilih tema"</string>
@@ -81,6 +83,7 @@
 <string name="settings_item_global_stats_summary">"Mengirim dan menerima statistik anonim"</string>
 <string name="settings_item_reset_defaults_title">"Atur ulang ke pengaturan semula"</string>
 <string name="settings_item_reset_defaults_summary">"Atur ulang semua alarm dan wakelocks ke pengaturan semula"</string>
+<string name="settings_category_debug">"Debug"</string>
 <string name="settings_item_author">"Karya: Ryan Steckler"</string>
 <string name="settings_item_logging_level">"Tingkat logging"</string>
 <string name="settings_category_translation">"Penerjemah"</string>

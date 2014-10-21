@@ -8,6 +8,7 @@
     <string name="title_home">Home</string>
     <string name="title_wakelocks">Wakelocks</string>
     <string name="title_alarms">Alarms</string>
+    <string name="title_services">Services</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_search">Search</string>
@@ -24,6 +25,7 @@
     <string name="card_settings_title">SETTINGS</string>
     <string name="card_settings_subtitle_alarm">Control this alarm</string>
     <string name="card_settings_subtitle_wakelock">Control this wakelock</string>
+    <string name="card_settings_subtitle_service">Control this service</string>
     <string name="card_description_title">DESCRIPTION</string>
     <string name="card_description_subtitle">Why is this thing eating your battery?</string>
 
@@ -192,6 +194,8 @@ May you have a long [battery] life!
 
     <!--Don't translate this one  :)  -->
     <string translatable="false" name="app_font_family">sans_serif</string>
+    <string name="service_switch_allow">Allow</string>
+    <string name="service_switch_deny">Deny</string>
 
 
 </resources>
