@@ -2,12 +2,12 @@ package com.ryansteckler.nlpunbounce;
 
 import android.app.Activity;
 import android.app.FragmentManager;
+import android.app.ListFragment;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.app.ListFragment;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,7 +16,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-
 
 import com.ryansteckler.nlpunbounce.adapters.WakelocksAdapter;
 import com.ryansteckler.nlpunbounce.helpers.ThemeHelper;
@@ -30,7 +29,7 @@ import com.ryansteckler.nlpunbounce.models.WakelockStats;
  * Activities containing this fragment MUST implement the {@link OnFragmentInteractionListener}
  * interface.
  */
-public class WakelocksFragment extends ListFragment implements WakelockDetailFragment.FragmentClearListener {
+public class WakelocksFragment extends ListFragment implements BaseDetailFragment.FragmentClearListener {
 
     private OnFragmentInteractionListener mListener;
     private WakelocksAdapter mAdapter;
@@ -166,7 +165,7 @@ public class WakelocksFragment extends ListFragment implements WakelockDetailFra
         //Spin up the new Detail fragment.  Dig the custom animations.  Also put it on the back stack
         //so we can hit the back button and come back to the list.
         FragmentManager fragmentManager = getFragmentManager();
-        WakelockDetailFragment newFrag = WakelockDetailFragment.newInstance(startBounds.top, finalBounds.top, startBounds.bottom, finalBounds.bottom, (WakelockStats)mAdapter.getItem(position), mTaskerMode);
+        WakelockDetailFragment newFrag = (WakelockDetailFragment) new WakelockDetailFragment().newInstance(startBounds.top, finalBounds.top, startBounds.bottom, finalBounds.bottom, (WakelockStats)mAdapter.getItem(position), mTaskerMode);
         newFrag.attachClearListener(this);
         fragmentManager.beginTransaction()
                 .setCustomAnimations(R.animator.expand_in, R.animator.noop, R.animator.noop, R.animator.expand_out)
@@ -239,7 +238,7 @@ public class WakelocksFragment extends ListFragment implements WakelockDetailFra
     }
 
     @Override
-    public void onWakelockCleared() {
+    public void onCleared() {
         mReloadOnShow = true;
     }
 

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:id="@+id/layoutDetails"
     android:layout_height="match_parent"
-    tools:context="com.ryansteckler.nlpunbounce.AlarmDetailFragment"
+    tools:context="com.ryansteckler.nlpunbounce.ServiceDetailFragment"
     android:visibility="visible"
     android:background="?activityRootBackground">
 
@@ -34,7 +34,7 @@
                     android:orientation="horizontal"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:background="?background_four_shaded"
+                    android:background="?background_three_shaded"
                     android:paddingStart="@dimen/card_internal_padding"
                     android:paddingEnd="@dimen/card_internal_padding"
                     android:paddingLeft="@dimen/card_internal_padding"
@@ -45,7 +45,7 @@
                     <ImageView
                         android:layout_width="@dimen/header_icon_size"
                         android:layout_height="@dimen/header_icon_size"
-                        android:src="@drawable/ic_description_four"
+                        android:src="@drawable/ic_description_three"
                         android:contentDescription="@string/card_description_title" />
 
                     <LinearLayout
@@ -108,7 +108,7 @@
                     android:orientation="horizontal"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:background="?background_four_shaded"
+                    android:background="?background_three_shaded"
                     android:paddingLeft="@dimen/card_internal_padding"
                     android:paddingTop="@dimen/card_internal_padding"
                     android:paddingBottom="@dimen/card_internal_padding"
@@ -117,7 +117,7 @@
                     <ImageView
                         android:layout_width="@dimen/header_icon_size"
                         android:layout_height="@dimen/header_icon_size"
-                        android:src="@drawable/ic_settings_four"
+                        android:src="@drawable/ic_settings_three"
                         android:contentDescription="@string/title_settings" />
 
                     <LinearLayout
@@ -125,7 +125,8 @@
                         android:layout_width="0dp"
                         android:layout_height="fill_parent"
                         android:gravity="center_vertical"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:clipChildren="false">
 
                         <TextView
                             android:id="@+id/lb_settings"
@@ -140,10 +141,13 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/card_settings_subtitle_alarm"
+                            android:text="@string/card_settings_subtitle_service"
                             android:layout_marginLeft="@dimen/pad_icon"
                             android:layout_marginStart="@dimen/pad_icon"
-                            style="@style/TextCaptionLight" />
+                            style="@style/TextCaptionLight"
+                            android:singleLine="false"
+                            android:autoText="false"
+                            android:ellipsize="none" />
 
                     </LinearLayout>
 
@@ -151,56 +155,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/switchStat"
-                        android:alpha="1"/>
+                        android:alpha="1"
+                        android:textOff="@string/service_switch_allow"
+                        android:textOn="@string/service_switch_deny"
+                        android:checked="false" />
 
 
                 </LinearLayout>
-
-                <LinearLayout
-                                android:orientation="horizontal"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:padding="@dimen/card_internal_padding"
-                                android:id="@+id/settingsPanel"
-                                android:background="?background_panel_disabled"
-                                android:paddingLeft="1dp"
-                                android:paddingRight="1dp"
-                                android:paddingBottom="2dp">
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/settings_allow_every"
-                                    style="?cardText"
-                                    android:layout_marginRight="@dimen/card_external_padding"
-                                    android:layout_marginEnd="@dimen/card_external_padding"
-                                    android:layout_weight=".25"
-                                    android:layout_gravity="center_vertical" />
-
-                                <EditText
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:inputType="number"
-                                    android:id="@+id/editAlarmSeconds"
-                                    android:layout_weight=".35"
-                                    android:maxLength="7"
-                                    android:maxLines="1"
-                                    android:lines="1"
-                                    android:textAlignment="center"
-                                    android:gravity="center_horizontal"
-                                    android:layout_gravity="center_horizontal" />
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/settings_seconds"
-                                    style="?cardText"
-                                    android:layout_marginLeft="@dimen/card_external_padding"
-                                    android:layout_marginStart="@dimen/card_external_padding"
-                                    android:layout_weight=".45"
-                                    android:layout_gravity="center_vertical" />
-                            </LinearLayout>
 
             </LinearLayout>
 
@@ -216,7 +177,7 @@
                     android:orientation="horizontal"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:background="?background_four_shaded"
+                    android:background="?background_three_shaded"
                     android:paddingLeft="@dimen/card_internal_padding"
                     android:paddingStart="@dimen/card_internal_padding"
                     android:paddingTop="@dimen/card_internal_padding"
@@ -226,7 +187,7 @@
                     <ImageView
                         android:layout_width="@dimen/header_icon_size"
                         android:layout_height="@dimen/header_icon_size"
-                        android:src="@drawable/ic_local_four"
+                        android:src="@drawable/ic_local_three"
                         android:contentDescription="@string/card_local_title" />
 
                     <LinearLayout
@@ -291,7 +252,7 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="fill_parent"
-                            android:text="@string/stat_alarms_acquired"
+                            android:text="@string/stat_service_allowed"
                             android:gravity="center_vertical"
                             android:layout_weight="1"
                             style="?cardText"
@@ -316,7 +277,7 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="fill_parent"
-                            android:text="@string/stat_alarms_blocked"
+                            android:text="@string/stat_service_blocked"
                             android:gravity="center_vertical"
                             android:layout_weight="1"
                             style="?cardText"

@@ -1,7 +1,5 @@
 package com.ryansteckler.nlpunbounce.models;
 
-import com.ryansteckler.nlpunbounce.AlarmDetailFragment;
-
 import java.io.Serializable;
 
 /**
@@ -9,8 +7,17 @@ import java.io.Serializable;
  */
 public class AlarmStats extends BaseStats implements Serializable {
 
-    public AlarmStats() {
+    public AlarmStats(String alarmName, String packageName)
+    {
         setType("alarm");
+        setName(alarmName);
+        if(null!=packageName && !packageName.trim().equals("")){
+            setmPackage(packageName);
+        }else{
+            setmPackage("No Package");
+        }
+
     }
 
+    private AlarmStats(){};
 }

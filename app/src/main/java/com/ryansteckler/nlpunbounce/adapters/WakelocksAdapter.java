@@ -3,7 +3,6 @@ package com.ryansteckler.nlpunbounce.adapters;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,10 +57,10 @@ public class WakelocksAdapter extends ArrayAdapter {
         boolean foundSafe = false;
         boolean foundUnknown = false;
 
-        Iterator<WakelockStats> iter = wakelockStatList.iterator();
-        while (iter.hasNext()) {
 
-            WakelockStats curStat = iter.next();
+        for(WakelockStats curStat:wakelockStatList){
+
+
 
             if (!curStat.getBlockingEnabled()) {
                 foundSafe = true;
@@ -91,10 +90,9 @@ public class WakelocksAdapter extends ArrayAdapter {
         SharedPreferences prefs = context.getSharedPreferences("com.ryansteckler.nlpunbounce" + "_preferences", Context.MODE_WORLD_READABLE);
 
         //Get the max and min values for the red-green spectrum of counts
-        Iterator<WakelockStats> iter = wakelockStatList.iterator();
-        while (iter.hasNext())
-        {
-            WakelockStats curStat = iter.next();
+
+       for(WakelockStats curStat:wakelockStatList ){
+
             if (curStat.getAllowedCount() > mHighCount)
                 mHighCount = curStat.getAllowedCount();
             if (curStat.getAllowedCount() < mLowCount || mLowCount == 0)

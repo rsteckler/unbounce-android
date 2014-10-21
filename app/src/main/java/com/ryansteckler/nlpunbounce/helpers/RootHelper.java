@@ -1,7 +1,5 @@
 package com.ryansteckler.nlpunbounce.helpers;
 
-import android.provider.DocumentsContract;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -12,6 +10,7 @@ import java.util.ArrayList;
 public class RootHelper {
     /** @author Kevin Kowalewski */
 
+    private RootHelper(){}
         public static boolean isDeviceRooted() {
             return checkRootMethod1() || checkRootMethod2() || checkRootMethod3() || checkRootMethod4();
         }
