@@ -153,7 +153,7 @@ public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.
         //Spin up the new Detail fragment.  Dig the custom animations.  Also put it on the back stack
         //so we can hit the back button and come back to the list.
         FragmentManager fragmentManager = getFragmentManager();
-        AlarmDetailFragment newFrag = AlarmDetailFragment.newInstance(startBounds.top, finalBounds.top, startBounds.bottom, finalBounds.bottom, (AlarmStats)mAdapter.getItem(position), mTaskerMode);
+        AlarmDetailFragment newFrag = (AlarmDetailFragment) new AlarmDetailFragment().newInstance(startBounds.top, finalBounds.top, startBounds.bottom, finalBounds.bottom, (AlarmStats)mAdapter.getItem(position), mTaskerMode);
         newFrag.attachClearListener(this);
         fragmentManager.beginTransaction()
                 .setCustomAnimations(R.animator.expand_in, R.animator.noop, R.animator.noop, R.animator.expand_out)
@@ -186,7 +186,7 @@ public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.
     }
 
     @Override
-    public void onAlarmCleared() {
+    public void onCleared() {
         mReloadOnShow = true;
     }
 

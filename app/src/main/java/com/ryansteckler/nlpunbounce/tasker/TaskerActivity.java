@@ -22,6 +22,7 @@ import com.ryansteckler.inappbilling.IabResult;
 import com.ryansteckler.inappbilling.Inventory;
 import com.ryansteckler.nlpunbounce.AlarmDetailFragment;
 import com.ryansteckler.nlpunbounce.AlarmsFragment;
+import com.ryansteckler.nlpunbounce.BaseDetailFragment;
 import com.ryansteckler.nlpunbounce.R;
 import com.ryansteckler.nlpunbounce.WakelockDetailFragment;
 import com.ryansteckler.nlpunbounce.WakelocksFragment;
@@ -29,9 +30,8 @@ import com.ryansteckler.nlpunbounce.WakelocksFragment;
 public class TaskerActivity extends Activity
         implements
         WakelocksFragment.OnFragmentInteractionListener,
-        WakelockDetailFragment.FragmentInteractionListener,
+        BaseDetailFragment.FragmentInteractionListener,
         AlarmsFragment.OnFragmentInteractionListener,
-        AlarmDetailFragment.FragmentInteractionListener,
         TaskerWhichFragment.OnFragmentInteractionListener {
 
     public static final String EXTRA_BUNDLE = "com.twofortyfouram.locale.intent.extra.BUNDLE";
@@ -207,23 +207,11 @@ public class TaskerActivity extends Activity
     }
 
     @Override
-    public void onWakelockDetailSetTitle(String title) {
+    public void onDetailSetTitle(String title) {
     }
 
     @Override
-    public void onWakelockDetailSetTaskerTitle(String title) {
-        TextView text = (TextView)findViewById(R.id.textTaskerHeader);
-        text.setText(title);
-        Button save = (Button)findViewById(R.id.buttonTaskerSave);
-        save.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void onAlarmDetailSetTitle(String title) {
-    }
-
-    @Override
-    public void onAlarmDetailSetTaskerTitle(String title) {
+    public void onDetailSetTaskerTitle(String title) {
         TextView text = (TextView)findViewById(R.id.textTaskerHeader);
         text.setText(title);
         Button save = (Button)findViewById(R.id.buttonTaskerSave);

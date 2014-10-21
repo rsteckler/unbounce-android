@@ -43,10 +43,10 @@ import java.io.File;
 public class MaterialSettingsActivity extends Activity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks,
         WakelocksFragment.OnFragmentInteractionListener,
-        WakelockDetailFragment.FragmentInteractionListener,
+        BaseDetailFragment.FragmentInteractionListener,
         HomeFragment.OnFragmentInteractionListener,
-        AlarmsFragment.OnFragmentInteractionListener,
-        AlarmDetailFragment.FragmentInteractionListener {
+        AlarmsFragment.OnFragmentInteractionListener
+    {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -287,13 +287,13 @@ public class MaterialSettingsActivity extends Activity
     }
 
     @Override
-    public void onWakelockDetailSetTitle(String title) {
+    public void onDetailSetTitle(String title) {
         mTitle = title;
         restoreActionBar();
     }
 
     @Override
-    public void onWakelockDetailSetTaskerTitle(String title) {
+    public void onDetailSetTaskerTitle(String title) {
         //Do nothing because we're not in Tasker mode.
     }
 
@@ -316,18 +316,6 @@ public class MaterialSettingsActivity extends Activity
         colorAnimation.start();
         mLastActionbarColor = colorTo;
 
-    }
-
-
-    @Override
-    public void onAlarmDetailSetTitle(String title) {
-        mTitle = title;
-        restoreActionBar();
-    }
-
-    @Override
-    public void onAlarmDetailSetTaskerTitle(String title) {
-        //Do nothing because we're not in Tasker mode.
     }
 
     @Override

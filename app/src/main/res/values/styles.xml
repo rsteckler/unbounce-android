@@ -19,6 +19,8 @@
         <item name="background_drawer">#cc666666</item>
 
         <item name="background_three">#FF5722</item>
+        <item name="background_three_shaded">#a83916</item>
+        <item name="background_three_faded">#ff9762</item>
 
         <item name="background_four">#9c27b0</item>
         <item name="background_four_faded">#ba68c8</item>
@@ -56,6 +58,8 @@
         <item name="background_drawer">#cc000000</item>
 
         <item name="background_three">#FF5722</item>
+        <item name="background_three_shaded">#333333</item>
+        <item name="background_three_faded">#ff9762</item>
 
         <item name="background_four">#9c27b0</item>
         <item name="background_four_faded">#ba68c8</item>

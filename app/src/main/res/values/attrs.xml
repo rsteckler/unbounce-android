@@ -15,6 +15,8 @@
         <attr name="background_lists" format="reference|color"></attr>
 
         <attr name="background_three" format="reference|color"></attr>
+        <attr name="background_three_shaded" format="reference|color"></attr>
+        <attr name="background_three_faded" format="reference|color"></attr>
 
         <attr name="background_four" format="reference|color"></attr>
         <attr name="background_four_faded" format="reference|color"></attr>
@@ -31,6 +33,7 @@
         <attr name="background_drawer" format="reference|color"></attr>
 
         <attr name="listBackgroundWakelock" format="reference"></attr>
+        <attr name="listBackgroundService" format="reference"></attr>
         <attr name="listBackgroundAlarm" format="reference"></attr>
         <attr name="listItemDownWakelock" format="reference"></attr>
         <attr name="listItemDownAlarm" format="reference"></attr>
