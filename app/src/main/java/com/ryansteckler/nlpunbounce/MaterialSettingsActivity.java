@@ -92,6 +92,7 @@ public class MaterialSettingsActivity extends Activity
                         Log.d("NlpUnbounce", "IAP inventory exists");
 
                         if (inventory.hasPurchase("donate_1") ||
+                                inventory.hasPurchase("donate_2") ||
                                 inventory.hasPurchase("donate_5") ||
                                 inventory.hasPurchase("donate_10")) {
                             Log.d("NlpUnbounce", "IAP inventory contains a donation");

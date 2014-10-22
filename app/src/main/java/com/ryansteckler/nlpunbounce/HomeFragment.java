@@ -447,7 +447,7 @@ public class HomeFragment extends Fragment  {
         layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MaterialSettingsActivity)getActivity()).mHelper.launchPurchaseFlow(getActivity(), "donate_1", 1, ((MaterialSettingsActivity)getActivity()).mPurchaseFinishedListener, "1");
+                ((MaterialSettingsActivity)getActivity()).mHelper.launchPurchaseFlow(getActivity(), "donate_2", 2, ((MaterialSettingsActivity)getActivity()).mPurchaseFinishedListener, "2");
             }
         });
 
