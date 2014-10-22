@@ -3,6 +3,8 @@ package com.ryansteckler.nlpunbounce.models;
 import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
 
+import static com.ryansteckler.nlpunbounce.helpers.LocaleHelper.getFormattedTime;
+
 /**
  * Created by rsteckler on 9/10/14.
  */
@@ -44,7 +46,7 @@ public class WakelockStats extends BaseStats implements Serializable {
         allowedTime -= TimeUnit.MINUTES.toMillis(minutes);
         long seconds = TimeUnit.MILLISECONDS.toSeconds(allowedTime);
 
-        StringBuilder sb = new StringBuilder(64);
+        /*StringBuilder sb = new StringBuilder(64);
         sb.append(days);
         sb.append(" d ");
         sb.append(hours);
@@ -52,9 +54,14 @@ public class WakelockStats extends BaseStats implements Serializable {
         sb.append(minutes);
         sb.append(" m ");
         sb.append(seconds);
-        sb.append(" s");
+        sb.append(" s");*/
 
-        return (sb.toString());
+       // String strLog =days + "d:" +hours +"h:"+minutes +"m:"+seconds +"s" ;
+
+       // return (sb.toString());
+
+        //return strLog;
+        return getFormattedTime(days,hours,minutes,seconds);
     }
 
     public long getBlockedDuration()
@@ -81,7 +88,7 @@ public class WakelockStats extends BaseStats implements Serializable {
         blockedTime -= TimeUnit.MINUTES.toMillis(minutes);
         long seconds = TimeUnit.MILLISECONDS.toSeconds(blockedTime);
 
-        StringBuilder sb = new StringBuilder(64);
+        /*StringBuilder sb = new StringBuilder(64);
         sb.append(days);
         sb.append(" d ");
         sb.append(hours);
@@ -90,8 +97,13 @@ public class WakelockStats extends BaseStats implements Serializable {
         sb.append(" m ");
         sb.append(seconds);
         sb.append(" s");
+*/
 
-        return (sb.toString());
+        return getFormattedTime(days,hours,minutes,seconds);
+       // String strLog =days + "d:" +hours +"h:"+minutes +"m:"+seconds +"s" ;
+
+        //return (sb.toString());
+       // return strLog;
     }
 
 

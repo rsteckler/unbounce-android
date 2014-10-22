@@ -332,7 +332,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
                 param.setResult(null);
                 recordWakelockBlock(param, wakeLockName);
 
-                debugLog("Preventing Wakelock" + wakeLockName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
+                debugLog("Preventing Wakelock " + wakeLockName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
 
             } else {
                 //Allow the wakelock
@@ -374,8 +374,8 @@ public class Wakelocks implements IXposedHookLoadPackage {
         }
     }
 
-    private void recordAlarmAcquire(Context context, String alarmName) {
-        UnbounceStatsCollection.getInstance().incrementAlarmAllowed(context, alarmName);
+    private void recordAlarmAcquire(Context context, String alarmName,String packageName) {
+        UnbounceStatsCollection.getInstance().incrementAlarmAllowed(context, alarmName,packageName);
     }
 
 //    private void handleServiceStop(XC_MethodHook.MethodHookParam param, Intent serviceIntent) {
@@ -464,6 +464,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
             try {
                 intent = (Intent) callMethod(pi, "getIntent");
             } catch (NoSuchMethodError nsme) {
+                try {
                 Object mTarget = XposedHelpers.getObjectField(pi, "mTarget");
 
                 //debugLog("mTarget Class for PendingIntent: " + mTarget.getClass());
@@ -475,6 +476,10 @@ public class Wakelocks implements IXposedHookLoadPackage {
                         //debugLog("requestIntent Class for PendingIntent: " + requestIntent.getClass() + " " + requestIntent);
                         intent = (Intent) requestIntent;
                     }
+                }
+                }
+                catch(Exception e){
+                    XposedBridge.log(TAG + "Additional logic to detect alarms on 4.1.2 failed for: "+ pi);
                 }
             }
 
@@ -515,7 +520,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
                     //Not enough time has passed since the last wakelock.  Deny the wakelock
                     //Not enough time has passed since the last alarm.  Remove it from the triggerlist
                     triggers.remove(j);
-                    recordAlarmBlock(param, alarmName);
+                    recordAlarmBlock(param, alarmName,pi.getTargetPackage());
 
                     debugLog("Preventing Alarm " + alarmName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastAlarm);
 
@@ -523,10 +528,10 @@ public class Wakelocks implements IXposedHookLoadPackage {
                     //Allow the wakelock
                     defaultLog("Allowing Alarm" + alarmName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastAlarm);
                     mLastAlarmAttempts.put(alarmName, now);
-                    recordAlarmAcquire(context, alarmName);
+                    recordAlarmAcquire(context, alarmName,pi.getTargetPackage());
                 }
             } else {
-                recordAlarmAcquire(context, alarmName);
+                recordAlarmAcquire(context, alarmName,pi.getTargetPackage());
             }
         }
     }
@@ -550,12 +555,12 @@ public class Wakelocks implements IXposedHookLoadPackage {
         }
     }
 
-    private void recordAlarmBlock(XC_MethodHook.MethodHookParam param, String name) {
+    private void recordAlarmBlock(XC_MethodHook.MethodHookParam param, String name,String packageName) {
 
         Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
 
         if (context != null) {
-            UnbounceStatsCollection.getInstance().incrementAlarmBlock(context, name);
+            UnbounceStatsCollection.getInstance().incrementAlarmBlock(context, name,packageName);
         }
 
     }

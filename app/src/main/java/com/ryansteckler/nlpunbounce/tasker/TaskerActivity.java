@@ -1,7 +1,6 @@
 package com.ryansteckler.nlpunbounce.tasker;
 
 import android.app.Activity;
-
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -76,7 +75,7 @@ public class TaskerActivity extends Activity
                             Log.d("Unbounce", "IAP inventory contains a donation");
 
                             mIsPremium = true;
-                        };
+                        }
                     }
                 }
             }

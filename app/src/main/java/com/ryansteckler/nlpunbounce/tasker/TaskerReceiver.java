@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import com.ryansteckler.nlpunbounce.MaterialSettingsActivity;
 import com.ryansteckler.nlpunbounce.XposedReceiver;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
 

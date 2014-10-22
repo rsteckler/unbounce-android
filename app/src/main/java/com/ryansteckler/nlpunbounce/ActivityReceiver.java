@@ -6,11 +6,8 @@ import android.content.Intent;
 
 import com.ryansteckler.nlpunbounce.models.BaseStats;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
-import com.ryansteckler.nlpunbounce.models.WakelockStats;
 
-import java.io.InvalidClassException;
 import java.util.HashMap;
-import java.util.Iterator;
 
 public class ActivityReceiver extends BroadcastReceiver {
 
@@ -26,9 +23,7 @@ public class ActivityReceiver extends BroadcastReceiver {
             HashMap<String, BaseStats> stats = null;
             try {
                 stats = (HashMap<String, BaseStats>) intent.getSerializableExtra("stats");
-                Iterator<BaseStats> iter = stats.values().iterator();
-                if (iter.hasNext()) {
-                    BaseStats testStat = iter.next();
+                for (BaseStats testStat : stats.values()) {
                     if (!(testStat instanceof BaseStats)) {
                         throw new ClassCastException();
                     }

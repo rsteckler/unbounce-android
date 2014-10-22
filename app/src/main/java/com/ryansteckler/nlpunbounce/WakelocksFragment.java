@@ -2,12 +2,12 @@ package com.ryansteckler.nlpunbounce;
 
 import android.app.Activity;
 import android.app.FragmentManager;
+import android.app.ListFragment;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.app.ListFragment;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,7 +16,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-
 
 import com.ryansteckler.nlpunbounce.adapters.WakelocksAdapter;
 import com.ryansteckler.nlpunbounce.helpers.ThemeHelper;

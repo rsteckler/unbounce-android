@@ -4,10 +4,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
@@ -15,12 +13,9 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.widget.Toast;
 
-import com.ryansteckler.inappbilling.IabHelper;
 import com.ryansteckler.nlpunbounce.helpers.LocaleHelper;
 import com.ryansteckler.nlpunbounce.helpers.SettingsHelper;
 import com.ryansteckler.nlpunbounce.helpers.ThemeHelper;
-
-import java.util.Locale;
 
 
 public class SettingsActivity extends Activity {

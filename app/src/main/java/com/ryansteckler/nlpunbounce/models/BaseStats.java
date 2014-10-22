@@ -1,9 +1,6 @@
 package com.ryansteckler.nlpunbounce.models;
 
-import android.util.Log;
-
 import java.io.Serializable;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by rsteckler on 9/10/14.
@@ -15,6 +12,15 @@ public class BaseStats implements Serializable {
     private boolean mBlockingEnabled;
 
     private String mType;
+    private String mPackage;
+
+    public String getmPackage() {
+        return mPackage;
+    }
+
+    public void setmPackage(String mPackage) {
+        this.mPackage = mPackage;
+    }
 
     public String getType() {
         return mType;

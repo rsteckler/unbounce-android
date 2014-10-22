@@ -13,13 +13,15 @@ public class EventLookup {
     public static final int UNKNOWN = 1;
     public static final int SAFE = 2;
 
+    private EventLookup(){}
+
     public static String getDescription(Context context, String eventName) {
         String lowerTrimmed = eventName.toLowerCase();
-        lowerTrimmed.replace("[", "");
-        lowerTrimmed.replace("]", "");
-        lowerTrimmed.replace(":", "");
-        lowerTrimmed.replace("-", "");
-        lowerTrimmed.replace(".", "");
+        lowerTrimmed= lowerTrimmed.replace("[", "");
+        lowerTrimmed =lowerTrimmed.replace("]", "");
+        lowerTrimmed =lowerTrimmed.replace(":", "");
+        lowerTrimmed =lowerTrimmed.replace("-", "");
+        lowerTrimmed =lowerTrimmed.replace(".", "");
 
         //Unknown
         String toReturn = context.getResources().getString(R.string.desc_unknown);
