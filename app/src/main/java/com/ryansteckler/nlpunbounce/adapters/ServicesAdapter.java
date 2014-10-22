@@ -21,6 +21,8 @@ import java.util.ArrayList;
  */
 public class ServicesAdapter extends BaseAdapter {
 
+    private int mSortBy = SortWakeLocks.SORT_COUNT;
+
     public ServicesAdapter(Context context, ArrayList<BaseStats> serviceStatList) {
         super(context, R.layout.fragment_service_listitem, serviceStatList, "service");
     }
@@ -96,13 +98,14 @@ public class ServicesAdapter extends BaseAdapter {
 
 
 
-    public void sort(boolean categorize) {
-        sort(SortWakeLocks.getBaseListComparator(SortWakeLocks.SORT_ALPHA, categorize));
-        super.addCategories(mBackingList);
+    public void sort(int sortBy, boolean categorize) {
+        mSortBy = sortBy;
+        sort(SortWakeLocks.getBaseListComparator(mSortBy, categorize));
+        addCategories(mBackingList);
     }
 
-    public void sort() {
-        sort(true);
+    public void sort(int sortBy) {
+        sort(sortBy, true);
     }
 
 

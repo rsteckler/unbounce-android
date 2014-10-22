@@ -45,7 +45,7 @@ public class MaterialSettingsActivity extends Activity
     int mCurTheme = ThemeHelper.THEME_DEFAULT;
     int mCurForceEnglish = -1;
 
-    private boolean mIsPremium = true;
+    private boolean mIsPremium = false;
 
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.

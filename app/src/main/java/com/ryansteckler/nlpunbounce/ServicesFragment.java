@@ -10,12 +10,16 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.ryansteckler.nlpunbounce.adapters.AlarmsAdapter;
 import com.ryansteckler.nlpunbounce.adapters.ServicesAdapter;
+import com.ryansteckler.nlpunbounce.helpers.SortWakeLocks;
 import com.ryansteckler.nlpunbounce.helpers.ThemeHelper;
 import com.ryansteckler.nlpunbounce.models.AlarmStats;
 import com.ryansteckler.nlpunbounce.models.ServiceStats;
@@ -31,6 +35,8 @@ public class ServicesFragment extends ListFragment implements ServiceDetailFragm
 
     private boolean mReloadOnShow = false;
     private boolean mTaskerMode = false;
+
+    private int mSortBy = SortWakeLocks.SORT_COUNT;
 
     private final static String ARG_TASKER_MODE = "taskerMode";
 
@@ -66,7 +72,7 @@ public class ServicesFragment extends ListFragment implements ServiceDetailFragm
         if (mListener != null)
             mListener.onSetTitle(getResources().getString(R.string.title_services));
 
-        mAdapter.sort();
+        mAdapter.sort(mSortBy);
     }
 
     @Override
@@ -76,6 +82,8 @@ public class ServicesFragment extends ListFragment implements ServiceDetailFragm
         if (getArguments() != null) {
             mTaskerMode = getArguments().getBoolean(ARG_TASKER_MODE);
         }
+
+        setHasOptionsMenu(true);
 
         mAdapter = new ServicesAdapter(getActivity(), UnbounceStatsCollection.getInstance().toServiceArrayList(getActivity()));
         setListAdapter(mAdapter);
@@ -127,6 +135,51 @@ public class ServicesFragment extends ListFragment implements ServiceDetailFragm
         switchToDetail(position);
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        getActivity().getMenuInflater().inflate(R.menu.list, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        //If they pushed the sort toggle, switch the icon from duration<->count
+        if (id == R.id.action_sort) {
+            if (mSortBy == SortWakeLocks.SORT_COUNT) {
+                mSortBy = SortWakeLocks.SORT_ALPHA;
+            } else if (mSortBy == SortWakeLocks.SORT_ALPHA) {
+                mSortBy = SortWakeLocks.SORT_COUNT;
+            }
+
+            getActivity().invalidateOptionsMenu();
+
+            //Do the re-sort here
+            mAdapter.sort(mSortBy);
+
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        MenuItem sortItem = menu.findItem(R.id.action_sort);
+        if (sortItem != null) {
+            if (mSortBy == SortWakeLocks.SORT_COUNT) {
+                sortItem.setIcon(R.drawable.ic_action_sort_by_size);
+                sortItem.setTitle(R.string.action_sort_by_count);
+            } else if (mSortBy == SortWakeLocks.SORT_ALPHA) {
+                sortItem.setIcon(R.drawable.ic_sort_alpha);
+                sortItem.setTitle(R.string.action_sort_by_alpha);
+            }
+        }
+
+        super.onPrepareOptionsMenu(menu);
+    }
+
+
     private void switchToDetail(int position) {
         //We're going for an animation from the list item, expanding to take the entire screen.
         //Start by getting the bounds of the current list item, as a starting point.
@@ -172,7 +225,7 @@ public class ServicesFragment extends ListFragment implements ServiceDetailFragm
                 //We may have had a change in the data for this wakelock (such as the user resetting the counters).
                 //Try updating it.
                 mAdapter = new ServicesAdapter(getActivity(), UnbounceStatsCollection.getInstance().toServiceArrayList(getActivity()));
-                mAdapter.sort();
+                mAdapter.sort(mSortBy);
                 setListAdapter(mAdapter);
             }
         }

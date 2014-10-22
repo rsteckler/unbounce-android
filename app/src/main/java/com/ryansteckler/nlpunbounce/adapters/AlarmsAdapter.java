@@ -27,6 +27,8 @@ import java.util.Iterator;
  */
 public class AlarmsAdapter extends BaseAdapter {
 
+    private int mSortBy = SortWakeLocks.SORT_COUNT;
+
     public AlarmsAdapter(Context context, ArrayList<BaseStats> alarmStatList) {
         super(context, R.layout.fragment_alarms_listitem, alarmStatList, "alarm");
     }
@@ -104,13 +106,14 @@ public class AlarmsAdapter extends BaseAdapter {
 
 
 
-    public void sort(boolean categorize) {
-        sort(SortWakeLocks.getBaseListComparator(SortWakeLocks.SORT_COUNT, categorize));
-        super.addCategories(mBackingList);
+    public void sort(int sortBy, boolean categorize) {
+        mSortBy = sortBy;
+        sort(SortWakeLocks.getBaseListComparator(mSortBy, categorize));
+        addCategories(mBackingList);
     }
 
-    public void sort() {
-        sort(true);
+    public void sort(int sortBy) {
+        sort(sortBy, true);
     }
 
 

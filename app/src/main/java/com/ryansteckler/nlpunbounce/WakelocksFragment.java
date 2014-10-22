@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.ryansteckler.nlpunbounce.adapters.WakelocksAdapter;
+import com.ryansteckler.nlpunbounce.helpers.SortWakeLocks;
 import com.ryansteckler.nlpunbounce.helpers.ThemeHelper;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
 import com.ryansteckler.nlpunbounce.models.WakelockStats;
@@ -35,7 +36,7 @@ public class WakelocksFragment extends ListFragment implements BaseDetailFragmen
     private WakelocksAdapter mAdapter;
 
     //Whether we're sorting the wakelocks list by duration or count
-    private boolean mSortByTime = false;
+    private int mSortBy = SortWakeLocks.SORT_COUNT;
     private boolean mReloadOnShow = false;
 
     private boolean mTaskerMode = false;
@@ -76,7 +77,7 @@ public class WakelocksFragment extends ListFragment implements BaseDetailFragmen
         if (mListener != null)
             mListener.onWakelocksSetTitle(getResources().getString(R.string.title_wakelocks));
 
-        mAdapter.sort(!mSortByTime);
+        mAdapter.sort(mSortBy);
     }
 
     @Override
@@ -189,7 +190,7 @@ public class WakelocksFragment extends ListFragment implements BaseDetailFragmen
                 //We may have had a change in the data for this wakelock (such as the user resetting the counters).
                 //Try updating it.
                 mAdapter = new WakelocksAdapter(getActivity(), UnbounceStatsCollection.getInstance().toWakelockArrayList(getActivity()));
-                mAdapter.sort(!mSortByTime);
+                mAdapter.sort(mSortBy);
                 setListAdapter(mAdapter);
             }
         }
@@ -198,7 +199,7 @@ public class WakelocksFragment extends ListFragment implements BaseDetailFragmen
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        getActivity().getMenuInflater().inflate(R.menu.wakelocks, menu);
+        getActivity().getMenuInflater().inflate(R.menu.list, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -208,11 +209,18 @@ public class WakelocksFragment extends ListFragment implements BaseDetailFragmen
 
         //If they pushed the sort toggle, switch the icon from duration<->count
         if (id == R.id.action_sort) {
-            mSortByTime = !mSortByTime;
+            if (mSortBy == SortWakeLocks.SORT_COUNT) {
+                mSortBy = SortWakeLocks.SORT_TIME;
+            } else if (mSortBy == SortWakeLocks.SORT_TIME) {
+                mSortBy = SortWakeLocks.SORT_ALPHA;
+            } else if (mSortBy == SortWakeLocks.SORT_ALPHA) {
+                mSortBy = SortWakeLocks.SORT_COUNT;
+            }
+
             getActivity().invalidateOptionsMenu();
 
             //Do the re-sort here
-            mAdapter.sort(!mSortByTime);
+            mAdapter.sort(mSortBy);
 
             return true;
         }
@@ -225,12 +233,15 @@ public class WakelocksFragment extends ListFragment implements BaseDetailFragmen
     public void onPrepareOptionsMenu(Menu menu) {
         MenuItem sortItem = menu.findItem(R.id.action_sort);
         if (sortItem != null) {
-            if (mSortByTime) {
+            if (mSortBy == SortWakeLocks.SORT_TIME) {
                 sortItem.setIcon(R.drawable.ic_action_time);
                 sortItem.setTitle(R.string.action_sort_by_time);
-            } else {
+            } else if (mSortBy == SortWakeLocks.SORT_COUNT) {
                 sortItem.setIcon(R.drawable.ic_action_sort_by_size);
                 sortItem.setTitle(R.string.action_sort_by_count);
+            } else if (mSortBy == SortWakeLocks.SORT_ALPHA) {
+                sortItem.setIcon(R.drawable.ic_sort_alpha);
+                sortItem.setTitle(R.string.action_sort_by_alpha);
             }
         }
 

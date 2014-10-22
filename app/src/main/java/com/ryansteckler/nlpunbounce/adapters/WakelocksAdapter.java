@@ -27,7 +27,7 @@ import java.util.Iterator;
 public class WakelocksAdapter extends BaseAdapter {
 
     //Track whether we're sorting by count or duration.
-    private boolean mByCount = false;
+    private int mSortBy = SortWakeLocks.SORT_COUNT;
 
     public WakelocksAdapter(Context context, ArrayList<BaseStats> wakelockStatList) {
         super(context, R.layout.fragment_wakelocks_listitem, wakelockStatList, "wakelock");
@@ -98,14 +98,14 @@ public class WakelocksAdapter extends BaseAdapter {
         return convertView;
     }
 
-    public void sort(boolean byCount, boolean categorize) {
-        mByCount = byCount;
-        sort(SortWakeLocks.getWakelockListComparator(byCount ? SortWakeLocks.SORT_COUNT : SortWakeLocks.SORT_TIME, categorize));
+    public void sort(int sortBy, boolean categorize) {
+        mSortBy = sortBy;
+        sort(SortWakeLocks.getWakelockListComparator(mSortBy, categorize));
         addCategories(mBackingList);
     }
 
-    public void sort(boolean byCount) {
-        sort(byCount, true);
+    public void sort(int sortBy) {
+        sort(sortBy, true);
     }
 
 }
