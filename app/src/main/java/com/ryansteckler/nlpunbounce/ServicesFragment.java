@@ -2,61 +2,56 @@ package com.ryansteckler.nlpunbounce;
 
 import android.app.Activity;
 import android.app.FragmentManager;
+import android.app.ListFragment;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.app.ListFragment;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-
 import com.ryansteckler.nlpunbounce.adapters.AlarmsAdapter;
+import com.ryansteckler.nlpunbounce.adapters.ServicesAdapter;
 import com.ryansteckler.nlpunbounce.helpers.ThemeHelper;
 import com.ryansteckler.nlpunbounce.models.AlarmStats;
+import com.ryansteckler.nlpunbounce.models.ServiceStats;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
 
 /**
- * A fragment representing a list of Items.
- * <p />
- * <p />
- * Activities containing this fragment MUST implement the {@link OnFragmentInteractionListener}
- * interface.
+ * Created by rsteckler on 10/21/14.
  */
-public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.FragmentClearListener {
+public class ServicesFragment extends ListFragment implements ServiceDetailFragment.FragmentClearListener {
 
     private OnFragmentInteractionListener mListener;
-    private AlarmsAdapter mAdapter;
+    private ServicesAdapter mAdapter;
 
     private boolean mReloadOnShow = false;
     private boolean mTaskerMode = false;
 
     private final static String ARG_TASKER_MODE = "taskerMode";
 
-    public static AlarmsFragment newInstance() {
+    public static ServicesFragment newInstance() {
         return newInstance(false);
     }
 
-    public static AlarmsFragment newInstance(boolean taskerMode) {
-        AlarmsFragment fragment = new AlarmsFragment();
+    public static ServicesFragment newInstance(boolean taskerMode) {
+        ServicesFragment fragment = new ServicesFragment();
         Bundle args = new Bundle();
         args.putBoolean(ARG_TASKER_MODE, taskerMode);
         fragment.setArguments(args);
         return fragment;
     }
 
-
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public AlarmsFragment() {
+    public ServicesFragment() {
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -69,10 +64,9 @@ public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (mListener != null)
-            mListener.onAlarmsSetTitle(getResources().getString(R.string.title_alarms));
+            mListener.onSetTitle(getResources().getString(R.string.title_services));
 
         mAdapter.sort();
-
     }
 
     @Override
@@ -83,7 +77,7 @@ public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.
             mTaskerMode = getArguments().getBoolean(ARG_TASKER_MODE);
         }
 
-        mAdapter = new AlarmsAdapter(getActivity(), UnbounceStatsCollection.getInstance().toAlarmArrayList(getActivity()));
+        mAdapter = new ServicesAdapter(getActivity(), UnbounceStatsCollection.getInstance().toServiceArrayList(getActivity()));
         setListAdapter(mAdapter);
     }
 
@@ -112,7 +106,7 @@ public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.
         //there until the animation takes over.  Looks sexier that way.
         TypedValue backgroundValue = new TypedValue();
         Resources.Theme theme = getActivity().getTheme();
-        boolean success = theme.resolveAttribute(R.attr.listItemDownAlarm, backgroundValue, true);
+        boolean success = theme.resolveAttribute(R.attr.listItemDownService, backgroundValue, true);
         Drawable backgroundColor = getResources().getDrawable(backgroundValue.resourceId);
 
         v.setBackground(backgroundColor);
@@ -123,7 +117,7 @@ public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
-                        v.setBackgroundResource(R.drawable.list_background_alarm);
+                        v.setBackgroundResource(R.drawable.list_background_service);
                     }
                 },
                 400
@@ -153,12 +147,12 @@ public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.
         //Spin up the new Detail fragment.  Dig the custom animations.  Also put it on the back stack
         //so we can hit the back button and come back to the list.
         FragmentManager fragmentManager = getFragmentManager();
-        AlarmDetailFragment newFrag = (AlarmDetailFragment) new AlarmDetailFragment().newInstance(startBounds.top, finalBounds.top, startBounds.bottom, finalBounds.bottom, (AlarmStats)mAdapter.getItem(position), mTaskerMode);
+        ServiceDetailFragment newFrag = (ServiceDetailFragment) new ServiceDetailFragment().newInstance(startBounds.top, finalBounds.top, startBounds.bottom, finalBounds.bottom, (ServiceStats)mAdapter.getItem(position), mTaskerMode);
         newFrag.attachClearListener(this);
         fragmentManager.beginTransaction()
                 .setCustomAnimations(R.animator.expand_in, R.animator.noop, R.animator.noop, R.animator.expand_out)
                 .hide(this)
-                .add(R.id.container, newFrag, "alarm_detail")
+                .add(R.id.container, newFrag, "service_detail")
                 .addToBackStack(null)
                 .commit();
 
@@ -170,14 +164,14 @@ public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.
         //Remember the scroll pos so we can reinstate it
         if (!hidden) {
             if (mListener != null) {
-                mListener.onAlarmsSetTitle(getResources().getString(R.string.title_alarms));
-                mListener.onAlarmsSetTaskerTitle(getResources().getString(R.string.tasker_choose_alarm));
+                mListener.onSetTitle(getResources().getString(R.string.title_services));
+                mListener.onSetTaskerTitle(getResources().getString(R.string.tasker_choose_service));
             }
             if (mReloadOnShow) {
                 mReloadOnShow = false;
-                //We may have had a change in the data for this alarm (such as the user resetting the counters).
+                //We may have had a change in the data for this wakelock (such as the user resetting the counters).
                 //Try updating it.
-                mAdapter = new AlarmsAdapter(getActivity(), UnbounceStatsCollection.getInstance().toAlarmArrayList(getActivity()));
+                mAdapter = new ServicesAdapter(getActivity(), UnbounceStatsCollection.getInstance().toServiceArrayList(getActivity()));
                 mAdapter.sort();
                 setListAdapter(mAdapter);
             }
@@ -201,8 +195,8 @@ public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        public void onAlarmsSetTitle(String id);
-        public void onAlarmsSetTaskerTitle(String title);
+        public void onSetTitle(String id);
+        public void onSetTaskerTitle(String title);
     }
 
 }

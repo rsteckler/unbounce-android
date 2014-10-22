@@ -43,6 +43,7 @@
     <string name="tasker_reset_stats">Reset stats</string>
     <string name="tasker_choose_wakelock">Choose the wakelock to adjust.</string>
     <string name="tasker_choose_alarm">Choose the alarm to adjust.</string>
+    <string name="tasker_choose_service">Choose the service to adjust.</string>
     <string name="tasker_welcome">Welcome to Unbounce\'s Tasker plugin.</string>
     <string name="tasker_which_task">Do you want to change settings for a Wakelock or an Alarm, or do you want to reset stats for your device?</string>
     <string name="tasker_task_wakelock">CHANGE WAKELOCK</string>
@@ -53,6 +54,8 @@
     <string name="alert_nopro_content">To Unbounce non-standard wakelocks and alarms, you need to purchase a donation package.</string>
     <string name="alert_unknown_alarm_title">Unbounce unknown alarm?</string>
     <string name="alert_unknown_alarm_content">This alarm hasn\'t been proven safe to Unbounce.  Would you like to Unbounce it anyway?</string>
+    <string name="alert_unknown_service_title">Unbounce unknown service?</string>
+    <string name="alert_unknown_service_content">This service hasn\'t been proven safe to Unbounce.  Would you like to Unbounce it anyway?</string>
     <string name="dialog_unbounce">UNBOUNCE</string>
     <string name="dialog_cancel">CANCEL</string>
     <string name="tasker_choose_settings">Choose the settings you want.</string>

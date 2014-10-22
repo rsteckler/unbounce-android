@@ -35,8 +35,10 @@
         <item name="categoryText">@style/TextTitle</item>
         <item name="listItemDownWakelock">@drawable/list_item_down_wakelock</item>
         <item name="listItemDownAlarm">@drawable/list_item_down_alarm</item>
+        <item name="listItemDownService">@drawable/list_item_down_service</item>
         <item name="listBackgroundWakelock">@drawable/list_background_wakelock</item>
         <item name="listBackgroundAlarm">@drawable/list_background_alarm</item>
+        <item name="listBackgroundService">@drawable/list_background_service</item>
 
     </style>
 
@@ -74,8 +76,10 @@
         <item name="categoryText">@style/TextTitle_dark</item>
         <item name="listItemDownWakelock">@drawable/list_item_down_dark</item>
         <item name="listItemDownAlarm">@drawable/list_item_down_dark</item>
+        <item name="listItemDownService">@drawable/list_item_down_dark</item>
         <item name="listBackgroundWakelock">@drawable/list_background_dark</item>
         <item name="listBackgroundAlarm">@drawable/list_background_dark</item>
+        <item name="listBackgroundService">@drawable/list_background_dark</item>
 
     </style>
 

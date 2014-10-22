@@ -37,6 +37,7 @@
         <attr name="listBackgroundAlarm" format="reference"></attr>
         <attr name="listItemDownWakelock" format="reference"></attr>
         <attr name="listItemDownAlarm" format="reference"></attr>
+        <attr name="listItemDownService" format="reference"></attr>
 
 
     </declare-styleable>

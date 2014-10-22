@@ -45,7 +45,8 @@ public class MaterialSettingsActivity extends Activity
         WakelocksFragment.OnFragmentInteractionListener,
         BaseDetailFragment.FragmentInteractionListener,
         HomeFragment.OnFragmentInteractionListener,
-        AlarmsFragment.OnFragmentInteractionListener
+        AlarmsFragment.OnFragmentInteractionListener,
+        ServicesFragment.OnFragmentInteractionListener
     {
 
     /**
@@ -58,7 +59,7 @@ public class MaterialSettingsActivity extends Activity
     int mCurTheme = ThemeHelper.THEME_DEFAULT;
     int mCurForceEnglish = -1;
 
-    private boolean mIsPremium = false;
+    private boolean mIsPremium = true;
 
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
@@ -253,6 +254,12 @@ public class MaterialSettingsActivity extends Activity
                     .addToBackStack("alarms")
                     .commit();
         } else if (position == 3) {
+            fragmentManager.beginTransaction()
+                    .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, android.R.animator.fade_in, android.R.animator.fade_out)
+                    .replace(R.id.container, ServicesFragment.newInstance(), "services")
+                    .addToBackStack("services")
+                    .commit();
+        } else if (position == 4) {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
         }
@@ -331,4 +338,17 @@ public class MaterialSettingsActivity extends Activity
     }
 
 
-}
+        @Override
+        public void onSetTitle(String title) {
+            mTitle = title;
+            restoreActionBar();
+            animateActionbarBackground(getResources().getColor(R.color.background_four), 400);
+
+        }
+
+        @Override
+        public void onSetTaskerTitle(String title) {
+            //Do nothing because we're not in Tasker mode.
+
+        }
+    }
