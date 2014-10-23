@@ -133,46 +133,45 @@ public class UnbounceStatsCollection implements Serializable {
 
     }
 
-    public ArrayList<AlarmStats> toAlarmArrayList(Context context)
-    {
+    public ArrayList<BaseStats> toAlarmArrayList(Context context) {
         loadStats(context);
         ArrayList<BaseStats> bases = new ArrayList<BaseStats>(mCurrentStats.values());
-        ArrayList<AlarmStats> alarms = new ArrayList<AlarmStats>();
+        ArrayList<BaseStats> alarms = new ArrayList<BaseStats>();
         Iterator<BaseStats> iter = bases.iterator();
 
         //TODO:  There are WAY better ways to do this, other than copying arrays.
         for (BaseStats curStat : bases) {
 
             if (curStat instanceof AlarmStats) {
-                alarms.add((AlarmStats) curStat);
+                alarms.add(curStat);
             }
         }
 
         return alarms;
     }
 
-    public ArrayList<WakelockStats> toWakelockArrayList(Context context) {
+    public ArrayList<BaseStats> toWakelockArrayList(Context context) {
         loadStats(context);
         ArrayList<BaseStats> bases = new ArrayList<BaseStats>(mCurrentStats.values());
-        ArrayList<WakelockStats> wakelocks = new ArrayList<WakelockStats>();
-
+        ArrayList<BaseStats> wakelocks = new ArrayList<BaseStats>();
+        Iterator<BaseStats> iter = bases.iterator();
 
         //TODO:  There are WAY better ways to do this, other than copying arrays.
         for (BaseStats curStat : bases) {
 
             if (curStat instanceof WakelockStats) {
-                wakelocks.add((WakelockStats) curStat);
+                wakelocks.add(curStat);
             }
         }
 
         return wakelocks;
     }
 
-    public ArrayList<ServiceStats> toServiceArrayList(Context context)
+    public ArrayList<BaseStats> toServiceArrayList(Context context)
     {
         loadStats(context);
         ArrayList<BaseStats> bases = new ArrayList<BaseStats>(mCurrentStats.values());
-        ArrayList<ServiceStats> services = new ArrayList<ServiceStats>();
+        ArrayList<BaseStats> services = new ArrayList<BaseStats>();
         Iterator<BaseStats> iter = bases.iterator();
 
         //TODO:  There are WAY better ways to do this, other than copying arrays.
@@ -180,7 +179,7 @@ public class UnbounceStatsCollection implements Serializable {
         {
             BaseStats curStat = iter.next();
             if (curStat instanceof ServiceStats) {
-                services.add((ServiceStats)curStat);
+                services.add(curStat);
             }
         }
 
@@ -771,7 +770,7 @@ public class UnbounceStatsCollection implements Serializable {
                 Log.d("Unbounce:WLSC", "Ready to load file.");
                 FileInputStream in = new FileInputStream(inFile);
                 ObjectInputStream objIn = new ObjectInputStream(in);
-                if (statFilename == STATS_FILENAME_GLOBAL) {
+                if (statFilename.equals(STATS_FILENAME_GLOBAL)) {
                     statChoice = (HashMap)objIn.readObject();
                 } else {
                     BaseStatsWrapper wrap = (BaseStatsWrapper) objIn.readObject();

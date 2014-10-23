@@ -1,0 +1,6 @@
+<resources>
+    <!-- Don't translate these :) -->
+    <string name="app_font_family">sans_serif</string>
+    <string name="welcome_banner_problem_xposed_installed_link"><![CDATA[<a href="http://www.tested.com/tech/android/460074-how-use-xposed-framework-android-extreme-customization/"> Tested.com.</a>]]></string>
+    <string name="welcome_banner_problem_root_link"><![CDATA[<a href="http://www.techverse.net/how-to-root-your-android-phone-tablet-and-why/">Techverse.net</a>]]></string>
+</resources>

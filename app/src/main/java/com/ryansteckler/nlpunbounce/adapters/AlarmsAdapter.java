@@ -14,7 +14,10 @@ import com.ryansteckler.nlpunbounce.R;
 import com.ryansteckler.nlpunbounce.helpers.SortWakeLocks;
 import com.ryansteckler.nlpunbounce.helpers.ThemeHelper;
 import com.ryansteckler.nlpunbounce.models.AlarmStats;
+import com.ryansteckler.nlpunbounce.models.BaseStats;
 import com.ryansteckler.nlpunbounce.models.EventLookup;
+import com.ryansteckler.nlpunbounce.models.WakelockStats;
+
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -22,135 +25,27 @@ import java.util.Iterator;
 /**
  * Created by rsteckler on 9/7/14.
  */
-public class AlarmsAdapter extends ArrayAdapter {
+public class AlarmsAdapter extends BaseAdapter {
 
-    private long mLowCount = 0;
-    private long mHighCount = 0;
-    private long mScale = 0;
+    private int mSortBy = SortWakeLocks.SORT_COUNT;
 
-    private long mCategoryBlockedIndex = 0;
-    private long mCategorySafeIndex = 0;
-    private long mCategoryUnknownIndex = 0;
-    private long mCategoryUnsafeIndex = 0;
-
-    private final static int ALARM_TYPE = 0;
-    private final static int CATEGORY_TYPE = 1;
-
-    private ArrayList<AlarmStats> mBackingList = null;
-
-    public AlarmsAdapter(Context context, ArrayList<AlarmStats> alarmStatList) {
-        super(context, R.layout.fragment_wakelocks_listitem, alarmStatList);
-        mBackingList = alarmStatList;
-        calculateScale(context, alarmStatList);
-        addCategories(mBackingList);
+    public AlarmsAdapter(Context context, ArrayList<BaseStats> alarmStatList) {
+        super(context, R.layout.fragment_alarms_listitem, alarmStatList, "alarm");
     }
 
-    private void addCategories(ArrayList<AlarmStats> alarmStatList) {
-        mCategoryBlockedIndex = 0;
-        mCategorySafeIndex = 1;
-        mCategoryUnknownIndex = 2;
-        mCategoryUnsafeIndex = 3;
-
-        boolean foundSafe = false;
-        boolean foundUnknown = false;
-
-
-       for(AlarmStats curStat:alarmStatList){
-
-
-
-            if (!curStat.getBlockingEnabled()) {
-                foundSafe = true;
-            }
-
-            if (!foundUnknown && foundSafe && EventLookup.isSafe(curStat.getName()) == EventLookup.UNKNOWN) {
-                foundUnknown = true;
-            }
-
-            if (foundUnknown && EventLookup.isSafe(curStat.getName()) == EventLookup.UNSAFE) {
-                break;
-            }
-
-            if (!foundSafe)
-                mCategorySafeIndex++;
-
-            if (!foundUnknown)
-                mCategoryUnknownIndex++;
-
-            mCategoryUnsafeIndex++;
-
-        }
-    }
-
-    private void calculateScale(Context context, ArrayList<AlarmStats> alarmStatList) {
-
-        SharedPreferences prefs = context.getSharedPreferences("com.ryansteckler.nlpunbounce" + "_preferences", Context.MODE_WORLD_READABLE);
-
-        //Get the max and min values for the red-green spectrum of counts
-
-        for(AlarmStats curStat:alarmStatList){
-            if (curStat.getAllowedCount() > mHighCount)
-                mHighCount = curStat.getAllowedCount();
-            if (curStat.getAllowedCount() < mLowCount || mLowCount == 0)
-                mLowCount = curStat.getAllowedCount();
-            //Set the blocking flag
-            String blockName = "alarm_" + curStat.getName() + "_enabled";
-            curStat.setBlockingEnabled(prefs.getBoolean(blockName, false));
-        }
-        mScale = mHighCount - mLowCount;
-
-    }
 
     private static class AlarmViewHolder {
         TextView name;
         TextView alarmCount;
     }
 
-    private static class CategoryViewHolder {
-        TextView name;
-    }
 
-    @Override
-    public int getCount() {
-        return super.getCount() + 4; //4 categories
-    }
-
-    @Override
-    public Object getItem(int position) {
-        int newPosition = position;
-        if (position > mCategoryBlockedIndex)
-            newPosition--;
-        if (position > mCategorySafeIndex)
-            newPosition--;
-        if (position > mCategoryUnknownIndex)
-            newPosition--;
-        if (position > mCategoryUnsafeIndex)
-            newPosition--;
-
-        return super.getItem(newPosition);
-    }
-
-    @Override
-    public int getViewTypeCount() {
-        return 2;
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        if (position == mCategoryBlockedIndex ||
-                position == mCategorySafeIndex ||
-                position == mCategoryUnknownIndex ||
-                position == mCategoryUnsafeIndex)
-            return CATEGORY_TYPE;
-        else
-            return ALARM_TYPE;
-    }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         int itemType = this.getItemViewType(position);
         switch (itemType) {
-            case ALARM_TYPE:
+            case ITEM_TYPE:
                 // Get the data item for this position
                 AlarmStats alarm = (AlarmStats)getItem(position);
 
@@ -200,72 +95,25 @@ public class AlarmsAdapter extends ArrayAdapter {
                 break;
 
             case CATEGORY_TYPE:
-                //Take care of the category special cases.
-                CategoryViewHolder categoryViewHolder = null; // view lookup cache stored in tag
-
-                // Check if an existing view is being reused, otherwise inflate the view
-                if (convertView == null) {
-                    categoryViewHolder = new CategoryViewHolder();
-                    LayoutInflater inflater = LayoutInflater.from(getContext());
-                    convertView = inflater.inflate(R.layout.fragment_wakelocks_listgroup, parent, false);
-                    categoryViewHolder.name = (TextView) convertView.findViewById(R.id.textviewCategoryName);
-                    convertView.setTag(categoryViewHolder);
-                } else {
-                    categoryViewHolder = (CategoryViewHolder) convertView.getTag();
-
-                }
-
-                if (position == mCategoryBlockedIndex) {
-                    categoryViewHolder.name.setText(R.string.category_unbounced);
-                } else if (position == mCategorySafeIndex) {
-                    categoryViewHolder.name.setText(R.string.category_safe);
-                } else if (position == mCategoryUnknownIndex) {
-                    categoryViewHolder.name.setText(R.string.category_unknown);
-                } else if (position == mCategoryUnsafeIndex) {
-                    categoryViewHolder.name.setText(R.string.category_not_safe);
-                } else {
-                    categoryViewHolder.name.setText(R.string.category_error);
-                }
-
+                convertView = getCategoryView(position, convertView, parent);
                 break;
+
         }
 
 
         return convertView;
     }
 
-    private float[] getBackColorFromSpectrum(AlarmStats alarm) {
-        float correctedStat = alarm.getAllowedCount() - mLowCount;
-        //Set the background color along the reg-green spectrum based on the severity of the count.
-        if (ThemeHelper.getTheme() == ThemeHelper.THEME_DEFAULT) {
-            float point = 120 - ((correctedStat / mScale) * 120); //this gives us a 1-120 hue number.
-            return new float[]{point, 1f, 1f};
-        } else {
-            float point = (((correctedStat / mScale) * 80) / 100) + 0.2f; //this gives us a 40-100 value number.
-            return new float[]{1f, 0f, point};
-        }
-    }
 
-    private float[] getForeColorFromBack(float[] hsvBack) {
-        if (ThemeHelper.getTheme() == ThemeHelper.THEME_DEFAULT) {
-            return new float[]{0, 0, 0};
-        } else {
-            //Set the background color along the reg-green spectrum based on the severity of the count.
-            float point = 1;
-            if (hsvBack[2] > .6) {
-                point = .0f;
-            }
-            return new float[]{291, 0f, point};
-        }
-    }
 
-    public void sort(boolean categorize) {
-        sort(SortWakeLocks.getAlarmListComparator(categorize));
+    public void sort(int sortBy, boolean categorize) {
+        mSortBy = sortBy;
+        sort(SortWakeLocks.getBaseListComparator(mSortBy, categorize));
         addCategories(mBackingList);
     }
 
-    public void sort() {
-        sort(true);
+    public void sort(int sortBy) {
+        sort(sortBy, true);
     }
 
 
