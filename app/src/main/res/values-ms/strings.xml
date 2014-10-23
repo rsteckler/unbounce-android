@@ -107,7 +107,6 @@
   <string name="donate_more_button">"BAGAIMANA SAYA BOLEH MENOLONG LAGI?"</string>
   <string name="donate_more_text">"Ramai telah bertanya bagaiman mereka boleh menolong selepas menderma.  Butang-butang di bawah membolehkan anda derma lagi, tetapi tidak mengaktifkan apa-apa ciri tambahan.  Terima kasih kerana menyokong Lion Tamer!"</string>
   <string name="welcome_banner_title">"Selamat datang!"</string>
-  <string name="welcome_banner_text">"Anda boleh menghalang kunci berjaga daripada menghalang telefon anda tidur, dan menghalang penggera daripada membangunkannya.  Kami telah menetapkan beberapa tetapan untuk penjimatan bateri."</string>
   <string name="settings_category_options">"Pilihan"</string>
   <string name="settings_item_show_launcher">"Tunjuk ikon pelancar"</string>
   <string name="settings_item_choose_theme">"Pilih tema"</string>
@@ -115,7 +114,6 @@
   <string name="settings_item_global_stats_summary">"Hantar dan menerima statistik tanpa nama"</string>
   <string name="settings_item_reset_defaults_title">"Kembali kepada tetapan asal"</string>
   <string name="settings_item_reset_defaults_summary">"Tetapkan semula semua penggera dan kunci berjaga ke tetapan asal"</string>
-  <string name="settings_category_debug">"Nyahpepijat"</string>
   <string name="settings_item_author">"Pencipta: Ryan Steckler"</string>
   <string name="settings_item_logging_level">"Tahap"</string>
   <string name="settings_category_translation">"Terjemahan oleh"</string>

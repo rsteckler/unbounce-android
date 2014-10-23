@@ -107,7 +107,6 @@
   <string name="donate_more_button">"COMO POSSO AJUDAR MAIS?"</string>
   <string name="donate_more_text">"Muitas pessoas perguntaram como é que poderiam ajudar para além do donativo inicial. Os botões em baixo deixam-te doar outra vez, mas não vão desbloquear nada mais. Muito obrigado por suportares o Lion Tamer!"</string>
   <string name="welcome_banner_title">"Bem vindo!"</string>
-  <string name="welcome_banner_text">"Podes bloquear wakelocks impedindo que o teu telefone se mantenha acordado, e bloquear os alarmes que fazem com que ele acorde. Já definimos algumas coisas por ti que te vão poupar bateria."</string>
   <string name="settings_category_options">"Opções"</string>
   <string name="settings_item_show_launcher">"Mostrar icon app"</string>
   <string name="settings_item_choose_theme">"Escolher tema"</string>
@@ -115,7 +114,6 @@
   <string name="settings_item_global_stats_summary">"Enviar e receber estatística"</string>
   <string name="settings_item_reset_defaults_title">"Reiniciar para definições padrão"</string>
   <string name="settings_item_reset_defaults_summary">"Mudar para as config inicíais de todos os alarmes e wakelocks"</string>
-  <string name="settings_category_debug">"Resolver problema"</string>
   <string name="settings_item_author">"Autor: Ryan Steckles"</string>
   <string name="settings_item_logging_level">"Nível de conexão"</string>
   <string name="settings_category_translation">"Tradutores"</string>

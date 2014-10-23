@@ -770,7 +770,7 @@ public class UnbounceStatsCollection implements Serializable {
                 Log.d("Unbounce:WLSC", "Ready to load file.");
                 FileInputStream in = new FileInputStream(inFile);
                 ObjectInputStream objIn = new ObjectInputStream(in);
-                if (statFilename == STATS_FILENAME_GLOBAL) {
+                if (statFilename.equals(STATS_FILENAME_GLOBAL)) {
                     statChoice = (HashMap)objIn.readObject();
                 } else {
                     BaseStatsWrapper wrap = (BaseStatsWrapper) objIn.readObject();
