@@ -24,7 +24,7 @@
 
         <activity
             android:name=".SettingsActivity"
-            android:label="Unbounce settings" >
+            android:label="Lion Tamer settings" >
         </activity>
 
         <receiver
