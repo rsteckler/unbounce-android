@@ -2,12 +2,12 @@ package com.ryansteckler.nlpunbounce;
 
 import android.app.Activity;
 import android.app.FragmentManager;
+import android.app.ListFragment;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.app.ListFragment;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,8 +17,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-
 import com.ryansteckler.nlpunbounce.adapters.WakelocksAdapter;
+import com.ryansteckler.nlpunbounce.helpers.SortWakeLocks;
 import com.ryansteckler.nlpunbounce.helpers.ThemeHelper;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
 import com.ryansteckler.nlpunbounce.models.WakelockStats;
@@ -30,13 +30,13 @@ import com.ryansteckler.nlpunbounce.models.WakelockStats;
  * Activities containing this fragment MUST implement the {@link OnFragmentInteractionListener}
  * interface.
  */
-public class WakelocksFragment extends ListFragment implements WakelockDetailFragment.FragmentClearListener {
+public class WakelocksFragment extends ListFragment implements BaseDetailFragment.FragmentClearListener {
 
     private OnFragmentInteractionListener mListener;
     private WakelocksAdapter mAdapter;
 
     //Whether we're sorting the wakelocks list by duration or count
-    private boolean mSortByTime = false;
+    private int mSortBy = SortWakeLocks.SORT_COUNT;
     private boolean mReloadOnShow = false;
 
     private boolean mTaskerMode = false;
@@ -77,7 +77,7 @@ public class WakelocksFragment extends ListFragment implements WakelockDetailFra
         if (mListener != null)
             mListener.onWakelocksSetTitle(getResources().getString(R.string.title_wakelocks));
 
-        mAdapter.sort(!mSortByTime);
+        mAdapter.sort(mSortBy);
     }
 
     @Override
@@ -166,7 +166,7 @@ public class WakelocksFragment extends ListFragment implements WakelockDetailFra
         //Spin up the new Detail fragment.  Dig the custom animations.  Also put it on the back stack
         //so we can hit the back button and come back to the list.
         FragmentManager fragmentManager = getFragmentManager();
-        WakelockDetailFragment newFrag = WakelockDetailFragment.newInstance(startBounds.top, finalBounds.top, startBounds.bottom, finalBounds.bottom, (WakelockStats)mAdapter.getItem(position), mTaskerMode);
+        WakelockDetailFragment newFrag = (WakelockDetailFragment) new WakelockDetailFragment().newInstance(startBounds.top, finalBounds.top, startBounds.bottom, finalBounds.bottom, (WakelockStats)mAdapter.getItem(position), mTaskerMode);
         newFrag.attachClearListener(this);
         fragmentManager.beginTransaction()
                 .setCustomAnimations(R.animator.expand_in, R.animator.noop, R.animator.noop, R.animator.expand_out)
@@ -190,7 +190,7 @@ public class WakelocksFragment extends ListFragment implements WakelockDetailFra
                 //We may have had a change in the data for this wakelock (such as the user resetting the counters).
                 //Try updating it.
                 mAdapter = new WakelocksAdapter(getActivity(), UnbounceStatsCollection.getInstance().toWakelockArrayList(getActivity()));
-                mAdapter.sort(!mSortByTime);
+                mAdapter.sort(mSortBy);
                 setListAdapter(mAdapter);
             }
         }
@@ -199,7 +199,7 @@ public class WakelocksFragment extends ListFragment implements WakelockDetailFra
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        getActivity().getMenuInflater().inflate(R.menu.wakelocks, menu);
+        getActivity().getMenuInflater().inflate(R.menu.list, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -209,11 +209,18 @@ public class WakelocksFragment extends ListFragment implements WakelockDetailFra
 
         //If they pushed the sort toggle, switch the icon from duration<->count
         if (id == R.id.action_sort) {
-            mSortByTime = !mSortByTime;
+            if (mSortBy == SortWakeLocks.SORT_COUNT) {
+                mSortBy = SortWakeLocks.SORT_TIME;
+            } else if (mSortBy == SortWakeLocks.SORT_TIME) {
+                mSortBy = SortWakeLocks.SORT_ALPHA;
+            } else if (mSortBy == SortWakeLocks.SORT_ALPHA) {
+                mSortBy = SortWakeLocks.SORT_COUNT;
+            }
+
             getActivity().invalidateOptionsMenu();
 
             //Do the re-sort here
-            mAdapter.sort(!mSortByTime);
+            mAdapter.sort(mSortBy);
 
             return true;
         }
@@ -226,12 +233,15 @@ public class WakelocksFragment extends ListFragment implements WakelockDetailFra
     public void onPrepareOptionsMenu(Menu menu) {
         MenuItem sortItem = menu.findItem(R.id.action_sort);
         if (sortItem != null) {
-            if (mSortByTime) {
+            if (mSortBy == SortWakeLocks.SORT_TIME) {
                 sortItem.setIcon(R.drawable.ic_action_time);
                 sortItem.setTitle(R.string.action_sort_by_time);
-            } else {
+            } else if (mSortBy == SortWakeLocks.SORT_COUNT) {
                 sortItem.setIcon(R.drawable.ic_action_sort_by_size);
                 sortItem.setTitle(R.string.action_sort_by_count);
+            } else if (mSortBy == SortWakeLocks.SORT_ALPHA) {
+                sortItem.setIcon(R.drawable.ic_sort_alpha);
+                sortItem.setTitle(R.string.action_sort_by_alpha);
             }
         }
 
@@ -239,7 +249,7 @@ public class WakelocksFragment extends ListFragment implements WakelockDetailFra
     }
 
     @Override
-    public void onWakelockCleared() {
+    public void onCleared() {
         mReloadOnShow = true;
     }
 

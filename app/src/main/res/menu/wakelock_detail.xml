@@ -1,6 +1,5 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.ryansteckler.nlpunbounce.MaterialSettingsActivity" >
+<menu xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.ryansteckler.nlpunbounce.MaterialSettingsActivity">
 
     <!--<item android:id="@+id/wakelock_switch"-->
         <!--android:titleCondensed=""-->

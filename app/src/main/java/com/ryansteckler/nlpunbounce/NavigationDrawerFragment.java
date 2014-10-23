@@ -1,15 +1,14 @@
 package com.ryansteckler.nlpunbounce;
 
 
-import android.app.Activity;
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.Fragment;
+import android.content.res.Configuration;
+import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.content.res.Configuration;
-import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,7 +18,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.ryansteckler.nlpunbounce.helpers.ThemeHelper;
 
@@ -96,6 +94,7 @@ public class NavigationDrawerFragment extends Fragment {
                         getString(R.string.title_home),
                         getString(R.string.title_wakelocks),
                         getString(R.string.title_alarms),
+                        getString(R.string.title_services),
                         getString(R.string.title_settings)
                 }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);

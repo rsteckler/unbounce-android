@@ -1,151 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string name="app_name">"Unbounce"</string>
-<string name="version">"Versione"</string>
-<string name="title_activity_material_settings">"Unbounce"</string>
-<string name="title_home">"Home"</string>
-<string name="title_wakelocks">"Wakelock"</string>
-<string name="title_alarms">"Allarmi"</string>
-<string name="navigation_drawer_open">"Apri il cassetto di navigazione"</string>
-<string name="navigation_drawer_close">"Chiudi il cassetto di navigazione"</string>
-<string name="action_search">"Trova"</string>
-<string name="action_sort_by_count">"Ordina per numero"</string>
-<string name="action_sort_by_time">"Ordina per tempo"</string>
-<string name="action_settings">"Impostazioni"</string>
-<string name="action_reset_stats">"Resetta statistiche"</string>
-<string name="card_donate_title">"KARMA"</string>
-<string name="card_donate_subtitle">"Supporta il tuo sviluppatore"</string>
-<string name="card_global_title">"STATISTICHE GLOBALI"</string>
-<string name="card_global_subtitle">"Le nostre statistiche combinate"</string>
-<string name="card_local_title">"STATISTICHE DISPOSITIVO"</string>
-<string name="card_local_subtitle">"Vedi il tuo progresso"</string>
-<string name="card_settings_title">"IMPOSTAZIONI"</string>
-<string name="card_settings_subtitle_alarm">"Controlla questo allarme"</string>
-<string name="card_settings_subtitle_wakelock">"Controlla questo wakelock"</string>
-<string name="card_description_title">"DESCRIZIONE"</string>
-<string name="card_description_subtitle">"Perchè ti sta mangiando la batteria?"</string>
-<string name="category_unbounced">"Unbounced"</string>
-<string name="category_safe">"Sicuri da Unbounce"</string>
-<string name="category_unknown">"Sconosciuti"</string>
-<string name="category_not_safe">"Non sicuri da Unbounce"</string>
-<string name="category_error">"Errore"</string>
-<string name="alert_noiab_title">"Disponibili funzionalità Pro"</string>
-<string name="alert_noiab_content">"Il tuo dispositivo non supporta acquisti in-app. Non ti sarà possibile acquistare le funzionalità Pro di Unbounce.
+  <string name="app_name">"Lion Tamer"</string>
+  <string name="version">"Versione"</string>
+  <string name="title_activity_material_settings">"Lion Tamer"</string>
+  <string name="title_home">"Home"</string>
+  <string name="title_wakelocks">"Wakelock"</string>
+  <string name="title_alarms">"Allarmi"</string>
+  <string name="navigation_drawer_open">"Apri il cassetto di navigazione"</string>
+  <string name="navigation_drawer_close">"Chiudi il cassetto di navigazione"</string>
+  <string name="action_search">"Trova"</string>
+  <string name="action_sort_by_count">"Ordina per numero"</string>
+  <string name="action_sort_by_time">"Ordina per tempo"</string>
+  <string name="action_settings">"Impostazioni"</string>
+  <string name="action_reset_stats">"Resetta statistiche"</string>
+  <string name="card_donate_title">"KARMA"</string>
+  <string name="card_donate_subtitle">"Supporta il tuo sviluppatore"</string>
+  <string name="card_global_title">"STATISTICHE GLOBALI"</string>
+  <string name="card_global_subtitle">"Le nostre statistiche combinate"</string>
+  <string name="card_local_title">"STATISTICHE DISPOSITIVO"</string>
+  <string name="card_local_subtitle">"Vedi il tuo progresso"</string>
+  <string name="card_settings_title">"IMPOSTAZIONI"</string>
+  <string name="card_settings_subtitle_alarm">"Controlla questo allarme"</string>
+  <string name="card_settings_subtitle_wakelock">"Controlla questo wakelock"</string>
+  <string name="card_description_title">"DESCRIZIONE"</string>
+  <string name="card_description_subtitle">"Perchè ti sta mangiando la batteria?"</string>
+  <string name="category_unbounced">"Tamed"</string>
+  <string name="category_safe">"Sicuri da Tame"</string>
+  <string name="category_unknown">"Sconosciuti"</string>
+  <string name="category_not_safe">"Non sicuri da Tame"</string>
+  <string name="category_error">"Errore"</string>
+  <string name="alert_noiab_title">"Disponibili funzionalità Pro"</string>
+  <string name="alert_noiab_content">"Il tuo dispositivo non supporta acquisti in-app. Non ti sarà possibile acquistare le funzionalità Pro di Lion Tamer.
     Ciò potrebbe essere causato da una versione non aggiornata dell'app Google Play Store, oppure perchè i pagamenti in-app non sono disponibili nella tua nazione."</string>
-<string name="dialog_ok">"OK"</string>
-<string name="tasker_on">"On"</string>
-<string name="tasker_off">"Off"</string>
-<string name="tasker_reset_stats">"Resetta statistiche"</string>
-<string name="tasker_choose_wakelock">"Scegli il wakelock da bilanciare."</string>
-<string name="tasker_choose_alarm">"Scegli l'allarme da bilanciare."</string>
-<string name="tasker_welcome">"Benvenuto nel plugin Unbounce per Tasker."</string>
-<string name="tasker_which_task">"Vuoi cambiare le impostazioni per un allarme o wakelock, oppure vuoi resettare le statistiche del tuo device?"</string>
-<string name="tasker_task_wakelock">"CAMBIA WAKELOCK"</string>
-<string name="tasker_task_alarm">"CAMBIA ALLARME"</string>
-<string name="tasker_task_reset">"RESETTA STATISTICHE"</string>
-<string name="alert_nopro_title">"Questa è una funzionalità Pro"</string>
-<string name="alert_nopro_content">"Per Unbounce wakelock e allarmi non standard, devi acquistare il pacchetto donazione."</string>
-<string name="alert_unknown_alarm_title">"Unbounce allarme sconosciuto?"</string>
-<string name="alert_unknown_alarm_content">"Non si è certi che Unbounce questo allarme non provochi problemi. Lo vuoi Unbounce comunque?"</string>
-<string name="dialog_unbounce">"UNBOUNCE"</string>
-<string name="dialog_cancel">"CANCELLA"</string>
-<string name="tasker_choose_settings">"Scegli le impostazioni che desideri."</string>
-<string name="alert_unknown_wakelock_title">"Unbounce wakelock sconosciuto?"</string>
-<string name="alert_unknown_wakelock_content">"Non si è certi che Unbounce questo wakelock non provochi problemi. Lo vuoi Unbounce comunque?"</string>
-<string name="dialog_delete">"CANCELLA"</string>
-<string name="alert_delete_stats_title">"Cancellare tutte le statistiche?"</string>
-<string name="alert_delete_stats_content">"Questo resetterà tutte le statistiche per tutti i tuoi wakelock e allarmi!"</string>
-<string name="title_settings">"Impostazioni"</string>
-<string name="alert_reset_settings_title">"Resetta alle impostazioni di default?"</string>
-<string name="alert_reset_settings_content">"Questo resetterà tutte le impostazioni per tutti i tuoi wakelock e allarmi!"</string>
-<string name="dialog_reset">"RESETTA"</string>
-<string name="reset_settings_confirmation">"Le impostazioni sono state resettate a quelle di default."</string>
-<string name="dialog_save">"SALVA"</string>
-<string name="desc_unknown">"Al momento non abbiamo alcuna informazione riguardante questo evento. Potrebbe non essere sicuro da Unbounce. Fallo solo se sai quello che stai facendo e sai come disabilitare Xposed framework all'avvio. Stiamo lavorando duramente per raccogliere informazioni sui più importanti wakelock e allarmi. Per favore pazienta mentre raccogliamo tali informazioni."</string>
-<string name="desc_nlpwakelock">"NlpWakeLock è sicuro da unbounce. E' usato da Google Play Services per determinare la tua posizione approssimativa usando una combinazione di torri cellulari e WiFi. Una volta che ha la tua posizione, la salva in locale, così altre app, come Google Now, possono accedere alla tua posizione senza usare il GPS od ottenere un nuovo fix. Le impostazioni consigliare sono tra 180 e 600 secondi."</string>
-<string name="desc_nlpcollectorwakelock">"NlpCollectorWakeLock è sicuro da unbounce. E' usato da Google Play Services per determinare la tua posizione approssimativa usando una combinazione di torri cellulari e WiFi. Una volta che ha la tua posizione, la manda indietro a Google così che possano espandere il loro database di posizioni delle reti WiFi. Le impostazioni consigliare sono tra 180 e 600 secondi."</string>
-<string name="desc_alarmmanager">"Fornisce accesso ai servizi di allarme del sistema. Quando un allarme parte, l'Intent registrato per esso è trasmesso dal sistema, avviando automaticamente l'applicazione desiderata se non è già in esecuzione. Gli allarmi registrati sono mantenuti mentre il dispositivo sta dormendo (e possono eventualmente svegliarlo se partono durante quell'intervallo di tempo), ma saranno cancellati se il dispositivo verrà spento o riavviato."</string>
-<string name="desc_audiooffload">"Riproduzione audio mentre lo schermo è spento. Se lo disabiliti, non potrai ascoltare suoni o musica mentre lo schermo è spento."</string>
-<string name="desc_activitymanagerlauncher">"Interagisce con le varie attività del sistema. Se lo Unbounce, niente funzionerà come si deve."</string>
-<string name="desc_windowmanager">"E' un wakelock di sistema di Android. L'interfaccia che le app usano per colloquiare con il manager delle finestre - le applicazioni acquisiranno un WindowManager wakelock ogni volta che devono essere visualizzate a schermo."</string>
-<string name="desc_rilj">"RILJ mantiene il terminale sveglio mentre vengono processate azioni relative alla fonia, come ad esempio chiamate e comunicazioni con le torri cellulari adiacenti."</string>
-<string name="desc_syncloopwakelock">"Questo wakeLock è usato dal SyncManager di Android per sincronizzare account come Google+, Twitter, Linkedin, Gmail etc. Più sarà alto l'unbouncing, più tempo ci vorrà perchè questi account vengano nuovamente sincronizzati."</string>
-<string name="desc_icing">"ICING è un wakelock Google Services. Attualmente in attesa di ulteriori dettagli."</string>
-<string name="desc_startingalertservice">"Questo wakelock viene generalmente associato a Calendar, anche se potrebbe avere effetti su altre app come quelle di messagistica. Se il tuo Calendar ha notifiche / allarmi allora può tenere questo wakelock."</string>
-<string name="desc_audiomix">"Questo wakelock gestisce, tra gli altri, i suoni al tocco e quelli degli allarmi. Ha colpito alcuni device anche se questi avevano gli input al tocco disattivati."</string>
-<string name="desc_locationmanagerservice">"Come lascia intuire il nome. Generalmente non è un grande consumatore di batteria ma in certi casi può tenere un grosso wakelock."</string>
-<string name="desc_audioin">"Questo wakelock è usato per tenere il dispositivo sveglio in modo da poter ascoltare le parole chiave Okay, Google usate da Google Search."</string>
-<string name="desc_nfcservicemroutingwakelock">"Relativo al servizio NFC, veicola il tag trovato verso l'applicazione giusta."</string>
-<string name="desc_wakefulintentservicegcoreulrlocationreportingservice">"Usato da Google Location Services per segnalare la tua posizione attuale a Google."</string>
-<string name="desc_vzwgpslocationprovider">"Servizio di localizzazione specifico di Verizon usato per ottenere statistiche sulle torri cellulari."</string>
-<string name="desc_hangouts_rtcs">"Google Hangouts. Se lo Unbounce, Hangouts smetterà di funzionare."</string>
-<string name="desc_gcm_conn">"Google Cloud Messaging. Invia messaggi leggeri alle tue app. Responsabile per inviare notifiche push al tuo cellulare, per tutte le app."</string>
-<string name="desc_google_c2dm">"Cloud to Device Messaging (C2DM) è un servizio che aiuta gli sviluppatori a mandare dati alle loro app sui dispositivi. Il servizio fornisce un meccanismo che i server possono utilizzare per dire alle applicazioni di contattare il server per prendere da esso dati aggiornati. Questo servizio è stato deprecato dal 2012 ma ci sono ancora app che usano questo servizio invece del nuovo e migliore GCM."</string>
-<string name="desc_timedeventqueue">"Parte integrante di Android che è meglio non toccare. Mette in coda tutti gli eventi quando si verificano."</string>
-<string name="desc_comgoogleandroidgmsnlpalarm_wakeup_locator">"Questo allarme è sicuro da unbounce.  E' usato da Google Play Services per determinare la tua posizione approssimativa usando una combinazione di torri cellulari e WiFi. Una volta che ha la tua posizione, la salva in locale, così altre app, come Google Now, possono accedere alla tua posizione senza usare il GPS od ottenere un nuovo fix. Le impostazioni consigliare sono tra 180 e 600 secondi."</string>
-<string name="desc_comgoogleandroidgmsnlpalarm_wakeup_activity_detection">"Questo allarme è sicuro da unbounce.  E' usato da Google Play Services per determinare la tua posizione approssimativa usando una combinazione di torri cellulari e WiFi. Una volta che ha la tua posizione, la manda indietro a Google così che possano espandere il loro database di posizioni delle reti WiFi. Le impostazioni consigliare sono tra 180 e 600 secondi."</string>
-<string name="desc_comgoogleandroidappshangoutsupdate_notification">"Il listener che aggiorna le tue notifiche di Google Hangouts."</string>
-<string name="desc_comandroidinternaltelephonydatastall">"Wakelock generato da com.android.phone (app telefono) quando viene utilizzata la connessione dati tramite torri cellulari. Utilizzando la wifi questo allarme non viene scatenato. Generalmente schizza quando viene usata la connessione dati, specialmente se il segnale è scarso."</string>
-<string name="settings_allow_every">"Permetti ogni"</string>
-<string name="settings_seconds">"secondi."</string>
-<string name="card_button_reset">"RESETTA"</string>
-<string name="stat_alarms_acquired">"Allarme acquisito"</string>
-<string name="stat_alarms_blocked">"Allarme bloccato"</string>
-<string name="stat_loading">"Caricamento in corso..."</string>
-<string name="stat_collected_for">"Statistiche collezionate per "</string>
-<string name="stat_wake_duration_allowed">"Wakelock permessi per"</string>
-<string name="stat_wake_duration_blocked">"Wakelock bloccati per"</string>
-<string name="stat_wake_allowed">"Wakelock acquisiti"</string>
-<string name="stat_wake_blocked">"Wakelock bloccati"</string>
-<string name="stat_alarm_allowed">"Allarmi lanciati"</string>
-<string name="stat_alarm_blocked">"Allarmi bloccati"</string>
-<string name="stat_disabled">"Disabilitata"</string>
-<string name="donate_text">"Questa app ti permetterà sempre di gestire gli allarmi e i wakelock causati da Network Location Provider, gratis. Se vorrai Unbounce anche altri allarmi e wakelock, potrai fare un upgrade alla versione Pro e supportare il progetto mediante la scelta qui sotto. Qualsiasi cifra donata sbloccherà le funzionalità Pro."</string>
-<string name="donate_1">"Una tazza di caffè mentre sviluppo"</string>
-<string name="donate_5">"Un latte mentre rispondo alle domande sul forum"</string>
-<string name="donate_10">"Il sollievo di non dovervi portare appresso il caricabatteria"</string>
-<string name="donate_thank_you">"Grazie per la tua donazione. Significa molto per me. Lavoro duramente nel mio tempo libero per aiutare tutti ad avere una batteria che duri di più. Quando hai donato, hai fatto la differenza sia per questo progetto, che nella vita della mia famiglia. Sei un grande."</string>
-<string name="donate_more_button">"COME ALTRO POSSO AIUTARE?"</string>
-<string name="donate_more_text">"Alcune persone mi hanno chiesto come contribuire oltre la donazione iniziale. I bottoni sottostanti ti permettono di donare ulteriormente, ma non forniranno funzionalità addizionali. Grazie mille per supportare Unbounce!"</string>
-<string name="welcome_banner_title">"Benvenuto!"</string>
-
-<string name="settings_category_options">"Opzioni"</string>
-<string name="settings_item_show_launcher">"Mostra icona nel launcher"</string>
-<string name="settings_item_choose_theme">"Scegli il tema"</string>
-<string name="settings_item_global_stats_title">"Partecipa alle Statistiche Globali"</string>
-<string name="settings_item_global_stats_summary">"Invia e ricevi statistiche anonime"</string>
-<string name="settings_item_reset_defaults_title">"Resetta ai valori di default"</string>
-<string name="settings_item_reset_defaults_summary">"Resetta tutti gli allarmi e wakelock ai valori di default"</string>
-<string name="settings_item_author">"Autore: Ryan Steckler"</string>
-<string name="settings_item_logging_level">"Livello di logging"</string>
-<string name="settings_category_translation">"Ringraziamenti per le traduzioni"</string>
-<string name="settings_theme_material">"Materiale"</string>
-<string name="settings_theme_dark">"Scuro"</string>
-<string name="settings_logging_quiet">"Silenzioso"</string>
-<string name="settings_logging_default">"Default"</string>
-<string name="settings_logging_verbose">"Prolisso"</string>
-<string name="settings_item_force_english_title">"Forza lingua inglese"</string>
-<string name="settings_item_force_english_summary">"Sovrascrivi il tuo linguaggio di sistema ed usa l'inglese"</string>
-<string name="playstore_short_description">"Maggior durata della batteria per tutti!"</string>
-<string name="playstore_long_description">"
+  <string name="dialog_ok">"OK"</string>
+  <string name="tasker_on">"On"</string>
+  <string name="tasker_off">"Off"</string>
+  <string name="tasker_reset_stats">"Resetta statistiche"</string>
+  <string name="tasker_choose_wakelock">"Scegli il wakelock da bilanciare."</string>
+  <string name="tasker_choose_alarm">"Scegli l'allarme da bilanciare."</string>
+  <string name="tasker_welcome">"Benvenuto nel plugin Lion Tamer per Tasker."</string>
+  <string name="tasker_which_task">"Vuoi cambiare le impostazioni per un allarme o wakelock, oppure vuoi resettare le statistiche del tuo device?"</string>
+  <string name="tasker_task_wakelock">"CAMBIA WAKELOCK"</string>
+  <string name="tasker_task_alarm">"CAMBIA ALLARME"</string>
+  <string name="tasker_task_reset">"RESETTA STATISTICHE"</string>
+  <string name="alert_nopro_title">"Questa è una funzionalità Pro"</string>
+  <string name="alert_nopro_content">"Per Tame wakelock e allarmi non standard, devi acquistare il pacchetto donazione."</string>
+  <string name="alert_unknown_alarm_title">"Tame allarme sconosciuto?"</string>
+  <string name="alert_unknown_alarm_content">"Non si è certi che Tame questo allarme non provochi problemi. Lo vuoi Tame comunque?"</string>
+  <string name="dialog_unbounce">"TAME"</string>
+  <string name="dialog_cancel">"CANCELLA"</string>
+  <string name="tasker_choose_settings">"Scegli le impostazioni che desideri."</string>
+  <string name="alert_unknown_wakelock_title">"Tame wakelock sconosciuto?"</string>
+  <string name="alert_unknown_wakelock_content">"Non si è certi che Tame questo wakelock non provochi problemi. Lo vuoi Tame comunque?"</string>
+  <string name="dialog_delete">"CANCELLA"</string>
+  <string name="alert_delete_stats_title">"Cancellare tutte le statistiche?"</string>
+  <string name="alert_delete_stats_content">"Questo resetterà tutte le statistiche per tutti i tuoi wakelock e allarmi!"</string>
+  <string name="title_settings">"Impostazioni"</string>
+  <string name="alert_reset_settings_title">"Resetta alle impostazioni di default?"</string>
+  <string name="alert_reset_settings_content">"Questo resetterà tutte le impostazioni per tutti i tuoi wakelock e allarmi!"</string>
+  <string name="dialog_reset">"RESETTA"</string>
+  <string name="reset_settings_confirmation">"Le impostazioni sono state resettate a quelle di default."</string>
+  <string name="dialog_save">"SALVA"</string>
+  <string name="desc_unknown">"Al momento non abbiamo alcuna informazione riguardante questo evento. Potrebbe non essere sicuro da Tame. Fallo solo se sai quello che stai facendo e sai come disabilitare Xposed framework all'avvio. Stiamo lavorando duramente per raccogliere informazioni sui più importanti wakelock e allarmi. Per favore pazienta mentre raccogliamo tali informazioni."</string>
+  <string name="desc_nlpwakelock">"NlpWakeLock è sicuro da Tame. E' usato da Google Play Services per determinare la tua posizione approssimativa usando una combinazione di torri cellulari e WiFi. Una volta che ha la tua posizione, la salva in locale, così altre app, come Google Now, possono accedere alla tua posizione senza usare il GPS od ottenere un nuovo fix. Le impostazioni consigliare sono tra 180 e 600 secondi."</string>
+  <string name="desc_nlpcollectorwakelock">"NlpCollectorWakeLock è sicuro da Tame. E' usato da Google Play Services per determinare la tua posizione approssimativa usando una combinazione di torri cellulari e WiFi. Una volta che ha la tua posizione, la manda indietro a Google così che possano espandere il loro database di posizioni delle reti WiFi. Le impostazioni consigliare sono tra 180 e 600 secondi."</string>
+  <string name="desc_alarmmanager">"Fornisce accesso ai servizi di allarme del sistema. Quando un allarme parte, l'Intent registrato per esso è trasmesso dal sistema, avviando automaticamente l'applicazione desiderata se non è già in esecuzione. Gli allarmi registrati sono mantenuti mentre il dispositivo sta dormendo (e possono eventualmente svegliarlo se partono durante quell'intervallo di tempo), ma saranno cancellati se il dispositivo verrà spento o riavviato."</string>
+  <string name="desc_audiooffload">"Riproduzione audio mentre lo schermo è spento. Se lo disabiliti, non potrai ascoltare suoni o musica mentre lo schermo è spento."</string>
+  <string name="desc_activitymanagerlauncher">"Interagisce con le varie attività del sistema. Se lo Tame, niente funzionerà come si deve."</string>
+  <string name="desc_windowmanager">"E' un wakelock di sistema di Android. L'interfaccia che le app usano per colloquiare con il manager delle finestre - le applicazioni acquisiranno un WindowManager wakelock ogni volta che devono essere visualizzate a schermo."</string>
+  <string name="desc_rilj">"RILJ mantiene il terminale sveglio mentre vengono processate azioni relative alla fonia, come ad esempio chiamate e comunicazioni con le torri cellulari adiacenti."</string>
+  <string name="desc_syncloopwakelock">"Questo wakeLock è usato dal SyncManager di Android per sincronizzare account come Google+, Twitter, Linkedin, Gmail etc. Più sarà alto l'unbouncing, più tempo ci vorrà perchè questi account vengano nuovamente sincronizzati."</string>
+  <string name="desc_icing">"ICING è un wakelock Google Services. Attualmente in attesa di ulteriori dettagli."</string>
+  <string name="desc_startingalertservice">"Questo wakelock viene generalmente associato a Calendar, anche se potrebbe avere effetti su altre app come quelle di messagistica. Se il tuo Calendar ha notifiche / allarmi allora può tenere questo wakelock."</string>
+  <string name="desc_audiomix">"Questo wakelock gestisce, tra gli altri, i suoni al tocco e quelli degli allarmi. Ha colpito alcuni device anche se questi avevano gli input al tocco disattivati."</string>
+  <string name="desc_locationmanagerservice">"Come lascia intuire il nome. Generalmente non è un grande consumatore di batteria ma in certi casi può tenere un grosso wakelock."</string>
+  <string name="desc_audioin">"Questo wakelock è usato per tenere il dispositivo sveglio in modo da poter ascoltare le parole chiave Okay, Google usate da Google Search."</string>
+  <string name="desc_nfcservicemroutingwakelock">"Relativo al servizio NFC, veicola il tag trovato verso l'applicazione giusta."</string>
+  <string name="desc_wakefulintentservicegcoreulrlocationreportingservice">"Usato da Google Location Services per segnalare la tua posizione attuale a Google."</string>
+  <string name="desc_vzwgpslocationprovider">"Servizio di localizzazione specifico di Verizon usato per ottenere statistiche sulle torri cellulari."</string>
+  <string name="desc_hangouts_rtcs">"Google Hangouts. Se lo Tame, Hangouts smetterà di funzionare."</string>
+  <string name="desc_gcm_conn">"Google Cloud Messaging. Invia messaggi leggeri alle tue app. Responsabile per inviare notifiche push al tuo cellulare, per tutte le app."</string>
+  <string name="desc_google_c2dm">"Cloud to Device Messaging (C2DM) è un servizio che aiuta gli sviluppatori a mandare dati alle loro app sui dispositivi. Il servizio fornisce un meccanismo che i server possono utilizzare per dire alle applicazioni di contattare il server per prendere da esso dati aggiornati. Questo servizio è stato deprecato dal 2012 ma ci sono ancora app che usano questo servizio invece del nuovo e migliore GCM."</string>
+  <string name="desc_timedeventqueue">"Parte integrante di Android che è meglio non toccare. Mette in coda tutti gli eventi quando si verificano."</string>
+  <string name="desc_comgoogleandroidgmsnlpalarm_wakeup_locator">"Questo allarme è sicuro da Tame.  E' usato da Google Play Services per determinare la tua posizione approssimativa usando una combinazione di torri cellulari e WiFi. Una volta che ha la tua posizione, la salva in locale, così altre app, come Google Now, possono accedere alla tua posizione senza usare il GPS od ottenere un nuovo fix. Le impostazioni consigliare sono tra 180 e 600 secondi."</string>
+  <string name="desc_comgoogleandroidgmsnlpalarm_wakeup_activity_detection">"Questo allarme è sicuro da Tame.  E' usato da Google Play Services per determinare la tua posizione approssimativa usando una combinazione di torri cellulari e WiFi. Una volta che ha la tua posizione, la manda indietro a Google così che possano espandere il loro database di posizioni delle reti WiFi. Le impostazioni consigliare sono tra 180 e 600 secondi."</string>
+  <string name="desc_comgoogleandroidappshangoutsupdate_notification">"Il listener che aggiorna le tue notifiche di Google Hangouts."</string>
+  <string name="desc_comandroidinternaltelephonydatastall">"Wakelock generato da com.android.phone (app telefono) quando viene utilizzata la connessione dati tramite torri cellulari. Utilizzando la wifi questo allarme non viene scatenato. Generalmente schizza quando viene usata la connessione dati, specialmente se il segnale è scarso."</string>
+  <string name="settings_allow_every">"Permetti ogni"</string>
+  <string name="settings_seconds">"secondi."</string>
+  <string name="card_button_reset">"RESETTA"</string>
+  <string name="stat_alarms_acquired">"Allarme acquisito"</string>
+  <string name="stat_alarms_blocked">"Allarme bloccato"</string>
+  <string name="stat_loading">"Caricamento in corso..."</string>
+  <string name="stat_collected_for">"Statistiche collezionate per "</string>
+  <string name="stat_wake_duration_allowed">"Wakelock permessi per"</string>
+  <string name="stat_wake_duration_blocked">"Wakelock bloccati per"</string>
+  <string name="stat_wake_allowed">"Wakelock acquisiti"</string>
+  <string name="stat_wake_blocked">"Wakelock bloccati"</string>
+  <string name="stat_alarm_allowed">"Allarmi lanciati"</string>
+  <string name="stat_alarm_blocked">"Allarmi bloccati"</string>
+  <string name="stat_disabled">"Disabilitata"</string>
+  <string name="donate_text">"Questa app ti permetterà sempre di gestire gli allarmi e i wakelock causati da Network Location Provider, gratis. Se vorrai Tame anche altri allarmi e wakelock, potrai fare un upgrade alla versione Pro e supportare il progetto mediante la scelta qui sotto. Qualsiasi cifra donata sbloccherà le funzionalità Pro."</string>
+  <string name="donate_1">"Una tazza di caffè mentre sviluppo"</string>
+  <string name="donate_5">"Un latte mentre rispondo alle domande sul forum"</string>
+  <string name="donate_10">"Il sollievo di non dovervi portare appresso il caricabatteria"</string>
+  <string name="donate_thank_you">"Grazie per la tua donazione. Significa molto per me. Lavoro duramente nel mio tempo libero per aiutare tutti ad avere una batteria che duri di più. Quando hai donato, hai fatto la differenza sia per questo progetto, che nella vita della mia famiglia. Sei un grande."</string>
+  <string name="donate_more_button">"COME ALTRO POSSO AIUTARE?"</string>
+  <string name="donate_more_text">"Alcune persone mi hanno chiesto come contribuire oltre la donazione iniziale. I bottoni sottostanti ti permettono di donare ulteriormente, ma non forniranno funzionalità addizionali. Grazie mille per supportare Lion Tamer!"</string>
+  <string name="welcome_banner_title">"Benvenuto!"</string>
+  <string name="settings_category_options">"Opzioni"</string>
+  <string name="settings_item_show_launcher">"Mostra icona nel launcher"</string>
+  <string name="settings_item_choose_theme">"Scegli il tema"</string>
+  <string name="settings_item_global_stats_title">"Partecipa alle Statistiche Globali"</string>
+  <string name="settings_item_global_stats_summary">"Invia e ricevi statistiche anonime"</string>
+  <string name="settings_item_reset_defaults_title">"Resetta ai valori di default"</string>
+  <string name="settings_item_reset_defaults_summary">"Resetta tutti gli allarmi e wakelock ai valori di default"</string>
+  <string name="settings_item_author">"Autore: Ryan Steckler"</string>
+  <string name="settings_item_logging_level">"Livello di logging"</string>
+  <string name="settings_category_translation">"Ringraziamenti per le traduzioni"</string>
+  <string name="settings_theme_material">"Materiale"</string>
+  <string name="settings_theme_dark">"Scuro"</string>
+  <string name="settings_logging_quiet">"Silenzioso"</string>
+  <string name="settings_logging_default">"Default"</string>
+  <string name="settings_logging_verbose">"Prolisso"</string>
+  <string name="settings_item_force_english_title">"Forza lingua inglese"</string>
+  <string name="settings_item_force_english_summary">"Sovrascrivi il tuo linguaggio di sistema ed usa l'inglese"</string>
+  <string name="playstore_short_description">"Maggior durata della batteria per tutti!"</string>
+  <string name="playstore_long_description">"
 *** Richiede Root ***
 
-Quello che veri utenti dicono di Unbounced:
+Quello che veri utenti dicono di Lion Tamerd:
 Mi ha dato due ore extra di utilizzo di cui 30 minuti di schermo acceso. Mi ha risparmiato lacquisto di una batteria di riserva da 25€.
 Ho appena donato 5 dollari per supportare questopera darte... Proseguite così
 Semplicamente fantastica
-[Unbounce] ha appena rivoluzionato il significato di gestione dei wakelock
+[Lion Tamer] ha appena rivoluzionato il significato di gestione dei wakelock
 Questo modulo è fantastico! In standby ho un consumo inferiore dello 0,5% lora. 
 ...e tanti altri ancora.
 
-Unbounce vi permette di gestire come il vostro dispositivo utilizza la batteria mediante il controllo di quanto spesso il vostro dispositivo si può risvegliare, e per quanto tempo può restare sveglio. Usate le impostazioni di default per un facile risparmio energetico, oppure scavate più a fondo e gestite in maniera personalizzata ogni allarme e wakelock del vostro dispositivo.
+Lion Tamer vi permette di gestire come il vostro dispositivo utilizza la batteria mediante il controllo di quanto spesso il vostro dispositivo si può risvegliare, e per quanto tempo può restare sveglio. Usate le impostazioni di default per un facile risparmio energetico, oppure scavate più a fondo e gestite in maniera personalizzata ogni allarme e wakelock del vostro dispositivo.
 Ecco alcuni punti forti:
 
 - Un bellissimo design, ispirato dalle linee guida del Material Design di Google
 - Un motore di blocco stabile
 - Significative statistiche sia del tempo perso che di quello risparmiato a causa degli allarmi e wakelock
 - Una sempre crescente lista di descrizioni degli allarmi e wakelock (in Inglese, altri linguaggi saranno disponibili a breve!)
-- Un nuovo pacchetto Pro che vi permette di Unbounce qualsiasi allarme e wakelock del vostro device
+- Un nuovo pacchetto Pro che vi permette di Lion Tamer qualsiasi allarme e wakelock del vostro device
 - Una codebase open source così che possiate vedere con i vostri occhi come funziona, oppure compilarvelo da soli
 
 
@@ -154,5 +153,27 @@ Senza il pacchetto Pro, potrete controllare solo i principali nemici della vostr
 
 Che tutti voi possiate avere una lunga vita [della batteria]!
     "</string>
-
+  <string name="welcome_banner_welcome">"Benvenuto!"</string>
+  <string name="welcome_banner_checking_service">"Sto controllando se Lion Tamer è in esecuzione"</string>
+  <string name="welcome_banner_checking_xposed">"Sto controllando se Lion Tamer è installato"</string>
+  <string name="welcome_banner_checking_root">"Sto controllando se è disponibile Root"</string>
+  <string name="welcome_banner_checking_looks_great">"Tutto perfetto!"</string>
+  <string name="welcome_banner_checking_uhoh">"Qualcosa non ha funzionato. Scopriamo cosa e risolviamolo..."</string>
+  <string name="welcome_banner_problem_none">"Ti abbiamo impostato alcuni settaggi di default. Divertiti con la tua nuova durata della batteria!"</string>
+  <string name="welcome_banner_problem_service">"Sembrerebbe che non hai attivato il modulo Lion Tamer. Premi RISOLVI, controlla che sia attivato, e riavvia."</string>
+  <string name="welcome_banner_problem_xposed_running">"Xposed non è in esecuzione. Premi RISOLVI, poi Installa/Aggiorna, e riavvia."</string>
+  <string name="welcome_banner_problem_xposed_installed">"Xposed non è installato. Xposed è necessario per Lion Tamer e altre applicazioni Root. Una volta che il download è terminato, premi INSTALLA, e rilancia Lion Tamer. Se vuoi saperne di più su Xposed, %1$s "</string>
+  <string name="welcome_banner_problem_root">"Sembrerebbe che il tuo device non è rootato. Lion Tamer richiede un dispositivo rootato per funzionare correttamente. Se sei interessato a rootare il tuo device, visita %1$s per iniziare."</string>
+  <string name="welcome_banner_button_next">"AVANTI"</string>
+  <string name="welcome_banner_button_fixit">"RISOLVI"</string>
+  <string name="welcome_banner_button_exit">"ESCI"</string>
+  <string name="welcome_banner_button_install">"INSTALLA"</string>
+  <string name="welcome_downloading_xposed">"Scaricando Xposed..."</string>
+  <string name="welcome_downloaded_xposed">"Download completato."</string>
+  <string name="welcome_download_error_xposed">"Download fallito. Per favore riprova più tardi."</string>
+  <string name="download_xposed_title">"Sto scaricando Xposed"</string>
+  <string name="download_xposed_description">"Necessario per Lion Tamer"</string>
+  <string name="requires_root">"*** Richiede un device rootato ***"</string>
+  <string name="installs_xposed">"Lion Tamer utilizza il framework Xposed e procederà ad installarlo per te se non lo hai già."</string>
+  <string name="settings_category_code_credits">"Ringraziamenti"</string>
 </resources>

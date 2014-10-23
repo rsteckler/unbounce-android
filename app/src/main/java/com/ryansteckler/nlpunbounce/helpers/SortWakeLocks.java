@@ -5,6 +5,7 @@ package com.ryansteckler.nlpunbounce.helpers;
  */
 
 import com.ryansteckler.nlpunbounce.models.AlarmStats;
+import com.ryansteckler.nlpunbounce.models.BaseStats;
 import com.ryansteckler.nlpunbounce.models.EventLookup;
 import com.ryansteckler.nlpunbounce.models.WakelockStats;
 
@@ -12,6 +13,10 @@ import java.util.Comparator;
 
 
 public class SortWakeLocks {
+
+    public final static int SORT_COUNT = 0;
+    public final static int SORT_ALPHA = 1;
+    public final static int SORT_TIME = 2; //Only makes sense for Wakelocks
 
 //    public static Comparator<Entry<String, WakelockStats>> getMapComparator(final boolean byCount)
 //    {
@@ -32,11 +37,11 @@ public class SortWakeLocks {
 //        };
 //    }
 
-    public static Comparator<WakelockStats> getWakelockListComparator(final boolean byCount) {
-        return getWakelockListComparator(byCount, true);
+    public static Comparator<WakelockStats> getWakelockListComparator(final int sortType) {
+        return getWakelockListComparator(sortType, true);
     }
 
-    public static Comparator<WakelockStats> getWakelockListComparator(final boolean byCount, final boolean categorize)
+    public static Comparator<WakelockStats> getWakelockListComparator(final int sortType, final boolean categorize)
     {
         return new Comparator<WakelockStats>()
         {
@@ -54,22 +59,30 @@ public class SortWakeLocks {
                         return safetyCompare;
 
                     //The category state is the same.  Sub-compare
-                    if (byCount)
+                    if (sortType == SORT_COUNT)
                     {
                         return ((Long)o2.getAllowedCount()).compareTo(o1.getAllowedCount());
                     }
-                    else
+                    else if (sortType == SORT_TIME)
                     {
                         return ((Long)o2.getAllowedDuration()).compareTo(o1.getAllowedDuration());
+                    }
+                    else
+                    {
+                        return ((String)o1.getName()).compareTo(o2.getName());
                     }
                 } else {
-                    if (byCount)
+                    if (sortType == SORT_COUNT)
                     {
                         return ((Long)o2.getAllowedCount()).compareTo(o1.getAllowedCount());
                     }
-                    else
+                    else if (sortType == SORT_TIME)
                     {
                         return ((Long)o2.getAllowedDuration()).compareTo(o1.getAllowedDuration());
+                    }
+                    else
+                    {
+                        return ((String)o1.getName()).compareTo(o2.getName());
                     }
                 }
 
@@ -77,16 +90,16 @@ public class SortWakeLocks {
         };
     }
 
-    public static Comparator<AlarmStats> getAlarmListComparator() {
-        return getAlarmListComparator(true);
+    public static Comparator<BaseStats> getBaseListComparator(final int sortType) {
+        return getBaseListComparator(sortType, true);
     }
 
-    public static Comparator<AlarmStats> getAlarmListComparator(final boolean categorize)
+    public static Comparator<BaseStats> getBaseListComparator(final int sortType, final boolean categorize)
     {
-        return new Comparator<AlarmStats>()
+        return new Comparator<BaseStats>()
         {
-            public int compare(AlarmStats o1,
-                               AlarmStats o2)
+            public int compare(BaseStats o1,
+                               BaseStats o2)
             {
                 if (categorize) {
 
@@ -99,9 +112,17 @@ public class SortWakeLocks {
                         return safetyCompare;
 
                     //The category state is the same.  Sub-compare
-                    return ((Long)o2.getAllowedCount()).compareTo(o1.getAllowedCount());
+                    if (sortType == SORT_COUNT) {
+                        return ((Long) o2.getAllowedCount()).compareTo(o1.getAllowedCount());
+                    } else {
+                        return ((String)o1.getName()).compareTo(o2.getName());
+                    }
                 } else {
-                    return ((Long) o2.getAllowedCount()).compareTo(o1.getAllowedCount());
+                    if (sortType == SORT_COUNT) {
+                        return ((Long) o2.getAllowedCount()).compareTo(o1.getAllowedCount());
+                    } else {
+                        return ((String)o1.getName()).compareTo(o2.getName());
+                    }
                 }
             }
         };
