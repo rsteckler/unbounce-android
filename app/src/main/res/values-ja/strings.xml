@@ -107,7 +107,6 @@
   <string name="donate_more_button">"もっと手助けするには?"</string>
   <string name="donate_more_text">"下のボタンでもっと寄付することが出来ますが、追加される機能はありません。Lion Tamerの開発をサポートしてくださり、本当にありがとうございます!"</string>
   <string name="welcome_banner_title">"準備が完了しているか確認しましょう。"</string>
-  <string name="welcome_banner_text">"ウェイクロックをブロックしてウェイクされたままにしないようにしたり、アラームをブロックしてウェイクされないようにしたり出来ます。デフォルトで位置情報関連のバッテリー消費を抑えるようになっています。"</string>
   <string name="settings_category_options">"オプション"</string>
   <string name="settings_item_show_launcher">"ホームアプリアイコンの表示"</string>
   <string name="settings_item_choose_theme">"テーマの選択"</string>

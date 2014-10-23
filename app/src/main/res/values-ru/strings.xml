@@ -107,7 +107,6 @@
   <string name="donate_more_button">"ЧЕМ Я МОГУ ПОМОЧЬ В ДАЛЬНЕЙШЕМ?"</string>
   <string name="donate_more_text">"Люди часто спрашивают, чем они могут помочь после начального пожертвования.  Кнопки ниже позволят Вам и дальше жертвовать деньги, но уже без предоставления дополнительных возможностей.  Огромное спасибо за поддержку Lion Tamer!"</string>
   <string name="welcome_banner_title">"Добро пожаловать!"</string>
-  <string name="welcome_banner_text">"Теперь Вы можете блокировать пробуждения, чтобы предотвращать бодрствование телефона, и события, чтобы те не тревожили устройство.  Мы уже подготовили для Вас пару настроек, продлевающих жизнь батареи."</string>
   <string name="settings_category_options">"Настройки"</string>
   <string name="settings_item_show_launcher">"Показывать иконку программы"</string>
   <string name="settings_item_choose_theme">"Выбрать тему"</string>
@@ -115,7 +114,6 @@
   <string name="settings_item_global_stats_summary">"Отсылать и заполучать анонимную статистику"</string>
   <string name="settings_item_reset_defaults_title">"Сброс на исходные"</string>
   <string name="settings_item_reset_defaults_summary">"Сбросить все настройки событий и пробуждений на исходные"</string>
-  <string name="settings_category_debug">"Наладки"</string>
   <string name="settings_item_author">"Автор: Раян Стеклер"</string>
   <string name="settings_item_logging_level">"Уровень журнализации"</string>
   <string name="settings_category_translation">"Переводчики"</string>

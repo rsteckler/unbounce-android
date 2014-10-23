@@ -103,7 +103,6 @@
   <string name="settings_item_global_stats_summary">"发送和接收匿名统计数据"</string>
   <string name="settings_item_reset_defaults_title">"恢复到默认设置"</string>
   <string name="settings_item_reset_defaults_summary">"还原所有唤醒锁和闹钟的设置"</string>
-  <string name="settings_category_debug">"调试"</string>
   <string name="settings_item_author">"作者: Ryan Steckler"</string>
   <string name="settings_item_logging_level">"日志详细程度"</string>
   <string name="settings_category_translation">"翻译人员"</string>

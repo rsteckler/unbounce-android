@@ -109,7 +109,6 @@ Zasílání_push_zpráv"</string>
   <string name="donate_more_button">"Jak_mohu_darovat_znovu?"</string>
   <string name="donate_more_text">"Lidé se ptali, jak mohou přispět mimo jejich původní dar. Níže uvedená tlačítka vám umožní darovat dále, ale neposkytují žádné další funkce. Děkuji moc za podporu Unbounce!"</string>
   <string name="welcome_banner_title">"Vítejte!"</string>
-  <string name="welcome_banner_text">"Mùžete blokovat wakelocks, zabránit telefonu zùstávat vzhùru a blokovat alarmy_a_ zastavit_je_od probuzení v první_řadě..Tak jsem již nastavil úsporu výchozí pro vás a můžete blokovat wakelocks_a_ zastavit telefon_zùstávat vzhùru a blokovat alarmy_a_ zastavit od probuzení v první_řadě."</string>
   <string name="settings_category_options">"Volby"</string>
   <string name="settings_item_show_launcher">"Zobrazit_ikonu_v_launcheru"</string>
   <string name="settings_item_choose_theme">"Zvolte_si_téma"</string>
@@ -117,7 +116,6 @@ Zasílání_push_zpráv"</string>
   <string name="settings_item_global_stats_summary">"Odesílat a přijímat anonymní statistiky "</string>
   <string name="settings_item_reset_defaults_title">"Obnovit_na_výchozí"</string>
   <string name="settings_item_reset_defaults_summary">"Obnovit_všechny_alarmy_a_wakelocks_na_výchozí nastavení "</string>
-  <string name="settings_category_debug">"Debug"</string>
   <string name="settings_item_author">"Autor: Ryan Steckler "</string>
   <string name="settings_item_logging_level">"Úroveň protokolování "</string>
   <string name="settings_category_translation">"Překlad_Kredity"</string>

@@ -107,7 +107,6 @@
   <string name="donate_more_button">"KUINKA VOIN VIELÄ AUTTAA SINUA?"</string>
   <string name="donate_more_text">"Ihmiset ovat kysyneet kuinka he voisivat lahjoittaa lisää.  Napit alhaalla antavat sinun lahjoittaa uudestaan, mutteivät anna lisäominaisuuksia.  Kiitos paljon tuestasi!!"</string>
   <string name="welcome_banner_title">"Tervetuloa!"</string>
-  <string name="welcome_banner_text">"Voit estää herätyksiä estääksesi puhelimen pysymisen hereillä, ja estää hälytyksiä estääksesi sen heräämisen.  Olemme jo asettaneet joitakin asetuksia valmiiksi."</string>
   <string name="playstore_short_description">"Pitkää [akku]ikää!"</string>
   <string name="playstore_long_description">"
 ***Vaatii rootin sekä Xposed Frameworkin***
