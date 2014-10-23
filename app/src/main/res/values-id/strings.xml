@@ -70,12 +70,49 @@
 <string name="desc_activitymanagerlauncher">"Berinteraksi dengan keseluruhan kegiatan berjalan di sistem. Jika Anda Unbounce ini, tidak akan bekerja dengan baik."</string>
 <string name="desc_windowmanager">"Ini adalah tingkat WakeLock Sistem Android. Antarmuka aplikasi yang digunakan untuk berbicara dengan window manager - yang berarti, aplikasi akan memerlukan WindowManager mengunci setiap kali mereka harus ditampilkan pada layar."</string>
 <string name="desc_rilj">"RILJ membuat perangkat Anda terjaga sementara tindakan telepon pengolahan, seperti panggilan telepon dan komunikasi menara seluler."</string>
+<string name="desc_syncloopwakelock"></string>
+<string name="desc_icing"></string>
+<string name="desc_startingalertservice"></string>
+<string name="desc_audiomix"></string>
+<string name="desc_locationmanagerservice"></string>
+<string name="desc_audioin"></string>
+<string name="desc_nfcservicemroutingwakelock"></string>
+<string name="desc_wakefulintentservicegcoreulrlocationreportingservice"></string>
+<string name="desc_vzwgpslocationprovider"></string>
+<string name="desc_hangouts_rtcs"></string>
+<string name="desc_gcm_conn"></string>
+<string name="desc_google_c2dm"></string>
+<string name="desc_timedeventqueue"></string>
+<string name="desc_comgoogleandroidgmsnlpalarm_wakeup_locator"></string>
+<string name="desc_comgoogleandroidgmsnlpalarm_wakeup_activity_detection"></string>
+<string name="desc_comgoogleandroidappshangoutsupdate_notification"></string>
+<string name="desc_comandroidinternaltelephonydatastall"></string>
+<string name="settings_allow_every"></string>
+<string name="settings_seconds"></string>
+<string name="card_button_reset"></string>
+<string name="stat_alarms_acquired"></string>
+<string name="stat_alarms_blocked"></string>
+<string name="stat_loading"></string>
+<string name="stat_collected_for"></string>
+<string name="stat_wake_duration_allowed"></string>
+<string name="stat_wake_duration_blocked"></string>
+<string name="stat_wake_allowed"></string>
+<string name="stat_wake_blocked"></string>
+<string name="stat_alarm_allowed"></string>
+<string name="stat_alarm_blocked"></string>
+<string name="stat_disabled"></string>
+<string name="donate_text"></string>
 <string name="donate_1">"Secangkir kopi sementara saya menulis kode"</string>
+<string name="donate_5"></string>
 <string name="donate_10">"Kegembiraan tidak membawa charger anda"</string>
+<string name="donate_thank_you"></string>
 <string name="donate_more_button">"BAGAIMANA SAYA DAPAT MEMBANTU LEBIH LANJUT?"</string>
+<string name="donate_more_text"></string>
 <string name="welcome_banner_title">"Selamat datang!"</string>
+<string name="welcome_banner_text"></string>
 
-
+<!-- Don't translate this one  :) -->
+<string name="app_font_family">"sans_serif"</string>
 <string name="settings_category_options">"Pilihan"</string>
 <string name="settings_item_show_launcher">"Tampilkan ikon aplikasi"</string>
 <string name="settings_item_choose_theme">"Pilih tema"</string>
@@ -119,5 +156,37 @@ Berikut adalah beberapa ulasan:
 Di Aplikasi pembelian memungkinkan Anda untuk membuka paket tambahan yang memungkinkan Anda menyesuaikan alarm dan wakelocks pada perangkat Anda. Tanpa paket tambahan, Anda dapat mengontrol baterai: NlpWakelock, NlpCollectorWakeLock, ALARM_WAKEUP_LOCATOR, dan ALARM_WAKE_ACTIVITY_DETECTION. 
 
 Semoga Anda memiliki umur [baterai] panjang!"</string>
-
+<string name="welcome_banner_welcome"></string>
+<string name="welcome_banner_checking_service"></string>
+<string name="welcome_banner_checking_xposed"></string>
+<string name="welcome_banner_checking_root"></string>
+<string name="welcome_banner_checking_looks_great"></string>
+<string name="welcome_banner_checking_uhoh"></string>
+<string name="welcome_banner_problem_none"></string>
+<string name="welcome_banner_problem_service"></string>
+<string name="welcome_banner_problem_xposed_running"></string>
+<string name="welcome_banner_problem_xposed_installed"></string>
+<string name="welcome_banner_problem_root"></string>
+<string name="welcome_banner_button_next"></string>
+<string name="welcome_banner_button_fixit"></string>
+<string name="welcome_banner_button_exit"></string>
+<string name="welcome_banner_button_install"></string>
+<string name="welcome_downloading_xposed"></string>
+<string name="welcome_downloaded_xposed"></string>
+<string name="welcome_download_error_xposed"></string>
+<string name="download_xposed_title"></string>
+<string name="download_xposed_description"></string>
+<string name="requires_root"></string>
+<string name="installs_xposed"></string>
+<string name="settings_category_code_credits"></string>
+<string name="title_services"></string>
+<string name="action_sort_by_alpha"></string>
+<string name="card_settings_subtitle_service"></string>
+<string name="tasker_choose_service"></string>
+<string name="alert_unknown_service_title"></string>
+<string name="alert_unknown_service_content"></string>
+<string name="stat_service_allowed"></string>
+<string name="stat_service_blocked"></string>
+<string name="service_switch_allow"></string>
+<string name="service_switch_deny"></string>
 </resources>
