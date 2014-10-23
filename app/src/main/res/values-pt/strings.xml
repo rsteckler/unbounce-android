@@ -109,6 +109,8 @@
 <string name="welcome_banner_title">"Bem vindo!"</string>
 <string name="welcome_banner_text">"Podes bloquear wakelocks impedindo que o teu telefone se mantenha acordado, e bloquear os alarmes que fazem com que ele acorde. Já definimos algumas coisas por ti que te vão poupar bateria."</string>
 
+<!-- Don't translate this one  :) -->
+<string name="app_font_family">"sans_serif"</string>
 <string name="settings_category_options">"Opções"</string>
 <string name="settings_item_show_launcher">"Mostrar icon app"</string>
 <string name="settings_item_choose_theme">"Escolher tema"</string>
@@ -161,8 +163,8 @@ Que aproveites uma grande e longa bateria!"</string>
 <string name="welcome_banner_problem_none">"Configurámos algumas coisas por ti. Vais começar a poupar bateria, aproveita!"</string>
 <string name="welcome_banner_problem_service">"Parece que não activaste o modulo Unbounce. Clica em ARRANJAR, certifica-te que Unbouce está activo e reinicia o dispositivo."</string>
 <string name="welcome_banner_problem_xposed_running">"Xposed não está a funcionar. Clica em ARRANJAR, depois clica em Intall/Update e reinicia o dispositivo."</string>
-<string name="welcome_banner_problem_xposed_installed">"Xposed não está instalado. Xposed é fundamental para que Unbouce e outras aplicações que precisam de root funcionem. Quando o download acabar, clica em INSTALAR, depois inicia Unbouce outra vez. Se quiseres aprender mais sobre Xposed vai a: <![CDATA[<a href="http://www.tested.com/tech/android/460074-how-use-xposed-framework-android-extreme-customization"/>visit Tested.com.</a>]]> "</string>
-<string name="welcome_banner_problem_root">"Parece que o teu dispositivo não tem root. Para que Unbouce funcione tens que ter o dispositivo com root. Se estás interessado em fazer root, para começar vai a: <![CDATA[<a href="http://www.techverse.net/how-to-root-your-android-phone-tablet-and-why"/>Techverse.net</a>]]>"</string>
+<string name="welcome_banner_problem_xposed_installed">"Xposed não está instalado. Xposed é fundamental para que Unbouce e outras aplicações que precisam de root funcionem. Quando o download acabar, clica em INSTALAR, depois inicia Unbouce outra vez. Se quiseres aprender mais sobre Xposed vai a: &lt;a href=http://www.tested.com/tech/android/460074-how-use-xposed-framework-android-extreme-customization/&gt;visit Tested.com.&lt;/a&gt; "</string>
+<string name="welcome_banner_problem_root">"Parece que o teu dispositivo não tem root. Para que Unbouce funcione tens que ter o dispositivo com root. Se estás interessado em fazer root, para começar vai a: &lt;a href=http://www.techverse.net/how-to-root-your-android-phone-tablet-and-why/&gt;Techverse.net&lt;/a&gt;"</string>
 <string name="welcome_banner_button_next">"PRÓXIMO"</string>
 <string name="welcome_banner_button_fixit">"ARRANJAR"</string>
 <string name="welcome_banner_button_exit">"SAIR"</string>
@@ -175,4 +177,14 @@ Que aproveites uma grande e longa bateria!"</string>
 <string name="requires_root">"*** Precisa de dispositivo com root ***"</string>
 <string name="installs_xposed">"Unbounce precisa de Xposed Framework e vai instalá-lo se não o tiveres."</string>
 <string name="settings_category_code_credits">"Créditos"</string>
+<string name="title_services"></string>
+<string name="action_sort_by_alpha"></string>
+<string name="card_settings_subtitle_service"></string>
+<string name="tasker_choose_service"></string>
+<string name="alert_unknown_service_title"></string>
+<string name="alert_unknown_service_content"></string>
+<string name="stat_service_allowed"></string>
+<string name="stat_service_blocked"></string>
+<string name="service_switch_allow"></string>
+<string name="service_switch_deny"></string>
 </resources>
