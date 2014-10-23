@@ -180,4 +180,14 @@
 <string name="requires_root"></string>
 <string name="installs_xposed"></string>
 <string name="settings_category_code_credits"></string>
+<string name="title_services"></string>
+<string name="action_sort_by_alpha"></string>
+<string name="card_settings_subtitle_service"></string>
+<string name="tasker_choose_service"></string>
+<string name="alert_unknown_service_title"></string>
+<string name="alert_unknown_service_content"></string>
+<string name="stat_service_allowed"></string>
+<string name="stat_service_blocked"></string>
+<string name="service_switch_allow"></string>
+<string name="service_switch_deny"></string>
 </resources>
