@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">"Unbounce"</string>
+  <string name="app_name">"Lion Tamer"</string>
   <string name="version">"Version"</string>
-  <string name="title_activity_material_settings">"Unbounce"</string>
+  <string name="title_activity_material_settings">"Lion Tamer"</string>
   <string name="title_home">"Accueil"</string>
   <string name="title_wakelocks">"Wakelocks"</string>
   <string name="title_alarms">"Alarmes"</string>
@@ -30,14 +30,14 @@
   <string name="category_not_safe">"Blocage risqué"</string>
   <string name="category_error">"Erreur"</string>
   <string name="alert_noiab_title">"Fonctionnalités pro désactivées"</string>
-  <string name="alert_noiab_content">"Votre appareil ne supporte pas les achats 'in-app'. Vous ne pouvez pas acheter les fonctionnalités pro de Unbounce. Cela peut se produire lorsque votre application Google Play Store a besoin d'être mise à jour ou lorsque vous vivez dans un pays où ce type d'achat est désactivé."</string>
+  <string name="alert_noiab_content">"Votre appareil ne supporte pas les achats 'in-app'. Vous ne pouvez pas acheter les fonctionnalités pro de Lion Tamer. Cela peut se produire lorsque votre application Google Play Store a besoin d'être mise à jour ou lorsque vous vivez dans un pays où ce type d'achat est désactivé."</string>
   <string name="dialog_ok">"OK"</string>
   <string name="tasker_on">"Activer"</string>
   <string name="tasker_off">"Désactiver"</string>
   <string name="tasker_reset_stats">"Remettre à zéro les statistiques"</string>
   <string name="tasker_choose_wakelock">"Choisissez le wakelock à modifier."</string>
   <string name="tasker_choose_alarm">"Choisissez l'alarme à modifier."</string>
-  <string name="tasker_welcome">"Bienvenue dans le plugin de gestion des tâches d'Unbounce."</string>
+  <string name="tasker_welcome">"Bienvenue dans le plugin de gestion des tâches d'Lion Tamer."</string>
   <string name="tasker_which_task">"Voulez-vous changer les paramètres concernant un wakelock ou une alarme, ou voulez-vous remettre à zéro les statistiques sur votre appareil ?"</string>
   <string name="tasker_task_wakelock">"MODIFIER LE WAKELOCK"</string>
   <string name="tasker_task_alarm">"MODIFIER L'ALARME"</string>
@@ -46,7 +46,7 @@
   <string name="alert_nopro_content">"Pour bloquer un wakelock ou une alarme non standard, vous devez d'abord faire une donation."</string>
   <string name="alert_unknown_alarm_title">"Bloquer cette alarme inconnue ?"</string>
   <string name="alert_unknown_alarm_content">"Cette alarme ne semble pas sûre à bloquer. Voulez-vous quand même le faire ?"</string>
-  <string name="dialog_unbounce">"UNBOUNCE"</string>
+  <string name="dialog_unbounce">"TAME"</string>
   <string name="dialog_cancel">"Annuler"</string>
   <string name="tasker_choose_settings">"Choisir le paramètre voulu."</string>
   <string name="alert_unknown_wakelock_title">"Bloquer ce wakelock inconnu ?"</string>
@@ -131,11 +131,11 @@
 Retours non sollicités d'utilisateurs (traduits) :
 \"Cela m'a permis d'avoir 2 heures de plus d'utilisation avec 30 minutes d'écran en plus. J'ai économisé l'achat d'une batterie à 25$. Continue ce super travail\"
 \"Simplement génial\"
-\"[Unbounce] Révolutionne simplement la gestion des wakelocks\"
+\"[Lion Tamer] Révolutionne simplement la gestion des wakelocks\"
 \"Ce module est extraordinaire ! J'ai obtenu moins de la moité d'un pourcent d'utilisation par heure en veille\"
 ... et bien d'autres retours.
 
-Unbounce vous permet de contrôler comment votre appareil utilise votre batterie, par le fait de contrôler combien de fois votre appareil se réveille, et combien de temps il reste éveillé. Utiliser les paramétres recommandés pour une économie de batterie, ou investiguer et customiser chaque alarme et wakelock sur votre téléphone.
+Lion Tamer vous permet de contrôler comment votre appareil utilise votre batterie, par le fait de contrôler combien de fois votre appareil se réveille, et combien de temps il reste éveillé. Utiliser les paramétres recommandés pour une économie de batterie, ou investiguer et customiser chaque alarme et wakelock sur votre téléphone.
 
 Quelques points à souligner :
 - Très beau design, inspiré par les principes de 'Material Design' (Google)
@@ -149,17 +149,17 @@ L'achat dans l'application permet de débloquer le module Pro et vous laisse par
 
 Vous souhaitant longue vie [à votre batterie] !"</string>
   <string name="welcome_banner_welcome">"Bienvenue !"</string>
-  <string name="welcome_banner_checking_service">"Vérification de l'activation d'Unbounce..."</string>
+  <string name="welcome_banner_checking_service">"Vérification de l'activation d'Lion Tamer..."</string>
   <string name="welcome_banner_checking_xposed">"Verification de l'installation de Xposed..."</string>
   <string name="welcome_banner_checking_root">"Verification de l'activation du 'root'..."</string>
   <string name="welcome_banner_checking_looks_great">"Tout semble prêt !"</string>
   <string name="welcome_banner_checking_uhoh">"Une erreur est survenue. Cherchons pourquoi, et corrigeons cela..."</string>
   <string name="welcome_banner_problem_none">"Des réglages par défaut sont activés. Profitez de cette autonomie prolongée !"</string>
-  <string name="welcome_banner_problem_service">"Il semblerait que vous n'ayez pas activé le module Unbounce dans Xposed. Cliquer sur 'RÉPARER', assurez-vous que Unbounce soit coché, et redémarrez."</string>
+  <string name="welcome_banner_problem_service">"Il semblerait que vous n'ayez pas activé le module Lion Tamer dans Xposed. Cliquer sur 'RÉPARER', assurez-vous que Lion Tamer soit coché, et redémarrez."</string>
   <string name="welcome_banner_problem_xposed_running">"Xposed n'est pas lancé. Cliquez sur 'RÉPARER', puis \"Installer/Mettre a jour\" dans Xposed et redémarrez."</string>
-  <string name="welcome_banner_problem_xposed_installed">"Xposed n'est pas installé. Xposed est necessaire pour le fonctionnement d'un bounce et de biens d'autres modules. Une fois le téléchargement terminé, cliquer sur Installer, puis relancez Unbounce.
+  <string name="welcome_banner_problem_xposed_installed">"Xposed n'est pas installé. Xposed est necessaire pour le fonctionnement d'un bounce et de biens d'autres modules. Une fois le téléchargement terminé, cliquer sur Installer, puis relancez Lion Tamer.
 Si vous voulez en savoir plus sur Xposed, %1$s "</string>
-  <string name="welcome_banner_problem_root">"Il semblerait que votre appareil ne soit pas 'rooté'. Unbounce necessite un appareil avec le 'root' activé pour fonctionner. Si vous voulez rooter votre appareil,visitez %1$s pour Commencer."</string>
+  <string name="welcome_banner_problem_root">"Il semblerait que votre appareil ne soit pas 'rooté'. Lion Tamer necessite un appareil avec le 'root' activé pour fonctionner. Si vous voulez rooter votre appareil,visitez %1$s pour Commencer."</string>
   <string name="welcome_banner_button_next">"SUIVANT"</string>
   <string name="welcome_banner_button_fixit">"RÉPARER"</string>
   <string name="welcome_banner_button_exit">"QUITTER"</string>
@@ -168,8 +168,8 @@ Si vous voulez en savoir plus sur Xposed, %1$s "</string>
   <string name="welcome_downloaded_xposed">"Telechargement terminé."</string>
   <string name="welcome_download_error_xposed">"Erreur de telechargement. Réessayez plus tard."</string>
   <string name="download_xposed_title">"Téléchargement de Xposed"</string>
-  <string name="download_xposed_description">"Nécessaire pour Unbounce"</string>
+  <string name="download_xposed_description">"Nécessaire pour Lion Tamer"</string>
   <string name="requires_root">"*** Nécessite un appareil avec 'root' activé ***"</string>
-  <string name="installs_xposed">"Unbounce utilise le framework Xposed et va l'installer pour vous, si vous ne l'avez pas déjà."</string>
+  <string name="installs_xposed">"Lion Tamer utilise le framework Xposed et va l'installer pour vous, si vous ne l'avez pas déjà."</string>
   <string name="settings_category_code_credits">"Crédits de developpement"</string>
 </resources>

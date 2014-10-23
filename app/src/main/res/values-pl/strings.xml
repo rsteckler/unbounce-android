@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <!-- Fuzzy -->
-  <string name="app_name">"Unbounce"</string>
+  <string name="app_name">"Lion Tamer"</string>
   <string name="version">"Wersja"</string>
   <!-- Fuzzy -->
-  <string name="title_activity_material_settings">"Unbounce"</string>
+  <string name="title_activity_material_settings">"Lion Tamer"</string>
   <string name="title_home">"Główna"</string>
   <!-- Fuzzy -->
   <string name="title_wakelocks">"Wybudzenia"</string>
@@ -46,7 +46,7 @@
   <string name="category_error">"Błąd"</string>
   <string name="alert_noiab_title">"Funkcje pro niedostępne"</string>
   <!-- Fuzzy -->
-  <string name="alert_noiab_content">"Twoje urządzenie nie obsługuję opcji App Billing. Nie jesteś w stanie kupic wersji Pro Unbounce. Być może musisz zaktualizować Sklep Play lub mieszkasz w kraju gdzie opcja App Billing jest niedostępna"</string>
+  <string name="alert_noiab_content">"Twoje urządzenie nie obsługuję opcji App Billing. Nie jesteś w stanie kupic wersji Pro Lion Tamer. Być może musisz zaktualizować Sklep Play lub mieszkasz w kraju gdzie opcja App Billing jest niedostępna"</string>
   <string name="dialog_ok">"Ok"</string>
   <!-- Fuzzy -->
   <string name="tasker_on">"Wł."</string>
@@ -56,7 +56,7 @@
   <string name="tasker_choose_wakelock">"Dostosuj wybudzenie"</string>
   <!-- Fuzzy -->
   <string name="tasker_choose_alarm">"Dostosuj alarm"</string>
-  <string name="tasker_welcome">"Witaj we wtycze Tasker Unbounce"</string>
+  <string name="tasker_welcome">"Witaj we wtycze Tasker Lion Tamer"</string>
   <!-- Fuzzy -->
   <string name="tasker_which_task">"Chcesz dokonać zmian dla Wybudzenia lub alarmu, a może chcesz zresetować ustawienia dla Twojego urządzenia?"</string>
   <string name="tasker_task_wakelock">"ZMIEŃ WYBUDZENIE"</string>
@@ -159,7 +159,7 @@
 Rządzisz."</string>
   <!-- Fuzzy -->
   <string name="donate_more_button">"JAK MOGĘ POMÓC DALEJ?"</string>
-  <string name="donate_more_text">"Ludzie pytają jak mogą pomóc oprócz zwykłej darowizny. Przycisk poniżej pozwoli Ci przekazać dodatkowa darowiznę lecz nie zapewni juz dodatkowych opcji. Dziękuję bardzo za wspieranie Unbounce!"</string>
+  <string name="donate_more_text">"Ludzie pytają jak mogą pomóc oprócz zwykłej darowizny. Przycisk poniżej pozwoli Ci przekazać dodatkowa darowiznę lecz nie zapewni juz dodatkowych opcji. Dziękuję bardzo za wspieranie Lion Tamer!"</string>
   <!-- Fuzzy -->
   <string name="welcome_banner_title">"Witaj!"</string>
   <string name="welcome_banner_text">"Możesz zablokować wybudzenia aby powstrzymac telefon od bycia aktywnym oraz blokuj alarmy aby nie były wybudzane w pierwszej kolejności. Domyślnie ustawiliśmy już kilka opcji za Ciebie."</string>
@@ -198,10 +198,10 @@ Dobrowolne zacytowania od użytkowników:
 \"Dodało mi to około 2h więcej czasu pracy przy 30min dłuższego działania ekranu. Oszczędziłem 25$ na nowej baterii.\"
 \"Właśnie wsparłem 5 dolarów ten świetny projekt. Oby tak dalej\"
 \"Po prostu fenomenalne\"
-[Unbounce] zrewolucjonizował sposób zarzadzania wybudzeniami.\"
+[Lion Tamer] zrewolucjonizował sposób zarzadzania wybudzeniami.\"
 \"Ten moduł jest świetny. Myślę, że około 0,5%/h zmniejszyło się drenowanie baterii w stanie spoczynku.\"
 ... Oraz wiele innych komentarzy.
-Unbounce pozwala Ci na kontrolowanie jak często Twój telefon wybudza się i jak szybko zjada baterię. Używaj rekomendowanych ustawień dla łatwego oszczędzania baterii lub sprawdzaj i wprowadzaj własne ustawienia kontroli wybudzeń i alarmów na Twoim urządzeniu.
+Lion Tamer pozwala Ci na kontrolowanie jak często Twój telefon wybudza się i jak szybko zjada baterię. Używaj rekomendowanych ustawień dla łatwego oszczędzania baterii lub sprawdzaj i wprowadzaj własne ustawienia kontroli wybudzeń i alarmów na Twoim urządzeniu.
 Kilka głównych funkcji:
 -wspaniale zaprojektowany wygląd
 - stabilny silnik blokowania
@@ -215,8 +215,8 @@ Funkcja zakupu w aplikacji pozwoli Ci na odblokowanie funkcji Pro które pozwol�
 Życzę dłuższej pracy na baterii!"</string>
   <string name="welcome_banner_welcome">"Witaj!"</string>
   <!-- Fuzzy -->
-  <string name="welcome_banner_checking_service">"Sprawdzanie, czy Unbounce działa..."</string>
-  <string name="welcome_banner_checking_xposed">"Sprawdzanie instalacji Unbounce..."</string>
+  <string name="welcome_banner_checking_service">"Sprawdzanie, czy Lion Tamer działa..."</string>
+  <string name="welcome_banner_checking_xposed">"Sprawdzanie instalacji Lion Tamer..."</string>
   <!-- Fuzzy -->
   <string name="welcome_banner_checking_root">"Sprawdzanie roota..."</string>
   <string name="welcome_banner_checking_looks_great">"Wygląda, że wszystko ok!"</string>
@@ -224,11 +224,11 @@ Funkcja zakupu w aplikacji pozwoli Ci na odblokowanie funkcji Pro które pozwol�
   <string name="welcome_banner_checking_uhoh">"Coś poszło nie tak. Zobaczmy co trzeba naprawić..."</string>
   <string name="welcome_banner_problem_none">"Ustawiliśmy kilka rzeczy za Ciebie w celu wydłużenia pracy baterii. Powodzenia!"</string>
   <!-- Fuzzy -->
-  <string name="welcome_banner_problem_service">"Wygląda, że nie włączyłeś modułu Unbounce. Naciśnij NAPRAW TO, sprawdź zaznaczenie modułu i uruchom ponownie."</string>
+  <string name="welcome_banner_problem_service">"Wygląda, że nie włączyłeś modułu Lion Tamer. Naciśnij NAPRAW TO, sprawdź zaznaczenie modułu i uruchom ponownie."</string>
   <string name="welcome_banner_problem_xposed_running">"Xposed nie działa. Naciśnij NAPRAW TO, następnie instaluj/aktualizuj i uruchom ponownie."</string>
   <!-- Fuzzy -->
-  <string name="welcome_banner_problem_xposed_installed">"Xposed nie jest zainstalowany. Unbounce wymaga Xposed i innych aplikacji wymagających roota. Po pobraniu naciśnij INSTALLUJ i uruchom Unbounce ponownie. Jeśli chcesz się dowiedzieć więcej:  %1$s "</string>
-  <string name="welcome_banner_problem_root">"Wygląda, że Twoje urządzenie nie ma roota. Unbounce wymaga roota do poprawnego działania. Jeśli chcesz zrootować swój telefon sprawdź:  %1$s."</string>
+  <string name="welcome_banner_problem_xposed_installed">"Xposed nie jest zainstalowany. Lion Tamer wymaga Xposed i innych aplikacji wymagających roota. Po pobraniu naciśnij INSTALLUJ i uruchom Lion Tamer ponownie. Jeśli chcesz się dowiedzieć więcej:  %1$s "</string>
+  <string name="welcome_banner_problem_root">"Wygląda, że Twoje urządzenie nie ma roota. Lion Tamer wymaga roota do poprawnego działania. Jeśli chcesz zrootować swój telefon sprawdź:  %1$s."</string>
   <!-- Fuzzy -->
   <string name="welcome_banner_button_next">"DALEJ"</string>
   <string name="welcome_banner_button_fixit">"NAPRAW"</string>
@@ -242,9 +242,9 @@ Funkcja zakupu w aplikacji pozwoli Ci na odblokowanie funkcji Pro które pozwol�
   <string name="welcome_download_error_xposed">"Pobieranie nieudane. Spróbuj później."</string>
   <string name="download_xposed_title">"Pobieranie Xposed"</string>
   <!-- Fuzzy -->
-  <string name="download_xposed_description">"Wymagania Unbounce"</string>
+  <string name="download_xposed_description">"Wymagania Lion Tamer"</string>
   <string name="requires_root">"***Wymaga roota***"</string>
   <!-- Fuzzy -->
-  <string name="installs_xposed">"Unbounce używa Xposed Framework, jeśli go nie masz, zainstaluje się automatycznie."</string>
+  <string name="installs_xposed">"Lion Tamer używa Xposed Framework, jeśli go nie masz, zainstaluje się automatycznie."</string>
   <string name="settings_category_code_credits">"Przypisy Twórcy"</string>
 </resources>
