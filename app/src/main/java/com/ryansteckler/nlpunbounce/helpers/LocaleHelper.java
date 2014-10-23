@@ -77,10 +77,25 @@ public class LocaleHelper {
     }
 
     public static String getFormattedTime(java.lang.Object... paramTimes) {
-        StringBuilder sbuf= new StringBuilder();
-        for (Object param : paramTimes) {
-            sbuf.append(String.format("%02d",param));
-            sbuf.append(":");
+        StringBuilder sbuf = new StringBuilder();
+        int offset = 0;
+        if (5 == paramTimes.length) {
+            offset = 2;
+        } else if (4 == paramTimes.length) {
+            offset = 1;
+        }
+        for (int i = 0; i < paramTimes.length; i++) {
+            if (i < (paramTimes.length - offset)) {
+                if ((long) paramTimes[i] > 0) {
+                    sbuf.append(String.format("%02d", paramTimes[i]));
+                    sbuf.append(":");
+                } else {
+                    continue;
+                }
+            } else {
+                sbuf.append(String.format("%02d", paramTimes[i]));
+                sbuf.append(":");
+            }
         }
         sbuf.deleteCharAt(sbuf.lastIndexOf(":"));
         return sbuf.toString();
