@@ -218,6 +218,9 @@ Rządzisz."</string>
 <string name="welcome_banner_title">"Witaj!"</string>
 <string name="welcome_banner_text">"Możesz zablokować wybudzenia aby powstrzymac telefon od bycia aktywnym oraz blokuj alarmy aby nie były wybudzane w pierwszej kolejności. Domyślnie ustawiliśmy już kilka opcji za Ciebie."</string>
 
+<!-- Don't translate this one  :) -->
+<!-- Fuzzy -->
+<string name="app_font_family">"sans_serif"</string>
 <string name="settings_category_options">"opcje"</string>
 
 <!-- Fuzzy -->
@@ -297,8 +300,8 @@ Funkcja zakupu w aplikacji pozwoli Ci na odblokowanie funkcji Pro które pozwol�
 <string name="welcome_banner_problem_xposed_running">"Xposed nie działa. Naciśnij NAPRAW TO, następnie instaluj/aktualizuj i uruchom ponownie."</string>
 
 <!-- Fuzzy -->
-<string name="welcome_banner_problem_xposed_installed">"Xposed nie jest zainstalowany. Unbounce wymaga Xposed i innych aplikacji wymagających roota. Po pobraniu naciśnij INSTALLUJ i uruchom Unbounce ponownie. Jeśli chcesz się dowiedzieć więcej:  <![CDATA[<a href="http://www.tested.com/tech/android/460074-how-use-xposed-framework-android-extreme-customization"/>visit Tested.com.</a>]]> "</string>
-<string name="welcome_banner_problem_root">"Wygląda, że Twoje urządzenie nie ma roota. Unbounce wymaga roota do poprawnego działania. Jeśli chcesz zrootować swój telefon sprawdź: <![CDATA[ <a href="http://www.techverse.net/how-to-root-your-android-phone-tablet-and-why"/>Techverse.net</a>]]>."</string>
+<string name="welcome_banner_problem_xposed_installed">"Xposed nie jest zainstalowany. Unbounce wymaga Xposed i innych aplikacji wymagających roota. Po pobraniu naciśnij INSTALLUJ i uruchom Unbounce ponownie. Jeśli chcesz się dowiedzieć więcej:  &lt;a href=http://www.tested.com/tech/android/460074-how-use-xposed-framework-android-extreme-customization/&gt;visit Tested.com.&lt;/a&gt; "</string>
+<string name="welcome_banner_problem_root">"Wygląda, że Twoje urządzenie nie ma roota. Unbounce wymaga roota do poprawnego działania. Jeśli chcesz zrootować swój telefon sprawdź:  &lt;a href=http://www.techverse.net/how-to-root-your-android-phone-tablet-and-why/&gt;Techverse.net&lt;/a&gt;."</string>
 
 <!-- Fuzzy -->
 <string name="welcome_banner_button_next">"DALEJ"</string>
@@ -323,4 +326,14 @@ Funkcja zakupu w aplikacji pozwoli Ci na odblokowanie funkcji Pro które pozwol�
 <!-- Fuzzy -->
 <string name="installs_xposed">"Unbounce używa Xposed Framework, jeśli go nie masz, zainstaluje się automatycznie."</string>
 <string name="settings_category_code_credits">"Przypisy Twórcy"</string>
+<string name="title_services"></string>
+<string name="action_sort_by_alpha"></string>
+<string name="card_settings_subtitle_service"></string>
+<string name="tasker_choose_service"></string>
+<string name="alert_unknown_service_title"></string>
+<string name="alert_unknown_service_content"></string>
+<string name="stat_service_allowed"></string>
+<string name="stat_service_blocked"></string>
+<string name="service_switch_allow"></string>
+<string name="service_switch_deny"></string>
 </resources>
