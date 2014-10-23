@@ -109,6 +109,8 @@
 <string name="welcome_banner_title">"Bienvenue !"</string>
 <string name="welcome_banner_text">"Vous pouvez bloquer les wakelocks pour empêcher votre téléphone de rester éveillé, et bloquer les alarmes pour l'empêcher de se réveiller. Nous avons déjà préconfiguré des réglages d'économie de batterie pour vous."</string>
 
+<!-- Don't translate this one  :) -->
+<string name="app_font_family">"sans_serif"</string>
 <string name="settings_category_options">"Options"</string>
 <string name="settings_item_show_launcher">"Afficher l'icone de lancement"</string>
 <string name="settings_item_choose_theme">"Afficher le thème"</string>
@@ -159,8 +161,8 @@ Vous souhaitant longue vie [à votre batterie] !"</string>
 <string name="welcome_banner_problem_service">"Il semblerait que vous n'ayez pas activé le module Unbounce dans Xposed. Cliquer sur 'RÉPARER', assurez-vous que Unbounce soit coché, et redémarrez."</string>
 <string name="welcome_banner_problem_xposed_running">"Xposed n'est pas lancé. Cliquez sur 'RÉPARER', puis \"Installer/Mettre a jour\" dans Xposed et redémarrez."</string>
 <string name="welcome_banner_problem_xposed_installed">"Xposed n'est pas installé. Xposed est necessaire pour le fonctionnement d'un bounce et de biens d'autres modules. Une fois le téléchargement terminé, cliquer sur Installer, puis relancez Unbounce.
-Si vous voulez en savoir plus sur Xposed, <![CDATA[<a href="http://www.tested.com/tech/android/460074-how-use-xposed-framework-android-extreme-customization"/>visitez Tested.com.</a>]]> "</string>
-<string name="welcome_banner_problem_root">"Il semblerait que votre appareil ne soit pas 'rooté'. Unbounce necessite un appareil avec le 'root' activé pour fonctionner. Si vous voulez rooter votre appareil,visitez <![CDATA[<a href="http://www.techverse.net/how-to-root-your-android-phone-tablet-and-why"/>Techverse.net</a>]]> pour Commencer."</string>
+Si vous voulez en savoir plus sur Xposed, &lt;a href=http://www.tested.com/tech/android/460074-how-use-xposed-framework-android-extreme-customization/&gt;visitez Tested.com.&lt;/a&gt; "</string>
+<string name="welcome_banner_problem_root">"Il semblerait que votre appareil ne soit pas 'rooté'. Unbounce necessite un appareil avec le 'root' activé pour fonctionner. Si vous voulez rooter votre appareil,visitez &lt;a href=http://www.techverse.net/how-to-root-your-android-phone-tablet-and-why/&gt;Techverse.net&lt;/a&gt; pour Commencer."</string>
 <string name="welcome_banner_button_next">"SUIVANT"</string>
 <string name="welcome_banner_button_fixit">"RÉPARER"</string>
 <string name="welcome_banner_button_exit">"QUITTER"</string>
@@ -173,4 +175,14 @@ Si vous voulez en savoir plus sur Xposed, <![CDATA[<a href="http://www.tested.co
 <string name="requires_root">"*** Nécessite un appareil avec 'root' activé ***"</string>
 <string name="installs_xposed">"Unbounce utilise le framework Xposed et va l'installer pour vous, si vous ne l'avez pas déjà."</string>
 <string name="settings_category_code_credits">"Crédits de developpement"</string>
+<string name="title_services"></string>
+<string name="action_sort_by_alpha"></string>
+<string name="card_settings_subtitle_service"></string>
+<string name="tasker_choose_service"></string>
+<string name="alert_unknown_service_title"></string>
+<string name="alert_unknown_service_content"></string>
+<string name="stat_service_allowed"></string>
+<string name="stat_service_blocked"></string>
+<string name="service_switch_allow"></string>
+<string name="service_switch_deny"></string>
 </resources>
