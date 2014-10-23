@@ -110,7 +110,8 @@
 <string name="welcome_banner_title">"Benvenuto!"</string>
 <string name="welcome_banner_text">"Puoi bloccare i wakelock per evitare che il tuo telefono stia sveglio, e bloccare gli allarmi per evitare che si svegli. Ti abbiamo già settato alcune impostazioni di default che ti permetteranno di risparmiare batteria."</string>
 
-
+<!-- Don't translate this one  :) -->
+<string name="app_font_family">"sans_serif"</string>
 <string name="settings_category_options">"Opzioni"</string>
 <string name="settings_item_show_launcher">"Mostra icona nel launcher"</string>
 <string name="settings_item_choose_theme">"Scegli il tema"</string>
@@ -166,8 +167,8 @@ Che tutti voi possiate avere una lunga vita [della batteria]!
 <string name="welcome_banner_problem_none">"Ti abbiamo impostato alcuni settaggi di default. Divertiti con la tua nuova durata della batteria!"</string>
 <string name="welcome_banner_problem_service">"Sembrerebbe che non hai attivato il modulo Unbounce. Premi RISOLVI, controlla che sia attivato, e riavvia."</string>
 <string name="welcome_banner_problem_xposed_running">"Xposed non è in esecuzione. Premi RISOLVI, poi Installa/Aggiorna, e riavvia."</string>
-<string name="welcome_banner_problem_xposed_installed">"Xposed non è installato. Xposed è necessario per Unbounce e altre applicazioni Root. Una volta che il download è terminato, premi INSTALLA, e rilancia Unbounce. Se vuoi saperne di più su Xposed, <![CDATA[<a href="http://www.tested.com/tech/android/460074-how-use-xposed-framework-android-extreme-customization"/>visita Tested.com.</a>]]> "</string>
-<string name="welcome_banner_problem_root">"Sembrerebbe che il tuo device non è rootato. Unbounce richiede un dispositivo rootato per funzionare correttamente. Se sei interessato a rootare il tuo device, visita <![CDATA[<a href="http://www.techverse.net/how-to-root-your-android-phone-tablet-and-why"/>Techverse.net</a> ]]>per iniziare."</string>
+<string name="welcome_banner_problem_xposed_installed">"Xposed non è installato. Xposed è necessario per Unbounce e altre applicazioni Root. Una volta che il download è terminato, premi INSTALLA, e rilancia Unbounce. Se vuoi saperne di più su Xposed, &lt;a href=http://www.tested.com/tech/android/460074-how-use-xposed-framework-android-extreme-customization/&gt;visita Tested.com.&lt;/a&gt; "</string>
+<string name="welcome_banner_problem_root">"Sembrerebbe che il tuo device non è rootato. Unbounce richiede un dispositivo rootato per funzionare correttamente. Se sei interessato a rootare il tuo device, visita &lt;a href=http://www.techverse.net/how-to-root-your-android-phone-tablet-and-why/&gt;Techverse.net&lt;/a&gt; per iniziare."</string>
 <string name="welcome_banner_button_next">"AVANTI"</string>
 <string name="welcome_banner_button_fixit">"RISOLVI"</string>
 <string name="welcome_banner_button_exit">"ESCI"</string>
@@ -180,4 +181,14 @@ Che tutti voi possiate avere una lunga vita [della batteria]!
 <string name="requires_root">"*** Richiede un device rootato ***"</string>
 <string name="installs_xposed">"Unbounce utilizza il framework Xposed e procederà ad installarlo per te se non lo hai già."</string>
 <string name="settings_category_code_credits">"Ringraziamenti"</string>
+<string name="title_services"></string>
+<string name="action_sort_by_alpha"></string>
+<string name="card_settings_subtitle_service"></string>
+<string name="tasker_choose_service"></string>
+<string name="alert_unknown_service_title"></string>
+<string name="alert_unknown_service_content"></string>
+<string name="stat_service_allowed"></string>
+<string name="stat_service_blocked"></string>
+<string name="service_switch_allow"></string>
+<string name="service_switch_deny"></string>
 </resources>
