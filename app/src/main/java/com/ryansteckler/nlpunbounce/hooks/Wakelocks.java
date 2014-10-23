@@ -15,11 +15,15 @@ import android.os.SystemClock;
 
 import com.ryansteckler.nlpunbounce.ActivityReceiver;
 import com.ryansteckler.nlpunbounce.XposedReceiver;
+import com.ryansteckler.nlpunbounce.models.BaseStats;
 import com.ryansteckler.nlpunbounce.models.InterimEvent;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
@@ -303,7 +307,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
             debugLog("Preventing Service " + serviceName + ".");
 
         } else {
-            defaultLog("Allowing service" + serviceName + ".");
+            defaultLog("Allowing service " + serviceName + ".");
             recordServiceStart(param, serviceName);
         }
 
@@ -336,7 +340,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
 
             } else {
                 //Allow the wakelock
-                defaultLog("Allowing Wakelock" + wakeLockName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
+                defaultLog("Allowing Wakelock " + wakeLockName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
                 mLastWakelockAttempts.put(wakeLockName, now);
                 recordAcquire(wakeLockName, lock);
             }
@@ -417,17 +421,8 @@ public class Wakelocks implements IXposedHookLoadPackage {
             long timeSinceLastUpdateStats = now - mLastUpdateStats;
 
             if (timeSinceLastUpdateStats > mUpdateStatsFrequency) {
-                Intent intent = new Intent(ActivityReceiver.SEND_STATS_ACTION);
-                //TODO:  add FLAG_RECEIVER_REGISTERED_ONLY_BEFORE_BOOT to the intent to avoid needing to catch
-                //      the IllegalStateException.  The flag value changed between 4.3 and 4.4  :/
-                intent.putExtra("stats", UnbounceStatsCollection.getInstance().getSerializableStats(UnbounceStatsCollection.STAT_CURRENT));
-                intent.putExtra("stat_type", UnbounceStatsCollection.STAT_CURRENT);
-                intent.putExtra("running_since", UnbounceStatsCollection.getInstance().getRunningSince());
-                try {
-                    context.sendBroadcast(intent);
-                } catch (IllegalStateException ise) {
-                    //Ignore.  This is because boot hasn't completed yet.
-                }
+                HashMap<String, BaseStats> statsToSend = UnbounceStatsCollection.getInstance().getSerializableStats(UnbounceStatsCollection.STAT_CURRENT);
+                sendStatsToActivity(context, statsToSend);
 
                 Intent intentPush = new Intent(ActivityReceiver.SEND_STATS_ACTION);
                 //TODO:  add FLAG_RECEIVER_REGISTERED_ONLY_BEFORE_BOOT to the intent to avoid needing to catch
@@ -442,6 +437,39 @@ public class Wakelocks implements IXposedHookLoadPackage {
 
                 mLastUpdateStats = now;
             }
+        }
+    }
+
+    private void sendStatsToActivity(Context context, HashMap<String, BaseStats> statsToSend) {
+        HashMap<String, BaseStats> incrementalSend = new HashMap<String, BaseStats>(50);
+        debugLog("Total stats to send: " + statsToSend.size());
+
+        for (Map.Entry<String, BaseStats> curStat : statsToSend.entrySet()) {
+            incrementalSend.put(curStat.getKey(), curStat.getValue());
+            if (incrementalSend.size() == 20) {
+                sendStatsBroadcast(context, incrementalSend);
+                incrementalSend.clear();
+            }
+        }
+        if (incrementalSend.size() > 0) {
+            //send the balance
+            sendStatsBroadcast(context, incrementalSend);
+        }
+
+    }
+
+    private void sendStatsBroadcast(Context context, HashMap<String, BaseStats> incrementalSend) {
+        debugLog("Incremental send: " + incrementalSend.size());
+        Intent intent = new Intent(ActivityReceiver.SEND_STATS_ACTION);
+        //TODO:  add FLAG_RECEIVER_REGISTERED_ONLY_BEFORE_BOOT to the intent to avoid needing to catch
+        //      the IllegalStateException.  The flag value changed between 4.3 and 4.4  :/
+        intent.putExtra("stats", incrementalSend);
+        intent.putExtra("stat_type", UnbounceStatsCollection.STAT_CURRENT);
+        intent.putExtra("running_since", UnbounceStatsCollection.getInstance().getRunningSince());
+        try {
+            context.sendBroadcast(intent);
+        } catch (IllegalStateException ise) {
+            //Ignore.  This is because boot hasn't completed yet.
         }
     }
 
@@ -526,7 +554,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
 
                 } else {
                     //Allow the wakelock
-                    defaultLog("Allowing Alarm" + alarmName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastAlarm);
+                    defaultLog("Allowing Alarm " + alarmName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastAlarm);
                     mLastAlarmAttempts.put(alarmName, now);
                     recordAlarmAcquire(context, alarmName,pi.getTargetPackage());
                 }
