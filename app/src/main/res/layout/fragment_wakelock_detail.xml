@@ -88,7 +88,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/desc_unknown"
                     style="?cardText"
-                    android:id="@+id/textViewWakelockDescription"
+                    android:id="@+id/textViewDescription"
                     android:alpha=".87" />
 
             </LinearLayout>
@@ -150,7 +150,7 @@
                 <Switch
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/switchWakelock"
+                android:id="@+id/switchStat"
                 android:alpha="1"/>
 
 
@@ -303,7 +303,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="fill_parent"
                         android:text="@string/stat_loading"
-                        android:id="@+id/textLocalWakeTimeAllowed"
+                        android:id="@+id/textLocalTimeAllowed"
                         android:gravity="center_vertical"
                         style="?cardTextValues"  />
 
@@ -327,7 +327,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="fill_parent"
                         android:text="@string/stat_loading"
-                        android:id="@+id/textLocalWakeTimeBlocked"
+                        android:id="@+id/textLocalTimeBlocked"
                         android:gravity="center_vertical"
                                                     style="?cardTextValues"  />
 
@@ -351,7 +351,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="fill_parent"
                         android:text="@string/stat_loading"
-                        android:id="@+id/textLocalWakeAcquired"
+                        android:id="@+id/textLocalAcquired"
                         android:gravity="center_vertical"
                                                     style="?cardTextValues"  />
 
@@ -375,7 +375,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="fill_parent"
                         android:text="@string/stat_loading"
-                        android:id="@+id/textLocalWakeBlocked"
+                        android:id="@+id/textLocalBlocked"
                         android:gravity="center_vertical"
                         style="?cardTextValues"  />
 

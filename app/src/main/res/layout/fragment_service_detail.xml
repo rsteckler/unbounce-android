@@ -1,0 +1,303 @@
+<com.ryansteckler.nlpunbounce.ExpandingLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/layoutDetails"
+    android:layout_height="match_parent"
+    tools:context="com.ryansteckler.nlpunbounce.ServiceDetailFragment"
+    android:visibility="visible"
+    android:background="?activityRootBackground">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:alpha="1">
+
+
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="?cardBackground"
+                android:layout_margin="@dimen/card_external_padding"
+                android:layout_marginTop="@dimen/activity_vertical_margin">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?background_three_shaded"
+                    android:paddingStart="@dimen/card_internal_padding"
+                    android:paddingEnd="@dimen/card_internal_padding"
+                    android:paddingLeft="@dimen/card_internal_padding"
+                    android:paddingRight="@dimen/card_internal_padding"
+                    android:paddingTop="@dimen/card_internal_padding"
+                    android:paddingBottom="@dimen/card_internal_padding">
+
+                    <ImageView
+                        android:layout_width="@dimen/header_icon_size"
+                        android:layout_height="@dimen/header_icon_size"
+                        android:src="@drawable/ic_description_three"
+                        android:contentDescription="@string/card_description_title" />
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:gravity="center_vertical"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/lb_description"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:enabled="false"
+                            android:layout_marginLeft="@dimen/pad_icon"
+                            android:layout_marginStart="@dimen/pad_icon"
+                            android:text="@string/card_description_title"
+                            style="@style/TextTitleLight" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/card_description_subtitle"
+                            android:layout_marginLeft="@dimen/pad_icon"
+                            android:layout_marginStart="@dimen/pad_icon"
+                            style="@style/TextCaptionLight" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:padding="@dimen/card_internal_padding">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/desc_unknown"
+                        style="?cardText"
+                        android:id="@+id/textViewDescription"
+                        android:alpha=".87" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="?cardBackground"
+                android:layout_margin="@dimen/card_external_padding"
+                android:layout_marginTop="@dimen/activity_vertical_margin">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?background_three_shaded"
+                    android:paddingLeft="@dimen/card_internal_padding"
+                    android:paddingTop="@dimen/card_internal_padding"
+                    android:paddingBottom="@dimen/card_internal_padding"
+                    android:paddingRight="@dimen/card_internal_padding">
+
+                    <ImageView
+                        android:layout_width="@dimen/header_icon_size"
+                        android:layout_height="@dimen/header_icon_size"
+                        android:src="@drawable/ic_settings_three"
+                        android:contentDescription="@string/title_settings" />
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:clipChildren="false">
+
+                        <TextView
+                            android:id="@+id/lb_settings"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:enabled="false"
+                            android:layout_marginLeft="@dimen/pad_icon"
+                            android:layout_marginStart="@dimen/pad_icon"
+                            android:text="@string/card_settings_title"
+                            style="@style/TextTitleLight" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/card_settings_subtitle_service"
+                            android:layout_marginLeft="@dimen/pad_icon"
+                            android:layout_marginStart="@dimen/pad_icon"
+                            style="@style/TextCaptionLight"
+                            android:singleLine="false"
+                            android:autoText="false"
+                            android:ellipsize="none" />
+
+                    </LinearLayout>
+
+                    <Switch
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/switchStat"
+                        android:alpha="1"
+                        android:textOff="@string/service_switch_allow"
+                        android:textOn="@string/service_switch_deny"
+                        android:checked="false" />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="?cardBackground"
+                android:layout_margin="@dimen/card_external_padding"
+                android:layout_marginTop="@dimen/activity_vertical_margin">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?background_three_shaded"
+                    android:paddingLeft="@dimen/card_internal_padding"
+                    android:paddingStart="@dimen/card_internal_padding"
+                    android:paddingTop="@dimen/card_internal_padding"
+                    android:paddingBottom="@dimen/card_internal_padding"
+                    tools:ignore="RtlSymmetry">
+
+                    <ImageView
+                        android:layout_width="@dimen/header_icon_size"
+                        android:layout_height="@dimen/header_icon_size"
+                        android:src="@drawable/ic_local_three"
+                        android:contentDescription="@string/card_local_title" />
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:gravity="center_vertical"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/lb_local"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:enabled="false"
+                            android:layout_marginLeft="@dimen/pad_icon"
+                            android:layout_marginStart="@dimen/pad_icon"
+                            android:text="@string/card_local_title"
+                            style="@style/TextTitleLight" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/card_local_subtitle"
+                            android:layout_marginLeft="@dimen/pad_icon"
+                            android:layout_marginStart="@dimen/pad_icon"
+                            style="@style/TextCaptionLight" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/card_button_reset"
+                        android:id="@+id/buttonResetStats"
+                        android:background="?reset_button_background"
+                        style="@style/TextButtonLight"
+                        android:paddingRight="@dimen/flat_button_long_padding"
+                        android:paddingTop="@dimen/card_external_padding"
+                        android:paddingBottom="@dimen/card_external_padding"
+                        android:paddingLeft="@dimen/card_external_padding"
+                        android:alpha="1"
+                        android:gravity="center_vertical"
+                        android:clickable="true"
+                        android:enabled="true"
+                        android:focusable="true"
+                        tools:ignore="RtlHardcoded" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:padding="@dimen/card_internal_padding">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        >
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent"
+                            android:text="@string/stat_service_allowed"
+                            android:gravity="center_vertical"
+                            android:layout_weight="1"
+                            style="?cardText"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="@string/stat_loading"
+                            android:id="@+id/textLocalAcquired"
+                            android:gravity="center_vertical"
+                            style="?cardTextValues" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        >
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent"
+                            android:text="@string/stat_service_blocked"
+                            android:gravity="center_vertical"
+                            android:layout_weight="1"
+                            style="?cardText"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text="@string/stat_loading"
+                            android:id="@+id/textLocalBlocked"
+                            android:gravity="center_vertical"
+                            style="?cardTextValues" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+</com.ryansteckler.nlpunbounce.ExpandingLayout>

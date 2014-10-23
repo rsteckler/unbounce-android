@@ -1,27 +1,18 @@
 package com.ryansteckler.nlpunbounce;
 
-import android.animation.Animator;
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
-import android.app.Activity;
-
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.View;
-import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.LinearInterpolator;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.analytics.GoogleAnalytics;
@@ -32,21 +23,17 @@ import com.ryansteckler.inappbilling.IabResult;
 import com.ryansteckler.inappbilling.Inventory;
 import com.ryansteckler.inappbilling.Purchase;
 import com.ryansteckler.nlpunbounce.helpers.LocaleHelper;
-import com.ryansteckler.nlpunbounce.helpers.RootHelper;
 import com.ryansteckler.nlpunbounce.helpers.ThemeHelper;
-
-import org.w3c.dom.Text;
-
-import java.io.File;
 
 
 public class MaterialSettingsActivity extends Activity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks,
         WakelocksFragment.OnFragmentInteractionListener,
-        WakelockDetailFragment.FragmentInteractionListener,
+        BaseDetailFragment.FragmentInteractionListener,
         HomeFragment.OnFragmentInteractionListener,
         AlarmsFragment.OnFragmentInteractionListener,
-        AlarmDetailFragment.FragmentInteractionListener {
+        ServicesFragment.OnFragmentInteractionListener
+    {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -105,12 +92,13 @@ public class MaterialSettingsActivity extends Activity
                         Log.d("NlpUnbounce", "IAP inventory exists");
 
                         if (inventory.hasPurchase("donate_1") ||
+                                inventory.hasPurchase("donate_2") ||
                                 inventory.hasPurchase("donate_5") ||
                                 inventory.hasPurchase("donate_10")) {
                             Log.d("NlpUnbounce", "IAP inventory contains a donation");
 
                             mIsPremium = true;
-                        };
+                        }
                     }
                     // update UI accordingly
                     if (isPremium()) {
@@ -253,6 +241,12 @@ public class MaterialSettingsActivity extends Activity
                     .addToBackStack("alarms")
                     .commit();
         } else if (position == 3) {
+            fragmentManager.beginTransaction()
+                    .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, android.R.animator.fade_in, android.R.animator.fade_out)
+                    .replace(R.id.container, ServicesFragment.newInstance(), "services")
+                    .addToBackStack("services")
+                    .commit();
+        } else if (position == 4) {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
         }
@@ -287,13 +281,13 @@ public class MaterialSettingsActivity extends Activity
     }
 
     @Override
-    public void onWakelockDetailSetTitle(String title) {
+    public void onDetailSetTitle(String title) {
         mTitle = title;
         restoreActionBar();
     }
 
     @Override
-    public void onWakelockDetailSetTaskerTitle(String title) {
+    public void onDetailSetTaskerTitle(String title) {
         //Do nothing because we're not in Tasker mode.
     }
 
@@ -318,18 +312,6 @@ public class MaterialSettingsActivity extends Activity
 
     }
 
-
-    @Override
-    public void onAlarmDetailSetTitle(String title) {
-        mTitle = title;
-        restoreActionBar();
-    }
-
-    @Override
-    public void onAlarmDetailSetTaskerTitle(String title) {
-        //Do nothing because we're not in Tasker mode.
-    }
-
     @Override
     public void onAlarmsSetTitle(String title) {
         mTitle = title;
@@ -343,4 +325,17 @@ public class MaterialSettingsActivity extends Activity
     }
 
 
-}
+        @Override
+        public void onSetTitle(String title) {
+            mTitle = title;
+            restoreActionBar();
+            animateActionbarBackground(getResources().getColor(R.color.background_four), 400);
+
+        }
+
+        @Override
+        public void onSetTaskerTitle(String title) {
+            //Do nothing because we're not in Tasker mode.
+
+        }
+    }

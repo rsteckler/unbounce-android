@@ -663,7 +663,7 @@
                                 <ImageView
                                     android:layout_width="@dimen/sub_icon_size"
                                     android:layout_height="@dimen/sub_icon_size"
-                                    android:src="@drawable/ic_donate_1"
+                                    android:src="@drawable/ic_donate_2"
                                     android:layout_gravity="end"
                                     android:contentDescription="@string/donate_1" />
 

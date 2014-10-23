@@ -86,9 +86,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text=""
+                        android:text="@string/desc_unknown"
                         style="?cardText"
-                        android:id="@+id/textViewAlarmDescription"
+                        android:id="@+id/textViewDescription"
                         android:alpha=".87" />
 
                 </LinearLayout>
@@ -150,7 +150,7 @@
                     <Switch
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/switchAlarm"
+                        android:id="@+id/switchStat"
                         android:alpha="1"/>
 
 
@@ -301,7 +301,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
                             android:text="@string/stat_loading"
-                            android:id="@+id/textLocalAlarmAcquired"
+                            android:id="@+id/textLocalAcquired"
                             android:gravity="center_vertical"
                             style="?cardTextValues" />
 
@@ -326,7 +326,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
                             android:text="@string/stat_loading"
-                            android:id="@+id/textLocalAlarmBlocked"
+                            android:id="@+id/textLocalBlocked"
                             android:gravity="center_vertical"
                             style="?cardTextValues" />
 

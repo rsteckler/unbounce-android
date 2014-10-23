@@ -2,20 +2,23 @@ package com.ryansteckler.nlpunbounce;
 
 import android.app.Activity;
 import android.app.FragmentManager;
+import android.app.ListFragment;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.app.ListFragment;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-
 import com.ryansteckler.nlpunbounce.adapters.AlarmsAdapter;
+import com.ryansteckler.nlpunbounce.helpers.SortWakeLocks;
 import com.ryansteckler.nlpunbounce.helpers.ThemeHelper;
 import com.ryansteckler.nlpunbounce.models.AlarmStats;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
@@ -35,6 +38,7 @@ public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.
     private boolean mReloadOnShow = false;
     private boolean mTaskerMode = false;
 
+    private int mSortBy = SortWakeLocks.SORT_COUNT;
     private final static String ARG_TASKER_MODE = "taskerMode";
 
     public static AlarmsFragment newInstance() {
@@ -71,9 +75,54 @@ public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.
         if (mListener != null)
             mListener.onAlarmsSetTitle(getResources().getString(R.string.title_alarms));
 
-        mAdapter.sort();
+        mAdapter.sort(mSortBy);
 
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        getActivity().getMenuInflater().inflate(R.menu.list, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        //If they pushed the sort toggle, switch the icon from duration<->count
+        if (id == R.id.action_sort) {
+            if (mSortBy == SortWakeLocks.SORT_COUNT) {
+                mSortBy = SortWakeLocks.SORT_ALPHA;
+            } else if (mSortBy == SortWakeLocks.SORT_ALPHA) {
+                mSortBy = SortWakeLocks.SORT_COUNT;
+            }
+
+            getActivity().invalidateOptionsMenu();
+
+            //Do the re-sort here
+            mAdapter.sort(mSortBy);
+
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        MenuItem sortItem = menu.findItem(R.id.action_sort);
+        if (sortItem != null) {
+            if (mSortBy == SortWakeLocks.SORT_COUNT) {
+                sortItem.setIcon(R.drawable.ic_action_sort_by_size);
+                sortItem.setTitle(R.string.action_sort_by_count);
+            } else if (mSortBy == SortWakeLocks.SORT_ALPHA) {
+                sortItem.setIcon(R.drawable.ic_sort_alpha);
+                sortItem.setTitle(R.string.action_sort_by_alpha);
+            }
+        }
+
+        super.onPrepareOptionsMenu(menu);
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -82,6 +131,8 @@ public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.
         if (getArguments() != null) {
             mTaskerMode = getArguments().getBoolean(ARG_TASKER_MODE);
         }
+
+        setHasOptionsMenu(true);
 
         mAdapter = new AlarmsAdapter(getActivity(), UnbounceStatsCollection.getInstance().toAlarmArrayList(getActivity()));
         setListAdapter(mAdapter);
@@ -123,7 +174,7 @@ public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
-                        v.setBackgroundResource(R.drawable.list_background_wakelock);
+                        v.setBackgroundResource(R.drawable.list_background_alarm);
                     }
                 },
                 400
@@ -153,7 +204,7 @@ public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.
         //Spin up the new Detail fragment.  Dig the custom animations.  Also put it on the back stack
         //so we can hit the back button and come back to the list.
         FragmentManager fragmentManager = getFragmentManager();
-        AlarmDetailFragment newFrag = AlarmDetailFragment.newInstance(startBounds.top, finalBounds.top, startBounds.bottom, finalBounds.bottom, (AlarmStats)mAdapter.getItem(position), mTaskerMode);
+        AlarmDetailFragment newFrag = (AlarmDetailFragment) new AlarmDetailFragment().newInstance(startBounds.top, finalBounds.top, startBounds.bottom, finalBounds.bottom, (AlarmStats)mAdapter.getItem(position), mTaskerMode);
         newFrag.attachClearListener(this);
         fragmentManager.beginTransaction()
                 .setCustomAnimations(R.animator.expand_in, R.animator.noop, R.animator.noop, R.animator.expand_out)
@@ -175,10 +226,10 @@ public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.
             }
             if (mReloadOnShow) {
                 mReloadOnShow = false;
-                //We may have had a change in the data for this wakelock (such as the user resetting the counters).
+                //We may have had a change in the data for this alarm (such as the user resetting the counters).
                 //Try updating it.
                 mAdapter = new AlarmsAdapter(getActivity(), UnbounceStatsCollection.getInstance().toAlarmArrayList(getActivity()));
-                mAdapter.sort();
+                mAdapter.sort(mSortBy);
                 setListAdapter(mAdapter);
             }
         }
@@ -186,7 +237,7 @@ public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.
     }
 
     @Override
-    public void onAlarmCleared() {
+    public void onCleared() {
         mReloadOnShow = true;
     }
 
