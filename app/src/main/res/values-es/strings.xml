@@ -109,6 +109,8 @@
 <string name="welcome_banner_title">"Bienvenido"</string>
 <string name="welcome_banner_text">"Puedes bloquear wakelocks para evitar que el teléfono se mantenga despierto, y además bloquear las alarmas para que deje de despertar. Ya hemos creado algunos ajustes de ahorro por defecto para ahorrar batería."</string>
 
+<!-- Don't translate this one  :) -->
+<string name="app_font_family">"Sans Serif"</string>
 <string name="settings_category_options">"Opciones"</string>
 <string name="settings_item_show_launcher">"Mostrar icono de launcher"</string>
 <string name="settings_item_choose_theme">"Elegir tema"</string>
@@ -158,8 +160,8 @@ Las compras dentro de la aplicación te permiten desbloquear el paquete Pro, el 
 <string name="welcome_banner_problem_none">"Hemos programado algunos ajustes de ahorro de batería. ¡Disfruta la nueva vida de tu bateria!"</string>
 <string name="welcome_banner_problem_service">"Parece que no tienes habilitado el modulo de Unbounce. Haz clic en SOLUCIONAR para asegurarte de que se activa, después reinicia el dispositivo."</string>
 <string name="welcome_banner_problem_xposed_running">"Xposed no instalado. Haz clic en SOLUCIONAR para instalarlo."</string>
-<string name="welcome_banner_problem_xposed_installed">"Xposed no está instalado. Xposed es necesario para Unbounce y muchas otras aplicaciones root. Una vez finalizada la descarga, haga clic en Instalar, luego abra otra vez Unbounce. Si desea obtener más información sobre Xposed, visita <![CDATA[<a href="http://www.tested.com/tech/android/460074-how-use-xposed-framework-android-extreme-customization/>Tested.com.</a>]]>"</string>
-<string name="welcome_banner_problem_root">"Parece que su dispositivo no está rooteado. Unbounce requiere un dispositivo con permisos root para funcionar correctamente. Si usted está interesado en rootearlo, por favor visite <![CDATA[<a href="http://www.techverse.net/how-to-root-your-android-phone-tablet-y-why/>Techverse.net</ a> ]]>para empezar."</string>
+<string name="welcome_banner_problem_xposed_installed">"Xposed no está instalado. Xposed es necesario para Unbounce y muchas otras aplicaciones root. Una vez finalizada la descarga, haga clic en Instalar, luego abra otra vez Unbounce. Si desea obtener más información sobre Xposed, visita &lt;a href=http://www.tested.com/tech/android/460074-how-use-xposed-framework-android-extreme-customization/&gt;Tested.com.&lt;/a&gt;"</string>
+<string name="welcome_banner_problem_root">"Parece que su dispositivo no está rooteado. Unbounce requiere un dispositivo con permisos root para funcionar correctamente. Si usted está interesado en rootearlo, por favor visite &lt;a href=http://www.techverse.net/how-to-root-your-android-phone-tablet-y-why/&gt;Techverse.net&lt;/ a&gt; para empezar."</string>
 <string name="welcome_banner_button_next">"SIGUIENTE"</string>
 <string name="welcome_banner_button_fixit">"SOLUCIONAR"</string>
 <string name="welcome_banner_button_exit">"SALIR"</string>
@@ -172,4 +174,14 @@ Las compras dentro de la aplicación te permiten desbloquear el paquete Pro, el 
 <string name="requires_root">"*** Necesita permisos ROOT ***"</string>
 <string name="installs_xposed">"Unbounce utiliza el Xposed Framework y lo instalará por usted si aún no lo tiene."</string>
 <string name="settings_category_code_credits">"Creditos de desarrollo."</string>
+<string name="title_services"></string>
+<string name="action_sort_by_alpha"></string>
+<string name="card_settings_subtitle_service"></string>
+<string name="tasker_choose_service"></string>
+<string name="alert_unknown_service_title"></string>
+<string name="alert_unknown_service_content"></string>
+<string name="stat_service_allowed"></string>
+<string name="stat_service_blocked"></string>
+<string name="service_switch_allow"></string>
+<string name="service_switch_deny"></string>
 </resources>
