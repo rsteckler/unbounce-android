@@ -10,7 +10,7 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:label="Unbounce"
+        android:label="@string/app_name"
         android:theme="@style/UnbounceThemeDark" >
         <meta-data
             android:name="xposedmodule"
@@ -20,7 +20,7 @@
             android:value="42" />
         <meta-data
             android:name="xposeddescription"
-            android:value="Control alarms and wakelocks" />
+            android:value="Tame your alarms, wakelocks and services" />
 
         <activity
             android:name=".SettingsActivity"
