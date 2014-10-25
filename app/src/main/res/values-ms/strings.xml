@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">"Lion Tamer"</string>
+  <string name="app_name">"Amplify"</string>
   <string name="version">"Versi"</string>
   <string name="title_activity_material_settings">"Halang Lantun"</string>
   <string name="title_home">"Laman Utama"</string>
@@ -30,14 +30,14 @@
   <string name="category_not_safe">"Lantunan tidak selamat untuk dihalang"</string>
   <string name="category_error">"Ralat"</string>
   <string name="alert_noiab_title">"Tiada ciri-ciri premium"</string>
-  <string name="alert_noiab_content">"Peranti anda tidak menyokong bil dalam aplikasi.  Anda tidak dapat membeli ciri-ciri premium Lion Tamer.  Ini mungkin disebabkan anda perlu mengemaskinikan aplikasi Google Play Store, atau disebabkan anda tinggal di dalam negara di mana bil dalam aplikasi dinyahdayakan."</string>
+  <string name="alert_noiab_content">"Peranti anda tidak menyokong bil dalam aplikasi.  Anda tidak dapat membeli ciri-ciri premium Amplify.  Ini mungkin disebabkan anda perlu mengemaskinikan aplikasi Google Play Store, atau disebabkan anda tinggal di dalam negara di mana bil dalam aplikasi dinyahdayakan."</string>
   <string name="dialog_ok">"OK"</string>
   <string name="tasker_on">"Buka"</string>
   <string name="tasker_off">"Tutup"</string>
   <string name="tasker_reset_stats">"Menetapkan semula statistik"</string>
   <string name="tasker_choose_wakelock">"Pilih penggera untuk disesuaikan."</string>
   <string name="tasker_choose_alarm">"Pilih penggera untuk disesuaikan."</string>
-  <string name="tasker_welcome">"Selamat datang ke pemalam Tasker untuk Lion Tamer."</string>
+  <string name="tasker_welcome">"Selamat datang ke pemalam Tasker untuk Amplify."</string>
   <string name="tasker_which_task">"Anda ingin menukarkan tetapan untuk kunci berjaga atau penggera, atau menetapkan semula statistik untuk peranti anda?"</string>
   <string name="tasker_task_wakelock">"TUKAR KUNCI BERJAGA"</string>
   <string name="tasker_task_alarm">"TUKAR PENGGERA"</string>
@@ -105,8 +105,9 @@
   <string name="donate_10">"Kegembiraan untuk tidak membawa pengecas."</string>
   <string name="donate_thank_you">"Terima kasih di atas derma anda.  Ia sangat berharga kepada saya.  Saya bekerja keras di dalam masa lapang saya yang terhad untuk melanjutkan bateri anda.  Dengan derma anda, anda telah membawa perbezaan kepada projek ini, dan telah membawa perubahan di dalam kehidupan keluarga saya.  Anda hebat."</string>
   <string name="donate_more_button">"BAGAIMANA SAYA BOLEH MENOLONG LAGI?"</string>
-  <string name="donate_more_text">"Ramai telah bertanya bagaiman mereka boleh menolong selepas menderma.  Butang-butang di bawah membolehkan anda derma lagi, tetapi tidak mengaktifkan apa-apa ciri tambahan.  Terima kasih kerana menyokong Lion Tamer!"</string>
+  <string name="donate_more_text">"Ramai telah bertanya bagaiman mereka boleh menolong selepas menderma.  Butang-butang di bawah membolehkan anda derma lagi, tetapi tidak mengaktifkan apa-apa ciri tambahan.  Terima kasih kerana menyokong Amplify!"</string>
   <string name="welcome_banner_title">"Selamat datang!"</string>
+  <string name="welcome_banner_text">"Anda boleh menghalang kunci berjaga daripada menghalang telefon anda tidur, dan menghalang penggera daripada membangunkannya.  Kami telah menetapkan beberapa tetapan untuk penjimatan bateri."</string>
   <string name="settings_category_options">"Pilihan"</string>
   <string name="settings_item_show_launcher">"Tunjuk ikon pelancar"</string>
   <string name="settings_item_choose_theme">"Pilih tema"</string>
@@ -114,6 +115,7 @@
   <string name="settings_item_global_stats_summary">"Hantar dan menerima statistik tanpa nama"</string>
   <string name="settings_item_reset_defaults_title">"Kembali kepada tetapan asal"</string>
   <string name="settings_item_reset_defaults_summary">"Tetapkan semula semua penggera dan kunci berjaga ke tetapan asal"</string>
+  <string name="settings_category_debug">"Nyahpepijat"</string>
   <string name="settings_item_author">"Pencipta: Ryan Steckler"</string>
   <string name="settings_item_logging_level">"Tahap"</string>
   <string name="settings_category_translation">"Terjemahan oleh"</string>
@@ -132,11 +134,11 @@ Petikan yang tidak diminta daripada pengguna-pengguna sebenar:
 Ia memberikan saya penggunaan lebih daripada 2 jam use dengan masa skrin lebih daripada 30 minit. Menyelamatkan saya daripada membeli bateri yang berharaga $25.
 Saya baru menderma 5 Dollar untuk menyokong karya ini.. Teruskan kerja yang baik
 Sememangnya menakjubkan
-[Lion Tamer] telah merevolusikan maksud sebenar urusan kunci berjaga
+[Amplify] telah merevolusikan maksud sebenar urusan kunci berjaga
 Modul ini hebat! Saya mendapat kurang daripada setengah peratus sejam penurunan bateri apabila telefon di dalam mod siap sedia. 
 ...dan banyak lagi.
 
-Lion Tamer memberi anda kawalan ke atas penggunaan bateri peranti anda dengan mengawal kerapan peranti anda boleh bangun, dan berapa lama ia boleh berjaga. Gunakan tetapan yang disyorkan untuk penjimatan bateri mudah, atau gunakan tetapan yang lebih dalam dan menyesuaikan setiap penggera dan kunci berjaga pada peranti anda.
+Amplify memberi anda kawalan ke atas penggunaan bateri peranti anda dengan mengawal kerapan peranti anda boleh bangun, dan berapa lama ia boleh berjaga. Gunakan tetapan yang disyorkan untuk penjimatan bateri mudah, atau gunakan tetapan yang lebih dalam dan menyesuaikan setiap penggera dan kunci berjaga pada peranti anda.
 Berikut adalah beberapa sorotan:
 
 - Satu reka bentuk yang indah, yang diilhamkan oleh prinsip Bahan Rekabentuk
@@ -158,10 +160,10 @@ Semoga [bateri] anda tahan lama!
   <string name="welcome_banner_checking_looks_great">"Semuanya nampak elok!"</string>
   <string name="welcome_banner_checking_uhoh">"Sesuatu masalah telah berlaku. Mari kita siasat dan betulkannya..."</string>
   <string name="welcome_banner_problem_none">"Kami telah menyediakan beberapa tetapan penjimatan bateri untuk anda. Sila menikmati kehidupan bateri baru anda!"</string>
-  <string name="welcome_banner_problem_service">"Nampaknya seperti anda belum lagi membolehkan modul Lion Tamer. Klik BETULKANNYA, pastikan Lion Tamer dipilih, kemudian mulakan peranti anda semula."</string>
+  <string name="welcome_banner_problem_service">"Nampaknya seperti anda belum lagi membolehkan modul Amplify. Klik BETULKANNYA, pastikan Amplify dipilih, kemudian mulakan peranti anda semula."</string>
   <string name="welcome_banner_problem_xposed_running">"Xposed tidak berjalan. Klik BETULKANNYA, kemudian klik Pasang/Kemaskini dan mulakan peranti anda semula."</string>
-  <string name="welcome_banner_problem_xposed_installed">"Xposed tidak dipasang. Xposed diperlukan untuk Lion Tamer dan banyak aplikasi lain yang memerlukan root. Sebaik sahaja muat turun selesai, klik PASANG, kemudian lancarkan Lion Tamer sekali lagi. Jika anda ingin mengetahui lebih lanjut mengenai Xposed, %1$s"</string>
-  <string name="welcome_banner_problem_root">"Nampaknya seperti peranti anda tidak mempunyai root. Lion Tamer memerlukan peranti yang mempunyai root untuk berfungsi dengan baik. Jika anda berminat untuk mendapatkan root, sila layari %1$s untuk mula. "</string>
+  <string name="welcome_banner_problem_xposed_installed">"Xposed tidak dipasang. Xposed diperlukan untuk Amplify dan banyak aplikasi lain yang memerlukan root. Sebaik sahaja muat turun selesai, klik PASANG, kemudian lancarkan Amplify sekali lagi. Jika anda ingin mengetahui lebih lanjut mengenai Xposed, %1$s"</string>
+  <string name="welcome_banner_problem_root">"Nampaknya seperti peranti anda tidak mempunyai root. Amplify memerlukan peranti yang mempunyai root untuk berfungsi dengan baik. Jika anda berminat untuk mendapatkan root, sila layari %1$s untuk mula. "</string>
   <string name="welcome_banner_button_next">"SETERUSNYA"</string>
   <string name="welcome_banner_button_fixit">"BETULKANNYA"</string>
   <string name="welcome_banner_button_exit">"KELUAR"</string>
@@ -170,8 +172,8 @@ Semoga [bateri] anda tahan lama!
   <string name="welcome_downloaded_xposed">"Muat turun selesai"</string>
   <string name="welcome_download_error_xposed">"Muat turun gagal. Sila cuba lagi kemudian."</string>
   <string name="download_xposed_title">"Memuat turun Xposed"</string>
-  <string name="download_xposed_description">"Diperlukan untuk Lion Tamer"</string>
+  <string name="download_xposed_description">"Diperlukan untuk Amplify"</string>
   <string name="requires_root">"*** Memerlukan peranti yang mempunyai root *** "</string>
-  <string name="installs_xposed">"Lion Tamer menggunakan Rangka Kerja Xposed dan akan memasangnya untuk anda jika ia belum lagi dipasang."</string>
+  <string name="installs_xposed">"Amplify menggunakan Rangka Kerja Xposed dan akan memasangnya untuk anda jika ia belum lagi dipasang."</string>
   <string name="settings_category_code_credits">"Kepujian Pemaju"</string>
 </resources>

@@ -17,8 +17,8 @@ android {
         applicationId 'com.ryansteckler.nlpunbounce'
         minSdkVersion 16
         targetSdkVersion 20
-        versionCode 34
-        versionName '1.5.1'
+        versionCode 35
+        versionName '2.0'
     }
     buildTypes {
         release {

@@ -1,62 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="app_name">"Amplify"</string>
   <!-- Fuzzy -->
-  <string name="app_name">"Lion Tamer"</string>
   <string name="version">"Wersja"</string>
+  <string name="title_activity_material_settings">"Amplify"</string>
   <!-- Fuzzy -->
-  <string name="title_activity_material_settings">"Lion Tamer"</string>
   <string name="title_home">"Główna"</string>
-  <!-- Fuzzy -->
   <string name="title_wakelocks">"Wybudzenia"</string>
+  <!-- Fuzzy -->
   <string name="title_alarms">"Alarmy"</string>
-  <!-- Fuzzy -->
   <string name="navigation_drawer_open">"Otwórz pasek nawigacji"</string>
+  <!-- Fuzzy -->
   <string name="navigation_drawer_close">"Zamknij pasek nawigacji"</string>
-  <!-- Fuzzy -->
   <string name="action_search">"Szukaj"</string>
+  <!-- Fuzzy -->
   <string name="action_sort_by_count">"Sortuj wg ilości"</string>
-  <!-- Fuzzy -->
   <string name="action_sort_by_time">"Sortuj wg czasu"</string>
+  <!-- Fuzzy -->
   <string name="action_settings">"Ustawienia"</string>
-  <!-- Fuzzy -->
   <string name="action_reset_stats">"Reset statystyk"</string>
+  <!-- Fuzzy -->
   <string name="card_donate_title">"KARMA"</string>
-  <!-- Fuzzy -->
   <string name="card_donate_subtitle">"Wspomóż dewelopera"</string>
+  <!-- Fuzzy -->
   <string name="card_global_title">"STAT. GLOBALNE"</string>
-  <!-- Fuzzy -->
   <string name="card_global_subtitle">"Wspólne statystyki"</string>
+  <!-- Fuzzy -->
   <string name="card_local_title">"TWOJE STATYSTYKI"</string>
-  <!-- Fuzzy -->
   <string name="card_local_subtitle">"Sprawdź swoje postępy"</string>
+  <!-- Fuzzy -->
   <string name="card_settings_title">"USTAWIENIA"</string>
-  <!-- Fuzzy -->
   <string name="card_settings_subtitle_alarm">"Kontroluj ten alarm"</string>
+  <!-- Fuzzy -->
   <string name="card_settings_subtitle_wakelock">"Kontroluj to wybudzenie"</string>
-  <!-- Fuzzy -->
   <string name="card_description_title">"OPIS"</string>
+  <!-- Fuzzy -->
   <string name="card_description_subtitle">"Czemu to zjada baterie?"</string>
-  <!-- Fuzzy -->
   <string name="category_unbounced">"Kontrolowane"</string>
+  <!-- Fuzzy -->
   <string name="category_safe">"Bezpieczne"</string>
-  <!-- Fuzzy -->
   <string name="category_unknown">"Nieznane"</string>
+  <!-- Fuzzy -->
   <string name="category_not_safe">"Niebezpieczne"</string>
-  <!-- Fuzzy -->
   <string name="category_error">"Błąd"</string>
+  <!-- Fuzzy -->
   <string name="alert_noiab_title">"Funkcje pro niedostępne"</string>
+  <string name="alert_noiab_content">"Twoje urządzenie nie obsługuję opcji App Billing. Nie jesteś w stanie kupic wersji Pro Amplify. Być może musisz zaktualizować Sklep Play lub mieszkasz w kraju gdzie opcja App Billing jest niedostępna"</string>
   <!-- Fuzzy -->
-  <string name="alert_noiab_content">"Twoje urządzenie nie obsługuję opcji App Billing. Nie jesteś w stanie kupic wersji Pro Lion Tamer. Być może musisz zaktualizować Sklep Play lub mieszkasz w kraju gdzie opcja App Billing jest niedostępna"</string>
   <string name="dialog_ok">"Ok"</string>
-  <!-- Fuzzy -->
   <string name="tasker_on">"Wł."</string>
+  <!-- Fuzzy -->
   <string name="tasker_off">"Wył."</string>
-  <!-- Fuzzy -->
   <string name="tasker_reset_stats">"Resetuj statystyki"</string>
-  <string name="tasker_choose_wakelock">"Dostosuj wybudzenie"</string>
   <!-- Fuzzy -->
+  <string name="tasker_choose_wakelock">"Dostosuj wybudzenie"</string>
   <string name="tasker_choose_alarm">"Dostosuj alarm"</string>
-  <string name="tasker_welcome">"Witaj we wtycze Tasker Lion Tamer"</string>
+  <string name="tasker_welcome">"Witaj we wtycze Tasker Amplify"</string>
   <!-- Fuzzy -->
   <string name="tasker_which_task">"Chcesz dokonać zmian dla Wybudzenia lub alarmu, a może chcesz zresetować ustawienia dla Twojego urządzenia?"</string>
   <string name="tasker_task_wakelock">"ZMIEŃ WYBUDZENIE"</string>
@@ -155,13 +154,13 @@
   <string name="donate_5">"Latte podczas odpisywania na pytania na forum"</string>
   <!-- Fuzzy -->
   <string name="donate_10">"Radość, kiedy nie nosisz ładowarki"</string>
-  <string name="donate_thank_you">"Dziękuję za Twoje wsparcie. To wiele dla mnie znaczy. Ciężko pracuję w wolnych chwilach aby zapewnić Ci lepszy czas pracy baterii. Jeśli wesprzesz ten projekt, dokonasz w nim zmiany, a zarazem zmienisz coś w moim rodzinnym życiu.
-Rządzisz."</string>
+  <string name="donate_thank_you">"Dziękuję za Twoje wsparcie. To wiele dla mnie znaczy. Ciężko pracuję w wolnych chwilach aby zapewnić Ci lepszy czas pracy baterii. Jeśli wesprzesz ten projekt, dokonasz w nim zmiany, a zarazem zmienisz coś w moim rodzinnym życiu. Rządzisz."</string>
   <!-- Fuzzy -->
   <string name="donate_more_button">"JAK MOGĘ POMÓC DALEJ?"</string>
-  <string name="donate_more_text">"Ludzie pytają jak mogą pomóc oprócz zwykłej darowizny. Przycisk poniżej pozwoli Ci przekazać dodatkowa darowiznę lecz nie zapewni juz dodatkowych opcji. Dziękuję bardzo za wspieranie Lion Tamer!"</string>
+  <string name="donate_more_text">"Ludzie pytają jak mogą pomóc oprócz zwykłej darowizny. Przycisk poniżej pozwoli Ci przekazać dodatkowa darowiznę lecz nie zapewni juz dodatkowych opcji. Dziękuję bardzo za wspieranie Amplify!"</string>
   <!-- Fuzzy -->
   <string name="welcome_banner_title">"Witaj!"</string>
+  <string name="welcome_banner_text">"Możesz zablokować wybudzenia aby powstrzymac telefon od bycia aktywnym oraz blokuj alarmy aby nie były wybudzane w pierwszej kolejności. Domyślnie ustawiliśmy już kilka opcji za Ciebie."</string>
   <string name="settings_category_options">"opcje"</string>
   <!-- Fuzzy -->
   <string name="settings_item_show_launcher">"Pokaż ikonę launchera"</string>
@@ -173,6 +172,7 @@ Rządzisz."</string>
   <string name="settings_item_reset_defaults_title">"Reset do ustawień fabrycznych"</string>
   <string name="settings_item_reset_defaults_summary">"Resetuj alarmy i wyburzenia do ustawień fabrycznych"</string>
   <!-- Fuzzy -->
+  <string name="settings_category_debug">"Debuguj"</string>
   <string name="settings_item_author">"Autor: Ryan Steckler"</string>
   <!-- Fuzzy -->
   <string name="settings_item_logging_level">"Poziom logowania"</string>
@@ -189,17 +189,16 @@ Rządzisz."</string>
   <!-- Fuzzy -->
   <string name="settings_item_force_english_summary">"Zamień język systemu na Angielski"</string>
   <string name="playstore_short_description">"Moc baterii dla wszystkich!"</string>
-  <!-- Fuzzy -->
   <string name="playstore_long_description">"***Wymagany Root ***
 
 Dobrowolne zacytowania od użytkowników:
 \"Dodało mi to około 2h więcej czasu pracy przy 30min dłuższego działania ekranu. Oszczędziłem 25$ na nowej baterii.\"
 \"Właśnie wsparłem 5 dolarów ten świetny projekt. Oby tak dalej\"
 \"Po prostu fenomenalne\"
-[Lion Tamer] zrewolucjonizował sposób zarzadzania wybudzeniami.\"
+[Amplify] zrewolucjonizował sposób zarzadzania wybudzeniami.\"
 \"Ten moduł jest świetny. Myślę, że około 0,5%/h zmniejszyło się drenowanie baterii w stanie spoczynku.\"
 ... Oraz wiele innych komentarzy.
-Lion Tamer pozwala Ci na kontrolowanie jak często Twój telefon wybudza się i jak szybko zjada baterię. Używaj rekomendowanych ustawień dla łatwego oszczędzania baterii lub sprawdzaj i wprowadzaj własne ustawienia kontroli wybudzeń i alarmów na Twoim urządzeniu.
+Amplify pozwala Ci na kontrolowanie jak często Twój telefon wybudza się i jak szybko zjada baterię. Używaj rekomendowanych ustawień dla łatwego oszczędzania baterii lub sprawdzaj i wprowadzaj własne ustawienia kontroli wybudzeń i alarmów na Twoim urządzeniu.
 Kilka głównych funkcji:
 -wspaniale zaprojektowany wygląd
 - stabilny silnik blokowania
@@ -211,22 +210,21 @@ Kilka głównych funkcji:
 Funkcja zakupu w aplikacji pozwoli Ci na odblokowanie funkcji Pro które pozwolą Ci na pełną kontrolę każdego wybudzenia i alarmu na Twoim urządzeniu. Bez paczki Pro możesz kontrolować największe zjadacze baterii: NlpCollectorWakeLock, ALARM_WAKEUP_LOCATOR oraz ALARM_WAKE_ACTIVITY_DETECTION.
 
 Życzę dłuższej pracy na baterii!"</string>
-  <string name="welcome_banner_welcome">"Witaj!"</string>
   <!-- Fuzzy -->
-  <string name="welcome_banner_checking_service">"Sprawdzanie, czy Lion Tamer działa..."</string>
-  <string name="welcome_banner_checking_xposed">"Sprawdzanie instalacji Lion Tamer..."</string>
+  <string name="welcome_banner_welcome">"Witaj!"</string>
+  <string name="welcome_banner_checking_service">"Sprawdzanie, czy Amplify działa..."</string>
+  <string name="welcome_banner_checking_xposed">"Sprawdzanie instalacji Amplify..."</string>
   <!-- Fuzzy -->
   <string name="welcome_banner_checking_root">"Sprawdzanie roota..."</string>
   <string name="welcome_banner_checking_looks_great">"Wygląda, że wszystko ok!"</string>
   <!-- Fuzzy -->
   <string name="welcome_banner_checking_uhoh">"Coś poszło nie tak. Zobaczmy co trzeba naprawić..."</string>
   <string name="welcome_banner_problem_none">"Ustawiliśmy kilka rzeczy za Ciebie w celu wydłużenia pracy baterii. Powodzenia!"</string>
+  <string name="welcome_banner_problem_service">"Wygląda, że nie włączyłeś modułu Amplify. Naciśnij NAPRAW TO, sprawdź zaznaczenie modułu i uruchom ponownie."</string>
   <!-- Fuzzy -->
-  <string name="welcome_banner_problem_service">"Wygląda, że nie włączyłeś modułu Lion Tamer. Naciśnij NAPRAW TO, sprawdź zaznaczenie modułu i uruchom ponownie."</string>
   <string name="welcome_banner_problem_xposed_running">"Xposed nie działa. Naciśnij NAPRAW TO, następnie instaluj/aktualizuj i uruchom ponownie."</string>
-  <!-- Fuzzy -->
-  <string name="welcome_banner_problem_xposed_installed">"Xposed nie jest zainstalowany. Lion Tamer wymaga Xposed i innych aplikacji wymagających roota. Po pobraniu naciśnij INSTALLUJ i uruchom Lion Tamer ponownie. Jeśli chcesz się dowiedzieć więcej:  %1$s "</string>
-  <string name="welcome_banner_problem_root">"Wygląda, że Twoje urządzenie nie ma roota. Lion Tamer wymaga roota do poprawnego działania. Jeśli chcesz zrootować swój telefon sprawdź:  %1$s."</string>
+  <string name="welcome_banner_problem_xposed_installed">"Xposed nie jest zainstalowany. Amplify wymaga Xposed i innych aplikacji wymagających roota. Po pobraniu naciśnij INSTALLUJ i uruchom Amplify ponownie. Jeśli chcesz się dowiedzieć więcej:  %1$s "</string>
+  <string name="welcome_banner_problem_root">"Wygląda, że Twoje urządzenie nie ma roota. Amplify wymaga roota do poprawnego działania. Jeśli chcesz zrootować swój telefon sprawdź:  %1$s."</string>
   <!-- Fuzzy -->
   <string name="welcome_banner_button_next">"DALEJ"</string>
   <string name="welcome_banner_button_fixit">"NAPRAW"</string>
@@ -240,9 +238,18 @@ Funkcja zakupu w aplikacji pozwoli Ci na odblokowanie funkcji Pro które pozwol�
   <string name="welcome_download_error_xposed">"Pobieranie nieudane. Spróbuj później."</string>
   <string name="download_xposed_title">"Pobieranie Xposed"</string>
   <!-- Fuzzy -->
-  <string name="download_xposed_description">"Wymagania Lion Tamer"</string>
+  <string name="download_xposed_description">"Wymagania Amplify"</string>
   <string name="requires_root">"***Wymaga roota***"</string>
+  <string name="installs_xposed">"Amplify używa Xposed Framework, jeśli go nie masz, zainstaluje się automatycznie."</string>
   <!-- Fuzzy -->
-  <string name="installs_xposed">"Lion Tamer używa Xposed Framework, jeśli go nie masz, zainstaluje się automatycznie."</string>
   <string name="settings_category_code_credits">"Przypisy Twórcy"</string>
+  <string name="title_services">"Usługi"</string>
+  <!-- Fuzzy -->
+  <string name="card_settings_subtitle_service">"Kontroluj usługę"</string>
+  <!-- Fuzzy -->
+  <string name="stat_service_allowed">"Usługa uruchomiona"</string>
+  <string name="stat_service_blocked">"Usługa zablokowna"</string>
+  <!-- Fuzzy -->
+  <string name="service_switch_allow">"Pozwól"</string>
+  <string name="service_switch_deny">"Odmów"</string>
 </resources>

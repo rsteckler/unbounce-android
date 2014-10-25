@@ -37,8 +37,8 @@ import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 
 public class Wakelocks implements IXposedHookLoadPackage {
 
-    private static final String TAG = "Unbounce: ";
-    private static final String VERSION = "1.5.1"; //This needs to be pulled from the manifest or gradle build.
+    private static final String TAG = "Amplify: ";
+    private static final String VERSION = "2.0"; //This needs to be pulled from the manifest or gradle build.
     private HashMap<String, Long> mLastWakelockAttempts = null; //The last time each wakelock was allowed.
     private HashMap<String, Long> mLastAlarmAttempts = null; //The last time each alarm was allowed.
     private HashMap<String, Long> mLastServiceAttempts = null; //The last time each wakelock was allowed.

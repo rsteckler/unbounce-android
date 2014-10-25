@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">"Lion Tamer"</string>
+  <string name="app_name">"Amplify"</string>
   <string name="version">"Versi"</string>
-  <string name="title_activity_material_settings">"Lion Tamer"</string>
+  <string name="title_activity_material_settings">"Amplify"</string>
   <string name="title_home">"Halaman Utama"</string>
   <string name="title_wakelocks">"Wakelocks"</string>
   <string name="title_alarms">"Alarms"</string>
@@ -25,33 +25,33 @@
   <string name="card_settings_subtitle_wakelock">"Kontrol wakelock ini"</string>
   <string name="card_description_title">"Deskripsi"</string>
   <string name="card_description_subtitle">"Mengapa hal ini memakan baterai Anda?"</string>
-  <string name="category_unbounced">"Tamed"</string>
-  <string name="category_safe">"Aman untuk di Tame"</string>
+  <string name="category_unbounced">"Limited"</string>
+  <string name="category_safe">"Aman untuk di limit"</string>
   <string name="category_unknown">"Tidak diketahui"</string>
-  <string name="category_not_safe">"Tidak aman untuk di Tame"</string>
+  <string name="category_not_safe">"Tidak aman untuk di limit"</string>
   <string name="category_error">"Kesalahan"</string>
   <string name="alert_noiab_title">"Fitur tambahan tidak tersedia"</string>
-  <string name="alert_noiab_content">"Perangkat Anda tidak mendukung di aplikasi penagihan. Anda tidak akan dapat membeli fitur tambahan dari Lion Tamer. Ini bisa jadi karena Anda perlu memperbarui aplikasi Google Play Sore, atau karena Anda tinggal di negara di mana aplikasi billing dinonaktifkan."</string>
+  <string name="alert_noiab_content">"Perangkat Anda tidak mendukung di aplikasi penagihan. Anda tidak akan dapat membeli fitur tambahan dari Amplify. Ini bisa jadi karena Anda perlu memperbarui aplikasi Google Play Sore, atau karena Anda tinggal di negara di mana aplikasi billing dinonaktifkan."</string>
   <string name="dialog_ok">"OK"</string>
   <string name="tasker_on">"Hidup"</string>
   <string name="tasker_off">"Mati"</string>
   <string name="tasker_reset_stats">"Atur ulang statistik"</string>
   <string name="tasker_choose_wakelock">"Pilih wakelock untuk menyesuaikan."</string>
   <string name="tasker_choose_alarm">"Pilih alarm untuk menyesuaikan."</string>
-  <string name="tasker_welcome">"Selamat Datang di Lion Tamer Tasker Plugin"</string>
+  <string name="tasker_welcome">"Selamat Datang di Amplify Tasker Plugin"</string>
   <string name="tasker_which_task">"Apakah Anda ingin mengubah pengaturan untuk Wakelock atau Alarm, atau apakah Anda ingin me-reset statistik untuk perangkat Anda?"</string>
   <string name="tasker_task_wakelock">"GANTI WAKELOCK"</string>
   <string name="tasker_task_alarm">"GANTI ALARM"</string>
   <string name="tasker_task_reset">"ATUR ULANG STATISTIK"</string>
   <string name="alert_nopro_title">"Ini adalah fitur tambahan"</string>
-  <string name="alert_nopro_content">"Untuk Tame wakelocks non-standar dan alarm, Anda perlu membeli paket donasi."</string>
-  <string name="alert_unknown_alarm_title">"Tame alarm tidak diketahui?"</string>
-  <string name="alert_unknown_alarm_content">"Alarm ini belum terbukti aman untuk Tame. Apakah Anda ingin Tame ini?"</string>
-  <string name="dialog_unbounce">"TAME"</string>
+  <string name="alert_nopro_content">"Untuk limit wakelocks non-standar dan alarm, Anda perlu membeli paket donasi."</string>
+  <string name="alert_unknown_alarm_title">"Limit alarm tidak diketahui?"</string>
+  <string name="alert_unknown_alarm_content">"Alarm ini belum terbukti aman untuk limit. Apakah Anda ingin limit ini?"</string>
+  <string name="dialog_unbounce">"LIMIT"</string>
   <string name="dialog_cancel">"BATAL"</string>
   <string name="tasker_choose_settings">"Pilih pengaturan yang anda inginkan"</string>
-  <string name="alert_unknown_wakelock_title">"Tame wakelock tidak diketahui?"</string>
-  <string name="alert_unknown_wakelock_content">"Wakelock ini belum terbukti aman untuk Tame. Apakah Anda ingin Tame ini?"</string>
+  <string name="alert_unknown_wakelock_title">"Limit wakelock tidak diketahui?"</string>
+  <string name="alert_unknown_wakelock_content">"Wakelock ini belum terbukti aman untuk limit. Apakah Anda ingin limit ini?"</string>
   <string name="dialog_delete">"HAPUS"</string>
   <string name="alert_delete_stats_title">"Hapus semua statistik?"</string>
   <string name="alert_delete_stats_content">"Ini akan mengatur ulang statistik untuk semua wakelocks dan alarm anda!"</string>
@@ -61,12 +61,12 @@
   <string name="dialog_reset">"ATUR ULANG"</string>
   <string name="reset_settings_confirmation">"Pengaturan telah dikembalikan ke semula."</string>
   <string name="dialog_save">"SIMPAN"</string>
-  <string name="desc_unknown">"Kami tidak memiliki informasi tentang acara ini, namun. Hal ini mungkin tidak aman untuk Tame. Hanya melakukannya jika Anda tahu apa yang Anda lakukan dan Anda tahu bagaimana menonaktifkan Xposed saat boot. Kami bekerja keras untuk mengumpulkan informasi tentang setiap wakelock dan alarm utama. Mohon bersabar sementara kami mengumpulkan informasi ini"</string>
-  <string name="desc_nlpwakelock">"NlpWakeLock aman untuk Tame. Ini digunakan oleh Layanan Google Play untuk menentukan lokasi anda menggunakan kombinasi jaringan menara dan WiFi. Setelah memiliki lokasi Anda, itu dapat mengakses lokasi Anda tanpa menggunakan GPS. Pengaturan yang direkomendasikan adalah antara 180 dan 600 detik."</string>
-  <string name="desc_nlpcollectorwakelock">"NlpCollectorWakeLock aman untuk Tame. Ini digunakan oleh Layanan Google Play untuk menentukan lokasi anda menggunakan kombinasi jaringan menara dan WiFi. Setelah memiliki lokasi Anda, itu dapat mengakses lokasi Anda tanpa menggunakan GPS. Pengaturan yang direkomendasikan adalah antara 180 dan 600 detik."</string>
+  <string name="desc_unknown">"Kami tidak memiliki informasi tentang acara ini, namun. Hal ini mungkin tidak aman untuk limit. Hanya melakukannya jika Anda tahu apa yang Anda lakukan dan Anda tahu bagaimana menonaktifkan Xposed saat boot. Kami bekerja keras untuk mengumpulkan informasi tentang setiap wakelock dan alarm utama. Mohon bersabar sementara kami mengumpulkan informasi ini"</string>
+  <string name="desc_nlpwakelock">"NlpWakeLock aman untuk limit. Ini digunakan oleh Layanan Google Play untuk menentukan lokasi anda menggunakan kombinasi jaringan menara dan WiFi. Setelah memiliki lokasi Anda, itu dapat mengakses lokasi Anda tanpa menggunakan GPS. Pengaturan yang direkomendasikan adalah antara 180 dan 600 detik."</string>
+  <string name="desc_nlpcollectorwakelock">"NlpCollectorWakeLock aman untuk limit. Ini digunakan oleh Layanan Google Play untuk menentukan lokasi anda menggunakan kombinasi jaringan menara dan WiFi. Setelah memiliki lokasi Anda, itu dapat mengakses lokasi Anda tanpa menggunakan GPS. Pengaturan yang direkomendasikan adalah antara 180 dan 600 detik."</string>
   <string name="desc_alarmmanager">"Ini menyediakan akses ke layanan sistem alarm. Ketika alarm berbunyi, Intent yang telah terdaftar untuk itu disiarkan oleh sistem, secara otomatis memulai aplikasi target jika tidak sudah berjalan. Alarm Terdaftar dipertahankan saat perangkat sedang tidur (dan opsional dapat membangunkan perangkat jika mereka pergi selama waktu itu), tapi akan dihapus jika dimatikan."</string>
   <string name="desc_audiooffload">"Audio playback ketika layar dimatikan. Jika Anda menonaktifkan ini, Anda tidak akan memiliki audio latar belakang atau musik bisa bermain ketika layar Anda tidak aktif."</string>
-  <string name="desc_activitymanagerlauncher">"Berinteraksi dengan keseluruhan kegiatan berjalan di sistem. Jika Anda Tame ini, tidak akan bekerja dengan baik."</string>
+  <string name="desc_activitymanagerlauncher">"Berinteraksi dengan keseluruhan kegiatan berjalan di sistem. Jika Anda limit ini, tidak akan bekerja dengan baik."</string>
   <string name="desc_windowmanager">"Ini adalah tingkat WakeLock Sistem Android. Antarmuka aplikasi yang digunakan untuk berbicara dengan window manager - yang berarti, aplikasi akan memerlukan WindowManager mengunci setiap kali mereka harus ditampilkan pada layar."</string>
   <string name="desc_rilj">"RILJ membuat perangkat Anda terjaga sementara tindakan telepon pengolahan, seperti panggilan telepon dan komunikasi menara seluler."</string>
   <string name="donate_1">"Secangkir kopi sementara saya menulis kode"</string>
@@ -80,6 +80,7 @@
   <string name="settings_item_global_stats_summary">"Mengirim dan menerima statistik anonim"</string>
   <string name="settings_item_reset_defaults_title">"Atur ulang ke pengaturan semula"</string>
   <string name="settings_item_reset_defaults_summary">"Atur ulang semua alarm dan wakelocks ke pengaturan semula"</string>
+  <string name="settings_category_debug">"Debug"</string>
   <string name="settings_item_author">"Karya: Ryan Steckler"</string>
   <string name="settings_item_logging_level">"Tingkat logging"</string>
   <string name="settings_category_translation">"Penerjemah"</string>
@@ -97,18 +98,18 @@ Kutipan yang tidak diminta dari pengguna yang sebenarnya :
 Ini memberi saya sekitar 2 jam lebih digunakan dengan 30 menit lagi layar tepat waktu. Menyelamatkan saya dari membeli $25 baterai. 
 Hanya menyumbangkan 5 Dollar untuk mendukung karya ini. Menjaga pekerjaan yang baik 
 Cukup menakjubkan 
-[Lion Tamer] hanya merevolusi makna sebenarnya dari wakelock pengelolaan
+[Amplify] hanya merevolusi makna sebenarnya dari wakelock pengelolaan
 Modul ini luarbiasa! Saya mendapatkan kurang dari menguras setengah persen per jam untuk layar siaga. 
 ... dan masih banyak lagi. 
 
-Lion Tamer menempatkan Anda mengendalikan bagaimana perangkat menggunakan baterai dengan mengendalikan seberapa sering perangkat Anda bisa bangun, dan berapa lama dapat tetap terjaga. Gunakan pengaturan yang direkomendasikan untuk penghematan baterai, atau menggali dan menyesuaikan setiap alarm dan wakelock pada perangkat Anda.
+Amplify menempatkan Anda mengendalikan bagaimana perangkat menggunakan baterai dengan mengendalikan seberapa sering perangkat Anda bisa bangun, dan berapa lama dapat tetap terjaga. Gunakan pengaturan yang direkomendasikan untuk penghematan baterai, atau menggali dan menyesuaikan setiap alarm dan wakelock pada perangkat Anda.
 Berikut adalah beberapa ulasan: 
 
 - Sebuah desain yang indah, terinspirasi oleh prinsip-prinsip Material Desain 
 - Sebuah mesin memblokir stabil 
 - Pengukuran Komprehensif waktu terbuang dan waktu diselamatkan karena alarm dan wakelocks 
 - Sebuah daftar tumbuh deskripsi dari alarm dan wakelocks dalam bahasa Inggris (dan bahasa lainnya segera hadir!) 
-- Sebuah paket baru tambahan yang memungkinkan Anda Lion Tamer apapun alarm atau wakelock pada perangkat
+- Sebuah paket baru tambahan yang memungkinkan Anda Amplify apapun alarm atau wakelock pada perangkat
 - Sebuah basis kode sumber terbuka sehingga Anda dapat melihat cara kerjanya, atau membangun sendiri 
 
 

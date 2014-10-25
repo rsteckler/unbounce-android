@@ -967,7 +967,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/textWelcomeProblemDescription"
                     style="@style/TextTitleLight"
-                    android:text="It looks like your device isn't rooted.  Unfortunately, Unbounce requires a rooted device to function.  For more information on rooting your device, check here, on howtoroot.com"
+                    android:text="It looks like your device isn't rooted.  Unfortunately, requires a rooted device to function.  For more information on rooting your device, check here, on howtoroot.com"
                     android:linksClickable="true"
                     android:visibility="visible" />
 

@@ -6,6 +6,8 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -132,6 +134,18 @@ public abstract class BaseDetailFragment extends Fragment {
 
         TextView description = (TextView)view.findViewById(R.id.textViewDescription);
         String descriptionText = EventLookup.getDescription(getActivity(), mStat.getName());
+
+        PackageManager pm = getActivity().getPackageManager();
+        ApplicationInfo ai;
+        try {
+            ai = pm.getApplicationInfo( mStat.getmPackage(), 0);
+        } catch (final PackageManager.NameNotFoundException e) {
+            ai = null;
+        }
+        final String applicationName = (String) (ai != null ? pm.getApplicationLabel(ai) : "Unknown");
+
+        descriptionText = descriptionText + "\n\n"+"Package Name: " + applicationName;
+
         description.setText(descriptionText);
         mKnownSafe = EventLookup.isSafe(mStat.getName()) == EventLookup.SAFE;
         mFree = EventLookup.isFree(mStat.getName());
