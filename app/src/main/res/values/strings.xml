@@ -1,179 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources   xmlns:tools="http://schemas.android.com/tools"
-    tools:ignore="MissingTranslation" >
+<resources>
+<string name="app_name">"Lion Tamer"</string>
+<string name="version">"Version"</string>
+<string name="title_activity_material_settings">"Lion Tamer"</string>
+<string name="title_home">"Home"</string>
+<string name="title_wakelocks">"Wakelocks"</string>
+<string name="title_alarms">"Alarms"</string>
+<string name="navigation_drawer_open">"Open navigation drawer"</string>
+<string name="navigation_drawer_close">"Close navigation drawer"</string>
+<string name="action_search">"Search"</string>
+<string name="action_sort_by_count">"Sort by count"</string>
+<string name="action_sort_by_time">"Sort by time"</string>
+<string name="action_settings">"Settings"</string>
+<string name="action_reset_stats">"Reset Stats"</string>
+<string name="card_donate_title">"KARMA"</string>
+<string name="card_donate_subtitle">"Support your local developer"</string>
+<string name="card_global_title">"GLOBAL STATS"</string>
+<string name="card_global_subtitle">"Our combined stats"</string>
+<string name="card_local_title">"DEVICE STATS"</string>
+<string name="card_local_subtitle">"View your progress"</string>
+<string name="card_settings_title">"SETTINGS"</string>
+<string name="card_settings_subtitle_alarm">"Control this alarm"</string>
+<string name="card_settings_subtitle_wakelock">"Control this wakelock"</string>
+<string name="card_description_title">"DESCRIPTION"</string>
+<string name="card_description_subtitle">"Why is this thing eating your battery?"</string>
+<string name="category_unbounced">"Tamed"</string>
+<string name="category_safe">"Safe to Tame"</string>
+<string name="category_unknown">"Unknown"</string>
+<string name="category_not_safe">"Not safe to Tame"</string>
+<string name="category_error">"Error"</string>
+<string name="alert_noiab_title">"Pro features unavailable"</string>
+<string name="alert_noiab_content">"Your device doesn't support In App Billing.  You won't be able to purchase the Pro features of Lion Tamer.  This could be because you need to update your Google Play Store application, or because you live in a country where In App Billing is disabled."</string>
+<string name="dialog_ok">"OK"</string>
+<string name="tasker_on">"On"</string>
+<string name="tasker_off">"Off"</string>
+<string name="tasker_reset_stats">"Reset stats"</string>
+<string name="tasker_choose_wakelock">"Choose the wakelock to adjust."</string>
+<string name="tasker_choose_alarm">"Choose the alarm to adjust."</string>
+<string name="tasker_welcome">"Welcome to Lion Tamer's Tasker plugin."</string>
+<string name="tasker_which_task">"Do you want to change settings for a Wakelock or an Alarm, or do you want to reset stats for your device?"</string>
+<string name="tasker_task_wakelock">"CHANGE WAKELOCK"</string>
+<string name="tasker_task_alarm">"CHANGE ALARM"</string>
+<string name="tasker_task_reset">"RESET STATS"</string>
+<string name="alert_nopro_title">"This is a Pro feature"</string>
+<string name="alert_nopro_content">"To Tame non-standard wakelocks and alarms, you need to purchase a donation package."</string>
+<string name="alert_unknown_alarm_title">"Tame unknown alarm?"</string>
+<string name="alert_unknown_alarm_content">"This alarm hasn't been proven safe to Tame.  Would you like to Tame it anyway?"</string>
+<string name="dialog_unbounce">"TAME"</string>
+<string name="dialog_cancel">"CANCEL"</string>
+<string name="tasker_choose_settings">"Choose the settings you want."</string>
+<string name="alert_unknown_wakelock_title">"Tame unknown wakelock?"</string>
+<string name="alert_unknown_wakelock_content">"This wakelock hasn't been proven safe to Tame.  Would you like to Tame it anyway?"</string>
+<string name="dialog_delete">"DELETE"</string>
+<string name="alert_delete_stats_title">"Delete all stats?"</string>
+<string name="alert_delete_stats_content">"This will reset stats for all of your wakelocks and alarms!"</string>
+<string name="title_settings">"Settings"</string>
+<string name="alert_reset_settings_title">"Reset to defaults?"</string>
+<string name="alert_reset_settings_content">"This will reset all of the settings for alarms and wakelocks!"</string>
+<string name="dialog_reset">"RESET"</string>
+<string name="reset_settings_confirmation">"Settings have been reset to defaults."</string>
+<string name="dialog_save">"SAVE"</string>
+<string name="desc_unknown">"We don't have any information about this event, yet.  This may not be safe to Tame.  Only do so if you know what you're doing and you know how to disable Xposed at boot.  We're working hard to collect information about every major wakelock and alarm.  Please be patient while we collect this information."</string>
+<string name="desc_nlpwakelock">"NlpWakeLock is safe to Tame.  It's used by Google Play Services to determine your rough location using a combination of cell towers and WiFi.  Once it has your location, it stores it locally so other apps, like Google Now, can access your location without using GPS or getting a new fix.  Recommended settings are between 180 and 600 seconds."</string>
+<string name="desc_nlpcollectorwakelock">"NlpCollectorWakeLock is safe to Tame.  It's used by Google Play Services to determine your rough location using a combination of cell towers and wifi.  Once it has your location, it sends it back to Google so they can expand their database of WiFi locations.  Recommended settings are between 180 and 600 seconds."</string>
+<string name="desc_alarmmanager">"This provides access to the system alarm services. When an alarm goes off, the Intent that had been registered for it is broadcast by the system, automatically starting the target application if it is not already running. Registered alarms are retained while the device is asleep (and can optionally wake the device up if they go off during that time), but will be cleared if it is turned off and rebooted."</string>
+<string name="desc_audiooffload">"Audio playback when your screen is turned off.  If you disable this, you won't have background audio or music able to play when your screen is off."</string>
+<string name="desc_activitymanagerlauncher">"Interacts with the overall activities running in the system. If you Tame this, nothing will work well."</string>
+<string name="desc_windowmanager">"This is an Android System level WakeLock.  The interface that apps use to talk to the window manager - meaning, applications will require a WindowManager lock everytime they need to be shown on the screen."</string>
+<string name="desc_rilj">"RILJ keeps your device awake while processing phone actions, such as phone calls and cell tower communication."</string>
+<string name="desc_syncloopwakelock">"This is the WakeLock used by Android SyncManager to Sync accounts like Google+, Twitter, Linkedin, Gmail etc. The higher the unbouncing, the longer the amount of time until your accounts will get synced again."</string>
+<string name="desc_icing">"ICING is a Google Services WakeLock.  Currently looking for more details."</string>
+<string name="desc_startingalertservice">"This WakeLock can usually be associated with Calendar, although may effect other apps such as messaging. If your Calendar has notifications / alerts it can hold this WakeLock."</string>
+<string name="desc_audiomix">"This WakeLock handles Touch Sounds and Alert Sounds among others. It has plagued some devices even with Touch Sounds turned off."</string>
+<string name="desc_locationmanagerservice">"As the name implies. This is not typically a high battery drainer for some it might held a big wakelock."</string>
+<string name="desc_audioin">"This wakelock is used to hold the device awake listening for Google Search/Hotword Detection. Okay, Google"</string>
+<string name="desc_nfcservicemroutingwakelock">"Related to NFC service routing detected tags to the appropriate application."</string>
+<string name="desc_wakefulintentservicegcoreulrlocationreportingservice">"Used by Google Location Services to report your current location."</string>
+<string name="desc_vzwgpslocationprovider">"Verizon specific location service used for cell tower statistics."</string>
+<string name="desc_hangouts_rtcs">"Google Hangouts.  If you Tame this, Hangouts will no longer work."</string>
+<string name="desc_gcm_conn">"Google Cloud Messaging. Sends lightweight messages to your apps. Responsible for sending push notifications to your phone, for all apps."</string>
+<string name="desc_google_c2dm">"Cloud to Device Messaging (C2DM) is a service that helps developers send data to their apps on devices. The service provides a mechanism that servers can use to tell mobile applications to contact the server to fetch updated application or user data. The C2DM service handles all aspects of queueing of messages and delivery to the target application running on target devices. This service was deprecated since 2012 but there are still apps that are using this service instead of the new and improved GCM."</string>
+<string name="desc_timedeventqueue">"This is a core part of Android that is best left alone. It queues up all incoming events."</string>
+<string name="desc_comgoogleandroidgmsnlpalarm_wakeup_locator">"This alarm is safe to Tame.  It's used by Google Play Services to determine your rough location using a combination of cell towers and WiFi.  Once it has your location, it stores it locally so other apps, like Google Now, can access your location without using GPS or getting a new fix.  Recommended settings are between 180 and 600 seconds."</string>
+<string name="desc_comgoogleandroidgmsnlpalarm_wakeup_activity_detection">"This alarm is safe to Tame.  It's used by Google Play Services to determine your rough location using a combination of cell towers and wifi.  Once it has your location, it sends it back to Google so they can expand their database of WiFi locations.  Recommended settings are between 180 and 600 seconds."</string>
+<string name="desc_comgoogleandroidappshangoutsupdate_notification">"The listener which updates your Google Hangouts notifications."</string>
+<string name="desc_comandroidinternaltelephonydatastall">"Wakelock from com.android.phone (Phone app) when using Data through Cellular towers. Using WiFi will not trigger this alarm. Usually it gets through the roof while using data, especially on a mediocre connection."</string>
+<string name="settings_allow_every">"Allow every"</string>
+<string name="settings_seconds">"seconds."</string>
+<string name="card_button_reset">"RESET"</string>
+<string name="stat_alarms_acquired">"Alarms acquired"</string>
+<string name="stat_alarms_blocked">"Alarms blocked"</string>
+<string name="stat_loading">"Loading..."</string>
+<string name="stat_collected_for">"Stats collected for"</string>
+<string name="stat_wake_duration_allowed">"Wakelock time allowed"</string>
+<string name="stat_wake_duration_blocked">"Wakelock time blocked"</string>
+<string name="stat_wake_allowed">"Wakelocks acquired"</string>
+<string name="stat_wake_blocked">"Wakelocks blocked"</string>
+<string name="stat_alarm_allowed">"Alarms fired"</string>
+<string name="stat_alarm_blocked">"Alarms blocked"</string>
+<string name="stat_disabled">"Disabled"</string>
+<string name="donate_text">"This app will always let you fix the Network Location Provider battery killers for free.  If you'd also like to Tame other wakelocks and alarms, you can upgrade to the Pro features by supporting the project below.  Any donation amount will unlock the Pro features."</string>
+<string name="donate_1">"A cup of coffee while I write code"</string>
+<string name="donate_5">"A latte while I answer forum questions"</string>
+<string name="donate_10">"The joy of not carrying your charger"</string>
+<string name="donate_thank_you">"Thank you for your donation.  It means a lot to me.  I work hard in my limited free time to bring you better battery life.  When you donated, you made a difference to the project, and made a difference in my family's life.  You rock."</string>
+<string name="donate_more_button">"HOW CAN I HELP FURTHER?"</string>
+<string name="donate_more_text">"People have asked how they can contribute beyond their initial donation.  The buttons below let you donate further, but don't provide any additional features.  Thank you so much for supporting Lion Tamer!"</string>
+<string name="welcome_banner_title">"Let's make sure everything is setup."</string>
+<string name="welcome_banner_text">"You can block wakelocks to stop your phone from staying awake, and block alarms to stop it from waking up in the first place.  We've already set up some battery saving defaults for you."</string>
 
-    <string name="app_name">Lion Tamer</string>
-    <string name="version">Version</string>
-    <string name="title_activity_material_settings">Lion Tamer</string>
-    <string name="title_home">Home</string>
-    <string name="title_wakelocks">Wakelocks</string>
-    <string name="title_alarms">Alarms</string>
-    <string name="title_services">Services</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_search">Search</string>
-    <string name="action_sort_by_count">Sort by count</string>
-    <string name="action_sort_by_time">Sort by time</string>
-    <string name="action_sort_by_alpha">Sort alphabetically</string>
-    <string name="action_settings">Settings</string>
-    <string name="action_reset_stats">Reset Stats</string>
-    <string name="card_donate_title">KARMA</string>
-    <string name="card_donate_subtitle">Support your local developer</string>
-    <string name="card_global_title">GLOBAL STATS</string>
-    <string name="card_global_subtitle">Our combined stats</string>
-    <string name="card_local_title">DEVICE STATS</string>
-    <string name="card_local_subtitle">View your progress</string>
-    <string name="card_settings_title">SETTINGS</string>
-    <string name="card_settings_subtitle_alarm">Control this alarm</string>
-    <string name="card_settings_subtitle_wakelock">Control this wakelock</string>
-    <string name="card_settings_subtitle_service">Control this service</string>
-    <string name="card_description_title">DESCRIPTION</string>
-    <string name="card_description_subtitle">Why is this thing eating your battery?</string>
-
-    <string name="category_unbounced">Tamed</string>
-    <string name="category_safe">Safe to Tame</string>
-    <string name="category_unknown">Unknown</string>
-    <string name="category_not_safe">Not safe to Tame</string>
-    <string name="category_error">Error</string>
-
-    <string name="alert_noiab_title">Pro features unavailable</string>
-    <string name="alert_noiab_content">Your device doesn\'t support In App Billing.  You won\'t be able to purchase the Pro features of Lion Tamer.  This could be because you need to update your Google Play Store application, or because you live in a country where In App Billing is disabled.</string>
-    <string name="dialog_ok">OK</string>
-    <string name="tasker_on">On</string>
-    <string name="tasker_off">Off</string>
-    <string name="tasker_reset_stats">Reset stats</string>
-    <string name="tasker_choose_wakelock">Choose the wakelock to adjust.</string>
-    <string name="tasker_choose_alarm">Choose the alarm to adjust.</string>
-    <string name="tasker_choose_service">Choose the service to adjust.</string>
-    <string name="tasker_welcome">Welcome to Lion Tamer\'s Tasker plugin.</string>
-    <string name="tasker_which_task">Do you want to change settings for a Wakelock or an Alarm, or do you want to reset stats for your device?</string>
-    <string name="tasker_task_wakelock">CHANGE WAKELOCK</string>
-    <string name="tasker_task_alarm">CHANGE ALARM</string>
-    <string name="tasker_task_reset">RESET STATS</string>
-
-    <string name="alert_nopro_title">This is a Pro feature</string>
-    <string name="alert_nopro_content">To Tame non-standard wakelocks and alarms, you need to purchase a donation package.</string>
-    <string name="alert_unknown_alarm_title">Tame unknown alarm?</string>
-    <string name="alert_unknown_alarm_content">This alarm hasn\'t been proven safe to Tame.  Would you like to Tame it anyway?</string>
-    <string name="alert_unknown_service_title">Tame unknown service?</string>
-    <string name="alert_unknown_service_content">This service hasn\'t been proven safe to Tame.  Would you like to Tame it anyway?</string>
-    <string name="dialog_unbounce">TAME</string>
-    <string name="dialog_cancel">CANCEL</string>
-    <string name="tasker_choose_settings">Choose the settings you want.</string>
-    <string name="alert_unknown_wakelock_title">Tame unknown wakelock?</string>
-    <string name="alert_unknown_wakelock_content">This wakelock hasn\'t been proven safe to Tame.  Would you like to Tame it anyway?</string>
-    <string name="dialog_delete">DELETE</string>
-    <string name="alert_delete_stats_title">Delete all stats?</string>
-    <string name="alert_delete_stats_content">This will reset stats for all of your wakelocks and alarms!</string>
-    <string name="title_settings">Settings</string>
-    <string name="alert_reset_settings_title">Reset to defaults?</string>
-    <string name="alert_reset_settings_content">This will reset all of the settings for alarms and wakelocks!</string>
-    <string name="dialog_reset">RESET</string>
-    <string name="reset_settings_confirmation">Settings have been reset to defaults.</string>
-    <string name="dialog_save">SAVE</string>
-
-    <string name="desc_unknown">We don\'t have any information about this event, yet.  This may not be safe to Tame.  Only do so if you know what you\'re doing and you know how to disable Xposed at boot.  We\'re working hard to collect information about every major wakelock and alarm.  Please be patient while we collect this information.</string>
-    <string name="desc_nlpwakelock">NlpWakeLock is safe to Tame.  It\'s used by Google Play Services to determine your rough location using a combination of cell towers and WiFi.  Once it has your location, it stores it locally so other apps, like Google Now, can access your location without using GPS or getting a new fix.  Recommended settings are between 180 and 600 seconds.</string>
-    <string name="desc_nlpcollectorwakelock">NlpCollectorWakeLock is safe to Tame.  It\'s used by Google Play Services to determine your rough location using a combination of cell towers and wifi.  Once it has your location, it sends it back to Google so they can expand their database of WiFi locations.  Recommended settings are between 180 and 600 seconds.</string>
-    <string name="desc_alarmmanager">This provides access to the system alarm services. When an alarm goes off, the Intent that had been registered for it is broadcast by the system, automatically starting the target application if it is not already running. Registered alarms are retained while the device is asleep (and can optionally wake the device up if they go off during that time), but will be cleared if it is turned off and rebooted.</string>
-    <string name="desc_audiooffload">Audio playback when your screen is turned off.  If you disable this, you won\'t have background audio or music able to play when your screen is off.</string>
-    <string name="desc_activitymanagerlauncher">Interacts with the overall activities running in the system. If you Tame this, nothing will work well.</string>
-    <string name="desc_windowmanager">This is an Android System level WakeLock.  The interface that apps use to talk to the window manager - meaning, applications will require a WindowManager lock everytime they need to be shown on the screen.</string>
-    <string name="desc_rilj">RILJ keeps your device awake while processing phone actions, such as phone calls and cell tower communication.</string>
-    <string name="desc_syncloopwakelock">This is the WakeLock used by Android SyncManager to Sync accounts like Google+, Twitter, Linkedin, Gmail etc. The higher the unbouncing, the longer the amount of time until your accounts will get synced again.</string>
-    <string name="desc_icing">ICING is a Google Services WakeLock.  Currently looking for more details.</string>
-    <string name="desc_startingalertservice">This WakeLock can usually be associated with Calendar, although may effect other apps such as messaging. If your Calendar has notifications / alerts it can hold this WakeLock.</string>
-    <string name="desc_audiomix">This WakeLock handles Touch Sounds and Alert Sounds among others. It has plagued some devices even with Touch Sounds turned off.</string>
-    <string name="desc_locationmanagerservice">As the name implies. This is not typically a high battery drainer for some it might held a big wakelock.</string>
-    <string name="desc_audioin">This wakelock is used to hold the device awake listening for Google Search/Hotword Detection. "Okay, Google"</string>
-    <string name="desc_nfcservicemroutingwakelock">Related to NFC service routing detected tags to the appropriate application.</string>
-    <string name="desc_wakefulintentservicegcoreulrlocationreportingservice">Used by Google Location Services to report your current location.</string>
-    <string name="desc_vzwgpslocationprovider">Verizon specific location service used for cell tower statistics.</string>
-    <string name="desc_hangouts_rtcs">Google Hangouts.  If you Tame this, Hangouts will no longer work.</string>
-    <string name="desc_gcm_conn">Google Cloud Messaging. Sends lightweight messages to your apps. Responsible for sending push notifications to your phone, for all apps.</string>
-    <string name="desc_google_c2dm">Cloud to Device Messaging (C2DM) is a service that helps developers send data to their apps on devices. The service provides a mechanism that servers can use to tell mobile applications to contact the server to fetch updated application or user data. The C2DM service handles all aspects of queueing of messages and delivery to the target application running on target devices. This service was deprecated since 2012 but there are still apps that are using this service instead of the new and improved GCM.</string>
-    <string name="desc_timedeventqueue">This is a core part of Android that is best left alone. It queues up all incoming events.</string>
-    <string name="desc_comgoogleandroidgmsnlpalarm_wakeup_locator">This alarm is safe to Tame.  It\'s used by Google Play Services to determine your rough location using a combination of cell towers and WiFi.  Once it has your location, it stores it locally so other apps, like Google Now, can access your location without using GPS or getting a new fix.  Recommended settings are between 180 and 600 seconds.</string>
-    <string name="desc_comgoogleandroidgmsnlpalarm_wakeup_activity_detection">This alarm is safe to Tame.  It\'s used by Google Play Services to determine your rough location using a combination of cell towers and wifi.  Once it has your location, it sends it back to Google so they can expand their database of WiFi locations.  Recommended settings are between 180 and 600 seconds.</string>
-    <string name="desc_comgoogleandroidappshangoutsupdate_notification">The listener which updates your Google Hangouts notifications.</string>
-    <string name="desc_comandroidinternaltelephonydatastall">Wakelock from com.android.phone (Phone app) when using Data through Cellular towers. Using WiFi will not trigger this alarm. Usually it gets through the roof while using data, especially on a mediocre connection.</string>
-
-    <string name="settings_allow_every">Allow every</string>
-    <string name="settings_seconds">seconds.</string>
-    <string name="card_button_reset">RESET</string>
-
-    <string name="stat_alarms_acquired">Alarms acquired</string>
-    <string name="stat_alarms_blocked">Alarms blocked</string>
-    <string name="stat_loading">Loading...</string>
-    <string name="stat_collected_for">Stats collected for</string>
-    <string name="stat_wake_duration_allowed">Wakelock time allowed</string>
-    <string name="stat_wake_duration_blocked">Wakelock time blocked</string>
-    <string name="stat_wake_allowed">Wakelocks acquired</string>
-    <string name="stat_wake_blocked">Wakelocks blocked</string>
-    <string name="stat_service_allowed">Services started</string>
-    <string name="stat_service_blocked">Services blocked</string>
-    <string name="stat_alarm_allowed">Alarms fired</string>
-    <string name="stat_alarm_blocked">Alarms blocked</string>
-    <string name="stat_disabled">Disabled</string>
-    <string name="donate_text">This app will always let you fix the Network Location Provider battery killers for free.  If you\'d also like to Tame other wakelocks and alarms, you can upgrade to the Pro features by supporting the project below.  Any donation amount will unlock the Pro features.</string>
-    <string name="donate_1">A cup of coffee while I write code</string>
-    <string name="donate_5">A latte while I answer forum questions</string>
-    <string name="donate_10">The joy of not carrying your charger</string>
-    <string name="donate_thank_you">Thank you for your donation.  It means a lot to me.  I work hard in my limited free time to bring you better battery life.  When you donated, you made a difference to the project, and made a difference in my family\'s life.  You rock.</string>
-    <string name="donate_more_button">HOW CAN I HELP FURTHER?</string>
-    <string name="donate_more_text">People have asked how they can contribute beyond their initial donation.  The buttons below let you donate further, but don\'t provide any additional features.  Thank you so much for supporting Lion Tamer!</string>
-
-    <string name="welcome_banner_welcome">Welcome!</string>
-    <string name="welcome_banner_title">Let\'s make sure everything is setup.</string>
-    <string name="welcome_banner_checking_service">Checking if Lion Tamer is running...</string>
-    <string name="welcome_banner_checking_xposed">Checking if Xposed is installed...</string>
-    <string name="welcome_banner_checking_root">Checking for root access...</string>
-    <string name="welcome_banner_checking_looks_great">Everything looks great!</string>
-    <string name="welcome_banner_checking_uhoh">Something went wrong.  Let\'s find out what and get it fixed...</string>
-    <string name="welcome_banner_problem_none">We\'ve setup some battery saving defaults for you.  Enjoy your new battery life!</string>
-    <string name="welcome_banner_problem_service">It looks like you haven\'t enabled the Lion Tamer module. Click \"FIX IT\", make sure Lion Tamer is checked, then reboot.</string>
-    <string name="welcome_banner_problem_xposed_running">Xposed isn\'t running. Click \"FIX IT\", then click \"Install/Update\" and reboot your device.</string>
-    <string name="welcome_banner_problem_xposed_installed">Xposed isn\'t installed. Xposed is required for Lion Tamer and many other root applications.  Once the download is finished, click INSTALL, then launch Lion Tamer again.\nIf you\'d like to learn more about Xposed, visit %1$s.</string>
-    <string name="welcome_banner_problem_root">It looks like your device isn\'t rooted.  Lion Tamer requires a rooted device to function properly.  If you\'re interested in rooting your device, please visit %1$s.</string>
-    <string name="welcome_banner_button_next">NEXT</string>
-    <string name="welcome_banner_button_fixit">FIX IT</string>
-    <string name="welcome_banner_button_exit">EXIT</string>
-    <string name="welcome_banner_button_install">INSTALL</string>
-    <string name="welcome_downloading_xposed">Downloading Xposed...</string>
-    <string name="welcome_downloaded_xposed">Download complete.</string>
-    <string name="welcome_download_error_xposed">Download failed.  Please try again later.</string>
-    <string name="download_xposed_title">Downloading Xposed</string>
-    <string name="download_xposed_description">Required for Lion Tamer</string>
-
-    <string name="settings_category_options">Options</string>
-    <string name="settings_item_show_launcher">Show launcher icon</string>
-    <string name="settings_item_choose_theme">Choose theme</string>
-    <string name="settings_item_global_stats_title">Participate in Global Stats</string>
-    <string name="settings_item_global_stats_summary">Send and receive anonymous stats</string>
-    <string name="settings_item_reset_defaults_title">Reset to defaults</string>
-    <string name="settings_item_reset_defaults_summary">Reset all alarms and wakelocks to default settings</string>
-    <string name="settings_category_code_credits">Developer Credit</string>
-    <string name="settings_item_author">Author: Ryan Steckler</string>
-    <string name="settings_item_logging_level">Logging level</string>
-    <string name="settings_category_translation">Translation Credit</string>
-    <string name="settings_theme_material">Material</string>
-    <string name="settings_theme_dark">Dark</string>
-    <string name="settings_logging_quiet">Quiet</string>
-    <string name="settings_logging_default">Default</string>
-    <string name="settings_logging_verbose">Verbose</string>
-    <string name="settings_item_force_english_title">Force English</string>
-    <string name="settings_item_force_english_summary">Override your locale settings and use English</string>
-
-    <string name="playstore_short_description">Battery power to the people!</string>
-    <string name="requires_root">*** Requires a rooted device ***</string>
-    <string name="installs_xposed">Lion Tamer uses the Xposed Framework and will install it for you if you don\'t already have it.</string>
-    <string name="playstore_long_description">
+<!-- Don't translate this one  :) -->
+<string name="app_font_family">"sans_serif"</string>
+<string name="settings_category_options">"Options"</string>
+<string name="settings_item_show_launcher">"Show launcher icon"</string>
+<string name="settings_item_choose_theme">"Choose theme"</string>
+<string name="settings_item_global_stats_title">"Participate in Global Stats"</string>
+<string name="settings_item_global_stats_summary">"Send and receive anonymous stats"</string>
+<string name="settings_item_reset_defaults_title">"Reset to defaults"</string>
+<string name="settings_item_reset_defaults_summary">"Reset all alarms and wakelocks to default settings"</string>
+<string name="settings_category_debug">"Debug"</string>
+<string name="settings_item_author">"Author: Ryan Steckler"</string>
+<string name="settings_item_logging_level">"Logging level"</string>
+<string name="settings_category_translation">"Translation Credit"</string>
+<string name="settings_theme_material">"Material"</string>
+<string name="settings_theme_dark">"Dark"</string>
+<string name="settings_logging_quiet">"Quiet"</string>
+<string name="settings_logging_default">"Default"</string>
+<string name="settings_logging_verbose">"Verbose"</string>
+<string name="settings_item_force_english_title">"Force English"</string>
+<string name="settings_item_force_english_summary">"Override your locale settings and use English"</string>
+<string name="playstore_short_description">"Battery power to the people!"</string>
+<string name="playstore_long_description">"
 Unsolicited quotes from real users:
-"It gave me about 2 hours more use with 30 minutes more screen on time. Saved me from buying a $25 battery."
-"Just donated 5 Dollars to support this masterpiece.. Keep up the good work"
-"Simply amazing"
-"[Lion Tamer] just revolutionized the true meaning of wakelock managing"
-"This module is awesome! I get less than a half percent drain per hour for idle standby. "
+It gave me about 2 hours more use with 30 minutes more screen on time. Saved me from buying a $25 battery.
+Just donated 5 Dollars to support this masterpiece.. Keep up the good work
+Simply amazing
+[Lion Tamer] just revolutionized the true meaning of wakelock managing
+This module is awesome! I get less than a half percent drain per hour for idle standby. 
 ...and many more.
 
 Lion Tamer puts you in control of how your device uses your battery by controlling how often your device can wake up, and how long it can stay awake.  Use the recommended settings for easy battery savings, or dig in and customize every alarm and wakelock on your device.
@@ -190,10 +153,39 @@ Here are some highlights:
 The In-App purchases allow you to unlock the Pro package that lets you customize the alarms and wakelocks on your device.   Without the pro package, you can control the worst battery hogs:  NlpWakelock, NlpCollectorWakeLock, ALARM_WAKEUP_LOCATOR, and ALARM_WAKE_ACTIVITY_DETECTION.
 
 May you have a long [battery] life!
-</string>
-
-    <string name="service_switch_allow">Allow</string>
-    <string name="service_switch_deny">Deny</string>
-
-
+"</string>
+<string name="welcome_banner_welcome">"Welcome!"</string>
+<string name="welcome_banner_checking_service">"Checking if Lion Tamer is running..."</string>
+<string name="welcome_banner_checking_xposed">"Checking if Xposed is installed..."</string>
+<string name="welcome_banner_checking_root">"Checking for root access..."</string>
+<string name="welcome_banner_checking_looks_great">"Everything looks great!"</string>
+<string name="welcome_banner_checking_uhoh">"Something went wrong.  Let's find out what and get it fixed..."</string>
+<string name="welcome_banner_problem_none">"We've setup some battery saving defaults for you.  Enjoy your new battery life!"</string>
+<string name="welcome_banner_problem_service">"It looks like you haven't enabled the Lion Tamer module. Click \"FIX IT\", make sure Lion Tamer is checked, then reboot."</string>
+<string name="welcome_banner_problem_xposed_running">"Xposed isn't running. Click \"FIX IT\", then click \"Install/Update\" and reboot your device."</string>
+<string name="welcome_banner_problem_xposed_installed">"Xposed isn't installed. Xposed is required for Lion Tamer and many other root applications.  Once the download is finished, click INSTALL, then launch Lion Tamer again.
+If you'd like to learn more about Xposed, visit %1$s."</string>
+<string name="welcome_banner_problem_root">"It looks like your device isn't rooted.  Lion Tamer requires a rooted device to function properly.  If you're interested in rooting your device, please visit %1$s."</string>
+<string name="welcome_banner_button_next">"NEXT"</string>
+<string name="welcome_banner_button_fixit">"FIX IT"</string>
+<string name="welcome_banner_button_exit">"EXIT"</string>
+<string name="welcome_banner_button_install">"INSTALL"</string>
+<string name="welcome_downloading_xposed">"Downloading Xposed..."</string>
+<string name="welcome_downloaded_xposed">"Download complete."</string>
+<string name="welcome_download_error_xposed">"Download failed.  Please try again later."</string>
+<string name="download_xposed_title">"Downloading Xposed"</string>
+<string name="download_xposed_description">"Required for Lion Tamer"</string>
+<string name="requires_root">"*** Requires a rooted device ***"</string>
+<string name="installs_xposed">"Lion Tamer uses the Xposed Framework and will install it for you if you don't already have it."</string>
+<string name="settings_category_code_credits">"Developer Credit"</string>
+<string name="title_services">"Services"</string>
+<string name="action_sort_by_alpha">"Sort alphabetically"</string>
+<string name="card_settings_subtitle_service">"Control this service"</string>
+<string name="tasker_choose_service">"Choose the service to adjust."</string>
+<string name="alert_unknown_service_title">"Tame unknown service?"</string>
+<string name="alert_unknown_service_content">"This service hasn't been proven safe to Tame.  Would you like to Tame it anyway?"</string>
+<string name="stat_service_allowed">"Services started"</string>
+<string name="stat_service_blocked">"Services blocked"</string>
+<string name="service_switch_allow">"Allow"</string>
+<string name="service_switch_deny">"Deny"</string>
 </resources>
