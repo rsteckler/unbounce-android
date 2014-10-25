@@ -1,196 +1,262 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <!-- Fuzzy -->
-  <string name="app_name">"Lion Tamer"</string>
-  <string name="version">"Wersja"</string>
-  <!-- Fuzzy -->
-  <string name="title_activity_material_settings">"Lion Tamer"</string>
-  <string name="title_home">"Główna"</string>
-  <!-- Fuzzy -->
-  <string name="title_wakelocks">"Wybudzenia"</string>
-  <string name="title_alarms">"Alarmy"</string>
-  <!-- Fuzzy -->
-  <string name="navigation_drawer_open">"Otwórz pasek nawigacji"</string>
-  <string name="navigation_drawer_close">"Zamknij pasek nawigacji"</string>
-  <!-- Fuzzy -->
-  <string name="action_search">"Szukaj"</string>
-  <string name="action_sort_by_count">"Sortuj wg ilości"</string>
-  <!-- Fuzzy -->
-  <string name="action_sort_by_time">"Sortuj wg czasu"</string>
-  <string name="action_settings">"Ustawienia"</string>
-  <!-- Fuzzy -->
-  <string name="action_reset_stats">"Reset statystyk"</string>
-  <string name="card_donate_title">"KARMA"</string>
-  <!-- Fuzzy -->
-  <string name="card_donate_subtitle">"Wspomóż dewelopera"</string>
-  <string name="card_global_title">"STAT. GLOBALNE"</string>
-  <!-- Fuzzy -->
-  <string name="card_global_subtitle">"Wspólne statystyki"</string>
-  <string name="card_local_title">"TWOJE STATYSTYKI"</string>
-  <!-- Fuzzy -->
-  <string name="card_local_subtitle">"Sprawdź swoje postępy"</string>
-  <string name="card_settings_title">"USTAWIENIA"</string>
-  <!-- Fuzzy -->
-  <string name="card_settings_subtitle_alarm">"Kontroluj ten alarm"</string>
-  <string name="card_settings_subtitle_wakelock">"Kontroluj to wybudzenie"</string>
-  <!-- Fuzzy -->
-  <string name="card_description_title">"OPIS"</string>
-  <string name="card_description_subtitle">"Czemu to zjada baterie?"</string>
-  <!-- Fuzzy -->
-  <string name="category_unbounced">"Kontrolowane"</string>
-  <string name="category_safe">"Bezpieczne"</string>
-  <!-- Fuzzy -->
-  <string name="category_unknown">"Nieznane"</string>
-  <string name="category_not_safe">"Niebezpieczne"</string>
-  <!-- Fuzzy -->
-  <string name="category_error">"Błąd"</string>
-  <string name="alert_noiab_title">"Funkcje pro niedostępne"</string>
-  <!-- Fuzzy -->
-  <string name="alert_noiab_content">"Twoje urządzenie nie obsługuję opcji App Billing. Nie jesteś w stanie kupic wersji Pro Lion Tamer. Być może musisz zaktualizować Sklep Play lub mieszkasz w kraju gdzie opcja App Billing jest niedostępna"</string>
-  <string name="dialog_ok">"Ok"</string>
-  <!-- Fuzzy -->
-  <string name="tasker_on">"Wł."</string>
-  <string name="tasker_off">"Wył."</string>
-  <!-- Fuzzy -->
-  <string name="tasker_reset_stats">"Resetuj statystyki"</string>
-  <string name="tasker_choose_wakelock">"Dostosuj wybudzenie"</string>
-  <!-- Fuzzy -->
-  <string name="tasker_choose_alarm">"Dostosuj alarm"</string>
-  <string name="tasker_welcome">"Witaj we wtycze Tasker Lion Tamer"</string>
-  <!-- Fuzzy -->
-  <string name="tasker_which_task">"Chcesz dokonać zmian dla Wybudzenia lub alarmu, a może chcesz zresetować ustawienia dla Twojego urządzenia?"</string>
-  <string name="tasker_task_wakelock">"ZMIEŃ WYBUDZENIE"</string>
-  <!-- Fuzzy -->
-  <string name="tasker_task_alarm">"ZMIEŃ ALARM"</string>
-  <string name="tasker_task_reset">"RESET STATYSTYK"</string>
-  <!-- Fuzzy -->
-  <string name="alert_nopro_title">"To jest funkcja Pro"</string>
-  <string name="alert_nopro_content">"Aby kontrolować niestandardowe wybudzenia i alarmy, musisz kupić paczke darowizny"</string>
-  <!-- Fuzzy -->
-  <string name="alert_unknown_alarm_title">"Kontrolować nienznany alarm?"</string>
-  <string name="alert_unknown_alarm_content">"Ten alarm nie jest oznaczony jako bezpieczny. Czy pomimo tego chcesz go kontrolować?"</string>
-  <!-- Fuzzy -->
-  <string name="dialog_unbounce">"KONTROLUJ"</string>
-  <string name="dialog_cancel">"ANULUJ"</string>
-  <!-- Fuzzy -->
-  <string name="tasker_choose_settings">"Wybierz własne ustawienia"</string>
-  <string name="alert_unknown_wakelock_title">"Kontrolować nienznane wybudzenie?"</string>
-  <!-- Fuzzy -->
-  <string name="alert_unknown_wakelock_content">"To wybudzenie nie jest oznaczone jako bezpieczne. Czy pomimo tego chcesz je kontrolować?"</string>
-  <string name="dialog_delete">"SKASUJ"</string>
-  <!-- Fuzzy -->
-  <string name="alert_delete_stats_title">"Skasować wszystko?"</string>
-  <string name="alert_delete_stats_content">"Usuwasz wszystkie statystyki wybudzeń i alarmów!"</string>
-  <!-- Fuzzy -->
-  <string name="title_settings">"Ustawienia"</string>
-  <string name="alert_reset_settings_title">"Przywrócić domyślne?"</string>
-  <!-- Fuzzy -->
-  <string name="alert_reset_settings_content">"Usuniesz wszystkie ustawienia alarmów i wybudzeń!"</string>
-  <string name="dialog_reset">"KASUJ"</string>
-  <!-- Fuzzy -->
-  <string name="reset_settings_confirmation">"Przywrócone ustawienia domyślne"</string>
-  <string name="dialog_save">"ZAPISZ"</string>
-  <!-- Fuzzy -->
-  <string name="desc_unknown">"Nie mamy jeszcze żadnych informacji na ten temat. Może spowodować utrudnienia. Kontroluj tylko jeśli wiesz co robisz i wiesz jak wyłączyć Xposed podczas startu. Ciężko pracujemy aby zebrać informacje o każdym ważnym wybudzeniu i alarmie. Proszę, bądź cierpliwy podczas gdy my zbieramy informacje."</string>
-  <string name="desc_nlpwakelock">"NlpWakelock jest bezpieczny do kontrolowania. Jest używany przez Google Play services do okreslania lokalizacji na podstawie WiFi i nadajników. Raz zapisana lokalizacja jest udostępniana innym aplikacjom np. Google Now może uzyskać dostęp do Twojej lokalizacji bez użycia GPS. Polecane ustawienia pomiędzy 180 a 600 sekund."</string>
-  <!-- Fuzzy -->
-  <string name="desc_nlpcollectorwakelock">"NlpWakelock jest bezpieczny do kontrolowania. Jest używany przez Google Play services do określania lokalizacji na podstawie WiFi i nadajników. Raz zapisana lokalizacja jest wysyłana do Google aby mogli powiększyć ich baze lokalizacji WiFi. Polecane ustawienia pomiędzy 180 a 600 sekund."</string>
-  <string name="desc_alarmmanager">"This provides access to the system alarm services. When an alarm goes off, the Intent that had been registered for it is broadcast by the system, automatically starting the target application if it is not already running. Registered alarms are retained while the device is asleep (and can optionally wake the device up if they go off during that time), but will be cleared if it is turned off and rebooted."</string>
-  <!-- Fuzzy -->
-  <string name="desc_audiooffload">"Odtwarza dźwięk kiedy ekran jest wyłączony. Jeśli wyłączysz tą opcję, nie będziesz w stanie słuchać muzyki przy wyłączonym ekranie ."</string>
-  <string name="desc_activitymanagerlauncher">"Współdziała z ogólnymi aktywnościami w systemie. Jesli zaczniesz kontrolowac nic nie bedzie działać dobrze."</string>
-  <!-- Fuzzy -->
-  <string name="desc_windowmanager">"This is an Android System level WakeLock.  The interface that apps use to talk to the window manager - meaning, applications will require a WindowManager lock everytime they need to be shown on the screen. "</string>
-  <string name="desc_rilj">"RILJ utrzymuje Twój telefon aktywny podczas wykonywania akcji takich jak rozmowy i komunikacja z nadajnikami."</string>
-  <!-- Fuzzy -->
-  <string name="desc_syncloopwakelock">"Używany przez Android SyncManager w celu synchronizacji G+, Twitter, Linkedin, Gmail itp. Im wyższa wartość przerwy tym większy interwał synchronizacji."</string>
-  <string name="desc_icing">"ICING jest kontrolowany przez Google Services. Szukamy dalszych info."</string>
-  <!-- Fuzzy -->
-  <string name="desc_startingalertservice">"Jest powiązany zazwyczaj z kalendarzem. Może mieć wpływ na inne aplikacje np. wiadomości. Jeśli masz przypomnienia w kalendarzu to wybudzenie może je przechowywać."</string>
-  <string name="desc_audiomix">"Ten wybudzacz przechowuje dźwięki dotyku oraz alarmów wśród innych. Nęka niektóre urządzenia nawet z wyłączonym dźwiękiem dotyku."</string>
-  <!-- Fuzzy -->
-  <string name="desc_locationmanagerservice">"Jak nazwa mówi. To nie jest typowy zjadacz baterii. Może powodować duże wybudzenia."</string>
-  <string name="desc_audioin">"Odpowiada za utrzymywanie telefonu w stanie aktywności i nasłuchiwania dla Google Search. Okay, Google"</string>
-  <!-- Fuzzy -->
-  <string name="desc_nfcservicemroutingwakelock">"Powiązane z NFC przekazuje wykryte tagi do odpowiednich aplikacji. "</string>
-  <string name="desc_wakefulintentservicegcoreulrlocationreportingservice">"Używane przez usługi Google w celu poznania Twojej aktualnej pozycji"</string>
-  <!-- Fuzzy -->
-  <string name="desc_vzwgpslocationprovider">"Specyficzna usługa lokalizacji Verizon używana do statystyk przez nadajniki"</string>
-  <string name="desc_hangouts_rtcs">"Jeśli ograniczysz ten proces Hangouty przestaną działać"</string>
-  <!-- Fuzzy -->
-  <string name="desc_gcm_conn">"Wiadomości w chmurze Google. Wysyła małe wiadomośći do Twoich aplikacji. Odpowiedzialne za powiadomienia push dla wszystkich aplikacji."</string>
-  <string name="desc_google_c2dm">"Cloud to Device Messaging (C2DM) jest usługą która pomaga deweloperom wysyłać dane do ich aplikacji na urządzeniu. Usługa ta zapewnia mechanizm przez który serwery mówią aplikacją mobilnym aby kontaktowały sie z serwerem aby zaktualizować dane. To rozwiązanie jest przestarzałe od 2012 roku ale niektóre aplikacje nadal z niego korzystają zamiast nowego usprawnionego GCM."</string>
-  <!-- Fuzzy -->
-  <string name="desc_timedeventqueue">"Jest to część rdzenia Androida. Najlepiej zostawić w spokoju. Odpowiada za kolejkowanie zdarzeń"</string>
-  <string name="desc_comgoogleandroidgmsnlpalarm_wakeup_locator">"NlpWakelock jest bezpieczny do kontrolowania. Jest używany przez Google Play services do okreslania lokalizacji na podstawie WiFi i nadajników. Raz zapisana lokalizacja jest udostępniana innym aplikacjom np. Google Now może uzyskać dostęp do Twojej lokalizacji bez użycia GPS lub zapewnia nowego fixa. Polecane ustawić pomiędzy 180 a 600 sekund."</string>
-  <!-- Fuzzy -->
-  <string name="desc_comgoogleandroidgmsnlpalarm_wakeup_activity_detection">"NlpWakelock jest bezpieczny do kontrolowania. Jest używany przez Google Play services do okreslania lokalizacji na podstawie WiFi i nadajników. Raz zapisana lokalizacja jest wysyłana do Google aby mogli powiększyć ich baze lokalizacji WiFi. Polecane ustawienia pomiędzy 180 a 600 sekund."</string>
-  <string name="desc_comgoogleandroidappshangoutsupdate_notification">"Sprawdza kiedy zaktualizować powiadomienia o Hangoutach"</string>
-  <!-- Fuzzy -->
-  <string name="desc_comandroidinternaltelephonydatastall">"Wywołuje go com.android.phone(telefon app) podczas gdy używany jest internet mobilny. Używanie WiFi nie podnosi tego alarmu. Zazwyczaj jest wywoływany przez niski zasięg podczas używania danych pakietowych"</string>
-  <string name="settings_allow_every">"Zezwól wszystkim"</string>
-  <!-- Fuzzy -->
-  <string name="settings_seconds">"sekundy."</string>
-  <string name="card_button_reset">"RESETUJ"</string>
-  <!-- Fuzzy -->
-  <string name="stat_alarms_acquired">"Otrzymane alarmy"</string>
-  <string name="stat_alarms_blocked">"Zablokowane alarmy"</string>
-  <!-- Fuzzy -->
-  <string name="stat_loading">"Wczytywanie..."</string>
-  <string name="stat_collected_for">"Statystyki zebrane od"</string>
-  <!-- Fuzzy -->
-  <string name="stat_wake_duration_allowed">"Czas wybudzeń"</string>
-  <string name="stat_wake_duration_blocked">"Oszczędzony czas wybudzeń"</string>
-  <!-- Fuzzy -->
-  <string name="stat_wake_allowed">"Ilość wybudzeń"</string>
-  <string name="stat_wake_blocked">"Wybuedznia zablokowane"</string>
-  <!-- Fuzzy -->
-  <string name="stat_alarm_allowed">"Alarmy"</string>
-  <string name="stat_alarm_blocked">"Alarmy zablokowane"</string>
-  <!-- Fuzzy -->
-  <string name="stat_disabled">"Staty wył."</string>
-  <string name="donate_text">"Ta aplikacja zawsze pozwoli Ci modyfikować usługi związane z Lokalizacją, co poprawi żywotność baterii. Jeśli chcesz zarządzać innymi procesami, możesz skorzystać z wersji Pro wspierając ten projekt. Kazda darowizna odblokuje funkcje Pro."</string>
-  <!-- Fuzzy -->
-  <string name="donate_1">"Filiżanka kawy podczas pisania kodu"</string>
-  <string name="donate_5">"Latte podczas odpisywania na pytania na forum"</string>
-  <!-- Fuzzy -->
-  <string name="donate_10">"Radość, kiedy nie nosisz ładowarki"</string>
-  <string name="donate_thank_you">"Dziękuję za Twoje wsparcie. To wiele dla mnie znaczy. Ciężko pracuję w wolnych chwilach aby zapewnić Ci lepszy czas pracy baterii. Jeśli wesprzesz ten projekt, dokonasz w nim zmiany, a zarazem zmienisz coś w moim rodzinnym życiu.
+<string name="app_name">"Lion Tamer"</string>
+
+<!-- Fuzzy -->
+<string name="version">"Wersja"</string>
+<string name="title_activity_material_settings">"Lion Tamer"</string>
+
+<!-- Fuzzy -->
+<string name="title_home">"Główna"</string>
+<string name="title_wakelocks">"Wybudzenia"</string>
+
+<!-- Fuzzy -->
+<string name="title_alarms">"Alarmy"</string>
+<string name="navigation_drawer_open">"Otwórz pasek nawigacji"</string>
+
+<!-- Fuzzy -->
+<string name="navigation_drawer_close">"Zamknij pasek nawigacji"</string>
+<string name="action_search">"Szukaj"</string>
+
+<!-- Fuzzy -->
+<string name="action_sort_by_count">"Sortuj wg ilości"</string>
+<string name="action_sort_by_time">"Sortuj wg czasu"</string>
+
+<!-- Fuzzy -->
+<string name="action_settings">"Ustawienia"</string>
+<string name="action_reset_stats">"Reset statystyk"</string>
+
+<!-- Fuzzy -->
+<string name="card_donate_title">"KARMA"</string>
+<string name="card_donate_subtitle">"Wspomóż dewelopera"</string>
+
+<!-- Fuzzy -->
+<string name="card_global_title">"STAT. GLOBALNE"</string>
+<string name="card_global_subtitle">"Wspólne statystyki"</string>
+
+<!-- Fuzzy -->
+<string name="card_local_title">"TWOJE STATYSTYKI"</string>
+<string name="card_local_subtitle">"Sprawdź swoje postępy"</string>
+
+<!-- Fuzzy -->
+<string name="card_settings_title">"USTAWIENIA"</string>
+<string name="card_settings_subtitle_alarm">"Kontroluj ten alarm"</string>
+
+<!-- Fuzzy -->
+<string name="card_settings_subtitle_wakelock">"Kontroluj to wybudzenie"</string>
+<string name="card_description_title">"OPIS"</string>
+
+<!-- Fuzzy -->
+<string name="card_description_subtitle">"Czemu to zjada baterie?"</string>
+<string name="category_unbounced">"Kontrolowane"</string>
+
+<!-- Fuzzy -->
+<string name="category_safe">"Bezpieczne"</string>
+<string name="category_unknown">"Nieznane"</string>
+
+<!-- Fuzzy -->
+<string name="category_not_safe">"Niebezpieczne"</string>
+<string name="category_error">"Błąd"</string>
+
+<!-- Fuzzy -->
+<string name="alert_noiab_title">"Funkcje pro niedostępne"</string>
+<string name="alert_noiab_content">"Twoje urządzenie nie obsługuję opcji App Billing. Nie jesteś w stanie kupic wersji Pro Lion Tamer. Być może musisz zaktualizować Sklep Play lub mieszkasz w kraju gdzie opcja App Billing jest niedostępna"</string>
+
+<!-- Fuzzy -->
+<string name="dialog_ok">"Ok"</string>
+<string name="tasker_on">"Wł."</string>
+
+<!-- Fuzzy -->
+<string name="tasker_off">"Wył."</string>
+<string name="tasker_reset_stats">"Resetuj statystyki"</string>
+
+<!-- Fuzzy -->
+<string name="tasker_choose_wakelock">"Dostosuj wybudzenie"</string>
+<string name="tasker_choose_alarm">"Dostosuj alarm"</string>
+<string name="tasker_welcome">"Witaj we wtycze Tasker Lion Tamer"</string>
+
+<!-- Fuzzy -->
+<string name="tasker_which_task">"Chcesz dokonać zmian dla Wybudzenia lub alarmu, a może chcesz zresetować ustawienia dla Twojego urządzenia?"</string>
+<string name="tasker_task_wakelock">"ZMIEŃ WYBUDZENIE"</string>
+
+<!-- Fuzzy -->
+<string name="tasker_task_alarm">"ZMIEŃ ALARM"</string>
+<string name="tasker_task_reset">"RESET STATYSTYK"</string>
+
+<!-- Fuzzy -->
+<string name="alert_nopro_title">"To jest funkcja Pro"</string>
+<string name="alert_nopro_content">"Aby kontrolować niestandardowe wybudzenia i alarmy, musisz kupić paczke darowizny"</string>
+
+<!-- Fuzzy -->
+<string name="alert_unknown_alarm_title">"Kontrolować nienznany alarm?"</string>
+<string name="alert_unknown_alarm_content">"Ten alarm nie jest oznaczony jako bezpieczny. Czy pomimo tego chcesz go kontrolować?"</string>
+
+<!-- Fuzzy -->
+<string name="dialog_unbounce">"KONTROLUJ"</string>
+<string name="dialog_cancel">"ANULUJ"</string>
+
+<!-- Fuzzy -->
+<string name="tasker_choose_settings">"Wybierz własne ustawienia"</string>
+<string name="alert_unknown_wakelock_title">"Kontrolować nienznane wybudzenie?"</string>
+
+<!-- Fuzzy -->
+<string name="alert_unknown_wakelock_content">"To wybudzenie nie jest oznaczone jako bezpieczne. Czy pomimo tego chcesz je kontrolować?"</string>
+<string name="dialog_delete">"SKASUJ"</string>
+
+<!-- Fuzzy -->
+<string name="alert_delete_stats_title">"Skasować wszystko?"</string>
+<string name="alert_delete_stats_content">"Usuwasz wszystkie statystyki wybudzeń i alarmów!"</string>
+
+<!-- Fuzzy -->
+<string name="title_settings">"Ustawienia"</string>
+<string name="alert_reset_settings_title">"Przywrócić domyślne?"</string>
+
+<!-- Fuzzy -->
+<string name="alert_reset_settings_content">"Usuniesz wszystkie ustawienia alarmów i wybudzeń!"</string>
+<string name="dialog_reset">"KASUJ"</string>
+
+<!-- Fuzzy -->
+<string name="reset_settings_confirmation">"Przywrócone ustawienia domyślne"</string>
+<string name="dialog_save">"ZAPISZ"</string>
+
+<!-- Fuzzy -->
+<string name="desc_unknown">"Nie mamy jeszcze żadnych informacji na ten temat. Może spowodować utrudnienia. Kontroluj tylko jeśli wiesz co robisz i wiesz jak wyłączyć Xposed podczas startu. Ciężko pracujemy aby zebrać informacje o każdym ważnym wybudzeniu i alarmie. Proszę, bądź cierpliwy podczas gdy my zbieramy informacje."</string>
+<string name="desc_nlpwakelock">"NlpWakelock jest bezpieczny do kontrolowania. Jest używany przez Google Play services do okreslania lokalizacji na podstawie WiFi i nadajników. Raz zapisana lokalizacja jest udostępniana innym aplikacjom np. Google Now może uzyskać dostęp do Twojej lokalizacji bez użycia GPS. Polecane ustawienia pomiędzy 180 a 600 sekund."</string>
+
+<!-- Fuzzy -->
+<string name="desc_nlpcollectorwakelock">"NlpWakelock jest bezpieczny do kontrolowania. Jest używany przez Google Play services do określania lokalizacji na podstawie WiFi i nadajników. Raz zapisana lokalizacja jest wysyłana do Google aby mogli powiększyć ich baze lokalizacji WiFi. Polecane ustawienia pomiędzy 180 a 600 sekund."</string>
+<string name="desc_alarmmanager">"This provides access to the system alarm services. When an alarm goes off, the Intent that had been registered for it is broadcast by the system, automatically starting the target application if it is not already running. Registered alarms are retained while the device is asleep (and can optionally wake the device up if they go off during that time), but will be cleared if it is turned off and rebooted."</string>
+
+<!-- Fuzzy -->
+<string name="desc_audiooffload">"Odtwarza dźwięk kiedy ekran jest wyłączony. Jeśli wyłączysz tą opcję, nie będziesz w stanie słuchać muzyki przy wyłączonym ekranie ."</string>
+<string name="desc_activitymanagerlauncher">"Współdziała z ogólnymi aktywnościami w systemie. Jesli zaczniesz kontrolowac nic nie bedzie działać dobrze."</string>
+
+<!-- Fuzzy -->
+<string name="desc_windowmanager">"This is an Android System level WakeLock.  The interface that apps use to talk to the window manager - meaning, applications will require a WindowManager lock everytime they need to be shown on the screen. "</string>
+<string name="desc_rilj">"RILJ utrzymuje Twój telefon aktywny podczas wykonywania akcji takich jak rozmowy i komunikacja z nadajnikami."</string>
+
+<!-- Fuzzy -->
+<string name="desc_syncloopwakelock">"Używany przez Android SyncManager w celu synchronizacji G+, Twitter, Linkedin, Gmail itp. Im wyższa wartość przerwy tym większy interwał synchronizacji."</string>
+<string name="desc_icing">"ICING jest kontrolowany przez Google Services. Szukamy dalszych info."</string>
+
+<!-- Fuzzy -->
+<string name="desc_startingalertservice">"Jest powiązany zazwyczaj z kalendarzem. Może mieć wpływ na inne aplikacje np. wiadomości. Jeśli masz przypomnienia w kalendarzu to wybudzenie może je przechowywać."</string>
+<string name="desc_audiomix">"Ten wybudzacz przechowuje dźwięki dotyku oraz alarmów wśród innych. Nęka niektóre urządzenia nawet z wyłączonym dźwiękiem dotyku."</string>
+
+<!-- Fuzzy -->
+<string name="desc_locationmanagerservice">"Jak nazwa mówi. To nie jest typowy zjadacz baterii. Może powodować duże wybudzenia."</string>
+<string name="desc_audioin">"Odpowiada za utrzymywanie telefonu w stanie aktywności i nasłuchiwania dla Google Search. Okay, Google"</string>
+
+<!-- Fuzzy -->
+<string name="desc_nfcservicemroutingwakelock">"Powiązane z NFC przekazuje wykryte tagi do odpowiednich aplikacji. "</string>
+<string name="desc_wakefulintentservicegcoreulrlocationreportingservice">"Używane przez usługi Google w celu poznania Twojej aktualnej pozycji"</string>
+
+<!-- Fuzzy -->
+<string name="desc_vzwgpslocationprovider">"Specyficzna usługa lokalizacji Verizon używana do statystyk przez nadajniki"</string>
+<string name="desc_hangouts_rtcs">"Jeśli ograniczysz ten proces Hangouty przestaną działać"</string>
+
+<!-- Fuzzy -->
+<string name="desc_gcm_conn">"Wiadomości w chmurze Google. Wysyła małe wiadomośći do Twoich aplikacji. Odpowiedzialne za powiadomienia push dla wszystkich aplikacji."</string>
+<string name="desc_google_c2dm">"Cloud to Device Messaging (C2DM) jest usługą która pomaga deweloperom wysyłać dane do ich aplikacji na urządzeniu. Usługa ta zapewnia mechanizm przez który serwery mówią aplikacją mobilnym aby kontaktowały sie z serwerem aby zaktualizować dane. To rozwiązanie jest przestarzałe od 2012 roku ale niektóre aplikacje nadal z niego korzystają zamiast nowego usprawnionego GCM."</string>
+
+<!-- Fuzzy -->
+<string name="desc_timedeventqueue">"Jest to część rdzenia Androida. Najlepiej zostawić w spokoju. Odpowiada za kolejkowanie zdarzeń"</string>
+<string name="desc_comgoogleandroidgmsnlpalarm_wakeup_locator">"NlpWakelock jest bezpieczny do kontrolowania. Jest używany przez Google Play services do okreslania lokalizacji na podstawie WiFi i nadajników. Raz zapisana lokalizacja jest udostępniana innym aplikacjom np. Google Now może uzyskać dostęp do Twojej lokalizacji bez użycia GPS lub zapewnia nowego fixa. Polecane ustawić pomiędzy 180 a 600 sekund."</string>
+
+<!-- Fuzzy -->
+<string name="desc_comgoogleandroidgmsnlpalarm_wakeup_activity_detection">"NlpWakelock jest bezpieczny do kontrolowania. Jest używany przez Google Play services do okreslania lokalizacji na podstawie WiFi i nadajników. Raz zapisana lokalizacja jest wysyłana do Google aby mogli powiększyć ich baze lokalizacji WiFi. Polecane ustawienia pomiędzy 180 a 600 sekund."</string>
+<string name="desc_comgoogleandroidappshangoutsupdate_notification">"Sprawdza kiedy zaktualizować powiadomienia o Hangoutach"</string>
+
+<!-- Fuzzy -->
+<string name="desc_comandroidinternaltelephonydatastall">"Wywołuje go com.android.phone(telefon app) podczas gdy używany jest internet mobilny. Używanie WiFi nie podnosi tego alarmu. Zazwyczaj jest wywoływany przez niski zasięg podczas używania danych pakietowych"</string>
+<string name="settings_allow_every">"Zezwól wszystkim"</string>
+
+<!-- Fuzzy -->
+<string name="settings_seconds">"sekundy."</string>
+<string name="card_button_reset">"RESETUJ"</string>
+
+<!-- Fuzzy -->
+<string name="stat_alarms_acquired">"Otrzymane alarmy"</string>
+<string name="stat_alarms_blocked">"Zablokowane alarmy"</string>
+
+<!-- Fuzzy -->
+<string name="stat_loading">"Wczytywanie..."</string>
+<string name="stat_collected_for">"Statystyki zebrane od"</string>
+
+<!-- Fuzzy -->
+<string name="stat_wake_duration_allowed">"Czas wybudzeń"</string>
+<string name="stat_wake_duration_blocked">"Oszczędzony czas wybudzeń"</string>
+
+<!-- Fuzzy -->
+<string name="stat_wake_allowed">"Ilość wybudzeń"</string>
+<string name="stat_wake_blocked">"Wybuedznia zablokowane"</string>
+
+<!-- Fuzzy -->
+<string name="stat_alarm_allowed">"Alarmy"</string>
+<string name="stat_alarm_blocked">"Alarmy zablokowane"</string>
+
+<!-- Fuzzy -->
+<string name="stat_disabled">"Staty wył."</string>
+<string name="donate_text">"Ta aplikacja zawsze pozwoli Ci modyfikować usługi związane z Lokalizacją, co poprawi żywotność baterii. Jeśli chcesz zarządzać innymi procesami, możesz skorzystać z wersji Pro wspierając ten projekt. Kazda darowizna odblokuje funkcje Pro."</string>
+
+<!-- Fuzzy -->
+<string name="donate_1">"Filiżanka kawy podczas pisania kodu"</string>
+<string name="donate_5">"Latte podczas odpisywania na pytania na forum"</string>
+
+<!-- Fuzzy -->
+<string name="donate_10">"Radość, kiedy nie nosisz ładowarki"</string>
+<string name="donate_thank_you">"Dziękuję za Twoje wsparcie. To wiele dla mnie znaczy. Ciężko pracuję w wolnych chwilach aby zapewnić Ci lepszy czas pracy baterii. Jeśli wesprzesz ten projekt, dokonasz w nim zmiany, a zarazem zmienisz coś w moim rodzinnym życiu.
 Rządzisz."</string>
-  <!-- Fuzzy -->
-  <string name="donate_more_button">"JAK MOGĘ POMÓC DALEJ?"</string>
-  <string name="donate_more_text">"Ludzie pytają jak mogą pomóc oprócz zwykłej darowizny. Przycisk poniżej pozwoli Ci przekazać dodatkowa darowiznę lecz nie zapewni juz dodatkowych opcji. Dziękuję bardzo za wspieranie Lion Tamer!"</string>
-  <!-- Fuzzy -->
-  <string name="welcome_banner_title">"Witaj!"</string>
-  <string name="settings_category_options">"opcje"</string>
-  <!-- Fuzzy -->
-  <string name="settings_item_show_launcher">"Pokaż ikonę launchera"</string>
-  <string name="settings_item_choose_theme">"Wybierz skórkę"</string>
-  <!-- Fuzzy -->
-  <string name="settings_item_global_stats_title">"Dołącz do ogólnych statystyk"</string>
-  <string name="settings_item_global_stats_summary">"Wysyłając i odbierając anonimowe statystyki"</string>
-  <!-- Fuzzy -->
-  <string name="settings_item_reset_defaults_title">"Reset do ustawień fabrycznych"</string>
-  <string name="settings_item_reset_defaults_summary">"Resetuj alarmy i wyburzenia do ustawień fabrycznych"</string>
-  <!-- Fuzzy -->
-  <string name="settings_item_author">"Autor: Ryan Steckler"</string>
-  <!-- Fuzzy -->
-  <string name="settings_item_logging_level">"Poziom logowania"</string>
-  <string name="settings_category_translation">"Tłumaczenia"</string>
-  <!-- Fuzzy -->
-  <string name="settings_theme_material">"Material"</string>
-  <string name="settings_theme_dark">"Ciemny"</string>
-  <!-- Fuzzy -->
-  <string name="settings_logging_quiet">"Wyjście"</string>
-  <string name="settings_logging_default">"Domyślne"</string>
-  <!-- Fuzzy -->
-  <string name="settings_logging_verbose">"Verbose"</string>
-  <string name="settings_item_force_english_title">"Wymuś Angielski"</string>
-  <!-- Fuzzy -->
-  <string name="settings_item_force_english_summary">"Zamień język systemu na Angielski"</string>
-  <string name="playstore_short_description">"Moc baterii dla wszystkich!"</string>
-  <!-- Fuzzy -->
-  <string name="playstore_long_description">"***Wymagany Root ***
+
+<!-- Fuzzy -->
+<string name="donate_more_button">"JAK MOGĘ POMÓC DALEJ?"</string>
+<string name="donate_more_text">"Ludzie pytają jak mogą pomóc oprócz zwykłej darowizny. Przycisk poniżej pozwoli Ci przekazać dodatkowa darowiznę lecz nie zapewni juz dodatkowych opcji. Dziękuję bardzo za wspieranie Lion Tamer!"</string>
+
+<!-- Fuzzy -->
+<string name="welcome_banner_title">"Witaj!"</string>
+<string name="welcome_banner_text">"Możesz zablokować wybudzenia aby powstrzymac telefon od bycia aktywnym oraz blokuj alarmy aby nie były wybudzane w pierwszej kolejności. Domyślnie ustawiliśmy już kilka opcji za Ciebie."</string>
+
+<!-- Don't translate this one  :) -->
+<!-- Fuzzy -->
+<string name="app_font_family">"sans_serif"</string>
+<string name="settings_category_options">"opcje"</string>
+
+<!-- Fuzzy -->
+<string name="settings_item_show_launcher">"Pokaż ikonę launchera"</string>
+<string name="settings_item_choose_theme">"Wybierz skórkę"</string>
+
+<!-- Fuzzy -->
+<string name="settings_item_global_stats_title">"Dołącz do ogólnych statystyk"</string>
+<string name="settings_item_global_stats_summary">"Wysyłając i odbierając anonimowe statystyki"</string>
+
+<!-- Fuzzy -->
+<string name="settings_item_reset_defaults_title">"Reset do ustawień fabrycznych"</string>
+<string name="settings_item_reset_defaults_summary">"Resetuj alarmy i wyburzenia do ustawień fabrycznych"</string>
+
+<!-- Fuzzy -->
+<string name="settings_category_debug">"Debuguj"</string>
+<string name="settings_item_author">"Autor: Ryan Steckler"</string>
+
+<!-- Fuzzy -->
+<string name="settings_item_logging_level">"Poziom logowania"</string>
+<string name="settings_category_translation">"Tłumaczenia"</string>
+
+<!-- Fuzzy -->
+<string name="settings_theme_material">"Material"</string>
+<string name="settings_theme_dark">"Ciemny"</string>
+
+<!-- Fuzzy -->
+<string name="settings_logging_quiet">"Wyjście"</string>
+<string name="settings_logging_default">"Domyślne"</string>
+
+<!-- Fuzzy -->
+<string name="settings_logging_verbose">"Verbose"</string>
+<string name="settings_item_force_english_title">"Wymuś Angielski"</string>
+
+<!-- Fuzzy -->
+<string name="settings_item_force_english_summary">"Zamień język systemu na Angielski"</string>
+<string name="playstore_short_description">"Moc baterii dla wszystkich!"</string>
+<string name="playstore_long_description">"***Wymagany Root ***
 
 Dobrowolne zacytowania od użytkowników:
 \"Dodało mi to około 2h więcej czasu pracy przy 30min dłuższego działania ekranu. Oszczędziłem 25$ na nowej baterii.\"
@@ -211,38 +277,63 @@ Kilka głównych funkcji:
 Funkcja zakupu w aplikacji pozwoli Ci na odblokowanie funkcji Pro które pozwolą Ci na pełną kontrolę każdego wybudzenia i alarmu na Twoim urządzeniu. Bez paczki Pro możesz kontrolować największe zjadacze baterii: NlpCollectorWakeLock, ALARM_WAKEUP_LOCATOR oraz ALARM_WAKE_ACTIVITY_DETECTION.
 
 Życzę dłuższej pracy na baterii!"</string>
-  <string name="welcome_banner_welcome">"Witaj!"</string>
-  <!-- Fuzzy -->
-  <string name="welcome_banner_checking_service">"Sprawdzanie, czy Lion Tamer działa..."</string>
-  <string name="welcome_banner_checking_xposed">"Sprawdzanie instalacji Lion Tamer..."</string>
-  <!-- Fuzzy -->
-  <string name="welcome_banner_checking_root">"Sprawdzanie roota..."</string>
-  <string name="welcome_banner_checking_looks_great">"Wygląda, że wszystko ok!"</string>
-  <!-- Fuzzy -->
-  <string name="welcome_banner_checking_uhoh">"Coś poszło nie tak. Zobaczmy co trzeba naprawić..."</string>
-  <string name="welcome_banner_problem_none">"Ustawiliśmy kilka rzeczy za Ciebie w celu wydłużenia pracy baterii. Powodzenia!"</string>
-  <!-- Fuzzy -->
-  <string name="welcome_banner_problem_service">"Wygląda, że nie włączyłeś modułu Lion Tamer. Naciśnij NAPRAW TO, sprawdź zaznaczenie modułu i uruchom ponownie."</string>
-  <string name="welcome_banner_problem_xposed_running">"Xposed nie działa. Naciśnij NAPRAW TO, następnie instaluj/aktualizuj i uruchom ponownie."</string>
-  <!-- Fuzzy -->
-  <string name="welcome_banner_problem_xposed_installed">"Xposed nie jest zainstalowany. Lion Tamer wymaga Xposed i innych aplikacji wymagających roota. Po pobraniu naciśnij INSTALLUJ i uruchom Lion Tamer ponownie. Jeśli chcesz się dowiedzieć więcej:  %1$s "</string>
-  <string name="welcome_banner_problem_root">"Wygląda, że Twoje urządzenie nie ma roota. Lion Tamer wymaga roota do poprawnego działania. Jeśli chcesz zrootować swój telefon sprawdź:  %1$s."</string>
-  <!-- Fuzzy -->
-  <string name="welcome_banner_button_next">"DALEJ"</string>
-  <string name="welcome_banner_button_fixit">"NAPRAW"</string>
-  <!-- Fuzzy -->
-  <string name="welcome_banner_button_exit">"WYJDŹ"</string>
-  <string name="welcome_banner_button_install">"ZAINSTALUJ"</string>
-  <!-- Fuzzy -->
-  <string name="welcome_downloading_xposed">"Pobieranie Xposed..."</string>
-  <string name="welcome_downloaded_xposed">"Pobieranie ukończone"</string>
-  <!-- Fuzzy -->
-  <string name="welcome_download_error_xposed">"Pobieranie nieudane. Spróbuj później."</string>
-  <string name="download_xposed_title">"Pobieranie Xposed"</string>
-  <!-- Fuzzy -->
-  <string name="download_xposed_description">"Wymagania Lion Tamer"</string>
-  <string name="requires_root">"***Wymaga roota***"</string>
-  <!-- Fuzzy -->
-  <string name="installs_xposed">"Lion Tamer używa Xposed Framework, jeśli go nie masz, zainstaluje się automatycznie."</string>
-  <string name="settings_category_code_credits">"Przypisy Twórcy"</string>
+
+<!-- Fuzzy -->
+<string name="welcome_banner_welcome">"Witaj!"</string>
+<string name="welcome_banner_checking_service">"Sprawdzanie, czy Lion Tamer działa..."</string>
+<string name="welcome_banner_checking_xposed">"Sprawdzanie instalacji Lion Tamer..."</string>
+
+<!-- Fuzzy -->
+<string name="welcome_banner_checking_root">"Sprawdzanie roota..."</string>
+<string name="welcome_banner_checking_looks_great">"Wygląda, że wszystko ok!"</string>
+
+<!-- Fuzzy -->
+<string name="welcome_banner_checking_uhoh">"Coś poszło nie tak. Zobaczmy co trzeba naprawić..."</string>
+<string name="welcome_banner_problem_none">"Ustawiliśmy kilka rzeczy za Ciebie w celu wydłużenia pracy baterii. Powodzenia!"</string>
+<string name="welcome_banner_problem_service">"Wygląda, że nie włączyłeś modułu Lion Tamer. Naciśnij NAPRAW TO, sprawdź zaznaczenie modułu i uruchom ponownie."</string>
+
+<!-- Fuzzy -->
+<string name="welcome_banner_problem_xposed_running">"Xposed nie działa. Naciśnij NAPRAW TO, następnie instaluj/aktualizuj i uruchom ponownie."</string>
+<string name="welcome_banner_problem_xposed_installed">"Xposed nie jest zainstalowany. Lion Tamer wymaga Xposed i innych aplikacji wymagających roota. Po pobraniu naciśnij INSTALLUJ i uruchom Lion Tamer ponownie. Jeśli chcesz się dowiedzieć więcej:  %1$s "</string>
+<string name="welcome_banner_problem_root">"Wygląda, że Twoje urządzenie nie ma roota. Lion Tamer wymaga roota do poprawnego działania. Jeśli chcesz zrootować swój telefon sprawdź:  %1$s."</string>
+
+<!-- Fuzzy -->
+<string name="welcome_banner_button_next">"DALEJ"</string>
+<string name="welcome_banner_button_fixit">"NAPRAW"</string>
+
+<!-- Fuzzy -->
+<string name="welcome_banner_button_exit">"WYJDŹ"</string>
+<string name="welcome_banner_button_install">"ZAINSTALUJ"</string>
+
+<!-- Fuzzy -->
+<string name="welcome_downloading_xposed">"Pobieranie Xposed..."</string>
+<string name="welcome_downloaded_xposed">"Pobieranie ukończone"</string>
+
+<!-- Fuzzy -->
+<string name="welcome_download_error_xposed">"Pobieranie nieudane. Spróbuj później."</string>
+<string name="download_xposed_title">"Pobieranie Xposed"</string>
+
+<!-- Fuzzy -->
+<string name="download_xposed_description">"Wymagania Lion Tamer"</string>
+<string name="requires_root">"***Wymaga roota***"</string>
+<string name="installs_xposed">"Lion Tamer używa Xposed Framework, jeśli go nie masz, zainstaluje się automatycznie."</string>
+
+<!-- Fuzzy -->
+<string name="settings_category_code_credits">"Przypisy Twórcy"</string>
+<string name="title_services">"Usługi"</string>
+<string name="action_sort_by_alpha"></string>
+
+<!-- Fuzzy -->
+<string name="card_settings_subtitle_service">"Kontroluj usługę"</string>
+<string name="tasker_choose_service"></string>
+<string name="alert_unknown_service_title"></string>
+<string name="alert_unknown_service_content"></string>
+
+<!-- Fuzzy -->
+<string name="stat_service_allowed">"Usługa uruchomiona"</string>
+<string name="stat_service_blocked">"Usługa zablokowna"</string>
+
+<!-- Fuzzy -->
+<string name="service_switch_allow">"Pozwól"</string>
+<string name="service_switch_deny">"Odmów"</string>
 </resources>
