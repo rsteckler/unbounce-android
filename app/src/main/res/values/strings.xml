@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingTranslation" >
 <string name="app_name">"Amplify"</string>
 <string name="version">"Version"</string>
 <string name="title_activity_material_settings">"Amplify"</string>
