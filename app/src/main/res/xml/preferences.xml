@@ -56,7 +56,7 @@
             android:key="about_author"
             android:editable="false"
             android:defaultValue="0"
-            android:summary="Version: 1.5.1"
+            android:summary="Version: 2.0"
             />
 
         <Preference

@@ -20,11 +20,11 @@
             android:value="42" />
         <meta-data
             android:name="xposeddescription"
-            android:value="Tame your alarms, wakelocks and services" />
+            android:value="Control battery killing alarms, wakelocks and services" />
 
         <activity
             android:name=".SettingsActivity"
-            android:label="Lion Tamer settings" >
+            android:label="Amplify settings" >
         </activity>
 
         <receiver
