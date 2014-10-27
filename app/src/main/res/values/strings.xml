@@ -56,9 +56,9 @@
 <string name="dialog_delete">"DELETE"</string>
 <string name="alert_delete_stats_title">"Delete all stats?"</string>
 <string name="alert_delete_stats_content">"This will reset stats for all of your wakelocks and alarms!"</string>
-<string name="title_settings">"Settings"</string>
-<string name="alert_reset_settings_title">"Reset to defaults?"</string>
-<string name="alert_reset_settings_content">"This will reset all of the settings for alarms and wakelocks!"</string>
+<string name="settings_extended_debug_options">"Debug Settings"</string>
+<string name="settings_item_partition_broadcast_title">"Alternate broadcast method"</string>
+<string name="settings_item_partition_broadcast_summary">"Partition broadcasts - may cause instability."</string>
 <string name="dialog_reset">"RESET"</string>
 <string name="reset_settings_confirmation">"Settings have been reset to defaults."</string>
 <string name="dialog_save">"SAVE"</string>

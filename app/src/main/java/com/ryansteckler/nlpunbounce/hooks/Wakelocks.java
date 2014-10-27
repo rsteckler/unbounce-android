@@ -41,7 +41,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
     private static final String VERSION = "2.0"; //This needs to be pulled from the manifest or gradle build.
     private HashMap<String, Long> mLastWakelockAttempts = null; //The last time each wakelock was allowed.
     private HashMap<String, Long> mLastAlarmAttempts = null; //The last time each alarm was allowed.
-    private HashMap<String, Long> mLastServiceAttempts = null; //The last time each wakelock was allowed.
+//    private HashMap<String, Long> mLastServiceAttempts = null; //The last time each wakelock was allowed.
 
     private long mLastUpdateStats = 0;
     private long mUpdateStatsFrequency = 600000; //Send for saving every ten minutes
@@ -71,7 +71,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
 //            mCurrentServices = new HashMap<String, InterimEvent>();
             mLastWakelockAttempts = new HashMap<String, Long>();
             mLastAlarmAttempts = new HashMap<String, Long>();
-            mLastServiceAttempts = new HashMap<String, Long>();
+//            mLastServiceAttempts = new HashMap<String, Long>();
 
             hookAlarms(lpparam);
             hookWakeLocks(lpparam);
@@ -160,11 +160,18 @@ public class Wakelocks implements IXposedHookLoadPackage {
     private void hookServices(LoadPackageParam lpparam) {
         boolean servicesHooked = false;
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             //Try for wakelock hooks for API levels 19-20
-            defaultLog("Attempting 19to20 ServiceHook");
-            try19To20ServiceHook(lpparam);
-            defaultLog("Successful 19to20 ServiceHook");
+            defaultLog("Attempting 17to20 ServiceHook");
+            try17To20ServiceHook(lpparam);
+            defaultLog("Successful 17to20 ServiceHook");
+            servicesHooked = true;
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH &&
+        Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN) {
+            //Try for wakelock hooks for API levels 19-20
+            defaultLog("Attempting 14to16 ServiceHook");
+            try14To16ServiceHook(lpparam);
+            defaultLog("Successful 14to16 ServiceHook");
             servicesHooked = true;
         }
 //        else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1 &&
@@ -188,7 +195,8 @@ public class Wakelocks implements IXposedHookLoadPackage {
         }
     }
 
-    private void try19To20ServiceHook(LoadPackageParam lpparam) {
+    //in back to 4.2_r1
+    private void try17To20ServiceHook(LoadPackageParam lpparam) {
         findAndHookMethod("com.android.server.am.ActiveServices", lpparam.classLoader, "startServiceLocked", "android.app.IApplicationThread", Intent.class, String.class, int.class, int.class, int.class, new XC_MethodHook() {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -206,6 +214,27 @@ public class Wakelocks implements IXposedHookLoadPackage {
 //        });
 
     }
+
+    //4.1.2r1 to
+    private void try14To16ServiceHook(LoadPackageParam lpparam) {
+        findAndHookMethod("com.android.server.am.ActivityManagerService", lpparam.classLoader, "startServiceLocked", "android.app.IApplicationThread", Intent.class, String.class, int.class, int.class, new XC_MethodHook() {
+            @Override
+            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                Intent intent = (Intent) param.args[1];
+                handleServiceStart(param, intent);
+            }
+        });
+
+//        findAndHookMethod("com.android.server.am.ActiveServices", lpparam.classLoader, "stopServiceLocked", "android.app.IApplicationThread", Intent.class, String.class, int.class, new XC_MethodHook() {
+//            @Override
+//            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+//                Intent intent = (Intent) param.args[1];
+//                handleServiceStop(param, intent);
+//            }
+//        });
+
+    }
+
 
     private void try19To20WakeLockHook(LoadPackageParam lpparam) {
         findAndHookMethod("com.android.server.power.PowerManagerService", lpparam.classLoader, "acquireWakeLockInternal", android.os.IBinder.class, int.class, String.class, String.class, android.os.WorkSource.class, int.class, int.class, new XC_MethodHook() {
@@ -422,49 +451,46 @@ public class Wakelocks implements IXposedHookLoadPackage {
 
             if (timeSinceLastUpdateStats > mUpdateStatsFrequency) {
                 HashMap<String, BaseStats> statsToSend = UnbounceStatsCollection.getInstance().getSerializableStats(UnbounceStatsCollection.STAT_CURRENT);
-                sendStatsToActivity(context, statsToSend);
+                sendStatsToActivity(context, statsToSend, UnbounceStatsCollection.STAT_CURRENT);
 
-                Intent intentPush = new Intent(ActivityReceiver.SEND_STATS_ACTION);
-                //TODO:  add FLAG_RECEIVER_REGISTERED_ONLY_BEFORE_BOOT to the intent to avoid needing to catch
-                //      the IllegalStateException.  The flag value changed between 4.3 and 4.4  :/
-                intentPush.putExtra("stats", UnbounceStatsCollection.getInstance().getSerializableStats(UnbounceStatsCollection.STAT_PUSH));
-                intentPush.putExtra("stat_type", UnbounceStatsCollection.STAT_PUSH);
-                try {
-                    context.sendBroadcast(intentPush);
-                } catch (IllegalStateException ise) {
-                    //Ignore.  This is because boot hasn't completed yet.
-                }
+                statsToSend = UnbounceStatsCollection.getInstance().getSerializableStats(UnbounceStatsCollection.STAT_PUSH);
+                sendStatsToActivity(context, statsToSend, UnbounceStatsCollection.STAT_PUSH);
 
                 mLastUpdateStats = now;
             }
         }
     }
 
-    private void sendStatsToActivity(Context context, HashMap<String, BaseStats> statsToSend) {
-        HashMap<String, BaseStats> incrementalSend = new HashMap<String, BaseStats>(50);
+    private void sendStatsToActivity(Context context, HashMap<String, BaseStats> statsToSend, int statType) {
+        int incrementalSize = 100000;  //unlikely to exceed this.
+        if (m_prefs.getBoolean("partition_broadcast", false)) {
+            incrementalSize = 50;
+        }
+
+        HashMap<String, BaseStats> incrementalSend = new HashMap<String, BaseStats>(incrementalSize);
         debugLog("Total stats to send: " + statsToSend.size());
 
         for (Map.Entry<String, BaseStats> curStat : statsToSend.entrySet()) {
             incrementalSend.put(curStat.getKey(), curStat.getValue());
-            if (incrementalSend.size() == 20) {
-                sendStatsBroadcast(context, incrementalSend);
+            if (incrementalSend.size() == incrementalSize) {
+                sendStatsBroadcast(context, incrementalSend, statType);
                 incrementalSend.clear();
             }
         }
         if (incrementalSend.size() > 0) {
             //send the balance
-            sendStatsBroadcast(context, incrementalSend);
+            sendStatsBroadcast(context, incrementalSend, statType);
         }
 
     }
 
-    private void sendStatsBroadcast(Context context, HashMap<String, BaseStats> incrementalSend) {
+    private void sendStatsBroadcast(Context context, HashMap<String, BaseStats> incrementalSend, int statType) {
         debugLog("Incremental send: " + incrementalSend.size());
         Intent intent = new Intent(ActivityReceiver.SEND_STATS_ACTION);
         //TODO:  add FLAG_RECEIVER_REGISTERED_ONLY_BEFORE_BOOT to the intent to avoid needing to catch
         //      the IllegalStateException.  The flag value changed between 4.3 and 4.4  :/
         intent.putExtra("stats", incrementalSend);
-        intent.putExtra("stat_type", UnbounceStatsCollection.STAT_CURRENT);
+        intent.putExtra("stat_type", statType);
         intent.putExtra("running_since", UnbounceStatsCollection.getInstance().getRunningSince());
         try {
             context.sendBroadcast(intent);

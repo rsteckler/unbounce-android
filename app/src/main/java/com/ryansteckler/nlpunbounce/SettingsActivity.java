@@ -25,12 +25,16 @@ public class SettingsActivity extends Activity {
     int mCurTheme = ThemeHelper.THEME_DEFAULT;
     int mCurForceEnglish = -1;
 
+    static int mClicksOnDebug = 0;
+    static Preference mExtendedDebugCategory = null;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         mCurTheme = ThemeHelper.onActivityCreateSetTheme(this);
         mCurForceEnglish = LocaleHelper.onActivityCreateSetLocale(this);
+        mClicksOnDebug = 0;
 
         // Display the fragment as the main content.
         if (savedInstanceState == null)
@@ -90,6 +94,34 @@ public class SettingsActivity extends Activity {
                     return true;
                 }
             });
+
+            pref = (Preference) findPreference("about_author");
+            pref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    if (sharedPref.getBoolean("show_extended_debug_options", false)) {
+                        mClicksOnDebug++;
+                        Toast.makeText(getActivity(), "You are " + (10 - mClicksOnDebug) + " from enabling extended debug options.", Toast.LENGTH_SHORT).show();
+                        if (mClicksOnDebug == 10) {
+                            SharedPreferences.Editor edit = sharedPref.edit();
+                            edit.putBoolean("show_extended_debug_options", true);
+                            edit.apply();
+                            getPreferenceScreen().addPreference(mExtendedDebugCategory);
+                        }
+                    }
+                    else {
+                        Toast.makeText(getActivity(), "You've already enabled extended debug options.", Toast.LENGTH_SHORT).show();
+                    }
+                    return true;
+                }
+            });
+
+            //Hide extended debug options
+            mExtendedDebugCategory = findPreference("extended_debug_options");
+            if (!sharedPref.getBoolean("show_extended_debug_options", false)) {
+                getPreferenceScreen().removePreference(mExtendedDebugCategory);
+            }
+
         }
 
         private void enableDependent(String control, boolean enable)
@@ -140,8 +172,10 @@ public class SettingsActivity extends Activity {
                 } else {
                     LocaleHelper.revertToSystem(getActivity());
                 }
-
-
+            } else if (key.equals("partition_broadcast")) {
+                CheckBoxPreference pref = (CheckBoxPreference) findPreference(key);
+                boolean value = sharedPreferences.getBoolean(key, false);
+                pref.setChecked(value);
             }
 
 
