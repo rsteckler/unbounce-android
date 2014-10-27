@@ -78,10 +78,20 @@ public class UnbounceStatsCollection implements Serializable {
     public void populateSerializableStats(HashMap<String, BaseStats> source, int statType, long runningSince)
     {
         if (statType == STAT_CURRENT) {
-            mCurrentStats = source;
+            try {
+                mCurrentStats = source;
+            } catch (ClassCastException cce) {
+                //Probable version upgrade and stat incompatibility.  Reset the stats.
+                mCurrentStats = new HashMap<String, BaseStats>();
+            }
             mRunningSince = runningSince;
         } else if (statType == STAT_PUSH) {
-            mSincePushStats = source;
+            try {
+                mSincePushStats = source;
+            } catch (ClassCastException cce) {
+                //Probable version upgrade and stat incompatibility.  Reset the stats.
+                mSincePushStats = new HashMap<String, BaseStats>();
+            }
         }
     }
 
