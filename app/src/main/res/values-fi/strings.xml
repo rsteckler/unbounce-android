@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">"Unbounce"</string>
+  <string name="app_name">"Amplify"</string>
   <string name="version">"Versio"</string>
-  <string name="title_activity_material_settings">"Unbounce"</string>
+  <string name="title_activity_material_settings">"Amplify"</string>
   <string name="title_home">"Koti"</string>
   <string name="title_wakelocks">"Herätykset"</string>
   <string name="title_alarms">"Hälytykset"</string>
@@ -30,14 +30,14 @@
   <string name="category_not_safe">"Epäturvallisia hallita"</string>
   <string name="category_error">"Virhe"</string>
   <string name="alert_noiab_title">"Maksulliset ominaisuudet ei saatavilla"</string>
-  <string name="alert_noiab_content">"Laitteesi ei tue ohjelmien sisäisiä maksuja.  Et voi ostaa Unbouncen maksullisia palveluita.  Tämä saattaa johtua vanhentuneesta Google Play Store-ohjelmasta, tai siitä, että asut maassa jossa tämä palvelu ei ole saatavissa."</string>
+  <string name="alert_noiab_content">"Laitteesi ei tue ohjelmien sisäisiä maksuja.  Et voi ostaa Amplify maksullisia palveluita.  Tämä saattaa johtua vanhentuneesta Google Play Store-ohjelmasta, tai siitä, että asut maassa jossa tämä palvelu ei ole saatavissa."</string>
   <string name="dialog_ok">"OK"</string>
   <string name="tasker_on">"Päällä"</string>
   <string name="tasker_off">"Pois"</string>
   <string name="tasker_reset_stats">"Nollaa tilastot"</string>
   <string name="tasker_choose_wakelock">"Valitse hallittava herätys."</string>
   <string name="tasker_choose_alarm">"Valitse hallittava hälytys."</string>
-  <string name="tasker_welcome">"Tervetuloa Unbouncen Tasker plug-iniin."</string>
+  <string name="tasker_welcome">"Tervetuloa Amplify Tasker plug-iniin."</string>
   <string name="tasker_which_task">"Haluatko muuttaa herätyksen tai hälytyksen asetuksia, vai haluatko nollata laitteesi tilastot?"</string>
   <string name="tasker_task_wakelock">"MUUTA HERÄTYSTÄ"</string>
   <string name="tasker_task_alarm">"MUUTA HÄLYTYSTÄ"</string>
@@ -107,6 +107,7 @@
   <string name="donate_more_button">"KUINKA VOIN VIELÄ AUTTAA SINUA?"</string>
   <string name="donate_more_text">"Ihmiset ovat kysyneet kuinka he voisivat lahjoittaa lisää.  Napit alhaalla antavat sinun lahjoittaa uudestaan, mutteivät anna lisäominaisuuksia.  Kiitos paljon tuestasi!!"</string>
   <string name="welcome_banner_title">"Tervetuloa!"</string>
+  <string name="welcome_banner_text">"Voit estää herätyksiä estääksesi puhelimen pysymisen hereillä, ja estää hälytyksiä estääksesi sen heräämisen.  Olemme jo asettaneet joitakin asetuksia valmiiksi."</string>
   <string name="playstore_short_description">"Pitkää [akku]ikää!"</string>
   <string name="playstore_long_description">"
 ***Vaatii rootin sekä Xposed Frameworkin***
@@ -114,11 +115,11 @@ Lainauksia oikeilta käyttäjiltä:
 Antoi minulle noin 2 tuntia lisää akkua ja 30 minuuttia lisää näyttöaikaa. Pelasti minut 25€ akun ostolta
 Lahjoitin juuri 5 dollaria tukeakseni tätä mestariteosta. Jatka samaan malliin
 Yksinkertaisesti upeaa
-[Unbounce] mullisti juuri wakelock-hallinnan oikean merkityksen
+[Amplify] mullisti juuri wakelock-hallinnan oikean merkityksen
 Tämä moduuli on upea! Menetän vähemmän kuin puoli prosenttia tunnissa valmiustilassa!
 ...ja monia muita.
 
-Unbounce laittaa sinut laitteesi herätysten hallintaan antamalla sinulle ohjakset mukauttaa
+Amplify laittaa sinut laitteesi herätysten hallintaan antamalla sinulle ohjakset mukauttaa
 sitä, kuinka usein laitteesi voi herätä ja kuinka kauan se pysyy hereillä. Käytä oletusasetuksia
 helpon akunsäästön aikaansaamiseksi, tai kaivaudu syvemmälle ja mukauta jokaista hälytystä tai herätystä laitteessasi.
 Tässä joitain yksityiskohtia:

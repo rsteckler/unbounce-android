@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">"Lion Tamer"</string>
+  <string name="app_name">"Amplify"</string>
   <string name="version">"Versiunea"</string>
-  <string name="title_activity_material_settings">"Lion Tamer"</string>
+  <string name="title_activity_material_settings">"Amplify"</string>
   <string name="title_home">"Acasa"</string>
   <string name="title_wakelocks">"Wakelocks"</string>
   <string name="title_alarms">"Alarme"</string>
@@ -24,31 +24,31 @@
   <string name="card_settings_subtitle_wakelock">"Controleaza acest.."</string>
   <string name="card_description_title">"DESCRIERE"</string>
   <string name="card_description_subtitle">"De ce acest lucru iti mananca bateria?"</string>
-  <string name="category_unbounced">"Tamed"</string>
-  <string name="category_safe">"In siguranta pentru Tame"</string>
+  <string name="category_unbounced">"Limited"</string>
+  <string name="category_safe">"In siguranta pentru limit"</string>
   <string name="category_unknown">"Necunoscut"</string>
-  <string name="category_not_safe">"Nesigur pentru Tame"</string>
+  <string name="category_not_safe">"Nesigur pentru limit"</string>
   <string name="category_error">"Eroare"</string>
-  <string name="alert_noiab_content">"Telefonul tau nu suporta in-app-billing. Nu o sa poti cumpara functionalitatile pro pentru Lion Tamer. Acest lucru poate fii cauzat din cauza unei versiuni mai vechi al aplicatiei Google Play Store, sau din cauza faptului ca traiesti intr-o tara unde in-app-billing sunt dezactivate."</string>
+  <string name="alert_noiab_content">"Telefonul tau nu suporta in-app-billing. Nu o sa poti cumpara functionalitatile pro pentru Amplify. Acest lucru poate fii cauzat din cauza unei versiuni mai vechi al aplicatiei Google Play Store, sau din cauza faptului ca traiesti intr-o tara unde in-app-billing sunt dezactivate."</string>
   <string name="dialog_ok">"OK"</string>
   <string name="tasker_on">"On"</string>
   <string name="tasker_off">"Off"</string>
   <string name="tasker_reset_stats">"Reseteaza statistica"</string>
   <string name="tasker_choose_wakelock">"Ajusteaza wakelock-ul selectat"</string>
   <string name="tasker_choose_alarm">"Ajusteaza alarma selectata"</string>
-  <string name="tasker_welcome">"Bine ai venit la plugin-ul Tasker pentru aplicatia Lion Tamer"</string>
+  <string name="tasker_welcome">"Bine ai venit la plugin-ul Tasker pentru aplicatia Amplify"</string>
   <string name="tasker_which_task">"Vrei sa schimbi setarile pentru un wakelock sau o alarma, sau doresti sa resetezi statistica pentru device-ul tau?"</string>
   <string name="tasker_task_wakelock">"AJUSTEAZA WAKELOCK-UL"</string>
   <string name="tasker_task_alarm">"AJUSTEAZA ALARMA"</string>
   <string name="tasker_task_reset">"RESETEAZA STATISTICA"</string>
   <string name="alert_nopro_content">"Pentru a modifica un wakelock sau o alarma care nu sunt oferite din start de catre aplicatie, trebuie sa cumparati un pachet de donatie."</string>
-  <string name="alert_unknown_alarm_title">"Tame alarma necunoscuta?"</string>
-  <string name="alert_unknown_alarm_content">"Aceasta alarma nu a fost dovedita a fii sigura pentru Tame. Doresti sa o Tame?"</string>
-  <string name="dialog_unbounce">"TAME"</string>
+  <string name="alert_unknown_alarm_title">"Limit alarma necunoscuta?"</string>
+  <string name="alert_unknown_alarm_content">"Aceasta alarma nu a fost dovedita a fii sigura pentru limit. Doresti sa o limit?"</string>
+  <string name="dialog_unbounce">"LIMIT"</string>
   <string name="dialog_cancel">"ANULEAZA"</string>
   <string name="tasker_choose_settings">"Alege setarile care doresti."</string>
-  <string name="alert_unknown_wakelock_title">"Tame wakelock necunoscut?"</string>
-  <string name="alert_unknown_wakelock_content">"Acest wakelock nu a fost dovedit a fii sigur pentru Tame. Doresti sa il Tame?"</string>
+  <string name="alert_unknown_wakelock_title">"Limit wakelock necunoscut?"</string>
+  <string name="alert_unknown_wakelock_content">"Acest wakelock nu a fost dovedit a fii sigur pentru limit. Doresti sa il limit?"</string>
   <string name="alert_delete_stats_title">"Sterge toate statisticile?"</string>
   <string name="alert_delete_stats_content">"Acest lucru v-a sterge toate statisticile pentru alarmele si wakelock-urile tale!"</string>
   <string name="title_settings">"Setari"</string>
@@ -57,10 +57,9 @@
   <string name="dialog_reset">"RESETEAZA"</string>
   <string name="reset_settings_confirmation">"Setarile au fost resetate la default."</string>
   <string name="dialog_save">"SALVEAZA"</string>
-  <string name="desc_unknown">"Nu avem informatii despre acest eveniment, inca. Acest lucru poate fii nesigur pentru Tame. Fa acest lucru doar daca esti sigur si stii cum sa dai disable la Xposed in timpul procesului de boot-are al telefonului! Lucram din greu pentru a aduna cat mai multe informatii despre toate wakelock-urile si alarmele majore. Chill, pana le avem pe toate, bro!"</string>
-  <string name="desc_nlpwakelock">"NlpWakeLock este sigur pentru Tame. Este folosit de catre Google Play Service pentru a determina locatia ta folosing o combinatie WiFi+semnalul GSM al telefonului. De indata ce locatia este valabila, o salveaza local pentru ca alte aplicatii sa o poata folosi, exemplu Google Now, care iti poate accesa locatia fara sa utilizeze GPS sau sa trebuiasca sa o afle din nou. Setarile recomandate sunt intre 180 si 600 secunde."</string>
-  <string name="desc_nlpcollectorwakelock">"NlpWakeLock este sigur pentru Tame. Este folosit de catre Google Play Service pentru a determina locatia ta folosing o combinatie WiFi+semnalul GSM al telefonului. De indata ce locatia este valabila, o salveaza local pentru ca alte aplicatii sa o poata folosi, exemplu Google Now, care iti poate accesa locatia fara sa utilizeze GPS sau sa trebuiasca sa o afle din nou. Setarile recomandate sunt intre 180 si 600 secunde."</string>
+  <string name="desc_unknown">"Nu avem informatii despre acest eveniment, inca. Acest lucru poate fii nesigur pentru limit. Fa acest lucru doar daca esti sigur si stii cum sa dai disable la Xposed in timpul procesului de boot-are al telefonului! Lucram din greu pentru a aduna cat mai multe informatii despre toate wakelock-urile si alarmele majore. Chill, pana le avem pe toate, bro!"</string>
+  <string name="desc_nlpwakelock">"NlpWakeLock este sigur pentru limit. Este folosit de catre Google Play Service pentru a determina locatia ta folosing o combinatie WiFi+semnalul GSM al telefonului. De indata ce locatia este valabila, o salveaza local pentru ca alte aplicatii sa o poata folosi, exemplu Google Now, care iti poate accesa locatia fara sa utilizeze GPS sau sa trebuiasca sa o afle din nou. Setarile recomandate sunt intre 180 si 600 secunde."</string>
+  <string name="desc_nlpcollectorwakelock">"NlpWakeLock este sigur pentru limit. Este folosit de catre Google Play Service pentru a determina locatia ta folosing o combinatie WiFi+semnalul GSM al telefonului. De indata ce locatia este valabila, o salveaza local pentru ca alte aplicatii sa o poata folosi, exemplu Google Now, care iti poate accesa locatia fara sa utilizeze GPS sau sa trebuiasca sa o afle din nou. Setarile recomandate sunt intre 180 si 600 secunde."</string>
   <string name="desc_alarmmanager">"Aceasta alarma ofera acces la serviciul de alarma al sistemului. Cand o alarma este inchisa, intent-ul care a fost registrat este transmis de catre sistem, iar aplicatia care a furnizat aceasta alarma este lansata. Alarmele inregistrate sunt stocate cand telefonul este in starea de somnolenta (deep sleep) (si poate sa trezeasca telefonul daca acestea sunt inchise in timpul somnului), dar vor disparea daca telefonul este inchis si redeschis."</string>
   <string name="desc_audiooffload">"Playback audio cand ecranul telefonului este stins. Daca "</string>
-  <!-- Don't translate this one  :) -->
 </resources>

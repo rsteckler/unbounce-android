@@ -24,7 +24,7 @@
         android:id="@+id/textviewCategoryName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Unbounced"
+        android:text=""
         android:fontFamily="@string/app_font_family"
         android:layout_weight="1"
         android:singleLine="true"
