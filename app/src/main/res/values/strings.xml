@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:ignore="MissingTranslation" >
+<resources>
 <string name="app_name">"Amplify"</string>
 <string name="version">"Version"</string>
 <string name="title_activity_material_settings">"Amplify"</string>
 <string name="title_home">"Home"</string>
 <string name="title_wakelocks">"Wakelocks"</string>
-    <string name="title_alarms">"Alarms"</string>
-    <string name="title_settings">"Settings"</string>
+<string name="title_alarms">"Alarms"</string>
 <string name="navigation_drawer_open">"Open navigation drawer"</string>
 <string name="navigation_drawer_close">"Close navigation drawer"</string>
 <string name="action_search">"Search"</string>
@@ -57,6 +54,9 @@
 <string name="dialog_delete">"DELETE"</string>
 <string name="alert_delete_stats_title">"Delete all stats?"</string>
 <string name="alert_delete_stats_content">"This will reset stats for all of your wakelocks and alarms!"</string>
+<string name="title_settings">"Settings"</string>
+<string name="alert_reset_settings_title">"Reset to defaults?"</string>
+<string name="alert_reset_settings_content">"This will reset all of the settings for alarms and wakelocks!"</string>
 <string name="dialog_reset">"RESET"</string>
 <string name="reset_settings_confirmation">"Settings have been reset to defaults."</string>
 <string name="dialog_save">"SAVE"</string>
@@ -108,6 +108,9 @@
 <string name="donate_more_text">"People have asked how they can contribute beyond their initial donation.  The buttons below let you donate further, but don't provide any additional features.  Thank you so much for supporting Amplify!"</string>
 <string name="welcome_banner_title">"Let's make sure everything is setup."</string>
 <string name="welcome_banner_text">"You can block wakelocks to stop your phone from staying awake, and block alarms to stop it from waking up in the first place.  We've already set up some battery saving defaults for you."</string>
+
+<!-- Don't translate this one  :) -->
+<string name="app_font_family">"sans_serif"</string>
 <string name="settings_category_options">"Options"</string>
 <string name="settings_item_show_launcher">"Show launcher icon"</string>
 <string name="settings_item_choose_theme">"Choose theme"</string>
@@ -160,7 +163,8 @@ May you have a long [battery] life!
 <string name="welcome_banner_problem_none">"We've setup some battery saving defaults for you.  Enjoy your new battery life!"</string>
 <string name="welcome_banner_problem_service">"It looks like you haven't enabled the Amplify module. Click \"FIX IT\", make sure Amplify is checked, then reboot."</string>
 <string name="welcome_banner_problem_xposed_running">"Xposed isn't running. Click \"FIX IT\", then click \"Install/Update\" and reboot your device."</string>
-<string name="welcome_banner_problem_xposed_installed">"Xposed isn't installed. Xposed is required for Amplify and many other root applications.  Once the download is finished, click INSTALL, then launch Amplify again. If you'd like to learn more about Xposed, visit %1$s."</string>
+<string name="welcome_banner_problem_xposed_installed">"Xposed isn't installed. Xposed is required for Amplify and many other root applications.  Once the download is finished, click INSTALL, then launch Amplify again.
+If you'd like to learn more about Xposed, visit %1$s."</string>
 <string name="welcome_banner_problem_root">"It looks like your device isn't rooted.  Amplify requires a rooted device to function properly.  If you're interested in rooting your device, please visit %1$s."</string>
 <string name="welcome_banner_button_next">"NEXT"</string>
 <string name="welcome_banner_button_fixit">"FIX IT"</string>
