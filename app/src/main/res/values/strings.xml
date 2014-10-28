@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-<string name="app_name">"Amplify"</string>
+<resources
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingTranslation" >
+    <string name="app_name">"Amplify"</string>
 <string name="version">"Version"</string>
 <string name="title_activity_material_settings">"Amplify"</string>
 <string name="title_home">"Home"</string>
@@ -108,9 +110,6 @@
 <string name="donate_more_text">"People have asked how they can contribute beyond their initial donation.  The buttons below let you donate further, but don't provide any additional features.  Thank you so much for supporting Amplify!"</string>
 <string name="welcome_banner_title">"Let's make sure everything is setup."</string>
 <string name="welcome_banner_text">"You can block wakelocks to stop your phone from staying awake, and block alarms to stop it from waking up in the first place.  We've already set up some battery saving defaults for you."</string>
-
-<!-- Don't translate this one  :) -->
-<string name="app_font_family">"sans_serif"</string>
 <string name="settings_category_options">"Options"</string>
 <string name="settings_item_show_launcher">"Show launcher icon"</string>
 <string name="settings_item_choose_theme">"Choose theme"</string>
@@ -136,7 +135,7 @@ It gave me about 2 hours more use with 30 minutes more screen on time. Saved me 
 Just donated 5 Dollars to support this masterpiece.. Keep up the good work
 Simply amazing
 [Amplify] just revolutionized the true meaning of wakelock managing
-This module is awesome! I get less than a half percent drain per hour for idle standby. 
+This module is awesome! I get less than a half percent drain per hour for idle standby.
 ...and many more.
 
 Amplify puts you in control of how your device uses your battery by controlling how often your device can wake up, and how long it can stay awake.  Use the recommended settings for easy battery savings, or dig in and customize every alarm and wakelock on your device.
