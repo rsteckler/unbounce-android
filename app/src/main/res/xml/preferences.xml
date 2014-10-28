@@ -51,12 +51,6 @@
         android:title="@string/settings_extended_debug_options"
         android:key="extended_debug_options">
 
-        <CheckBoxPreference
-            android:key="partition_broadcast"
-            android:title="@string/settings_item_partition_broadcast_title"
-            android:summary="@string/settings_item_partition_broadcast_summary"
-            android:defaultValue="false"/>
-
     </PreferenceCategory>
 
     <PreferenceCategory
