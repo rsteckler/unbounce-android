@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +23,37 @@ public class ServiceDetailFragment extends BaseDetailFragment {
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        TextView description = (TextView) view.findViewById(R.id.textViewDescription);
+        String descriptionText = description.getText().toString();
+
+        PackageManager pm = getActivity().getPackageManager();
+
+        if (mStat.getUid() > 0) {
+            String[] packages = pm.getPackagesForUid(mStat.getUid());
+            if (null != packages) {
+                descriptionText = descriptionText + "\n\n" + "Package Name: ";
+                for (String packageEntry : packages) {
+                    if (mStat.getName().contains(packageEntry)) {
+                        ApplicationInfo ai;
+                        try {
+                            ai = pm.getApplicationInfo(packageEntry, 0);
+                        } catch (final PackageManager.NameNotFoundException e) {
+                            ai = null;
+                        }
+                        String applicationName = (String) (ai != null ? pm.getApplicationLabel(ai) : "Unknown");
+
+                        descriptionText = descriptionText + applicationName+ "\n" ;
+                    }
+                }
+
+            } else {
+                descriptionText = descriptionText + "\n\n" + "Package Name: Unknown";
+            }
+        }
+
+
+        description.setText(descriptionText);
 
         SharedPreferences prefs = getActivity().getSharedPreferences(AlarmDetailFragment.class.getPackage().getName() + "_preferences", Context.MODE_WORLD_READABLE);
 
@@ -64,8 +97,7 @@ public class ServiceDetailFragment extends BaseDetailFragment {
             editor.apply();
         }
 
-        if (mClearListener != null)
-        {
+        if (mClearListener != null) {
             mClearListener.onCleared();
         }
     }
@@ -75,9 +107,9 @@ public class ServiceDetailFragment extends BaseDetailFragment {
         UnbounceStatsCollection coll = UnbounceStatsCollection.getInstance();
         mStat = coll.getServiceStats(getActivity(), mStat.getName());
 
-        TextView textView = (TextView)view.findViewById(R.id.textLocalBlocked);
+        TextView textView = (TextView) view.findViewById(R.id.textLocalBlocked);
         textView.setText(String.valueOf(mStat.getBlockCount()));
-        textView = (TextView)view.findViewById(R.id.textLocalAcquired);
+        textView = (TextView) view.findViewById(R.id.textLocalAcquired);
         textView.setText(String.valueOf(mStat.getAllowedCount()));
     }
 

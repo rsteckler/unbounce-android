@@ -14,11 +14,14 @@ public class BaseStats implements Serializable {
     private String mType;
     private String mPackage;
 
-    public String getmPackage() {
+
+    private int uid=-99;
+
+    public String getPackage() {
         return mPackage;
     }
 
-    public void setmPackage(String mPackage) {
+    public void setPackage(String mPackage) {
         this.mPackage = mPackage;
     }
 
@@ -83,5 +86,14 @@ public class BaseStats implements Serializable {
         }
         return mBlockCount;
     }
+
+    public int getUid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
+    }
+
 
 }
