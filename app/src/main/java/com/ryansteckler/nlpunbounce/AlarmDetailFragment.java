@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -21,6 +23,7 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.ryansteckler.nlpunbounce.models.EventLookup;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
 
 
@@ -45,6 +48,24 @@ public class AlarmDetailFragment extends BaseDetailFragment {
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        TextView description = (TextView) view.findViewById(R.id.textViewDescription);
+        String descriptionText = description.getText().toString();
+
+        PackageManager pm = getActivity().getPackageManager();
+
+        ApplicationInfo ai;
+        try {
+            ai = pm.getApplicationInfo(mStat.getPackage(), 0);
+        } catch (final PackageManager.NameNotFoundException e) {
+            ai = null;
+        }
+        String applicationName = (String) (ai != null ? pm.getApplicationLabel(ai) : "Unknown");
+
+        descriptionText = descriptionText + "\n\n" + "Package Name: " + applicationName;
+
+
+        description.setText(descriptionText);
 
         SharedPreferences prefs = getActivity().getSharedPreferences(AlarmDetailFragment.class.getPackage().getName() + "_preferences", Context.MODE_WORLD_READABLE);
 

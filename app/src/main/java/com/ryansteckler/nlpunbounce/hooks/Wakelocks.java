@@ -11,6 +11,7 @@ import android.content.IntentFilter;
 import android.os.Build;
 import android.os.IBinder;
 import android.os.SystemClock;
+import android.util.Log;
 
 import com.ryansteckler.nlpunbounce.ActivityReceiver;
 import com.ryansteckler.nlpunbounce.XposedReceiver;
@@ -318,18 +319,18 @@ public class Wakelocks implements IXposedHookLoadPackage {
         if (serviceName == null) {
             return;
         }
+        int callingUid = (Integer)param.args[4];
 
         String prefName = "service_" + serviceName + "_enabled";
         if (m_prefs.getBoolean(prefName, false)) {
 
             param.setResult(null);
-            recordServiceBlock(param, serviceName);
-
+            recordServiceBlock(param, serviceName,callingUid);
             debugLog("Preventing Service " + serviceName + ".");
 
         } else {
             debugLog("Allowing service " + serviceName + ".");
-            recordServiceStart(param, serviceName);
+            recordServiceStart(param, serviceName,callingUid);
         }
 
     }
@@ -370,7 +371,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
         }
     }
 
-    private void recordServiceStart(XC_MethodHook.MethodHookParam param, String serviceName) {
+    private void recordServiceStart(XC_MethodHook.MethodHookParam param, String serviceName, int uId) {
         //Get the service
 //        InterimEvent curStats = mCurrentServices.get(serviceName);
 //        if (curStats == null) {
@@ -379,11 +380,15 @@ public class Wakelocks implements IXposedHookLoadPackage {
 //            curStats.setTimeStarted(SystemClock.elapsedRealtime());
 //            mCurrentServices.put(serviceName, curStats);
 //        }
+        Context context = null;
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
+        } else {
         Object am = (Object)XposedHelpers.getObjectField(param.thisObject, "mAm");
-        Context context = (Context) XposedHelpers.getObjectField(am, "mContext");
-
+            context = (Context) XposedHelpers.getObjectField(am, "mContext");
+        }
         if (context != null) {
-            UnbounceStatsCollection.getInstance().incrementServiceAllowed(context, serviceName);
+            UnbounceStatsCollection.getInstance().incrementServiceAllowed(context, serviceName, uId);
         }
 
     }
@@ -552,13 +557,18 @@ public class Wakelocks implements IXposedHookLoadPackage {
         }
     }
 
-    private void recordServiceBlock(XC_MethodHook.MethodHookParam param, String name) {
+    private void recordServiceBlock(XC_MethodHook.MethodHookParam param, String name, int uId) {
 
+        Context context = null;
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
+        } else {
         Object am = (Object)XposedHelpers.getObjectField(param.thisObject, "mAm");
-        Context context = (Context) XposedHelpers.getObjectField(am, "mContext");
+            context = (Context) XposedHelpers.getObjectField(am, "mContext");
+        }
 
         if (context != null) {
-            UnbounceStatsCollection.getInstance().incrementServiceBlock(context, name);
+            UnbounceStatsCollection.getInstance().incrementServiceBlock(context, name, uId);
         }
     }
 
@@ -576,6 +586,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
         String curLevel = m_prefs.getString("logging_level", "default");
         if (curLevel.equals("verbose")) {
             XposedBridge.log(TAG + log);
+            Log.d(TAG,log);
         }
     }
 
@@ -583,6 +594,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
         String curLevel = m_prefs.getString("logging_level", "default");
         if (curLevel.equals("default") || curLevel.equals("verbose")) {
             XposedBridge.log(TAG + log);
+            Log.d(TAG,log);
         }
     }
 }

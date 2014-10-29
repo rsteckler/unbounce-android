@@ -8,7 +8,17 @@ import java.util.concurrent.TimeUnit;
  */
 public class ServiceStats extends BaseStats implements Serializable{
 
-    public ServiceStats() {
+
+    public ServiceStats(String serviceName, int uId)
+    {
+
+        setType("service");
+        setName(serviceName);
+        setUid(uId);
+        setType("service");
+
+    }
+    private ServiceStats() {
         setType("service");
     }
 
