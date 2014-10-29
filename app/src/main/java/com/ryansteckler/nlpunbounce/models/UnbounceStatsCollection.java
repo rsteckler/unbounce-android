@@ -59,7 +59,7 @@ public class UnbounceStatsCollection implements Serializable {
     public static final int STAT_PUSH = 2;
 
     long mLastPush = 0;
-    long mPushTimeFrequency = 60000; //Push every 24 hours //TODO
+    long mPushTimeFrequency = 86400000; //Push every 24 hours
 
     private static UnbounceStatsCollection mInstance = null;
 
