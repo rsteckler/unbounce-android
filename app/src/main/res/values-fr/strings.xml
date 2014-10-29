@@ -108,6 +108,8 @@
   <string name="donate_more_text">"Certaines personnes ont demandé comment aider en plus de leur donation initiale. Les boutons suivants vous permettent de faire une nouvelle contribution, mais n'apporte aucune fonctionnalité additionnelle. Un grand merci pour votre contribution à cette application !"</string>
   <string name="welcome_banner_title">"Bienvenue !"</string>
   <string name="welcome_banner_text">"Vous pouvez bloquer les wakelocks pour empêcher votre téléphone de rester éveillé, et bloquer les alarmes pour l'empêcher de se réveiller. Nous avons déjà préconfiguré des réglages d'économie de batterie pour vous."</string>
+  <!-- Don't translate this one  :) -->
+  <string name="app_font_family">"sans_serif"</string>
   <string name="settings_category_options">"Options"</string>
   <string name="settings_item_show_launcher">"Afficher l'icone de lancement"</string>
   <string name="settings_item_choose_theme">"Afficher le thème"</string>

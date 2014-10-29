@@ -73,6 +73,8 @@
   <string name="donate_10">"Kegembiraan tidak membawa charger anda"</string>
   <string name="donate_more_button">"BAGAIMANA SAYA DAPAT MEMBANTU LEBIH LANJUT?"</string>
   <string name="welcome_banner_title">"Selamat datang!"</string>
+  <!-- Don't translate this one  :) -->
+  <string name="app_font_family">"sans_serif"</string>
   <string name="settings_category_options">"Pilihan"</string>
   <string name="settings_item_show_launcher">"Tampilkan ikon aplikasi"</string>
   <string name="settings_item_choose_theme">"Pilih tema"</string>

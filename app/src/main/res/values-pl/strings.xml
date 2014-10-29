@@ -6,7 +6,7 @@
   <string name="title_activity_material_settings">"Amplify"</string>
   <!-- Fuzzy -->
   <string name="title_home">"Główna"</string>
-  <string name="title_wakelocks">"Wybudzenia"</string>
+  <string name="title_wakelocks">"Wakelocki"</string>
   <!-- Fuzzy -->
   <string name="title_alarms">"Alarmy"</string>
   <string name="navigation_drawer_open">"Otwórz pasek nawigacji"</string>
@@ -32,7 +32,7 @@
   <string name="card_settings_title">"USTAWIENIA"</string>
   <string name="card_settings_subtitle_alarm">"Kontroluj ten alarm"</string>
   <!-- Fuzzy -->
-  <string name="card_settings_subtitle_wakelock">"Kontroluj to wybudzenie"</string>
+  <string name="card_settings_subtitle_wakelock">"Kontroluj ten wakelock"</string>
   <string name="card_description_title">"OPIS"</string>
   <!-- Fuzzy -->
   <string name="card_description_subtitle">"Czemu to zjada baterie?"</string>
@@ -53,18 +53,18 @@
   <string name="tasker_off">"Wył."</string>
   <string name="tasker_reset_stats">"Resetuj statystyki"</string>
   <!-- Fuzzy -->
-  <string name="tasker_choose_wakelock">"Dostosuj wybudzenie"</string>
+  <string name="tasker_choose_wakelock">"Dostosuj wakelock"</string>
   <string name="tasker_choose_alarm">"Dostosuj alarm"</string>
   <string name="tasker_welcome">"Witaj we wtycze Tasker Amplify"</string>
   <!-- Fuzzy -->
-  <string name="tasker_which_task">"Chcesz dokonać zmian dla Wybudzenia lub alarmu, a może chcesz zresetować ustawienia dla Twojego urządzenia?"</string>
+  <string name="tasker_which_task">"Chcesz dokonać zmian dla wakelocka lub alarmu, a może chcesz zresetować ustawienia dla Twojego urządzenia?"</string>
   <string name="tasker_task_wakelock">"ZMIEŃ WYBUDZENIE"</string>
   <!-- Fuzzy -->
   <string name="tasker_task_alarm">"ZMIEŃ ALARM"</string>
   <string name="tasker_task_reset">"RESET STATYSTYK"</string>
   <!-- Fuzzy -->
   <string name="alert_nopro_title">"To jest funkcja Pro"</string>
-  <string name="alert_nopro_content">"Aby kontrolować niestandardowe wybudzenia i alarmy, musisz kupić paczke darowizny"</string>
+  <string name="alert_nopro_content">"Aby kontrolować niestandardowe wakelocki i alarmy, musisz kupić paczke darowizny"</string>
   <!-- Fuzzy -->
   <string name="alert_unknown_alarm_title">"Kontrolować nienznany alarm?"</string>
   <string name="alert_unknown_alarm_content">"Ten alarm nie jest oznaczony jako bezpieczny. Czy pomimo tego chcesz go kontrolować?"</string>
@@ -73,24 +73,24 @@
   <string name="dialog_cancel">"ANULUJ"</string>
   <!-- Fuzzy -->
   <string name="tasker_choose_settings">"Wybierz własne ustawienia"</string>
-  <string name="alert_unknown_wakelock_title">"Kontrolować nienznane wybudzenie?"</string>
+  <string name="alert_unknown_wakelock_title">"Kontrolować nienznany wakelock?"</string>
   <!-- Fuzzy -->
-  <string name="alert_unknown_wakelock_content">"To wybudzenie nie jest oznaczone jako bezpieczne. Czy pomimo tego chcesz je kontrolować?"</string>
+  <string name="alert_unknown_wakelock_content">"Ten wakelock nie jest oznaczony jako bezpieczny. Czy pomimo tego chcesz go kontrolować?"</string>
   <string name="dialog_delete">"SKASUJ"</string>
   <!-- Fuzzy -->
   <string name="alert_delete_stats_title">"Skasować wszystko?"</string>
-  <string name="alert_delete_stats_content">"Usuwasz wszystkie statystyki wybudzeń i alarmów!"</string>
+  <string name="alert_delete_stats_content">"Usuwasz wszystkie statystyki wakelockow i alarmów!"</string>
   <!-- Fuzzy -->
   <string name="title_settings">"Ustawienia"</string>
   <string name="alert_reset_settings_title">"Przywrócić domyślne?"</string>
   <!-- Fuzzy -->
-  <string name="alert_reset_settings_content">"Usuniesz wszystkie ustawienia alarmów i wybudzeń!"</string>
+  <string name="alert_reset_settings_content">"Usuniesz wszystkie ustawienia alarmów i wakelockow!"</string>
   <string name="dialog_reset">"KASUJ"</string>
   <!-- Fuzzy -->
   <string name="reset_settings_confirmation">"Przywrócone ustawienia domyślne"</string>
   <string name="dialog_save">"ZAPISZ"</string>
   <!-- Fuzzy -->
-  <string name="desc_unknown">"Nie mamy jeszcze żadnych informacji na ten temat. Może spowodować utrudnienia. Kontroluj tylko jeśli wiesz co robisz i wiesz jak wyłączyć Xposed podczas startu. Ciężko pracujemy aby zebrać informacje o każdym ważnym wybudzeniu i alarmie. Proszę, bądź cierpliwy podczas gdy my zbieramy informacje."</string>
+  <string name="desc_unknown">"Nie mamy jeszcze żadnych informacji na ten temat. Może spowodować utrudnienia. Kontroluj tylko jeśli wiesz co robisz i wiesz jak wyłączyć Xposed podczas startu. Ciężko pracujemy aby zebrać informacje o każdym ważnym wakelocku i alarmie. Proszę, bądź cierpliwy podczas gdy my zbieramy informacje."</string>
   <string name="desc_nlpwakelock">"NlpWakelock jest bezpieczny do kontrolowania. Jest używany przez Google Play services do okreslania lokalizacji na podstawie WiFi i nadajników. Raz zapisana lokalizacja jest udostępniana innym aplikacjom np. Google Now może uzyskać dostęp do Twojej lokalizacji bez użycia GPS. Polecane ustawienia pomiędzy 180 a 600 sekund."</string>
   <!-- Fuzzy -->
   <string name="desc_nlpcollectorwakelock">"NlpWakelock jest bezpieczny do kontrolowania. Jest używany przez Google Play services do określania lokalizacji na podstawie WiFi i nadajników. Raz zapisana lokalizacja jest wysyłana do Google aby mogli powiększyć ich baze lokalizacji WiFi. Polecane ustawienia pomiędzy 180 a 600 sekund."</string>
@@ -106,7 +106,7 @@
   <string name="desc_icing">"ICING jest kontrolowany przez Google Services. Szukamy dalszych info."</string>
   <!-- Fuzzy -->
   <string name="desc_startingalertservice">"Jest powiązany zazwyczaj z kalendarzem. Może mieć wpływ na inne aplikacje np. wiadomości. Jeśli masz przypomnienia w kalendarzu to wybudzenie może je przechowywać."</string>
-  <string name="desc_audiomix">"Ten wybudzacz przechowuje dźwięki dotyku oraz alarmów wśród innych. Nęka niektóre urządzenia nawet z wyłączonym dźwiękiem dotyku."</string>
+  <string name="desc_audiomix">"Ten wakelock przechowuje dźwięki dotyku oraz alarmów wśród innych. Nęka niektóre urządzenia nawet z wyłączonym dźwiękiem dotyku."</string>
   <!-- Fuzzy -->
   <string name="desc_locationmanagerservice">"Jak nazwa mówi. To nie jest typowy zjadacz baterii. Może powodować duże wybudzenia."</string>
   <string name="desc_audioin">"Odpowiada za utrzymywanie telefonu w stanie aktywności i nasłuchiwania dla Google Search. Okay, Google"</string>
@@ -139,10 +139,10 @@
   <string name="stat_collected_for">"Statystyki zebrane od"</string>
   <!-- Fuzzy -->
   <string name="stat_wake_duration_allowed">"Czas wybudzeń"</string>
-  <string name="stat_wake_duration_blocked">"Oszczędzony czas wybudzeń"</string>
+  <string name="stat_wake_duration_blocked">"Oszczędz czas wakelockow"</string>
   <!-- Fuzzy -->
-  <string name="stat_wake_allowed">"Ilość wybudzeń"</string>
-  <string name="stat_wake_blocked">"Wybuedznia zablokowane"</string>
+  <string name="stat_wake_allowed">"Ilość wakelockow"</string>
+  <string name="stat_wake_blocked">"Wakelocki zablokowane"</string>
   <!-- Fuzzy -->
   <string name="stat_alarm_allowed">"Alarmy"</string>
   <string name="stat_alarm_blocked">"Alarmy zablokowane"</string>
@@ -160,7 +160,8 @@
   <string name="donate_more_text">"Ludzie pytają jak mogą pomóc oprócz zwykłej darowizny. Przycisk poniżej pozwoli Ci przekazać dodatkowa darowiznę lecz nie zapewni juz dodatkowych opcji. Dziękuję bardzo za wspieranie Amplify!"</string>
   <!-- Fuzzy -->
   <string name="welcome_banner_title">"Witaj!"</string>
-  <string name="welcome_banner_text">"Możesz zablokować wybudzenia aby powstrzymac telefon od bycia aktywnym oraz blokuj alarmy aby nie były wybudzane w pierwszej kolejności. Domyślnie ustawiliśmy już kilka opcji za Ciebie."</string>
+  <string name="welcome_banner_text">"Możesz zablokować wakelocki aby powstrzymac telefon od bycia aktywnym oraz blokuj alarmy aby nie były wybudzane w pierwszej kolejności. Domyślnie ustawiliśmy już kilka opcji za Ciebie."</string>
+  <!-- Fuzzy -->
   <string name="settings_category_options">"opcje"</string>
   <!-- Fuzzy -->
   <string name="settings_item_show_launcher">"Pokaż ikonę launchera"</string>
@@ -170,7 +171,7 @@
   <string name="settings_item_global_stats_summary">"Wysyłając i odbierając anonimowe statystyki"</string>
   <!-- Fuzzy -->
   <string name="settings_item_reset_defaults_title">"Reset do ustawień fabrycznych"</string>
-  <string name="settings_item_reset_defaults_summary">"Resetuj alarmy i wyburzenia do ustawień fabrycznych"</string>
+  <string name="settings_item_reset_defaults_summary">"Resetuj alarmy i wakelocki do ustawień fabrycznych"</string>
   <!-- Fuzzy -->
   <string name="settings_category_debug">"Debuguj"</string>
   <string name="settings_item_author">"Autor: Ryan Steckler"</string>
@@ -237,19 +238,25 @@ Funkcja zakupu w aplikacji pozwoli Ci na odblokowanie funkcji Pro które pozwol�
   <!-- Fuzzy -->
   <string name="welcome_download_error_xposed">"Pobieranie nieudane. Spróbuj później."</string>
   <string name="download_xposed_title">"Pobieranie Xposed"</string>
-  <!-- Fuzzy -->
   <string name="download_xposed_description">"Wymagania Amplify"</string>
+  <!-- Fuzzy -->
   <string name="requires_root">"***Wymaga roota***"</string>
   <string name="installs_xposed">"Amplify używa Xposed Framework, jeśli go nie masz, zainstaluje się automatycznie."</string>
   <!-- Fuzzy -->
   <string name="settings_category_code_credits">"Przypisy Twórcy"</string>
   <string name="title_services">"Usługi"</string>
   <!-- Fuzzy -->
+  <string name="action_sort_by_alpha">"Sortuj alfabetycznie"</string>
   <string name="card_settings_subtitle_service">"Kontroluj usługę"</string>
   <!-- Fuzzy -->
-  <string name="stat_service_allowed">"Usługa uruchomiona"</string>
-  <string name="stat_service_blocked">"Usługa zablokowna"</string>
+  <string name="tasker_choose_service">"Wybierz usługę do kontroli."</string>
+  <string name="alert_unknown_service_title">"Limit nieznana usługa?"</string>
   <!-- Fuzzy -->
+  <string name="alert_unknown_service_content">"Ta usługa może być niebezpieczna. Czy chcesz ją ograniczyć?"</string>
+  <string name="stat_service_allowed">"Usługa uruchomiona"</string>
+  <!-- Fuzzy -->
+  <string name="stat_service_blocked">"Usługa zablokowna"</string>
   <string name="service_switch_allow">"Pozwól"</string>
+  <!-- Fuzzy -->
   <string name="service_switch_deny">"Odmów"</string>
 </resources>
