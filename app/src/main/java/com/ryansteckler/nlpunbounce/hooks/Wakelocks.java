@@ -58,7 +58,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
 
         if (lpparam.packageName.equals("android")) {
 
-            XposedBridge.log(TAG + "Version " + VERSION);
+            defaultLog("Version " + VERSION);
 
             m_prefs = new XSharedPreferences("com.ryansteckler.nlpunbounce");
             m_prefs.reload();
@@ -177,13 +177,25 @@ public class Wakelocks implements IXposedHookLoadPackage {
 
     //in back to 4.2_r1
     private void try17To20ServiceHook(LoadPackageParam lpparam) {
-        findAndHookMethod("com.android.server.am.ActiveServices", lpparam.classLoader, "startServiceLocked", "android.app.IApplicationThread", Intent.class, String.class, int.class, int.class, int.class, new XC_MethodHook() {
-            @Override
-            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                Intent intent = (Intent) param.args[1];
-                handleServiceStart(param, intent);
-            }
-        });
+        try {
+            findAndHookMethod("com.android.server.am.ActiveServices", lpparam.classLoader, "startServiceLocked", "android.app.IApplicationThread", Intent.class, String.class, int.class, int.class, int.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    Intent intent = (Intent) param.args[1];
+                    handleServiceStart(param, intent);
+                }
+            });
+        } catch (NoSuchMethodError nsme) {
+            //Nonstandard version of the library.  Try an alternate
+            defaultLog("Standard Service hook failed.  Trying alternate.");
+            findAndHookMethod("com.android.server.am.ActiveServices", lpparam.classLoader, "startServiceLocked", "android.app.IApplicationThread", Intent.class, String.class, int.class, int.class, int.class, Context.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    Intent intent = (Intent) param.args[1];
+                    handleServiceStart(param, intent);
+                }
+            });
+        }
 
 //        findAndHookMethod("com.android.server.am.ActiveServices", lpparam.classLoader, "stopServiceLocked", "android.app.IApplicationThread", Intent.class, String.class, int.class, new XC_MethodHook() {
 //            @Override
