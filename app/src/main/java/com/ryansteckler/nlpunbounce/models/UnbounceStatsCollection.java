@@ -251,7 +251,7 @@ public class UnbounceStatsCollection implements Serializable {
                 return null;
         }
         else {
-            ServiceStats emptyStat = new ServiceStats();
+            ServiceStats emptyStat = new ServiceStats(serviceName,-1);
             emptyStat.setAllowedCount(0);
             emptyStat.setBlockCount(0);
             emptyStat.setName(serviceName);
@@ -505,25 +505,25 @@ public class UnbounceStatsCollection implements Serializable {
         statChoice.put(statName, combined);
     }
 
-    public void incrementServiceBlock(Context context, String statName)
+    public void incrementServiceBlock(Context context, String statName,  int uId)
     {
         //Load from disk and populate our stats
         loadStats(context, false); 
 
-        incrementServiceBlock(statName, mCurrentStats);
+        incrementServiceBlock(statName, mCurrentStats, uId);
         if (mGlobalParticipation) {
-            incrementServiceBlock(statName, mSincePushStats);
+            incrementServiceBlock(statName, mSincePushStats, uId);
         }
 
     }
 
-    private void incrementServiceBlock(String statName, HashMap<String, BaseStats> statChoice) {
+    private void incrementServiceBlock(String statName, HashMap<String, BaseStats> statChoice, int uId) {
         BaseStats combined = statChoice.get(statName);
         if (combined == null)
         {
-            combined = new ServiceStats();
-            combined.setName(statName);
-        }
+            combined = new ServiceStats(statName, uId);
+                   }
+        combined.setUid(uId);
         combined.incrementBlockCount();
         statChoice.put(statName, combined);
     }
@@ -545,7 +545,7 @@ public class UnbounceStatsCollection implements Serializable {
         if (combined == null) {
             combined = new AlarmStats(statName,packageName);
         }
-        combined.setmPackage(packageName);
+        combined.setPackage(packageName);
         combined.incrementBlockCount();
         statChoice.put(statName, combined);
     }
@@ -565,28 +565,28 @@ public class UnbounceStatsCollection implements Serializable {
         if (combined == null) {
             combined = new AlarmStats(statName,packageName);
         }
-        combined.setmPackage(packageName);
+        combined.setPackage(packageName);
         combined.incrementAllowedCount();
         statChoice.put(statName, combined);
     }
-    public void incrementServiceAllowed(Context context, String statName)
+    public void incrementServiceAllowed(Context context, String statName, int uId)
     {
         //Load from disk and populate our stats
         loadStats(context, false); 
 
-        incrementServiceAllowed(statName, mCurrentStats);
+        incrementServiceAllowed(statName, mCurrentStats, uId);
         if (mGlobalParticipation) {
-            incrementServiceAllowed(statName, mSincePushStats);
+            incrementServiceAllowed(statName, mSincePushStats, uId);
         }
 
     }
-    private void incrementServiceAllowed(String statName, HashMap<String, BaseStats> statChoice) {
+    private void incrementServiceAllowed(String statName, HashMap<String, BaseStats> statChoice, int uId) {
         BaseStats combined = statChoice.get(statName);
         if (combined == null)
         {
-            combined = new ServiceStats();
-            combined.setName(statName);
-        }
+            combined = new ServiceStats(statName, uId);
+                   }
+        combined.setUid(uId);
         combined.incrementAllowedCount();
         statChoice.put(statName, combined);
     }

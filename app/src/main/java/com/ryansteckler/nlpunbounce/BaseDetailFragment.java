@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import com.ryansteckler.nlpunbounce.helpers.LocaleHelper;
 import com.ryansteckler.nlpunbounce.helpers.ThemeHelper;
-import com.ryansteckler.nlpunbounce.models.AlarmStats;
 import com.ryansteckler.nlpunbounce.models.BaseStats;
 import com.ryansteckler.nlpunbounce.models.EventLookup;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
@@ -49,8 +48,11 @@ public abstract class BaseDetailFragment extends Fragment {
     protected FragmentInteractionListener mListener;
 
     protected abstract void loadStatsFromSource(View view);
+
     protected abstract void warnUnknown(Switch onOff);
+
     protected abstract void updateEnabled(boolean b);
+
     protected abstract BaseDetailFragment newInstance();
 
 
@@ -59,7 +61,7 @@ public abstract class BaseDetailFragment extends Fragment {
     }
 
     public boolean getEnabled() {
-        Switch onOff = (Switch)getActivity().findViewById(R.id.switchStat);
+        Switch onOff = (Switch) getActivity().findViewById(R.id.switchStat);
         return onOff.isChecked();
     }
 
@@ -93,8 +95,7 @@ public abstract class BaseDetailFragment extends Fragment {
                     Activity baseActivity = getActivity();
                     if (baseActivity instanceof MaterialSettingsActivity) {
                         isPremium = ((MaterialSettingsActivity) getActivity()).isPremium();
-                    }
-                    else if (baseActivity instanceof TaskerActivity) {
+                    } else if (baseActivity instanceof TaskerActivity) {
                         isPremium = ((TaskerActivity) getActivity()).isPremium();
                     }
 
@@ -117,7 +118,7 @@ public abstract class BaseDetailFragment extends Fragment {
             }
         });
 
-        TextView resetButton = (TextView)view.findViewById(R.id.buttonResetStats);
+        TextView resetButton = (TextView) view.findViewById(R.id.buttonResetStats);
         resetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View resetView) {
@@ -125,28 +126,17 @@ public abstract class BaseDetailFragment extends Fragment {
                 UnbounceStatsCollection stats = UnbounceStatsCollection.getInstance();
                 stats.resetStats(getActivity(), mStat.getName());
                 loadStatsFromSource(view);
-                if (mClearListener != null)
-                {
+                if (mClearListener != null) {
                     mClearListener.onCleared();
                 }
             }
         });
 
-        TextView description = (TextView)view.findViewById(R.id.textViewDescription);
+        TextView description = (TextView) view.findViewById(R.id.textViewDescription);
         String descriptionText = EventLookup.getDescription(getActivity(), mStat.getName());
-
-        PackageManager pm = getActivity().getPackageManager();
-        ApplicationInfo ai;
-        try {
-            ai = pm.getApplicationInfo( mStat.getmPackage(), 0);
-        } catch (final PackageManager.NameNotFoundException e) {
-            ai = null;
-        }
-        final String applicationName = (String) (ai != null ? pm.getApplicationLabel(ai) : "Unknown");
-
-        descriptionText = descriptionText + "\n\n"+"Package Name: " + applicationName;
-
         description.setText(descriptionText);
+
+
         mKnownSafe = EventLookup.isSafe(mStat.getName()) == EventLookup.SAFE;
         mFree = EventLookup.isFree(mStat.getName());
     }
@@ -185,7 +175,7 @@ public abstract class BaseDetailFragment extends Fragment {
             mFinalTop = getArguments().getInt(ARG_FINAL_TOP);
             mStartBottom = getArguments().getInt(ARG_START_BOTTOM);
             mFinalBottom = getArguments().getInt(ARG_FINAL_BOTTOM);
-            mStat = (BaseStats)getArguments().getSerializable(ARG_CUR_STAT);
+            mStat = (BaseStats) getArguments().getSerializable(ARG_CUR_STAT);
             mTaskerMode = getArguments().getBoolean(ARG_TASKER_MODE);
         }
         setHasOptionsMenu(true);
@@ -229,13 +219,14 @@ public abstract class BaseDetailFragment extends Fragment {
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
-     * <p>
+     * <p/>
      * See the Android Training lesson <a href=
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface FragmentInteractionListener {
         public void onDetailSetTitle(String title);
+
         public void onDetailSetTaskerTitle(String title);
     }
 
@@ -243,11 +234,9 @@ public abstract class BaseDetailFragment extends Fragment {
         public void onCleared();
     }
 
-    public void attachClearListener(FragmentClearListener fragment)
-    {
+    public void attachClearListener(FragmentClearListener fragment) {
         mClearListener = fragment;
     }
-
 
 
 }
