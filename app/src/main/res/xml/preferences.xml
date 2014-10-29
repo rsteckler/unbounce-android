@@ -48,7 +48,7 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="@string/settings_extended_debug_options"
+        android:title=""
         android:key="extended_debug_options">
 
     </PreferenceCategory>
