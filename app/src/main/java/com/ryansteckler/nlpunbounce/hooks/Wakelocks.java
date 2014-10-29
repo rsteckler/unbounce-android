@@ -37,7 +37,7 @@ import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 public class Wakelocks implements IXposedHookLoadPackage {
 
     private static final String TAG = "Amplify: ";
-    private static final String VERSION = "2.0.1"; //This needs to be pulled from the manifest or gradle build.
+    private static final String VERSION = "2.0.2b1"; //This needs to be pulled from the manifest or gradle build.
     private HashMap<String, Long> mLastWakelockAttempts = null; //The last time each wakelock was allowed.
     private HashMap<String, Long> mLastAlarmAttempts = null; //The last time each alarm was allowed.
 //    private HashMap<String, Long> mLastServiceAttempts = null; //The last time each wakelock was allowed.
@@ -59,10 +59,10 @@ public class Wakelocks implements IXposedHookLoadPackage {
 
         if (lpparam.packageName.equals("android")) {
 
-            defaultLog("Version " + VERSION);
-
             m_prefs = new XSharedPreferences("com.ryansteckler.nlpunbounce");
             m_prefs.reload();
+
+            defaultLog("Version " + VERSION);
 
             mCurrentWakeLocks = new HashMap<IBinder, InterimEvent>();
 //            mCurrentServices = new HashMap<String, InterimEvent>();

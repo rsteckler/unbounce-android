@@ -13,6 +13,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.ryansteckler.nlpunbounce.ActivityReceiver;
 import com.ryansteckler.nlpunbounce.XposedReceiver;
 import com.ryansteckler.nlpunbounce.helpers.NetworkHelper;
 
@@ -58,7 +59,7 @@ public class UnbounceStatsCollection implements Serializable {
     public static final int STAT_PUSH = 2;
 
     long mLastPush = 0;
-    long mPushTimeFrequency = 86400000; //Push every 24 hours
+    long mPushTimeFrequency = 60000; //Push every 24 hours //TODO
 
     private static UnbounceStatsCollection mInstance = null;
 
@@ -72,36 +73,6 @@ public class UnbounceStatsCollection implements Serializable {
     }
 
     private UnbounceStatsCollection() {
-    }
-
-    public void populateSerializableStats(HashMap<String, BaseStats> source, int statType, long runningSince)
-    {
-        if (statType == STAT_CURRENT) {
-            try {
-                mCurrentStats = source;
-            } catch (ClassCastException cce) {
-                //Probable version upgrade and stat incompatibility.  Reset the stats.
-                mCurrentStats = new HashMap<String, BaseStats>();
-            }
-            mRunningSince = runningSince;
-        } else if (statType == STAT_PUSH) {
-            try {
-                mSincePushStats = source;
-            } catch (ClassCastException cce) {
-                //Probable version upgrade and stat incompatibility.  Reset the stats.
-                mSincePushStats = new HashMap<String, BaseStats>();
-            }
-        }
-    }
-
-    public HashMap<String, BaseStats> getSerializableStats(int statType)
-    {
-        if (statType == STAT_CURRENT) {
-            return mCurrentStats;
-        } else if (statType == STAT_PUSH) {
-            return mSincePushStats;
-        }
-        return null;
     }
 
     public Long getRunningSince() {
@@ -769,9 +740,20 @@ public class UnbounceStatsCollection implements Serializable {
     }
 
     public void pushStatsToNetwork(final Context context) {
+        //Send a broadcast to the activity asking for this.
+        Intent intent = new Intent(ActivityReceiver.PUSH_NETWORK_STATS);
+        try {
+            context.sendBroadcast(intent);
+        } catch (IllegalStateException ise) {
+        }
+
+    }
+
+    public void pushStatsToNetworkInternal(final Context context) {
         //Are we allowed to?
         if (mGlobalParticipation) {
             //Serialize the collection to JSON
+            loadStats(context, true);
             if (mSincePushStats != null) {
                 if (mSincePushStats.size() > 0) {
                     final Gson gson = new GsonBuilder().create();
