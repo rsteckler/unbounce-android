@@ -113,8 +113,6 @@
   <string name="donate_more_text">"אנשים שאלו כיצד ניתן לעזור עוד מעבר לתרומה הראשונה. הכפתורים הבאים מאפשרים לתרום עוד ללא תמורה של הפעלת תכונות מתקדמות. תודה על תרומתכם לAmplify."</string>
   <string name="welcome_banner_title">"בוא נוודא שהכל מוגדר"</string>
   <string name="welcome_banner_text">"ביכולתך לבטל Wakelocks ופסיקות שגורמות למכשירך להיות דלוק ברקע. הפעלנו כבר הגדרות ברירת מחדל שחוסכות בצריכת הסוללה."</string>
-  <!-- Don't translate this one  :) -->
-  <string name="app_font_family">"sans_serif"</string>
   <string name="settings_category_options">"אפשרויות"</string>
   <string name="settings_item_show_launcher">"הצג צלמית ברשימת האפליקציות"</string>
   <string name="settings_item_choose_theme">"בחר מראה"</string>

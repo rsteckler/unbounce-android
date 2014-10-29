@@ -108,8 +108,6 @@
   <string name="donate_more_text">"Lidé se ptali, jak mohou přispět mimo jejich původní dar. Níže uvedená tlačítka vám umožní darovat dále, ale neposkytují žádné další funkce. Děkuji moc za podporu Amplify!"</string>
   <string name="welcome_banner_title">"Vítejte!"</string>
   <string name="welcome_banner_text">"Mùžete blokovat wakelocks, zabránit telefonu zùstávat vzhùru a blokovat alarmy_a_ zastavit_je_od probuzení v první_řadě..Tak jsem již nastavil úsporu výchozí pro vás a můžete blokovat wakelocks_a_ zastavit telefon_zùstávat vzhùru a blokovat alarmy_a_ zastavit od probuzení v první_řadě."</string>
-  <!-- Don't translate this one  :) -->
-  <string name="app_font_family">"sans_serif"</string>
   <string name="settings_category_options">"Volby"</string>
   <string name="settings_item_show_launcher">"Zobrazit_ikonu_v_launcheru"</string>
   <string name="settings_item_choose_theme">"Zvolte_si_téma"</string>

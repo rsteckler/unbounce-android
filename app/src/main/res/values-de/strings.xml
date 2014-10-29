@@ -108,8 +108,6 @@
   <string name="donate_more_text">"Leute haben mich gefragt, wie sie über der ersten Spende hinaus etwas beitragen können. Die folgenden Schaltflächen erlauben weitere Spenden, bringen aber keine weiteren Funktionen. Vielen Dank, dass Sie Amplify unterstützen!"</string>
   <string name="welcome_banner_title">"Willkommen!"</string>
   <string name="welcome_banner_text">"Sie können Wakelocks blockieren, um Ihr Telefon davon abzuhalten, wach zu bleiben. Außerdem können Sie Alarme blockieren, um es von vornherein am Aufwachen zu hindern.  Wir haben bereits einige batteriesparende Standardwerte für Sie gesetzt."</string>
-  <!-- Don't translate this one  :) -->
-  <string name="app_font_family">"sans_serif"</string>
   <string name="settings_category_options">"Einstellungen"</string>
   <string name="settings_item_show_launcher">"Launcher-Icon zeigen"</string>
   <string name="settings_item_choose_theme">"Farbschema wählen"</string>
