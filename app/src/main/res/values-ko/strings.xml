@@ -79,6 +79,8 @@
   <string name="desc_vzwgpslocationprovider">"기지국 통계를 위해 사용되는 장황한 특정 위치 서비스입니다."</string>
   <string name="desc_hangouts_rtcs">"구글 행아웃.  이것을 길들이면, 행아웃은 더 이상 작동하지 않을 겁니다."</string>
   <string name="desc_gcm_conn">"구글 클라우드 메세지. 앱에서 가벼운 메세지를 보냅니다. 모든 앱들을 위해, 휴대폰에서 푸쉬 알람을 보냅니다."</string>
+  <string name="desc_google_c2dm">"Cloud to Device Messaging (C2DM) is a service that helps developers send data to their apps on devices. The service provides a mechanism that servers can use to tell mobile applications to contact the server to fetch updated application or user data. The C2DM service handles all aspects of queueing of messages and delivery to the target application running on target devices. This service was deprecated since 2012 but there are still apps that are using this service instead of the new and improved GCM."</string>
+  <string name="desc_timedeventqueue">"This is a core part of Android that is best left alone. It queues up all incoming events."</string>
   <string name="desc_comgoogleandroidgmsnlpalarm_wakeup_locator">"이 알람은 길들이기 안전합니다.  구글 플레이 서비스에 의해 기지국과 WiFi을 결합하여 당신의 위치를 대충 결정하여 사용됩니다.  한번 위치를 얻으면 스토어는 구글 Now와 같이, GPS를 사용하거나 고정 없이도 위치에 접근해, 그 지역의 다른 앱들을 진열합니다.  추천하는 설정은 180초에서 600초 사이입니다.me.  It's used by Google Play Services to determine your rough location using a combination of cell towers and WiFi.  Once it has your location, it stores it locally so other apps, like Google Now, can access your location without using GPS or getting a new fix.  Recommended settings are between 180 and 600 seconds."</string>
   <string name="desc_comgoogleandroidgmsnlpalarm_wakeup_activity_detection">"이 알람은 길들이기 안전합니다.  구글 플레이 서비스에 의해 기지국과 WiFi을 결합하여 당신의 위치를 대충 결정하여 사용됩니다.  한번 위치를 얻으면, WiFi 위치의 데이터베이스를 확장할 수 있게 구글에 반송합니다.  추천하는 설정은 180초에서 600초 사이입니다."</string>
   <string name="desc_comgoogleandroidappshangoutsupdate_notification">"구글 행아웃 알림을 업데이트하는 듣는이(리스너)입니다."</string>
@@ -100,8 +102,10 @@
   <string name="donate_text">"이 앱은 항상 배터리를 없애는 네트워크 위치 제공자를 무료로 고칠겁니다.  만약 다른 웨이크락들과 알람들을 길들이려면, 아래에서 프로젝트를 지원함으로서  유로 특성으로 업그레이드하세요.  기부의 수량과 관계없이 유로 특성들이 해제될 겁니다."</string>
   <string name="donate_1">"코드를 작성하는 동안의 한 잔의 커피"</string>
   <string name="donate_5">"포럼의 질문들을 답변하는 동안의 한 에스프레소 커피"</string>
+  <string name="donate_10">"The joy of not carrying your charger"</string>
   <string name="donate_thank_you">"당신의 기부에 감사드립니다.  기부는 저에게 많은 의미입니다.  저는 제한된 남는 시간에 열심히 일해 당신에게 더 나은 배터리 수명을 가져옵니다.  당신이 기부했을 때, 당신은 프로젝트에 한 차이를 만들고, 내 가족의 삶에 한 차이를 만듭니다.  넌 정말 짱이야!"</string>
   <string name="donate_more_button">"어떻게하면 더 좋게 도와드릴 수 있을까요?"</string>
+  <string name="donate_more_text">"People have asked how they can contribute beyond their initial donation.  The buttons below let you donate further, but don't provide any additional features.  사자 조련사 지원에 매우 감사드립니다!"</string>
   <string name="welcome_banner_title">"모든 것이 설치되있는지 확실히 하세요."</string>
   <string name="welcome_banner_text">"당신은 깨어있는 상태로부터 폰의 웨이크락을 차단해 중지시킬 수 있고, 알람을 차단해 첫 장소에서 깨어나는걸 중지시킬 수 있습니다.  우리는 이미 당신을 위해 몇 개의 기본적인 배터리 절약을 설치했습니다."</string>
   <string name="settings_category_options">"설정"</string>
@@ -123,6 +127,30 @@
   <string name="settings_item_force_english_title">"강제 영어"</string>
   <string name="settings_item_force_english_summary">"언어 설정을 덮어씌어 영어를 사용합니다"</string>
   <string name="playstore_short_description">"사람들에게 배터리 파워를!"</string>
+  <string name="playstore_long_description">"
+Unsolicited quotes from real users:
+It gave me about 2 hours more use with 30 minutes more screen on time. Saved me from buying a $25 battery.
+Just donated 5 Dollars to support this masterpiece.. Keep up the good work
+Simply amazing
+[Lion Tamer] just revolutionized the true meaning of wakelock managing
+This module is awesome! I get less than a half percent drain per hour for idle standby. 
+...and many more.
+
+Lion Tamer puts you in control of how your device uses your battery by controlling how often your device can wake up, and how long it can stay awake.  Use the recommended settings for easy battery savings, or dig in and customize every alarm and wakelock on your device.
+Here are some highlights:
+
+- A beautiful design, inspired by Material Design principles
+- A stable blocking engine
+- Comprehensive measuring of the time wasted and time saved because of alarms and wakelocks
+- A growing list of descriptions of the alarms and wakelocks in plain English (and other languages coming soon!)
+- A new Pro package that lets you Tame any alarm or wakelock on the device
+- An open source codebase so you can see how it works, or build it yourself
+
+
+The In-App purchases allow you to unlock the Pro package that lets you customize the alarms and wakelocks on your device.   Without the pro package, you can control the worst battery hogs:  NlpWakelock, NlpCollectorWakeLock, ALARM_WAKEUP_LOCATOR, and ALARM_WAKE_ACTIVITY_DETECTION.
+
+May you have a long [battery] life!
+"</string>
   <string name="welcome_banner_welcome">"환영합니다!"</string>
   <string name="welcome_banner_checking_service">"사자 조련사가 구동중인지 검사중입니다..."</string>
   <string name="welcome_banner_checking_xposed">"Xposed가 설치되었는지 검사중입니다..."</string>
@@ -132,6 +160,8 @@
   <string name="welcome_banner_problem_none">"우리는 당신을 위한 몇 개의 기본적인 배터리 절약을 설치합니다.  당신의 새 배터리 수명을 즐기세요!"</string>
   <string name="welcome_banner_problem_service">"사자 조련사 모듈이 활성화되어있지 않은 것 같습니다. \"고치기\"를 클릭한다음, 사자 조련사가 검사되었나 확실히하고, 전원 끄고 다시 시작하세요."</string>
   <string name="welcome_banner_problem_xposed_running">"Xposed가 구동중이지 않습니다. \"고치기\"를 클릭한 다음, \"설치/업데이트\"를 클릭하고 기기를 전원 끄고 다시 시작하세요."</string>
+  <string name="welcome_banner_problem_xposed_installed">"Xposed isn't installed. Xposed is required for Lion Tamer and many other root applications.  Once the download is finished, click INSTALL, then launch Lion Tamer again.
+If you'd like to learn more about Xposed, visit %1$s."</string>
   <string name="welcome_banner_problem_root">"당신의 기기는 루트되어있지 않은 것 같습니다. 언바운스는 루트된 기기의 권한을 완전히 필요로 합니다. 기기의 루팅에 흥미가 있으시면 &lt;a href=http://www.techverse.net/how-to-root-your-phone-tablet-and-why/&gt;Techverse.net&lt;/a&gt;에 방문하시고 시작해보세요."</string>
   <string name="welcome_banner_button_next">"다음"</string>
   <string name="welcome_banner_button_fixit">"고치기"</string>

@@ -48,6 +48,12 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:title=""
+        android:key="extended_debug_options">
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:title="@string/settings_category_code_credits"
         android:key="">
 

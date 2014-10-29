@@ -150,7 +150,7 @@ Nákupy In-App vám umožní odemknout Pro balíèek, který vám umožní pøiz
   <string name="welcome_banner_checking_service">"Kontrola,zda je spuštěn Amplify"</string>
   <string name="welcome_banner_checking_xposed">"Kontrola,zda je instalován Xposed"</string>
   <string name="welcome_banner_checking_root">"Kontrola Root povolení"</string>
-  <string name="welcome_banner_checking_looks_great">"Vypadá vše skvěle"</string>
+  <string name="welcome_banner_checking_looks_great">"Všechno vypadá skvěle!"</string>
   <string name="welcome_banner_checking_uhoh">"Něco se pokazilo. Pojďme zjistit, co a opravit problém."</string>
   <string name="welcome_banner_problem_none">"Máme na nastavení nějaké úspory baterie výchozí pro vás. Užijte si svůj nový život baterii!"</string>
   <string name="welcome_banner_problem_service">"Vypadá_ to_že jste povolili Amplify modul. Klepněte na tlačítko Fix It, ujistěte se, že_ Amplify_ je zaškrtnuto, pak se restartuje."</string>

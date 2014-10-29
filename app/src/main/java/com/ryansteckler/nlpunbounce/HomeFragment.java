@@ -51,7 +51,6 @@ import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
 
 import java.io.File;
 
-
 /**
  * A placeholder fragment containing a simple view.
  */
@@ -88,6 +87,7 @@ public class HomeFragment extends Fragment  {
         LocaleHelper.onActivityCreateSetLocale(this.getActivity());
         ThemeHelper.onActivityCreateSetTheme(this.getActivity());
         setHasOptionsMenu(true);
+
     }
 
     @Override
@@ -109,7 +109,7 @@ public class HomeFragment extends Fragment  {
             }
         };
         //Register when new stats come in.
-        getActivity().registerReceiver(refreshReceiver, new IntentFilter(ActivityReceiver.SEND_STATS_ACTION));
+        getActivity().registerReceiver(refreshReceiver, new IntentFilter(ActivityReceiver.STATS_REFRESHED_ACTION));
         loadStatsFromSource(view);
 
         setupResetStatsButton(view);
@@ -651,6 +651,7 @@ public class HomeFragment extends Fragment  {
     private void loadStatsFromSource(final View view) {
         final UnbounceStatsCollection stats = UnbounceStatsCollection.getInstance();
         final Context c = getActivity();
+        stats.loadStats(c, true);
         String duration = stats.getWakelockDurationAllowedFormatted(c, UnbounceStatsCollection.STAT_CURRENT);
         //Wakelocks
         TextView textView = (TextView)view.findViewById(R.id.textLocalWakeTimeAllowed);

@@ -30,7 +30,7 @@
   <string name="category_not_safe">"Niet veilig te temperen"</string>
   <string name="category_error">"Fout"</string>
   <string name="alert_noiab_title">"Pro functies niet beschikbaar"</string>
-  <string name="alert_noiab_content">"Uw toestel ondersteunt In App aankopen niet. U zal de Pro functies van Amplify niet niet kunnen aankopen. Dit kan zijn omdat u uw Google Play Store applicatie moet updaten, of omdat u in een land woont waar In App aankopen niet mogelijk zijn. "</string>
+  <string name="alert_noiab_content">"Uw toestel ondersteunt In App aankopen niet. U zal de Pro functies van Amplify niet kunnen aankopen. Dit kan zijn omdat u uw Google Play Store applicatie moet updaten, of omdat u in een land woont waar In App aankopen niet mogelijk zijn. "</string>
   <string name="dialog_ok">"Ok"</string>
   <string name="tasker_on">"Aan"</string>
   <string name="tasker_off">"Af"</string>
@@ -38,7 +38,7 @@
   <string name="tasker_choose_wakelock">"Kies de wakelock om aan te passen"</string>
   <string name="tasker_choose_alarm">"Kies het alarm om aan te passen"</string>
   <string name="tasker_welcome">"Welkom bij Amplifys Tasker plugin"</string>
-  <string name="tasker_which_task">"Wil de instellingen aanpassen voor een wakelock of alarm, of wil je de statistieken restten voor je toestel?"</string>
+  <string name="tasker_which_task">"Wil je de instellingen aanpassen voor een wakelock of alarm, of wil je de statistieken resetten voor je toestel?"</string>
   <string name="tasker_task_wakelock">"Wijzig wakelock"</string>
   <string name="tasker_task_alarm">"Wijzg alarm"</string>
   <string name="tasker_task_reset">"Reset statisieken"</string>
@@ -63,7 +63,30 @@
   <string name="desc_unknown">"We hebben nog geen informatie over dit event. Het kan onveilig zijn het te temperen. Doe dit alleen als je goed weet wat je doet, en hoe Xposed uitgeschakeld kan worden. We werken er hard aan informatie te verzamelen over alle veelvoorkomende wakelocks en alarmen."</string>
   <string name="desc_nlpwakelock">"NlpWakeLock kan veilig worden getemperd. Het wordt gebruikt door Google Play Services voor het bepalen van de locatie op basis van cell en WiFi netwerken. De locatie wordt opgeslagen zodat andere apps, zoals Google Now, de locatie kunnen bepalen zonder GPS of netwerkk. Aanbevolen instelling is tussen 180 en 600 seconden."</string>
   <string name="desc_nlpcollectorwakelock">"NlpCollectorWakeLock kan veilig worden getemperd. Het wordt gebruikt door Google Play Services voor het bepalen van de locatie op basis van cell en WiFi netwerken. Deze informatie wordt door Google verzameld voor hun database van WiFi locaties. Aanbevolen instelling is tussen 180 en 600 seconden."</string>
+  <string name="desc_alarmmanager">"Geeft toegang tot de systeem alarm dienst. Wanneer een alarm afgaat, wordt de hiervoor geregistreerde Intent door het systeem verzonden. Hierdoor wordt de bijbehorende applicatie geactiveerd als het nog niet actief was. Geregistreerde alarmen worden bewaard als het toestel slaapt (en kunnen eventueel het toestel wakker maken), maar worden gewist als het wordt uitgeschakeld of herstart."</string>
+  <string name="desc_audiooffload">"Afspelen van audio met het scherm uit. Als u dit uitschakelt, kunt u geen audio meer afspelen wanneer het scherm uit is."</string>
+  <string name="desc_activitymanagerlauncher">"Werkt samen met de activiteiten die actief zijn in je systeem.
+Als je dit beperkt werkt niks goed."</string>
+  <string name="desc_windowmanager">"Dit is een wakelock op Android Systeemniveau. De interface die apps gebruiken om te communiceren met de Window Manager. Dit wil zeggen dat programma's een WindowManager wakelock nodig hebben elke keer ze iets iets willen tonen op het scherm."</string>
+  <string name="desc_rilj">"RILJ houdt uw toestel wakker tijdens het verwerken van telefoon gerelateerde acties, zoals gesprekken en communicatie met het netwerk."</string>
+  <string name="desc_syncloopwakelock">"Dit is de WakeLock die gebuikt wordt door de Android SyncManager om accounts te synchroniseren zoals Google+, Twitter, LinkedIn, Gmail enz... Hoe hoger de unbounce-tijd, hoe langer het duurt tot je accounts opnieuw gesynchroniseerd worden."</string>
+  <string name="desc_icing">"ICING is een WakeLock van Google Services. Nog op zoek naar meer details."</string>
+  <string name="desc_startingalertservice">"Deze Wakelock word geassocieerd met de kalender, Maar zou ook andere apps kunnen beïnvloeden zoals berichten. Als je kalender notificaties heeft zou het deze Wakelock kunnen gebruiken."</string>
+  <string name="desc_audiomix">"Deze wakelock verwerkt onder anderen Aanraakgeluiden en Alarmgeluiden.
+Kan een grote invloed hebben, zelfs met Aanraakgeluiden uitgeschakeld."</string>
+  <string name="desc_locationmanagerservice">"Lokatie manager service. Heeft normaal gesproken geen grote invloed op het batterijverbruik, zou bij sommige wel een grote wakelock kunnen zijn."</string>
+  <string name="desc_audioin">"Deze wakelock word gebruikt om het apparaat wakker te houden om te luisteren naar Google Search/Hotword Detection. Okay, Google"</string>
+  <string name="desc_nfcservicemroutingwakelock">"Gerelateerd aan de NFC-service die gedetecteerde tags doorstuurt naar het juiste programma."</string>
+  <string name="desc_wakefulintentservicegcoreulrlocationreportingservice">"Gebruikt door Google Locatie Service om je huidige locatie door te geven."</string>
+  <string name="desc_vzwgpslocationprovider">"Specifiek voor Verizon, locatie service om gsm mast statistieken te verzamelen. "</string>
+  <string name="desc_hangouts_rtcs">"Google Hangouts. Als je dit beperkt werkt Hangouts niet meer."</string>
+  <string name="desc_gcm_conn">"Google Cloud Messaging. Stuurt kleine berichten naar je apps. Verantwoordelijk voor push notificaties, voor alle apps."</string>
+  <string name="desc_google_c2dm">"Cloud naar Device Messaging (C2DM) is een service die ontwikkelaars helpt om data te sturen naar hun apps op toestellen. Deze service voorziet een mechanisme dat servers kunnen gebruiken om mobiele apps de server te laten contacteren om geupdate gegevens op te halen voor de app of de gebruiker. De C2DM service behandelt alles aspecten voor het afhandelen van berichten en het afleveren ervan aan de beoogde app die draait op het toestel. Deze service is afgeschreven sinds 2012 maar er zijn nog steeds apps die deze service gebruiken in plaats van de nieuwe en verbeterde GCM."</string>
   <string name="desc_timedeventqueue">"Dit is een kernonderdeel van Android waar u beter afblijft. Het regelt al binnenkomende gebeurtenissen."</string>
+  <string name="desc_comgoogleandroidgmsnlpalarm_wakeup_locator">"Veilig om te beperken. Word gebruikt door Google Play Services om grofweg je locatie te bepalen door middel van GSM masten en WiFi. Als je locatie bekend is wordt deze opgeslagen zodat andere apps zoals Google Now deze in kunnen zien. Kan je locatie bepalen zonder gebruik van GPS. Aanbevolen instelling zijn tussen de 180 en 600 seconden."</string>
+  <string name="desc_comgoogleandroidgmsnlpalarm_wakeup_activity_detection">"Veilig om te beperken. Word gebruikt door Google Play Services om grofweg je locatie te bepalen door middel van GSM masten en WiFi. Als je locatie bekend is wordt deze opgeslagen zodat Google zijn database met WiFi lokaties kan vergroten. Kan je locatie bepalen zonder gebruik van GPS. Aanbevolen instelling zijn tussen de 180 en 600 seconden."</string>
+  <string name="desc_comgoogleandroidappshangoutsupdate_notification">"Verantwoordelijk voor Google Hangouts notificatie updates."</string>
+  <string name="desc_comandroidinternaltelephonydatastall">"Wakelock van com.android.phone (Telefoon app) wanneer er via GSM masten data wordt verbruikt. Data via WiFi wordt niet beïnvloed. Kan erg hoog zijn bij data gebruik, vooral bij een matige verbinding."</string>
   <string name="settings_allow_every">"Allemaal toestaan"</string>
   <string name="settings_seconds">"seconden"</string>
   <string name="card_button_reset">"Reset"</string>
@@ -106,6 +129,27 @@
   <string name="settings_item_force_english_title">"Forceer Engels"</string>
   <string name="settings_item_force_english_summary">"Negeer uw lokale instellingen en gebruik Engels"</string>
   <string name="playstore_short_description">"Batterijduur voor het volk!"</string>
+  <string name="playstore_long_description">"Spontane feedback van echte gebruikers:
+Het gaf me ongeveer 2 uur extra gebruiksduur met 30 minuten extra Schermtijd. Hierdoor heb ik niet 25$ moeten uitgeven aan een batterij.
+Ik heb zonet 5$ geschonken om dit meesterwerk te steunen. Doe zo voort !
+Gewoonweg verbazend !
+Amplify heeft zonet de ware betekenis van WakeLock management revolutionair veranderd .
+Deze module is fantastisch ! Ik heb nu minder dan een halve percent batterijverlies per uur in standby.
+... en zo veel meer
+
+Amplify geeft je controle over hoe je toestel je batterij gebruikt door te regelen hoe vaak je toestel mag wakker worden, en hoe lang het dan wakker mag blijven. Gebruik de aangewezen instellingen voor eenvoudige batterijbesparing,  of ga nog wat verder door elk Alarm of WakeLock op je toestel aan te passen.
+Hier zijn een aantal voorname kenmerken:
+
+- een mooi ontwerp, geïnspireerd door de principes van Google 's Material Design
+- een stabiel blokkeringsmechanisme
+- uitgebreide monitoring van de tijd verloren of gewonnen door het al dan niet blokkeren van Alarmen en WakeLocks
+- een groeiende lijst van beschrijvingen van de Alarmen en WakeLocks in het Engels (andere talen zullen snel volgen)
+- een nieuw Pro pakket dat je elk Alarm of WakeLock op je toestel laat beperken
+- een open sourcecode zodat je kan zien hoe het werkt, of zodat je het zelf kan compileren
+
+De in-App aankopen laten je toe het Pro pakket te gebruiken, dat je in staat stelt om alle Alarmen en Wakelocks op je toestel aan te passen. Zonder het Pro pakket kan u wel de ergste batterijvreters aanpakken: NlpWakelock, NlpCollectorWakeLock, ALARM_WAKEUP_LOCATOR, en ALARM_WAKE_ACTIVITY_DETECTION.
+
+Ik wens u een lang (batterij)leven !"</string>
   <string name="welcome_banner_welcome">"Welkom!"</string>
   <string name="welcome_banner_checking_service">"Controleren of Amplify uitgevoerd wordt..."</string>
   <string name="welcome_banner_checking_xposed">"Controleren of Xposed geïnstalleerd is..."</string>

@@ -29,13 +29,16 @@ public class XposedReceiver extends BroadcastReceiver {
                 collection.resetLocalStats(statName);
             }
         } else if (action.equals(REFRESH_ACTION)) {
-            Intent refreshIntent = new Intent(ActivityReceiver.SEND_STATS_ACTION);
-            //TODO:  add FLAG_RECEIVER_REGISTERED_ONLY_BEFORE_BOOT to the intent to avoid needing to catch
-            //      the IllegalStateException.  The flag value changed between 4.3 and 4.4  :/
-            refreshIntent.putExtra("stats", UnbounceStatsCollection.getInstance().getSerializableStats(UnbounceStatsCollection.STAT_CURRENT));
-            refreshIntent.putExtra("stat_type", UnbounceStatsCollection.STAT_CURRENT);
-            refreshIntent.putExtra("running_since", UnbounceStatsCollection.getInstance().getRunningSince());
+            if (!UnbounceStatsCollection.getInstance().saveNow(context)) {
+                //Request the activity to create the files.
+                Intent createIntent = new Intent(ActivityReceiver.CREATE_FILES_ACTION);
+                try {
+                    context.sendBroadcast(createIntent);
+                } catch (IllegalStateException ise) {
+                }
+            }
 
+            Intent refreshIntent = new Intent(ActivityReceiver.STATS_REFRESHED_ACTION);
             try {
                 context.sendBroadcast(refreshIntent);
             } catch (IllegalStateException ise) {

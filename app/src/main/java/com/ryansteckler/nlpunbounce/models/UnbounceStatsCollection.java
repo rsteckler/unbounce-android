@@ -1,5 +1,6 @@
 package com.ryansteckler.nlpunbounce.models;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -40,9 +41,9 @@ import static com.ryansteckler.nlpunbounce.helpers.LocaleHelper.getFormattedTime
 public class UnbounceStatsCollection implements Serializable {
 
 //    final private static String URL_STATS = "http://localhost:8080/stats";
-//    final private static String URL_STATS = "http://www.unbounceme.com/stats";
     final private static String URL_STATS = "http://unbounce-server-1.appspot.com/stats";
 
+    final private static String STATS_DIRECTORY = "/data/data/com.ryansteckler.nlpunbounce/files/";
     final private static String STATS_FILENAME_CURRENT = "nlpunbounce.stats";
     final private static String STATS_FILENAME_GLOBAL = "nlpunbounce.global.stats";
     final private static String STATS_FILENAME_PUSH = "nlpunbounce.push.stats";
@@ -56,9 +57,7 @@ public class UnbounceStatsCollection implements Serializable {
     public static final int STAT_GLOBAL = 1;
     public static final int STAT_PUSH = 2;
 
-    long mLastSave = 0;
     long mLastPush = 0;
-    long mSaveTimeFrequency = 600000; //Save every ten minutes
     long mPushTimeFrequency = 86400000; //Push every 24 hours
 
     private static UnbounceStatsCollection mInstance = null;
@@ -78,10 +77,20 @@ public class UnbounceStatsCollection implements Serializable {
     public void populateSerializableStats(HashMap<String, BaseStats> source, int statType, long runningSince)
     {
         if (statType == STAT_CURRENT) {
-            mCurrentStats = source;
+            try {
+                mCurrentStats = source;
+            } catch (ClassCastException cce) {
+                //Probable version upgrade and stat incompatibility.  Reset the stats.
+                mCurrentStats = new HashMap<String, BaseStats>();
+            }
             mRunningSince = runningSince;
         } else if (statType == STAT_PUSH) {
-            mSincePushStats = source;
+            try {
+                mSincePushStats = source;
+            } catch (ClassCastException cce) {
+                //Probable version upgrade and stat incompatibility.  Reset the stats.
+                mSincePushStats = new HashMap<String, BaseStats>();
+            }
         }
     }
 
@@ -115,26 +124,10 @@ public class UnbounceStatsCollection implements Serializable {
 
         return getFormattedTime(years,days,hours,minutes,seconds);
 
-        /*StringBuilder sb = new StringBuilder(64);
-        if (years > 0) {
-            sb.append(years);
-            sb.append(" y ");
-        }
-        sb.append(days);
-        sb.append(" d ");
-        sb.append(hours);
-        sb.append(" h ");
-        sb.append(minutes);
-        sb.append(" m ");
-        sb.append(seconds);
-        sb.append(" s");
-
-        return (sb.toString());*/
-
     }
 
     public ArrayList<BaseStats> toAlarmArrayList(Context context) {
-        loadStats(context);
+        loadStats(context, false);
         ArrayList<BaseStats> bases = new ArrayList<BaseStats>(mCurrentStats.values());
         ArrayList<BaseStats> alarms = new ArrayList<BaseStats>();
         Iterator<BaseStats> iter = bases.iterator();
@@ -151,7 +144,7 @@ public class UnbounceStatsCollection implements Serializable {
     }
 
     public ArrayList<BaseStats> toWakelockArrayList(Context context) {
-        loadStats(context);
+        loadStats(context, false); 
         ArrayList<BaseStats> bases = new ArrayList<BaseStats>(mCurrentStats.values());
         ArrayList<BaseStats> wakelocks = new ArrayList<BaseStats>();
         Iterator<BaseStats> iter = bases.iterator();
@@ -169,7 +162,7 @@ public class UnbounceStatsCollection implements Serializable {
 
     public ArrayList<BaseStats> toServiceArrayList(Context context)
     {
-        loadStats(context);
+        loadStats(context, false); 
         ArrayList<BaseStats> bases = new ArrayList<BaseStats>(mCurrentStats.values());
         ArrayList<BaseStats> services = new ArrayList<BaseStats>();
         Iterator<BaseStats> iter = bases.iterator();
@@ -198,7 +191,7 @@ public class UnbounceStatsCollection implements Serializable {
             }
         } else if (statType == STAT_CURRENT) {
             HashMap<String, BaseStats> statChoice = null;
-            loadStats(context);
+            loadStats(context, false); 
 
             //Iterate over all wakelocks and return the duration
             Iterator<BaseStats> iter = mCurrentStats.values().iterator();
@@ -224,27 +217,11 @@ public class UnbounceStatsCollection implements Serializable {
 
         return getFormattedTime(years,days,hours,minutes,seconds);
 
-        /*StringBuilder sb = new StringBuilder(64);
-        if (years > 0) {
-            sb.append(years);
-            sb.append(" y ");
-        }
-        sb.append(days);
-        sb.append(" d ");
-        sb.append(hours);
-        sb.append(" h ");
-        sb.append(minutes);
-        sb.append(" m ");
-        sb.append(seconds);
-        sb.append(" s");
-
-
-        return (sb.toString());*/
     }
 
     public WakelockStats getWakelockStats(Context context, String wakelockName)
     {
-        loadStats(context);
+        loadStats(context, false); 
         if (mCurrentStats.containsKey(wakelockName)) {
             BaseStats base = mCurrentStats.get(wakelockName);
             if (base instanceof WakelockStats)
@@ -259,14 +236,13 @@ public class UnbounceStatsCollection implements Serializable {
             emptyStat.setBlockCount(0);
             emptyStat.setName(wakelockName);
             mCurrentStats.put(wakelockName, emptyStat);
-            saveNow(context);
             return emptyStat;
         }
     }
 
     public ServiceStats getServiceStats(Context context, String serviceName)
     {
-        loadStats(context);
+        loadStats(context, false); 
         if (mCurrentStats.containsKey(serviceName)) {
             BaseStats base = mCurrentStats.get(serviceName);
             if (base instanceof ServiceStats)
@@ -280,7 +256,6 @@ public class UnbounceStatsCollection implements Serializable {
             emptyStat.setBlockCount(0);
             emptyStat.setName(serviceName);
             mCurrentStats.put(serviceName, emptyStat);
-            saveNow(context);
             return emptyStat;
         }
     }
@@ -288,7 +263,7 @@ public class UnbounceStatsCollection implements Serializable {
     public AlarmStats getAlarmStats(Context context, String alarmName)
     {
         HashMap<String, BaseStats> statChoice = null;
-        loadStats(context);
+        loadStats(context, false); 
 
         if (mCurrentStats.containsKey(alarmName)) {
             BaseStats base = mCurrentStats.get(alarmName);
@@ -301,7 +276,6 @@ public class UnbounceStatsCollection implements Serializable {
             emptyStat.setAllowedCount(0);
             emptyStat.setBlockCount(0);
             mCurrentStats.put(alarmName, emptyStat);
-            saveNow(context);
             return emptyStat;
         }
     }
@@ -316,7 +290,7 @@ public class UnbounceStatsCollection implements Serializable {
                 }
             }
         } else if (statType == STAT_CURRENT) {
-            loadStats(context);
+            loadStats(context, false); 
             //Iterate over all stats and return the duration
             Iterator<BaseStats> iter = mCurrentStats.values().iterator();
             while (iter.hasNext())
@@ -342,21 +316,6 @@ public class UnbounceStatsCollection implements Serializable {
 
         return getFormattedTime(years,days,hours,minutes,seconds);
 
-        /*StringBuilder sb = new StringBuilder(64);
-        if (years > 0) {
-            sb.append(years);
-            sb.append(" y ");
-        }
-        sb.append(days);
-        sb.append(" d ");
-        sb.append(hours);
-        sb.append(" h ");
-        sb.append(minutes);
-        sb.append(" m ");
-        sb.append(seconds);
-        sb.append(" s");
-
-        return (sb.toString());*/
     }
 
     public long getTotalAllowedWakelockCount(Context context, int statType)
@@ -369,7 +328,7 @@ public class UnbounceStatsCollection implements Serializable {
                 }
             }
         } else if (statType == STAT_CURRENT) {
-            loadStats(context);
+            loadStats(context, false); 
 
             for (BaseStats curStat : mCurrentStats.values()) {
 
@@ -391,7 +350,7 @@ public class UnbounceStatsCollection implements Serializable {
                 }
             }
         } else if (statType == STAT_CURRENT) {
-            loadStats(context);
+            loadStats(context, false); 
             Iterator<BaseStats> iter = mCurrentStats.values().iterator();
             while (iter.hasNext())
             {
@@ -414,7 +373,7 @@ public class UnbounceStatsCollection implements Serializable {
                 }
             }
         } else if (statType == STAT_CURRENT) {
-            loadStats(context);
+            loadStats(context, false); 
 
             for (BaseStats curStat : mCurrentStats.values()) {
 
@@ -438,7 +397,7 @@ public class UnbounceStatsCollection implements Serializable {
                 }
             }
         } else if (statType == STAT_CURRENT) {
-            loadStats(context);
+            loadStats(context, false); 
             Iterator<BaseStats> iter = mCurrentStats.values().iterator();
             while (iter.hasNext())
             {
@@ -462,7 +421,7 @@ public class UnbounceStatsCollection implements Serializable {
                 }
             }
         } else if (statType == STAT_CURRENT) {
-            loadStats(context);
+            loadStats(context, false); 
 
             for (BaseStats curStat : mCurrentStats.values()) {
 
@@ -485,7 +444,7 @@ public class UnbounceStatsCollection implements Serializable {
                 }
             }
         } else if (statType == STAT_CURRENT) {
-            loadStats(context);
+            loadStats(context, false); 
 
             for (BaseStats curStat : mCurrentStats.values()) {
 
@@ -499,7 +458,7 @@ public class UnbounceStatsCollection implements Serializable {
     public void addInterimWakelock(Context context, InterimEvent toAdd)
     {
         //Load from disk and populate our stats
-        loadStats(context);
+        loadStats(context, false); 
 
         addInterimWakelock(toAdd, mCurrentStats);
         if (mGlobalParticipation) {
@@ -526,7 +485,7 @@ public class UnbounceStatsCollection implements Serializable {
     public void incrementWakelockBlock(Context context, String statName)
     {
         //Load from disk and populate our stats
-        loadStats(context);
+        loadStats(context, false); 
 
         incrementWakelockBlock(statName, mCurrentStats);
         if (mGlobalParticipation) {
@@ -549,7 +508,7 @@ public class UnbounceStatsCollection implements Serializable {
     public void incrementServiceBlock(Context context, String statName)
     {
         //Load from disk and populate our stats
-        loadStats(context);
+        loadStats(context, false); 
 
         incrementServiceBlock(statName, mCurrentStats);
         if (mGlobalParticipation) {
@@ -572,7 +531,7 @@ public class UnbounceStatsCollection implements Serializable {
    
     public void incrementAlarmBlock(Context context, String statName,String packageName) {
         //Load from disk and populate our stats
-        loadStats(context);
+        loadStats(context, false); 
 
         incrementAlarmBlock(statName, mCurrentStats,packageName);
         if (mGlobalParticipation) {
@@ -593,7 +552,7 @@ public class UnbounceStatsCollection implements Serializable {
 
     public void incrementAlarmAllowed(Context context, String statName,String packageName) {
         //Load from disk and populate our stats
-        loadStats(context);
+        loadStats(context, false); 
         incrementAlarmAllowed(statName, mCurrentStats,packageName);
         if (mGlobalParticipation) {
             incrementAlarmAllowed(statName, mSincePushStats,packageName);
@@ -613,7 +572,7 @@ public class UnbounceStatsCollection implements Serializable {
     public void incrementServiceAllowed(Context context, String statName)
     {
         //Load from disk and populate our stats
-        loadStats(context);
+        loadStats(context, false); 
 
         incrementServiceAllowed(statName, mCurrentStats);
         if (mGlobalParticipation) {
@@ -631,11 +590,11 @@ public class UnbounceStatsCollection implements Serializable {
         combined.incrementAllowedCount();
         statChoice.put(statName, combined);
     }
+
     public void resetStats(Context context, String statName)
     {
-        loadStats(context);
+        loadStats(context, false); 
         mCurrentStats.remove(statName);
-        saveNow(context);
     }
 
     public void resetLocalStats(String statName)
@@ -648,11 +607,11 @@ public class UnbounceStatsCollection implements Serializable {
         if (statType == STAT_CURRENT) {
             mCurrentStats.clear();
             mRunningSince = SystemClock.elapsedRealtime();
-            clearStatFile(STATS_FILENAME_CURRENT);
+            clearStatFile(context, STATS_FILENAME_CURRENT);
         }
         else if (statType == STAT_PUSH) {
             mSincePushStats.clear();
-            clearStatFile(STATS_FILENAME_PUSH);
+            clearStatFile(context, STATS_FILENAME_PUSH);
         }
     }
 
@@ -667,88 +626,84 @@ public class UnbounceStatsCollection implements Serializable {
         }
     }
 
-    public void saveIfNeeded(Context context) {
-        //Find out how long since our last save
-        synchronized (this) {
-            final long now = SystemClock.elapsedRealtime();
-            long timeSinceLastSave = now - mLastSave;
-
-            if (timeSinceLastSave > mSaveTimeFrequency) {
-                //Save now
-                mLastSave = now;
-
-                saveStatsToFile(STATS_FILENAME_CURRENT, mCurrentStats);
-                saveStatsToFile(STATS_FILENAME_PUSH, mSincePushStats);
-                saveStatsToFile(STATS_FILENAME_GLOBAL, mGlobalStats);
-
-                long timeSinceLastPush = now - mLastPush;
-
-                if (timeSinceLastPush > mPushTimeFrequency || (mGlobalStats != null && mGlobalStats.size() == 0)) {
-                    //Push now
-                    pushStatsToNetwork(context);
-                }
-            }
-        }
-    }
-
-    private void saveStatsToFile(String statFilename, HashMap statChoice) {
+    private boolean saveStatsToFile(String statFilename, HashMap statChoice) {
         if (statChoice != null) {
             String filename = Environment.getDataDirectory() + "/data/" + "com.ryansteckler.nlpunbounce" + "/files/" + statFilename;
 
-            Object toWrite = statChoice;
+            Object toWrite = statChoice.clone();
             if (statChoice == mSincePushStats || statChoice == mCurrentStats) {
                 //Wrap statchoice to contain metadata
                 BaseStatsWrapper wrap = new BaseStatsWrapper();
                 if (statChoice == mCurrentStats) {
                     wrap.mRunningSince = mRunningSince;
                 }
-                wrap.mStats = statChoice;
+                wrap.mStats = (HashMap)statChoice.clone();
                 toWrite = wrap;
             }
 
             try {
-
-                File outFile = new File(filename);
+                File  outFile = new File(filename);
                 if (!outFile.exists()) {
-                    outFile.createNewFile();
+                    return false;
                 }
-                outFile.setReadable(true, false);
+
                 FileOutputStream out = new FileOutputStream(outFile);
                 ObjectOutputStream objOut = new ObjectOutputStream(out);
                 objOut.writeObject(toWrite);
                 objOut.close();
                 out.close();
-                outFile.setReadable(true, false);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+        return true;
     }
 
-    private void clearStatFile(String filename) {
-        File toClear = new File(filename);
-        toClear.delete();
+    private void clearStatFile(Context context, String filename) {
+        try {
+            FileOutputStream out = context.openFileOutput(filename, Activity.MODE_WORLD_WRITEABLE | Activity.MODE_WORLD_READABLE);
+            out.write(0);
+            out.close();
+        } catch (IOException ioe) {
+
+        }
     }
 
-    public void saveNow(Context context) {
-        mLastSave = 0; //force a save
-        saveIfNeeded(context);
+    public boolean saveNow(Context context) {
+        if (!saveStatsToFile(STATS_FILENAME_CURRENT, mCurrentStats)) {
+            return false;
+        }
+        if (!saveStatsToFile(STATS_FILENAME_PUSH, mSincePushStats)) {
+            return false;
+        }
+        if (!saveStatsToFile(STATS_FILENAME_GLOBAL, mGlobalStats)) {
+            return false;
+        }
+
+        long now = SystemClock.elapsedRealtime();
+        long timeSinceLastPush = now - mLastPush;
+        if (timeSinceLastPush > mPushTimeFrequency || (mGlobalStats != null && mGlobalStats.size() == 0)) {
+            //Push now
+            mLastPush = now;
+            pushStatsToNetwork(context);
+        }
+        return true;
     }
 
-    private void loadStats(Context context) {
-        if (mCurrentStats == null) {
+    public void loadStats(Context context, boolean forceReload) {
+        if (mCurrentStats == null || forceReload) {
             mCurrentStats = loadStatsFromFile(STATS_FILENAME_CURRENT);
             if (mCurrentStats == null)
                 mCurrentStats = new HashMap<String, BaseStats>();
         }
-        if (mSincePushStats == null) {
+        if (mSincePushStats == null || forceReload) {
             mSincePushStats = loadStatsFromFile(STATS_FILENAME_PUSH);
             if (mSincePushStats == null)
                 mSincePushStats = new HashMap<String, BaseStats>();
         }
-        if (mGlobalStats == null) {
+        if (mGlobalStats == null || forceReload) {
             mGlobalStats = loadStatsFromFile(STATS_FILENAME_GLOBAL);
             if (mGlobalStats == null)
                 mGlobalStats = new HashMap<String, Long>();
@@ -760,14 +715,11 @@ public class UnbounceStatsCollection implements Serializable {
         String filename = "";
         try {
             filename = Environment.getDataDirectory() + "/data/" + "com.ryansteckler.nlpunbounce" + "/files/" + statFilename;
-            Log.d("Unbounce:WLSC", "Loading file: " + filename);
 
             File inFile = new File(filename);
             if (inFile.exists() && !inFile.canRead()) {
-                Log.d("Unbounce:WLSC", "Can't load file yet.  Skipping...");
             }
             else if (inFile.exists() && inFile.canRead()) {
-                Log.d("Unbounce:WLSC", "Ready to load file.");
                 FileInputStream in = new FileInputStream(inFile);
                 ObjectInputStream objIn = new ObjectInputStream(in);
                 if (statFilename.equals(STATS_FILENAME_GLOBAL)) {
@@ -793,12 +745,10 @@ public class UnbounceStatsCollection implements Serializable {
                 in.close();
             }
             else {
-                Log.d("Unbounce:WLSC", "Unknown file state.  Resetting.");
                 statChoice = new HashMap<String, BaseStats>();
             }
 
         } catch (FileNotFoundException e) {
-            Log.d("Unbounce:WLSC", "Please send this log to Ryan.  It's a problem.  FNF: " + filename);
             new Exception().printStackTrace();
             statChoice = new HashMap<String, BaseStats>();
         } catch (StreamCorruptedException e) {
@@ -832,7 +782,6 @@ public class UnbounceStatsCollection implements Serializable {
                         @Override
                         public void handleMessage(Message msg) {
                             if (msg.what == 1) {
-                                mLastPush = SystemClock.elapsedRealtime();
 
                                 //Update global stats
                                 String globalStats = msg.getData().getString("global_stats");
@@ -887,5 +836,31 @@ public class UnbounceStatsCollection implements Serializable {
     public void refreshPrefs(XSharedPreferences prefs) {
         //Refresh the global options from the settings
         mGlobalParticipation = prefs.getBoolean("global_participation", true);
+    }
+
+    public void createFiles(Context context) {
+        try {
+            if (!new File(STATS_DIRECTORY + STATS_FILENAME_CURRENT).exists()) {
+                FileOutputStream out = context.openFileOutput(STATS_FILENAME_CURRENT, Activity.MODE_WORLD_WRITEABLE | Activity.MODE_WORLD_READABLE);
+                out.write(0);
+                out.close();
+            }
+
+            if (!new File(STATS_DIRECTORY + STATS_FILENAME_GLOBAL).exists()) {
+                FileOutputStream out = context.openFileOutput(STATS_FILENAME_GLOBAL, Activity.MODE_WORLD_WRITEABLE | Activity.MODE_WORLD_READABLE);
+                out.write(0);
+                out.close();
+            }
+
+            if (!new File(STATS_DIRECTORY + STATS_FILENAME_PUSH).exists()) {
+                FileOutputStream out = context.openFileOutput(STATS_FILENAME_PUSH, Activity.MODE_WORLD_WRITEABLE | Activity.MODE_WORLD_READABLE);
+                out.write(0);
+                out.close();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }
