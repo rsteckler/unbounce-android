@@ -12,9 +12,9 @@ public class AlarmStats extends BaseStats implements Serializable {
         setType("alarm");
         setName(alarmName);
         if(null!=packageName && !packageName.trim().equals("")){
-            setmPackage(packageName);
+            setPackage(packageName);
         }else{
-            setmPackage("No Package");
+            setPackage("No Package");
         }
 
     }
