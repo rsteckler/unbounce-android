@@ -46,6 +46,7 @@ import com.ryansteckler.nlpunbounce.helpers.LocaleHelper;
 import com.ryansteckler.nlpunbounce.helpers.RootHelper;
 import com.ryansteckler.nlpunbounce.helpers.SettingsHelper;
 import com.ryansteckler.nlpunbounce.helpers.ThemeHelper;
+import com.ryansteckler.nlpunbounce.hooks.Wakelocks;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
 
 
@@ -88,6 +89,12 @@ public class HomeFragment extends Fragment  {
         ThemeHelper.onActivityCreateSetTheme(this.getActivity());
         setHasOptionsMenu(true);
 
+        SharedPreferences prefs = getActivity().getSharedPreferences("com.ryansteckler.nlpunbounce" + "_preferences", Context.MODE_WORLD_READABLE);
+        String lastVersion = prefs.getString("file_version", "0");
+        if (!lastVersion.equals(Wakelocks.FILE_VERSION)) {
+            //Reset stats
+            UnbounceStatsCollection.getInstance().recreateFiles(getActivity());
+        }
     }
 
     @Override

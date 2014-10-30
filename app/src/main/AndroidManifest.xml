@@ -34,7 +34,9 @@
             <intent-filter>
                 <action android:name="com.ryansteckler.nlpunbounce.STATS_REFRESHED_ACTION" />
                 <action android:name="com.ryansteckler.nlpunbounce.CREATE_FILES_ACTION" />
+                <action android:name="com.ryansteckler.nlpunbounce.RESET_FILES_ACTION" />
                 <action android:name="com.ryansteckler.nlpunbounce.PUSH_NETWORK_STATS" />
+
             </intent-filter>
         </receiver>
 

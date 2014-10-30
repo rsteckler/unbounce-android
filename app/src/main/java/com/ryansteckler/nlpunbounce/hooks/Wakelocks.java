@@ -37,7 +37,8 @@ import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 public class Wakelocks implements IXposedHookLoadPackage {
 
     private static final String TAG = "Amplify: ";
-    private static final String VERSION = "2.0.2"; //This needs to be pulled from the manifest or gradle build.
+    public static final String VERSION = "2.0.3"; //This needs to be pulled from the manifest or gradle build.
+    public static final String FILE_VERSION = "2"; //This needs to be pulled from the manifest or gradle build.
     private HashMap<String, Long> mLastWakelockAttempts = null; //The last time each wakelock was allowed.
     private HashMap<String, Long> mLastAlarmAttempts = null; //The last time each alarm was allowed.
 //    private HashMap<String, Long> mLastServiceAttempts = null; //The last time each wakelock was allowed.
@@ -73,11 +74,28 @@ public class Wakelocks implements IXposedHookLoadPackage {
             hookAlarms(lpparam);
             hookWakeLocks(lpparam);
             hookServices(lpparam);
+            resetFilesIfNeeded(null);
         } else if (lpparam.packageName.equals("com.ryansteckler.nlpunbounce")) {
             hookAmplifyClasses(lpparam);
         }
     }
 
+    private void resetFilesIfNeeded(Context context) {
+        //Get the version number and compare it to our app version.
+        String lastVersion = m_prefs.getString("file_version", "0");
+        if (!lastVersion.equals(FILE_VERSION)) {
+            //Reset stats
+            defaultLog("Resetting stat files on version upgrade.");
+            if (context != null) {
+                Intent intent = new Intent(ActivityReceiver.CREATE_FILES_ACTION);
+                try {
+                    context.sendBroadcast(intent);
+                } catch (IllegalStateException ise) {
+                }
+            }
+            UnbounceStatsCollection.getInstance().resetLocalStats(UnbounceStatsCollection.STAT_CURRENT);
+        }
+    }
     private void hookAmplifyClasses(LoadPackageParam lpparam) {
         findAndHookMethod("com.ryansteckler.nlpunbounce.HomeFragment", lpparam.classLoader, "isUnbounceServiceRunning", new XC_MethodHook() {
             @Override
@@ -448,6 +466,8 @@ public class Wakelocks implements IXposedHookLoadPackage {
             long timeSinceLastUpdateStats = now - mLastUpdateStats;
 
             if (timeSinceLastUpdateStats > mUpdateStatsFrequency) {
+                resetFilesIfNeeded(context);
+
                 if (!UnbounceStatsCollection.getInstance().saveNow(context)) {
                     //Request the activity to create the files.
                     Intent intent = new Intent(ActivityReceiver.CREATE_FILES_ACTION);
