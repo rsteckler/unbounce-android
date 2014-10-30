@@ -74,6 +74,7 @@ public class UnbounceStatsCollection implements Serializable {
     }
 
     private UnbounceStatsCollection() {
+        mRunningSince = System.currentTimeMillis();
     }
 
     public Long getRunningSince() {
@@ -590,6 +591,7 @@ public class UnbounceStatsCollection implements Serializable {
     public void resetLocalStats(int statType)
     {
         if (statType == STAT_CURRENT) {
+
             mCurrentStats.clear();
             mRunningSince = System.currentTimeMillis();
         }

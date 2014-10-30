@@ -95,6 +95,14 @@ public class HomeFragment extends Fragment  {
         if (!lastVersion.equals(Wakelocks.FILE_VERSION)) {
             //Reset stats
             UnbounceStatsCollection.getInstance().recreateFiles(getActivity());
+            Intent intent = new Intent(XposedReceiver.RESET_ACTION);
+            intent.putExtra(XposedReceiver.STAT_TYPE, UnbounceStatsCollection.STAT_CURRENT);
+            try {
+                getActivity().sendBroadcast(intent);
+            } catch (IllegalStateException ise) {
+
+            }
+
         }
     }
 
@@ -137,17 +145,17 @@ public class HomeFragment extends Fragment  {
         final SharedPreferences prefs = getActivity().getSharedPreferences("com.ryansteckler.nlpunbounce" + "_preferences", Context.MODE_WORLD_READABLE);
         boolean firstRun = prefs.getBoolean("first_launch", true);
 
-        if (!isUnbounceServiceRunning() || firstRun) {
+        if (!getAmplifyKernelVersion().equals(Wakelocks.VERSION) || firstRun) {
 
             //Show the banner
             final LinearLayout banner = (LinearLayout)view.findViewById(R.id.banner);
             banner.setVisibility(View.VISIBLE);
 
             //Let's find out why the service isn't running:
-            if (!isUnbounceServiceRunning()) {
-                mSetupFailureStep = SETUP_FAILURE_SERVICE;
-                if (!getAmplifyKernelVersion().equals(Wakelocks.VERSION)) {
-                    mSetupFailureStep = SETUP_FAILURE_VERSION;
+            if (!getAmplifyKernelVersion().equals(Wakelocks.VERSION)) {
+                mSetupFailureStep = SETUP_FAILURE_VERSION;
+                if (!isUnbounceServiceRunning()) {
+                    mSetupFailureStep = SETUP_FAILURE_SERVICE;
                     if (!isXposedRunning()) {
                         mSetupFailureStep = SETUP_FAILURE_XPOSED_RUNNING;
                         if (!isXposedInstalled()) {
