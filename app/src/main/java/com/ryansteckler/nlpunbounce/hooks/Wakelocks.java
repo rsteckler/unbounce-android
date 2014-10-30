@@ -103,6 +103,13 @@ public class Wakelocks implements IXposedHookLoadPackage {
                 param.setResult(true);
             }
         });
+        findAndHookMethod("com.ryansteckler.nlpunbounce.HomeFragment", lpparam.classLoader, "getAmplifyKernelVersion", new XC_MethodHook() {
+            @Override
+            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                param.setResult(VERSION);
+            }
+        });
+
     }
 
     private void setupReceiver(XC_MethodHook.MethodHookParam param) {
