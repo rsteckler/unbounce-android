@@ -46,6 +46,7 @@ import com.ryansteckler.nlpunbounce.helpers.LocaleHelper;
 import com.ryansteckler.nlpunbounce.helpers.RootHelper;
 import com.ryansteckler.nlpunbounce.helpers.SettingsHelper;
 import com.ryansteckler.nlpunbounce.helpers.ThemeHelper;
+import com.ryansteckler.nlpunbounce.hooks.Wakelocks;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
 
 
@@ -64,9 +65,10 @@ public class HomeFragment extends Fragment  {
     private int mSetupFailureStep = SETUP_FAILURE_NONE; //We're optimists  :)
     private final static int SETUP_FAILURE_NONE = 0; //We're good.  The service is running.
     private final static int SETUP_FAILURE_SERVICE = 1; //The service isn't running, but Xposed is installed.
-    private final static int SETUP_FAILURE_XPOSED_RUNNING = 2; //Xposed isn't running ("installed")
-    private final static int SETUP_FAILURE_XPOSED_INSTALL = 3; //Xposed isn't installed
-    private final static int SETUP_FAILURE_ROOT = 4; //There's no root access.
+    private final static int SETUP_FAILURE_VERSION = 2; //The service isn't running, but Xposed is installed.
+    private final static int SETUP_FAILURE_XPOSED_RUNNING = 3; //Xposed isn't running ("installed")
+    private final static int SETUP_FAILURE_XPOSED_INSTALL = 4; //Xposed isn't installed
+    private final static int SETUP_FAILURE_ROOT = 5; //There's no root access.
 
 
     /**
@@ -88,6 +90,20 @@ public class HomeFragment extends Fragment  {
         ThemeHelper.onActivityCreateSetTheme(this.getActivity());
         setHasOptionsMenu(true);
 
+        SharedPreferences prefs = getActivity().getSharedPreferences("com.ryansteckler.nlpunbounce" + "_preferences", Context.MODE_WORLD_READABLE);
+        String lastVersion = prefs.getString("file_version", "0");
+        if (!lastVersion.equals(Wakelocks.FILE_VERSION)) {
+            //Reset stats
+            UnbounceStatsCollection.getInstance().recreateFiles(getActivity());
+            Intent intent = new Intent(XposedReceiver.RESET_ACTION);
+            intent.putExtra(XposedReceiver.STAT_TYPE, UnbounceStatsCollection.STAT_CURRENT);
+            try {
+                getActivity().sendBroadcast(intent);
+            } catch (IllegalStateException ise) {
+
+            }
+
+        }
     }
 
     @Override
@@ -129,21 +145,24 @@ public class HomeFragment extends Fragment  {
         final SharedPreferences prefs = getActivity().getSharedPreferences("com.ryansteckler.nlpunbounce" + "_preferences", Context.MODE_WORLD_READABLE);
         boolean firstRun = prefs.getBoolean("first_launch", true);
 
-        if (!isUnbounceServiceRunning() || firstRun) {
+        if (!getAmplifyKernelVersion().equals(Wakelocks.VERSION) || firstRun) {
 
             //Show the banner
             final LinearLayout banner = (LinearLayout)view.findViewById(R.id.banner);
             banner.setVisibility(View.VISIBLE);
 
             //Let's find out why the service isn't running:
-            if (!isUnbounceServiceRunning()) {
-                mSetupFailureStep = SETUP_FAILURE_SERVICE;
-                if (!isXposedRunning()) {
-                    mSetupFailureStep = SETUP_FAILURE_XPOSED_RUNNING;
-                    if (!isXposedInstalled()) {
-                        mSetupFailureStep = SETUP_FAILURE_XPOSED_INSTALL;
-                        if (!RootHelper.isDeviceRooted()) {
-                            mSetupFailureStep = SETUP_FAILURE_ROOT;
+            if (!getAmplifyKernelVersion().equals(Wakelocks.VERSION)) {
+                mSetupFailureStep = SETUP_FAILURE_VERSION;
+                if (!isUnbounceServiceRunning()) {
+                    mSetupFailureStep = SETUP_FAILURE_SERVICE;
+                    if (!isXposedRunning()) {
+                        mSetupFailureStep = SETUP_FAILURE_XPOSED_RUNNING;
+                        if (!isXposedInstalled()) {
+                            mSetupFailureStep = SETUP_FAILURE_XPOSED_INSTALL;
+                            if (!RootHelper.isDeviceRooted()) {
+                                mSetupFailureStep = SETUP_FAILURE_ROOT;
+                            }
                         }
                     }
                 }
@@ -271,6 +290,9 @@ public class HomeFragment extends Fragment  {
                     } else if (mSetupFailureStep == SETUP_FAILURE_SERVICE) {
                         //Service isn't running
                         handleServiceFailure(problemText, nextButtonText, nextButton);
+                    } else if (mSetupFailureStep == SETUP_FAILURE_VERSION) {
+                        //Service is the wrong version
+                        handleVersionFailure(problemText, nextButtonText, nextButton);
                     } else if (mSetupFailureStep == SETUP_FAILURE_XPOSED_RUNNING) {
                         //Xposed isn't running
                         handleXposedRunningFailure(problemText, nextButtonText, nextButton);
@@ -387,6 +409,19 @@ public class HomeFragment extends Fragment  {
                 @Override
                 public void onClick(View view) {
                     launchXposedFramework();
+                    getActivity().finish();
+                }
+            });
+        }
+
+        private void handleVersionFailure(TextView problemText, TextView nextButtonText, LinearLayout nextButton) {
+            nextButtonText.setText(getActivity().getResources().getString(R.string.welcome_banner_button_fixit));
+            String errorText = getResources().getString(R.string.welcome_banner_problem_version);
+            problemText.setText(Html.fromHtml(errorText));
+            problemText.setMovementMethod(LinkMovementMethod.getInstance());
+            nextButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
                     getActivity().finish();
                 }
             });
@@ -857,6 +892,13 @@ public class HomeFragment extends Fragment  {
         //The Unbounce hook changes this to true.
         return false;
     }
+
+    public String getAmplifyKernelVersion() {
+        //The Unbounce hook changes this to true.
+        return "0";
+    }
+
+
 
     public boolean isXposedRunning() {
         return new File("/data/data/de.robv.android.xposed.installer/bin/XposedBridge.jar").exists();
