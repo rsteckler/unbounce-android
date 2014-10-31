@@ -37,7 +37,7 @@ import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 public class Wakelocks implements IXposedHookLoadPackage {
 
     private static final String TAG = "Amplify: ";
-    public static final String VERSION = "2.0.3"; //This needs to be pulled from the manifest or gradle build.
+    public static final String VERSION = "2.0.4"; //This needs to be pulled from the manifest or gradle build.
     public static final String FILE_VERSION = "2"; //This needs to be pulled from the manifest or gradle build.
     private HashMap<String, Long> mLastWakelockAttempts = null; //The last time each wakelock was allowed.
     private HashMap<String, Long> mLastAlarmAttempts = null; //The last time each alarm was allowed.
@@ -407,9 +407,14 @@ public class Wakelocks implements IXposedHookLoadPackage {
 //        }
         Context context = null;
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-            context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
+            try {
+                context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
+            } catch (NoSuchFieldError nsfe) {
+                Object am = (Object)XposedHelpers.getObjectField(param.thisObject, "mAm");
+                context = (Context) XposedHelpers.getObjectField(am, "mContext");
+            }
         } else {
-        Object am = (Object)XposedHelpers.getObjectField(param.thisObject, "mAm");
+            Object am = (Object)XposedHelpers.getObjectField(param.thisObject, "mAm");
             context = (Context) XposedHelpers.getObjectField(am, "mContext");
         }
         if (context != null) {
