@@ -407,9 +407,14 @@ public class Wakelocks implements IXposedHookLoadPackage {
 //        }
         Context context = null;
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-            context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
+            try {
+                context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
+            } catch (NoSuchFieldError nsfe) {
+                Object am = (Object)XposedHelpers.getObjectField(param.thisObject, "mAm");
+                context = (Context) XposedHelpers.getObjectField(am, "mContext");
+            }
         } else {
-        Object am = (Object)XposedHelpers.getObjectField(param.thisObject, "mAm");
+            Object am = (Object)XposedHelpers.getObjectField(param.thisObject, "mAm");
             context = (Context) XposedHelpers.getObjectField(am, "mContext");
         }
         if (context != null) {
