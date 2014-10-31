@@ -16,6 +16,7 @@ import com.google.gson.reflect.TypeToken;
 import com.ryansteckler.nlpunbounce.ActivityReceiver;
 import com.ryansteckler.nlpunbounce.XposedReceiver;
 import com.ryansteckler.nlpunbounce.helpers.NetworkHelper;
+import com.ryansteckler.nlpunbounce.hooks.Wakelocks;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -73,6 +74,7 @@ public class UnbounceStatsCollection implements Serializable {
     }
 
     private UnbounceStatsCollection() {
+        mRunningSince = System.currentTimeMillis();
     }
 
     public Long getRunningSince() {
@@ -80,7 +82,7 @@ public class UnbounceStatsCollection implements Serializable {
     }
 
     public String getRunningSinceFormatted() {
-        long now = SystemClock.elapsedRealtime();
+        long now = System.currentTimeMillis();
         long running = now - mRunningSince;
 
         long years = TimeUnit.MILLISECONDS.toDays(running) / 365;
@@ -577,7 +579,7 @@ public class UnbounceStatsCollection implements Serializable {
     {
         if (statType == STAT_CURRENT) {
             mCurrentStats.clear();
-            mRunningSince = SystemClock.elapsedRealtime();
+            mRunningSince = System.currentTimeMillis();
             clearStatFile(context, STATS_FILENAME_CURRENT);
         }
         else if (statType == STAT_PUSH) {
@@ -589,8 +591,9 @@ public class UnbounceStatsCollection implements Serializable {
     public void resetLocalStats(int statType)
     {
         if (statType == STAT_CURRENT) {
+
             mCurrentStats.clear();
-            mRunningSince = SystemClock.elapsedRealtime();
+            mRunningSince = System.currentTimeMillis();
         }
         else if (statType == STAT_PUSH) {
             mSincePushStats.clear();
@@ -643,6 +646,7 @@ public class UnbounceStatsCollection implements Serializable {
     }
 
     public boolean saveNow(Context context) {
+
         if (!saveStatsToFile(STATS_FILENAME_CURRENT, mCurrentStats)) {
             return false;
         }
@@ -820,6 +824,14 @@ public class UnbounceStatsCollection implements Serializable {
         mGlobalParticipation = prefs.getBoolean("global_participation", true);
     }
 
+    public void recreateFiles(Context context) {
+        Log.d("Amplify: ", "Removing file: " + STATS_DIRECTORY + STATS_FILENAME_CURRENT);
+        new File(STATS_DIRECTORY + STATS_FILENAME_CURRENT).delete();
+        new File(STATS_DIRECTORY + STATS_FILENAME_GLOBAL).delete();
+        new File(STATS_DIRECTORY + STATS_FILENAME_PUSH).delete();
+        createFiles(context);
+    }
+
     public void createFiles(Context context) {
         try {
             if (!new File(STATS_DIRECTORY + STATS_FILENAME_CURRENT).exists()) {
@@ -843,6 +855,11 @@ public class UnbounceStatsCollection implements Serializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        Log.d("Amplify: ", "Writing creation version");
+        SharedPreferences prefs = context.getSharedPreferences("com.ryansteckler.nlpunbounce" + "_preferences", Context.MODE_WORLD_READABLE);
+        SharedPreferences.Editor edit = prefs.edit();
+        edit.putString("file_version", Wakelocks.FILE_VERSION);
+        edit.apply();
+        mRunningSince = System.currentTimeMillis();
     }
 }
