@@ -592,12 +592,15 @@ public class UnbounceStatsCollection implements Serializable {
     public void resetLocalStats(int statType)
     {
         if (statType == STAT_CURRENT) {
-
-            mCurrentStats.clear();
+            if (mCurrentStats != null) {
+                mCurrentStats.clear();
+            }
             mRunningSince = System.currentTimeMillis();
         }
         else if (statType == STAT_PUSH) {
-            mSincePushStats.clear();
+            if (mSincePushStats != null) {
+                mSincePushStats.clear();
+            }
         }
     }
 
