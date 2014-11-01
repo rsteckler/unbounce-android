@@ -622,7 +622,6 @@ public class Wakelocks implements IXposedHookLoadPackage {
         String curLevel = m_prefs.getString("logging_level", "default");
         if (curLevel.equals("verbose")) {
             XposedBridge.log(TAG + log);
-            Log.d(TAG,log);
         }
     }
 
@@ -630,7 +629,6 @@ public class Wakelocks implements IXposedHookLoadPackage {
         String curLevel = m_prefs.getString("logging_level", "default");
         if (curLevel.equals("default") || curLevel.equals("verbose")) {
             XposedBridge.log(TAG + log);
-            Log.d(TAG,log);
         }
     }
 }

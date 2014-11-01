@@ -17,11 +17,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.ryansteckler.nlpunbounce.adapters.AlarmsAdapter;
 import com.ryansteckler.nlpunbounce.adapters.ServicesAdapter;
 import com.ryansteckler.nlpunbounce.helpers.SortWakeLocks;
 import com.ryansteckler.nlpunbounce.helpers.ThemeHelper;
-import com.ryansteckler.nlpunbounce.models.AlarmStats;
 import com.ryansteckler.nlpunbounce.models.ServiceStats;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
 
@@ -70,7 +68,7 @@ public class ServicesFragment extends ListFragment implements ServiceDetailFragm
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (mListener != null)
-            mListener.onSetTitle(getResources().getString(R.string.title_services));
+            mListener.onServicesSetTitle(getResources().getString(R.string.title_services));
 
         mAdapter.sort(mSortBy);
     }
@@ -185,6 +183,10 @@ public class ServicesFragment extends ListFragment implements ServiceDetailFragm
         //Start by getting the bounds of the current list item, as a starting point.
         ListView list = (ListView)getActivity().findViewById(android.R.id.list);
         View listItem = list.getChildAt(position - list.getFirstVisiblePosition());
+        if (listItem == null) {
+            //Let this crash to google so I can get better reports.
+            throw new IndexOutOfBoundsException("Tried to open item that didn't exist: " + position + ". First vis: " + list.getFirstVisiblePosition());
+        }
         final Rect startBounds = new Rect();
         listItem.getGlobalVisibleRect(startBounds);
 
@@ -217,7 +219,7 @@ public class ServicesFragment extends ListFragment implements ServiceDetailFragm
         //Remember the scroll pos so we can reinstate it
         if (!hidden) {
             if (mListener != null) {
-                mListener.onSetTitle(getResources().getString(R.string.title_services));
+                mListener.onServicesSetTitle(getResources().getString(R.string.title_services));
                 mListener.onSetTaskerTitle(getResources().getString(R.string.tasker_choose_service));
             }
             if (mReloadOnShow) {
@@ -248,7 +250,7 @@ public class ServicesFragment extends ListFragment implements ServiceDetailFragm
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        public void onSetTitle(String id);
+        public void onServicesSetTitle(String id);
         public void onSetTaskerTitle(String title);
     }
 
