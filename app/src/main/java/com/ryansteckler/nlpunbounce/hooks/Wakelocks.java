@@ -260,7 +260,8 @@ public class Wakelocks implements IXposedHookLoadPackage {
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                 String wakeLockName = (String) param.args[2];
                 IBinder lock = (IBinder) param.args[0];
-                handleWakeLockAcquire(param, wakeLockName, lock);
+                int uId = (Integer)param.args[5];
+                handleWakeLockAcquire(param, wakeLockName, lock,uId);
             }
         });
 
@@ -280,7 +281,8 @@ public class Wakelocks implements IXposedHookLoadPackage {
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                 String wakeLockName = (String) param.args[2];
                 IBinder lock = (IBinder) param.args[0];
-                handleWakeLockAcquire(param, wakeLockName, lock);
+                int uId = (Integer)param.args[4];
+                handleWakeLockAcquire(param, wakeLockName, lock,uId);
             }
         });
 
@@ -300,7 +302,8 @@ public class Wakelocks implements IXposedHookLoadPackage {
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                 String wakeLockName = (String) param.args[4];
                 IBinder lock = (IBinder) param.args[1];
-                handleWakeLockAcquire(param, wakeLockName, lock);
+                int uId =(Integer) param.args[2];
+                handleWakeLockAcquire(param, wakeLockName, lock,uId);
             }
         });
 
@@ -360,7 +363,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
 
     }
 
-    private void handleWakeLockAcquire(XC_MethodHook.MethodHookParam param, String wakeLockName, IBinder lock) {
+    private void handleWakeLockAcquire(XC_MethodHook.MethodHookParam param, String wakeLockName, IBinder lock,int uId) {
 
         //If we're blocking this wakelock
         String prefName = "wakelock_" + wakeLockName + "_enabled";
@@ -381,7 +384,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
             if (timeSinceLastWakeLock < collectorMaxFreq) {
                 //Not enough time has passed since the last wakelock.  Deny the wakelock
                 param.setResult(null);
-                recordWakelockBlock(param, wakeLockName);
+                recordWakelockBlock(param, wakeLockName,uId);
 
                 debugLog("Preventing Wakelock " + wakeLockName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
 
@@ -389,10 +392,10 @@ public class Wakelocks implements IXposedHookLoadPackage {
                 //Allow the wakelock
                 defaultLog("Allowing Wakelock " + wakeLockName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
                 mLastWakelockAttempts.put(wakeLockName, now);
-                recordAcquire(wakeLockName, lock);
+                recordAcquire(wakeLockName, lock,uId);
             }
         } else {
-            recordAcquire(wakeLockName, lock);
+            recordAcquire(wakeLockName, lock,uId);
         }
     }
 
@@ -423,12 +426,13 @@ public class Wakelocks implements IXposedHookLoadPackage {
 
     }
 
-    private void recordAcquire(String wakeLockName, IBinder lock) {
+    private void recordAcquire(String wakeLockName, IBinder lock, int uId) {
         //Get the lock
         InterimEvent curStats = mCurrentWakeLocks.get(lock);
         if (curStats == null) {
             curStats = new InterimEvent();
             curStats.setName(wakeLockName);
+            curStats.setUId(uId);
             curStats.setTimeStarted(SystemClock.elapsedRealtime());
             mCurrentWakeLocks.put(lock, curStats);
         }
@@ -580,12 +584,12 @@ public class Wakelocks implements IXposedHookLoadPackage {
         }
     }
 
-    private void recordWakelockBlock(XC_MethodHook.MethodHookParam param, String name) {
+    private void recordWakelockBlock(XC_MethodHook.MethodHookParam param, String name, int uId) {
 
         Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
 
         if (context != null) {
-            UnbounceStatsCollection.getInstance().incrementWakelockBlock(context, name);
+            UnbounceStatsCollection.getInstance().incrementWakelockBlock(context, name,uId);
         }
     }
 
@@ -618,6 +622,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
         String curLevel = m_prefs.getString("logging_level", "default");
         if (curLevel.equals("verbose")) {
             XposedBridge.log(TAG + log);
+            Log.d(TAG,log);
         }
     }
 
@@ -625,6 +630,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
         String curLevel = m_prefs.getString("logging_level", "default");
         if (curLevel.equals("default") || curLevel.equals("verbose")) {
             XposedBridge.log(TAG + log);
+            Log.d(TAG,log);
         }
     }
 }

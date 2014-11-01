@@ -1,11 +1,9 @@
 package com.ryansteckler.nlpunbounce;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -15,7 +13,6 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
@@ -24,11 +21,9 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.ryansteckler.nlpunbounce.helpers.ThemeHelper;
-import com.ryansteckler.nlpunbounce.models.EventLookup;
+import com.ryansteckler.nlpunbounce.helpers.UidNameResolver;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
 import com.ryansteckler.nlpunbounce.models.WakelockStats;
-import com.ryansteckler.nlpunbounce.tasker.TaskerActivity;
 
 
 /**
@@ -38,12 +33,11 @@ import com.ryansteckler.nlpunbounce.tasker.TaskerActivity;
  * to handle interaction events.
  * Use the {@link WakelockDetailFragment#newInstance} factory method to
  * create an instance of this fragment.
- *
  */
 public class WakelockDetailFragment extends BaseDetailFragment {
 
     public long getSeconds() {
-        EditText editSeconds = (EditText)getActivity().findViewById(R.id.editWakelockSeconds);
+        EditText editSeconds = (EditText) getActivity().findViewById(R.id.editWakelockSeconds);
         String text = editSeconds.getText().toString();
         long seconds = Long.parseLong(text);
         return seconds;
@@ -53,9 +47,21 @@ public class WakelockDetailFragment extends BaseDetailFragment {
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        TextView description = (TextView) view.findViewById(R.id.textViewDescription);
+        String descriptionText = description.getText().toString();
+
+        UidNameResolver resolver = UidNameResolver.getInstance(getActivity().getApplicationContext());
+
+        String packName = resolver.getNameForUid(mStat.getUid());
+
+        descriptionText = descriptionText + "\n\n" + "Package Name: " + packName;
+
+
+        description.setText(descriptionText);
+
         SharedPreferences prefs = getActivity().getSharedPreferences(AlarmDetailFragment.class.getPackage().getName() + "_preferences", Context.MODE_WORLD_READABLE);
 
-        final EditText edit = (EditText)view.findViewById(R.id.editWakelockSeconds);
+        final EditText edit = (EditText) view.findViewById(R.id.editWakelockSeconds);
 
         String blockSeconds = "wakelock_" + mStat.getName() + "_seconds";
         edit.setText(String.valueOf(prefs.getLong(blockSeconds, 240)));
@@ -69,19 +75,19 @@ public class WakelockDetailFragment extends BaseDetailFragment {
             @Override
             public void onFocusChange(View view, boolean b) {
                 if (!b) {
-                    handleTextChange((TextView)view, edit);
+                    handleTextChange((TextView) view, edit);
                 }
             }
         });
 
-        final Switch onOff = (Switch)view.findViewById(R.id.switchStat);
+        final Switch onOff = (Switch) view.findViewById(R.id.switchStat);
         String blockName = "wakelock_" + mStat.getName() + "_enabled";
         boolean enabled = prefs.getBoolean(blockName, false);
         onOff.setChecked(enabled);
 
         getView().findViewById(R.id.editWakelockSeconds).setEnabled(onOff.isChecked());
 
-        View panel = (View)getView().findViewById(R.id.settingsPanel);
+        View panel = (View) getView().findViewById(R.id.settingsPanel);
         TypedValue backgroundValue = new TypedValue();
         Resources.Theme theme = getActivity().getTheme();
         int resId = enabled ? R.attr.background_panel_enabled : R.attr.background_panel_disabled;
@@ -109,12 +115,11 @@ public class WakelockDetailFragment extends BaseDetailFragment {
 
             textView.clearFocus();
             // hide virtual keyboard
-            InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(edit.getWindowToken(), 0);
             return true;
 
-        } catch (NumberFormatException nfe)
-        {
+        } catch (NumberFormatException nfe) {
             //Not a number.  Android let us down.
         }
         return false;
@@ -123,23 +128,23 @@ public class WakelockDetailFragment extends BaseDetailFragment {
     @Override
     protected void warnUnknown(final Switch onOff) {
         new AlertDialog.Builder(getActivity())
-            .setTitle(R.string.alert_unknown_wakelock_title)
-            .setMessage(R.string.alert_unknown_wakelock_content)
-            .setPositiveButton(R.string.dialog_unbounce, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    onOff.setChecked(true);
-                    updateEnabled(true);
-                }
-            })
-            .setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    //don't set the switch
-                    onOff.setChecked(false);
-                    updateEnabled(false);
-                }
-            })
-            .setIcon(android.R.drawable.ic_dialog_alert)
-            .show();
+                .setTitle(R.string.alert_unknown_wakelock_title)
+                .setMessage(R.string.alert_unknown_wakelock_content)
+                .setPositiveButton(R.string.dialog_unbounce, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        onOff.setChecked(true);
+                        updateEnabled(true);
+                    }
+                })
+                .setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        //don't set the switch
+                        onOff.setChecked(false);
+                        updateEnabled(false);
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 
     @Override
@@ -155,7 +160,7 @@ public class WakelockDetailFragment extends BaseDetailFragment {
 
         //Enable or disable the seconds setting.
         getView().findViewById(R.id.editWakelockSeconds).setEnabled(b);
-        View panel = (View)getView().findViewById(R.id.settingsPanel);
+        View panel = (View) getView().findViewById(R.id.settingsPanel);
         TypedValue backgroundValue = new TypedValue();
         Resources.Theme theme = getActivity().getTheme();
         int resId = b ? R.attr.background_panel_enabled : R.attr.background_panel_disabled;
@@ -167,8 +172,7 @@ public class WakelockDetailFragment extends BaseDetailFragment {
         panel.setBackgroundDrawable(backgroundColor);
         panel.setAlpha(b ? 1 : (float) .4);
 
-        if (mClearListener != null)
-        {
+        if (mClearListener != null) {
             mClearListener.onCleared();
         }
     }
@@ -178,13 +182,13 @@ public class WakelockDetailFragment extends BaseDetailFragment {
         UnbounceStatsCollection coll = UnbounceStatsCollection.getInstance();
         mStat = coll.getWakelockStats(getActivity(), mStat.getName());
 
-        TextView textView = (TextView)view.findViewById(R.id.textLocalTimeAllowed);
-        textView.setText(((WakelockStats)mStat).getDurationAllowedFormatted());
-        textView = (TextView)view.findViewById(R.id.textLocalTimeBlocked);
-        textView.setText(((WakelockStats)mStat).getDurationBlockedFormatted());
-        textView = (TextView)view.findViewById(R.id.textLocalBlocked);
+        TextView textView = (TextView) view.findViewById(R.id.textLocalTimeAllowed);
+        textView.setText(((WakelockStats) mStat).getDurationAllowedFormatted());
+        textView = (TextView) view.findViewById(R.id.textLocalTimeBlocked);
+        textView.setText(((WakelockStats) mStat).getDurationBlockedFormatted());
+        textView = (TextView) view.findViewById(R.id.textLocalBlocked);
         textView.setText(String.valueOf(mStat.getBlockCount()));
-        textView = (TextView)view.findViewById(R.id.textLocalAcquired);
+        textView = (TextView) view.findViewById(R.id.textLocalAcquired);
         textView.setText(String.valueOf(mStat.getAllowedCount()));
     }
 

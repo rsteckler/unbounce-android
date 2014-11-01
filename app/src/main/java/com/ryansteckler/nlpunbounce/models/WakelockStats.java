@@ -10,8 +10,17 @@ import static com.ryansteckler.nlpunbounce.helpers.LocaleHelper.getFormattedTime
  */
 public class WakelockStats extends BaseStats implements Serializable {
 
-    public WakelockStats() {
+    private WakelockStats() {
         setType("wakelock");
+    }
+
+    public WakelockStats(String wakeLockName, int uId)
+    {
+
+        setType("wakelock");
+        setName(wakeLockName);
+        setUid(uId);
+
     }
 
     private long mAllowedDuration;
