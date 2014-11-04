@@ -203,7 +203,7 @@ public class UnbounceStatsCollection implements Serializable {
                 return null;
         }
         else {
-            WakelockStats emptyStat = new WakelockStats();
+            WakelockStats emptyStat = new WakelockStats(wakelockName,-1);
             emptyStat.setAllowedCount(0);
             emptyStat.setAllowedDuration(0);
             emptyStat.setBlockCount(0);
@@ -445,35 +445,36 @@ public class UnbounceStatsCollection implements Serializable {
         BaseStats combined = statChoice.get(toAdd.getName());
         if (combined == null)
         {
-            combined = new WakelockStats();
-            combined.setName(toAdd.getName());
+            combined = new WakelockStats(toAdd.getName(),toAdd.getUId());
         }
         if (combined instanceof WakelockStats) {
             ((WakelockStats)combined).addDurationAllowed(toAdd.getTimeStopped() - toAdd.getTimeStarted());
+            ((WakelockStats)combined).setUid(toAdd.getUId());
             combined.incrementAllowedCount();
             statChoice.put(toAdd.getName(), combined);
         }
     }
 
-    public void incrementWakelockBlock(Context context, String statName)
+    public void incrementWakelockBlock(Context context, String statName, int uId)
     {
         //Load from disk and populate our stats
         loadStats(context, false); 
 
-        incrementWakelockBlock(statName, mCurrentStats);
+        incrementWakelockBlock(statName, mCurrentStats, uId);
         if (mGlobalParticipation) {
-            incrementWakelockBlock(statName, mSincePushStats);
+            incrementWakelockBlock(statName, mSincePushStats, uId);
         }
 
     }
 
-    private void incrementWakelockBlock(String statName, HashMap<String, BaseStats> statChoice) {
+    private void incrementWakelockBlock(String statName, HashMap<String, BaseStats> statChoice, int uId) {
         BaseStats combined = statChoice.get(statName);
         if (combined == null)
         {
-            combined = new WakelockStats();
-            combined.setName(statName);
+            combined = new WakelockStats(statName,uId);
+
         }
+        combined.setUid(uId);
         combined.incrementBlockCount();
         statChoice.put(statName, combined);
     }
@@ -591,12 +592,15 @@ public class UnbounceStatsCollection implements Serializable {
     public void resetLocalStats(int statType)
     {
         if (statType == STAT_CURRENT) {
-
-            mCurrentStats.clear();
+            if (mCurrentStats != null) {
+                mCurrentStats.clear();
+            }
             mRunningSince = System.currentTimeMillis();
         }
         else if (statType == STAT_PUSH) {
-            mSincePushStats.clear();
+            if (mSincePushStats != null) {
+                mSincePushStats.clear();
+            }
         }
     }
 
@@ -659,7 +663,7 @@ public class UnbounceStatsCollection implements Serializable {
 
         long now = SystemClock.elapsedRealtime();
         long timeSinceLastPush = now - mLastPush;
-        if (timeSinceLastPush > mPushTimeFrequency || (mGlobalStats != null && mGlobalStats.size() == 0)) {
+        if (timeSinceLastPush > mPushTimeFrequency) {
             //Push now
             mLastPush = now;
             pushStatsToNetwork(context);
@@ -755,6 +759,8 @@ public class UnbounceStatsCollection implements Serializable {
 
     public void pushStatsToNetworkInternal(final Context context) {
         //Are we allowed to?
+        SharedPreferences prefs = context.getSharedPreferences("com.ryansteckler.nlpunbounce" + "_preferences", Context.MODE_WORLD_READABLE);
+        mGlobalParticipation = prefs.getBoolean("global_participation", true);
         if (mGlobalParticipation) {
             //Serialize the collection to JSON
             loadStats(context, true);
@@ -825,7 +831,7 @@ public class UnbounceStatsCollection implements Serializable {
     }
 
     public void recreateFiles(Context context) {
-        Log.d("Amplify: ", "Removing file: " + STATS_DIRECTORY + STATS_FILENAME_CURRENT);
+        Log.d("Amplify: ", "Removing files in: " + STATS_DIRECTORY);
         new File(STATS_DIRECTORY + STATS_FILENAME_CURRENT).delete();
         new File(STATS_DIRECTORY + STATS_FILENAME_GLOBAL).delete();
         new File(STATS_DIRECTORY + STATS_FILENAME_PUSH).delete();

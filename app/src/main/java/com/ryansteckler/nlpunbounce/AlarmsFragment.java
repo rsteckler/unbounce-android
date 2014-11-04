@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.ryansteckler.nlpunbounce.adapters.AlarmsAdapter;
+import com.ryansteckler.nlpunbounce.helpers.LogHelper;
 import com.ryansteckler.nlpunbounce.helpers.SortWakeLocks;
 import com.ryansteckler.nlpunbounce.helpers.ThemeHelper;
 import com.ryansteckler.nlpunbounce.models.AlarmStats;
@@ -189,6 +190,9 @@ public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.
         //Start by getting the bounds of the current list item, as a starting point.
         ListView list = (ListView)getActivity().findViewById(android.R.id.list);
         View listItem = list.getChildAt(position - list.getFirstVisiblePosition());
+        if (listItem == null) {
+            LogHelper.defaultLog(getActivity(), "About to crash.  null alarm item at position: " + position);
+        }
         final Rect startBounds = new Rect();
         listItem.getGlobalVisibleRect(startBounds);
 

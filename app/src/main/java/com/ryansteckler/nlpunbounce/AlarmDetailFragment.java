@@ -23,6 +23,7 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.ryansteckler.nlpunbounce.helpers.UidNameResolver;
 import com.ryansteckler.nlpunbounce.models.EventLookup;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
 
@@ -52,17 +53,11 @@ public class AlarmDetailFragment extends BaseDetailFragment {
         TextView description = (TextView) view.findViewById(R.id.textViewDescription);
         String descriptionText = description.getText().toString();
 
-        PackageManager pm = getActivity().getPackageManager();
+        UidNameResolver resolver = UidNameResolver.getInstance(getActivity().getApplicationContext());
 
-        ApplicationInfo ai;
-        try {
-            ai = pm.getApplicationInfo(mStat.getPackage(), 0);
-        } catch (final PackageManager.NameNotFoundException e) {
-            ai = null;
-        }
-        String applicationName = (String) (ai != null ? pm.getApplicationLabel(ai) : "Unknown");
+        String packName = resolver.getLabel(mStat.getPackage());
+        descriptionText = descriptionText + "\n\n" + "Package Name: " + packName;
 
-        descriptionText = descriptionText + "\n\n" + "Package Name: " + applicationName;
 
 
         description.setText(descriptionText);

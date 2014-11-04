@@ -326,10 +326,10 @@ public class MaterialSettingsActivity extends Activity
 
 
         @Override
-        public void onSetTitle(String title) {
+        public void onServicesSetTitle(String title) {
             mTitle = title;
             restoreActionBar();
-            animateActionbarBackground(getResources().getColor(R.color.background_four), 400);
+            animateActionbarBackground(getResources().getColor(R.color.background_three), 400);
 
         }
 

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">"Amplify"</string>
+  <string name="version">"版本"</string>
+  <string name="title_activity_material_settings">"Amplify"</string>
+  <string name="title_home">"主界面"</string>
+  <string name="title_wakelocks">"喚醒鎖(Wakelock)"</string>
+  <string name="title_alarms">"定時器(Alarm)"</string>
+  <string name="navigation_drawer_open">"打開導航抽屜"</string>
+  <string name="navigation_drawer_close">"關閉導航抽屜"</string>
+  <string name="action_search">"搜尋"</string>
+  <string name="action_sort_by_count">"依次數排序"</string>
+  <string name="action_sort_by_time">"依時間排序"</string>
+  <string name="action_settings">"設定"</string>
+  <string name="action_reset_stats">"重置統計數據"</string>
+  <string name="card_donate_title">"贊助"</string>
+  <string name="card_donate_subtitle">"請支援開發者"</string>
+  <string name="card_global_title">"全球統計數據"</string>
+  <string name="card_global_subtitle">"全球使用者的數據匯總"</string>
+  <string name="card_local_title">"本機統計數據"</string>
+  <string name="card_local_subtitle">"使用者的個人統計"</string>
+  <string name="card_settings_title">"設定"</string>
+  <string name="card_settings_subtitle_alarm">"控制該定時器"</string>
+  <string name="card_settings_subtitle_wakelock">"控制該喚醒鎖"</string>
+  <string name="card_description_title">"說明"</string>
+  <string name="card_description_subtitle">"為什麼它會消耗電量？"</string>
+  <string name="category_unbounced">"已被限制"</string>
+  <string name="category_safe">"可被安全限制"</string>
+  <string name="category_unknown">"未知"</string>
+  <string name="category_not_safe">"不建議限制"</string>
+  <string name="category_error">"錯誤分類"</string>
+  <string name="alert_noiab_title">"無法啟用專業版功能"</string>
+  <string name="alert_noiab_content">"您的設備不支援程式內購買功能因此無法購買專業版功能。你可能需要更新Google Play，或者你所居住的地區不允許使用程式內購買功能。"</string>
+  <string name="dialog_ok">"確定"</string>
+  <string name="tasker_on">"開"</string>
+  <string name="tasker_off">"關"</string>
+  <string name="tasker_reset_stats">"重置統計數據"</string>
+  <string name="tasker_choose_wakelock">"選擇需要調整的喚醒鎖。"</string>
+  <string name="tasker_choose_alarm">"選擇需要調整的定時器。"</string>
+  <string name="tasker_welcome">"歡迎使用Amplify的Tasker插件。"</string>
+  <string name="tasker_which_task">"更改喚醒鎖或者定時器的設置，或重置關於設備的統計。"</string>
+  <string name="tasker_task_wakelock">"調整喚醒鎖設定"</string>
+  <string name="tasker_task_alarm">"調整定時器設定"</string>
+  <string name="tasker_task_reset">"重置統計數據"</string>
+  <string name="alert_nopro_title">"這是專業版功能"</string>
+  <string name="alert_nopro_content">"如要限制額外的喚醒鎖和定時器，需要贊助專業版。"</string>
+  <string name="alert_unknown_alarm_title">"限制未知的定時器?"</string>
+  <string name="alert_unknown_alarm_content">"限制這個定時器可能不安全。你仍然要限制它嗎?"</string>
+  <string name="dialog_unbounce">"限制"</string>
+  <string name="dialog_cancel">"取消"</string>
+  <string name="tasker_choose_settings">"選擇一項設定。"</string>
+  <string name="alert_unknown_wakelock_title">"限制未知的喚醒鎖?"</string>
+  <string name="alert_unknown_wakelock_content">"限制這個喚醒鎖可能不安全。你仍然要限制它嗎?"</string>
+  <string name="dialog_delete">"刪除"</string>
+  <string name="alert_delete_stats_title">"刪除所有統計數據?"</string>
+  <string name="alert_delete_stats_content">"這會重置所有關於喚醒鎖和定時器的統計！"</string>
+  <string name="title_settings">"設定"</string>
+  <string name="alert_reset_settings_title">"恢復到默認設定?"</string>
+  <string name="alert_reset_settings_content">"這會重置所有關於喚醒鎖和定時器的設定！"</string>
+  <string name="dialog_reset">"重置"</string>
+  <string name="reset_settings_confirmation">"已恢復預設設定。"</string>
+  <string name="dialog_save">"存檔"</string>
+  <string name="desc_unknown">"我們尚未有任何關於這個事件的資料，因此限制它可能不安全。除非你知道如何在開機時緊急停用Xposed framework否則不建議限制。"</string>
+  <string name="desc_nlpwakelock">"限制喚醒鎖NlpWakeLock是安全的。它被Google Play Service用來處理基地台和Wifi信號定位，並且把你的定位資料存於本機並用於其他的程式中，比如Google Now。而這些程式可以在不需要使用GPS或重新定位情況下讀取你的位置。建議設定為180到600秒。"</string>
+  <string name="desc_nlpcollectorwakelock">"限制喚醒鎖NlpCollectorWakeLock是安全的。它被Google Play Service用來處理基地台和Wifi信號定位，並且把你的定位資料傳回Google作為WiFi定位資料庫。建議設定為180到600秒。"</string>
+  <string name="desc_alarmmanager">"提供對系統定時器(Alarm)服務的存取。當一個定時器被觸發，系統會廣播相應的Intent，並自動啟動目標程式。在設備休眠時，登記的定時器會常駐(並且在觸發時喚醒設備)。但設備關閉和重新開機後所有定時器會被清除。"</string>
+  <string name="desc_audiooffload">"在螢幕關閉之後播放音效。如果它被限制則無法在螢幕關閉後播放任何音樂或音效。"</string>
+  <string name="desc_activitymanagerlauncher">"與所有的活動頁(activity)交互。如果你限制了它，你的設備將無法正常運作。"</string>
+  <string name="desc_windowmanager">"這是一個Android系統級喚醒鎖。這是程式與視窗管理器(Window Manager)的通訊埠。也就是說，每次程式想顯示在螢幕上，都需要呼叫這個喚醒鎖。"</string>
+  <string name="desc_rilj">"RILJ在處理通話相關任務(比如手機通話，與基地台聯絡)時，會保持你的設備喚醒。"</string>
+  <string name="desc_syncloopwakelock">"這個喚醒鎖被Android同步管理器（SyncManager）用來同步各種帳戶，比如Google+，Twitter，Linkedin，Gmail等。限制的值越高，帳戶的同步時間間隔就越長。"</string>
+  <string name="desc_icing">"ICING是屬於Google Service的喚醒鎖。其他資訊待更新。"</string>
+  <string name="desc_startingalertservice">"這個喚醒鎖通常與日曆（Calendar）有關，但也可能會影響其他應用，比如簡訊。如果你有日曆相關的通知，這個鎖會被呼叫。"</string>
+  <string name="desc_audiomix">"這個喚醒鎖處理有關觸控聲和提示音的事件。某些設備在關閉觸控聲之後仍會出現該喚醒鎖。"</string>
+  <string name="desc_locationmanagerservice">"位置管理服務。通常不會產生耗電問題，但有時會有例外。"</string>
+  <string name="desc_audioin">"該喚醒鎖被用於Google語音搜尋和Hotword Detection（OK Google）。"</string>
+  <string name="desc_nfcservicemroutingwakelock">"與近場通信(NFC)服務有關，將檢測到的NFC標籤交由合適的程式處理。"</string>
+  <string name="desc_wakefulintentservicegcoreulrlocationreportingservice">"被Google Location Service用來回報你的位置。"</string>
+  <string name="desc_vzwgpslocationprovider">"Verizon（美國一家電信公司）專屬的位置服務，被用作統計基地台的資料。"</string>
+  <string name="desc_hangouts_rtcs">"Google Hangouts。如果你限制它，Hangouts將無法正常工作。"</string>
+  <string name="desc_gcm_conn">"Google Cloud Messaging (GCM服務)。它會發送push到程式裡。"</string>
+  <string name="desc_google_c2dm">"C2DM服務被開發者用於push資料到終端設備程式。該服務讓伺服器可以通知應用程式去連接伺服器來取得更新和用戶資料。C2DM服務負責處理所有執行續，以及傳送資料到目標設備上的目標程式。該服務自2012年起被停用，但仍舊有部分程式使用該服務，而不是用更新的GCM服務。"</string>
+  <string name="desc_timedeventqueue">"這是Android的核心組件。請不要修改它的設定。它負責處理事件隊列。"</string>
+  <string name="desc_comgoogleandroidgmsnlpalarm_wakeup_locator">"限制這個定時器是安全的。它被Google Play Service用來處理基地台和Wifi信號定位，並且把你的定位資料存於本機並用於其他的程式中，比如Google Now。而這些程式可以在不需要使用GPS或重新定位情況下讀取你的位置。建議設定為180到600秒。"</string>
+  <string name="desc_comgoogleandroidgmsnlpalarm_wakeup_activity_detection">"限制這個定時器是安全的。它被Google Play Service用來處理基地台和Wifi信號定位，並且把你的定位資料傳回Google作為WiFi定位資料庫。建議設定為180到600秒。"</string>
+  <string name="desc_comgoogleandroidappshangoutsupdate_notification">"更新Google Hangouts通知的Listener。"</string>
+  <string name="desc_comandroidinternaltelephonydatastall">"在使用行動網絡時由com.android.phone(電話程式)產生。使用WiFi的時候不會被觸發。通常在使用行動數據時會大量出現，尤其是信號不太好的時候。"</string>
+  <string name="settings_allow_every">"允許間隔"</string>
+  <string name="settings_seconds">"秒"</string>
+  <string name="card_button_reset">"重置"</string>
+  <string name="stat_alarms_acquired">"被允許的定時器次數"</string>
+  <string name="stat_alarms_blocked">"被阻擋的定時器次數"</string>
+  <string name="stat_loading">"讀取中..."</string>
+  <string name="stat_collected_for">"合計統計時間"</string>
+  <string name="stat_wake_duration_allowed">"被允許的喚醒鎖時間"</string>
+  <string name="stat_wake_duration_blocked">"被阻擋的喚醒鎖時間"</string>
+  <string name="stat_wake_allowed">"被允許的喚醒鎖數量"</string>
+  <string name="stat_wake_blocked">"被阻擋的喚醒鎖數量"</string>
+  <string name="stat_alarm_allowed">"被允許的定時器數量"</string>
+  <string name="stat_alarm_blocked">"被阻擋的定時器數量"</string>
+  <string name="stat_disabled">"已停用"</string>
+  <string name="donate_text">"這個程式可以幫你解決網路位置取得服務(Network Location Provider)過度耗電的問題。如果你想嘗試限制更多的喚醒鎖(Wakelock)和定時器(Alarm)，你可以升級到專業版。贊助任何金額即可解鎖專業版。"</string>
+  <string name="donate_1">"看在我辛苦coding份上，請我喝杯咖啡吧！"</string>
+  <string name="donate_5">"請我喝杯星巴克拿鐵~~"</string>
+  <string name="donate_10">"完美!! 自從我裝了Amplify以後再也不用帶尿袋了。"</string>
+  <!-- I want to put "you are such a nice guy" at the end. I wonder how many fingers I would get if I do so. -->
+  <string name="donate_thank_you">"謝謝你的贊助。這對我意義重大。我努力地利用我有限的空餘時間來讓你的電量更持久。你的贊助不僅推動了這個專案，而且還改善了我家人的生活。愛你！"</string>
+  <string name="donate_more_button">"如何進一步幫助開發者？"</string>
+  <string name="donate_more_text">"如果想要捐助更多，請點選這個按鈕，但不會提供額外的功能。再次感謝您對Amplify的大力支持！"</string>
+  <string name="welcome_banner_title">"讓我們先確定一切設定正常。"</string>
+  <string name="welcome_banner_text">"你可以限制應用獲取喚醒鎖(wakelock)的頻率來避免設備持續喚醒，或者限制應用使用定時器(Alarm)的頻率來避免設備被喚醒。我們已經幫你設好基本的省電選項。"</string>
+  <string name="settings_category_options">"選項"</string>
+  <string name="settings_item_show_launcher">"顯示應用程式圖示"</string>
+  <string name="settings_item_choose_theme">"選擇主題"</string>
+  <string name="settings_item_global_stats_title">"參與全球統計"</string>
+  <string name="settings_item_global_stats_summary">"發送和接收匿名統計數據"</string>
+  <string name="settings_item_reset_defaults_title">"回復到預設設定"</string>
+  <string name="settings_item_reset_defaults_summary">"還原所有喚醒鎖和定時器的設定"</string>
+  <string name="settings_category_debug">"除錯"</string>
+  <string name="settings_item_author">"作者: Ryan Steckler"</string>
+  <string name="settings_item_logging_level">"記錄層級"</string>
+  <string name="settings_category_translation">"翻譯人員"</string>
+  <string name="settings_theme_material">"Material（Google的新介面）"</string>
+  <string name="settings_theme_dark">"黑色"</string>
+  <string name="settings_logging_quiet">"簡單"</string>
+  <string name="settings_logging_default">"預設"</string>
+  <string name="settings_logging_verbose">"詳細"</string>
+  <string name="settings_item_force_english_title">"Force English"</string>
+  <string name="settings_item_force_english_summary">"Override your locale settings and use English"</string>
+  <string name="playstore_short_description">"電池續航才是關鍵！"</string>
+  <string name="playstore_long_description">"以下是真實用戶們的評論：
+「It gave me about 2 hours more use with 30 minutes more screen on time. Saved me from buying a $25 battery.」
+「Just donated 5 Dollars to support this masterpiece.. Keep up the good work」
+「Simply amazing」
+「[Amplify] just revolutionized the true meaning of wakelock managing」
+「This module is awesome! I get less than a half percent drain per hour for idle standby. ...and many more.」
+
+Amplify幫助你重新掌控設備的耗電情況。它的原理是通過限制定時器(Alarm)和喚醒鎖(Wakelock)在系統中的使用頻率，來避免設備被頻繁和長時間的喚醒，從而增加設備深度睡眠的時間。使用推薦的設定便可輕鬆的節省設備電量，同時我們還向進階用戶提供了更多的自訂選項。
+
+本程式亮點包括：
+- 漂亮的介面設計，遵循Material Design的設計原則
+- 穩定的程式調校引擎
+- 詳盡的統計數據，顯示被定時器和喚醒鎖消耗的設備喚醒時間，以及Amplify幫你節省的喚醒時間
+- 持續更新有關各個定時器和喚醒鎖的訊息
+- 全新的專業版幫助你限制任何一個定時器或者喚醒鎖
+- 提供開源程式碼，讓你可以放心查閱
+
+程式內購買購可以解鎖專業版功能。專業版幫助你限制任何一個定時器或者喚醒鎖。免費版的應用只能限制了以下幾個常見的耗電大戶：NlpWakelock, NlpCollectorWakeLock, ALARM_WAKEUP_LOCATOR和ALARM_WAKE_ACTIVITY_DETECTION。
+
+祝你從此擺脫尿袋的束縛！"</string>
+  <string name="welcome_banner_welcome">"歡迎使用!"</string>
+  <string name="welcome_banner_checking_service">"檢查Amplify是否正在執行..."</string>
+  <string name="welcome_banner_checking_xposed">"檢查Xposed是否正確安裝..."</string>
+  <string name="welcome_banner_checking_root">"檢查root權限..."</string>
+  <string name="welcome_banner_checking_looks_great">"一切正常！"</string>
+  <string name="welcome_banner_checking_uhoh">"出錯了，嘗試修復..."</string>
+  <string name="welcome_banner_problem_none">"我們已經幫你設定好基本省電選項。扔掉你的尿袋吧！"</string>
+  <string name="welcome_banner_problem_service">"你似乎並未啟用Amplify模組。點選「修復」，確認Amplify被勾選，然後重新開機。"</string>
+  <string name="welcome_banner_problem_xposed_running">"Xposed framework沒有正常執行。點選「修復」，然後點選「安裝/更新」。安裝結束後重新開機。"</string>
+  <string name="welcome_banner_problem_xposed_installed">"Xposed framework尚未安裝。Amplify需要使用Xposed。下載結束後，點重新開機「安裝」，然後重新啟動Amplify。如果你想瞭解Xposed framework，請查閱%1$s"</string>
+  <string name="welcome_banner_problem_root">"你的設備尚未取得root權限，Amplify只能在已root的設備上執行。如果你想要root你的設備，請查閱%1$s"</string>
+  <string name="welcome_banner_button_next">"下一步"</string>
+  <string name="welcome_banner_button_fixit">"修復"</string>
+  <string name="welcome_banner_button_exit">"退出"</string>
+  <string name="welcome_banner_button_install">"安裝"</string>
+  <string name="welcome_downloading_xposed">"正在下載Xposed..."</string>
+  <string name="welcome_downloaded_xposed">"下載完成。"</string>
+  <string name="welcome_download_error_xposed">"下載失敗。請稍後重試。"</string>
+  <string name="download_xposed_title">"正在下載Xposed"</string>
+  <string name="download_xposed_description">"必裝選項"</string>
+  <string name="requires_root">"*** 要求有root權限的設備 ***"</string>
+  <string name="installs_xposed">"Amplify需要使用Xposed框架，並會引導你如何安裝Xposed。"</string>
+  <string name="settings_category_code_credits">"開發人員"</string>
+  <string name="title_services">"服務"</string>
+  <string name="action_sort_by_alpha">"按英文字母排序"</string>
+  <string name="card_settings_subtitle_service">"控制該服務"</string>
+  <string name="tasker_choose_service">"選擇需要調整的服務。"</string>
+  <string name="alert_unknown_service_title">"限制未知服務?"</string>
+  <string name="alert_unknown_service_content">"限制這個服務可能是不安全的。你仍然要限制它嗎?"</string>
+  <string name="stat_service_allowed">"啟用的服務"</string>
+  <string name="stat_service_blocked">"被阻擋的服務"</string>
+  <string name="service_switch_allow">"允許"</string>
+  <string name="service_switch_deny">"阻擋"</string>
+</resources>
