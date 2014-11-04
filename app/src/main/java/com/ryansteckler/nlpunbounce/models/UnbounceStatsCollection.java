@@ -663,7 +663,7 @@ public class UnbounceStatsCollection implements Serializable {
 
         long now = SystemClock.elapsedRealtime();
         long timeSinceLastPush = now - mLastPush;
-        if (timeSinceLastPush > mPushTimeFrequency || (mGlobalStats != null && mGlobalStats.size() == 0)) {
+        if (timeSinceLastPush > mPushTimeFrequency) {
             //Push now
             mLastPush = now;
             pushStatsToNetwork(context);
@@ -759,6 +759,8 @@ public class UnbounceStatsCollection implements Serializable {
 
     public void pushStatsToNetworkInternal(final Context context) {
         //Are we allowed to?
+        SharedPreferences prefs = context.getSharedPreferences("com.ryansteckler.nlpunbounce" + "_preferences", Context.MODE_WORLD_READABLE);
+        mGlobalParticipation = prefs.getBoolean("global_participation", true);
         if (mGlobalParticipation) {
             //Serialize the collection to JSON
             loadStats(context, true);
@@ -829,7 +831,7 @@ public class UnbounceStatsCollection implements Serializable {
     }
 
     public void recreateFiles(Context context) {
-        Log.d("Amplify: ", "Removing file: " + STATS_DIRECTORY + STATS_FILENAME_CURRENT);
+        Log.d("Amplify: ", "Removing files in: " + STATS_DIRECTORY);
         new File(STATS_DIRECTORY + STATS_FILENAME_CURRENT).delete();
         new File(STATS_DIRECTORY + STATS_FILENAME_GLOBAL).delete();
         new File(STATS_DIRECTORY + STATS_FILENAME_PUSH).delete();

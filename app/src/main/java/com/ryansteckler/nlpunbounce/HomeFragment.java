@@ -95,7 +95,7 @@ public class HomeFragment extends Fragment  {
         if (!lastVersion.equals(Wakelocks.FILE_VERSION)) {
             //Reset stats
             UnbounceStatsCollection.getInstance().recreateFiles(getActivity());
-            Intent intent = new Intent(XposedReceiver.RESET_ACTION);
+            Intent intent = new Intent(XposedReceiver.REFRESH_ACTION);
             intent.putExtra(XposedReceiver.STAT_TYPE, UnbounceStatsCollection.STAT_CURRENT);
             try {
                 getActivity().sendBroadcast(intent);
@@ -561,7 +561,6 @@ public class HomeFragment extends Fragment  {
                         .setPositiveButton(R.string.dialog_delete, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 UnbounceStatsCollection.getInstance().resetStats(getActivity(), UnbounceStatsCollection.STAT_CURRENT);
-                                loadStatsFromSource(view);
 
                                 Intent intent = new Intent(XposedReceiver.RESET_ACTION);
                                 intent.putExtra(XposedReceiver.STAT_TYPE, UnbounceStatsCollection.STAT_CURRENT);
@@ -570,6 +569,7 @@ public class HomeFragment extends Fragment  {
                                 } catch (IllegalStateException ise) {
 
                                 }
+                                loadStatsFromSource(view);
                             }
                         })
                         .setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {

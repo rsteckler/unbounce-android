@@ -93,7 +93,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
                 } catch (IllegalStateException ise) {
                 }
             }
-            UnbounceStatsCollection.getInstance().resetLocalStats(UnbounceStatsCollection.STAT_CURRENT);
+//            UnbounceStatsCollection.getInstance().resetLocalStats(UnbounceStatsCollection.STAT_CURRENT);
         }
     }
     private void hookAmplifyClasses(LoadPackageParam lpparam) {
