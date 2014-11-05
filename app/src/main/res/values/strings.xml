@@ -59,6 +59,8 @@
 <string name="title_settings">"Settings"</string>
 <string name="alert_reset_settings_title">"Reset to defaults?"</string>
 <string name="alert_reset_settings_content">"This will reset all of the settings for alarms and wakelocks!"</string>
+<string name="alert_disable_service_blocking_title">"Disable Service Blocking?"</string>
+<string name="alert_disable_service_blocking_content">"This will disable the service blocking, please reboot after this change"</string>
 <string name="dialog_reset">"RESET"</string>
 <string name="reset_settings_confirmation">"Settings have been reset to defaults."</string>
 <string name="dialog_save">"SAVE"</string>
@@ -115,6 +117,8 @@
 <string name="settings_item_choose_theme">"Choose theme"</string>
 <string name="settings_item_global_stats_title">"Participate in Global Stats"</string>
 <string name="settings_item_global_stats_summary">"Send and receive anonymous stats"</string>
+<string name="settings_item_enable_service_block">"Service Blocking"</string>
+<string name="settings_item_enable_service_block_summery">"Enable/Disable Service Blocking. Please reboot your device after this change"</string>
 <string name="settings_item_reset_defaults_title">"Reset to defaults"</string>
 <string name="settings_item_reset_defaults_summary">"Reset all alarms and wakelocks to default settings"</string>
 <string name="settings_category_debug">"Debug"</string>

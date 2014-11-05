@@ -116,6 +116,7 @@ public class SettingsActivity extends Activity {
                 }
             });
 
+
 //            Hide extended debug options
             mExtendedDebugCategory = findPreference("extended_debug_options");
             if (!sharedPref.getBoolean("show_extended_debug_options", false)) {
@@ -172,6 +173,10 @@ public class SettingsActivity extends Activity {
                 } else {
                     LocaleHelper.revertToSystem(getActivity());
                 }
+            }else if (key.equals("enable_service_block")) {
+                CheckBoxPreference pref = (CheckBoxPreference) findPreference(key);
+                boolean value = sharedPreferences.getBoolean(key, false);
+                pref.setChecked(value);
             }
 
         }
