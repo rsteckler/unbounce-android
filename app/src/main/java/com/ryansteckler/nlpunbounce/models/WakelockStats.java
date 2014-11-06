@@ -1,5 +1,9 @@
 package com.ryansteckler.nlpunbounce.models;
 
+import android.content.Context;
+
+import com.ryansteckler.nlpunbounce.helpers.UidNameResolver;
+
 import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
 
@@ -115,5 +119,15 @@ public class WakelockStats extends BaseStats implements Serializable {
        // return strLog;
     }
 
+    @Override
+    public String getDerivedPackageName(Context ctx) {
+        if (null != getDerivedPackageName()) return getDerivedPackageName();
+        else {
+            UidNameResolver resolver = UidNameResolver.getInstance(ctx);
+            String packName = resolver.getNameForUid(this.getUid());
+            setDerivedPackageName(packName);
+        }
+        return getDerivedPackageName();
+    }
 
 }

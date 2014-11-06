@@ -1,5 +1,9 @@
 package com.ryansteckler.nlpunbounce.models;
 
+import android.content.Context;
+
+import com.ryansteckler.nlpunbounce.helpers.UidNameResolver;
+
 import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
 
@@ -20,6 +24,18 @@ public class ServiceStats extends BaseStats implements Serializable{
     }
     private ServiceStats() {
         setType("service");
+    }
+
+
+    @Override
+    public String getDerivedPackageName(Context ctx) {
+        if (null != getDerivedPackageName()) return getDerivedPackageName();
+        else {
+            UidNameResolver resolver = UidNameResolver.getInstance(ctx);
+            String packName = resolver.getLabelForServices(this.getUid(),this.getName());
+            setDerivedPackageName(packName);
+        }
+        return getDerivedPackageName();
     }
 
 }

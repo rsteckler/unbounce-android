@@ -53,12 +53,8 @@ public class AlarmDetailFragment extends BaseDetailFragment {
         TextView description = (TextView) view.findViewById(R.id.textViewDescription);
         String descriptionText = description.getText().toString();
 
-        UidNameResolver resolver = UidNameResolver.getInstance(getActivity().getApplicationContext());
 
-        String packName = resolver.getLabel(mStat.getPackage());
-        descriptionText = descriptionText + "\n\n" + "Package Name: " + packName;
-
-
+        descriptionText = descriptionText + "\n\n" + "Package Name: " + mStat.getDerivedPackageName(getActivity().getApplicationContext());
 
         description.setText(descriptionText);
 

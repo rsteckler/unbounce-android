@@ -1,5 +1,9 @@
 package com.ryansteckler.nlpunbounce.models;
 
+import android.content.Context;
+
+import com.ryansteckler.nlpunbounce.helpers.UidNameResolver;
+
 import java.io.Serializable;
 
 /**
@@ -7,17 +11,27 @@ import java.io.Serializable;
  */
 public class AlarmStats extends BaseStats implements Serializable {
 
-    public AlarmStats(String alarmName, String packageName)
-    {
+    public AlarmStats(String alarmName, String packageName) {
         setType("alarm");
         setName(alarmName);
-        if(null!=packageName && !packageName.trim().equals("")){
-            setPackage(packageName);
-        }else{
+        if (null != packageName && !packageName.trim().equals("")) setPackage(packageName);
+        else {
             setPackage("No Package");
         }
 
     }
 
-    private AlarmStats(){};
+    private AlarmStats() {
+    }
+
+    @Override
+    public String getDerivedPackageName(Context ctx) {
+        if (null != getDerivedPackageName()) return getDerivedPackageName();
+        else {
+            UidNameResolver resolver = UidNameResolver.getInstance(ctx);
+            String packName = resolver.getLabel(this.getPackage());
+            setDerivedPackageName(packName);
+        }
+        return getDerivedPackageName();
+    }
 }
