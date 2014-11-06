@@ -31,7 +31,11 @@ public class ServiceStats extends BaseStats implements Serializable {
         if (null == getDerivedPackageName()) {
             UidNameResolver resolver = UidNameResolver.getInstance(ctx);
             String packName = resolver.getLabelForServices(this.getUid(), this.getName());
-            setDerivedPackageName(packName);
+            if (null != packName) {
+                setDerivedPackageName(packName);
+            } else {
+                setDerivedPackageName("Unknown");
+            }
         }
         return getDerivedPackageName();
     }

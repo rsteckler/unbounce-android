@@ -120,7 +120,11 @@ public class WakelockStats extends BaseStats implements Serializable {
         if (null == getDerivedPackageName()) {
             UidNameResolver resolver = UidNameResolver.getInstance(ctx);
             String packName = resolver.getNameForUid(this.getUid());
-            setDerivedPackageName(packName);
+            if (null != packName) {
+                setDerivedPackageName(packName);
+            } else {
+                setDerivedPackageName("Unknown");
+            }
         }
         return getDerivedPackageName();
     }
