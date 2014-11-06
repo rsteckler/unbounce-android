@@ -28,15 +28,19 @@ import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
  */
 public class ServicesFragment extends ListFragment implements ServiceDetailFragment.FragmentClearListener {
 
+    private final static String ARG_TASKER_MODE = "taskerMode";
     private OnFragmentInteractionListener mListener;
     private ServicesAdapter mAdapter;
-
     private boolean mReloadOnShow = false;
     private boolean mTaskerMode = false;
-
     private int mSortBy = SortWakeLocks.SORT_COUNT;
 
-    private final static String ARG_TASKER_MODE = "taskerMode";
+    /**
+     * Mandatory empty constructor for the fragment manager to instantiate the
+     * fragment (e.g. upon screen orientation changes).
+     */
+    public ServicesFragment() {
+    }
 
     public static ServicesFragment newInstance() {
         return newInstance(false);
@@ -48,13 +52,6 @@ public class ServicesFragment extends ListFragment implements ServiceDetailFragm
         args.putBoolean(ARG_TASKER_MODE, taskerMode);
         fragment.setArguments(args);
         return fragment;
-    }
-
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
-    public ServicesFragment() {
     }
 
     @Override
@@ -71,6 +68,55 @@ public class ServicesFragment extends ListFragment implements ServiceDetailFragm
             mListener.onServicesSetTitle(getResources().getString(R.string.title_services));
 
         mAdapter.sort(mSortBy);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        getActivity().getMenuInflater().inflate(R.menu.list, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        //If they pushed the sort toggle, switch the icon from duration<->count
+        if (id == R.id.action_sort) {
+            if (mSortBy == SortWakeLocks.SORT_COUNT) {
+                mSortBy = SortWakeLocks.SORT_ALPHA;
+            } else if (mSortBy == SortWakeLocks.SORT_ALPHA) {
+                mSortBy = SortWakeLocks.SORT_PACKAGE;
+            } else if (mSortBy == SortWakeLocks.SORT_PACKAGE) {
+                mSortBy = SortWakeLocks.SORT_COUNT;
+            }
+
+            getActivity().invalidateOptionsMenu();
+
+            //Do the re-sort here
+            mAdapter.sort(mSortBy);
+
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        MenuItem sortItem = menu.findItem(R.id.action_sort);
+        if (sortItem != null) {
+            if (mSortBy == SortWakeLocks.SORT_COUNT) {
+                sortItem.setIcon(R.drawable.ic_action_sort_by_size);
+                sortItem.setTitle(R.string.action_sort_by_count);
+            } else if (mSortBy == SortWakeLocks.SORT_ALPHA) {
+                sortItem.setIcon(R.drawable.ic_sort_alpha);
+                sortItem.setTitle(R.string.action_sort_by_alpha);
+            } else if (mSortBy == SortWakeLocks.SORT_PACKAGE) {
+                sortItem.setIcon(R.drawable.ic_sort_pack);
+                sortItem.setTitle(R.string.action_sort_by_package);
+            }
+        }
+
+        super.onPrepareOptionsMenu(menu);
     }
 
     @Override
@@ -133,55 +179,11 @@ public class ServicesFragment extends ListFragment implements ServiceDetailFragm
         switchToDetail(position);
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        getActivity().getMenuInflater().inflate(R.menu.list, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        //If they pushed the sort toggle, switch the icon from duration<->count
-        if (id == R.id.action_sort) {
-            if (mSortBy == SortWakeLocks.SORT_COUNT) {
-                mSortBy = SortWakeLocks.SORT_ALPHA;
-            } else if (mSortBy == SortWakeLocks.SORT_ALPHA) {
-                mSortBy = SortWakeLocks.SORT_COUNT;
-            }
-
-            getActivity().invalidateOptionsMenu();
-
-            //Do the re-sort here
-            mAdapter.sort(mSortBy);
-
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onPrepareOptionsMenu(Menu menu) {
-        MenuItem sortItem = menu.findItem(R.id.action_sort);
-        if (sortItem != null) {
-            if (mSortBy == SortWakeLocks.SORT_COUNT) {
-                sortItem.setIcon(R.drawable.ic_action_sort_by_size);
-                sortItem.setTitle(R.string.action_sort_by_count);
-            } else if (mSortBy == SortWakeLocks.SORT_ALPHA) {
-                sortItem.setIcon(R.drawable.ic_sort_alpha);
-                sortItem.setTitle(R.string.action_sort_by_alpha);
-            }
-        }
-
-        super.onPrepareOptionsMenu(menu);
-    }
-
 
     private void switchToDetail(int position) {
         //We're going for an animation from the list item, expanding to take the entire screen.
         //Start by getting the bounds of the current list item, as a starting point.
-        ListView list = (ListView)getActivity().findViewById(android.R.id.list);
+        ListView list = (ListView) getActivity().findViewById(android.R.id.list);
         View listItem = list.getChildAt(position - list.getFirstVisiblePosition());
         if (listItem == null) {
             //Let this crash to google so I can get better reports.
@@ -202,7 +204,7 @@ public class ServicesFragment extends ListFragment implements ServiceDetailFragm
         //Spin up the new Detail fragment.  Dig the custom animations.  Also put it on the back stack
         //so we can hit the back button and come back to the list.
         FragmentManager fragmentManager = getFragmentManager();
-        ServiceDetailFragment newFrag = (ServiceDetailFragment) new ServiceDetailFragment().newInstance(startBounds.top, finalBounds.top, startBounds.bottom, finalBounds.bottom, (ServiceStats)mAdapter.getItem(position), mTaskerMode);
+        ServiceDetailFragment newFrag = (ServiceDetailFragment) new ServiceDetailFragment().newInstance(startBounds.top, finalBounds.top, startBounds.bottom, finalBounds.bottom, (ServiceStats) mAdapter.getItem(position), mTaskerMode);
         newFrag.attachClearListener(this);
         fragmentManager.beginTransaction()
                 .setCustomAnimations(R.animator.expand_in, R.animator.noop, R.animator.noop, R.animator.expand_out)
@@ -244,13 +246,14 @@ public class ServicesFragment extends ListFragment implements ServiceDetailFragm
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
-     * <p>
+     * <p/>
      * See the Android Training lesson <a href=
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
         public void onServicesSetTitle(String id);
+
         public void onSetTaskerTitle(String title);
     }
 

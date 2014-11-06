@@ -183,6 +183,7 @@ May you have a long [battery] life!
 <string name="settings_category_code_credits">"Developer Credit"</string>
 <string name="title_services">"Services"</string>
 <string name="action_sort_by_alpha">"Sort alphabetically"</string>
+<string name="action_sort_by_package">"Sort by Package Name"</string>
 <string name="card_settings_subtitle_service">"Control this service"</string>
 <string name="tasker_choose_service">"Choose the service to adjust."</string>
 <string name="alert_unknown_service_title">"Limit unknown service?"</string>
