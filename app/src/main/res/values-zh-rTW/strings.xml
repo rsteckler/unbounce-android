@@ -6,8 +6,8 @@
   <string name="title_home">"主界面"</string>
   <string name="title_wakelocks">"喚醒鎖(Wakelock)"</string>
   <string name="title_alarms">"定時器(Alarm)"</string>
-  <string name="navigation_drawer_open">"打開導航抽屜"</string>
-  <string name="navigation_drawer_close">"關閉導航抽屜"</string>
+  <string name="navigation_drawer_open">"開啟導航選單"</string>
+  <string name="navigation_drawer_close">"關閉導航選單"</string>
   <string name="action_search">"搜尋"</string>
   <string name="action_sort_by_count">"依次數排序"</string>
   <string name="action_sort_by_time">"依時間排序"</string>
@@ -20,10 +20,10 @@
   <string name="card_local_title">"本機統計數據"</string>
   <string name="card_local_subtitle">"使用者的個人統計"</string>
   <string name="card_settings_title">"設定"</string>
-  <string name="card_settings_subtitle_alarm">"控制該定時器"</string>
-  <string name="card_settings_subtitle_wakelock">"控制該喚醒鎖"</string>
+  <string name="card_settings_subtitle_alarm">"控制本定時器"</string>
+  <string name="card_settings_subtitle_wakelock">"控制本喚醒鎖"</string>
   <string name="card_description_title">"說明"</string>
-  <string name="card_description_subtitle">"為什麼它會消耗電量？"</string>
+  <string name="card_description_subtitle">"為什麼它會耗電？"</string>
   <string name="category_unbounced">"已被限制"</string>
   <string name="category_safe">"可被安全限制"</string>
   <string name="category_unknown">"未知"</string>
@@ -125,8 +125,8 @@
   <string name="settings_logging_quiet">"簡單"</string>
   <string name="settings_logging_default">"預設"</string>
   <string name="settings_logging_verbose">"詳細"</string>
-  <string name="settings_item_force_english_title">"Force English"</string>
-  <string name="settings_item_force_english_summary">"Override your locale settings and use English"</string>
+  <string name="settings_item_force_english_title">"強制使用英文介面"</string>
+  <string name="settings_item_force_english_summary">"無視語系設定，一律使用英文介面"</string>
   <string name="playstore_short_description">"電池續航才是關鍵！"</string>
   <string name="playstore_long_description">"以下是真實用戶們的評論：
 「It gave me about 2 hours more use with 30 minutes more screen on time. Saved me from buying a $25 battery.」
@@ -148,7 +148,7 @@ Amplify幫助你重新掌控設備的耗電情況。它的原理是通過限制�
 程式內購買購可以解鎖專業版功能。專業版幫助你限制任何一個定時器或者喚醒鎖。免費版的應用只能限制了以下幾個常見的耗電大戶：NlpWakelock, NlpCollectorWakeLock, ALARM_WAKEUP_LOCATOR和ALARM_WAKE_ACTIVITY_DETECTION。
 
 祝你從此擺脫尿袋的束縛！"</string>
-  <string name="welcome_banner_welcome">"歡迎使用!"</string>
+  <string name="welcome_banner_welcome">"歡迎使用 Amplify!"</string>
   <string name="welcome_banner_checking_service">"檢查Amplify是否正在執行..."</string>
   <string name="welcome_banner_checking_xposed">"檢查Xposed是否正確安裝..."</string>
   <string name="welcome_banner_checking_root">"檢查root權限..."</string>
