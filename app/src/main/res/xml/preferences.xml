@@ -86,10 +86,17 @@
         android:key="">
 
         <Preference
-            android:title="Chinese"
+            android:title="Chinese Simplified"
             android:editable="false"
             android:defaultValue="0"
             android:summary="kagwind, sulfle"
+            />
+
+        <Preference
+            android:title="Chinese Traditional"
+            android:editable="false"
+            android:defaultValue="0"
+            android:summary="Chih-Hsun Liao"
             />
 
         <Preference
