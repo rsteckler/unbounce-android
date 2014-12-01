@@ -100,7 +100,7 @@ public class ServicesAdapter extends BaseAdapter {
 
     public void sort(int sortBy, boolean categorize) {
         mSortBy = sortBy;
-        sort(SortWakeLocks.getBaseListComparator(mSortBy, categorize));
+        sort(SortWakeLocks.getBaseListComparator(mSortBy, categorize,this.getContext()));
         addCategories(mBackingList);
     }
 

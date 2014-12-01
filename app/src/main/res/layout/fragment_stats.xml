@@ -12,8 +12,9 @@
         android:visibility="visible"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:background="?background_lists" />
-
-
+        android:background="?background_lists"
+        android:fastScrollEnabled="true"
+        android:scrollingCache="false"
+        android:animationCache="false"/>
 </FrameLayout>
 

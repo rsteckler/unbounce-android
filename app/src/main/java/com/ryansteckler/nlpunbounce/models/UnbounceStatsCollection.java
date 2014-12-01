@@ -103,7 +103,6 @@ public class UnbounceStatsCollection implements Serializable {
         loadStats(context, false);
         ArrayList<BaseStats> bases = new ArrayList<BaseStats>(mCurrentStats.values());
         ArrayList<BaseStats> alarms = new ArrayList<BaseStats>();
-        Iterator<BaseStats> iter = bases.iterator();
 
         //TODO:  There are WAY better ways to do this, other than copying arrays.
         for (BaseStats curStat : bases) {

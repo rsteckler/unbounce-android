@@ -1,11 +1,13 @@
 package com.ryansteckler.nlpunbounce.models;
 
+import android.content.Context;
+
 import java.io.Serializable;
 
 /**
  * Created by rsteckler on 9/10/14.
  */
-public class BaseStats implements Serializable {
+public abstract class BaseStats implements Serializable {
     private long mAllowedCount;
     private long mBlockCount;
     private String mName;
@@ -14,8 +16,12 @@ public class BaseStats implements Serializable {
     private String mType;
     private String mPackage;
 
+    private int uid = -99;
 
-    private int uid=-99;
+
+
+
+    private String mDerivedPackageName;
 
     public String getPackage() {
         return mPackage;
@@ -95,5 +101,13 @@ public class BaseStats implements Serializable {
         this.uid = uid;
     }
 
+    public abstract String getDerivedPackageName(Context ctx);
+
+    protected void setDerivedPackageName(String mDerivedPackageName) {
+        this.mDerivedPackageName = mDerivedPackageName;
+    }
+    protected String getDerivedPackageName() {
+        return mDerivedPackageName;
+    }
 
 }

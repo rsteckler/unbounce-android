@@ -26,21 +26,27 @@ import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
 
 /**
  * A fragment representing a list of Items.
- * <p />
- * <p />
+ * <p/>
+ * <p/>
  * Activities containing this fragment MUST implement the {@link OnFragmentInteractionListener}
  * interface.
  */
 public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.FragmentClearListener {
 
+    //private int mCatBy = SortWakeLocks.CAT_BLOCKING_MODE;
+    private final static String ARG_TASKER_MODE = "taskerMode";
     private OnFragmentInteractionListener mListener;
     private AlarmsAdapter mAdapter;
-
     private boolean mReloadOnShow = false;
     private boolean mTaskerMode = false;
-
     private int mSortBy = SortWakeLocks.SORT_COUNT;
-    private final static String ARG_TASKER_MODE = "taskerMode";
+
+    /**
+     * Mandatory empty constructor for the fragment manager to instantiate the
+     * fragment (e.g. upon screen orientation changes).
+     */
+    public AlarmsFragment() {
+    }
 
     public static AlarmsFragment newInstance() {
         return newInstance(false);
@@ -53,15 +59,6 @@ public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.
         fragment.setArguments(args);
         return fragment;
     }
-
-
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
-    public AlarmsFragment() {
-    }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -95,14 +92,13 @@ public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.
             if (mSortBy == SortWakeLocks.SORT_COUNT) {
                 mSortBy = SortWakeLocks.SORT_ALPHA;
             } else if (mSortBy == SortWakeLocks.SORT_ALPHA) {
+                mSortBy = SortWakeLocks.SORT_PACKAGE;
+            } else if (mSortBy == SortWakeLocks.SORT_PACKAGE) {
                 mSortBy = SortWakeLocks.SORT_COUNT;
             }
-
             getActivity().invalidateOptionsMenu();
-
             //Do the re-sort here
             mAdapter.sort(mSortBy);
-
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -118,6 +114,9 @@ public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.
             } else if (mSortBy == SortWakeLocks.SORT_ALPHA) {
                 sortItem.setIcon(R.drawable.ic_sort_alpha);
                 sortItem.setTitle(R.string.action_sort_by_alpha);
+            } else if (mSortBy == SortWakeLocks.SORT_PACKAGE) {
+                sortItem.setIcon(R.drawable.ic_sort_pack);
+                sortItem.setTitle(R.string.action_sort_by_package);
             }
         }
 
@@ -188,7 +187,7 @@ public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.
     private void switchToDetail(int position) {
         //We're going for an animation from the list item, expanding to take the entire screen.
         //Start by getting the bounds of the current list item, as a starting point.
-        ListView list = (ListView)getActivity().findViewById(android.R.id.list);
+        ListView list = (ListView) getActivity().findViewById(android.R.id.list);
         View listItem = list.getChildAt(position - list.getFirstVisiblePosition());
         if (listItem == null) {
             LogHelper.defaultLog(getActivity(), "About to crash.  null alarm item at position: " + position);
@@ -208,7 +207,7 @@ public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.
         //Spin up the new Detail fragment.  Dig the custom animations.  Also put it on the back stack
         //so we can hit the back button and come back to the list.
         FragmentManager fragmentManager = getFragmentManager();
-        AlarmDetailFragment newFrag = (AlarmDetailFragment) new AlarmDetailFragment().newInstance(startBounds.top, finalBounds.top, startBounds.bottom, finalBounds.bottom, (AlarmStats)mAdapter.getItem(position), mTaskerMode);
+        AlarmDetailFragment newFrag = (AlarmDetailFragment) new AlarmDetailFragment().newInstance(startBounds.top, finalBounds.top, startBounds.bottom, finalBounds.bottom, (AlarmStats) mAdapter.getItem(position), mTaskerMode);
         newFrag.attachClearListener(this);
         fragmentManager.beginTransaction()
                 .setCustomAnimations(R.animator.expand_in, R.animator.noop, R.animator.noop, R.animator.expand_out)
@@ -250,13 +249,14 @@ public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
-     * <p>
+     * <p/>
      * See the Android Training lesson <a href=
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
         public void onAlarmsSetTitle(String id);
+
         public void onAlarmsSetTaskerTitle(String title);
     }
 

@@ -24,6 +24,12 @@
             android:defaultValue="true"/>
 
         <CheckBoxPreference
+            android:key="enable_service_block"
+            android:title="@string/settings_item_enable_service_block"
+            android:summary="@string/settings_item_enable_service_block_summery"
+            android:defaultValue="true"/>
+
+        <CheckBoxPreference
             android:key="force_english"
             android:title="@string/settings_item_force_english_title"
             android:summary="@string/settings_item_force_english_summary"
