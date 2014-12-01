@@ -24,6 +24,12 @@
             android:defaultValue="true"/>
 
         <CheckBoxPreference
+            android:key="enable_service_block"
+            android:title="@string/settings_item_enable_service_block"
+            android:summary="@string/settings_item_enable_service_block_summery"
+            android:defaultValue="true"/>
+
+        <CheckBoxPreference
             android:key="force_english"
             android:title="@string/settings_item_force_english_title"
             android:summary="@string/settings_item_force_english_summary"
@@ -86,10 +92,17 @@
         android:key="">
 
         <Preference
-            android:title="Chinese"
+            android:title="Chinese Simplified"
             android:editable="false"
             android:defaultValue="0"
             android:summary="kagwind, sulfle, kamoko"
+            />
+
+        <Preference
+            android:title="Chinese Traditional"
+            android:editable="false"
+            android:defaultValue="0"
+            android:summary="Chih-Hsun Liao"
             />
 
         <Preference

@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.ryansteckler.nlpunbounce.R;
 import com.ryansteckler.nlpunbounce.helpers.ThemeHelper;
-import com.ryansteckler.nlpunbounce.models.AlarmStats;
 import com.ryansteckler.nlpunbounce.models.BaseStats;
 import com.ryansteckler.nlpunbounce.models.EventLookup;
 
@@ -36,6 +35,8 @@ public abstract class BaseAdapter extends ArrayAdapter {
 
     protected ArrayList<BaseStats> mBackingList = null;
 
+    //protected Map<String, List<BaseStats>> mapPackageIndexMap = new HashMap<String, List<BaseStats>>();
+
 
     public BaseAdapter(Context context, int layoutId, ArrayList<BaseStats> baseStatList, String prefix) {
         super(context, layoutId, baseStatList);
@@ -43,6 +44,7 @@ public abstract class BaseAdapter extends ArrayAdapter {
         mBackingList = baseStatList;
         calculateScale(context, baseStatList);
         addCategories(mBackingList);
+        //addPackgeBasedCategories(mBackingList);
     }
 
     protected void addCategories(ArrayList<BaseStats> alarmStatList) {
@@ -53,11 +55,7 @@ public abstract class BaseAdapter extends ArrayAdapter {
 
         boolean foundSafe = false;
         boolean foundUnknown = false;
-
-        Iterator<BaseStats> iter = alarmStatList.iterator();
-        while (iter.hasNext()) {
-
-            BaseStats curStat = iter.next();
+        for (BaseStats curStat : alarmStatList) {
 
             if (!curStat.getBlockingEnabled()) {
                 foundSafe = true;
@@ -88,8 +86,7 @@ public abstract class BaseAdapter extends ArrayAdapter {
 
         //Get the max and min values for the red-green spectrum of counts
         Iterator<BaseStats> iter = baseStatList.iterator();
-        while (iter.hasNext())
-        {
+        while (iter.hasNext()) {
             BaseStats curStat = iter.next();
             if (curStat.getAllowedCount() > mHighCount)
                 mHighCount = curStat.getAllowedCount();
@@ -202,5 +199,17 @@ public abstract class BaseAdapter extends ArrayAdapter {
         }
     }
 
-
+    /*protected void addPackgeBasedCategories(ArrayList<BaseStats> alarmStatList) {
+        for (BaseStats curStat : alarmStatList) {
+            List curStatsList = mapPackageIndexMap.get(curStat.getDerivedPackageName(this.getContext()));
+            if (null != curStatsList) {
+                curStatsList.add(curStat);
+                mapPackageIndexMap.put(curStat.getDerivedPackageName(this.getContext()),curStatsList);
+            } else {
+                List<BaseStats> tempBaseStatsList = new ArrayList<BaseStats>();
+                tempBaseStatsList.add(curStat);
+                mapPackageIndexMap.put(curStat.getDerivedPackageName(this.getContext()), tempBaseStatsList);
+            }
+        }
+    }*/
 }

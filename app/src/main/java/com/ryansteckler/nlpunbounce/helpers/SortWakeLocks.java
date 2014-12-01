@@ -4,7 +4,8 @@ package com.ryansteckler.nlpunbounce.helpers;
  * Created by rsteckler on 9/5/14.
  */
 
-import com.ryansteckler.nlpunbounce.models.AlarmStats;
+import android.content.Context;
+
 import com.ryansteckler.nlpunbounce.models.BaseStats;
 import com.ryansteckler.nlpunbounce.models.EventLookup;
 import com.ryansteckler.nlpunbounce.models.WakelockStats;
@@ -17,6 +18,11 @@ public class SortWakeLocks {
     public final static int SORT_COUNT = 0;
     public final static int SORT_ALPHA = 1;
     public final static int SORT_TIME = 2; //Only makes sense for Wakelocks
+
+    public final static int SORT_PACKAGE = 3;
+
+    //public final static int CAT_BLOCKING_MODE=0;
+    //public final static int CAT_PACKAGE_MODE =1;
 
 //    public static Comparator<Entry<String, WakelockStats>> getMapComparator(final boolean byCount)
 //    {
@@ -37,52 +43,42 @@ public class SortWakeLocks {
 //        };
 //    }
 
-    public static Comparator<WakelockStats> getWakelockListComparator(final int sortType) {
-        return getWakelockListComparator(sortType, true);
+    public static Comparator<WakelockStats> getWakelockListComparator(final int sortType, Context ctx) {
+        return getWakelockListComparator(sortType, true, ctx);
     }
 
-    public static Comparator<WakelockStats> getWakelockListComparator(final int sortType, final boolean categorize)
-    {
-        return new Comparator<WakelockStats>()
-        {
+    public static Comparator<WakelockStats> getWakelockListComparator(final int sortType, final boolean categorize, final Context ctx) {
+        return new Comparator<WakelockStats>() {
             public int compare(WakelockStats o1,
-                               WakelockStats o2)
-            {
-                if (categorize)
-                {
-                    int blockingCompare = ((Boolean)o2.getBlockingEnabled()).compareTo(o1.getBlockingEnabled());
+                               WakelockStats o2) {
+                if (categorize) {
+                    int blockingCompare = ((Boolean) o2.getBlockingEnabled()).compareTo(o1.getBlockingEnabled());
                     if (blockingCompare != 0)
                         return blockingCompare;
 
-                    int safetyCompare = ((Integer)EventLookup.isSafe(o2.getName())).compareTo(EventLookup.isSafe(o1.getName()));
+                    int safetyCompare = ((Integer) EventLookup.isSafe(o2.getName())).compareTo(EventLookup.isSafe(o1.getName()));
                     if (safetyCompare != 0)
                         return safetyCompare;
 
                     //The category state is the same.  Sub-compare
-                    if (sortType == SORT_COUNT)
-                    {
-                        return ((Long)o2.getAllowedCount()).compareTo(o1.getAllowedCount());
-                    }
-                    else if (sortType == SORT_TIME)
-                    {
-                        return ((Long)o2.getAllowedDuration()).compareTo(o1.getAllowedDuration());
-                    }
-                    else
-                    {
-                        return ((String)o1.getName()).compareTo(o2.getName());
+                    if (sortType == SORT_COUNT) {
+                        return ((Long) o2.getAllowedCount()).compareTo(o1.getAllowedCount());
+                    } else if (sortType == SORT_TIME) {
+                        return ((Long) o2.getAllowedDuration()).compareTo(o1.getAllowedDuration());
+                    } else if (sortType == SORT_PACKAGE) {
+                        return (o2.getDerivedPackageName(ctx)).compareTo(o1.getDerivedPackageName(ctx));
+                    } else {
+                        return ((String) o1.getName()).compareTo(o2.getName());
                     }
                 } else {
-                    if (sortType == SORT_COUNT)
-                    {
-                        return ((Long)o2.getAllowedCount()).compareTo(o1.getAllowedCount());
-                    }
-                    else if (sortType == SORT_TIME)
-                    {
-                        return ((Long)o2.getAllowedDuration()).compareTo(o1.getAllowedDuration());
-                    }
-                    else
-                    {
-                        return ((String)o1.getName()).compareTo(o2.getName());
+                    if (sortType == SORT_COUNT) {
+                        return ((Long) o2.getAllowedCount()).compareTo(o1.getAllowedCount());
+                    } else if (sortType == SORT_TIME) {
+                        return ((Long) o2.getAllowedDuration()).compareTo(o1.getAllowedDuration());
+                    } else if (sortType == SORT_PACKAGE) {
+                        return (o2.getDerivedPackageName(ctx)).compareTo(o1.getDerivedPackageName(ctx));
+                    } else {
+                        return ((String) o1.getName()).compareTo(o2.getName());
                     }
                 }
 
@@ -90,38 +86,39 @@ public class SortWakeLocks {
         };
     }
 
-    public static Comparator<BaseStats> getBaseListComparator(final int sortType) {
-        return getBaseListComparator(sortType, true);
+    public static Comparator<BaseStats> getBaseListComparator(final int sortType, Context ctx) {
+        return getBaseListComparator(sortType, true, ctx);
     }
 
-    public static Comparator<BaseStats> getBaseListComparator(final int sortType, final boolean categorize)
-    {
-        return new Comparator<BaseStats>()
-        {
+    public static Comparator<BaseStats> getBaseListComparator(final int sortType, final boolean categorize, final Context ctx) {
+        return new Comparator<BaseStats>() {
             public int compare(BaseStats o1,
-                               BaseStats o2)
-            {
+                               BaseStats o2) {
                 if (categorize) {
 
-                    int blockingCompare = ((Boolean)o2.getBlockingEnabled()).compareTo(o1.getBlockingEnabled());
+                    int blockingCompare = ((Boolean) o2.getBlockingEnabled()).compareTo(o1.getBlockingEnabled());
                     if (blockingCompare != 0)
                         return blockingCompare;
 
-                    int safetyCompare = ((Integer)EventLookup.isSafe(o2.getName())).compareTo(EventLookup.isSafe(o1.getName()));
+                    int safetyCompare = ((Integer) EventLookup.isSafe(o2.getName())).compareTo(EventLookup.isSafe(o1.getName()));
                     if (safetyCompare != 0)
                         return safetyCompare;
 
                     //The category state is the same.  Sub-compare
                     if (sortType == SORT_COUNT) {
                         return ((Long) o2.getAllowedCount()).compareTo(o1.getAllowedCount());
+                    } else if (sortType == SORT_PACKAGE) {
+                        return (o2.getDerivedPackageName(ctx)).compareTo(o1.getDerivedPackageName(ctx));
                     } else {
-                        return ((String)o1.getName()).compareTo(o2.getName());
+                        return ((String) o1.getName()).compareTo(o2.getName());
                     }
                 } else {
                     if (sortType == SORT_COUNT) {
                         return ((Long) o2.getAllowedCount()).compareTo(o1.getAllowedCount());
+                    } else if (sortType == SORT_PACKAGE) {
+                        return (o2.getDerivedPackageName(ctx)).compareTo(o1.getDerivedPackageName(ctx));
                     } else {
-                        return ((String)o1.getName()).compareTo(o2.getName());
+                        return ((String) o1.getName()).compareTo(o2.getName());
                     }
                 }
             }

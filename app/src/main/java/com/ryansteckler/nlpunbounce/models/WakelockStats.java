@@ -1,5 +1,9 @@
 package com.ryansteckler.nlpunbounce.models;
 
+import android.content.Context;
+
+import com.ryansteckler.nlpunbounce.helpers.UidNameResolver;
+
 import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
 
@@ -14,8 +18,7 @@ public class WakelockStats extends BaseStats implements Serializable {
         setType("wakelock");
     }
 
-    public WakelockStats(String wakeLockName, int uId)
-    {
+    public WakelockStats(String wakeLockName, int uId) {
 
         setType("wakelock");
         setName(wakeLockName);
@@ -35,16 +38,14 @@ public class WakelockStats extends BaseStats implements Serializable {
         }
     }
 
-    public long addDurationAllowed(long duration)
-    {
+    public long addDurationAllowed(long duration) {
         synchronized (this) {
             mAllowedDuration += duration;
         }
         return mAllowedDuration;
     }
 
-    public String getDurationAllowedFormatted() 
-    {
+    public String getDurationAllowedFormatted() {
         long allowedTime = mAllowedDuration;
 
         long days = TimeUnit.MILLISECONDS.toDays(allowedTime);
@@ -65,16 +66,15 @@ public class WakelockStats extends BaseStats implements Serializable {
         sb.append(seconds);
         sb.append(" s");*/
 
-       // String strLog =days + "d:" +hours +"h:"+minutes +"m:"+seconds +"s" ;
+        // String strLog =days + "d:" +hours +"h:"+minutes +"m:"+seconds +"s" ;
 
-       // return (sb.toString());
+        // return (sb.toString());
 
         //return strLog;
-        return getFormattedTime(days,hours,minutes,seconds);
+        return getFormattedTime(days, hours, minutes, seconds);
     }
 
-    public long getBlockedDuration()
-    {
+    public long getBlockedDuration() {
         //Determine the average alive time of a wakelock.
         if (getAllowedCount() == 0)
             return 0;
@@ -108,12 +108,25 @@ public class WakelockStats extends BaseStats implements Serializable {
         sb.append(" s");
 */
 
-        return getFormattedTime(days,hours,minutes,seconds);
-       // String strLog =days + "d:" +hours +"h:"+minutes +"m:"+seconds +"s" ;
+        return getFormattedTime(days, hours, minutes, seconds);
+        // String strLog =days + "d:" +hours +"h:"+minutes +"m:"+seconds +"s" ;
 
         //return (sb.toString());
-       // return strLog;
+        // return strLog;
     }
 
+    @Override
+    public String getDerivedPackageName(Context ctx) {
+        if (null == getDerivedPackageName()) {
+            UidNameResolver resolver = UidNameResolver.getInstance(ctx);
+            String packName = resolver.getNameForUid(this.getUid());
+            if (null != packName) {
+                setDerivedPackageName(packName);
+            } else {
+                setDerivedPackageName("Unknown");
+            }
+        }
+        return getDerivedPackageName();
+    }
 
 }
