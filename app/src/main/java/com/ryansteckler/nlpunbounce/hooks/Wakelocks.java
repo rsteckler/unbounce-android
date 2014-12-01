@@ -3,6 +3,7 @@ package com.ryansteckler.nlpunbounce.hooks;
 /**
  * Created by ryan steckler on 8/18/14.
  */
+
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -11,18 +12,14 @@ import android.content.IntentFilter;
 import android.os.Build;
 import android.os.IBinder;
 import android.os.SystemClock;
-import android.util.Log;
 
 import com.ryansteckler.nlpunbounce.ActivityReceiver;
 import com.ryansteckler.nlpunbounce.XposedReceiver;
-import com.ryansteckler.nlpunbounce.models.BaseStats;
-import com.ryansteckler.nlpunbounce.models.BaseStatsWrapper;
 import com.ryansteckler.nlpunbounce.models.InterimEvent;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
@@ -37,7 +34,7 @@ import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 public class Wakelocks implements IXposedHookLoadPackage {
 
     private static final String TAG = "Amplify: ";
-    public static final String VERSION = "2.0.6"; //This needs to be pulled from the manifest or gradle build.
+    public static final String VERSION = "2.0.7"; //This needs to be pulled from the manifest or gradle build.
     public static final String FILE_VERSION = "3"; //This needs to be pulled from the manifest or gradle build.
     private HashMap<String, Long> mLastWakelockAttempts = null; //The last time each wakelock was allowed.
     private HashMap<String, Long> mLastAlarmAttempts = null; //The last time each alarm was allowed.
@@ -96,6 +93,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
 //            UnbounceStatsCollection.getInstance().resetLocalStats(UnbounceStatsCollection.STAT_CURRENT);
         }
     }
+
     private void hookAmplifyClasses(LoadPackageParam lpparam) {
         findAndHookMethod("com.ryansteckler.nlpunbounce.HomeFragment", lpparam.classLoader, "isUnbounceServiceRunning", new XC_MethodHook() {
             @Override
@@ -179,25 +177,33 @@ public class Wakelocks implements IXposedHookLoadPackage {
     }
 
     private void hookServices(LoadPackageParam lpparam) {
-        boolean servicesHooked = false;
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            //Try for wakelock hooks for API levels 19-20
-            defaultLog("Attempting 17to20 ServiceHook");
-            try17To20ServiceHook(lpparam);
-            defaultLog("Successful 17to20 ServiceHook");
-            servicesHooked = true;
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH &&
-        Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN) {
-            //Try for wakelock hooks for API levels 19-20
-            defaultLog("Attempting 14to16 ServiceHook");
-            try14To16ServiceHook(lpparam);
-            defaultLog("Successful 14to16 ServiceHook");
-            servicesHooked = true;
-        }
+        boolean isServicBlockingEnabled = m_prefs.getBoolean("enable_service_block", true);
 
-        if (!servicesHooked) {
-            defaultLog("Unsupported Android version trying to hook Services.");
+        defaultLog("Service Blocking Status: " + isServicBlockingEnabled);
+
+        if (isServicBlockingEnabled) {
+            boolean servicesHooked = false;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                //Try for wakelock hooks for API levels 19-20
+                defaultLog("Attempting 17to20 ServiceHook");
+                try17To20ServiceHook(lpparam);
+                defaultLog("Successful 17to20 ServiceHook");
+                servicesHooked = true;
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH &&
+                    Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN) {
+                //Try for wakelock hooks for API levels 19-20
+                defaultLog("Attempting 14to16 ServiceHook");
+                try14To16ServiceHook(lpparam);
+                defaultLog("Successful 14to16 ServiceHook");
+                servicesHooked = true;
+            }
+
+            if (!servicesHooked) {
+                defaultLog("Unsupported Android version trying to hook Services.");
+            }
+        } else {
+            defaultLog("Service Blocking is disabled.");
         }
     }
 
@@ -260,8 +266,8 @@ public class Wakelocks implements IXposedHookLoadPackage {
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                 String wakeLockName = (String) param.args[2];
                 IBinder lock = (IBinder) param.args[0];
-                int uId = (Integer)param.args[5];
-                handleWakeLockAcquire(param, wakeLockName, lock,uId);
+                int uId = (Integer) param.args[5];
+                handleWakeLockAcquire(param, wakeLockName, lock, uId);
             }
         });
 
@@ -281,8 +287,8 @@ public class Wakelocks implements IXposedHookLoadPackage {
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                 String wakeLockName = (String) param.args[2];
                 IBinder lock = (IBinder) param.args[0];
-                int uId = (Integer)param.args[4];
-                handleWakeLockAcquire(param, wakeLockName, lock,uId);
+                int uId = (Integer) param.args[4];
+                handleWakeLockAcquire(param, wakeLockName, lock, uId);
             }
         });
 
@@ -302,8 +308,8 @@ public class Wakelocks implements IXposedHookLoadPackage {
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                 String wakeLockName = (String) param.args[4];
                 IBinder lock = (IBinder) param.args[1];
-                int uId =(Integer) param.args[2];
-                handleWakeLockAcquire(param, wakeLockName, lock,uId);
+                int uId = (Integer) param.args[2];
+                handleWakeLockAcquire(param, wakeLockName, lock, uId);
             }
         });
 
@@ -321,7 +327,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
         findAndHookMethod("com.android.server.AlarmManagerService", lpparam.classLoader, "triggerAlarmsLocked", ArrayList.class, long.class, long.class, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                ArrayList<Object> triggers = (ArrayList<Object>)param.args[0];
+                ArrayList<Object> triggers = (ArrayList<Object>) param.args[0];
                 handleAlarm(param, triggers);
             }
         });
@@ -331,7 +337,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
         findAndHookMethod("com.android.server.AlarmManagerService", lpparam.classLoader, "triggerAlarmsLocked", ArrayList.class, ArrayList.class, long.class, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                ArrayList<Object> triggers = (ArrayList<Object>)param.args[1];
+                ArrayList<Object> triggers = (ArrayList<Object>) param.args[1];
                 handleAlarm(param, triggers);
             }
         });
@@ -347,23 +353,23 @@ public class Wakelocks implements IXposedHookLoadPackage {
         if (serviceName == null) {
             return;
         }
-        int callingUid = (Integer)param.args[4];
+        int callingUid = (Integer) param.args[4];
 
         String prefName = "service_" + serviceName + "_enabled";
         if (m_prefs.getBoolean(prefName, false)) {
 
             param.setResult(null);
-            recordServiceBlock(param, serviceName,callingUid);
+            recordServiceBlock(param, serviceName, callingUid);
             debugLog("Preventing Service " + serviceName + ".");
 
         } else {
             debugLog("Allowing service " + serviceName + ".");
-            recordServiceStart(param, serviceName,callingUid);
+            recordServiceStart(param, serviceName, callingUid);
         }
 
     }
 
-    private void handleWakeLockAcquire(XC_MethodHook.MethodHookParam param, String wakeLockName, IBinder lock,int uId) {
+    private void handleWakeLockAcquire(XC_MethodHook.MethodHookParam param, String wakeLockName, IBinder lock, int uId) {
 
         //If we're blocking this wakelock
         String prefName = "wakelock_" + wakeLockName + "_enabled";
@@ -384,7 +390,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
             if (timeSinceLastWakeLock < collectorMaxFreq) {
                 //Not enough time has passed since the last wakelock.  Deny the wakelock
                 param.setResult(null);
-                recordWakelockBlock(param, wakeLockName,uId);
+                recordWakelockBlock(param, wakeLockName, uId);
 
                 debugLog("Preventing Wakelock " + wakeLockName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
 
@@ -392,10 +398,10 @@ public class Wakelocks implements IXposedHookLoadPackage {
                 //Allow the wakelock
                 defaultLog("Allowing Wakelock " + wakeLockName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
                 mLastWakelockAttempts.put(wakeLockName, now);
-                recordAcquire(wakeLockName, lock,uId);
+                recordAcquire(wakeLockName, lock, uId);
             }
         } else {
-            recordAcquire(wakeLockName, lock,uId);
+            recordAcquire(wakeLockName, lock, uId);
         }
     }
 
@@ -413,11 +419,11 @@ public class Wakelocks implements IXposedHookLoadPackage {
             try {
                 context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
             } catch (NoSuchFieldError nsfe) {
-                Object am = (Object)XposedHelpers.getObjectField(param.thisObject, "mAm");
+                Object am = (Object) XposedHelpers.getObjectField(param.thisObject, "mAm");
                 context = (Context) XposedHelpers.getObjectField(am, "mContext");
             }
         } else {
-            Object am = (Object)XposedHelpers.getObjectField(param.thisObject, "mAm");
+            Object am = (Object) XposedHelpers.getObjectField(param.thisObject, "mAm");
             context = (Context) XposedHelpers.getObjectField(am, "mContext");
         }
         if (context != null) {
@@ -438,8 +444,8 @@ public class Wakelocks implements IXposedHookLoadPackage {
         }
     }
 
-    private void recordAlarmAcquire(Context context, String alarmName,String packageName) {
-        UnbounceStatsCollection.getInstance().incrementAlarmAllowed(context, alarmName,packageName);
+    private void recordAlarmAcquire(Context context, String alarmName, String packageName) {
+        UnbounceStatsCollection.getInstance().incrementAlarmAllowed(context, alarmName, packageName);
     }
 
 //    private void handleServiceStop(XC_MethodHook.MethodHookParam param, Intent serviceIntent) {
@@ -517,18 +523,17 @@ public class Wakelocks implements IXposedHookLoadPackage {
                 intent = (Intent) callMethod(pi, "getIntent");
             } catch (NoSuchMethodError nsme) {
                 try {
-                Object mTarget = XposedHelpers.getObjectField(pi, "mTarget");
+                    Object mTarget = XposedHelpers.getObjectField(pi, "mTarget");
 
-                if (null != mTarget) {
-                    Object pendingIntentRecord$Key = XposedHelpers.getObjectField(mTarget, "key");
-                    if (null != pendingIntentRecord$Key) {
-                        Object requestIntent = XposedHelpers.getObjectField(pendingIntentRecord$Key, "requestIntent");
-                        intent = (Intent) requestIntent;
+                    if (null != mTarget) {
+                        Object pendingIntentRecord$Key = XposedHelpers.getObjectField(mTarget, "key");
+                        if (null != pendingIntentRecord$Key) {
+                            Object requestIntent = XposedHelpers.getObjectField(pendingIntentRecord$Key, "requestIntent");
+                            intent = (Intent) requestIntent;
+                        }
                     }
-                }
-                }
-                catch(Exception e){
-                    defaultLog("Additional logic to detect alarms on 4.1.2 failed for: "+ pi);
+                } catch (Exception e) {
+                    defaultLog("Additional logic to detect alarms on 4.1.2 failed for: " + pi);
                 }
             }
 
@@ -568,7 +573,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
                 if (timeSinceLastAlarm < collectorMaxFreq) {
                     //Not enough time has passed since the last alarm.  Remove it from the triggerlist
                     triggers.remove(j);
-                    recordAlarmBlock(param, alarmName,pi.getTargetPackage());
+                    recordAlarmBlock(param, alarmName, pi.getTargetPackage());
 
                     debugLog("Preventing Alarm " + alarmName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastAlarm);
 
@@ -576,10 +581,10 @@ public class Wakelocks implements IXposedHookLoadPackage {
                     //Allow the wakelock
                     defaultLog("Allowing Alarm " + alarmName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastAlarm);
                     mLastAlarmAttempts.put(alarmName, now);
-                    recordAlarmAcquire(context, alarmName,pi.getTargetPackage());
+                    recordAlarmAcquire(context, alarmName, pi.getTargetPackage());
                 }
             } else {
-                recordAlarmAcquire(context, alarmName,pi.getTargetPackage());
+                recordAlarmAcquire(context, alarmName, pi.getTargetPackage());
             }
         }
     }
@@ -589,7 +594,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
         Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
 
         if (context != null) {
-            UnbounceStatsCollection.getInstance().incrementWakelockBlock(context, name,uId);
+            UnbounceStatsCollection.getInstance().incrementWakelockBlock(context, name, uId);
         }
     }
 
@@ -600,11 +605,11 @@ public class Wakelocks implements IXposedHookLoadPackage {
             try {
                 context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
             } catch (NoSuchFieldError nsfe) {
-                Object am = (Object)XposedHelpers.getObjectField(param.thisObject, "mAm");
+                Object am = (Object) XposedHelpers.getObjectField(param.thisObject, "mAm");
                 context = (Context) XposedHelpers.getObjectField(am, "mContext");
             }
         } else {
-        Object am = (Object)XposedHelpers.getObjectField(param.thisObject, "mAm");
+            Object am = (Object) XposedHelpers.getObjectField(param.thisObject, "mAm");
             context = (Context) XposedHelpers.getObjectField(am, "mContext");
         }
 
@@ -613,12 +618,12 @@ public class Wakelocks implements IXposedHookLoadPackage {
         }
     }
 
-    private void recordAlarmBlock(XC_MethodHook.MethodHookParam param, String name,String packageName) {
+    private void recordAlarmBlock(XC_MethodHook.MethodHookParam param, String name, String packageName) {
 
         Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
 
         if (context != null) {
-            UnbounceStatsCollection.getInstance().incrementAlarmBlock(context, name,packageName);
+            UnbounceStatsCollection.getInstance().incrementAlarmBlock(context, name, packageName);
         }
 
     }

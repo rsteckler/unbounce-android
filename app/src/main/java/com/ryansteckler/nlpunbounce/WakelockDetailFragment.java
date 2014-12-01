@@ -50,11 +50,9 @@ public class WakelockDetailFragment extends BaseDetailFragment {
         TextView description = (TextView) view.findViewById(R.id.textViewDescription);
         String descriptionText = description.getText().toString();
 
-        UidNameResolver resolver = UidNameResolver.getInstance(getActivity().getApplicationContext());
 
-        String packName = resolver.getNameForUid(mStat.getUid());
 
-        descriptionText = descriptionText + "\n\n" + "Package Name: " + packName;
+        descriptionText = descriptionText + "\n\n" + "Package Name: " + mStat.getDerivedPackageName(getActivity().getApplicationContext());
 
 
         description.setText(descriptionText);
