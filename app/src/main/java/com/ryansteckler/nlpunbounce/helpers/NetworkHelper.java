@@ -48,6 +48,8 @@ public class NetworkHelper{
 
                 } catch (ClientProtocolException e) {
                 } catch (IOException e) {
+                } catch (SecurityException e) {
+                    //We were denied internet permissions.
                 }
                 handler.sendEmptyMessage(0);
 
@@ -84,9 +86,9 @@ public class NetworkHelper{
                     }
 
                 } catch (ClientProtocolException e) {
-                    // TODO Auto-generated catch block
                 } catch (IOException e) {
-                    // TODO Auto-generated catch block
+                } catch (SecurityException e) {
+                    //We were denied internet permissions.
                 }
                 handler.sendEmptyMessage(0);
 
