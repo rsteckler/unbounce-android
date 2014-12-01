@@ -89,56 +89,77 @@
             android:title="Chinese"
             android:editable="false"
             android:defaultValue="0"
-            android:summary="kagwind, sulfle"
+            android:summary="kagwind, sulfle, kamoko"
             />
 
         <Preference
             android:title="Czech"
             android:editable="false"
             android:defaultValue="0"
-            android:summary="MIKEMON"
+            android:summary="MIKEMON, WodokCZ"
+            />
+
+        <Preference
+            android:title="Dutch"
+            android:editable="false"
+            android:defaultValue="0"
+            android:summary="Wimmme, Job Bolle, SWADED"
             />
 
         <Preference
             android:title="Finnish"
             android:editable="false"
             android:defaultValue="0"
-            android:summary="Köhvwezd"
+            android:summary="Köhvwezd, Sami Kivinen, Eger"
             />
 
         <Preference
             android:title="French"
             android:editable="false"
             android:defaultValue="0"
-            android:summary="Thomas Sokay (Soktomy), Baud, Spoonoid"
+            android:summary="Thomas Sokay (Soktomy), Baud, Spoonoid, Carlos Bojorges"
             />
 
         <Preference
             android:title="German"
             android:editable="false"
             android:defaultValue="0"
-            android:summary="Achim Schumacher, Bender80, xor"
+            android:summary="Achim Schumacher, Bender80, xor, Christina S., Uwe"
             />
 
         <Preference
             android:title="Greek"
             android:editable="false"
             android:defaultValue="0"
-            android:summary="Nik Chris"
+            android:summary="Nik Chris, Serafim, Lucas"
+            />
+
+        <Preference
+            android:title="Hebrew"
+            android:editable="false"
+            android:defaultValue="0"
+            android:summary="Zag Z., Dimiav"
+            />
+
+        <Preference
+            android:title="Hungarian"
+            android:editable="false"
+            android:defaultValue="0"
+            android:summary="Zoltan Toldy"
             />
 
         <Preference
             android:title="Indonesian"
             android:editable="false"
             android:defaultValue="0"
-            android:summary="Sandivisi Aditya, setiawanjimmy"
+            android:summary="Sandivisi Aditya, setiawanjimmy, anang"
             />
 
         <Preference
             android:title="Italian"
             android:editable="false"
             android:defaultValue="0"
-            android:summary="Roberto Fabrizi, marco"
+            android:summary="Roberto Fabrizi, Marco, Nico Caprioli, ManuelDG, Ilario"
             />
 
         <Preference
@@ -149,24 +170,31 @@
             />
 
         <Preference
+            android:title="Korean"
+            android:editable="false"
+            android:defaultValue="0"
+            android:summary="wolfwork, eric cho"
+            />
+
+        <Preference
             android:title="Malay"
             android:editable="false"
             android:defaultValue="0"
-            android:summary="Celestial Fury"
+            android:summary="Celestial Fury, Justin Alex"
             />
 
         <Preference
             android:title="Polish"
             android:editable="false"
             android:defaultValue="0"
-            android:summary="Piotr Sęk(mosespl)"
+            android:summary="Piotr Sęk(mosespl), Patryk"
             />
 
         <Preference
             android:title="Portuguese"
             android:editable="false"
             android:defaultValue="0"
-            android:summary="Luís FL"
+            android:summary="Luís FL, Gabriel Soldani, Adonis Batista da Silva"
             />
 
         <Preference
@@ -180,14 +208,21 @@
             android:title="Russian"
             android:editable="false"
             android:defaultValue="0"
-            android:summary="DumF0rGaming, Dmitriy Briskin, Ilya"
+            android:summary="DumF0rGaming, Dmitriy Briskin, Ilya, VALVIX, Alex Kudinov"
             />
 
         <Preference
             android:title="Spanish"
             android:editable="false"
             android:defaultValue="0"
-            android:summary="Ignacio, Sergio Castell, nbivan, Carlos Bojorges, Luis FL, Víctor M., kevin, Zave Peck, David"
+            android:summary="Ignacio, Sergio Castell, nbivan, Carlos Bojorges, Luis FL, Víctor M., kevin, Zave Peck, David, Daniel, pedrazadixon, Fabián Rojas, Marco Vasquez, ARMANDROID, Gabriel Soldani, Ignacio, Ugur Can, Abraham, Ruben Oliver"
+            />
+
+        <Preference
+            android:title="Turkish"
+            android:editable="false"
+            android:defaultValue="0"
+            android:summary="Eray Çetin, predator_395, Ugur Can, Furkan"
             />
 
     </PreferenceCategory>
