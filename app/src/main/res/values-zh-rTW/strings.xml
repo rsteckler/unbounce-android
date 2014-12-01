@@ -6,8 +6,8 @@
 <string name="title_home">"主界面"</string>
 <string name="title_wakelocks">"喚醒鎖(Wakelock)"</string>
 <string name="title_alarms">"定時器(Alarm)"</string>
-<string name="navigation_drawer_open">"打開導航抽屜"</string>
-<string name="navigation_drawer_close">"關閉導航抽屜"</string>
+  <string name="navigation_drawer_open">"開啟導航選單"</string>
+  <string name="navigation_drawer_close">"關閉導航選單"</string>
 <string name="action_search">"搜尋"</string>
 <string name="action_sort_by_count">"依次數排序"</string>
 <string name="action_sort_by_time">"依時間排序"</string>
@@ -20,17 +20,17 @@
 <string name="card_local_title">"本機統計數據"</string>
 <string name="card_local_subtitle">"使用者的個人統計"</string>
 <string name="card_settings_title">"設定"</string>
-<string name="card_settings_subtitle_alarm">"控制該定時器"</string>
-<string name="card_settings_subtitle_wakelock">"控制該喚醒鎖"</string>
+  <string name="card_settings_subtitle_alarm">"控制本定時器"</string>
+  <string name="card_settings_subtitle_wakelock">"控制本喚醒鎖"</string>
 <string name="card_description_title">"說明"</string>
-<string name="card_description_subtitle">"為什麼它會消耗電量？"</string>
+  <string name="card_description_subtitle">"為什麼它會耗電？"</string>
 <string name="category_unbounced">"已被限制"</string>
 <string name="category_safe">"可被安全限制"</string>
 <string name="category_unknown">"未知"</string>
 <string name="category_not_safe">"不建議限制"</string>
 <string name="category_error">"錯誤分類"</string>
 <string name="alert_noiab_title">"無法啟用專業版功能"</string>
-<string name="alert_noiab_content">"您的設備不支援程式內購買功能，因此無法購買專業版功能。你可能需要更新Google Play Store，或者您所居住的地區不允許使用程式內購買功能。"</string>
+  <string name="alert_noiab_content">"您的設備不支援程式內購買功能因此無法購買專業版功能。你可能需要更新Google Play，或者你所居住的地區不允許使用程式內購買功能。"</string>
 <string name="dialog_ok">"確定"</string>
 <string name="tasker_on">"開"</string>
 <string name="tasker_off">"關"</string>
@@ -38,7 +38,7 @@
 <string name="tasker_choose_wakelock">"選擇需要調整的喚醒鎖。"</string>
 <string name="tasker_choose_alarm">"選擇需要調整的定時器。"</string>
 <string name="tasker_welcome">"歡迎使用Amplify的Tasker插件。"</string>
-<string name="tasker_which_task">"更改喚醒鎖或者定時器的設定，或重置關於設備的統計。"</string>
+  <string name="tasker_which_task">"更改喚醒鎖或者定時器的設置，或重置關於設備的統計。"</string>
 <string name="tasker_task_wakelock">"調整喚醒鎖設定"</string>
 <string name="tasker_task_alarm">"調整定時器設定"</string>
 <string name="tasker_task_reset">"重置統計數據"</string>
@@ -70,7 +70,7 @@
 <string name="desc_rilj">"RILJ在處理通話相關任務(比如手機通話，與基地台聯絡)時，會保持你的設備喚醒。"</string>
 <string name="desc_syncloopwakelock">"這個喚醒鎖被Android同步管理器（SyncManager）用來同步各種帳戶，比如Google+，Twitter，Linkedin，Gmail等。限制的值越高，帳戶的同步時間間隔就越長。"</string>
 <string name="desc_icing">"ICING是屬於Google Service的喚醒鎖。其他資訊待更新。"</string>
-<string name="desc_startingalertservice">"這個喚醒鎖通常與日曆（Calendar）有關，但也可能會影響其他程式，比如簡訊。如果你有日曆相關的通知，這個鎖會被呼叫。"</string>
+  <string name="desc_startingalertservice">"這個喚醒鎖通常與日曆（Calendar）有關，但也可能會影響其他應用，比如簡訊。如果你有日曆相關的通知，這個鎖會被呼叫。"</string>
 <string name="desc_audiomix">"這個喚醒鎖處理有關觸控聲和提示音的事件。某些設備在關閉觸控聲之後仍會出現該喚醒鎖。"</string>
 <string name="desc_locationmanagerservice">"位置管理服務。通常不會產生耗電問題，但有時會有例外。"</string>
 <string name="desc_audioin">"該喚醒鎖被用於Google語音搜尋和Hotword Detection（OK Google）。"</string>
@@ -107,7 +107,7 @@
 <string name="donate_more_button">"如何進一步幫助開發者？"</string>
 <string name="donate_more_text">"如果想要捐助更多，請點選這個按鈕，但不會提供額外的功能。再次感謝您對Amplify的大力支持！"</string>
 <string name="welcome_banner_title">"讓我們先確定一切設定正常。"</string>
-<string name="welcome_banner_text">"你可以限制程式獲取喚醒鎖(wakelock)的頻率來避免設備持續喚醒，或者限制程式使用定時器(Alarm)的頻率來避免設備被喚醒。我們已經幫你設好基本的省電選項。"</string>
+  <string name="welcome_banner_text">"你可以限制應用獲取喚醒鎖(wakelock)的頻率來避免設備持續喚醒，或者限制應用使用定時器(Alarm)的頻率來避免設備被喚醒。我們已經幫你設好基本的省電選項。"</string>
 <string name="settings_category_options">"選項"</string>
 <string name="settings_item_show_launcher">"顯示應用程式圖示"</string>
 <string name="settings_item_choose_theme">"選擇主題"</string>
@@ -119,13 +119,13 @@
 <string name="settings_item_author">"作者: Ryan Steckler"</string>
 <string name="settings_item_logging_level">"記錄層級"</string>
 <string name="settings_category_translation">"翻譯人員"</string>
-<string name="settings_theme_material">"Material（Google的新界面）"</string>
+  <string name="settings_theme_material">"Material（Google的新介面）"</string>
 <string name="settings_theme_dark">"黑色"</string>
 <string name="settings_logging_quiet">"簡單"</string>
 <string name="settings_logging_default">"預設"</string>
 <string name="settings_logging_verbose">"詳細"</string>
-<string name="settings_item_force_english_title">"Force English"</string>
-<string name="settings_item_force_english_summary">"Override your locale settings and use English"</string>
+  <string name="settings_item_force_english_title">"強制使用英文介面"</string>
+  <string name="settings_item_force_english_summary">"無視語系設定，一律使用英文介面"</string>
 <string name="playstore_short_description">"電池續航才是關鍵！"</string>
 <string name="playstore_long_description">"以下是真實用戶們的評論：
 「It gave me about 2 hours more use with 30 minutes more screen on time. Saved me from buying a $25 battery.」
@@ -137,17 +137,17 @@
 Amplify幫助你重新掌控設備的耗電情況。它的原理是通過限制定時器(Alarm)和喚醒鎖(Wakelock)在系統中的使用頻率，來避免設備被頻繁和長時間的喚醒，從而增加設備深度睡眠的時間。使用推薦的設定便可輕鬆的節省設備電量，同時我們還向進階用戶提供了更多的自訂選項。
 
 本程式亮點包括：
-- 漂亮的界面設計，遵循Material Design的設計原則
+- 漂亮的介面設計，遵循Material Design的設計原則
 - 穩定的程式調校引擎
 - 詳盡的統計數據，顯示被定時器和喚醒鎖消耗的設備喚醒時間，以及Amplify幫你節省的喚醒時間
 - 持續更新有關各個定時器和喚醒鎖的訊息
 - 全新的專業版幫助你限制任何一個定時器或者喚醒鎖
 - 提供開源程式碼，讓你可以放心查閱
 
-程式內購買購可以解鎖專業版功能。專業版幫助你限制任何一個定時器或者喚醒鎖。免費版的程式只能限制了以下幾個常見的耗電大戶：NlpWakelock, NlpCollectorWakeLock, ALARM_WAKEUP_LOCATOR和ALARM_WAKE_ACTIVITY_DETECTION。
+程式內購買購可以解鎖專業版功能。專業版幫助你限制任何一個定時器或者喚醒鎖。免費版的應用只能限制了以下幾個常見的耗電大戶：NlpWakelock, NlpCollectorWakeLock, ALARM_WAKEUP_LOCATOR和ALARM_WAKE_ACTIVITY_DETECTION。
 
 祝你從此擺脫尿袋的束縛！"</string>
-<string name="welcome_banner_welcome">"歡迎使用!"</string>
+  <string name="welcome_banner_welcome">"歡迎使用 Amplify!"</string>
 <string name="welcome_banner_checking_service">"檢查Amplify是否正在執行..."</string>
 <string name="welcome_banner_checking_xposed">"檢查Xposed是否正確安裝..."</string>
 <string name="welcome_banner_checking_root">"檢查root權限..."</string>
@@ -171,7 +171,7 @@ Amplify幫助你重新掌控設備的耗電情況。它的原理是通過限制�
 <string name="installs_xposed">"Amplify需要使用Xposed框架，並會引導你如何安裝Xposed。"</string>
 <string name="settings_category_code_credits">"開發人員"</string>
 <string name="title_services">"服務"</string>
-<string name="action_sort_by_alpha">"依英文字母排序"</string>
+  <string name="action_sort_by_alpha">"按英文字母排序"</string>
 <string name="card_settings_subtitle_service">"控制該服務"</string>
 <string name="tasker_choose_service">"選擇需要調整的服務。"</string>
 <string name="alert_unknown_service_title">"限制未知服務?"</string>
