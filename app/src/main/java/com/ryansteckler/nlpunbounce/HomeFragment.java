@@ -49,7 +49,6 @@ import com.ryansteckler.nlpunbounce.helpers.ThemeHelper;
 import com.ryansteckler.nlpunbounce.hooks.Wakelocks;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
 
-
 import java.io.File;
 
 /**

@@ -21,7 +21,6 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.ryansteckler.nlpunbounce.helpers.UidNameResolver;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
 import com.ryansteckler.nlpunbounce.models.WakelockStats;
 

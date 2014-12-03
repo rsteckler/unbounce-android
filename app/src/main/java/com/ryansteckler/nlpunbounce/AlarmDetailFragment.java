@@ -1,15 +1,13 @@
 package com.ryansteckler.nlpunbounce;
 
 import android.app.AlertDialog;
+import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -23,8 +21,6 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.ryansteckler.nlpunbounce.helpers.UidNameResolver;
-import com.ryansteckler.nlpunbounce.models.EventLookup;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
 
 

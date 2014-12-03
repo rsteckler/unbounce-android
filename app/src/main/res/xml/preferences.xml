@@ -1,241 +1,241 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
     <PreferenceCategory
-        android:title="@string/settings_category_options"
-        android:key="">
+        android:key=""
+        android:title="@string/settings_category_options">
 
         <CheckBoxPreference
+            android:defaultValue="true"
             android:key="show_launcher_icon"
-            android:title="@string/settings_item_show_launcher"
-            android:defaultValue="true"/>
+            android:title="@string/settings_item_show_launcher"/>
 
         <ListPreference
-            android:key="theme"
-            android:title="@string/settings_item_choose_theme"
+            android:defaultValue="default"
             android:dialogTitle="@string/settings_item_choose_theme"
             android:entries="@array/themeArray"
             android:entryValues="@array/themeValues"
-            android:defaultValue="default" />
+            android:key="theme"
+            android:title="@string/settings_item_choose_theme" />
 
         <CheckBoxPreference
+            android:defaultValue="true"
             android:key="global_participation"
-            android:title="@string/settings_item_global_stats_title"
             android:summary="@string/settings_item_global_stats_summary"
-            android:defaultValue="true"/>
+            android:title="@string/settings_item_global_stats_title"/>
 
         <CheckBoxPreference
+            android:defaultValue="true"
             android:key="enable_service_block"
-            android:title="@string/settings_item_enable_service_block"
             android:summary="@string/settings_item_enable_service_block_summery"
-            android:defaultValue="true"/>
+            android:title="@string/settings_item_enable_service_block"/>
 
         <CheckBoxPreference
+            android:defaultValue="false"
             android:key="force_english"
-            android:title="@string/settings_item_force_english_title"
             android:summary="@string/settings_item_force_english_summary"
-            android:defaultValue="false"/>
+            android:title="@string/settings_item_force_english_title"/>
 
         <Preference
-            android:title="@string/settings_item_reset_defaults_title"
-            android:key="reset_defaults"
-            android:editable="false"
             android:defaultValue="0"
+            android:editable="false"
+            android:key="reset_defaults"
             android:summary="@string/settings_item_reset_defaults_title"
+            android:title="@string/settings_item_reset_defaults_title"
             />
 
         <ListPreference
-            android:key="logging_level"
-            android:title="@string/settings_item_logging_level"
+            android:defaultValue="default"
             android:dialogTitle="@string/settings_item_logging_level"
             android:entries="@array/loggingArray"
             android:entryValues="@array/loggingValues"
-            android:defaultValue="default" />
+            android:key="logging_level"
+            android:title="@string/settings_item_logging_level" />
 
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title=""
-        android:key="extended_debug_options">
+        android:key="extended_debug_options"
+        android:title="">
 
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="@string/settings_category_code_credits"
-        android:key="">
+        android:key=""
+        android:title="@string/settings_category_code_credits">
 
         <Preference
-            android:title="@string/settings_item_author"
+            android:defaultValue="0"
+            android:editable="false"
             android:key="about_author"
-            android:editable="false"
-            android:defaultValue="0"
             android:summary="Version: 2.0.7"
+            android:title="@string/settings_item_author"
             />
 
         <Preference
-            android:title="Additional Code: Ruturaj Shetye"
-            android:editable="false"
             android:defaultValue="0"
+            android:editable="false"
             android:summary="JellyBean 4.1.2 Fixes"
+            android:title="Additional Code: Ruturaj Shetye"
             />
 
         <Preference
-            android:title="Additional Code: kagwind"
-            android:editable="false"
             android:defaultValue="0"
+            android:editable="false"
             android:summary="Various fixes"
+            android:title="Additional Code: kagwind"
             />
 
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="@string/settings_category_translation"
-        android:key="">
+        android:key=""
+        android:title="@string/settings_category_translation">
 
         <Preference
-            android:title="Chinese Simplified"
-            android:editable="false"
             android:defaultValue="0"
+            android:editable="false"
             android:summary="kagwind, sulfle, kamoko"
+            android:title="Chinese Simplified"
             />
 
         <Preference
-            android:title="Chinese Traditional"
-            android:editable="false"
             android:defaultValue="0"
+            android:editable="false"
             android:summary="Chih-Hsun Liao"
+            android:title="Chinese Traditional"
             />
 
         <Preference
-            android:title="Czech"
-            android:editable="false"
             android:defaultValue="0"
+            android:editable="false"
             android:summary="MIKEMON, WodokCZ"
+            android:title="Czech"
             />
 
         <Preference
-            android:title="Dutch"
-            android:editable="false"
             android:defaultValue="0"
+            android:editable="false"
             android:summary="Wimmme, Job Bolle, SWADED"
+            android:title="Dutch"
             />
 
         <Preference
-            android:title="Finnish"
-            android:editable="false"
             android:defaultValue="0"
+            android:editable="false"
             android:summary="Köhvwezd, Sami Kivinen, Eger"
+            android:title="Finnish"
             />
 
         <Preference
-            android:title="French"
-            android:editable="false"
             android:defaultValue="0"
+            android:editable="false"
             android:summary="Thomas Sokay (Soktomy), Baud, Spoonoid, Carlos Bojorges"
+            android:title="French"
             />
 
         <Preference
-            android:title="German"
-            android:editable="false"
             android:defaultValue="0"
+            android:editable="false"
             android:summary="Achim Schumacher, Bender80, xor, Christina S., Uwe"
+            android:title="German"
             />
 
         <Preference
-            android:title="Greek"
-            android:editable="false"
             android:defaultValue="0"
+            android:editable="false"
             android:summary="Nik Chris, Serafim, Lucas"
+            android:title="Greek"
             />
 
         <Preference
-            android:title="Hebrew"
-            android:editable="false"
             android:defaultValue="0"
+            android:editable="false"
             android:summary="Zag Z., Dimiav"
+            android:title="Hebrew"
             />
 
         <Preference
-            android:title="Hungarian"
-            android:editable="false"
             android:defaultValue="0"
+            android:editable="false"
             android:summary="Zoltan Toldy"
+            android:title="Hungarian"
             />
 
         <Preference
-            android:title="Indonesian"
-            android:editable="false"
             android:defaultValue="0"
+            android:editable="false"
             android:summary="Sandivisi Aditya, setiawanjimmy, anang"
+            android:title="Indonesian"
             />
 
         <Preference
-            android:title="Italian"
-            android:editable="false"
             android:defaultValue="0"
+            android:editable="false"
             android:summary="Roberto Fabrizi, Marco, Nico Caprioli, ManuelDG, Ilario"
+            android:title="Italian"
             />
 
         <Preference
-            android:title="Japanese"
-            android:editable="false"
             android:defaultValue="0"
+            android:editable="false"
             android:summary="RyokoN (@WedyDQ10), anonymous"
+            android:title="Japanese"
             />
 
         <Preference
-            android:title="Korean"
-            android:editable="false"
             android:defaultValue="0"
+            android:editable="false"
             android:summary="wolfwork, eric cho"
+            android:title="Korean"
             />
 
         <Preference
-            android:title="Malay"
-            android:editable="false"
             android:defaultValue="0"
+            android:editable="false"
             android:summary="Celestial Fury, Justin Alex"
+            android:title="Malay"
             />
 
         <Preference
-            android:title="Polish"
-            android:editable="false"
             android:defaultValue="0"
+            android:editable="false"
             android:summary="Piotr Sęk(mosespl), Patryk"
+            android:title="Polish"
             />
 
         <Preference
-            android:title="Portuguese"
-            android:editable="false"
             android:defaultValue="0"
+            android:editable="false"
             android:summary="Luís FL, Gabriel Soldani, Adonis Batista da Silva"
+            android:title="Portuguese"
             />
 
         <Preference
-            android:title="Romanian"
-            android:editable="false"
             android:defaultValue="0"
+            android:editable="false"
             android:summary="1ceb0x"
+            android:title="Romanian"
             />
 
         <Preference
-            android:title="Russian"
-            android:editable="false"
             android:defaultValue="0"
+            android:editable="false"
             android:summary="DumF0rGaming, Dmitriy Briskin, Ilya, VALVIX, Alex Kudinov"
+            android:title="Russian"
             />
 
         <Preference
-            android:title="Spanish"
-            android:editable="false"
             android:defaultValue="0"
+            android:editable="false"
             android:summary="Ignacio, Sergio Castell, nbivan, Carlos Bojorges, Luis FL, Víctor M., kevin, Zave Peck, David, Daniel, pedrazadixon, Fabián Rojas, Marco Vasquez, ARMANDROID, Gabriel Soldani, Ignacio, Ugur Can, Abraham, Ruben Oliver"
+            android:title="Spanish"
             />
 
         <Preference
-            android:title="Turkish"
-            android:editable="false"
             android:defaultValue="0"
+            android:editable="false"
             android:summary="Eray Çetin, predator_395, Ugur Can, Furkan"
+            android:title="Turkish"
             />
 
     </PreferenceCategory>
