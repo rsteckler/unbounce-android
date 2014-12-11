@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="app_name">"Amplify"</string>
+<string name="version">"Verzió"</string>
+<string name="title_activity_material_settings">"Akksi kímélés (Amplify)"</string>
+<string name="title_home">"Kezdőképernyő"</string>
+<string name="title_wakelocks">"Ébrentartások (Wakelocks)"</string>
+<string name="title_alarms">"Ébresztések (Alarms)"</string>
+<string name="navigation_drawer_open">"Alkalmazás lista megnyitása"</string>
+<string name="navigation_drawer_close">"Alkalmazás lista bezárása"</string>
+<string name="action_search">"Keresés"</string>
+<string name="action_sort_by_count">"Rendezés darabszám szerint"</string>
+<string name="action_sort_by_time">"Rendezés idő szerint"</string>
+<string name="action_settings">"Beállítások"</string>
+<string name="action_reset_stats">"Statisztikák törlése"</string>
+<string name="card_donate_title">"KARMA"</string>
+<string name="card_donate_subtitle">"Támogatsd a fejlesztőt"</string>
+<string name="card_global_title">"GLOBÁLIS STATISZTIKÁK"</string>
+<string name="card_global_subtitle">"Összesített statisztikák"</string>
+<string name="card_local_title">"KÉSZÜLÉK STATISZTIKÁK"</string>
+<string name="card_local_subtitle">"Saját adatok"</string>
+<string name="card_settings_title">"BEÁLLÍTÁSOK"</string>
+<string name="card_settings_subtitle_alarm">"Ébresztés szabályozása"</string>
+<string name="card_settings_subtitle_wakelock">"Ébrentartás szabályozása"</string>
+<string name="card_description_title">"LEÍRÁS"</string>
+<string name="card_description_subtitle">"Miért meríti az akkut ez a folyamat?"</string>
+<string name="category_unbounced">"Korlátozottan szabályozható"</string>
+<string name="category_safe">"Biztonságosan szabályozható"</string>
+<string name="category_unknown">"Ismeretlen"</string>
+<string name="category_not_safe">"Nem biztonságos szabáyozni"</string>
+<string name="category_error">"Hiba"</string>
+<string name="alert_noiab_title">"A Pro funkciók nem elérhetőek"</string>
+<string name="alert_noiab_content">"A készüléked nem támogatja az alkalmazáson belüli vásárlást. Így nem tudod megvásárolni az Amplify Pro funkcióit. Lehet, hogy olyan országban élsz, ahol ez nem támogatott vagy frissítened kell a Google Play alkalmazást."</string>
+<string name="dialog_ok">"OK"</string>
+<string name="tasker_on">"Be"</string>
+<string name="tasker_off">"Ki"</string>
+<string name="tasker_reset_stats">"Statisztikák törlése"</string>
+<string name="tasker_choose_wakelock">"Választd ki a szabályozni kívánt ébrentartást."</string>
+<string name="tasker_choose_alarm">"Választd ki a szabályozni kívánt ébrentartást."</string>
+<string name="tasker_welcome">"Üdvözöllek az Amplify Tasker beépülőben."</string>
+<string name="tasker_which_task">"Szeretnél változtatni egy ébrentartás vagy ébresztés beállításain, vagy a készülék statisztikákat szeretnéd nullázni?"</string>
+<string name="tasker_task_wakelock">"ÉBRENTARTÁS MÓDOSÍTÁSA"</string>
+<string name="tasker_task_alarm">"RIASZTÁS SZABÁLYOZÁSA"</string>
+<string name="tasker_task_reset">"STATISZTKA TÖRLÉSE"</string>
+<string name="alert_nopro_title">"Ez egy Pro funkció"</string>
+<string name="alert_nopro_content">"A nem szabványos wakelock és riasztás szabályozásához a támogatói verzió szükséges."</string>
+<string name="alert_unknown_alarm_title">"Szabályozni szeretnéd az ismeretlen riasztási folyamatot?"</string>
+<string name="alert_unknown_alarm_content">"A riasztás szabályozása nem biztonságos. Biztosan szabályozni szeretnéd?"</string>
+<string name="dialog_unbounce">"SZABÁLYOZÁS"</string>
+<string name="dialog_cancel">"MÉGSE"</string>
+<string name="tasker_choose_settings">"Válaszd ki a kívánt beállításokat."</string>
+<string name="alert_unknown_wakelock_title">"Szabályozni szerentéd az ismeretlen wakelock-ot?"</string>
+<string name="alert_unknown_wakelock_content">"A wakelock szabályozása biztonságos. Biztosan szabályozni szeretnéd?"</string>
+<string name="dialog_delete">"TÖRLÉS"</string>
+<string name="alert_delete_stats_title">"Törlöd az összes statisztikát?"</string>
+<string name="alert_delete_stats_content">"Ez nullázni fogja az összes wakelock és riasztás statisztikát!"</string>
+<string name="title_settings">"Beállítások"</string>
+<string name="alert_reset_settings_title">"Visszaállítod az alapértékeket?"</string>
+<string name="alert_reset_settings_content">"Ez visszaállítja az összes riasztás és wakelock értékét a gyári értékre!"</string>
+<string name="alert_disable_service_blocking_title">"Letiltsuk a Szolgáltatás Blokkolást?"</string>
+<string name="alert_disable_service_blocking_content">"Le fogja tiltani a szolgáltatás blokkolást, kérlek indítsd újra a készüléked a változtatás után."</string>
+<string name="dialog_reset">"VISSZAÁLLÍTÁS"</string>
+<string name="reset_settings_confirmation">"A beállítások visszaállításra kerültek."</string>
+<string name="dialog_save">"MENTÉS"</string>
+<string name="desc_unknown">"Erről az eseményről még nem rendelkezünk elég információval.Lehetséges, hogy ennek a korlátozása nem biztonságos. Csak akkor módosítsd az értéket, ha tudod mit csinálsz és hiba esetén le tudod tiltani az Xposed keretrendszert. Folyamatosan dolgozunk a jelentősebb ébrentartási és ébresztési események információinak megszerzésén. Kérlek legyél türelmes, amíg ezeket az információkat begyűjtjük."</string>
+<string name="desc_nlpwakelock">"Az NlpWakeLock biztonságosan szabályozható. Ezt a Google Play szolgáltatások használja a helymeghatározáshoz, felhasználva a környező WiFi és cellaadatokat. Ha meghatározásra került a helyzeted, akkor ez tárolásra kerül a készüléken, így az olyan alkalmazások, mint a Google Now hozzáférhetnek a helyadatokhoz a GPS használata vagy a GPS általi pozíció újbóli fixálása nélkül. Az ajánlott érték 180 és 600 másodperc között van."</string>
+<string name="desc_nlpcollectorwakelock">"NlpCollectorWakeLock biztonságosan állítható. Ezt a Google Play szolgáltatások használja a helymeghatározáshoz, felhasználva a környező WiFi és cellaadatokat. Ha meghatározásra került a helyzeted, akkor az adatok elküldésre kerülnek a Google részére, hogy a WiFi adatbázisukat bővíteni tudják. Az ajánlott érték 180 és 600 másodperc között van."</string>
+<string name="desc_alarmmanager">"Hozzáférést biztosít a rendszer riasztási szolgáltatásaihoz.Amikor egy ébresztés végbemegy, az üzenet, ami emiatt jön létre és a rendszer közvetíti, automatikusan elindítja a cél alkalmazást. A regisztrált ébresztések akkor is megmaradnak, ha a készülék alvó módba kerül (és opcionálisan fel is kelthetik a készüléket, ha a riasztás ez idő alatt következik be), de a készülék újraindítását követően ezek törlődnek."</string>
+<string name="desc_audiooffload">"Háttérzene kikapcsolt képernyőnél. Ha letiltod, akkor kikapcsolt képernyőnél nem fog működni a háttérzene és más audió sem."</string>
+<string name="desc_activitymanagerlauncher">"Kapcsolatban van az összes rendszerszintű tevékenységgel. Ha szabályzod, semmi sem fog megfelelően működni."</string>
+<string name="desc_windowmanager">"Ez egy rendszerszintű ébrentartás. Ezen keresztül kommunikál az alkalmazás az ablakkezelővel. A jelentősége az, hogy az alkalmazásoknak mindig szüksége van a WindowManager ébrentartásra, amikor a képernyőn akarnak megjelenni."</string>
+<string name="desc_rilj">"A RILJ ébren tartja a készüléket például telefonhívás vagy adótornyokkal történő kommunikáció közben."</string>
+<string name="desc_syncloopwakelock">"Ez az Android SyncManager által használt ébrentartás a különböző fiókok szinkronizálásához, úgy mint Google+, Twitter, Linkedin, Gmail stb. Minél nagyobb az érték, annál hosszabb idő telik el két szinkronizálás között."</string>
+<string name="desc_icing">"Az ICING egy Google szolgáltatás ébrentartás. Jelenleg keressük a további információkat ezzel kapcsolatban."</string>
+<string name="desc_startingalertservice">"Ez az ébrentartás a naptárral és más üzenetküldő alkalmazásokkal van összefüggésben. Ha a naptárban figyelmeztetés/riasztás található, akkor az befolyással van erre az ébrentartásra."</string>
+<string name="desc_audiomix">"Ez az ébrentartás kezeli többek között az érintési és a figyelmeztetési hangokat. Néha akkor is járatja a készüléket, ha az érintési hangok ki vannak kapcsolva."</string>
+<string name="desc_locationmanagerservice">"Ahogy a neve is mutatja (helyzetmeghatározási szolgáltatás). Nem meríti különösebben a készüléket annak ellenére, hogy nagy wakelock értékkel rendelkezik."</string>
+<string name="desc_audioin">"Ez az ébrentartási művelet végzi a készülék ébrentartását Google keresés/Kulcsszó felismerés során. Pl.: Okay, Google"</string>
+<string name="desc_nfcservicemroutingwakelock">"Az NFC szolgáltatással kapcsolatos, az észlelt címkék (tags) megfelelő alkalmazáshoz való irányításához."</string>
+<string name="desc_wakefulintentservicegcoreulrlocationreportingservice">"A Google helymeghatározó szolgáltatás használja a helyzeted jelentésére."</string>
+<string name="desc_vzwgpslocationprovider">"Verizon specifikus helymeghatározó szolgáltatás az adótornyok statisztikájához."</string>
+<string name="desc_hangouts_rtcs">"Google Hangouts. Ha szabályzod, akkor a Hangouts nem fog működni."</string>
+<string name="desc_gcm_conn">"Google Felhőalapú üzenetküldés. Kisméretű üzeneteket küld az alkalmazásoknak. Ez felelős a push üzenetek küldéséért minden alkalmazás számára."</string>
+<string name="desc_google_c2dm">"A C2DM (Üzenetküldés Felhőből a Készülékre) egy olyan szolgáltatás, amely segít a fejlesztőknek, hogy adatokat küldhessenek az alkalmazásaikon keresztül. Egy olyan mechanizmust tartalmaz, amivel a szerverek értesíthetik az alkalmazásokat, hogy azok kapcsolódjanak a szerverhez alkalmazás frissítés vagy felhasználói adat letöltés miatt. A C2DM szolgáltatás kezeli az üzenetek sorba rendezését és kézbesítését a célzott készülékeken futó célzott alkalmazások részére. Ez a szolgáltatás 2012 óta elavult, de néhány alkalmazás még mindig ezt használja az újabb és fejletteb GCM szolgáltatás helyett."</string>
+<string name="desc_timedeventqueue">"Az Android rendszer szerves része, ezért jobb nem piszkálni. A bejövő eseményeket ütemezi."</string>
+<string name="desc_comgoogleandroidgmsnlpalarm_wakeup_locator">"Ez az ébresztés biztonságosan állítható. Ezt a Google Play szolgáltatások használja a helymeghatározáshoz, felhasználva a környező WiFi és cellaadatokat. Ha meghatározásra került a helyzeted, akkor ez tárolásra kerül a készüléken, így az olyan alkalmazások, mint a Google Now hozzáférhetnek a helyadatokhoz a GPS használata vagy a GPS általi pozíció újbóli fixálása nélkül. Az ajánlott érték 180 és 600 másodperc között van."</string>
+<string name="desc_comgoogleandroidgmsnlpalarm_wakeup_activity_detection">"Ez az ébresztés biztonságosan állítható. Ezt a Google Play szolgáltatások használja a helymeghatározáshoz, felhasználva a környező WiFi és cellaadatokat. Ha meghatározásra került a helyzeted, akkor az adatok elküldésre kerülnek a Google részére, hogy a WiFi adatbázisukat bővíteni tudják. Az ajánlott érték 180 és 600 másodperc között van."</string>
+<string name="desc_comgoogleandroidappshangoutsupdate_notification">"A Google Hangouts értesítések frissítéséért felelős."</string>
+<string name="desc_comandroidinternaltelephonydatastall">"Ez a com.android.phone (Tárcsázó app)-hoz tartozó ébrentartás, ami akkor van használatban, ha adótornyon keresztüli adatmozgás következik be. A WiFi használata nem indítja el ezt az ébrentartást. Tipikusan akkor ér el magas értéket, ha középszerű kapcsolatokon keresztül történik adatcsere."</string>
+<string name="settings_allow_every">"Engedélyezés"</string>
+<string name="settings_seconds">"másodpercenként"</string>
+<string name="card_button_reset">"VISSZAÁLLÍTÁS"</string>
+<string name="stat_alarms_acquired">"Bekövetkezett ébresztések"</string>
+<string name="stat_alarms_blocked">"Blokkolt ébresztések"</string>
+<string name="stat_loading">"Betöltés..."</string>
+<string name="stat_collected_for">"Adatgyűjtés ehhez"</string>
+<string name="stat_wake_duration_allowed">"Engedélyezett ébrentartás ideje"</string>
+<string name="stat_wake_duration_blocked">"Blokkolt ébrentartás ideje"</string>
+<string name="stat_wake_allowed">"Bekövetkezett ébrentartások"</string>
+<string name="stat_wake_blocked">"Blokkolt ébrentartások"</string>
+<string name="stat_alarm_allowed">"Engedélyezett ébresztések"</string>
+<string name="stat_alarm_blocked">"Blokkolt ébresztések"</string>
+<string name="stat_disabled">"Letiltva"</string>
+<string name="donate_text">"Ennek az alkalmazásnak a segítségével a Network Location Provider üzemidőgyilkos folyamatait tudod ingyenesen szabályozni. Ha más ébrentartást és ébresztést is korlátozni szeretnél, Pro verzióra kell frissítened, melyet a projekt lenti támogatásával érhetsz el. Bármekkora összeg feloldja a Pro funkciókat."</string>
+<string name="donate_1">"Egy csésze kávé, mialatt a programkódot írom"</string>
+<string name="donate_5">"Egy latte, amíg fórum kérdésekre válaszolok"</string>
+<string name="donate_10">"Az érzés, hogy nem kell cipelned a töltődet"</string>
+<string name="donate_thank_you">"Köszönöm a támogatást. Ez sokat jelent számomra. Keményen dolgozom a szabadidőmben, hogy jobb üzemidőt tudjak biztosítani számodra. A támogatásoddal előrelendíted a projektet és változást idézel elő a családi életemben. Szuper vagy!"</string>
+<string name="donate_more_button">"HOGYAN TUDNÉK TOVÁBB SEGÍTENI?"</string>
+<string name="donate_more_text">"Az emberek gyakran kérdezik, hogy hogyan tudnának a kezdeti támogatáson felül hozzájárulni a program fejlesztéséhez. A lenti gombbal lehetőséged van további támogatást küldeni, de ez nem jár további előnyökkel. Nagyon szépen köszönöm, hogy támogatod az Amplify fejlesztését!"</string>
+<string name="welcome_banner_title">"Nézzük meg, hogy minden beállításra került-e."</string>
+<string name="welcome_banner_text">"Blokkolhatsz ébrentartásokat, hogy megállítsd a telefonod ébren maradását, és blokkolhatsz ébresztéseket, hogy mindezekelőtt megakadályozd a készüléked felébresztését. Már be is állítottunk neked néhány akkumulátor kímélő értéket."</string>
+<string name="settings_category_options">"Beállítások"</string>
+<string name="settings_item_show_launcher">"Indítóikon megjelenítése"</string>
+<string name="settings_item_choose_theme">"Válassz kinézetet"</string>
+<string name="settings_item_global_stats_title">"Részvétel a statisztikában"</string>
+<string name="settings_item_global_stats_summary">"Névtelen statisztikák küldése és fogadása"</string>
+<string name="settings_item_enable_service_block">"Szolgáltatás Blokkolás"</string>
+<string name="settings_item_enable_service_block_summery">"Szolgáltatás Blokkolás engedélyezése/tiltása. Kérlek indítsd újra a készüléked a változtatás után."</string>
+<string name="settings_item_reset_defaults_title">"Alapértelmezések visszaállítása"</string>
+<string name="settings_item_reset_defaults_summary">"Összes ébresztés és ébrentartás visszaállítása gyári értékre"</string>
+<string name="settings_category_debug">"Hibanapló"</string>
+<string name="settings_item_author">"Készítő: Ryan Steckler"</string>
+<string name="settings_item_logging_level">"Naplózás szintje"</string>
+<string name="settings_category_translation">"Fordítók listája"</string>
+<string name="settings_theme_material">"Material"</string>
+<string name="settings_theme_dark">"Sötét"</string>
+<string name="settings_logging_quiet">"Csendes"</string>
+<string name="settings_logging_default">"Alapértelmezett"</string>
+<string name="settings_logging_verbose">"Részletes"</string>
+<string name="settings_item_force_english_title">"Angol kényszerítése"</string>
+<string name="settings_item_force_english_summary">"Angol lokalicázió használata a területi beállításaid felülbírálásával."</string>
+<string name="playstore_short_description">"Üzemidőt az embereknek!"</string>
+<string name="playstore_long_description">"
+Idézetek valós felhasználóktól:
+
+Plusz két óra használati- és 30 perc kijelzőidőt eredményezett a számomra. Egy 25 dolláros akkumulátor vásárlástól is megmentett.
+Éppen most adományoztam 5 dollárt ennek a mesterműnek a támogatásához... További jó munkát
+Egyszerűen elképesztő
+Az Amplify egyszerűen szólva forradalmasította az ébrentartás kezelés valódi értelmét.
+Ez a modul félelmetes! Kevesebb, mint fél százalék akkumulátor használatot eredményezett óránként készenléti állapotban.
+
+...és még több.
+
+Az Amplify a kezedbe adja a készüléked akkumulátor használatának az irányítását azáltal, hogy Te felügyelheted azt, hogy milyen gyakran ébredhet fel és milyen hosszan maradhat ébren a készüléked. Használd a javasolt beállításokat az egyszerű akkumulátor spóroláshoz, vagy áss mélyebbre és szabd testre a készüléked összes ébresztését és ébrentartását.
+Itt van néhány részlet:
+- Gyönyörű felület, a Materail Design által inspirálva
+- Stabil blokkoló motor
+- Átfogó mérési lehetőség az ébresztések és ébrentartások általi elvesztegetett és megtakarított időt tekintve
+- Folyamatosan bővülő lista az ébresztések és ébrentartások leírásáról egyszerűen és érthetően angolul (és hamarosan további nyelveken is)
+- Új Pro csomag, ami lehetővé teszi bármely ébresztés és ébrentartás szabályozását és korlátozását bármilyen készüléken
+- Nyílt forráskódú fejlesztés, így láthatod, hogyan is működik az alkalmazás, vagy akár felépítheted a kódot Te is
+
+Az alkalmazáson belüli vásárlás feloldja a Pro csomagot, ami lehetővé teszi az ébresztések és ébrentartások testreszabását a készülékeden. A Pro csomag nélkül csak a következő, legrosszabb akkumulátor túlhasználókat felügyelheted: NlpWakelock, NlpCollectorWakeLock, ALARM_WAKEUP_LOCATOR, és ALARM_WAKE_ACTIVITY_DETECTION.
+
+Legyen hosszú (akkumulátor) életed!"</string>
+<string name="welcome_banner_welcome">"Üdvözöllek!"</string>
+<string name="welcome_banner_checking_service">"Amplify ellenőrzése..."</string>
+<string name="welcome_banner_checking_xposed">"Xposed ellenőrzése..."</string>
+<string name="welcome_banner_checking_root">"Root hozzáférés ellenőrzése..."</string>
+<string name="welcome_banner_checking_looks_great">"Minden jónak tűnik!"</string>
+<string name="welcome_banner_checking_uhoh">"Valami hiba történt. Derítsük ki a problémát és javítsuk ki..."</string>
+<string name="welcome_banner_problem_none">"Néhány akkukímélő beállítást elvégeztünk. Élvezd a hosszabb üzemidőt!"</string>
+<string name="welcome_banner_problem_service">"Úgy tűnik az Amplify modul nincs engedélyezve. Kattints a \"Javítás\" opcióra, engedélyezd a modult és indítsd újra a készüléket."</string>
+<string name="welcome_banner_problem_version">"Úgy tűnik, hogy éppen frissítetted az Amplify-t, de nem indítottad újra a készüléked. Kattints a JAVÍTÁS-ra, majd indítsd újra a készüléked."</string>
+<string name="welcome_banner_problem_xposed_running">"Az Xposed nem fut. Kattints a \"Javítás\" opcióra, majd a \"Telepítés/Frissítés\" gombra és indítsd újra a készüléket."</string>
+<string name="welcome_banner_problem_xposed_installed">"Az Xposed nincs telepítve. Ez szükséges az Amplify és több más root alkalmazáshoz is. Ha a letöltés befejeződött, kattints a \"Telepítés\" gombra, majd indítsd újra az Amplify-t. További info az Xposed keretrendszerről itt: %1$s."</string>
+<string name="welcome_banner_problem_root">"Úgy tűnik, hogy a készüléked nem root-olt. Az Amplify megfelelő működéséhez root szükséges. Ha rootolni szeretnéd a készüléked, látogass el ide: %1$s."</string>
+<string name="welcome_banner_button_next">"Következő"</string>
+<string name="welcome_banner_button_fixit">"JAVÍTÁS"</string>
+<string name="welcome_banner_button_exit">"KILÉPÉS"</string>
+<string name="welcome_banner_button_install">"TELEPÍTÉS"</string>
+<string name="welcome_downloading_xposed">"Xposed letöltése..."</string>
+<string name="welcome_downloaded_xposed">"Letöltés kész."</string>
+<string name="welcome_download_error_xposed">"Letöltés sikertelen. Később próbáld újra."</string>
+<string name="download_xposed_title">"Xposed letöltése"</string>
+<string name="download_xposed_description">"Az Amplify működéséhez szükséges"</string>
+<string name="requires_root">"*** Root-olt eszköz szükséges ***"</string>
+<string name="installs_xposed">"Az Amplify használatához Xposed keretrendszer szükséges. Ha nincs telepítve, akkor az Amplify telepíteni fogja."</string>
+<string name="settings_category_code_credits">"Fejlesztők listája"</string>
+<string name="title_services">"Szolgáltatások"</string>
+<string name="action_sort_by_alpha">"Rendezés betűrend szerint"</string>
+<string name="action_sort_by_package">"Rendezés csomag név szerint"</string>
+<string name="card_settings_subtitle_service">"Szolgáltatás szabályozása"</string>
+<string name="tasker_choose_service">"Választd ki a szabályozni kívánt szolgáltatást."</string>
+<string name="alert_unknown_service_title">"Szabályozni szeretnéd az ismeretlen szolgáltatást?"</string>
+<string name="alert_unknown_service_content">"Nem bizonyított, hogy ez a szolgáltatás biztonsággal korlátozható. Szeretnéd ettől függetlenül szabályozni?"</string>
+<string name="stat_service_allowed">"Szolgáltatások elindítva"</string>
+<string name="stat_service_blocked">"Szolgáltatások blokkolva"</string>
+<string name="service_switch_allow">"Engedélyez"</string>
+<string name="service_switch_deny">"Letilt"</string>
+</resources>
