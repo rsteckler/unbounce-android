@@ -26,6 +26,7 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
+import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import de.robv.android.xposed.callbacks.XC_LoadPackage.LoadPackageParam;
 
 import static de.robv.android.xposed.XposedHelpers.callMethod;
@@ -38,7 +39,6 @@ public class Wakelocks implements IXposedHookLoadPackage {
     public static final String FILE_VERSION = "3"; //This needs to be pulled from the manifest or gradle build.
     private HashMap<String, Long> mLastWakelockAttempts = null; //The last time each wakelock was allowed.
     private HashMap<String, Long> mLastAlarmAttempts = null; //The last time each alarm was allowed.
-//    private HashMap<String, Long> mLastServiceAttempts = null; //The last time each wakelock was allowed.
 
     private long mLastUpdateStats = 0;
     private long mUpdateStatsFrequency = 300000; //Save every five minutes
@@ -50,7 +50,6 @@ public class Wakelocks implements IXposedHookLoadPackage {
 
     XSharedPreferences m_prefs;
     public static HashMap<IBinder, InterimEvent> mCurrentWakeLocks;
-//    public static HashMap<String, InterimEvent> mCurrentServices;
 
     @Override
     public void handleLoadPackage(LoadPackageParam lpparam) throws Throwable {
@@ -63,10 +62,8 @@ public class Wakelocks implements IXposedHookLoadPackage {
             defaultLog("Version " + VERSION);
 
             mCurrentWakeLocks = new HashMap<IBinder, InterimEvent>();
-//            mCurrentServices = new HashMap<String, InterimEvent>();
             mLastWakelockAttempts = new HashMap<String, Long>();
             mLastAlarmAttempts = new HashMap<String, Long>();
-//            mLastServiceAttempts = new HashMap<String, Long>();
 
             hookAlarms(lpparam);
             hookWakeLocks(lpparam);
@@ -90,7 +87,6 @@ public class Wakelocks implements IXposedHookLoadPackage {
                 } catch (IllegalStateException ise) {
                 }
             }
-//            UnbounceStatsCollection.getInstance().resetLocalStats(UnbounceStatsCollection.STAT_CURRENT);
         }
     }
 
@@ -148,8 +144,14 @@ public class Wakelocks implements IXposedHookLoadPackage {
 
     private void hookWakeLocks(LoadPackageParam lpparam) {
         boolean wakeLocksHooked = false;
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            //Try for wakelock hooks for API levels 19-20
+            defaultLog("Attempting 21 WakeLockHook");
+            try21WakeLockHook(lpparam);
+            defaultLog("Successful 21 WakeLockHook");
+            wakeLocksHooked = true;
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT &&
+                Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             //Try for wakelock hooks for API levels 19-20
             defaultLog("Attempting 19to20 WakeLockHook");
             try19To20WakeLockHook(lpparam);
@@ -228,15 +230,6 @@ public class Wakelocks implements IXposedHookLoadPackage {
                 }
             });
         }
-
-//        findAndHookMethod("com.android.server.am.ActiveServices", lpparam.classLoader, "stopServiceLocked", "android.app.IApplicationThread", Intent.class, String.class, int.class, new XC_MethodHook() {
-//            @Override
-//            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-//                Intent intent = (Intent) param.args[1];
-//                handleServiceStop(param, intent);
-//            }
-//        });
-
     }
 
     //4.1.2r1 to
@@ -248,15 +241,26 @@ public class Wakelocks implements IXposedHookLoadPackage {
                 handleServiceStart(param, intent);
             }
         });
+    }
 
-//        findAndHookMethod("com.android.server.am.ActiveServices", lpparam.classLoader, "stopServiceLocked", "android.app.IApplicationThread", Intent.class, String.class, int.class, new XC_MethodHook() {
-//            @Override
-//            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-//                Intent intent = (Intent) param.args[1];
-//                handleServiceStop(param, intent);
-//            }
-//        });
+    private void try21WakeLockHook(LoadPackageParam lpparam) {
+        findAndHookMethod("com.android.server.power.PowerManagerService", lpparam.classLoader, "acquireWakeLockInternal", android.os.IBinder.class, int.class, String.class, String.class, android.os.WorkSource.class, String.class, int.class, int.class, new XC_MethodHook() {
+            @Override
+            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                String wakeLockName = (String) param.args[2];
+                IBinder lock = (IBinder) param.args[0];
+                int uId = (Integer) param.args[6];
+                handleWakeLockAcquire(param, wakeLockName, lock, uId);
+            }
+        });
 
+        findAndHookMethod("com.android.server.power.PowerManagerService", lpparam.classLoader, "releaseWakeLockInternal", android.os.IBinder.class, int.class, new XC_MethodHook() {
+            @Override
+            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                IBinder lock = (IBinder) param.args[0];
+                handleWakeLockRelease(param, lock);
+            }
+        });
     }
 
 
