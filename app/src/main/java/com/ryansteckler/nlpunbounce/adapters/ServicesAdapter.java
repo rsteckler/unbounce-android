@@ -15,13 +15,12 @@ import com.ryansteckler.nlpunbounce.models.BaseStats;
 import com.ryansteckler.nlpunbounce.models.ServiceStats;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by rsteckler on 10/21/14.
  */
 public class ServicesAdapter extends BaseAdapter {
-
-    private int mSortBy = SortWakeLocks.SORT_COUNT;
 
     public ServicesAdapter(Context context, ArrayList<BaseStats> serviceStatList) {
         super(context, R.layout.fragment_service_listitem, serviceStatList, "service");
@@ -100,6 +99,7 @@ public class ServicesAdapter extends BaseAdapter {
 
     public void sort(int sortBy, boolean categorize) {
         mSortBy = sortBy;
+        Collections.sort(mBackingList, SortWakeLocks.getBaseListComparator(mSortBy, categorize, this.getContext()));
         sort(SortWakeLocks.getBaseListComparator(mSortBy, categorize,this.getContext()));
         addCategories(mBackingList);
     }

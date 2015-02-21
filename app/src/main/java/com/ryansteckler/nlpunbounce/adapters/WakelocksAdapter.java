@@ -19,15 +19,13 @@ import com.ryansteckler.nlpunbounce.models.EventLookup;
 import com.ryansteckler.nlpunbounce.models.WakelockStats;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 
 /**
  * Created by rsteckler on 9/7/14.
  */
 public class WakelocksAdapter extends BaseAdapter {
-
-    //Track whether we're sorting by count or duration.
-    private int mSortBy = SortWakeLocks.SORT_COUNT;
 
     public WakelocksAdapter(Context context, ArrayList<BaseStats> wakelockStatList) {
         super(context, R.layout.fragment_wakelocks_listitem, wakelockStatList, "wakelock");
@@ -100,6 +98,7 @@ public class WakelocksAdapter extends BaseAdapter {
 
     public void sort(int sortBy, boolean categorize) {
         mSortBy = sortBy;
+        Collections.sort(mBackingList, SortWakeLocks.getBaseListComparator(mSortBy, categorize, this.getContext()));
         sort(SortWakeLocks.getWakelockListComparator(mSortBy, categorize,this.getContext()));
         addCategories(mBackingList);
     }
