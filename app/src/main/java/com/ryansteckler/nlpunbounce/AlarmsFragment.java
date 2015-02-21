@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.SearchView;
 
 import com.ryansteckler.nlpunbounce.adapters.AlarmsAdapter;
 import com.ryansteckler.nlpunbounce.helpers.LogHelper;
@@ -70,9 +71,11 @@ public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         if (mListener != null)
             mListener.onAlarmsSetTitle(getResources().getString(R.string.title_alarms));
 
+        getListView().setTextFilterEnabled(true);
         mAdapter.sort(mSortBy);
 
     }
@@ -80,6 +83,20 @@ public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         getActivity().getMenuInflater().inflate(R.menu.list, menu);
+        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                //Filter the list
+                mAdapter.getFilter().filter(newText);
+                return true;
+            }
+        });
         super.onCreateOptionsMenu(menu, inflater);
     }
 

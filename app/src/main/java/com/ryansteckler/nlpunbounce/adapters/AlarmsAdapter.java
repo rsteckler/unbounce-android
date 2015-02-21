@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -20,14 +22,14 @@ import com.ryansteckler.nlpunbounce.models.WakelockStats;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by rsteckler on 9/7/14.
  */
 public class AlarmsAdapter extends BaseAdapter {
-
-    private int mSortBy = SortWakeLocks.SORT_COUNT;
 
     public AlarmsAdapter(Context context, ArrayList<BaseStats> alarmStatList) {
         super(context, R.layout.fragment_alarms_listitem, alarmStatList, "alarm");
@@ -108,13 +110,12 @@ public class AlarmsAdapter extends BaseAdapter {
 
     public void sort(int sortBy, boolean categorize) {
         mSortBy = sortBy;
-        sort(SortWakeLocks.getBaseListComparator(mSortBy, categorize,this.getContext()));
+        Collections.sort(mBackingList, SortWakeLocks.getBaseListComparator(mSortBy, categorize, this.getContext()));
+        sort(SortWakeLocks.getBaseListComparator(mSortBy, categorize, this.getContext()));
         addCategories(mBackingList);
     }
 
     public void sort(int sortBy) {
         sort(sortBy, true);
     }
-
-
 }

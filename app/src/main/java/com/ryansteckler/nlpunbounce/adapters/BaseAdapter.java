@@ -6,15 +6,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Filter;
 import android.widget.TextView;
 
 import com.ryansteckler.nlpunbounce.R;
+import com.ryansteckler.nlpunbounce.helpers.SortWakeLocks;
 import com.ryansteckler.nlpunbounce.helpers.ThemeHelper;
+import com.ryansteckler.nlpunbounce.models.AlarmStats;
 import com.ryansteckler.nlpunbounce.models.BaseStats;
 import com.ryansteckler.nlpunbounce.models.EventLookup;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by rsteckler on 10/21/14.
@@ -34,14 +38,28 @@ public abstract class BaseAdapter extends ArrayAdapter {
     protected final static int CATEGORY_TYPE = 1;
 
     protected ArrayList<BaseStats> mBackingList = null;
+    protected ArrayList<BaseStats> originalList;
+
+    //Track whether we're sorting by count or duration.
+    protected int mSortBy = SortWakeLocks.SORT_COUNT;
 
     //protected Map<String, List<BaseStats>> mapPackageIndexMap = new HashMap<String, List<BaseStats>>();
 
+    @Override
+    public int getPosition(Object item) {
+        return mBackingList.indexOf(item);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
 
     public BaseAdapter(Context context, int layoutId, ArrayList<BaseStats> baseStatList, String prefix) {
         super(context, layoutId, baseStatList);
         mPrefix = prefix;
         mBackingList = baseStatList;
+        originalList = new ArrayList<>(baseStatList);
         calculateScale(context, baseStatList);
         addCategories(mBackingList);
         //addPackgeBasedCategories(mBackingList);
@@ -104,7 +122,7 @@ public abstract class BaseAdapter extends ArrayAdapter {
 
     @Override
     public int getCount() {
-        return super.getCount() + 4; //4 categories
+        return mBackingList.size() + 4; //4 categories
     }
 
     @Override
@@ -119,7 +137,7 @@ public abstract class BaseAdapter extends ArrayAdapter {
         if (position > mCategoryUnsafeIndex)
             newPosition--;
 
-        return super.getItem(newPosition);
+        return mBackingList.get(newPosition);
     }
 
     @Override
@@ -199,17 +217,39 @@ public abstract class BaseAdapter extends ArrayAdapter {
         }
     }
 
-    /*protected void addPackgeBasedCategories(ArrayList<BaseStats> alarmStatList) {
-        for (BaseStats curStat : alarmStatList) {
-            List curStatsList = mapPackageIndexMap.get(curStat.getDerivedPackageName(this.getContext()));
-            if (null != curStatsList) {
-                curStatsList.add(curStat);
-                mapPackageIndexMap.put(curStat.getDerivedPackageName(this.getContext()),curStatsList);
-            } else {
-                List<BaseStats> tempBaseStatsList = new ArrayList<BaseStats>();
-                tempBaseStatsList.add(curStat);
-                mapPackageIndexMap.put(curStat.getDerivedPackageName(this.getContext()), tempBaseStatsList);
+    protected abstract void sort(int sortBy, boolean categorize);
+
+        @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @SuppressWarnings("unchecked")
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                mBackingList = (ArrayList<BaseStats>) results.values;
+                sort(mSortBy, true);
+                notifyDataSetChanged();
+            }
+
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                FilterResults results = new FilterResults();
+                List<BaseStats> filteredResults = getFilteredResults(constraint);
+
+                results.values = filteredResults;
+
+                return results;
+            }
+        };
+    }
+
+    private List<BaseStats> getFilteredResults(CharSequence constraint) {
+        ArrayList<BaseStats> filteredList = new ArrayList<>();
+        for (BaseStats curAlarm : originalList) {
+            if (curAlarm.getName().toLowerCase().contains(constraint.toString().toLowerCase())) {
+                filteredList.add(curAlarm);
             }
         }
-    }*/
+        return filteredList;
+    }
+
 }
