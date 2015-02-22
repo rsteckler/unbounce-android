@@ -41,7 +41,7 @@ public class TaskerActivity extends Activity
     public static final String BUNDLE_ENABLED = "enabled";
     IabHelper mHelper;
 
-    private boolean mIsPremium = false;
+    private boolean mIsPremium = true;
 
     Fragment mCurrentFragment = null;
 
