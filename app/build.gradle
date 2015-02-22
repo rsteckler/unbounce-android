@@ -6,23 +6,23 @@ buildscript {
         maven { url 'http://repo1.maven.org/maven2' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.0.0-rc1'
+        classpath 'com.android.tools.build:gradle:1.0.0'
     }
 }
 
 android {
-    compileSdkVersion 20
-    buildToolsVersion '20.0.0'
+    compileSdkVersion 21
+    buildToolsVersion '21.1.2'
     defaultConfig {
         applicationId 'com.ryansteckler.nlpunbounce'
         minSdkVersion 16
-        targetSdkVersion 20
-        versionCode 44
-        versionName '2.0.7'
+        targetSdkVersion 21
+        versionCode 51
+        versionName '3.0.1'
     }
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

@@ -1,19 +1,26 @@
 package com.ryansteckler.nlpunbounce.adapters;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ryansteckler.nlpunbounce.R;
 import com.ryansteckler.nlpunbounce.helpers.SortWakeLocks;
+import com.ryansteckler.nlpunbounce.helpers.ThemeHelper;
 import com.ryansteckler.nlpunbounce.models.AlarmStats;
 import com.ryansteckler.nlpunbounce.models.BaseStats;
+import com.ryansteckler.nlpunbounce.models.EventLookup;
+import com.ryansteckler.nlpunbounce.models.WakelockStats;
+
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Created by rsteckler on 9/7/14.

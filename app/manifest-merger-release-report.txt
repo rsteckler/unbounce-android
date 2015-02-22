@@ -1,0 +1,171 @@
+-- Merging decision tree log ---
+manifest
+ADDED from AndroidManifest.xml:2:1
+	package
+		ADDED from AndroidManifest.xml:3:5
+		INJECTED from AndroidManifest.xml:0:0
+		INJECTED from AndroidManifest.xml:0:0
+	android:versionName
+		INJECTED from AndroidManifest.xml:0:0
+		INJECTED from AndroidManifest.xml:0:0
+	xmlns:android
+		ADDED from AndroidManifest.xml:2:11
+	android:versionCode
+		INJECTED from AndroidManifest.xml:0:0
+		INJECTED from AndroidManifest.xml:0:0
+	android:installLocation
+		ADDED from AndroidManifest.xml:4:5
+uses-permission#com.android.vending.BILLING
+ADDED from AndroidManifest.xml:6:5
+	android:name
+		ADDED from AndroidManifest.xml:6:22
+uses-permission#android.permission.INTERNET
+ADDED from AndroidManifest.xml:7:5
+	android:name
+		ADDED from AndroidManifest.xml:7:22
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from AndroidManifest.xml:8:5
+	android:name
+		ADDED from AndroidManifest.xml:8:22
+application
+ADDED from AndroidManifest.xml:10:5
+MERGED from com.google.android.gms:play-services:6.5.87:20:5
+MERGED from com.android.support:support-v4:21.0.0:16:5
+	android:label
+		ADDED from AndroidManifest.xml:13:9
+	android:allowBackup
+		ADDED from AndroidManifest.xml:11:9
+	android:icon
+		ADDED from AndroidManifest.xml:12:9
+	android:theme
+		ADDED from AndroidManifest.xml:14:9
+meta-data#xposedmodule
+ADDED from AndroidManifest.xml:15:9
+	android:value
+		ADDED from AndroidManifest.xml:17:13
+	android:name
+		ADDED from AndroidManifest.xml:16:13
+meta-data#xposedminversion
+ADDED from AndroidManifest.xml:18:9
+	android:value
+		ADDED from AndroidManifest.xml:20:13
+	android:name
+		ADDED from AndroidManifest.xml:19:13
+meta-data#xposeddescription
+ADDED from AndroidManifest.xml:21:9
+	android:value
+		ADDED from AndroidManifest.xml:23:13
+	android:name
+		ADDED from AndroidManifest.xml:22:13
+activity#com.ryansteckler.nlpunbounce.SettingsActivity
+ADDED from AndroidManifest.xml:25:9
+	android:label
+		ADDED from AndroidManifest.xml:27:13
+	android:name
+		ADDED from AndroidManifest.xml:26:13
+receiver#com.ryansteckler.nlpunbounce.ActivityReceiver
+ADDED from AndroidManifest.xml:30:9
+	android:enabled
+		ADDED from AndroidManifest.xml:32:13
+	android:exported
+		ADDED from AndroidManifest.xml:33:13
+	android:name
+		ADDED from AndroidManifest.xml:31:13
+intent-filter#com.ryansteckler.nlpunbounce.CREATE_FILES_ACTION+com.ryansteckler.nlpunbounce.PUSH_NETWORK_STATS+com.ryansteckler.nlpunbounce.RESET_FILES_ACTION+com.ryansteckler.nlpunbounce.STATS_REFRESHED_ACTION
+ADDED from AndroidManifest.xml:34:13
+action#com.ryansteckler.nlpunbounce.STATS_REFRESHED_ACTION
+ADDED from AndroidManifest.xml:35:17
+	android:name
+		ADDED from AndroidManifest.xml:35:25
+action#com.ryansteckler.nlpunbounce.CREATE_FILES_ACTION
+ADDED from AndroidManifest.xml:36:17
+	android:name
+		ADDED from AndroidManifest.xml:36:25
+action#com.ryansteckler.nlpunbounce.RESET_FILES_ACTION
+ADDED from AndroidManifest.xml:37:17
+	android:name
+		ADDED from AndroidManifest.xml:37:25
+action#com.ryansteckler.nlpunbounce.PUSH_NETWORK_STATS
+ADDED from AndroidManifest.xml:38:17
+	android:name
+		ADDED from AndroidManifest.xml:38:25
+activity#com.ryansteckler.nlpunbounce.MaterialSettingsActivity
+ADDED from AndroidManifest.xml:43:9
+	android:label
+		ADDED from AndroidManifest.xml:45:13
+	android:name
+		ADDED from AndroidManifest.xml:44:13
+intent-filter#android.intent.action.MAIN+de.robv.android.xposed.category.MODULE_SETTINGS
+ADDED from AndroidManifest.xml:46:13
+action#android.intent.action.MAIN
+ADDED from AndroidManifest.xml:47:17
+	android:name
+		ADDED from AndroidManifest.xml:47:25
+category#de.robv.android.xposed.category.MODULE_SETTINGS
+ADDED from AndroidManifest.xml:49:17
+	android:name
+		ADDED from AndroidManifest.xml:49:27
+activity-alias#com.ryansteckler.nlpunbounce.Settings-Alias
+ADDED from AndroidManifest.xml:53:9
+	android:enabled
+		ADDED from AndroidManifest.xml:55:13
+	android:label
+		ADDED from AndroidManifest.xml:57:13
+	android:targetActivity
+		ADDED from AndroidManifest.xml:58:13
+	android:icon
+		ADDED from AndroidManifest.xml:56:13
+	android:name
+		ADDED from AndroidManifest.xml:54:13
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from AndroidManifest.xml:59:13
+category#android.intent.category.LAUNCHER
+ADDED from AndroidManifest.xml:62:17
+	android:name
+		ADDED from AndroidManifest.xml:62:27
+activity#com.ryansteckler.nlpunbounce.tasker.TaskerActivity
+ADDED from AndroidManifest.xml:66:9
+	android:label
+		ADDED from AndroidManifest.xml:70:13
+	android:exported
+		ADDED from AndroidManifest.xml:68:13
+	android:icon
+		ADDED from AndroidManifest.xml:69:13
+	android:name
+		ADDED from AndroidManifest.xml:67:13
+intent-filter#com.twofortyfouram.locale.intent.action.EDIT_SETTING
+ADDED from AndroidManifest.xml:73:13
+action#com.twofortyfouram.locale.intent.action.EDIT_SETTING
+ADDED from AndroidManifest.xml:74:17
+	android:name
+		ADDED from AndroidManifest.xml:74:25
+receiver#com.ryansteckler.nlpunbounce.tasker.TaskerReceiver
+ADDED from AndroidManifest.xml:78:9
+	android:enabled
+		ADDED from AndroidManifest.xml:80:13
+	android:exported
+		ADDED from AndroidManifest.xml:81:13
+	android:name
+		ADDED from AndroidManifest.xml:79:13
+intent-filter#com.twofortyfouram.locale.intent.action.FIRE_SETTING
+ADDED from AndroidManifest.xml:84:13
+action#com.twofortyfouram.locale.intent.action.FIRE_SETTING
+ADDED from AndroidManifest.xml:85:17
+	android:name
+		ADDED from AndroidManifest.xml:85:25
+uses-sdk
+INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
+MERGED from com.google.android.gms:play-services:6.5.87:18:5
+MERGED from com.android.support:support-v4:21.0.0:15:5
+	android:targetSdkVersion
+		INJECTED from AndroidManifest.xml:0:0
+		INJECTED from AndroidManifest.xml:0:0
+	android:minSdkVersion
+		INJECTED from AndroidManifest.xml:0:0
+		INJECTED from AndroidManifest.xml:0:0
+meta-data#com.google.android.gms.version
+ADDED from com.google.android.gms:play-services:6.5.87:21:9
+	android:value
+		ADDED from com.google.android.gms:play-services:6.5.87:23:13
+	android:name
+		ADDED from com.google.android.gms:play-services:6.5.87:22:13
