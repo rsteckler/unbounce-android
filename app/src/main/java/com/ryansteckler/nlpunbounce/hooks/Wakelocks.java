@@ -65,12 +65,31 @@ public class Wakelocks implements IXposedHookLoadPackage {
             mLastWakelockAttempts = new HashMap<String, Long>();
             mLastAlarmAttempts = new HashMap<String, Long>();
 
+            handleSELinux();
+
             hookAlarms(lpparam);
             hookWakeLocks(lpparam);
             hookServices(lpparam);
             resetFilesIfNeeded(null);
         } else if (lpparam.packageName.equals("com.ryansteckler.nlpunbounce")) {
             hookAmplifyClasses(lpparam);
+        }
+    }
+
+    private void handleSELinux() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Process localProcess = null;
+            String[] conFolder = new String[]{"chcon", "u:object_r:system_data_file:s0 /data/data/com.ryansteckler.nlpunbounce"};
+            String[] conFiles = new String[]{"chcon", "u:object_r:system_data_file:s0 /data/data/com.ryansteckler.nlpunbounce/files"};
+            String[] conNlpFiles = new String[]{"chcon", "u:object_r:system_data_file:s0 /data/data/com.ryansteckler.nlpunbounce/files/nlp*"};
+
+            try {
+                localProcess = Runtime.getRuntime().exec(conFolder);
+                localProcess = Runtime.getRuntime().exec(conFiles);
+                localProcess = Runtime.getRuntime().exec(conNlpFiles);
+            } catch (Exception e) {
+                defaultLog("Error setting SELinux permissions." + e.getMessage());
+            }
         }
     }
 
