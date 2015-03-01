@@ -68,7 +68,7 @@
             android:key="about_author"
             android:editable="false"
             android:defaultValue="0"
-            android:summary="Version: 2.0.7"
+            android:summary="Version: 3.0.2"
             />
 
         <Preference
@@ -76,6 +76,13 @@
             android:editable="false"
             android:defaultValue="0"
             android:summary="JellyBean 4.1.2 Fixes"
+            />
+
+        <Preference
+            android:title="Additional Code: voland66"
+            android:editable="false"
+            android:defaultValue="0"
+            android:summary="SELinux Fixes"
             />
 
         <Preference
