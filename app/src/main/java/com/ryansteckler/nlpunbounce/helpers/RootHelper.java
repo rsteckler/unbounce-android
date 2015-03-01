@@ -46,9 +46,7 @@ public class RootHelper {
 
         public static enum SHELL_CMD {
             check_su_binary(new String[] { "/system/xbin/which", "su" });
-
             String[] command;
-
             SHELL_CMD(String[] command) {
                 this.command = command;
             }

@@ -3,8 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/nlpFix2.iml" filepath="$PROJECT_DIR$/nlpFix2.iml" />
-      <module fileurl="file://$PROJECT_DIR$/nlpUnbounce.iml" filepath="$PROJECT_DIR$/nlpUnbounce.iml" />
       <module fileurl="file://$PROJECT_DIR$/unbounce-android.iml" filepath="$PROJECT_DIR$/unbounce-android.iml" />
     </modules>
   </component>
