@@ -17,8 +17,8 @@ android {
         applicationId 'com.ryansteckler.nlpunbounce'
         minSdkVersion 16
         targetSdkVersion 21
-        versionCode 53
-        versionName '3.0.3'
+        versionCode 54
+        versionName '3.0.4'
     }
     buildTypes {
         release {
@@ -43,4 +43,5 @@ dependencies {
     provided files('XposedBridgeApi-54.jar')
     compile 'com.google.android.gms:play-services:+'
     compile 'com.google.code.gson:gson:2.3'
+    compile files('XposedBridgeApi-20150213.jar')
 }
