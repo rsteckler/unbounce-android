@@ -63,6 +63,8 @@ public class RootHelper {
                 os.flush();
                 os.writeBytes("chcon u:object_r:system_data_file:s0 /data/data/com.ryansteckler.nlpunbounce/files/nlp* \n");
                 os.flush();
+                os.writeBytes("chcon u:object_r:system_data_file:s0 /data/data/com.ryansteckler.nlpunbounce/files/nlp* \n");
+                os.flush();
                 os.writeBytes("exit\n");
                 os.flush();
                 os.close();
