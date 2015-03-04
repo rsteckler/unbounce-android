@@ -40,8 +40,7 @@ repositories {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    provided files('XposedBridgeApi-54.jar')
     compile 'com.google.android.gms:play-services:+'
     compile 'com.google.code.gson:gson:2.3'
-    compile files('XposedBridgeApi-20150213.jar')
+    provided files('XposedBridgeApi-20150213.jar')
 }
