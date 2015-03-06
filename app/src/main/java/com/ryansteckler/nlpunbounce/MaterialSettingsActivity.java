@@ -134,6 +134,7 @@ public class MaterialSettingsActivity extends Activity
             }
         });
 
+        startService(new Intent(this, SELinuxService.class));
 
         GoogleAnalytics ga = GoogleAnalytics.getInstance(this);
         Tracker tracker = ga.newTracker("UA-11575064-3");

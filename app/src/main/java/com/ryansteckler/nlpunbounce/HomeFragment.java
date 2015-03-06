@@ -103,6 +103,9 @@ public class HomeFragment extends Fragment  {
             }
 
         }
+
+
+
     }
 
     @Override
@@ -209,6 +212,7 @@ public class HomeFragment extends Fragment  {
         }
     }
 
+
     private class WelcomeAnimationListener implements Animator.AnimatorListener, ValueAnimator.AnimatorUpdateListener {
         @Override
         public void onAnimationCancel(Animator animator) {}
@@ -233,6 +237,7 @@ public class HomeFragment extends Fragment  {
             int curValue = (int) animator.getAnimatedValue();
             if (isAdded()) {
                 mProgressChecking.setProgress(curValue);
+                mProgressChecking.requestLayout();
             }
         }
 

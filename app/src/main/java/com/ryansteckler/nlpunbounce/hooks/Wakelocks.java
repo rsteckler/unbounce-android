@@ -18,6 +18,11 @@ import com.ryansteckler.nlpunbounce.XposedReceiver;
 import com.ryansteckler.nlpunbounce.models.InterimEvent;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.DataOutputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -35,7 +40,7 @@ import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 public class Wakelocks implements IXposedHookLoadPackage {
 
     private static final String TAG = "Amplify: ";
-    public static final String VERSION = "3.0.1"; //This needs to be pulled from the manifest or gradle build.
+    public static final String VERSION = "3.0.5"; //This needs to be pulled from the manifest or gradle build.
     public static final String FILE_VERSION = "3"; //This needs to be pulled from the manifest or gradle build.
     private HashMap<String, Long> mLastWakelockAttempts = null; //The last time each wakelock was allowed.
     private HashMap<String, Long> mLastAlarmAttempts = null; //The last time each alarm was allowed.
@@ -71,8 +76,10 @@ public class Wakelocks implements IXposedHookLoadPackage {
             resetFilesIfNeeded(null);
         } else if (lpparam.packageName.equals("com.ryansteckler.nlpunbounce")) {
             hookAmplifyClasses(lpparam);
+
         }
     }
+
 
     private void resetFilesIfNeeded(Context context) {
         //Get the version number and compare it to our app version.
