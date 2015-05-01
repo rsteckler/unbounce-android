@@ -92,6 +92,13 @@
             android:summary="Various fixes"
             />
 
+        <Preference
+            android:title="Additional Code: Mauro Massese"
+            android:editable="false"
+            android:defaultValue="0"
+            android:summary="Sony Xperia fix"
+            />
+
     </PreferenceCategory>
 
     <PreferenceCategory

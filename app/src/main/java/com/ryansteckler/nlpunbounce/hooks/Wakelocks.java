@@ -346,7 +346,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
         } catch (NoSuchMethodError nsme) {
             //Nonstandard version of the library.  Try an alternate
             defaultLog("Standard Alarm hook failed.  Trying alternate for Sony device.");
-            findAndHookMethod("com.android.server.AlarmManagerService", lpparam.classLoader, "triggerAlarmsLocked", ArrayList.class, boolean.class, boolean.class, new XC_MethodHook() {
+            findAndHookMethod("com.android.server.AlarmManagerService", lpparam.classLoader, "triggerAlarmsLocked", ArrayList.class, long.class, long.class, boolean.class, boolean.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     ArrayList<Object> triggers = (ArrayList<Object>) param.args[0];
