@@ -35,68 +35,73 @@ public class EventLookup {
     }
 
     public static int isSafe(String eventName) {
-        String lower = eventName.toLowerCase();
         int toReturn = UNKNOWN;
 
         //Wakelocks - safe
-        if (lower.equals("nlpwakelock") ||
-                lower.equals("syncloopwakelock") ||
-                lower.equals("icing") ||
-                lower.equals("startingalertservice") ||
-                lower.equals("audiomix") ||
-                lower.equals("locationmanagerservice") ||
-                lower.equals("nfcservice:mroutingwakelock") ||
-                lower.equals("wakefulintentservice[gcoreulr-locationreportingservice]") ||
-                lower.equals("vzwgpslocationprovider") ||
-                lower.equals("rilj") ||
-                lower.equals("*net_scheduler*") ||
-                lower.equals("gcoreflp") ||
-                lower.equals("wakeful statemachine: geofencerstatemachine") ||
-                lower.equals("com.commonsware.cwac.wakeful.wakefullintentservice") ||
-                lower.equals("wakeful statemachine: geofencerstatemachine") ||
-                lower.equals("fingerprint_scanner_local") ||
-                lower.equals("gpslocationprovider") ||
-                lower.equals("cdmainboundsmshandler") ||
-                lower.equals("wake:com.google.android.gms/.config.configfetchservice") ||
-                lower.equals("networkstats") ||
-                lower.equals("ulrdispatchingservice") ||
-                lower.equals("fingerprint_scanner_static") ||
-                lower.equals("nlpcollectorwakelock")) {
-                    toReturn = SAFE;
+        if (eventName.equalsIgnoreCase("nlpwakelock") ||
+                eventName.equalsIgnoreCase("audioin") ||
+                eventName.equalsIgnoreCase("SyncLoopWakelock") ||
+                eventName.equalsIgnoreCase("ICING") ||
+                eventName.equalsIgnoreCase("StartingAlertService") ||
+                eventName.equalsIgnoreCase("GCoreFlp") ||
+                eventName.equalsIgnoreCase("*net_scheduler*") ||
+                eventName.equalsIgnoreCase("NetworkStats") ||
+                eventName.equalsIgnoreCase("UlrDispatchingService") ||
+                eventName.equalsIgnoreCase("fingerprint_scanner_static") ||
+                eventName.equalsIgnoreCase("fingerprint_scanner_local") ||
+                eventName.equalsIgnoreCase("GPSLocationProvider") ||
+                eventName.equalsIgnoreCase("CDMAInboundSMSHandler") ||
+                eventName.equalsIgnoreCase("wake:com.google.android.gms/.config.ConfigFetchService") ||
+                eventName.equalsIgnoreCase("LocationManagerService") ||
+                eventName.equalsIgnoreCase("NfcService:mRoutingWakeLock") ||
+                eventName.equalsIgnoreCase("WakefulIntentService[GCoreUlr-LocationReportingService]") ||
+                eventName.equalsIgnoreCase("NlpWakelockDetector") ||
+                eventName.equalsIgnoreCase("VZWGPSLocationProvider") ||
+                eventName.equalsIgnoreCase("com.commonsware.cwac.wakeful.WakefullIntentService") ||
+                eventName.equalsIgnoreCase("Wakeful StateMachine: GeofencerStateMachine") ||
+                eventName.equalsIgnoreCase("audioin") ||
+                eventName.equalsIgnoreCase("*sync*/com.google.android.apps.bigtop.provider.bigtopprovider/com.google/accountname")) {
+            toReturn = SAFE;
         }
         //Wakelocks - unsafe
-        else if (lower.equals("alarmmanager") ||
-                lower.equals("e") ||
-                lower.equals("m") ||
-                lower.equals("audiooffload") ||
-                lower.equals("activitymanager-launcher") ||
-                lower.equals("windowmanager") ||
-                lower.equals("audioin") ||
-                lower.equals("hangouts_rtcs") ||
-                lower.equals("gcm_conn") ||
-                lower.equals("google_c2dm") ||
-                lower.equals("timedeventqueue"))
+        else if (eventName.equalsIgnoreCase("TimedEventQueue") ||
+                eventName.equalsIgnoreCase("GCM_CONN") ||
+                eventName.equalsIgnoreCase("GOOGLE_C2DM") ||
+                eventName.equalsIgnoreCase("ActivityManager-Launcher") ||
+                eventName.equalsIgnoreCase("AlarmManager") ||
+                eventName.equalsIgnoreCase("AudioOffload") ||
+                eventName.equalsIgnoreCase("WindowManager") ||
+                eventName.equalsIgnoreCase("hangouts_rtcs") ||
+                eventName.equalsIgnoreCase("e") ||
+                eventName.equalsIgnoreCase("m") ||
+                eventName.equalsIgnoreCase("AudioMix") ||
+                eventName.equalsIgnoreCase("com.oasisfeng.greenify.CLEAN_NOW") ||
+                eventName.equalsIgnoreCase("rilj"))
         {
             toReturn = UNSAFE;
         }
         //Alarms - safe
-        else if (lower.equals("com.google.android.gms.nlp.alarm_wakeup_locator") ||
-                lower.equals("com.android.internal.telephony.data-stall") ||
-                lower.equals("android.content.syncmanager.sync_alarm") ||
-                lower.equals("android.app.backup.intent.run") ||
-                lower.equals("com.sonymobile.storagechecker.intent.action.alarm_expired") ||
-                lower.equals("com.google.android.intent.gcm_reconnect") ||
-                lower.equals("com.google.android.gms.gcm.nts.action_check_queue") ||
-                lower.equals("com.whatsapp.messaging.messageservice.logout_action") ||
-                lower.equals("com.devexpert.weatheradfree.pfx.wakeup") ||
-                lower.equals("com.google.android.gms.nlp.alarm_wakeup_activity_detection")) {
+        else if (eventName.equalsIgnoreCase("com.google.android.gms.nlp.alarm_wakeup_locator") ||
+                eventName.equalsIgnoreCase("com.sonymobile.storagechecker.intent.action.ALARM_ EXPIRED") ||
+                eventName.equalsIgnoreCase("com.google.android.intent.GCM_RECONNECT") ||
+                eventName.equalsIgnoreCase("com.android.internal.telephony.data-stall") ||
+                eventName.equalsIgnoreCase("Android.app.backup.intent.RUN") ||
+                eventName.equalsIgnoreCase("com.google.android.gms.gcm.nts.ACTION_CHECK_QUEUE") ||
+                eventName.equalsIgnoreCase("com.whatsapp.messaging.MessageService.LOGOUT_ACTION") ||
+                eventName.equalsIgnoreCase("com.devexpert.weatheradfree.pfx.WAKEUP") ||
+                eventName.equalsIgnoreCase("com.android.server.UPDATE_TWILIGHT_STATE") ||
+                eventName.equalsIgnoreCase("com.google.android.gms.nlp.alarm_wakeup_activity_detection")) {
             toReturn = SAFE;
         }
         //Alarms - unsafe
-        else if (lower.equals("android.intent.action.time_tick") ||
-                lower.equals("com.google.android.intent.action.mcs_heartbeat") ||
-                lower.equals("com.google.android.apps.hangouts.update_notification") ||
-                lower.equals("android.appwidget.action.appwidget_update")) {
+        else if (eventName.equalsIgnoreCase("android.intent.action.time_tick") ||
+                eventName.equalsIgnoreCase("com.google.android.apps.hangouts.UPDATE_NOTIFICATION") ||
+                eventName.equalsIgnoreCase("com.google.android.intent.action.MCS_HEARTBEAT") ||
+                eventName.equalsIgnoreCase("Android.content.SyncManager.SYNC_ALARM") ||
+                eventName.equalsIgnoreCase("com.android.server.IdleMaintenanceService.action.UPDATE_IDLE_MAINTENANCE_STATE") ||
+                eventName.equalsIgnoreCase("com.android.internal.policy.impl.PhoneWindowManager.DELAYED_KEYGUARD") ||
+                eventName.equalsIgnoreCase("au.com.weatherzone.android.weatherzoneplus.action.update_clock") ||
+                eventName.equalsIgnoreCase("android.appwidget.action.appwidget_update")) {
             toReturn = UNSAFE;
         }
         return toReturn;
