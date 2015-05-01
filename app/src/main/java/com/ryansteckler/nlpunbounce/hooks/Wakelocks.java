@@ -130,9 +130,9 @@ public class Wakelocks implements IXposedHookLoadPackage {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             //Try for alarm hooks for API levels >= 19
-            defaultLog("Attempting 19to20 AlarmHook");
-            try19To20AlarmHook(lpparam);
-            defaultLog("Successful 19to20 AlarmHook");
+            defaultLog("Attempting 19to21 AlarmHook");
+            try19To21AlarmHook(lpparam);
+            defaultLog("Successful 19to21 AlarmHook");
             alarmsHooked = true;
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1 &&
                 Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN_MR2) {
@@ -334,14 +334,26 @@ public class Wakelocks implements IXposedHookLoadPackage {
 
     }
 
-    private void try19To20AlarmHook(LoadPackageParam lpparam) {
-        findAndHookMethod("com.android.server.AlarmManagerService", lpparam.classLoader, "triggerAlarmsLocked", ArrayList.class, long.class, long.class, new XC_MethodHook() {
-            @Override
-            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                ArrayList<Object> triggers = (ArrayList<Object>) param.args[0];
-                handleAlarm(param, triggers);
-            }
-        });
+    private void try19To21AlarmHook(LoadPackageParam lpparam) {
+        try {
+            findAndHookMethod("com.android.server.AlarmManagerService", lpparam.classLoader, "triggerAlarmsLocked", ArrayList.class, long.class, long.class, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    ArrayList<Object> triggers = (ArrayList<Object>) param.args[0];
+                    handleAlarm(param, triggers);
+                }
+            });
+        } catch (NoSuchMethodError nsme) {
+            //Nonstandard version of the library.  Try an alternate
+            defaultLog("Standard Alarm hook failed.  Trying alternate for Sony device.");
+            findAndHookMethod("com.android.server.AlarmManagerService", lpparam.classLoader, "triggerAlarmsLocked", ArrayList.class, boolean.class, boolean.class, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    ArrayList<Object> triggers = (ArrayList<Object>) param.args[0];
+                    handleAlarm(param, triggers);
+                }
+            });
+        }
     }
 
     private void try15To18AlarmHook(LoadPackageParam lpparam) {

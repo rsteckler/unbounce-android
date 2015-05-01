@@ -107,6 +107,14 @@ public class SortWakeLocks {
                     //The category state is the same.  Sub-compare
                     if (sortType == SORT_COUNT) {
                         return ((Long) o2.getAllowedCount()).compareTo(o1.getAllowedCount());
+                    } else if (sortType == SORT_TIME) {
+                        if (o2 instanceof WakelockStats && o1 instanceof WakelockStats) {
+                            WakelockStats o2prime = (WakelockStats)o2;
+                            WakelockStats o1prime = (WakelockStats)o1;
+                            return ((Long) o2prime.getAllowedDuration()).compareTo(o1prime.getAllowedDuration());
+                        } else {
+                            return ((String) o1.getName()).compareTo(o2.getName());
+                        }
                     } else if (sortType == SORT_PACKAGE) {
                         return (o2.getDerivedPackageName(ctx)).compareTo(o1.getDerivedPackageName(ctx));
                     } else {
@@ -115,6 +123,14 @@ public class SortWakeLocks {
                 } else {
                     if (sortType == SORT_COUNT) {
                         return ((Long) o2.getAllowedCount()).compareTo(o1.getAllowedCount());
+                    } else if (sortType == SORT_TIME) {
+                        if (o2 instanceof WakelockStats && o1 instanceof WakelockStats) {
+                            WakelockStats o2prime = (WakelockStats)o2;
+                            WakelockStats o1prime = (WakelockStats)o1;
+                            return ((Long) o2prime.getAllowedDuration()).compareTo(o1prime.getAllowedDuration());
+                        } else {
+                            return ((String) o1.getName()).compareTo(o2.getName());
+                        }
                     } else if (sortType == SORT_PACKAGE) {
                         return (o2.getDerivedPackageName(ctx)).compareTo(o1.getDerivedPackageName(ctx));
                     } else {
