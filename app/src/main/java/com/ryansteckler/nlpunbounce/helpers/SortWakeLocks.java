@@ -109,16 +109,10 @@ public class SortWakeLocks {
                         return ((Long) o2.getAllowedCount()).compareTo(o1.getAllowedCount());
                     } else if (sortType == SORT_TIME) {
                         if (o2 instanceof WakelockStats && o1 instanceof WakelockStats) {
-<<<<<<< HEAD
-                            return ((Long) ((WakelockStats)o2).getAllowedDuration()).compareTo(((WakelockStats)o1).getAllowedDuration());
-                        } else {
-                            //Shouldn't happen
-=======
                             WakelockStats o2prime = (WakelockStats)o2;
                             WakelockStats o1prime = (WakelockStats)o1;
                             return ((Long) o2prime.getAllowedDuration()).compareTo(o1prime.getAllowedDuration());
                         } else {
->>>>>>> release/3.0.7
                             return ((String) o1.getName()).compareTo(o2.getName());
                         }
                     } else if (sortType == SORT_PACKAGE) {
@@ -131,13 +125,9 @@ public class SortWakeLocks {
                         return ((Long) o2.getAllowedCount()).compareTo(o1.getAllowedCount());
                     } else if (sortType == SORT_TIME) {
                         if (o2 instanceof WakelockStats && o1 instanceof WakelockStats) {
-<<<<<<< HEAD
-                            return ((Long) ((WakelockStats)o2).getAllowedDuration()).compareTo(((WakelockStats)o1).getAllowedDuration());
-=======
                             WakelockStats o2prime = (WakelockStats)o2;
                             WakelockStats o1prime = (WakelockStats)o1;
                             return ((Long) o2prime.getAllowedDuration()).compareTo(o1prime.getAllowedDuration());
->>>>>>> release/3.0.7
                         } else {
                             return ((String) o1.getName()).compareTo(o2.getName());
                         }
