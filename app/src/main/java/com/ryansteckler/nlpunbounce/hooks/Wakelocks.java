@@ -40,7 +40,7 @@ import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 public class Wakelocks implements IXposedHookLoadPackage {
 
     private static final String TAG = "Amplify: ";
-    public static final String VERSION = "3.0.8"; //This needs to be pulled from the manifest or gradle build.
+    public static final String VERSION = "3.0.9"; //This needs to be pulled from the manifest or gradle build.
     public static final String FILE_VERSION = "3"; //This needs to be pulled from the manifest or gradle build.
     private HashMap<String, Long> mLastWakelockAttempts = null; //The last time each wakelock was allowed.
     private HashMap<String, Long> mLastAlarmAttempts = null; //The last time each alarm was allowed.
@@ -346,7 +346,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
         } catch (NoSuchMethodError nsme) {
             //Nonstandard version of the library.  Try an alternate
             defaultLog("Standard Alarm hook failed.  Trying alternate for Sony device.");
-            findAndHookMethod("com.android.server.AlarmManagerService", lpparam.classLoader, "triggerAlarmsLocked", ArrayList.class, boolean.class, boolean.class, new XC_MethodHook() {
+            findAndHookMethod("com.android.server.AlarmManagerService", lpparam.classLoader, "triggerAlarmsLocked", ArrayList.class, long.class, long.class, boolean.class, boolean.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     ArrayList<Object> triggers = (ArrayList<Object>) param.args[0];
