@@ -22,6 +22,7 @@ public class EventLookup {
         lowerTrimmed =lowerTrimmed.replace(":", "");
         lowerTrimmed =lowerTrimmed.replace("-", "");
         lowerTrimmed =lowerTrimmed.replace(".", "");
+        lowerTrimmed =lowerTrimmed.replace("*", "");
 
         //Unknown
         String toReturn = context.getResources().getString(R.string.desc_unknown);
