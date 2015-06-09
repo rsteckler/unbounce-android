@@ -49,7 +49,6 @@ import com.ryansteckler.nlpunbounce.helpers.ThemeHelper;
 import com.ryansteckler.nlpunbounce.hooks.Wakelocks;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
 
-
 import java.io.File;
 
 /**
@@ -76,8 +75,7 @@ public class HomeFragment extends Fragment  {
      * number.
      */
     public static HomeFragment newInstance() {
-        HomeFragment fragment = new HomeFragment();
-        return fragment;
+        return new HomeFragment();
     }
 
     public HomeFragment() {
@@ -99,7 +97,7 @@ public class HomeFragment extends Fragment  {
             intent.putExtra(XposedReceiver.STAT_TYPE, UnbounceStatsCollection.STAT_CURRENT);
             try {
                 getActivity().sendBroadcast(intent);
-            } catch (IllegalStateException ise) {
+            } catch (IllegalStateException ignored) {
 
             }
 
@@ -222,10 +220,10 @@ public class HomeFragment extends Fragment  {
         @Override
         public void onAnimationStart(Animator animator) {}
 
-        private View mParentView;
-        private ValueAnimator mReverseWhenDone;
-        private ProgressBar mProgressChecking;
-        ValueAnimator mProgressAnimation;
+        private final View mParentView;
+        private final ValueAnimator mReverseWhenDone;
+        private final ProgressBar mProgressChecking;
+        final ValueAnimator mProgressAnimation;
         public WelcomeAnimationListener(View parentView, final ValueAnimator reverseWhenDone, ProgressBar progressChecking, ValueAnimator progressAnimation) {
             mParentView = parentView;
             mReverseWhenDone = reverseWhenDone;
@@ -571,7 +569,7 @@ public class HomeFragment extends Fragment  {
                                 intent.putExtra(XposedReceiver.STAT_TYPE, UnbounceStatsCollection.STAT_CURRENT);
                                 try {
                                     getActivity().sendBroadcast(intent);
-                                } catch (IllegalStateException ise) {
+                                } catch (IllegalStateException ignored) {
 
                                 }
                                 loadStatsFromSource(view);
@@ -586,11 +584,6 @@ public class HomeFragment extends Fragment  {
                         .show();
             }
         });
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
     }
 
 
@@ -609,21 +602,15 @@ public class HomeFragment extends Fragment  {
     private boolean isInstalledFromPlay() {
         String installer = getActivity().getPackageManager().getInstallerPackageName("com.ryansteckler.nlpunbounce");
 
-        if (installer == null) {
-            return false;
-        }
-        else {
-            return installer.equals("com.android.vending");
-        }
+        return installer != null && installer.equals("com.android.vending");
     }
 
-    private boolean launchXposedModules() {
+    private void launchXposedModules() {
         Intent LaunchIntent = null;
 
         try {
             LaunchIntent = getActivity().getPackageManager().getLaunchIntentForPackage("de.robv.android.xposed.installer");
             if (LaunchIntent == null) {
-                return false;
             } else {
                 Intent intent = new Intent("de.robv.android.xposed.installer.OPEN_SECTION");
                 intent.setPackage("de.robv.android.xposed.installer");
@@ -636,19 +623,16 @@ public class HomeFragment extends Fragment  {
                 LaunchIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(LaunchIntent);
             } else {
-                return false;
             }
         }
-        return true;
     }
 
-    private boolean launchXposedFramework() {
+    private void launchXposedFramework() {
         Intent LaunchIntent = null;
 
         try {
             LaunchIntent = getActivity().getPackageManager().getLaunchIntentForPackage("de.robv.android.xposed.installer");
             if (LaunchIntent == null) {
-                return false;
             } else {
                 Intent intent = new Intent("de.robv.android.xposed.installer.OPEN_SECTION");
                 intent.setPackage("de.robv.android.xposed.installer");
@@ -661,10 +645,8 @@ public class HomeFragment extends Fragment  {
                 LaunchIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(LaunchIntent);
             } else {
-                return false;
             }
         }
-        return true;
     }
 
     private BroadcastReceiver refreshReceiver;
@@ -681,9 +663,9 @@ public class HomeFragment extends Fragment  {
 
     private void updatePremiumUi() {
         if (((MaterialSettingsActivity)getActivity()).isPremium()) {
-            View againView = (View) getActivity().findViewById(R.id.layoutDonateAgain);
+            View againView = getActivity().findViewById(R.id.layoutDonateAgain);
             againView.setVisibility(View.VISIBLE);
-            View donateView = (View) getActivity().findViewById(R.id.layoutDonate);
+            View donateView = getActivity().findViewById(R.id.layoutDonate);
             donateView.setVisibility(View.GONE);
         }
     }
@@ -691,7 +673,7 @@ public class HomeFragment extends Fragment  {
     private void loadStatsFromSource(final View view) {
         final UnbounceStatsCollection stats = UnbounceStatsCollection.getInstance();
         final Context c = getActivity();
-        stats.loadStats(c, true);
+        stats.loadStats(true);
         String duration = stats.getWakelockDurationAllowedFormatted(c, UnbounceStatsCollection.STAT_CURRENT);
         //Wakelocks
         TextView textView = (TextView)view.findViewById(R.id.textLocalWakeTimeAllowed);
@@ -779,8 +761,7 @@ public class HomeFragment extends Fragment  {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-        return rootView;
+        return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
 
@@ -822,7 +803,7 @@ public class HomeFragment extends Fragment  {
         Intent intent = new Intent(XposedReceiver.REFRESH_ACTION);
         try {
             getActivity().sendBroadcast(intent);
-        } catch (IllegalStateException ise) {
+        } catch (IllegalStateException ignored) {
 
         }
     }
@@ -838,7 +819,7 @@ public class HomeFragment extends Fragment  {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        public void onHomeSetTitle(String id);
+        void onHomeSetTitle(String id);
     }
 
     private void animateButtonContainer(final ViewGroup container) {
@@ -893,19 +874,19 @@ public class HomeFragment extends Fragment  {
     }
 
 
-    public boolean isUnbounceServiceRunning() {
+    private boolean isUnbounceServiceRunning() {
         //The Unbounce hook changes this to true.
         return false;
     }
 
-    public String getAmplifyKernelVersion() {
+    private String getAmplifyKernelVersion() {
         //The Unbounce hook changes this to true.
         return "0";
     }
 
 
 
-    public boolean isXposedRunning() {
+    private boolean isXposedRunning() {
         return new File("/data/data/de.robv.android.xposed.installer/bin/XposedBridge.jar").exists();
     }
 

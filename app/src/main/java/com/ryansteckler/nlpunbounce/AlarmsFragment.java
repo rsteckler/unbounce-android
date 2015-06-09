@@ -64,8 +64,7 @@ public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View view = inflater.inflate(R.layout.fragment_stats, container, false);
-        return view;
+        return inflater.inflate(R.layout.fragment_stats, container, false);
     }
 
     @Override
@@ -271,9 +270,9 @@ public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        public void onAlarmsSetTitle(String id);
+        void onAlarmsSetTitle(String id);
 
-        public void onAlarmsSetTaskerTitle(String title);
+        void onAlarmsSetTaskerTitle(String title);
     }
 
 }

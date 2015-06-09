@@ -8,7 +8,7 @@ import android.util.Log;
  * Created by rsteckler on 11/1/14.
  */
 public class LogHelper {
-    private static String TAG = "Amplify";
+    private static final String TAG = "Amplify";
 
     public static void debugLog(Context c, String log) {
         if (getLogLevel(c).equals("verbose")) {

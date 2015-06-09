@@ -35,15 +35,10 @@ public class MaterialSettingsActivity extends Activity
         ServicesFragment.OnFragmentInteractionListener
     {
 
-    /**
-     * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
-     */
-    private NavigationDrawerFragment mNavigationDrawerFragment;
+        IabHelper mHelper;
 
-    IabHelper mHelper;
-
-    int mCurTheme = ThemeHelper.THEME_DEFAULT;
-    int mCurForceEnglish = -1;
+    private int mCurTheme = ThemeHelper.THEME_DEFAULT;
+    private int mCurForceEnglish = -1;
 
     private boolean mIsPremium = true;
 
@@ -63,7 +58,10 @@ public class MaterialSettingsActivity extends Activity
         mCurForceEnglish = LocaleHelper.onActivityCreateSetLocale(this);
         setContentView(R.layout.activity_material_settings);
 
-        mNavigationDrawerFragment = (NavigationDrawerFragment)
+        /*
+      Fragment managing the behaviors, interactions and presentation of the navigation drawer.
+     */
+        NavigationDrawerFragment mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
 
@@ -153,10 +151,10 @@ public class MaterialSettingsActivity extends Activity
 
     private void updateDonationUi() {
         if (isPremium()) {
-            View againView = (View) findViewById(R.id.layoutDonateAgain);
+            View againView = findViewById(R.id.layoutDonateAgain);
             if (againView != null)
                 againView.setVisibility(View.VISIBLE);
-            View donateView = (View) findViewById(R.id.layoutDonate);
+            View donateView = findViewById(R.id.layoutDonate);
             if (donateView != null)
                 donateView.setVisibility(View.GONE);
         }
@@ -170,12 +168,12 @@ public class MaterialSettingsActivity extends Activity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-        if (!mHelper.handleActivityResult(requestCode, resultCode, data)) {
+        if (mHelper.handleActivityResult(requestCode, resultCode, data)) {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
 
-    IabHelper.OnIabPurchaseFinishedListener mPurchaseFinishedListener = new IabHelper.OnIabPurchaseFinishedListener() {
+    final IabHelper.OnIabPurchaseFinishedListener mPurchaseFinishedListener = new IabHelper.OnIabPurchaseFinishedListener() {
         public void onIabPurchaseFinished(IabResult result, Purchase purchase)
         {
             if (result.getResponse() == IabHelper.BILLING_RESPONSE_RESULT_USER_CANCELED ||
@@ -205,7 +203,7 @@ public class MaterialSettingsActivity extends Activity
 
         }
 
-        IabHelper.OnConsumeFinishedListener mConsumeFinishedListener = new IabHelper.OnConsumeFinishedListener() {
+        final IabHelper.OnConsumeFinishedListener mConsumeFinishedListener = new IabHelper.OnConsumeFinishedListener() {
             public void onConsumeFinished(Purchase purchase, IabResult result) {
                 //Do nothing
             }
@@ -253,7 +251,7 @@ public class MaterialSettingsActivity extends Activity
         }
     }
 
-    public void restoreActionBar() {
+    private void restoreActionBar() {
         ActionBar actionBar = getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayShowTitleEnabled(true);
@@ -335,7 +333,7 @@ public class MaterialSettingsActivity extends Activity
         }
 
         @Override
-        public void onSetTaskerTitle(String title) {
+        public void onSetTaskerTitle() {
             //Do nothing because we're not in Tasker mode.
 
         }

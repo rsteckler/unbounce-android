@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.ryansteckler.nlpunbounce.R;
 import com.ryansteckler.nlpunbounce.helpers.SortWakeLocks;
-import com.ryansteckler.nlpunbounce.models.AlarmStats;
 import com.ryansteckler.nlpunbounce.models.BaseStats;
 import com.ryansteckler.nlpunbounce.models.ServiceStats;
 
@@ -97,7 +96,7 @@ public class ServicesAdapter extends BaseAdapter {
 
 
 
-    public void sort(int sortBy, boolean categorize) {
+    protected void sort(int sortBy, boolean categorize) {
         mSortBy = sortBy;
         Collections.sort(mBackingList, SortWakeLocks.getBaseListComparator(mSortBy, categorize, this.getContext()));
         sort(SortWakeLocks.getBaseListComparator(mSortBy, categorize,this.getContext()));

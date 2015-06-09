@@ -25,7 +25,7 @@ public class TaskerReceiver extends BroadcastReceiver {
                     resetIntent.putExtra(XposedReceiver.STAT_TYPE, UnbounceStatsCollection.STAT_CURRENT);
                     try {
                         context.sendBroadcast(resetIntent);
-                    } catch (IllegalStateException ise) {
+                    } catch (IllegalStateException ignored) {
 
                     }
 

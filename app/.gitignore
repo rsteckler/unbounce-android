@@ -1,2 +1,11 @@
 /build
 /.idea/
+/app/.classpath
+/app/.project
+/app/.settings/
+/app/Amplify.apk
+/app/Amplify2.apk
+/app/Amplify3.apk
+/app/bin/
+/q
+/unbounce-android.iml

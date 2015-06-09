@@ -6,8 +6,6 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -26,26 +24,26 @@ import com.ryansteckler.nlpunbounce.tasker.TaskerActivity;
  */
 public abstract class BaseDetailFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    protected static final String ARG_START_TOP = "startTop";
-    protected static final String ARG_FINAL_TOP = "finalTop";
-    protected static final String ARG_START_BOTTOM = "startBottom";
-    protected static final String ARG_FINAL_BOTTOM = "finalBottom";
-    protected static final String ARG_CUR_STAT = "curStat";
-    protected static final String ARG_TASKER_MODE = "taskerMode";
+    private static final String ARG_START_TOP = "startTop";
+    private static final String ARG_FINAL_TOP = "finalTop";
+    private static final String ARG_START_BOTTOM = "startBottom";
+    private static final String ARG_FINAL_BOTTOM = "finalBottom";
+    private static final String ARG_CUR_STAT = "curStat";
+    private static final String ARG_TASKER_MODE = "taskerMode";
 
-    protected int mStartTop;
-    protected int mFinalTop;
-    protected int mStartBottom;
-    protected int mFinalBottom;
-    protected BaseStats mStat;
-    protected boolean mTaskerMode;
+    private int mStartTop;
+    private int mFinalTop;
+    private int mStartBottom;
+    private int mFinalBottom;
+    BaseStats mStat;
+    boolean mTaskerMode;
 
-    protected FragmentClearListener mClearListener = null;
+    FragmentClearListener mClearListener = null;
 
-    protected boolean mKnownSafe = false;
-    protected boolean mFree = false;
+    private boolean mKnownSafe = false;
+    private boolean mFree = false;
 
-    protected FragmentInteractionListener mListener;
+    FragmentInteractionListener mListener;
 
     protected abstract void loadStatsFromSource(View view);
 
@@ -181,7 +179,7 @@ public abstract class BaseDetailFragment extends Fragment {
         setHasOptionsMenu(true);
     }
 
-    protected void warnLicensing(final Switch onOff) {
+    private void warnLicensing(final Switch onOff) {
         new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.alert_nopro_title)
                 .setMessage(R.string.alert_nopro_content)
@@ -225,13 +223,13 @@ public abstract class BaseDetailFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface FragmentInteractionListener {
-        public void onDetailSetTitle(String title);
+        void onDetailSetTitle(String title);
 
-        public void onDetailSetTaskerTitle(String title);
+        void onDetailSetTaskerTitle(String title);
     }
 
     public interface FragmentClearListener {
-        public void onCleared();
+        void onCleared();
     }
 
     public void attachClearListener(FragmentClearListener fragment) {

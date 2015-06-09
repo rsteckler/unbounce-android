@@ -64,8 +64,7 @@ public class WakelocksFragment extends ListFragment implements BaseDetailFragmen
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View view = inflater.inflate(R.layout.fragment_stats, container, false);
-        return view;
+        return inflater.inflate(R.layout.fragment_stats, container, false);
     }
 
     @Override
@@ -280,9 +279,9 @@ public class WakelocksFragment extends ListFragment implements BaseDetailFragmen
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        public void onWakelocksSetTitle(String id);
+        void onWakelocksSetTitle(String id);
 
-        public void onWakelocksSetTaskerTitle(String id);
+        void onWakelocksSetTaskerTitle(String id);
     }
 
 }

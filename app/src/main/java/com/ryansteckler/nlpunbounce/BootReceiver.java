@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.ryansteckler.nlpunbounce.helpers.RootHelper;
-
 /**
  * Created by rsteckler on 1/2/15.
  */

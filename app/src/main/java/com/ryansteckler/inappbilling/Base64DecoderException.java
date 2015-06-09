@@ -19,7 +19,7 @@ package com.ryansteckler.inappbilling;
  *
  * @author nelson
  */
-public class Base64DecoderException extends Exception {
+class Base64DecoderException extends Exception {
     public Base64DecoderException() {
         super();
     }

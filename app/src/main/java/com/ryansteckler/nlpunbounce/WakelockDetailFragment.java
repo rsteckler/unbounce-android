@@ -21,7 +21,6 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.ryansteckler.nlpunbounce.helpers.UidNameResolver;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
 import com.ryansteckler.nlpunbounce.models.WakelockStats;
 
@@ -39,8 +38,7 @@ public class WakelockDetailFragment extends BaseDetailFragment {
     public long getSeconds() {
         EditText editSeconds = (EditText) getActivity().findViewById(R.id.editWakelockSeconds);
         String text = editSeconds.getText().toString();
-        long seconds = Long.parseLong(text);
-        return seconds;
+        return Long.parseLong(text);
     }
 
     @Override
@@ -85,7 +83,7 @@ public class WakelockDetailFragment extends BaseDetailFragment {
 
         getView().findViewById(R.id.editWakelockSeconds).setEnabled(onOff.isChecked());
 
-        View panel = (View) getView().findViewById(R.id.settingsPanel);
+        View panel = getView().findViewById(R.id.settingsPanel);
         TypedValue backgroundValue = new TypedValue();
         Resources.Theme theme = getActivity().getTheme();
         int resId = enabled ? R.attr.background_panel_enabled : R.attr.background_panel_disabled;
@@ -158,7 +156,7 @@ public class WakelockDetailFragment extends BaseDetailFragment {
 
         //Enable or disable the seconds setting.
         getView().findViewById(R.id.editWakelockSeconds).setEnabled(b);
-        View panel = (View) getView().findViewById(R.id.settingsPanel);
+        View panel = getView().findViewById(R.id.settingsPanel);
         TypedValue backgroundValue = new TypedValue();
         Resources.Theme theme = getActivity().getTheme();
         int resId = b ? R.attr.background_panel_enabled : R.attr.background_panel_disabled;
@@ -203,8 +201,7 @@ public class WakelockDetailFragment extends BaseDetailFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_wakelock_detail, container, false);
-        return view;
+        return inflater.inflate(R.layout.fragment_wakelock_detail, container, false);
     }
 
     @Override

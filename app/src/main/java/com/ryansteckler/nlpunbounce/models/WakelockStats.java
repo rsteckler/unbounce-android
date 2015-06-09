@@ -38,11 +38,11 @@ public class WakelockStats extends BaseStats implements Serializable {
         }
     }
 
-    public long addDurationAllowed(long duration) {
+    public void addDurationAllowed(long duration) {
         synchronized (this) {
             mAllowedDuration += duration;
         }
-        return mAllowedDuration;
+
     }
 
     public String getDurationAllowedFormatted() {
@@ -80,9 +80,8 @@ public class WakelockStats extends BaseStats implements Serializable {
             return 0;
         long averageTime = mAllowedDuration / getAllowedCount();
         //Now multiply that by the number we've blocked.
-        long blockedTime = averageTime * getBlockCount();
 
-        return blockedTime;
+        return averageTime * getBlockCount();
     }
 
     public String getDurationBlockedFormatted() {

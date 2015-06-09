@@ -112,14 +112,19 @@ public class EventLookup {
         String lower = eventName.toLowerCase();
         boolean toReturn = false;
 
-        if (lower.equals("nlpwakelock")) {
-            toReturn = true;
-        } else if (lower.equals("nlpcollectorwakelock")) {
-            toReturn = true;
-        } else if (lower.equals("com.google.android.gms.nlp.alarm_wakeup_locator")) {
-            toReturn = true;
-        } else if (lower.equals("com.google.android.gms.nlp.alarm_wakeup_activity_detection")) {
-            toReturn = true;
+        switch (lower) {
+            case "nlpwakelock":
+                toReturn = true;
+                break;
+            case "nlpcollectorwakelock":
+                toReturn = true;
+                break;
+            case "com.google.android.gms.nlp.alarm_wakeup_locator":
+                toReturn = true;
+                break;
+            case "com.google.android.gms.nlp.alarm_wakeup_activity_detection":
+                toReturn = true;
+                break;
         }
         return toReturn;
     }
