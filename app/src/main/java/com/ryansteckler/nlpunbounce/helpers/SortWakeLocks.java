@@ -68,7 +68,7 @@ public class SortWakeLocks {
                     } else if (sortType == SORT_PACKAGE) {
                         return (o2.getDerivedPackageName(ctx)).compareTo(o1.getDerivedPackageName(ctx));
                     } else {
-                        return ((String) o1.getName()).compareTo(o2.getName());
+                        return o1.getName().compareTo(o2.getName());
                     }
                 } else {
                     if (sortType == SORT_COUNT) {
@@ -78,7 +78,7 @@ public class SortWakeLocks {
                     } else if (sortType == SORT_PACKAGE) {
                         return (o2.getDerivedPackageName(ctx)).compareTo(o1.getDerivedPackageName(ctx));
                     } else {
-                        return ((String) o1.getName()).compareTo(o2.getName());
+                        return o1.getName().compareTo(o2.getName());
                     }
                 }
 
@@ -113,12 +113,12 @@ public class SortWakeLocks {
                             WakelockStats o1prime = (WakelockStats)o1;
                             return ((Long) o2prime.getAllowedDuration()).compareTo(o1prime.getAllowedDuration());
                         } else {
-                            return ((String) o1.getName()).compareTo(o2.getName());
+                            return o1.getName().compareTo(o2.getName());
                         }
                     } else if (sortType == SORT_PACKAGE) {
                         return (o2.getDerivedPackageName(ctx)).compareTo(o1.getDerivedPackageName(ctx));
                     } else {
-                        return ((String) o1.getName()).compareTo(o2.getName());
+                        return o1.getName().compareTo(o2.getName());
                     }
                 } else {
                     if (sortType == SORT_COUNT) {
@@ -129,12 +129,12 @@ public class SortWakeLocks {
                             WakelockStats o1prime = (WakelockStats)o1;
                             return ((Long) o2prime.getAllowedDuration()).compareTo(o1prime.getAllowedDuration());
                         } else {
-                            return ((String) o1.getName()).compareTo(o2.getName());
+                            return o1.getName().compareTo(o2.getName());
                         }
                     } else if (sortType == SORT_PACKAGE) {
                         return (o2.getDerivedPackageName(ctx)).compareTo(o1.getDerivedPackageName(ctx));
                     } else {
-                        return ((String) o1.getName()).compareTo(o2.getName());
+                        return o1.getName().compareTo(o2.getName());
                     }
                 }
             }

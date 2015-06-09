@@ -47,7 +47,7 @@ public class ServicesFragment extends ListFragment implements ServiceDetailFragm
         return newInstance(false);
     }
 
-    public static ServicesFragment newInstance(boolean taskerMode) {
+    private static ServicesFragment newInstance(boolean taskerMode) {
         ServicesFragment fragment = new ServicesFragment();
         Bundle args = new Bundle();
         args.putBoolean(ARG_TASKER_MODE, taskerMode);
@@ -58,8 +58,7 @@ public class ServicesFragment extends ListFragment implements ServiceDetailFragm
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View view = inflater.inflate(R.layout.fragment_stats, container, false);
-        return view;
+        return inflater.inflate(R.layout.fragment_stats, container, false);
     }
 
     @Override
@@ -142,10 +141,11 @@ public class ServicesFragment extends ListFragment implements ServiceDetailFragm
             mTaskerMode = getArguments().getBoolean(ARG_TASKER_MODE);
         }
 
-        setHasOptionsMenu(true);
+
 
         mAdapter = new ServicesAdapter(getActivity(), UnbounceStatsCollection.getInstance().toServiceArrayList(getActivity()));
         setListAdapter(mAdapter);
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -237,7 +237,7 @@ public class ServicesFragment extends ListFragment implements ServiceDetailFragm
         if (!hidden) {
             if (mListener != null) {
                 mListener.onServicesSetTitle(getResources().getString(R.string.title_services));
-                mListener.onSetTaskerTitle(getResources().getString(R.string.tasker_choose_service));
+                mListener.onSetTaskerTitle();
             }
             if (mReloadOnShow) {
                 mReloadOnShow = false;
@@ -267,9 +267,9 @@ public class ServicesFragment extends ListFragment implements ServiceDetailFragm
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        public void onServicesSetTitle(String id);
+        void onServicesSetTitle(String id);
 
-        public void onSetTaskerTitle(String title);
+        void onSetTaskerTitle();
     }
 
 }

@@ -24,8 +24,7 @@ public class TaskerWhichFragment extends Fragment {
      * number.
      */
     public static TaskerWhichFragment newInstance() {
-        TaskerWhichFragment fragment = new TaskerWhichFragment();
-        return fragment;
+        return new TaskerWhichFragment();
     }
 
     public TaskerWhichFragment() {
@@ -87,8 +86,7 @@ public class TaskerWhichFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_tasker_which, container, false);
-        return rootView;
+        return inflater.inflate(R.layout.fragment_tasker_which, container, false);
     }
 
 
@@ -131,8 +129,8 @@ public class TaskerWhichFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        public void onTaskerResetSelected();
-        public void onTaskerWhichSetTitle(String title);
+        void onTaskerResetSelected();
+        void onTaskerWhichSetTitle(String title);
     }
 
 

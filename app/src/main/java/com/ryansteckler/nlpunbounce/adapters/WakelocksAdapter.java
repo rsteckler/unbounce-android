@@ -1,26 +1,20 @@
 package com.ryansteckler.nlpunbounce.adapters;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ryansteckler.nlpunbounce.R;
 import com.ryansteckler.nlpunbounce.helpers.SortWakeLocks;
-import com.ryansteckler.nlpunbounce.helpers.ThemeHelper;
 import com.ryansteckler.nlpunbounce.models.BaseStats;
-import com.ryansteckler.nlpunbounce.models.EventLookup;
 import com.ryansteckler.nlpunbounce.models.WakelockStats;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 
 /**
  * Created by rsteckler on 9/7/14.
@@ -96,7 +90,7 @@ public class WakelocksAdapter extends BaseAdapter {
         return convertView;
     }
 
-    public void sort(int sortBy, boolean categorize) {
+    protected void sort(int sortBy, boolean categorize) {
         mSortBy = sortBy;
         Collections.sort(mBackingList, SortWakeLocks.getBaseListComparator(mSortBy, categorize, this.getContext()));
         sort(SortWakeLocks.getWakelockListComparator(mSortBy, categorize, this.getContext()));

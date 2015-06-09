@@ -34,16 +34,14 @@ public class TaskerActivity extends Activity
         TaskerWhichFragment.OnFragmentInteractionListener {
 
     public static final String EXTRA_BUNDLE = "com.twofortyfouram.locale.intent.extra.BUNDLE";
-    public static final String EXTRA_BLURB = "com.twofortyfouram.locale.intent.extra.BLURB";
+    private static final String EXTRA_BLURB = "com.twofortyfouram.locale.intent.extra.BLURB";
     public static final String BUNDLE_TYPE = "type";
     public static final String BUNDLE_NAME = "name";
     public static final String BUNDLE_SECONDS = "seconds";
     public static final String BUNDLE_ENABLED = "enabled";
-    IabHelper mHelper;
+    private IabHelper mHelper;
 
-    private boolean mIsPremium = false;
-
-    Fragment mCurrentFragment = null;
+    private boolean mIsPremium = true;
 
     private static final String TAG = "NlpUnbounceTasker: ";
 
@@ -112,7 +110,7 @@ public class TaskerActivity extends Activity
             @Override
             public void onClick(View view) {
                 FragmentManager fragmentManager = getFragmentManager();
-                Bundle taskerBundle = null;
+                Bundle taskerBundle;
 
                 //Set the default tasker values
                 taskerBundle = new Bundle();
@@ -177,7 +175,7 @@ public class TaskerActivity extends Activity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-        if (!mHelper.handleActivityResult(requestCode, resultCode, data)) {
+        if (mHelper.handleActivityResult(requestCode, resultCode, data)) {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
@@ -185,7 +183,7 @@ public class TaskerActivity extends Activity
     @Override
     protected void onStart() {
         super.onStart();
-        mCurrentFragment = TaskerWhichFragment.newInstance();
+        Fragment mCurrentFragment = TaskerWhichFragment.newInstance();
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
                 .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, android.R.animator.fade_in, android.R.animator.fade_out)

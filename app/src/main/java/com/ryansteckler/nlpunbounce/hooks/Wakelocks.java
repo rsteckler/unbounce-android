@@ -18,20 +18,15 @@ import com.ryansteckler.nlpunbounce.XposedReceiver;
 import com.ryansteckler.nlpunbounce.models.InterimEvent;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.DataOutputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
-import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import de.robv.android.xposed.callbacks.XC_LoadPackage.LoadPackageParam;
 
 import static de.robv.android.xposed.XposedHelpers.callMethod;
@@ -42,19 +37,16 @@ public class Wakelocks implements IXposedHookLoadPackage {
     private static final String TAG = "Amplify: ";
     public static final String VERSION = "3.0.9"; //This needs to be pulled from the manifest or gradle build.
     public static final String FILE_VERSION = "3"; //This needs to be pulled from the manifest or gradle build.
-    private HashMap<String, Long> mLastWakelockAttempts = null; //The last time each wakelock was allowed.
-    private HashMap<String, Long> mLastAlarmAttempts = null; //The last time each alarm was allowed.
+    private Map<String, Long> mLastWakelockAttempts = null; //The last time each wakelock was allowed.
+    private Map<String, Long> mLastAlarmAttempts = null; //The last time each alarm was allowed.
 
     private long mLastUpdateStats = 0;
-    private long mUpdateStatsFrequency = 300000; //Save every five minutes
-    private long mLastReloadPrefs = 0;
-    private long mReloadPrefsFrequency = 60000; //Reload prefs every minute
 
     private final BroadcastReceiver mBroadcastReceiver = new XposedReceiver();
     private boolean mRegisteredRecevier = false;
 
-    XSharedPreferences m_prefs;
-    public static HashMap<IBinder, InterimEvent> mCurrentWakeLocks;
+    private XSharedPreferences m_prefs;
+    private static Map<IBinder, InterimEvent> mCurrentWakeLocks;
 
     @Override
     public void handleLoadPackage(LoadPackageParam lpparam) throws Throwable {
@@ -66,9 +58,9 @@ public class Wakelocks implements IXposedHookLoadPackage {
 
             defaultLog("Version " + VERSION);
 
-            mCurrentWakeLocks = new HashMap<IBinder, InterimEvent>();
-            mLastWakelockAttempts = new HashMap<String, Long>();
-            mLastAlarmAttempts = new HashMap<String, Long>();
+            mCurrentWakeLocks = new HashMap<>();
+            mLastWakelockAttempts = new HashMap<>();
+            mLastAlarmAttempts = new HashMap<>();
 
             hookAlarms(lpparam);
             hookWakeLocks(lpparam);
@@ -91,7 +83,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
                 Intent intent = new Intent(ActivityReceiver.CREATE_FILES_ACTION);
                 try {
                     context.sendBroadcast(intent);
-                } catch (IllegalStateException ise) {
+                } catch (IllegalStateException ignored) {
                 }
             }
         }
@@ -437,16 +429,16 @@ public class Wakelocks implements IXposedHookLoadPackage {
 //            curStats.setTimeStarted(SystemClock.elapsedRealtime());
 //            mCurrentServices.put(serviceName, curStats);
 //        }
-        Context context = null;
+        Context context;
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN_MR2) {
             try {
                 context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
             } catch (NoSuchFieldError nsfe) {
-                Object am = (Object) XposedHelpers.getObjectField(param.thisObject, "mAm");
+                Object am = XposedHelpers.getObjectField(param.thisObject, "mAm");
                 context = (Context) XposedHelpers.getObjectField(am, "mContext");
             }
         } else {
-            Object am = (Object) XposedHelpers.getObjectField(param.thisObject, "mAm");
+            Object am = XposedHelpers.getObjectField(param.thisObject, "mAm");
             context = (Context) XposedHelpers.getObjectField(am, "mContext");
         }
         if (context != null) {
@@ -510,15 +502,16 @@ public class Wakelocks implements IXposedHookLoadPackage {
 
             long timeSinceLastUpdateStats = now - mLastUpdateStats;
 
+            long mUpdateStatsFrequency = 300000;
             if (timeSinceLastUpdateStats > mUpdateStatsFrequency) {
                 resetFilesIfNeeded(context);
 
-                if (!UnbounceStatsCollection.getInstance().saveNow(context)) {
+                if (UnbounceStatsCollection.getInstance().saveNow(context)) {
                     //Request the activity to create the files.
                     Intent intent = new Intent(ActivityReceiver.CREATE_FILES_ACTION);
                     try {
                         context.sendBroadcast(intent);
-                    } catch (IllegalStateException ise) {
+                    } catch (IllegalStateException ignored) {
                     }
                 }
                 mLastUpdateStats = now;
@@ -529,7 +522,9 @@ public class Wakelocks implements IXposedHookLoadPackage {
     private void handleAlarm(XC_MethodHook.MethodHookParam param, ArrayList<Object> triggers) {
         final long now = SystemClock.elapsedRealtime();
         Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
+        long mLastReloadPrefs = 0;
         long sinceReload = now - mLastReloadPrefs;
+        long mReloadPrefsFrequency = 60000;
         if (sinceReload > mReloadPrefsFrequency) {
             setupReceiver(param);
             m_prefs.reload();
@@ -623,16 +618,16 @@ public class Wakelocks implements IXposedHookLoadPackage {
 
     private void recordServiceBlock(XC_MethodHook.MethodHookParam param, String name, int uId) {
 
-        Context context = null;
+        Context context;
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN_MR2) {
             try {
                 context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
             } catch (NoSuchFieldError nsfe) {
-                Object am = (Object) XposedHelpers.getObjectField(param.thisObject, "mAm");
+                Object am = XposedHelpers.getObjectField(param.thisObject, "mAm");
                 context = (Context) XposedHelpers.getObjectField(am, "mContext");
             }
         } else {
-            Object am = (Object) XposedHelpers.getObjectField(param.thisObject, "mAm");
+            Object am = XposedHelpers.getObjectField(param.thisObject, "mAm");
             context = (Context) XposedHelpers.getObjectField(am, "mContext");
         }
 

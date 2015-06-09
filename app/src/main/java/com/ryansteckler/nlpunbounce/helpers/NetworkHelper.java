@@ -46,10 +46,7 @@ public class NetworkHelper{
                         return;
                     }
 
-                } catch (ClientProtocolException e) {
-                } catch (IOException e) {
-                } catch (SecurityException e) {
-                    //We were denied internet permissions.
+                } catch (SecurityException | IOException ignored) {
                 }
                 handler.sendEmptyMessage(0);
 
@@ -57,7 +54,7 @@ public class NetworkHelper{
         }.start();
     }
 
-    public static void sendToServer(final String contentId, final String content, final String url, final Handler handler) {
+    public static void sendToServer(final String content, final String url, final Handler handler) {
         //Post the content to the URL
 
         new Thread()
@@ -85,10 +82,7 @@ public class NetworkHelper{
                         return;
                     }
 
-                } catch (ClientProtocolException e) {
-                } catch (IOException e) {
-                } catch (SecurityException e) {
-                    //We were denied internet permissions.
+                } catch (SecurityException | IOException ignored) {
                 }
                 handler.sendEmptyMessage(0);
 

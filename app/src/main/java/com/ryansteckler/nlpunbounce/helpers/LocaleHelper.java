@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 
 import java.util.Locale;
 
@@ -12,7 +13,7 @@ import java.util.Locale;
  * Created by rsteckler on 10/13/14.
  */
 public class LocaleHelper {
-    public static int sForceEnglish = -1;
+    private static int sForceEnglish = -1;
     private static String sLocale = null;
 
     /**
@@ -51,7 +52,7 @@ public class LocaleHelper {
             config.locale = locale;
             activity.getBaseContext().getResources().updateConfiguration(config, activity.getBaseContext().getResources().getDisplayMetrics());
         } else {
-            Locale defaultLocale = activity.getResources().getSystem().getConfiguration().locale;
+            Locale defaultLocale = Resources.getSystem().getConfiguration().locale;
             Locale.setDefault(defaultLocale);
             Configuration config = new Configuration();
             config.locale = defaultLocale;
@@ -90,7 +91,6 @@ public class LocaleHelper {
                     sbuf.append(String.format("%02d", paramTimes[i]));
                     sbuf.append(":");
                 } else {
-                    continue;
                 }
             } else {
                 sbuf.append(String.format("%02d", paramTimes[i]));

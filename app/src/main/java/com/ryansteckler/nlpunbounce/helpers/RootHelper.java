@@ -22,12 +22,12 @@ public class RootHelper {
         return checkRootMethod1() || checkRootMethod2() || checkRootMethod3() || checkRootMethod4();
     }
 
-    public static boolean checkRootMethod1() {
+    private static boolean checkRootMethod1() {
         String buildTags = android.os.Build.TAGS;
         return buildTags != null && buildTags.contains("test-keys");
     }
 
-    public static boolean checkRootMethod2() {
+    private static boolean checkRootMethod2() {
         try {
             File file = new File("/system/app/Superuser.apk");
             return file.exists();
@@ -36,7 +36,7 @@ public class RootHelper {
         }
     }
 
-    public static boolean checkRootMethod4() {
+    private static boolean checkRootMethod4() {
         try {
             File file = new File("/system/xbin/su");
             return file.exists();
@@ -45,7 +45,7 @@ public class RootHelper {
         }
     }
 
-    public static boolean checkRootMethod3() {
+    private static boolean checkRootMethod3() {
         return new ExecShell().executeCommand(ExecShell.SHELL_CMD.check_su_binary) != null;
     }
 
@@ -95,9 +95,9 @@ public class RootHelper {
 
         private static String LOG_TAG = ExecShell.class.getName();
 
-        public static enum SHELL_CMD {
+        public enum SHELL_CMD {
             check_su_binary(new String[]{"/system/xbin/which", "su"});
-            String[] command;
+            final String[] command;
 
             SHELL_CMD(String[] command) {
                 this.command = command;
@@ -105,9 +105,9 @@ public class RootHelper {
         }
 
         public ArrayList<String> executeCommand(SHELL_CMD shellCmd) {
-            String line = null;
-            ArrayList<String> fullResponse = new ArrayList<String>();
-            Process localProcess = null;
+            String line;
+            ArrayList<String> fullResponse = new ArrayList<>();
+            Process localProcess;
             try {
                 localProcess = Runtime.getRuntime().exec(shellCmd.command);
             } catch (Exception e) {

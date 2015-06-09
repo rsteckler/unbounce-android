@@ -22,11 +22,11 @@ public class SettingsActivity extends Activity {
 
     private static final String TAG = "UnbounceSettings";
 
-    int mCurTheme = ThemeHelper.THEME_DEFAULT;
-    int mCurForceEnglish = -1;
+    private int mCurTheme = ThemeHelper.THEME_DEFAULT;
+    private int mCurForceEnglish = -1;
 
-    static int mClicksOnDebug = 0;
-    static Preference mExtendedDebugCategory = null;
+    private static int mClicksOnDebug = 0;
+    private static Preference mExtendedDebugCategory = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,7 +70,7 @@ public class SettingsActivity extends Activity {
             onSharedPreferenceChanged(sharedPref, "show_launcher_icon");
 
             //Hook up the custom clicks
-            Preference pref = (Preference) findPreference("reset_defaults");
+            Preference pref = findPreference("reset_defaults");
             pref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
@@ -95,7 +95,7 @@ public class SettingsActivity extends Activity {
                 }
             });
 
-            pref = (Preference) findPreference("about_author");
+            pref = findPreference("about_author");
             pref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
@@ -127,56 +127,64 @@ public class SettingsActivity extends Activity {
 
         private void enableDependent(String control, boolean enable)
         {
-            Preference controlToAffect = (Preference)findPreference(control);
+            Preference controlToAffect = findPreference(control);
             controlToAffect.setEnabled(enable);
         }
 
         @Override
         public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences, String key) {
 
-            if (key.equals("logging_level"))
-            {
-                ListPreference pref = (ListPreference) findPreference(key);
-                String entry = sharedPreferences.getString(key, "default");
-                if (entry.equals("quiet")) {
-                    pref.setSummary("Quiet");
-                } else if (entry.equals("verbose")) {
-                    pref.setSummary("Verbose");
-                } else {
-                    pref.setSummary("Default");
+            switch (key) {
+                case "logging_level": {
+                    ListPreference pref = (ListPreference) findPreference(key);
+                    String entry = sharedPreferences.getString(key, "default");
+                    if (entry.equals("quiet")) {
+                        pref.setSummary("Quiet");
+                    } else if (entry.equals("verbose")) {
+                        pref.setSummary("Verbose");
+                    } else {
+                        pref.setSummary("Default");
+                    }
+                    break;
                 }
-            }
-            else if (key.equals("show_launcher_icon")) {
-                CheckBoxPreference pref = (CheckBoxPreference) findPreference(key);
-                boolean value = sharedPreferences.getBoolean(key, false);
-                pref.setChecked(value);
+                case "show_launcher_icon": {
+                    CheckBoxPreference pref = (CheckBoxPreference) findPreference(key);
+                    boolean value = sharedPreferences.getBoolean(key, false);
+                    pref.setChecked(value);
 
-                PackageManager packageManager = getActivity().getPackageManager();
-                int state = value ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED : PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
-                ComponentName aliasName = new ComponentName(getActivity(), "com.ryansteckler.nlpunbounce.Settings-Alias");
-                packageManager.setComponentEnabledSetting(aliasName, state, PackageManager.DONT_KILL_APP);
-            }
-            else if (key.equals("theme")) {
-                ListPreference pref = (ListPreference) findPreference(key);
-                if (sharedPreferences.getString(key, "default").equals("dark")) {
-                    ThemeHelper.changeToTheme(this.getActivity(), ThemeHelper.THEME_DARK);
-                } else {
-                    ThemeHelper.changeToTheme(this.getActivity(), ThemeHelper.THEME_DEFAULT);
+                    PackageManager packageManager = getActivity().getPackageManager();
+                    int state = value ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED : PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
+                    ComponentName aliasName = new ComponentName(getActivity(), "com.ryansteckler.nlpunbounce.Settings-Alias");
+                    packageManager.setComponentEnabledSetting(aliasName, state, PackageManager.DONT_KILL_APP);
+                    break;
                 }
-            } else if (key.equals("force_english")) {
-                CheckBoxPreference pref = (CheckBoxPreference) findPreference(key);
-                boolean value = sharedPreferences.getBoolean(key, false);
-                pref.setChecked(value);
+                case "theme": {
+                    ListPreference pref = (ListPreference) findPreference(key);
+                    if (sharedPreferences.getString(key, "default").equals("dark")) {
+                        ThemeHelper.changeToTheme(this.getActivity(), ThemeHelper.THEME_DARK);
+                    } else {
+                        ThemeHelper.changeToTheme(this.getActivity(), ThemeHelper.THEME_DEFAULT);
+                    }
+                    break;
+                }
+                case "force_english": {
+                    CheckBoxPreference pref = (CheckBoxPreference) findPreference(key);
+                    boolean value = sharedPreferences.getBoolean(key, false);
+                    pref.setChecked(value);
 
-                if (value) {
-                    LocaleHelper.forceEnglish(this.getActivity());
-                } else {
-                    LocaleHelper.revertToSystem(getActivity());
+                    if (value) {
+                        LocaleHelper.forceEnglish(this.getActivity());
+                    } else {
+                        LocaleHelper.revertToSystem(getActivity());
+                    }
+                    break;
                 }
-            }else if (key.equals("enable_service_block")) {
-                CheckBoxPreference pref = (CheckBoxPreference) findPreference(key);
-                boolean value = sharedPreferences.getBoolean(key, false);
-                pref.setChecked(value);
+                case "enable_service_block": {
+                    CheckBoxPreference pref = (CheckBoxPreference) findPreference(key);
+                    boolean value = sharedPreferences.getBoolean(key, false);
+                    pref.setChecked(value);
+                    break;
+                }
             }
 
         }

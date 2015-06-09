@@ -71,7 +71,7 @@ public class DownloadHelper {
     }
 
     public interface DownloadListener {
-        public void onFinished(boolean success, String filename);
+        void onFinished(boolean success, String filename);
     }
 
 }

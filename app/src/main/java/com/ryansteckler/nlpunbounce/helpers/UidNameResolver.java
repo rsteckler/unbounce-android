@@ -28,8 +28,6 @@ import android.graphics.drawable.Drawable;
  */
 public class UidNameResolver {
 
-    protected String[] m_packages;
-    protected String[] m_packageNames;
     private static Context m_context;
     private static UidNameResolver m_instance;
 
@@ -48,11 +46,10 @@ public class UidNameResolver {
     public Drawable getIcon(String packageName) {
         Drawable icon = null;
         // retrieve and store the icon for that package
-        String myPackage = packageName;
-        if (!myPackage.equals("")) {
+        if (!packageName.equals("")) {
             PackageManager manager = m_context.getPackageManager();
             try {
-                icon = manager.getApplicationIcon(myPackage);
+                icon = manager.getApplicationIcon(packageName);
             } catch (Exception e) {
                 // nop: no icon found
                 icon = null;
@@ -110,19 +107,19 @@ public class UidNameResolver {
     // Side effects: sets mName and mUniqueName
     // Sets mNamePackage, mName and mUniqueName
     public String getNameForUid(int uid) {
-        String uidName = "";
+        String uidName;
         String uidNamePackage = "";
         boolean uidUniqueName = false;
 
         PackageManager pm = m_context.getPackageManager();
-        m_packages = pm.getPackagesForUid(uid);
+        String[] m_packages = pm.getPackagesForUid(uid);
 
         if (m_packages == null) {
             uidName = Integer.toString(uid);
             return uidName;
         }
 
-        m_packageNames = new String[m_packages.length];
+        String[] m_packageNames = new String[m_packages.length];
         System.arraycopy(m_packages, 0, m_packageNames, 0, m_packages.length);
 
         // Convert package names to user-facing labels where possible
@@ -131,9 +128,7 @@ public class UidNameResolver {
         }
 
         if (m_packageNames.length == 1) {
-            uidNamePackage = m_packages[0];
             uidName = m_packageNames[0];
-            uidUniqueName = true;
         } else {
             uidName = "UID"; // Default name
             // Look for an official name for this UID.
@@ -148,7 +143,7 @@ public class UidNameResolver {
                             break;
                         }
                     }
-                } catch (NameNotFoundException e) {
+                } catch (NameNotFoundException ignored) {
                 }
             }
         }
