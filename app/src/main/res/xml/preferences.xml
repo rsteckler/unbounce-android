@@ -68,7 +68,7 @@
             android:key="about_author"
             android:editable="false"
             android:defaultValue="0"
-            android:summary="Version: 3.0.5"
+            android:summary="Version: 3.0.9"
             />
 
         <Preference
@@ -90,6 +90,13 @@
             android:editable="false"
             android:defaultValue="0"
             android:summary="Various fixes"
+            />
+
+        <Preference
+            android:title="Additional Code: Mauro Massese"
+            android:editable="false"
+            android:defaultValue="0"
+            android:summary="Sony Xperia fix"
             />
 
     </PreferenceCategory>
