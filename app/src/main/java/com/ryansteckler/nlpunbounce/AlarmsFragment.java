@@ -149,10 +149,9 @@ public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.
             mTaskerMode = getArguments().getBoolean(ARG_TASKER_MODE);
         }
 
-        setHasOptionsMenu(true);
-
         mAdapter = new AlarmsAdapter(getActivity(), UnbounceStatsCollection.getInstance().toAlarmArrayList(getActivity()));
         setListAdapter(mAdapter);
+        setHasOptionsMenu(true);
     }
 
     @Override

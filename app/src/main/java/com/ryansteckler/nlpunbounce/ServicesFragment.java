@@ -142,10 +142,11 @@ public class ServicesFragment extends ListFragment implements ServiceDetailFragm
             mTaskerMode = getArguments().getBoolean(ARG_TASKER_MODE);
         }
 
-        setHasOptionsMenu(true);
+
 
         mAdapter = new ServicesAdapter(getActivity(), UnbounceStatsCollection.getInstance().toServiceArrayList(getActivity()));
         setListAdapter(mAdapter);
+        setHasOptionsMenu(true);
     }
 
     @Override
