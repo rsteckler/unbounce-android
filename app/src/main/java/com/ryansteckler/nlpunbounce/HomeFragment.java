@@ -27,6 +27,7 @@ import android.os.Message;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -178,6 +179,12 @@ public class HomeFragment extends Fragment  {
             view.post(new Runnable() {
                 @Override
                 public void run() {
+                    while (getActivity() == null) {
+                        try {
+                            Thread.sleep(250);
+                        } catch (InterruptedException e) {
+                        }
+                    }
                     ViewGroup container = (ViewGroup)getActivity().findViewById(R.id.bannerSwitcher);
                     setupBannerAnimations(container);
                     ViewGroup buttonContainer = (ViewGroup)getActivity().findViewById(R.id.welcomeButtonContainer);
@@ -494,7 +501,21 @@ public class HomeFragment extends Fragment  {
         layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MaterialSettingsActivity)getActivity()).mHelper.launchPurchaseFlow(getActivity(), "donate_2", 2, ((MaterialSettingsActivity)getActivity()).mPurchaseFinishedListener, "2");
+                //Catch crash
+                try {
+                    ((MaterialSettingsActivity) getActivity()).mHelper.launchPurchaseFlow(getActivity(), "donate_2", 2, ((MaterialSettingsActivity) getActivity()).mPurchaseFinishedListener, "2");
+                } catch (IllegalStateException ise) {
+                    new AlertDialog.Builder(getActivity())
+                            .setTitle(R.string.alert_noiab_title)
+                            .setMessage(R.string.alert_noiab_content)
+                            .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            })
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+
+                }
             }
         });
 
@@ -502,7 +523,21 @@ public class HomeFragment extends Fragment  {
         layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MaterialSettingsActivity)getActivity()).mHelper.launchPurchaseFlow(getActivity(), "donate_5", 5, ((MaterialSettingsActivity)getActivity()).mPurchaseFinishedListener, "5");
+                try {
+                    ((MaterialSettingsActivity)getActivity()).mHelper.launchPurchaseFlow(getActivity(), "donate_5", 5, ((MaterialSettingsActivity)getActivity()).mPurchaseFinishedListener, "5");
+                } catch (IllegalStateException ise) {
+                    new AlertDialog.Builder(getActivity())
+                            .setTitle(R.string.alert_noiab_title)
+                            .setMessage(R.string.alert_noiab_content)
+                            .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            })
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+
+                }
+
             }
         });
 
@@ -510,7 +545,21 @@ public class HomeFragment extends Fragment  {
         layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MaterialSettingsActivity)getActivity()).mHelper.launchPurchaseFlow(getActivity(), "donate_10", 10, ((MaterialSettingsActivity)getActivity()).mPurchaseFinishedListener, "10");
+                try {
+                    ((MaterialSettingsActivity)getActivity()).mHelper.launchPurchaseFlow(getActivity(), "donate_10", 10, ((MaterialSettingsActivity)getActivity()).mPurchaseFinishedListener, "10");
+                } catch (IllegalStateException ise) {
+                    new AlertDialog.Builder(getActivity())
+                            .setTitle(R.string.alert_noiab_title)
+                            .setMessage(R.string.alert_noiab_content)
+                            .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            })
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+
+                }
+
             }
         });
 
@@ -518,7 +567,20 @@ public class HomeFragment extends Fragment  {
         layoutAgain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MaterialSettingsActivity)getActivity()).mHelper.launchPurchaseFlow(getActivity(), "donate_1_consumable", 1, ((MaterialSettingsActivity)getActivity()).mPurchaseFinishedListener, "1");
+                try {
+                    ((MaterialSettingsActivity)getActivity()).mHelper.launchPurchaseFlow(getActivity(), "donate_1_consumable", 1, ((MaterialSettingsActivity)getActivity()).mPurchaseFinishedListener, "1");
+                } catch (IllegalStateException ise) {
+                    new AlertDialog.Builder(getActivity())
+                            .setTitle(R.string.alert_noiab_title)
+                            .setMessage(R.string.alert_noiab_content)
+                            .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            })
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+
+                }
             }
         });
 
@@ -526,7 +588,21 @@ public class HomeFragment extends Fragment  {
         layoutAgain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MaterialSettingsActivity)getActivity()).mHelper.launchPurchaseFlow(getActivity(), "donate_5_consumable", 5, ((MaterialSettingsActivity)getActivity()).mPurchaseFinishedListener, "5");
+                try {
+                    ((MaterialSettingsActivity)getActivity()).mHelper.launchPurchaseFlow(getActivity(), "donate_5_consumable", 5, ((MaterialSettingsActivity)getActivity()).mPurchaseFinishedListener, "5");
+                } catch (IllegalStateException ise) {
+                    new AlertDialog.Builder(getActivity())
+                            .setTitle(R.string.alert_noiab_title)
+                            .setMessage(R.string.alert_noiab_content)
+                            .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            })
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+
+                }
+
             }
         });
 
@@ -534,7 +610,21 @@ public class HomeFragment extends Fragment  {
         layoutAgain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MaterialSettingsActivity)getActivity()).mHelper.launchPurchaseFlow(getActivity(), "donate_10_consumable", 10, ((MaterialSettingsActivity)getActivity()).mPurchaseFinishedListener, "10");
+                try {
+                    ((MaterialSettingsActivity)getActivity()).mHelper.launchPurchaseFlow(getActivity(), "donate_10_consumable", 10, ((MaterialSettingsActivity)getActivity()).mPurchaseFinishedListener, "10");
+                } catch (IllegalStateException ise) {
+                    new AlertDialog.Builder(getActivity())
+                            .setTitle(R.string.alert_noiab_title)
+                            .setMessage(R.string.alert_noiab_content)
+                            .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            })
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+
+                }
+
             }
         });
 

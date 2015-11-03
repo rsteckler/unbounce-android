@@ -117,8 +117,8 @@ public class MaterialSettingsActivity extends Activity
                 if (!result.isSuccess()) {
                     Log.d(TAG, "In-app Billing setup failed: " + result);
                     new AlertDialog.Builder(MaterialSettingsActivity.this)
-                            .setTitle("Pro features unavailable.")
-                            .setMessage("Your device doesn't support In App Billing.  You won't be able to purchase the Pro features of Unbounce.  This could be because you need to update your Google Play Store application, or because you live in a country where In App Billing is disabled.")
+                            .setTitle(R.string.alert_noiab_title)
+                            .setMessage(R.string.alert_noiab_content)
                             .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                 }

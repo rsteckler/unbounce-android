@@ -760,7 +760,7 @@ public class UnbounceStatsCollection implements Serializable {
         //Are we allowed to?
         SharedPreferences prefs = context.getSharedPreferences("com.ryansteckler.nlpunbounce" + "_preferences", Context.MODE_WORLD_READABLE);
         mGlobalParticipation = prefs.getBoolean("global_participation", true);
-        if (mGlobalParticipation) {
+        if (false) {
             //Serialize the collection to JSON
             loadStats(context, true);
             if (mSincePushStats != null) {
@@ -804,7 +804,7 @@ public class UnbounceStatsCollection implements Serializable {
         //Push the JSON to the server
         //Are we allowed to?
         SharedPreferences prefs = context.getSharedPreferences("com.ryansteckler.nlpunbounce" + "_preferences", Context.MODE_WORLD_READABLE);
-        if (prefs.getBoolean("global_participation", true)) {
+        if (false) {
             NetworkHelper.getFromServer(URL_STATS, new Handler() {
                 @Override
                 public void handleMessage(Message msg) {

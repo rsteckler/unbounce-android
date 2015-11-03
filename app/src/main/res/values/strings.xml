@@ -15,7 +15,7 @@
 <string name="action_sort_by_time">"Sort by time"</string>
 <string name="action_settings">"Settings"</string>
 <string name="action_reset_stats">"Reset Stats"</string>
-<string name="card_donate_title">"KARMA"</string>
+<string name="card_donate_title">"PRO FEATURES"</string>
 <string name="card_donate_subtitle">"Support your local developer"</string>
 <string name="card_global_title">"GLOBAL STATS"</string>
 <string name="card_global_subtitle">"Our combined stats"</string>
@@ -32,7 +32,7 @@
 <string name="category_not_safe">"Not safe to limit"</string>
 <string name="category_error">"Error"</string>
 <string name="alert_noiab_title">"Pro features unavailable"</string>
-<string name="alert_noiab_content">"Your device doesn't support In App Billing.  You won't be able to purchase the Pro features of Amplify.  This could be because you need to update your Google Play Store application, or because you live in a country where In App Billing is disabled."</string>
+<string name="alert_noiab_content">"Your device doesn't support In App Billing.  You won't be able to purchase the Pro features of Amplify.  This is usually because you have Lucky Patcher installed, or you have Greenified the Play Store"</string>
 <string name="dialog_ok">"OK"</string>
 <string name="tasker_on">"On"</string>
 <string name="tasker_off">"Off"</string>
@@ -45,7 +45,7 @@
 <string name="tasker_task_alarm">"CHANGE ALARM"</string>
 <string name="tasker_task_reset">"RESET STATS"</string>
 <string name="alert_nopro_title">"This is a Pro feature"</string>
-<string name="alert_nopro_content">"To limit non-standard wakelocks and alarms, you need to purchase a donation package."</string>
+<string name="alert_nopro_content">"To limit non-standard wakelocks and alarms, you need to purchase a Pro Features package from the Main Amplify screen."</string>
 <string name="alert_unknown_alarm_title">"Limit unknown alarm?"</string>
 <string name="alert_unknown_alarm_content">"This alarm hasn't been proven safe to limit.  Would you like to limit it anyway?"</string>
 <string name="dialog_unbounce">"LIMIT"</string>
