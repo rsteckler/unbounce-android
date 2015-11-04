@@ -106,7 +106,7 @@
 <string name="donate_thank_you">"Grazie per la tua donazione. Significa molto per me. Lavoro duramente nel mio tempo libero per aiutare tutti ad avere una batteria che duri di più. Dondando, hai fatto la differenza sia per questo progetto, che nella vita della mia famiglia. Sei un grande."</string>
 <string name="donate_more_button">"COME ALTRO POSSO AIUTARE?"</string>
 <string name="donate_more_text">"Alcune persone mi hanno chiesto come contribuire oltre la donazione iniziale. I bottoni sottostanti ti permettono di donare ulteriormente, ma non forniranno funzionalità addizionali. Grazie mille per supportare Amplify!"</string>
-<string name="welcome_banner_title">"Benvenuto!"</string>
+<string name="welcome_banner_title">"Controlliamo se tutto è configurato"</string>
 <string name="welcome_banner_text">"Puoi bloccare i wakelock per evitare che il tuo telefono stia sveglio, e bloccare gli allarmi per evitare che si svegli. Ti abbiamo già settato alcune impostazioni di default che ti permetteranno di risparmiare batteria."</string>
 <string name="settings_category_options">"Opzioni"</string>
 <string name="settings_item_show_launcher">"Mostra icona nel launcher"</string>
