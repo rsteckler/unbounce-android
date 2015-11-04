@@ -54,7 +54,7 @@ public class MaterialSettingsActivity extends Activity
 
     private int mLastActionbarColor = 0;
 
-    private static final String TAG = "NlpUnbounceSettings: ";
+    private static final String TAG = "Amplify: ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
