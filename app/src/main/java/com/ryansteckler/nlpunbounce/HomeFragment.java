@@ -71,6 +71,7 @@ public class HomeFragment extends Fragment  {
     private final static int SETUP_FAILURE_XPOSED_INSTALL = 4; //Xposed isn't installed
     private final static int SETUP_FAILURE_ROOT = 5; //There's no root access.
 
+    private final static String TAG = "Amplify: ";
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -179,7 +180,8 @@ public class HomeFragment extends Fragment  {
             view.post(new Runnable() {
                 @Override
                 public void run() {
-                    while (getActivity() == null) {
+                    int waitForAttach = 0;
+                    while (getActivity() == null && waitForAttach < 10) {
                         try {
                             Thread.sleep(250);
                         } catch (InterruptedException e) {
@@ -260,10 +262,14 @@ public class HomeFragment extends Fragment  {
                 if (mSetupStep == 1) {
                     stepText.setText(getResources().getString(R.string.welcome_banner_checking_xposed));
                     mProgressChecking.setProgress(0);
+                    mProgressAnimation.end();
+                    mProgressAnimation.setCurrentPlayTime(0);
                     mProgressAnimation.start();
                 } else if (mSetupStep == 2) {
                     stepText.setText(getResources().getString(R.string.welcome_banner_checking_root));
                     mProgressChecking.setProgress(0);
+                    mProgressAnimation.end();
+                    mProgressAnimation.setCurrentPlayTime(0);
                     mProgressAnimation.start();
                 } else if (mSetupStep == 3) {
                     handleFinalStep();
@@ -352,6 +358,7 @@ public class HomeFragment extends Fragment  {
         }
 
         private void handleXposedInstalledFailure(TextView problemText, final TextView nextButtonText, final LinearLayout nextButton) {
+
             //Set the problem text.
             String errorFormat = getResources().getString(R.string.welcome_banner_problem_xposed_installed);
             String errorText = String.format(errorFormat, R.string.welcome_banner_problem_xposed_installed_link);
@@ -685,6 +692,7 @@ public class HomeFragment extends Fragment  {
 
 
     private boolean isXposedInstalled() {
+
         PackageManager pm = getActivity().getPackageManager();
 
         try {
@@ -876,6 +884,7 @@ public class HomeFragment extends Fragment  {
 
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+
         try {
             mListener = (OnFragmentInteractionListener) activity;
         } catch (ClassCastException e) {
