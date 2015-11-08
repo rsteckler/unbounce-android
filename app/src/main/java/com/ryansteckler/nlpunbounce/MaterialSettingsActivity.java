@@ -59,6 +59,8 @@ public class MaterialSettingsActivity extends Activity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i(TAG, "MaterialSettingsActivity onCreate called");
+
         mCurTheme = ThemeHelper.onActivityCreateSetTheme(this);
         mCurForceEnglish = LocaleHelper.onActivityCreateSetLocale(this);
         setContentView(R.layout.activity_material_settings);
@@ -83,19 +85,19 @@ public class MaterialSettingsActivity extends Activity
                 if (result.isFailure()) {
                     // update UI accordingly
                     updateDonationUi();
-                    Log.d("NlpUnbounce", "IAP result failed with code: " + result.getMessage());
+                    Log.d(TAG, "IAP result failed with code: " + result.getMessage());
                 }
                 else {
                     // does the user have the premium upgrade?
-                    Log.d("NlpUnbounce", "IAP result succeeded");
+                    Log.d(TAG, "IAP result succeeded");
                     if (inventory != null) {
-                        Log.d("NlpUnbounce", "IAP inventory exists");
+                        Log.d(TAG, "IAP inventory exists");
 
                         if (inventory.hasPurchase("donate_1") ||
                                 inventory.hasPurchase("donate_2") ||
                                 inventory.hasPurchase("donate_5") ||
                                 inventory.hasPurchase("donate_10")) {
-                            Log.d("NlpUnbounce", "IAP inventory contains a donation");
+                            Log.d(TAG, "IAP inventory contains a donation");
 
                             mIsPremium = true;
                         }
@@ -108,6 +110,7 @@ public class MaterialSettingsActivity extends Activity
             }
         };
 
+        Log.i(TAG, "MaterialSettingsActivity setting up IAB");
         //Normally we would secure this key, but we're not licensing this app.
         String base64billing = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxwicOx54j03qBil36upqYab0uBWnf+WjoSRNOaTD9mkqj9bLM465gZlDXhutMZ+n5RlHUqmxl7jwH9KyYGTbwFqCxbLMCwR4oDhXVhX4fS6iggoHY7Ek6EzMT79x2XwCDg1pdQmX9d9TYRp32Sw2E+yg2uZKSPW29ikfdcmfkHcdCWrjFSuMJpC14R3d9McWQ7sg42eQq2spIuSWtP8ARGtj1M8eLVxgkQpXWrk9ijPgVcAbNZYWT9ndIZoKPg7VJVvzzAUNK/YOb+BzRurqJ42vCZy1+K+E4EUtmg/fxawHfXLZ3F/gNwictZO9fv1PYHPMa0sezSNVFAcm0yP1BwIDAQAB";
         mHelper = new IabHelper(MaterialSettingsActivity.this, base64billing);
@@ -134,8 +137,10 @@ public class MaterialSettingsActivity extends Activity
             }
         });
 
+        Log.i(TAG, "MaterialSettingsActivity Starting SELinux service");
         startService(new Intent(this, SELinuxService.class));
 
+        Log.i(TAG, "MaterialSettingsActivity Starting GA");
         GoogleAnalytics ga = GoogleAnalytics.getInstance(this);
         Tracker tracker = ga.newTracker("UA-11575064-3");
         tracker.setScreenName("MaterialSettingsActivity");

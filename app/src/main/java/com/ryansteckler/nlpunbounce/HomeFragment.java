@@ -262,13 +262,11 @@ public class HomeFragment extends Fragment  {
                 if (mSetupStep == 1) {
                     stepText.setText(getResources().getString(R.string.welcome_banner_checking_xposed));
                     mProgressChecking.setProgress(0);
-                    mProgressAnimation.end();
                     mProgressAnimation.setCurrentPlayTime(0);
                     mProgressAnimation.start();
                 } else if (mSetupStep == 2) {
                     stepText.setText(getResources().getString(R.string.welcome_banner_checking_root));
                     mProgressChecking.setProgress(0);
-                    mProgressAnimation.end();
                     mProgressAnimation.setCurrentPlayTime(0);
                     mProgressAnimation.start();
                 } else if (mSetupStep == 3) {
