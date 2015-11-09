@@ -15,9 +15,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.google.android.gms.analytics.GoogleAnalytics;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 import com.ryansteckler.inappbilling.IabHelper;
 import com.ryansteckler.inappbilling.IabResult;
 import com.ryansteckler.inappbilling.Inventory;
@@ -140,11 +137,6 @@ public class MaterialSettingsActivity extends Activity
         Log.i(TAG, "MaterialSettingsActivity Starting SELinux service");
         startService(new Intent(this, SELinuxService.class));
 
-        Log.i(TAG, "MaterialSettingsActivity Starting GA");
-        GoogleAnalytics ga = GoogleAnalytics.getInstance(this);
-        Tracker tracker = ga.newTracker("UA-11575064-3");
-        tracker.setScreenName("MaterialSettingsActivity");
-        tracker.send(new HitBuilders.AppViewBuilder().build());
     }
 
     @Override

@@ -10,11 +10,11 @@ import android.os.Message;
 import android.os.SystemClock;
 import android.util.Log;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
+//import com.google.gson.Gson;
+//import com.google.gson.GsonBuilder;
+//import com.google.gson.reflect.TypeToken;
 import com.ryansteckler.nlpunbounce.ActivityReceiver;
-import com.ryansteckler.nlpunbounce.XposedReceiver;
+//import com.ryansteckler.nlpunbounce.XposedReceiver;
 import com.ryansteckler.nlpunbounce.helpers.NetworkHelper;
 import com.ryansteckler.nlpunbounce.hooks.Wakelocks;
 
@@ -27,7 +27,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.io.StreamCorruptedException;
-import java.lang.reflect.Type;
+//import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -765,36 +765,36 @@ public class UnbounceStatsCollection implements Serializable {
             loadStats(context, true);
             if (mSincePushStats != null) {
                 if (mSincePushStats.size() > 0) {
-                    final Gson gson = new GsonBuilder().create();
-                    String json = gson.toJson(mSincePushStats.values().toArray());
-
-                    //Push the JSON to the server
-                    NetworkHelper.sendToServer("DeviceStats", json, URL_STATS, new Handler() {
-                        @Override
-                        public void handleMessage(Message msg) {
-                            if (msg.what == 1) {
-
-                                //Update global stats
-                                String globalStats = msg.getData().getString("global_stats");
-                                if (globalStats != null) {
-                                    Type globalType = new TypeToken<HashMap<String, Long>>() {
-                                    }.getType();
-                                    mGlobalStats = gson.fromJson(globalStats, globalType);
-                                }
-
-                                //Reset the push collection, locally and in Xposed
-                                Intent intent = new Intent(XposedReceiver.RESET_ACTION);
-                                intent.putExtra(XposedReceiver.STAT_TYPE, UnbounceStatsCollection.STAT_PUSH);
-                                try {
-                                    context.sendBroadcast(intent);
-                                } catch (IllegalStateException ise) {
-
-                                }
-                                resetStats(context, STAT_PUSH);
-
-                            }
-                        }
-                    });
+//                    final Gson gson = new GsonBuilder().create();
+//                    String json = gson.toJson(mSincePushStats.values().toArray());
+//
+//                    //Push the JSON to the server
+//                    NetworkHelper.sendToServer("DeviceStats", json, URL_STATS, new Handler() {
+//                        @Override
+//                        public void handleMessage(Message msg) {
+//                            if (msg.what == 1) {
+//
+//                                //Update global stats
+//                                String globalStats = msg.getData().getString("global_stats");
+//                                if (globalStats != null) {
+//                                    Type globalType = new TypeToken<HashMap<String, Long>>() {
+//                                    }.getType();
+//                                    mGlobalStats = gson.fromJson(globalStats, globalType);
+//                                }
+//
+//                                //Reset the push collection, locally and in Xposed
+//                                Intent intent = new Intent(XposedReceiver.RESET_ACTION);
+//                                intent.putExtra(XposedReceiver.STAT_TYPE, UnbounceStatsCollection.STAT_PUSH);
+//                                try {
+//                                    context.sendBroadcast(intent);
+//                                } catch (IllegalStateException ise) {
+//
+//                                }
+//                                resetStats(context, STAT_PUSH);
+//
+//                            }
+//                        }
+//                    });
                 }
             }
         }
@@ -809,14 +809,14 @@ public class UnbounceStatsCollection implements Serializable {
                 @Override
                 public void handleMessage(Message msg) {
                     if (msg.what == 1) {
-                        //Update global stats
-                        String globalStats = msg.getData().getString("global_stats");
-                        if (globalStats != null) {
-                            Type globalType = new TypeToken<HashMap<String, Long>>() {
-                            }.getType();
-                            final Gson gson = new GsonBuilder().create();
-                            mGlobalStats = gson.fromJson(globalStats, globalType);
-                        }
+//                        //Update global stats
+//                        String globalStats = msg.getData().getString("global_stats");
+//                        if (globalStats != null) {
+//                            Type globalType = new TypeToken<HashMap<String, Long>>() {
+//                            }.getType();
+//                            final Gson gson = new GsonBuilder().create();
+//                            mGlobalStats = gson.fromJson(globalStats, globalType);
+//                        }
                     }
                     clientHandler.sendEmptyMessage(1);
                 }

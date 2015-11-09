@@ -13,9 +13,6 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.android.gms.analytics.GoogleAnalytics;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 import com.ryansteckler.inappbilling.IabHelper;
 import com.ryansteckler.inappbilling.IabResult;
 import com.ryansteckler.inappbilling.Inventory;
@@ -164,10 +161,6 @@ public class TaskerActivity extends Activity
 
         }
 
-        GoogleAnalytics ga = GoogleAnalytics.getInstance(this);
-        Tracker tracker = ga.newTracker("UA-11575064-3");
-        tracker.setScreenName("TaskerActivity");
-        tracker.send(new HitBuilders.AppViewBuilder().build());
     }
 
     public boolean isPremium() {

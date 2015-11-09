@@ -46,6 +46,6 @@
         style="?cardText"
         android:layout_marginLeft="@dimen/section_pad"
         android:layout_marginStart="@dimen/section_pad"
-        android:ellipsize="marquee" />
+        android:ellipsize="end" />
     </LinearLayout>
 </LinearLayout>

@@ -62,7 +62,7 @@
             android:key="about_author"
             android:editable="false"
             android:defaultValue="0"
-            android:summary="Version: 3.2.3"
+            android:summary="Version: 3.2.6"
             />
 
         <Preference
