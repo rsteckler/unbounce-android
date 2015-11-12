@@ -1,8 +1,11 @@
 package com.ryansteckler.nlpunbounce;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.FragmentManager;
 import android.app.ListFragment;
+import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.graphics.Rect;
@@ -15,6 +18,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
 
@@ -119,10 +123,27 @@ public class WakelocksFragment extends ListFragment implements BaseDetailFragmen
             mAdapter.sort(mSortBy);
 
             return true;
+        } else if (id == R.id.action_new_custom) {
+            //Create a new custom wakelock regex
+            switchToRegex();
         }
         return super.onOptionsItemSelected(item);
     }
 
+    private void switchToRegex() {
+        //Spin up the new Detail fragment.  Dig the custom animations.  Also put it on the back stack
+        //so we can hit the back button and come back to the list.
+        FragmentManager fragmentManager = getFragmentManager();
+        WakelockRegexFragment newFrag = (WakelockRegexFragment) new WakelockRegexFragment().newInstance();
+//        newFrag.attachClearListener(this);
+        fragmentManager.beginTransaction()
+                .setCustomAnimations(R.animator.expand_in, R.animator.noop, R.animator.noop, R.animator.expand_out)
+                .hide(this)
+                .add(R.id.container, newFrag, "wakelock_regex")
+                .addToBackStack(null)
+                .commit();
+
+    }
 
     @Override
     public void onPrepareOptionsMenu(Menu menu) {

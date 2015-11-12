@@ -50,10 +50,9 @@ public class WakelockDetailFragment extends BaseDetailFragment {
         TextView description = (TextView) view.findViewById(R.id.textViewDescription);
         String descriptionText = description.getText().toString();
 
-
-
-        descriptionText = descriptionText + "\n\n" + "Package Name: " + mStat.getDerivedPackageName(getActivity().getApplicationContext());
-
+        descriptionText = "Package Name: " + mStat.getDerivedPackageName(getActivity().getApplicationContext()) + "\n" +
+                "Full Name: " + mStat.getName() + "\n\n" +
+                descriptionText;
 
         description.setText(descriptionText);
 

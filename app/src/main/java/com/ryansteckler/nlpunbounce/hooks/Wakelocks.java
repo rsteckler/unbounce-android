@@ -25,6 +25,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
@@ -40,7 +41,7 @@ import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 public class Wakelocks implements IXposedHookLoadPackage {
 
     private static final String TAG = "Amplify: ";
-    public static final String VERSION = "3.2.6"; //This needs to be pulled from the manifest or gradle build.
+    public static final String VERSION = "3.2.9a"; //This needs to be pulled from the manifest or gradle build.
     public static final String FILE_VERSION = "3"; //This needs to be pulled from the manifest or gradle build.
     private HashMap<String, Long> mLastWakelockAttempts = null; //The last time each wakelock was allowed.
     private HashMap<String, Long> mLastAlarmAttempts = null; //The last time each alarm was allowed.
@@ -403,7 +404,26 @@ public class Wakelocks implements IXposedHookLoadPackage {
 
         //If we're blocking this wakelock
         String prefName = "wakelock_" + wakeLockName + "_enabled";
-        if (m_prefs.getBoolean(prefName, false)) {
+        boolean block = m_prefs.getBoolean(prefName, false);
+        if (!block) {
+            debugLog("Not Blocking Wakelock: " + wakeLockName + " via prefs");
+
+            //See if there is a wildcard block on this
+            Set<String> wakelockWildcards = m_prefs.getStringSet("wakelock_regex_set", null);
+            if (wakelockWildcards != null) {
+                debugLog("We have wakelock wildcards!");
+                //For each wildcard block
+                for (String wildcard : wakelockWildcards) {
+                    debugLog("Checking wildcard: " + wildcard);
+                    if (wakeLockName.matches(wildcard)) {
+                        debugLog("Blocking Wakelock: " + wakeLockName + " via regex: " + wildcard);
+                        block = true;
+                        break;
+                    }
+                }
+            }
+        }
+        if (block) {
 
             long collectorMaxFreq = m_prefs.getLong("wakelock_" + wakeLockName + "_seconds", 240);
             collectorMaxFreq *= 1000; //convert to ms

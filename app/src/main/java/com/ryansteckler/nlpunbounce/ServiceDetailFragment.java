@@ -28,7 +28,10 @@ public class ServiceDetailFragment extends BaseDetailFragment {
         TextView description = (TextView) view.findViewById(R.id.textViewDescription);
         String descriptionText = description.getText().toString();
 
-        descriptionText = descriptionText + "\n\n" + "Package Name: " +  mStat.getDerivedPackageName(getActivity().getApplicationContext());
+        descriptionText = "Package Name: " + mStat.getDerivedPackageName(getActivity().getApplicationContext()) + "\n" +
+                "Full Name: " + mStat.getName() + "\n\n" +
+                descriptionText;
+
         description.setText(descriptionText);
 
         SharedPreferences prefs = getActivity().getSharedPreferences(AlarmDetailFragment.class.getPackage().getName() + "_preferences", Context.MODE_WORLD_READABLE);

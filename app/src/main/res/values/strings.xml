@@ -214,4 +214,6 @@ May you have a long [battery] life!
 <string name="stat_service_blocked">"Services blocked"</string>
 <string name="service_switch_allow">"Allow"</string>
 <string name="service_switch_deny">"Deny"</string>
+<string name="action_new_custom_item">"New"</string>
+
 </resources>
