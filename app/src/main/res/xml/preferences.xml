@@ -29,6 +29,11 @@
             android:summary="@string/settings_item_force_english_summary"
             android:defaultValue="false"/>
 
+        <CheckBoxPreference
+            android:key="scroll_item_names"
+            android:title="@string/settings_scroll_item_names"
+            android:defaultValue="true"/>
+
         <Preference
             android:title="@string/settings_item_reset_defaults_title"
             android:key="reset_defaults"
@@ -62,7 +67,7 @@
             android:key="about_author"
             android:editable="false"
             android:defaultValue="0"
-            android:summary="Version: 3.2.9a"
+            android:summary="Version: 3.3.0"
             />
 
         <Preference

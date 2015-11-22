@@ -8,7 +8,8 @@
     android:paddingTop="@dimen/separator_pad"
     android:paddingBottom="@dimen/separator_pad"
     android:id="@+id/listitemAlarm"
-    android:baselineAligned="false">
+    android:baselineAligned="false"
+    android:descendantFocusability="blocksDescendants">
 
 
     <TextView
@@ -31,7 +32,6 @@
         android:layout_height="wrap_content"
         android:text="DELETE"
         android:id="@+id/btn_delete_regex"
-        android:clickable="true"
         android:enabled="true"
         android:layout_gravity="center_vertical" />
 

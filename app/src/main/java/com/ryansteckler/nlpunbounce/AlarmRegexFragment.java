@@ -1,9 +1,9 @@
 package com.ryansteckler.nlpunbounce;
 
+import android.app.DialogFragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,13 +20,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * A fragment representing a list of Items.
- * <p/>
- * <p/>
- * Activities containing this fragment MUST implement the {OnFragmentInteractionListener}
- * interface.
+ * Created by rsteckler on 11/21/15.
  */
-public class WakelockRegexFragment extends android.app.ListFragment /* implements BaseDetailFragment.FragmentClearListener */ {
+public class AlarmRegexFragment extends android.app.ListFragment /* implements BaseDetailFragment.FragmentClearListener */ {
 
     private RegexAdapter mAdapter;
 
@@ -34,11 +30,11 @@ public class WakelockRegexFragment extends android.app.ListFragment /* implement
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public WakelockRegexFragment() {
+    public AlarmRegexFragment() {
     }
 
-    public static WakelockRegexFragment newInstance() {
-        WakelockRegexFragment fragment = new WakelockRegexFragment();
+    public static AlarmRegexFragment newInstance() {
+        AlarmRegexFragment fragment = new AlarmRegexFragment();
         return fragment;
     }
 
@@ -60,11 +56,11 @@ public class WakelockRegexFragment extends android.app.ListFragment /* implement
         //Setup the list adapter
         SharedPreferences prefs = getActivity().getSharedPreferences("com.ryansteckler.nlpunbounce_preferences", Context.MODE_WORLD_READABLE);
         Set<String> sampleSet = new HashSet<String>();
-        Set<String> set = prefs.getStringSet("wakelock_regex_set", sampleSet);
+        Set<String> set = prefs.getStringSet("alarm_regex_set", sampleSet);
         ArrayList<String> list = new ArrayList<String>(set);
 
         // Create The Adapter with passing ArrayList as 3rd parameter
-        mAdapter = new RegexAdapter(getActivity(), list, "wakelock");
+        mAdapter = new RegexAdapter(getActivity(), list, "alarm");
 
         // Sets The Adapter
         setListAdapter(mAdapter);
@@ -76,7 +72,7 @@ public class WakelockRegexFragment extends android.app.ListFragment /* implement
 
         if (id == R.id.action_new_custom) {
             //Create a new custom wakelock regex
-            DialogFragment dialog = RegexDialogFragment.newInstance("", "", "wakelock");
+            DialogFragment dialog = RegexDialogFragment.newInstance("", "", "alarm");
             dialog.setTargetFragment(this, 0);
             dialog.show(getActivity().getFragmentManager(), "RegexDialog");
         }
@@ -97,11 +93,11 @@ public class WakelockRegexFragment extends android.app.ListFragment /* implement
         //Setup the list adapter
         SharedPreferences prefs = getActivity().getSharedPreferences("com.ryansteckler.nlpunbounce_preferences", Context.MODE_WORLD_READABLE);
         Set<String> sampleSet = new HashSet<String>();
-        Set<String> set = prefs.getStringSet("wakelock_regex_set", sampleSet);
+        Set<String> set = prefs.getStringSet("alarm_regex_set", sampleSet);
         ArrayList<String> list = new ArrayList<String>(set);
 
         // Create The Adapter with passing ArrayList as 3rd parameter
-        mAdapter = new RegexAdapter(getActivity(), list, "wakelock");
+        mAdapter = new RegexAdapter(getActivity(), list, "alarm");
 
         // Sets The Adapter
         setListAdapter(mAdapter);
@@ -118,7 +114,7 @@ public class WakelockRegexFragment extends android.app.ListFragment /* implement
         String value = mAdapter.getItem(position);
         String name = value.substring(0, value.indexOf("$$||$$"));
         String seconds = value.substring(value.indexOf("$$||$$") + 6);
-        DialogFragment dialog = RegexDialogFragment.newInstance(name, seconds, "wakelock");
+        DialogFragment dialog = RegexDialogFragment.newInstance(name, seconds, "alarm");
         dialog.setTargetFragment(this, 0);
         dialog.show(getActivity().getFragmentManager(), "RegexDialog");
 

@@ -117,8 +117,26 @@ public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.
             //Do the re-sort here
             mAdapter.sort(mSortBy);
             return true;
+        } else if (id == R.id.action_new_custom) {
+            //Create a new custom wakelock regex
+            switchToRegex();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void switchToRegex() {
+        //Spin up the new Detail fragment.  Dig the custom animations.  Also put it on the back stack
+        //so we can hit the back button and come back to the list.
+        FragmentManager fragmentManager = getFragmentManager();
+        AlarmRegexFragment newFrag = (AlarmRegexFragment) new AlarmRegexFragment().newInstance();
+//        newFrag.attachClearListener(this);
+        fragmentManager.beginTransaction()
+                .setCustomAnimations(R.animator.expand_in, R.animator.noop, R.animator.noop, R.animator.expand_out)
+                .hide(this)
+                .add(R.id.container, newFrag, "alarm_regex")
+                .addToBackStack(null)
+                .commit();
+
     }
 
     @Override

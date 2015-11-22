@@ -41,7 +41,7 @@ import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 public class Wakelocks implements IXposedHookLoadPackage {
 
     private static final String TAG = "Amplify: ";
-    public static final String VERSION = "3.2.9a"; //This needs to be pulled from the manifest or gradle build.
+    public static final String VERSION = "3.3.0"; //This needs to be pulled from the manifest or gradle build.
     public static final String FILE_VERSION = "3"; //This needs to be pulled from the manifest or gradle build.
     private HashMap<String, Long> mLastWakelockAttempts = null; //The last time each wakelock was allowed.
     private HashMap<String, Long> mLastAlarmAttempts = null; //The last time each alarm was allowed.
@@ -405,19 +405,18 @@ public class Wakelocks implements IXposedHookLoadPackage {
         //If we're blocking this wakelock
         String prefName = "wakelock_" + wakeLockName + "_enabled";
         boolean block = m_prefs.getBoolean(prefName, false);
+        int overrideSeconds = -1;
         if (!block) {
-            debugLog("Not Blocking Wakelock: " + wakeLockName + " via prefs");
-
             //See if there is a wildcard block on this
             Set<String> wakelockWildcards = m_prefs.getStringSet("wakelock_regex_set", null);
             if (wakelockWildcards != null) {
-                debugLog("We have wakelock wildcards!");
                 //For each wildcard block
                 for (String wildcard : wakelockWildcards) {
-                    debugLog("Checking wildcard: " + wildcard);
+                    String regexToMatch = wildcard.substring(0, wildcard.indexOf("$$||$$"));
                     if (wakeLockName.matches(wildcard)) {
-                        debugLog("Blocking Wakelock: " + wakeLockName + " via regex: " + wildcard);
                         block = true;
+                        overrideSeconds = Integer.parseInt(wildcard.substring(wildcard.indexOf("$$||$$") + 6));
+                        debugLog("Blocking Wakelock: " + wakeLockName + " via regex for " + overrideSeconds + " seconds.");
                         break;
                     }
                 }
@@ -425,7 +424,12 @@ public class Wakelocks implements IXposedHookLoadPackage {
         }
         if (block) {
 
-            long collectorMaxFreq = m_prefs.getLong("wakelock_" + wakeLockName + "_seconds", 240);
+            long collectorMaxFreq = -1;
+            if (overrideSeconds != -1) {
+                collectorMaxFreq = overrideSeconds;
+            } else {
+                collectorMaxFreq = m_prefs.getLong("wakelock_" + wakeLockName + "_seconds", 240);
+            }
             collectorMaxFreq *= 1000; //convert to ms
 
             //Debounce this to our minimum interval.
@@ -605,9 +609,27 @@ public class Wakelocks implements IXposedHookLoadPackage {
                 continue;
             }
 
-            //If we're blocking this wakelock
+            //If we're blocking this alarm
             String prefName = "alarm_" + alarmName + "_enabled";
-            if (m_prefs.getBoolean(prefName, false)) {
+            boolean block = m_prefs.getBoolean(prefName, false);
+            int overrideSeconds = -1;
+            if (!block) {
+                //See if there is a wildcard block on this
+                Set<String> alarmWildcards = m_prefs.getStringSet("alarm_regex_set", null);
+                if (alarmWildcards != null) {
+                    //For each wildcard block
+                    for (String wildcard : alarmWildcards) {
+                        String regexToMatch = wildcard.substring(0, wildcard.indexOf("$$||$$"));
+                        if (alarmName.matches(wildcard)) {
+                            block = true;
+                            overrideSeconds = Integer.parseInt(wildcard.substring(wildcard.indexOf("$$||$$") + 6));
+                            debugLog("Blocking Wakelock: " + alarmName + " via regex for " + overrideSeconds + " seconds.");
+                            break;
+                        }
+                    }
+                }
+            }
+            if (block) {
 
                 long collectorMaxFreq = m_prefs.getLong("alarm_" + alarmName + "_seconds", 240);
                 collectorMaxFreq *= 1000; //convert to ms

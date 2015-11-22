@@ -62,7 +62,7 @@
             style="?cardText"
             android:layout_marginLeft="@dimen/section_pad"
             android:layout_marginStart="@dimen/section_pad"
-            android:ellipsize="end"
+            android:ellipsize="marquee"
             android:layout_toStartOf="@id/textviewWakelockTime"
             android:layout_toLeftOf="@id/textviewWakelockTime"
             android:layout_alignParentStart="true"
