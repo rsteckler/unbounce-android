@@ -161,13 +161,10 @@ public class HomeFragment extends Fragment  {
                 mSetupFailureStep = SETUP_FAILURE_VERSION;
                 if (!isUnbounceServiceRunning()) {
                     mSetupFailureStep = SETUP_FAILURE_SERVICE;
-                    if (!isXposedRunning()) {
-                        mSetupFailureStep = SETUP_FAILURE_XPOSED_RUNNING;
-                        if (!isXposedInstalled()) {
-                            mSetupFailureStep = SETUP_FAILURE_XPOSED_INSTALL;
-                            if (!RootHelper.isDeviceRooted()) {
-                                mSetupFailureStep = SETUP_FAILURE_ROOT;
-                            }
+                    if (!isXposedInstalled()) {
+                        mSetupFailureStep = SETUP_FAILURE_XPOSED_INSTALL;
+                        if (!RootHelper.isDeviceRooted()) {
+                            mSetupFailureStep = SETUP_FAILURE_ROOT;
                         }
                     }
                 }
@@ -1003,6 +1000,7 @@ public class HomeFragment extends Fragment  {
 
 
     public boolean isXposedRunning() {
+//        return true;
         return new File("/data/data/de.robv.android.xposed.installer/bin/XposedBridge.jar").exists();
     }
 
