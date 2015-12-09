@@ -71,7 +71,7 @@ public class AlarmRegexFragment extends android.app.ListFragment /* implements B
         int id = item.getItemId();
 
         if (id == R.id.action_new_custom) {
-            //Create a new custom wakelock regex
+            //Create a new custom alarm regex
             DialogFragment dialog = RegexDialogFragment.newInstance("", "", "alarm");
             dialog.setTargetFragment(this, 0);
             dialog.show(getActivity().getFragmentManager(), "RegexDialog");

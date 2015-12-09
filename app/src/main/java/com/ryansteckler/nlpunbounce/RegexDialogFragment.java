@@ -2,6 +2,7 @@ package com.ryansteckler.nlpunbounce;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -117,7 +118,12 @@ public class RegexDialogFragment  extends android.app.DialogFragment{
                 SharedPreferences.Editor edit = prefs.edit();
                 edit.putStringSet(mDefaultSetName + "_regex_set", set);
                 edit.commit();
-                ((WakelockRegexFragment) (getTargetFragment())).reload();
+                Fragment regexFrag = getTargetFragment();
+                if (regexFrag instanceof WakelockRegexFragment) {
+                    ((WakelockRegexFragment) (regexFrag)).reload();
+                } else if (regexFrag instanceof AlarmRegexFragment) {
+                    ((AlarmRegexFragment) (regexFrag)).reload();
+                }
                 return;
             }
         });

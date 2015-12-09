@@ -118,7 +118,7 @@ public class AlarmsFragment extends ListFragment implements AlarmDetailFragment.
             mAdapter.sort(mSortBy);
             return true;
         } else if (id == R.id.action_new_custom) {
-            //Create a new custom wakelock regex
+            //Create a new custom alarm regex
             switchToRegex();
         }
         return super.onOptionsItemSelected(item);
