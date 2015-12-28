@@ -41,7 +41,7 @@ import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 public class Wakelocks implements IXposedHookLoadPackage {
 
     private static final String TAG = "Amplify: ";
-    public static final String VERSION = "3.3.1"; //This needs to be pulled from the manifest or gradle build.
+    public static final String VERSION = "3.3.3"; //This needs to be pulled from the manifest or gradle build.
     public static final String FILE_VERSION = "3"; //This needs to be pulled from the manifest or gradle build.
     private HashMap<String, Long> mLastWakelockAttempts = null; //The last time each wakelock was allowed.
     private HashMap<String, Long> mLastAlarmAttempts = null; //The last time each alarm was allowed.
@@ -201,18 +201,24 @@ public class Wakelocks implements IXposedHookLoadPackage {
 
         if (isServicBlockingEnabled) {
             boolean servicesHooked = false;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                //Try for hooks for API levels 23
+                defaultLog("Attempting 23 ServiceHook");
+                try23ServiceHook(lpparam);
+                defaultLog("Successful 23 ServiceHook");
+                servicesHooked = true;
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
                 //Try for wakelock hooks for API levels 19-20
-                defaultLog("Attempting 17to20 ServiceHook");
+                defaultLog("Attempting 17to 22 ServiceHook");
                 try17To20ServiceHook(lpparam);
-                defaultLog("Successful 17to20 ServiceHook");
+                defaultLog("Successful 17to 22 ServiceHook");
                 servicesHooked = true;
             } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH &&
                     Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN) {
                 //Try for wakelock hooks for API levels 19-20
-                defaultLog("Attempting 14to16 ServiceHook");
+                defaultLog("Attempting 14 to 16 ServiceHook");
                 try14To16ServiceHook(lpparam);
-                defaultLog("Successful 14to16 ServiceHook");
+                defaultLog("Successful 14 to 16 ServiceHook");
                 servicesHooked = true;
             }
 
@@ -225,6 +231,17 @@ public class Wakelocks implements IXposedHookLoadPackage {
     }
 
     //in back to 4.2_r1
+    private void try23ServiceHook(LoadPackageParam lpparam) {
+        findAndHookMethod("android.app.ActivityManagerNative", lpparam.classLoader, "startservice", "android.app.IApplicationThread", Intent.class, String.class, String.class, int.class, new XC_MethodHook() {
+            @Override
+            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                Intent intent = (Intent) param.args[1];
+                handleServiceStart(param, intent);
+            }
+        });
+    }
+
+
     private void try17To20ServiceHook(LoadPackageParam lpparam) {
         try {
             findAndHookMethod("com.android.server.am.ActiveServices", lpparam.classLoader, "startServiceLocked", "android.app.IApplicationThread", Intent.class, String.class, int.class, int.class, int.class, new XC_MethodHook() {

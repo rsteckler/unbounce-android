@@ -110,10 +110,10 @@ public class RegexDialogFragment  extends android.app.DialogFragment{
                 SharedPreferences prefs = getActivity().getSharedPreferences("com.ryansteckler.nlpunbounce_preferences", Context.MODE_WORLD_READABLE);
                 Set<String> sampleSet = new HashSet<String>();
                 Set<String> set = new HashSet<String>(prefs.getStringSet(mDefaultSetName + "_regex_set", sampleSet));
-                set.add(value + "$$||$$" + seconds);
                 if (mDefaultValue != "" ) {
                     set.remove(mDefaultValue + "$$||$$" + mDefaultSeconds);
                 }
+                set.add(value + "$$||$$" + seconds);
 
                 SharedPreferences.Editor edit = prefs.edit();
                 edit.putStringSet(mDefaultSetName + "_regex_set", set);
