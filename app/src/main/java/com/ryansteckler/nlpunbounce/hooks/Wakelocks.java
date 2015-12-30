@@ -41,7 +41,7 @@ import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 public class Wakelocks implements IXposedHookLoadPackage {
 
     private static final String TAG = "Amplify: ";
-    public static final String VERSION = "3.3.3"; //This needs to be pulled from the manifest or gradle build.
+    public static final String VERSION = "3.3.4"; //This needs to be pulled from the manifest or gradle build.
     public static final String FILE_VERSION = "3"; //This needs to be pulled from the manifest or gradle build.
     private HashMap<String, Long> mLastWakelockAttempts = null; //The last time each wakelock was allowed.
     private HashMap<String, Long> mLastAlarmAttempts = null; //The last time each alarm was allowed.
@@ -232,13 +232,17 @@ public class Wakelocks implements IXposedHookLoadPackage {
 
     //in back to 4.2_r1
     private void try23ServiceHook(LoadPackageParam lpparam) {
-        findAndHookMethod("android.app.ActivityManagerNative", lpparam.classLoader, "startservice", "android.app.IApplicationThread", Intent.class, String.class, String.class, int.class, new XC_MethodHook() {
-            @Override
-            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                Intent intent = (Intent) param.args[1];
-                handleServiceStart(param, intent);
-            }
-        });
+        try {
+            findAndHookMethod("com.android.server.am.ActiveServices", lpparam.classLoader, "startServiceLocked", "android.app.IApplicationThread", Intent.class, String.class, int.class, int.class, String.class, int.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    Intent intent = (Intent) param.args[1];
+                    handleServiceStart(param, intent);
+                }
+            });
+        } catch (NoSuchMethodError nsme) {
+            defaultLog("Standard Service hook failed.");
+        }
     }
 
 
@@ -648,7 +652,13 @@ public class Wakelocks implements IXposedHookLoadPackage {
             }
             if (block) {
 
-                long collectorMaxFreq = m_prefs.getLong("alarm_" + alarmName + "_seconds", 240);
+                long collectorMaxFreq = -1;
+
+                if (overrideSeconds != -1) {
+                    collectorMaxFreq = overrideSeconds;
+                } else {
+                    collectorMaxFreq = m_prefs.getLong("alarm_" + alarmName + "_seconds", 240);
+                }
                 collectorMaxFreq *= 1000; //convert to ms
 
                 //Debounce this to our minimum interval.
