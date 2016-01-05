@@ -4,164 +4,193 @@
 <string name="version">"Версия"</string>
 <string name="title_activity_material_settings">"Amplify"</string>
 <string name="title_home">"Сведения"</string>
-<string name="title_wakelocks">"Пробуждения"</string>
-<string name="title_alarms">"События"</string>
+<string name="title_wakelocks">"Вэйклоки"</string>
+<string name="title_alarms">"Сигналы"</string>
 <string name="navigation_drawer_open">"Открыть меню навигации"</string>
 <string name="navigation_drawer_close">"Закрыть меню навигации"</string>
 <string name="action_search">"Поиск"</string>
-<string name="action_sort_by_count">"Сортировать по количеству"</string>
-<string name="action_sort_by_time">"Сортировать по длительности"</string>
+<string name="action_sort_by_count">"По количеству"</string>
+<string name="action_sort_by_time">"По длительности"</string>
 <string name="action_settings">"Настройки"</string>
 <string name="action_reset_stats">"Сбросить статистику"</string>
 <string name="card_donate_title">"КАРМА"</string>
-<string name="card_donate_subtitle">"Поддержите разработчика сего модуля"</string>
+<string name="card_donate_subtitle">"Поддержать разработчика"</string>
 <string name="card_global_title">"ГЛОБАЛЬНАЯ СТАТИСТИКА"</string>
-<string name="card_global_subtitle">"Наши всемирные результаты"</string>
+<string name="card_global_subtitle">"Наша обобщённая статистика"</string>
 <string name="card_local_title">"СТАТИСТИКА УСТРОЙСТВА"</string>
 <string name="card_local_subtitle">"Ваши результаты"</string>
 <string name="card_settings_title">"НАСТРОЙКИ"</string>
-<string name="card_settings_subtitle_alarm">"Сдерживать это событие"</string>
-<string name="card_settings_subtitle_wakelock">"Сдерживать это пробуждение"</string>
+<string name="card_settings_subtitle_alarm">"Управлять сигналом"</string>
+<string name="card_settings_subtitle_wakelock">"Управлять вэйклоком"</string>
 <string name="card_description_title">"ОПИСАНИЕ"</string>
-<string name="card_description_subtitle">"Почему оно ест мою батарею?"</string>
-<string name="category_unbounced">"Сдержанные"</string>
-<string name="category_safe">"Безвредно сдерживаемые"</string>
-<string name="category_unknown">"Неизвестные"</string>
-<string name="category_not_safe">"Нежелательны для сдерживания"</string>
+<string name="card_description_subtitle">"Почему это расходует заряд?"</string>
+<string name="category_unbounced">"Ограничено"</string>
+<string name="category_safe">"Безопасно для ограничения"</string>
+<string name="category_unknown">"Неизвестно"</string>
+<string name="category_not_safe">"Небезопасно для ограничения"</string>
 <string name="category_error">"Ошибка"</string>
-<string name="alert_noiab_title">"Оплата возможности недоступна"</string>
-<string name="alert_noiab_content">"Ваше устройство не поддерживает покупки внутри приложений.  Вы не сможете приобрести платные возможности Amplify.  Скорее всего это связано с тем, что у Вас устарели Сервисы Google Play, или Вы живёте в стране, где покупки внутри приложений недоступны."</string>
+<string name="alert_noiab_title">"Функции Pro недоступны"</string>
+<string name="alert_noiab_content">"Ваше устройство не поддерживает покупки внутри приложений.  Вы не сможете приобрести платные возможности Amplify.  Скорее всего, это связано с необходимостью обновить Сервисы Google Play, или Вы живёте в стране, где покупки внутри приложений недоступны."</string>
 <string name="dialog_ok">"OK"</string>
 <string name="tasker_on">"Вкл"</string>
 <string name="tasker_off">"Выкл"</string>
 <string name="tasker_reset_stats">"Сбросить статистику"</string>
-<string name="tasker_choose_wakelock">"Выберите пробуждение для настройки."</string>
-<string name="tasker_choose_alarm">"Выберите событие для настройки."</string>
+<string name="tasker_choose_wakelock">"Выберите вэйклок для настройки."</string>
+<string name="tasker_choose_alarm">"Выберите сигнал для настройки."</string>
 <string name="tasker_welcome">"Добро пожаловать в плагин Amplify для Tasker."</string>
-<string name="tasker_which_task">"Изменить настройки для пробуждения или события, или сбросить статистику устройства?"</string>
-<string name="tasker_task_wakelock">"НАСТРОИТЬ ПРОБУЖДЕНИЕ"</string>
-<string name="tasker_task_alarm">"НАСТРОИТЬ СОБЫТИЕ"</string>
+<string name="tasker_which_task">"Изменить настройки для вэйклока или сигнала, или сбросить статистику устройства?"</string>
+<string name="tasker_task_wakelock">"НАСТРОИТЬ ВЭЙКЛОК"</string>
+<string name="tasker_task_alarm">"НАСТРОИТЬ СИГНАЛ"</string>
 <string name="tasker_task_reset">"СБРОС СТАТИСТИКИ"</string>
 <string name="alert_nopro_title">"Это платная функция"</string>
-<string name="alert_nopro_content">"Для сдерживания необычных пробуждений и событий, требуется внести пожертвование внутри приложения."</string>
-<string name="alert_unknown_alarm_title">"Сдержать неизвестное событие?"</string>
-<string name="alert_unknown_alarm_content">"Последствия сдерживания данного события неизвестны.  Вы уверены в своих действиях?"</string>
-<string name="dialog_unbounce">"СДЕРЖИВАТЬ"</string>
+<string name="alert_nopro_content">"Для ограничения нестандартных вэйклоков и сигналов требуется внести пожертвование."</string>
+<string name="alert_unknown_alarm_title">"Ограничить неизвестный сигнал?"</string>
+<string name="alert_unknown_alarm_content">"Безопасность ограничения данного сигнала ещё не подтверждена.  Вы действительно хотите его ограничить?"</string>
+<string name="dialog_unbounce">"ОГРАНИЧИТЬ"</string>
 <string name="dialog_cancel">"ОТМЕНА"</string>
 <string name="tasker_choose_settings">"Выберите настройки."</string>
-<string name="alert_unknown_wakelock_title">"Сдерживать неизвестное пробуждение?"</string>
-<string name="alert_unknown_wakelock_content">"Последствия сдерживания данного пробуждения неизвестны.  Вы уверены в своих действиях?"</string>
+<string name="alert_unknown_wakelock_title">"Ограничить неизвестный вэйклок?"</string>
+<string name="alert_unknown_wakelock_content">"Безопасность ограничения данного вэйклока ещё не подтверждена.  Вы действительно хотите его ограничить?"</string>
 <string name="dialog_delete">"УДАЛИТЬ"</string>
 <string name="alert_delete_stats_title">"Очистить статистику?"</string>
-<string name="alert_delete_stats_content">"Статистика обо всех событиях и пробуждениях будет очищена!"</string>
+<string name="alert_delete_stats_content">"Статистика всех вэйклоков и сигналов будет сброшена!"</string>
 <string name="title_settings">"Настройки"</string>
-<string name="alert_reset_settings_title">"Сбросить настройки на исходные?"</string>
-<string name="alert_reset_settings_content">"Будут сброшены параметры для всех событий и пробуждений!!"</string>
-<string name="dialog_reset">"СБРОСИТЬ"</string>
-<string name="reset_settings_confirmation">"Настройки приведены в изначальное состояние."</string>
+<string name="alert_reset_settings_title">"Сбросить настройки к умолчаниям?"</string>
+<string name="alert_reset_settings_content">"Будут сброшены параметры для всех сигналов и вэйклоков!"</string>
+<string name="alert_disable_service_blocking_title">"Отключить блокировку служб?"</string>
+<string name="alert_disable_service_blocking_content">"Блокировка служб будет отключена, пожалуйста, перезагрузите устройство после внесения изменений"</string>
+<string name="dialog_reset">"СБРОС"</string>
+<string name="reset_settings_confirmation">"Настройки сброшены к умолчаниям."</string>
 <string name="dialog_save">"СОХРАНИТЬ"</string>
-<string name="desc_unknown">"Информация об этом процессе пока отсутствует. Сдерживание может пагубно сказаться на работе устройства.  Продолжайте только если знаете его предназначения и как отключить Xposed при запуске системы.  Мы упорно работаем над сбором сведений о каждом событии или пробуждении.  Пожалуйста, будьте терпеливы и дождитесь появления информации."</string>
-<string name="desc_nlpwakelock">"NlpWakeLock сдерживается без вреда системе и используется Сервисами Google Play для определения Вашего местоположения с помощью мобильной сети и WiFi.  Как только расположение будет определено, процесс предоставит его различным приложениям, например Google Now, чтобы те имели доступ к нему без использования GPS или других средств.  Рекомендуемые параметры - от 180 до 600 секунд."</string>
-<string name="desc_nlpcollectorwakelock">"NlpCollectorWakeLock сдерживается без вреда системе и используется Сервисами Google Play для определения Вашего местоположения с помощью мобильной сети и WiFi.  Как только расположение будет определено, процесс отправит его непосредственно в Google, дабы те расширили их базу данных о нахождении точек доступа WiFi.  Рекомендуемые параметры - от 180 до 600 секунд."</string>
-<string name="desc_alarmmanager">"Предоставляет доступ системным службам. Потревожив устройство, направленная системе задача автоматически запустит целевое приложение, если оно уже не запущено. Случившиеся события запоминаются в то время как устройство спит (и могут пробудить его, если отключатся за этот промежуток времени), но будут сброшены при его отключении или перезагрузке."</string>
+<string name="desc_unknown">"Информация об этом процессе пока отсутствует. Возможно, ограничение небезопасно.  Продолжайте, только если знаете, что делаете и уверены, что сможете отключить Xposed при запуске системы.  Мы много работаем над сбором сведений о каждом вэйклоке или сигнале.  Пожалуйста, будьте терпеливы и дождитесь появления информации."</string>
+<string name="desc_nlpwakelock">"Ограничение NlpWakeLock безопасно. Он используется сервисами Google Play для определения Вашего местоположения с помощью мобильной сети и WiFi.  Как только местоположение определено, процесс сохраняет его на устройстве, чтобы другие приложения, например, Google Now, имели к нему доступ без использования GPS или нового определения.  Рекомендуемые параметры - от 180 до 600 секунд."</string>
+<string name="desc_nlpcollectorwakelock">"Ограничение NlpCollectorWakeLock  безопасно. Он используется сервисами Google Play для определения Вашего местоположения с помощью мобильной сети и WiFi.  Как только местоположение определено, процесс отправляет его в Google для расширения базы данных о нахождении точек доступа WiFi.  Рекомендуемые параметры - от 180 до 600 секунд."</string>
+<string name="desc_alarmmanager">"Процесс предоставляет доступ системным службам оповещения. После срабатывания сигнала, соответствующая зарегистрированная команда передаётся системой, автоматически запуская целевое приложение, если оно уже не запущено. Зарегистрированные сигналы сохраняются, пока устройство спит (и могут пробудить его, если сработают за этот период), но будут сброшены при его отключении или перезагрузке."</string>
 <string name="desc_audiooffload">"Воспроизводит аудио при выключенном экране.  Вы не услышите фоновых уведомлений или музыки при выключенном экране, если отключите процесс."</string>
-<string name="desc_activitymanagerlauncher">"Взаимодействует со всеми задачами, выполняемыми в системе. Если усмирите этот процесс - сломаете всё, что можно."</string>
-<string name="desc_windowmanager">"Это пробуждение системного уровня.  Интерфейс, используемый приложениями для общения с менеджером окон, соответственно приложения будут обращаться к нему каждый раз, при необходимости их появления на экране."</string>
-<string name="desc_rilj">"RILJ держит устройство пробуждённым во время телефонных звонков и действий, связанных с сетью."</string>
-<string name="desc_syncloopwakelock">"Это пробуждение SyncManager'а Android для синхронизации аккаунтов наподобии Google+, Twitter, Linkedin, Gmail итд. Чем значительнее усмирение, тем дольше интервал между последующими синхронизациями Ваших аккаунтов."</string>
-<string name="desc_icing">"ICING это пробуждение, связанное с Сервисами Google Play.  Поведение на данный момент не изучено."</string>
-<string name="desc_startingalertservice">"Данное пробуждение обычно связано с работой Календаря, возможно его задействование и другими приложениями, например мессенджерами. Если Ваш календарь присылает Вам уведомления, он может быть причиной этого пробуждения."</string>
-<string name="desc_audiomix">"Данный процесс накладывает звуки касаний и уведомлений поверх прочих. Затрагивает некоторые устройства даже с отключенным звуком при касаниях."</string>
-<string name="desc_locationmanagerservice">"Название говорит за себя. Ест батарею не так уж и страшно, но для некоторых является причиной долгих пробуждений."</string>
-<string name="desc_audioin">"Данный процесс заствляет устройство вести прослушку ради Поиска Google/Распознавания ключевых слов. О'кей Google"</string>
-<string name="desc_nfcservicemroutingwakelock">"Относящаяся к NFC служба распределения распознанных меток между подходящими приложениями."</string>
-<string name="desc_wakefulintentservicegcoreulrlocationreportingservice">"Используется Геоданными из нескольких источников Google для определения Вашего текущего нахождения."</string>
-<string name="desc_vzwgpslocationprovider">"Специализированная служба определения местонахождения от Verizon, используемая для сбора стастики по сотовым вышкам."</string>
-<string name="desc_hangouts_rtcs">"Google Hangouts. Если Вы это усмирите, Hangouts перестанет работать."</string>
-<string name="desc_gcm_conn">"Google Cloud Messaging. Отправляет маловесящие сообщения Вашим приложениям. Ответственно за отправку push-увидомлений на Ваш телефон, затрагивая все приложения."</string>
-<string name="desc_google_c2dm">"Cloud to Device Messaging (C2DM) это сервис для отправки разработчиками данных в их приложения на различных устройствах. Предоставляет механизм для серверов, позволяющий мобильным приложениям подхватывать обновление приложения или актуальные данные. Сервис C2DM учитывает все аспекты очерёдности сообщений и доставки для конкретных приложений и конкретных устройств. Устарел в 2012, однако до сих пор встречается в некоторых приложениях."</string>
-<string name="desc_timedeventqueue">"Это важная часть Android, которую лучше оставить в покое. Упорядочивает все входящие события."</string>
-<string name="desc_comgoogleandroidgmsnlpalarm_wakeup_locator">"Это событие сдерживается без вреда системе и используется Сервисами Google Play для определения Вашего местоположения с помощью мобильной сети и WiFi.  Как только расположение будет определено, процесс предоставит его различным приложениям, например Google Now, чтобы те имели доступ к нему без использования GPS или других средств.  Рекомендуемые параметры - от 180 до 600 секунд."</string>
-<string name="desc_comgoogleandroidgmsnlpalarm_wakeup_activity_detection">"Это событие сдерживается без вреда системе и используется Сервисами Google Play для определения Вашего местоположения с помощью мобильной сети и WiFi.  Как только расположение будет определено, процесс отправит его непосредственно в Google, дабы те расширили их базу данных о нахождении точек доступа WiFi.  Рекомендуемые параметры - от 180 до 600 секунд."</string>
-<string name="desc_comgoogleandroidappshangoutsupdate_notification">"Прослушиватель для обновления уведомлений от Google Hangouts."</string>
-<string name="desc_comandroidinternaltelephonydatastall">"Пробуждение от com.android.phone (звонилки) при передаче данных через сотовые вышки. Использование WiFi не затрагивает это событие. Как правило проявляется при использовании мобильного Интеренета, особенно при посредственном соединении."</string>
-<string name="settings_allow_every">"Разрешать каждых"</string>
+<string name="desc_activitymanagerlauncher">"Взаимодействует со всеми задачами, выполняемыми в системе. Если Вы ограничите этот процесс, возможны проблемы в работе."</string>
+<string name="desc_windowmanager">"Это вэйклок системного уровня.  Интерфейс, используемый приложениями для взаимодействия с менеджером окон, соответственно, приложения будут обращаться к нему каждый раз при необходимости их появления на экране."</string>
+<string name="desc_rilj">"RILJ поддерживает бодрствование устройства во время телефонных вызовов и коммуникаций с сотовыми вышками."</string>
+<string name="desc_syncloopwakelock">"Это вэйклок менеджера синхронизации системы Андроид для синхронизации аккаунтов Google+, Twitter, Linkedin, Gmail и т.д. Чем больше величина ограничения, тем дольше интервал между последующими синхронизациями Ваших аккаунтов."</string>
+<string name="desc_icing">"ICING - это вэйклок сервисов Google Play.  Поведение на данный момент не изучено."</string>
+<string name="desc_startingalertservice">"Данный вэйклок обычно связан с работой календаря, возможно его задействование и другими приложениями, например, мессенджерами. Если в Вашем календаре установлены уведомления / оповещения, он может быть причиной удержания этого вэйклока."</string>
+<string name="desc_audiomix">"Данный процесс, кроме всего прочего, связан со звуками касаний и уведомлений. Затрагивает некоторые устройства даже с отключенным звуком при касаниях."</string>
+<string name="desc_locationmanagerservice">"Название говорит само за себя. Обычно, незначительно влияет на расход батареи, но иногда является причиной длительного бодрствования."</string>
+<string name="desc_audioin">"Данный процесс заставляет устройство бодрствовать для работы поиска Google/распознавания \"OK Google\"."</string>
+<string name="desc_nfcservicemroutingwakelock">"Относящаяся к NFC служба распределения распознанных меток между соответствующими приложениями."</string>
+<string name="desc_wakefulintentservicegcoreulrlocationreportingservice">"Используется службами местоположения Google для отчетов о Вашей текущей геолокации."</string>
+<string name="desc_vzwgpslocationprovider">"Специализированная служба определения местонахождения от Verizon, используемая для сбора статистики по сотовым вышкам."</string>
+<string name="desc_hangouts_rtcs">"Google Hangouts. Если Вы ограничите этот процесс, Hangouts перестанет работать."</string>
+<string name="desc_gcm_conn">"Google Cloud Messaging. Отправляет короткие сообщения Вашим приложениям. Отвечает за отправку push-уведомлений на Ваш телефон, для всех приложений."</string>
+<string name="desc_google_c2dm">"Cloud to Device Messaging (C2DM) - служба для отправки разработчиками данных в их приложения на различных устройствах. Предоставляет механизм для серверов, позволяющий мобильным приложениям подхватывать обновление приложения или актуальные данные. Сервис C2DM учитывает все аспекты очерёдности сообщений и доставки для конкретных приложений и конкретных устройств. С 2012 г. заменен на более новую и усовершенствованную службу GCM, однако до сих пор встречается в некоторых приложениях."</string>
+<string name="desc_timedeventqueue">"Это важная часть Android, которую лучше не трогать. Упорядочивает все входящие события."</string>
+<string name="desc_comgoogleandroidgmsnlpalarm_wakeup_locator">"Ограничение данного сигнала безопасно. Он используется сервисами Google Play для определения Вашего местоположения с помощью мобильной сети и WiFi.  Как только местоположение определено, процесс сохраняет его на устройстве, чтобы другие приложения, например, Google Now, имели к нему доступ без использования GPS или нового определения.  Рекомендуемые параметры - от 180 до 600 секунд."</string>
+<string name="desc_comgoogleandroidgmsnlpalarm_wakeup_activity_detection">"Ограничение данного сигнала  безопасно. Он используется сервисами Google Play для определения Вашего местоположения с помощью мобильной сети и WiFi.  Как только местоположение определено, процесс отправляет его в Google для расширения базы данных о нахождении точек доступа WiFi.  Рекомендуемые параметры - от 180 до 600 секунд."</string>
+<string name="desc_comgoogleandroidappshangoutsupdate_notification">"Процесс отвечает за обновления уведомлений от Google Hangouts."</string>
+<string name="desc_comandroidinternaltelephonydatastall">"Вэйклок от com.android.phone (приложения телефона) при передаче данных через сотовые вышки. При использовании WiFi пробуждений от этого процесса нет. Как правило, проявляется при использовании мобильного интернета, особенно при посредственном соединении."</string>
+<string name="desc_e">"Процесс Tasker."</string>
+<string name="desc_m">"Процесс Tasker."</string>
+<string name="desc_gcoreflp">"Процесс фреймворка захвата местоположения."</string>
+<string name="desc_networkstats">"Вэйклок NetworkStatsService удерживается при сборе и записи статистики из ядра"</string>
+<string name="desc_fingerprint_scanner_static">"Относится к Google+ - FingerprintScannerIntentService. Код: com.google.android.apps.plus.service.FingerprintScannerIntentService."</string>
+<string name="desc_fingerprint_scanner_local">"Относится к Google+ -  ещё один вэйклок, связанный с местоположением."</string>
+<string name="desc_cdmainboundsmshandler">"Часть пакета телефонии. Отвечает за передачу СМС различным приложениям, запрашивающим их."</string>
+<string name="desc_wakecomgoogleandroidgmsconfigconfigfetchservice">"Вэйклок появился с последним обновлением сервисов Google Play."</string>
+<string name="desc_synccomgoogleandroidappsbigtopproviderbigtopprovidercomgoogleaccountname">"Принадлежит к новому приложению Google- Inbox (новая форма Gmail). Синхронизирует Вашу учётную запись почты. Лучшие значения между 3600 и 7200, в зависимости от частоты желаемой синхронизации."</string>
+<string name="desc_comoasisfenggreenifyclean_now">"Greenify использует этот процесс для усыпления приложений после отключения экрана."</string>
+<string name="desc_androidintentactiontime_tick">"Процесс android.os.SystemClock. Отвечает за основную работу по поддержанию времени."</string>
+<string name="desc_androidappwidgetactionappwidget_update">"Часть android.appwidget.AppWidgetManager  - отвечает за обновление виджетов. Получает информацию об установленных провайдерах AppWidget и другой статистики, относящейся к виджетам."</string>
+<string name="desc_comgoogleandroidappshangoutsUPDATE_NOTIFICATION">"Процесс обновления уведомлений Hangouts"</string>
+<string name="desc_comgoogleandroidintentactionMCS_HEARTBEAT">"Часть GSF, относится к GTalk, Hangouts и др. "</string>
+<string name="desc_AndroidcontentSyncManagerSYNC_ALARM">"Относится к автоматической синхронизации на основе аккаунта (не влияет на ручную синхронизацию)."</string>
+<string name="desc_comsonymobilestoragecheckerintentactionALARM_EXPIRED">"Проверка памяти на предмет нехватки места и получение уведомления от пользователя (ТОЛЬКО ДЛЯ SONY)."</string>
+<string name="desc_comgoogleandroidintentGCM_RECONNECT">"Часть Google Cloud Messaging. Ограничение вэйклока GCM небезопасно, но, возможно, изменение самого сигнала может принести положительные результаты."</string>
+<string name="desc_AndroidappbackupintentRUN">"Часть службы резервного копирования. Сигнал периодически делает резервные копии данных телефона."</string>
+<string name="desc_comdevexpertweatheradfreepfxWAKEUP">"Виджет погоды и часов."</string>
+<string name="desc_comandroidserverIdleMaintenanceServiceactionUPDATE_IDLE_MAINTENANCE_STATE">"Служба fstrim Андроид, запускающаяся, когда телефон бездействует более часа и заряд превышает 20%."</string>
+<string name="desc_comandroidserverUPDATE_TWILIGHT_STATE">"Относится к службе CABL Андроид, изменяет яркость в зависимости от времени дня."</string>
+<string name="desc_comandroidinternalpolicyimplPhoneWindowManagerDELAYED_KEYGUARD">"Управляет защитой блокировки, активирующейся после отключения экрана."</string>
+<string name="settings_allow_every">"Разрешать каждые"</string>
 <string name="settings_seconds">"секунд."</string>
 <string name="card_button_reset">"СБРОС"</string>
-<string name="stat_alarms_acquired">"Событий учтено"</string>
-<string name="stat_alarms_blocked">"Событий заблокировано"</string>
+<string name="stat_alarms_acquired">"Сигналов разрешено"</string>
+<string name="stat_alarms_blocked">"Сигналов блокировано"</string>
 <string name="stat_loading">"Загрузка..."</string>
 <string name="stat_collected_for">"Статистика собрана за"</string>
-<string name="stat_wake_duration_allowed">"Длительность допущ. пробужд."</string>
-<string name="stat_wake_duration_blocked">"Длительность блок. пробужд."</string>
-<string name="stat_wake_allowed">"Пробуждений учтено"</string>
-<string name="stat_wake_blocked">"Пробуждений заблокировано"</string>
-<string name="stat_alarm_allowed">"Событий отменено"</string>
-<string name="stat_alarm_blocked">"Событий заблокировано"</string>
-<string name="stat_disabled">"Отключена"</string>
-<string name="donate_text">"Данный модуль позволит исправить поедание батареи Сервисами нахождения локации по сети в любом случае.  Если Вам угодно заблокировать и другие события или пробуждения — поддержите проект, приобретя платные возможности ниже.  Любая сумма пожертвования откроет платные функции."</string>
-<string name="donate_1">"Чашка кофе на написание кода"</string>
-<string name="donate_5">"Латте для тех-поддержки на форуме"</string>
-<string name="donate_10">"Удовольствие от не ношения подзарядчика"</string>
-<string name="donate_thank_you">"Благодарю.  Для меня это ценно.  Я тружусь в свободное время над тем, чтобы продлить время от заряда к заряду.  Оплатив модуль, Вы продвинули проект, предали значимость и моей семье.  Вы бесподобны."</string>
-<string name="donate_more_button">"ЧЕМ Я МОГУ ПОМОЧЬ В ДАЛЬНЕЙШЕМ?"</string>
-<string name="donate_more_text">"Люди часто спрашивают, чем они могут помочь после начального пожертвования.  Кнопки ниже позволят Вам и дальше жертвовать деньги, но уже без предоставления дополнительных возможностей.  Огромное спасибо за поддержку Amplify!"</string>
-<string name="welcome_banner_title">"Добро пожаловать!"</string>
-<string name="welcome_banner_text">"Теперь Вы можете блокировать пробуждения, чтобы предотвращать бодрствование телефона, и события, чтобы те не тревожили устройство.  Мы уже подготовили для Вас несколько настроек, продлевающих жизнь батареи."</string>
+<string name="stat_wake_duration_allowed">"Время разреш. вэйклоков"</string>
+<string name="stat_wake_duration_blocked">"Время блокир. вэйклоков"</string>
+<string name="stat_wake_allowed">"Вэйклоков разрешено"</string>
+<string name="stat_wake_blocked">"Вэйклоков блокировано"</string>
+<string name="stat_alarm_allowed">"Сигналов разрешено"</string>
+<string name="stat_alarm_blocked">"Сигналов блокировано"</string>
+<string name="stat_disabled">"Отключено"</string>
+<string name="donate_text">"Приложение позволит бесплатно снизить расход батареи, вызываемый службой местоположения.  Если Вы хотите блокировать и другие вэйклоки или сигналы — поддержите проект, приобретя платные возможности ниже.  Любая сумма пожертвования откроет платные функции."</string>
+<string name="donate_1">"Чашка кофе, когда я пишу код"</string>
+<string name="donate_5">"Латте, когда я отвечаю на вопросы в форуме"</string>
+<string name="donate_10">"Удовольствие, когда не нужно носить с собой зарядку"</string>
+<string name="donate_thank_you">"Благодарю за пожертвование.  Для меня это много значит.  Я тружусь в свободное время над тем, чтобы продлить время работы Вашей батареи.  Сделав пожертвование, Вы поддержали проект, поддержали и мою семью.  Вы бесподобны."</string>
+<string name="donate_more_button">"ЧЕМ Я ЕЩЁ МОГУ ПОМОЧЬ?"</string>
+<string name="donate_more_text">"Люди часто спрашивают, чем они могут помочь после того, как сделали пожертвование.  Кнопки ниже позволят Вам осуществлять пожертвования и далее, но уже без предоставления дополнительных возможностей.  Огромное спасибо за поддержку Amplify!"</string>
+<string name="welcome_banner_title">"Давайте займемся настройкой"</string>
+<string name="welcome_banner_text">"Вы можете блокировать вэйклоки, чтобы предотвратить бодрствование телефона, и сигналы, пробуждающие устройство.  Мы уже подготовили для Вас несколько настроек, продлевающих время работы батареи."</string>
 <string name="settings_category_options">"Настройки"</string>
-<string name="settings_item_show_launcher">"Показывать иконку программы"</string>
+<string name="settings_item_show_launcher">"Показывать значок программы"</string>
 <string name="settings_item_choose_theme">"Выбрать тему"</string>
-<string name="settings_item_global_stats_title">"Участвовать в Глобальной Статистике"</string>
+<string name="settings_item_global_stats_title">"Участвовать в глобальной статистике"</string>
 <string name="settings_item_global_stats_summary">"Отсылать и заполучать анонимную статистику"</string>
-<string name="settings_item_reset_defaults_title">"Сброс на исходные"</string>
-<string name="settings_item_reset_defaults_summary">"Сбросить все настройки событий и пробуждений на исходные"</string>
-<string name="settings_category_debug">"Наладки"</string>
-<string name="settings_item_author">"Автор: Раян Стеклер"</string>
-<string name="settings_item_logging_level">"Уровень журнализации"</string>
-<string name="settings_category_translation">"Переводчики"</string>
+<string name="settings_item_enable_service_block">"Блокировка служб"</string>
+<string name="settings_item_enable_service_block_summery">"Включить/отключить блокировку служб. Пожалуйста, перезагрузите устройство после этого изменения"</string>
+<string name="settings_item_reset_defaults_title">"Сброс к умолчаниям"</string>
+<string name="settings_item_reset_defaults_summary">"Сбросить все настройки сигналов и вэйклоков к умолчаниям"</string>
+<string name="settings_category_debug">"Отладка"</string>
+<string name="settings_item_author">"Автор: Ryan Steckler"</string>
+<string name="settings_item_logging_level">"Уровень логирования"</string>
+<string name="settings_category_translation">"Перевод"</string>
 <string name="settings_theme_material">"Материальная"</string>
 <string name="settings_theme_dark">"Тёмная"</string>
 <string name="settings_logging_quiet">"Светлая"</string>
 <string name="settings_logging_default">"По умолчанию"</string>
 <string name="settings_logging_verbose">"Подробный"</string>
-<string name="settings_item_force_english_title">"Принудительно Англ."</string>
-<string name="settings_item_force_english_summary">"Заместить выбранный в системе язык английским"</string>
-<string name="playstore_short_description">"Продлите жизнь батареи от одного заряда!"</string>
+<string name="settings_item_force_english_title">"Английский принудительно"</string>
+<string name="settings_item_force_english_summary">"Заменить выбранный системой язык английским"</string>
+<string name="playstore_short_description">"Работа батареи - людям!"</string>
 <string name="playstore_long_description">"
-*** Требует наличия Root-прав ***
-Вот лишь несколько комментариев от реальных пользователей:
-Телефон проработал на 2 часа дольше, при этом я пользовался им дополнительные полчаса! Чуть не купил батарею за $25.
-Заплатил 5 баксов для поддержки этого шедевра.. Продолжайте в том же духе
-Просто замечательно!
-[Amplify] сделал революцию в управлении пробуждениями
-Этот модуль прекрасен! Батарея не съедается и на процент во время сна! 
+Цитаты реальных пользователей без купюр:
+Приложение  дало мне около 2 дополнительных часов использования и 30 минут работы экрана. Мне не пришлось покупать батарею за 25 долларов.
+Пожертвовал 5 долларов для поддержки этого шедевра.. Отличная работа, продолжайте в том же духе.
+Просто восхитительно.
+[Amplify] просто совершил революцию в истинном смысле понятия управления вэйклоками.
+Этот модуль великолепен! У меня теперь расход всего полпроцента в час при бездействии.
 ...и многие другие.
 
-Amplify позволяет контролировать потребеление заряда за счёт управления частотой и длительностью пробуждений. С лёгкостью продлите жизнь батареи, воспользовавшись рекомендуемыми парараметрами или углубитесь в настройку, изменив каждое пробуждение под себя.
-Особенности:
-- Прекрасный и современный внешний вид
-- Стабильная система блокирования
-- Комплексное измерение сохранённого и затраченного на пробуждения времени
-- Постоянно пополняющиеся описания событий и пробуждений на чистом русском (и на других языках в скором времени!)
-- Возможность усмирять любое пробуждение или событие за внесение пожертвования
-- Открытый исходный код, Вы можете сами оценить механизм приложения или собрать его сами
+Amplify даёт Вам возможность управлять тем, как устройство использует батарею - Вы можете определять, насколько часто устройство будет пробуждаться и сколько времени оно будет бодрствовать.  Используйте рекомендуемые настройки для простой экономии батареи, или копайте глубже и настройте каждый сигнал и вэйклок на Вашем устройстве.
+Вот некоторые из возможностей:
 
-Покупки внутри приложений позволят разблокировать платные возможности, позволяющие управлять любыми событиями и пробуждениями на Вашем устройстве. Без пожертвования можно управлять основными пожирателями батареи: NlpWakelock, NlpCollectorWakeLock, ALARM_WAKEUP_LOCATOR, и ALARM_WAKE_ACTIVITY_DETECTION.
-Продлите жизнь батареи от одного заряда!
+- Красивое оформление на принципах материального дизайна
+- Стабильный механизм блокировки
+- Точные замеры времени разрешенных и блокированных вэйклоков и сигналов
+- Пополняющийся список описаний сигналов и вэйклоков на английском (скоро и на других языках!)
+- Новый пакет функций Pro, позволяющий ограничить любой сигнал или вэйклок на устройстве
+- База данных с открытым исходным кодом - Вы можете посмотреть, как это работает, или создать что-то сами
+
+
+Покупки в приложении позволят Вам разблокировать пакет Pro, позволяющий произвести настройку сигналов и вэйклоков на устройстве.  Даже без платного пакета, Вы можете управлять самыми энергоёмкими процессами:  NlpWakelock, NlpCollectorWakeLock, ALARM_WAKEUP_LOCATOR, and ALARM_WAKE_ACTIVITY_DETECTION.
+
+Пускай Ваша жизнь [батареи] будет долгой!
     "</string>
 <string name="welcome_banner_welcome">"Добро пожаловать!"</string>
-<string name="welcome_banner_checking_service">"Проверяем,не запущен ли Amplify..."</string>
-<string name="welcome_banner_checking_xposed">"Проверка установки Xposed..."</string>
-<string name="welcome_banner_checking_root">"Получаем ROOT доступ..."</string>
-<string name="welcome_banner_checking_looks_great">"Все круто!"</string>
-<string name="welcome_banner_checking_uhoh">"Произошла ошибка. Давайте выясним подробности, и починим."</string>
-<string name="welcome_banner_problem_none">"Программа установила некоторые исходные настройки. Наслаждайтесь экономией батарейки!"</string>
-<string name="welcome_banner_problem_service">"Amplify модуль не включен. Нажмите \"ПОЧИНИТЬ\", отметьте Amplify галкой, и перегрузите устройство."</string>
-<string name="welcome_banner_problem_xposed_running">"Xposed не запущена. Нажмите \"ПОЧИНИТЬ\", установите/обновите программу, и перегрузите устройство."</string>
-<string name="welcome_banner_problem_xposed_installed">"Xposed не установлена. Эта программа необходима для работы Ubounce и многих других модулей. По завершению загрузки, нажмите \"УСТАНОВИТЬ\", и потом запустите Ubounce повторно. Подробнее об Xposed: %1$s."</string>
-<string name="welcome_banner_problem_root">"Похоже что ваше устройство не имеет root доступа. Root доступ необходим для работы Amplify модуля. Пожалуйста, прочитайте %1$s про заполучaние root доступа."</string>
+<string name="welcome_banner_checking_service">"Проверка запуска Amplify..."</string>
+<string name="welcome_banner_checking_xposed">"Проверка наличия Xposed..."</string>
+<string name="welcome_banner_checking_root">"Получение рут-доступа..."</string>
+<string name="welcome_banner_checking_looks_great">"Все выглядит замечательно!"</string>
+<string name="welcome_banner_checking_uhoh">"Произошла ошибка. Давайте выясним подробности и устраним её."</string>
+<string name="welcome_banner_problem_none">"Программа установила некоторые исходные настройки. Наслаждайтесь экономией батареи!"</string>
+<string name="welcome_banner_problem_service">"Похоже, что Вы не включили модуль Amplify. Нажмите \"ИСПРАВИТЬ\", убедитесь, что Amplify отмечен, и перегрузите устройство."</string>
+<string name="welcome_banner_problem_version">"Похоже, что Вы только что обновили Amplify, но ещё не перезагрузились. Нажмите \"ИСПРАВИТЬ\", после чего перезагрузите устройство."</string>
+<string name="welcome_banner_problem_xposed_running">"Xposed не запущен. Нажмите \"ИСПРАВИТЬ\", установите/обновите программу и перегрузите устройство."</string>
+<string name="welcome_banner_problem_xposed_installed">"Xposed не установлен. Эта программа необходима для работы Amplify и многих других модулей. По завершении загрузки нажмите \"УСТАНОВИТЬ\" и запустите Amplify повторно. Подробнее об Xposed: %1$s."</string>
+<string name="welcome_banner_problem_root">"Похоже что Ваше устройство не имеет рут-доступа. Рут необходим для работы Amplify. Если Вас интересует получение рута на устройство, пожалуйста, посетите %1$s."</string>
 <string name="welcome_banner_button_next">"ДАЛЕЕ"</string>
-<string name="welcome_banner_button_fixit">"ПОЧИНИТЬ"</string>
+<string name="welcome_banner_button_fixit">"ИСПРАВИТЬ"</string>
 <string name="welcome_banner_button_exit">"ВЫХОД"</string>
 <string name="welcome_banner_button_install">"УСТАНОВИТЬ"</string>
 <string name="welcome_downloading_xposed">"Xposed загружается..."</string>
@@ -169,17 +198,18 @@ Amplify позволяет контролировать потребеление
 <string name="welcome_download_error_xposed">"Ошибка при загрузке. Попробуйте позже."</string>
 <string name="download_xposed_title">"Загрузка Xposed"</string>
 <string name="download_xposed_description">"Необходимо для Amplify"</string>
-<string name="requires_root">"*** Необходим root доступ ***"</string>
-<string name="installs_xposed">"Для Amplify требуется Xposed,и Xposed будет автоматически загружен если отсутствует."</string>
-<string name="settings_category_code_credits">"Разработчики"</string>
+<string name="requires_root">"*** Необходим рут- доступ ***"</string>
+<string name="installs_xposed">"Для работы Amplify требуется Xposed Framework, он будет автоматически загружен, если отсутствует на устройстве."</string>
+<string name="settings_category_code_credits">"Разработка"</string>
 <string name="title_services">"Службы"</string>
-<string name="action_sort_by_alpha">"Алфавитная сортировка"</string>
+<string name="action_sort_by_alpha">"По алфавиту"</string>
+<string name="action_sort_by_package">"По имени пакета"</string>
 <string name="card_settings_subtitle_service">"Управлять этой службой"</string>
 <string name="tasker_choose_service">"Выберите службу для настройки."</string>
-<string name="alert_unknown_service_title">"Сдерживать неизвестную службу?"</string>
-<string name="alert_unknown_service_content">"Последствия сдерживания данной службы неизвестны.  Вы уверены в своих действиях?"</string>
+<string name="alert_unknown_service_title">"Ограничить неизвестную службу?"</string>
+<string name="alert_unknown_service_content">"Безопасность ограничения данной службы ещё не подтверждена.  Вы уверены, что хотите её ограничить?"</string>
 <string name="stat_service_allowed">"Запущенные службы"</string>
-<string name="stat_service_blocked">"Сдержанные службы"</string>
+<string name="stat_service_blocked">"Блокированные службы"</string>
 <string name="service_switch_allow">"Разрешить"</string>
-<string name="service_switch_deny">"Отказать"</string>
+<string name="service_switch_deny">"Запретить"</string>
 </resources>
