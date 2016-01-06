@@ -3,6 +3,7 @@ package com.ryansteckler.nlpunbounce.adapters;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,8 +32,12 @@ import java.util.List;
  */
 public class AlarmsAdapter extends BaseAdapter {
 
+    private boolean mTruncateEnd = false;
+
     public AlarmsAdapter(Context context, ArrayList<BaseStats> alarmStatList) {
         super(context, R.layout.fragment_alarms_listitem, alarmStatList, "alarm");
+        SharedPreferences prefs = context.getSharedPreferences("com.ryansteckler.nlpunbounce" + "_preferences", Context.MODE_WORLD_READABLE);
+        mTruncateEnd = !prefs.getBoolean("scroll_item_names", true);
     }
 
 
@@ -59,6 +64,9 @@ public class AlarmsAdapter extends BaseAdapter {
                     LayoutInflater inflater = LayoutInflater.from(getContext());
                     convertView = inflater.inflate(R.layout.fragment_alarms_listitem, parent, false);
                     alarmViewHolder.name = (TextView) convertView.findViewById(R.id.textviewAlarmName);
+                    if (mTruncateEnd) {
+                        alarmViewHolder.name.setEllipsize(TextUtils.TruncateAt.END);
+                    }
                     alarmViewHolder.alarmCount = (TextView) convertView.findViewById(R.id.textViewAlarmCount);
 
                     convertView.setTag(alarmViewHolder);

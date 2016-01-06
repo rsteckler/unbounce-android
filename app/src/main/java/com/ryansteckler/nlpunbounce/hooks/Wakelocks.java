@@ -25,6 +25,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
@@ -40,7 +41,7 @@ import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 public class Wakelocks implements IXposedHookLoadPackage {
 
     private static final String TAG = "Amplify: ";
-    public static final String VERSION = "3.0.9"; //This needs to be pulled from the manifest or gradle build.
+    public static final String VERSION = "3.3.6c"; //This needs to be pulled from the manifest or gradle build.
     public static final String FILE_VERSION = "3"; //This needs to be pulled from the manifest or gradle build.
     private HashMap<String, Long> mLastWakelockAttempts = null; //The last time each wakelock was allowed.
     private HashMap<String, Long> mLastAlarmAttempts = null; //The last time each alarm was allowed.
@@ -110,6 +111,13 @@ public class Wakelocks implements IXposedHookLoadPackage {
                 param.setResult(VERSION);
             }
         });
+
+//        findAndHookMethod("com.ryansteckler.nlpunbounce.HomeFragment", lpparam.classLoader, "requestRefresh", new XC_MethodHook() {
+//            @Override
+//            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+//                String lastVersion = m_prefs.getString("file_version", "0");
+//            }
+//        });
 
     }
 
@@ -193,18 +201,24 @@ public class Wakelocks implements IXposedHookLoadPackage {
 
         if (isServicBlockingEnabled) {
             boolean servicesHooked = false;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                //Try for hooks for API levels 23
+                defaultLog("Attempting 23 ServiceHook");
+                try23ServiceHook(lpparam);
+                defaultLog("Successful 23 ServiceHook");
+                servicesHooked = true;
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
                 //Try for wakelock hooks for API levels 19-20
-                defaultLog("Attempting 17to20 ServiceHook");
+                defaultLog("Attempting 17to 22 ServiceHook");
                 try17To20ServiceHook(lpparam);
-                defaultLog("Successful 17to20 ServiceHook");
+                defaultLog("Successful 17to 22 ServiceHook");
                 servicesHooked = true;
             } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH &&
                     Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN) {
                 //Try for wakelock hooks for API levels 19-20
-                defaultLog("Attempting 14to16 ServiceHook");
+                defaultLog("Attempting 14 to 16 ServiceHook");
                 try14To16ServiceHook(lpparam);
-                defaultLog("Successful 14to16 ServiceHook");
+                defaultLog("Successful 14 to 16 ServiceHook");
                 servicesHooked = true;
             }
 
@@ -217,6 +231,21 @@ public class Wakelocks implements IXposedHookLoadPackage {
     }
 
     //in back to 4.2_r1
+    private void try23ServiceHook(LoadPackageParam lpparam) {
+        try {
+            findAndHookMethod("com.android.server.am.ActiveServices", lpparam.classLoader, "startServiceLocked", "android.app.IApplicationThread", Intent.class, String.class, int.class, int.class, String.class, int.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    Intent intent = (Intent) param.args[1];
+                    handleServiceStart(param, intent);
+                }
+            });
+        } catch (NoSuchMethodError nsme) {
+            defaultLog("Standard Service hook failed.");
+        }
+    }
+
+
     private void try17To20ServiceHook(LoadPackageParam lpparam) {
         try {
             findAndHookMethod("com.android.server.am.ActiveServices", lpparam.classLoader, "startServiceLocked", "android.app.IApplicationThread", Intent.class, String.class, int.class, int.class, int.class, new XC_MethodHook() {
@@ -394,17 +423,43 @@ public class Wakelocks implements IXposedHookLoadPackage {
 
     private void handleWakeLockAcquire(XC_MethodHook.MethodHookParam param, String wakeLockName, IBinder lock, int uId) {
 
+        String trackingWakelockName = wakeLockName;
+
         //If we're blocking this wakelock
         String prefName = "wakelock_" + wakeLockName + "_enabled";
-        if (m_prefs.getBoolean(prefName, false)) {
+        boolean block = m_prefs.getBoolean(prefName, false);
+        int overrideSeconds = -1;
+        if (!block) {
+            //See if there is a wildcard block on this
+            Set<String> wakelockWildcards = m_prefs.getStringSet("wakelock_regex_set", null);
+            if (wakelockWildcards != null) {
+                //For each wildcard block
+                for (String wildcard : wakelockWildcards) {
+                    String regexToMatch = wildcard.substring(0, wildcard.indexOf("$$||$$"));
+                    if (wakeLockName.matches(wildcard)) {
+                        block = true;
+                        overrideSeconds = Integer.parseInt(wildcard.substring(wildcard.indexOf("$$||$$") + 6));
+                        trackingWakelockName = wildcard;
+                        debugLog("Regex set for Wakelock: " + wakeLockName + " for " + overrideSeconds + " seconds.");
+                        break;
+                    }
+                }
+            }
+        }
+        if (block) {
 
-            long collectorMaxFreq = m_prefs.getLong("wakelock_" + wakeLockName + "_seconds", 240);
+            long collectorMaxFreq = -1;
+            if (overrideSeconds != -1) {
+                collectorMaxFreq = overrideSeconds;
+            } else {
+                collectorMaxFreq = m_prefs.getLong("wakelock_" + wakeLockName + "_seconds", 240);
+            }
             collectorMaxFreq *= 1000; //convert to ms
 
             //Debounce this to our minimum interval.
             long lastAttempt = 0;
             try {
-                lastAttempt = mLastWakelockAttempts.get(wakeLockName);
+                lastAttempt = mLastWakelockAttempts.get(trackingWakelockName);
             } catch (NullPointerException npe) { /* ok.  Just havent attempted yet.  Use 0 */ }
 
             long now = SystemClock.elapsedRealtime();
@@ -420,7 +475,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
             } else {
                 //Allow the wakelock
                 defaultLog("Allowing Wakelock " + wakeLockName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
-                mLastWakelockAttempts.put(wakeLockName, now);
+                mLastWakelockAttempts.put(trackingWakelockName, now);
                 recordAcquire(wakeLockName, lock, uId);
             }
         } else {
@@ -578,17 +633,44 @@ public class Wakelocks implements IXposedHookLoadPackage {
                 continue;
             }
 
-            //If we're blocking this wakelock
-            String prefName = "alarm_" + alarmName + "_enabled";
-            if (m_prefs.getBoolean(prefName, false)) {
+            String trackingAlarmName = alarmName;
 
-                long collectorMaxFreq = m_prefs.getLong("alarm_" + alarmName + "_seconds", 240);
+            //If we're blocking this alarm
+            String prefName = "alarm_" + alarmName + "_enabled";
+            boolean block = m_prefs.getBoolean(prefName, false);
+            int overrideSeconds = -1;
+            if (!block) {
+                //See if there is a wildcard block on this
+                Set<String> alarmWildcards = m_prefs.getStringSet("alarm_regex_set", null);
+                if (alarmWildcards != null) {
+                    //For each wildcard block
+                    for (String wildcard : alarmWildcards) {
+                        String regexToMatch = wildcard.substring(0, wildcard.indexOf("$$||$$"));
+                        if (alarmName.matches(wildcard)) {
+                            block = true;
+                            overrideSeconds = Integer.parseInt(wildcard.substring(wildcard.indexOf("$$||$$") + 6));
+                            trackingAlarmName = wildcard;
+                            debugLog("Regex set for Alarm: " + alarmName + " for " + overrideSeconds + " seconds.");
+                            break;
+                        }
+                    }
+                }
+            }
+            if (block) {
+
+                long collectorMaxFreq = -1;
+
+                if (overrideSeconds != -1) {
+                    collectorMaxFreq = overrideSeconds;
+                } else {
+                    collectorMaxFreq = m_prefs.getLong("alarm_" + alarmName + "_seconds", 240);
+                }
                 collectorMaxFreq *= 1000; //convert to ms
 
                 //Debounce this to our minimum interval.
                 long lastAttempt = 0;
                 try {
-                    lastAttempt = mLastAlarmAttempts.get(alarmName);
+                    lastAttempt = mLastAlarmAttempts.get(trackingAlarmName);
                 } catch (NullPointerException npe) { /* ok.  Just havent attempted yet.  Use 0 */ }
 
                 long timeSinceLastAlarm = now - lastAttempt;
@@ -603,7 +685,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
                 } else {
                     //Allow the wakelock
                     defaultLog("Allowing Alarm " + alarmName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastAlarm);
-                    mLastAlarmAttempts.put(alarmName, now);
+                    mLastAlarmAttempts.put(trackingAlarmName, now);
                     recordAlarmAcquire(context, alarmName, pi.getTargetPackage());
                 }
             } else {

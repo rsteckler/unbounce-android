@@ -1,7 +1,9 @@
 package com.ryansteckler.nlpunbounce.adapters;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,8 +24,12 @@ import java.util.Collections;
  */
 public class ServicesAdapter extends BaseAdapter {
 
+    private boolean mTruncateEnd = false;
+
     public ServicesAdapter(Context context, ArrayList<BaseStats> serviceStatList) {
         super(context, R.layout.fragment_service_listitem, serviceStatList, "service");
+        SharedPreferences prefs = context.getSharedPreferences("com.ryansteckler.nlpunbounce" + "_preferences", Context.MODE_WORLD_READABLE);
+        mTruncateEnd = !prefs.getBoolean("scroll_item_names", true);
     }
 
 
@@ -48,6 +54,9 @@ public class ServicesAdapter extends BaseAdapter {
                     LayoutInflater inflater = LayoutInflater.from(getContext());
                     convertView = inflater.inflate(R.layout.fragment_service_listitem, parent, false);
                     serviceViewHolder.name = (TextView) convertView.findViewById(R.id.textviewServiceName);
+                    if (mTruncateEnd) {
+                        serviceViewHolder.name.setEllipsize(TextUtils.TruncateAt.END);
+                    }
                     serviceViewHolder.serviceCount = (TextView) convertView.findViewById(R.id.textViewServiceCount);
 
                     convertView.setTag(serviceViewHolder);

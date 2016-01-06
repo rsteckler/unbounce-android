@@ -20,7 +20,7 @@ import com.ryansteckler.nlpunbounce.helpers.ThemeHelper;
 
 public class SettingsActivity extends Activity {
 
-    private static final String TAG = "UnbounceSettings";
+    private static final String TAG = "Anmplify: ";
 
     int mCurTheme = ThemeHelper.THEME_DEFAULT;
     int mCurForceEnglish = -1;

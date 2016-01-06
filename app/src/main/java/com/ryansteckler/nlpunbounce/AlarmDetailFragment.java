@@ -3,11 +3,13 @@ package com.ryansteckler.nlpunbounce;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.util.TypedValue;
@@ -20,12 +22,16 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
 import com.ryansteckler.nlpunbounce.helpers.UidNameResolver;
 import com.ryansteckler.nlpunbounce.models.EventLookup;
 import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 
 /**
@@ -53,8 +59,9 @@ public class AlarmDetailFragment extends BaseDetailFragment {
         TextView description = (TextView) view.findViewById(R.id.textViewDescription);
         String descriptionText = description.getText().toString();
 
-
-        descriptionText = descriptionText + "\n\n" + "Package Name: " + mStat.getDerivedPackageName(getActivity().getApplicationContext());
+        descriptionText = "Package Name: " + mStat.getDerivedPackageName(getActivity().getApplicationContext()) + "\n" +
+            "Full Name: " + mStat.getName() + "\n\n" +
+            descriptionText;
 
         description.setText(descriptionText);
 
@@ -86,6 +93,26 @@ public class AlarmDetailFragment extends BaseDetailFragment {
         String blockName = "alarm_" + mStat.getName() + "_enabled";
         boolean enabled = prefs.getBoolean(blockName, false);
         onOff.setChecked(enabled);
+
+        final ImageButton searchButton = (ImageButton) view.findViewById(R.id.btnSearch);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Get the name of the item
+                String itemName = mStat.getName();
+                //Open the browser with that term.
+                String query = null;
+                try {
+                    query = URLEncoder.encode(itemName, "utf-8");
+                    String url = "http://www.google.com/search?q=" + query;
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse(url));
+                    startActivity(intent);
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
         getView().findViewById(R.id.editAlarmSeconds).setEnabled(onOff.isChecked());
 

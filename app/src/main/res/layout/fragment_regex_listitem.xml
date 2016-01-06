@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:clickable="false"
+    android:background="?attr/listBackgroundAlarm"
+    android:paddingTop="@dimen/separator_pad"
+    android:paddingBottom="@dimen/separator_pad"
+    android:id="@+id/listitemAlarm"
+    android:baselineAligned="false"
+    android:descendantFocusability="blocksDescendants">
+
+
+    <TextView
+        android:id="@+id/textviewRegexName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/stat_loading"
+        android:fontFamily="@string/app_font_family"
+        android:singleLine="true"
+        style="?cardText"
+        android:layout_marginLeft="@dimen/section_pad"
+        android:layout_marginStart="@dimen/section_pad"
+        android:ellipsize="end"
+        android:layout_weight="1"
+        android:layout_gravity="center_vertical" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DELETE"
+        android:id="@+id/btn_delete_regex"
+        android:enabled="true"
+        android:layout_gravity="center_vertical" />
+
+
+</LinearLayout>
+
+

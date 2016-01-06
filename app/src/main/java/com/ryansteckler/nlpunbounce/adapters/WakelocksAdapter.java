@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,8 +28,12 @@ import java.util.Iterator;
  */
 public class WakelocksAdapter extends BaseAdapter {
 
+    private boolean mTruncateEnd = false;
+
     public WakelocksAdapter(Context context, ArrayList<BaseStats> wakelockStatList) {
         super(context, R.layout.fragment_wakelocks_listitem, wakelockStatList, "wakelock");
+        SharedPreferences prefs = context.getSharedPreferences("com.ryansteckler.nlpunbounce" + "_preferences", Context.MODE_WORLD_READABLE);
+        mTruncateEnd = !prefs.getBoolean("scroll_item_names", true);
     }
 
 
@@ -54,6 +59,9 @@ public class WakelocksAdapter extends BaseAdapter {
                     LayoutInflater inflater = LayoutInflater.from(getContext());
                     convertView = inflater.inflate(R.layout.fragment_wakelocks_listitem, parent, false);
                     viewHolder.name = (TextView) convertView.findViewById(R.id.textviewWakelockName);
+                    if (mTruncateEnd) {
+                        viewHolder.name.setEllipsize(TextUtils.TruncateAt.END);
+                    }
                     viewHolder.wakeTime = (TextView) convertView.findViewById(R.id.textviewWakelockTime);
                     viewHolder.wakeCount = (TextView) convertView.findViewById(R.id.textViewWakelockCount);
 

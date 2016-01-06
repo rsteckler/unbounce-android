@@ -117,6 +117,13 @@ public abstract class BaseDetailFragment extends Fragment {
                 }
             }
         });
+        onOff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Do not call super because of a bug in Android?
+
+            }
+        });
 
         TextView resetButton = (TextView) view.findViewById(R.id.buttonResetStats);
         resetButton.setOnClickListener(new View.OnClickListener() {

@@ -11,13 +11,12 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.analytics.GoogleAnalytics;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 import com.ryansteckler.inappbilling.IabHelper;
 import com.ryansteckler.inappbilling.IabResult;
 import com.ryansteckler.inappbilling.Inventory;
@@ -54,11 +53,13 @@ public class MaterialSettingsActivity extends Activity
 
     private int mLastActionbarColor = 0;
 
-    private static final String TAG = "NlpUnbounceSettings: ";
+    private static final String TAG = "Amplify: ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i(TAG, "MaterialSettingsActivity onCreate called");
+
         mCurTheme = ThemeHelper.onActivityCreateSetTheme(this);
         mCurForceEnglish = LocaleHelper.onActivityCreateSetLocale(this);
         setContentView(R.layout.activity_material_settings);
@@ -83,19 +84,19 @@ public class MaterialSettingsActivity extends Activity
                 if (result.isFailure()) {
                     // update UI accordingly
                     updateDonationUi();
-                    Log.d("NlpUnbounce", "IAP result failed with code: " + result.getMessage());
+                    Log.d(TAG, "IAP result failed with code: " + result.getMessage());
                 }
                 else {
                     // does the user have the premium upgrade?
-                    Log.d("NlpUnbounce", "IAP result succeeded");
+                    Log.d(TAG, "IAP result succeeded");
                     if (inventory != null) {
-                        Log.d("NlpUnbounce", "IAP inventory exists");
+                        Log.d(TAG, "IAP inventory exists");
 
                         if (inventory.hasPurchase("donate_1") ||
                                 inventory.hasPurchase("donate_2") ||
                                 inventory.hasPurchase("donate_5") ||
                                 inventory.hasPurchase("donate_10")) {
-                            Log.d("NlpUnbounce", "IAP inventory contains a donation");
+                            Log.d(TAG, "IAP inventory contains a donation");
 
                             mIsPremium = true;
                         }
@@ -108,6 +109,7 @@ public class MaterialSettingsActivity extends Activity
             }
         };
 
+        Log.i(TAG, "MaterialSettingsActivity setting up IAB");
         //Normally we would secure this key, but we're not licensing this app.
         String base64billing = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxwicOx54j03qBil36upqYab0uBWnf+WjoSRNOaTD9mkqj9bLM465gZlDXhutMZ+n5RlHUqmxl7jwH9KyYGTbwFqCxbLMCwR4oDhXVhX4fS6iggoHY7Ek6EzMT79x2XwCDg1pdQmX9d9TYRp32Sw2E+yg2uZKSPW29ikfdcmfkHcdCWrjFSuMJpC14R3d9McWQ7sg42eQq2spIuSWtP8ARGtj1M8eLVxgkQpXWrk9ijPgVcAbNZYWT9ndIZoKPg7VJVvzzAUNK/YOb+BzRurqJ42vCZy1+K+E4EUtmg/fxawHfXLZ3F/gNwictZO9fv1PYHPMa0sezSNVFAcm0yP1BwIDAQAB";
         mHelper = new IabHelper(MaterialSettingsActivity.this, base64billing);
@@ -116,15 +118,17 @@ public class MaterialSettingsActivity extends Activity
             {
                 if (!result.isSuccess()) {
                     Log.d(TAG, "In-app Billing setup failed: " + result);
-                    new AlertDialog.Builder(MaterialSettingsActivity.this)
-                            .setTitle("Pro features unavailable.")
-                            .setMessage("Your device doesn't support In App Billing.  You won't be able to purchase the Pro features of Unbounce.  This could be because you need to update your Google Play Store application, or because you live in a country where In App Billing is disabled.")
+                    AlertDialog errorDialog = new AlertDialog.Builder(MaterialSettingsActivity.this)
+                            .setTitle(R.string.alert_noiab_title)
+                            .setMessage(R.string.alert_noiab_content)
                             .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                 }
                             })
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .show();
+
+                    ((TextView)errorDialog.findViewById(android.R.id.message)).setMovementMethod(LinkMovementMethod.getInstance());
 
                 }
                 else {
@@ -134,12 +138,9 @@ public class MaterialSettingsActivity extends Activity
             }
         });
 
+        Log.i(TAG, "MaterialSettingsActivity Starting SELinux service");
         startService(new Intent(this, SELinuxService.class));
 
-        GoogleAnalytics ga = GoogleAnalytics.getInstance(this);
-        Tracker tracker = ga.newTracker("UA-11575064-3");
-        tracker.setScreenName("MaterialSettingsActivity");
-        tracker.send(new HitBuilders.AppViewBuilder().build());
     }
 
     @Override

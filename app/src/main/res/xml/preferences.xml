@@ -18,12 +18,6 @@
             android:defaultValue="default" />
 
         <CheckBoxPreference
-            android:key="global_participation"
-            android:title="@string/settings_item_global_stats_title"
-            android:summary="@string/settings_item_global_stats_summary"
-            android:defaultValue="true"/>
-
-        <CheckBoxPreference
             android:key="enable_service_block"
             android:title="@string/settings_item_enable_service_block"
             android:summary="@string/settings_item_enable_service_block_summery"
@@ -34,6 +28,11 @@
             android:title="@string/settings_item_force_english_title"
             android:summary="@string/settings_item_force_english_summary"
             android:defaultValue="false"/>
+
+        <CheckBoxPreference
+            android:key="scroll_item_names"
+            android:title="@string/settings_scroll_item_names"
+            android:defaultValue="true"/>
 
         <Preference
             android:title="@string/settings_item_reset_defaults_title"
@@ -68,7 +67,7 @@
             android:key="about_author"
             android:editable="false"
             android:defaultValue="0"
-            android:summary="Version: 3.0.9"
+            android:summary="Version: 3.3.6c"
             />
 
         <Preference

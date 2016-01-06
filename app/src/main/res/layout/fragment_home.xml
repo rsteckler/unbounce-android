@@ -332,7 +332,7 @@
                     android:layout_marginRight="@dimen/card_external_padding"
                     android:background="?cardBackground"
                     android:layout_marginTop="@dimen/card_external_padding"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     android:id="@+id/linearLayout">
 
                     <LinearLayout

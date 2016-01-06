@@ -27,6 +27,7 @@ import android.os.Message;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -70,6 +71,7 @@ public class HomeFragment extends Fragment  {
     private final static int SETUP_FAILURE_XPOSED_INSTALL = 4; //Xposed isn't installed
     private final static int SETUP_FAILURE_ROOT = 5; //There's no root access.
 
+    private final static String TAG = "Amplify: ";
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -159,13 +161,10 @@ public class HomeFragment extends Fragment  {
                 mSetupFailureStep = SETUP_FAILURE_VERSION;
                 if (!isUnbounceServiceRunning()) {
                     mSetupFailureStep = SETUP_FAILURE_SERVICE;
-                    if (!isXposedRunning()) {
-                        mSetupFailureStep = SETUP_FAILURE_XPOSED_RUNNING;
-                        if (!isXposedInstalled()) {
-                            mSetupFailureStep = SETUP_FAILURE_XPOSED_INSTALL;
-                            if (!RootHelper.isDeviceRooted()) {
-                                mSetupFailureStep = SETUP_FAILURE_ROOT;
-                            }
+                    if (!isXposedInstalled()) {
+                        mSetupFailureStep = SETUP_FAILURE_XPOSED_INSTALL;
+                        if (!RootHelper.isDeviceRooted()) {
+                            mSetupFailureStep = SETUP_FAILURE_ROOT;
                         }
                     }
                 }
@@ -178,6 +177,13 @@ public class HomeFragment extends Fragment  {
             view.post(new Runnable() {
                 @Override
                 public void run() {
+                    int waitForAttach = 0;
+                    while (getActivity() == null && waitForAttach < 10) {
+                        try {
+                            Thread.sleep(250);
+                        } catch (InterruptedException e) {
+                        }
+                    }
                     ViewGroup container = (ViewGroup)getActivity().findViewById(R.id.bannerSwitcher);
                     setupBannerAnimations(container);
                     ViewGroup buttonContainer = (ViewGroup)getActivity().findViewById(R.id.welcomeButtonContainer);
@@ -208,7 +214,7 @@ public class HomeFragment extends Fragment  {
                 public void run() {
                     progressAnimation.start();
                 }
-            }, 800); //Let the screen "come up" and blur start.  Let the user take in the screen before starting things moving.
+            }, 1200); //Let the screen "come up" and blur start.  Let the user take in the screen before starting things moving.
 
         }
     }
@@ -246,21 +252,47 @@ public class HomeFragment extends Fragment  {
         public void onAnimationEnd(Animator animator) {
             //Each time the animation finishes, handle the next step
             mSetupStep++;
+            Log.i(TAG, "OnAnimationEnd called.  We're on step: " + mSetupStep);
+
+            Log.d(TAG, "Original fragment status: " + (isAdded() ? "True" : "False"));
+            Log.d(TAG, "Refreshing fragment status");
+            getFragmentManager().executePendingTransactions();
+            Log.d(TAG, "New fragment status: " + (isAdded() ? "True" : "False"));
 
             if (isAdded()) {
                 final TextView stepText = (TextView) mParentView.findViewById(R.id.welcomeStepText);
 
                 if (mSetupStep == 1) {
+                    Log.d(TAG, "Starting animation for step 1.");
+                    Log.d(TAG, "Status of animation.isRunning (Should be false): " + mProgressAnimation.isRunning());
                     stepText.setText(getResources().getString(R.string.welcome_banner_checking_xposed));
                     mProgressChecking.setProgress(0);
+                    mProgressAnimation = ValueAnimator.ofInt(0, 100);
+                    mProgressAnimation.addListener(this);
+                    mProgressAnimation.addUpdateListener(this);
+                    mProgressAnimation.setDuration(2000);
+                    mProgressAnimation.setStartDelay(200); //Create a small gap between each step, so they look discrete
+                    mProgressAnimation.setInterpolator(new LinearInterpolator());
                     mProgressAnimation.start();
+                    Log.d(TAG, "Started animation for step 1.");
+
                 } else if (mSetupStep == 2) {
+                    Log.i(TAG, "Starting animation for step 2.");
                     stepText.setText(getResources().getString(R.string.welcome_banner_checking_root));
-                    mProgressChecking.setProgress(0);
+                    mProgressAnimation = ValueAnimator.ofInt(0, 100);
+                    mProgressAnimation.addListener(this);
+                    mProgressAnimation.addUpdateListener(this);
+                    mProgressAnimation.setDuration(2000);
+                    mProgressAnimation.setStartDelay(200); //Create a small gap between each step, so they look discrete
+                    mProgressAnimation.setInterpolator(new LinearInterpolator());
                     mProgressAnimation.start();
+                    Log.d(TAG, "Started animation for step 2.");
+
                 } else if (mSetupStep == 3) {
                     handleFinalStep();
                 }
+            } else {
+                Log.i(TAG, "Not running animation because the fragment isn't added.");
             }
         }
 
@@ -345,6 +377,7 @@ public class HomeFragment extends Fragment  {
         }
 
         private void handleXposedInstalledFailure(TextView problemText, final TextView nextButtonText, final LinearLayout nextButton) {
+
             //Set the problem text.
             String errorFormat = getResources().getString(R.string.welcome_banner_problem_xposed_installed);
             String errorText = String.format(errorFormat, R.string.welcome_banner_problem_xposed_installed_link);
@@ -494,7 +527,21 @@ public class HomeFragment extends Fragment  {
         layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MaterialSettingsActivity)getActivity()).mHelper.launchPurchaseFlow(getActivity(), "donate_2", 2, ((MaterialSettingsActivity)getActivity()).mPurchaseFinishedListener, "2");
+                //Catch crash
+                try {
+                    ((MaterialSettingsActivity) getActivity()).mHelper.launchPurchaseFlow(getActivity(), "donate_2", 2, ((MaterialSettingsActivity) getActivity()).mPurchaseFinishedListener, "2");
+                } catch (IllegalStateException ise) {
+                    new AlertDialog.Builder(getActivity())
+                            .setTitle(R.string.alert_noiab_title)
+                            .setMessage(R.string.alert_noiab_content)
+                            .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            })
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+
+                }
             }
         });
 
@@ -502,7 +549,21 @@ public class HomeFragment extends Fragment  {
         layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MaterialSettingsActivity)getActivity()).mHelper.launchPurchaseFlow(getActivity(), "donate_5", 5, ((MaterialSettingsActivity)getActivity()).mPurchaseFinishedListener, "5");
+                try {
+                    ((MaterialSettingsActivity)getActivity()).mHelper.launchPurchaseFlow(getActivity(), "donate_5", 5, ((MaterialSettingsActivity)getActivity()).mPurchaseFinishedListener, "5");
+                } catch (IllegalStateException ise) {
+                    new AlertDialog.Builder(getActivity())
+                            .setTitle(R.string.alert_noiab_title)
+                            .setMessage(R.string.alert_noiab_content)
+                            .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            })
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+
+                }
+
             }
         });
 
@@ -510,7 +571,21 @@ public class HomeFragment extends Fragment  {
         layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MaterialSettingsActivity)getActivity()).mHelper.launchPurchaseFlow(getActivity(), "donate_10", 10, ((MaterialSettingsActivity)getActivity()).mPurchaseFinishedListener, "10");
+                try {
+                    ((MaterialSettingsActivity)getActivity()).mHelper.launchPurchaseFlow(getActivity(), "donate_10", 10, ((MaterialSettingsActivity)getActivity()).mPurchaseFinishedListener, "10");
+                } catch (IllegalStateException ise) {
+                    new AlertDialog.Builder(getActivity())
+                            .setTitle(R.string.alert_noiab_title)
+                            .setMessage(R.string.alert_noiab_content)
+                            .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            })
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+
+                }
+
             }
         });
 
@@ -518,7 +593,20 @@ public class HomeFragment extends Fragment  {
         layoutAgain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MaterialSettingsActivity)getActivity()).mHelper.launchPurchaseFlow(getActivity(), "donate_1_consumable", 1, ((MaterialSettingsActivity)getActivity()).mPurchaseFinishedListener, "1");
+                try {
+                    ((MaterialSettingsActivity)getActivity()).mHelper.launchPurchaseFlow(getActivity(), "donate_1_consumable", 1, ((MaterialSettingsActivity)getActivity()).mPurchaseFinishedListener, "1");
+                } catch (IllegalStateException ise) {
+                    new AlertDialog.Builder(getActivity())
+                            .setTitle(R.string.alert_noiab_title)
+                            .setMessage(R.string.alert_noiab_content)
+                            .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            })
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+
+                }
             }
         });
 
@@ -526,7 +614,21 @@ public class HomeFragment extends Fragment  {
         layoutAgain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MaterialSettingsActivity)getActivity()).mHelper.launchPurchaseFlow(getActivity(), "donate_5_consumable", 5, ((MaterialSettingsActivity)getActivity()).mPurchaseFinishedListener, "5");
+                try {
+                    ((MaterialSettingsActivity)getActivity()).mHelper.launchPurchaseFlow(getActivity(), "donate_5_consumable", 5, ((MaterialSettingsActivity)getActivity()).mPurchaseFinishedListener, "5");
+                } catch (IllegalStateException ise) {
+                    new AlertDialog.Builder(getActivity())
+                            .setTitle(R.string.alert_noiab_title)
+                            .setMessage(R.string.alert_noiab_content)
+                            .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            })
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+
+                }
+
             }
         });
 
@@ -534,7 +636,21 @@ public class HomeFragment extends Fragment  {
         layoutAgain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MaterialSettingsActivity)getActivity()).mHelper.launchPurchaseFlow(getActivity(), "donate_10_consumable", 10, ((MaterialSettingsActivity)getActivity()).mPurchaseFinishedListener, "10");
+                try {
+                    ((MaterialSettingsActivity)getActivity()).mHelper.launchPurchaseFlow(getActivity(), "donate_10_consumable", 10, ((MaterialSettingsActivity)getActivity()).mPurchaseFinishedListener, "10");
+                } catch (IllegalStateException ise) {
+                    new AlertDialog.Builder(getActivity())
+                            .setTitle(R.string.alert_noiab_title)
+                            .setMessage(R.string.alert_noiab_content)
+                            .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            })
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+
+                }
+
             }
         });
 
@@ -595,6 +711,7 @@ public class HomeFragment extends Fragment  {
 
 
     private boolean isXposedInstalled() {
+
         PackageManager pm = getActivity().getPackageManager();
 
         try {
@@ -786,6 +903,7 @@ public class HomeFragment extends Fragment  {
 
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+
         try {
             mListener = (OnFragmentInteractionListener) activity;
         } catch (ClassCastException e) {
@@ -906,6 +1024,7 @@ public class HomeFragment extends Fragment  {
 
 
     public boolean isXposedRunning() {
+//        return true;
         return new File("/data/data/de.robv.android.xposed.installer/bin/XposedBridge.jar").exists();
     }
 
