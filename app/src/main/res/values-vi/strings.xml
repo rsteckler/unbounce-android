@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">"Amplify"</string>
+
+    <!-- Fuzzy -->
+    <string name="version">"Phiên bản"</string>
+    <string name="title_activity_material_settings">"Amplify"</string>
+    <string name="title_home">"Trang chính"</string>
+    <string name="title_wakelocks">"Đánh thức"</string>
+    <string name="title_alarms">"Báo động"</string>
+    <string name="navigation_drawer_open">"Mở ngăn điều hướng"</string>
+    <string name="navigation_drawer_close">"Đóng ngăn điều hướng"</string>
+    <string name="action_search">"Tìm kiếm"</string>
+    <string name="action_sort_by_count">"Sắp xếp theo số lượng"</string>
+    <string name="action_sort_by_time">"Sắp xếp theo thời gian"</string>
+    <string name="action_settings">"Cài đặt"</string>
+    <string name="action_reset_stats">"Thiết lập lại thống kê"</string>
+    <string name="card_donate_title">"KARMA"</string>
+    <string name="card_donate_subtitle">"Hỗ trợ phát triển địa phương hóa của bạn"</string>
+    <string name="card_global_title">"THỐNG KÊ TOÀN CẦU"</string>
+    <string name="card_global_subtitle">"Số liệu thống kê của chúng tôi đã kết hợp"</string>
+    <string name="card_local_title">"THỐNG KÊ THIẾT BỊ"</string>
+    <string name="card_local_subtitle">"Xem tiến trình của bạn"</string>
+    <string name="card_settings_title">"CÀI ĐẶT"</string>
+    <string name="card_settings_subtitle_alarm">"Kiểm soát báo động này"</string>
+    <string name="card_settings_subtitle_wakelock">"Kiểm soát đánh thức này"</string>
+    <string name="card_description_title">"MÔ TẢ"</string>
+    <string name="card_description_subtitle">"Tại sao điều này làm hao pin của bạn?"</string>
+    <string name="category_unbounced">"Đã hạn chế"</string>
+    <string name="category_safe">"An toàn để hạn chế"</string>
+    <string name="category_unknown">"Không xác định"</string>
+    <string name="category_not_safe">"Không an toàn để hạn chế"</string>
+    <string name="category_error">"Lỗi"</string>
+    <string name="alert_noiab_title">"Tính năng Pro không có sẵn"</string>
+    <string name="alert_noiab_content">"Điện thoại của bạn không hỗ trợ mua hàng trong Ứng dụng. Bạn sẽ không thể mua các tính năng Pro của Amplify.  This could be because you need to update your Google Play Store application, or because you live in a country where In App Billing is disabled."</string>
+    <string name="dialog_ok">"Ok"</string>
+    <string name="tasker_on">"Bật"</string>
+    <string name="tasker_off">"Tắt"</string>
+    <string name="tasker_reset_stats">"Đặt lại các thông số"</string>
+    <string name="tasker_choose_wakelock">"Chọn đánh thức để điều chỉnh."</string>
+    <string name="tasker_choose_alarm">"Chọn báo động để điều chỉnh."</string>
+    <string name="tasker_welcome">"Chào mừng đến trình cắm Quản lý tác vụ của Amplify."</string>
+    <string name="tasker_which_task">"Bạn có muốn thay đổi cài đặt cho một đánh thức hoặc một báo động , hay bạn muốn đặt  lại số liệu cho thiết bị của bạn?"</string>
+    <string name="tasker_task_wakelock">"THAY ĐỔI ĐÁNH THỨC"</string>
+    <string name="tasker_task_alarm">"THAY ĐỔI BÁO ĐỘNG"</string>
+    <string name="tasker_task_reset">"ĐẶT LẠI THỐNG KÊ"</string>
+    <string name="alert_nopro_title">"Đây là một tính năng Pro"</string>
+    <string name="alert_nopro_content">"Với hạn chế đánh thức và báo động không tiêu chuẩn , bạn cần phải mua một gói ủng hộ."</string>
+    <string name="alert_unknown_alarm_title">"Hạn chế báo động không xác định ?"</string>
+    <string name="alert_unknown_alarm_content">"Báo động này chưa được chứng minh an toàn để hạn chế. Bạn muốn hạn chế nó với bất cứ cách nào ?"</string>
+    <string name="dialog_unbounce">"HẠN CHẾ"</string>
+    <string name="dialog_cancel">"HỦY BỎ"</string>
+    <string name="tasker_choose_settings">"Chọn các cài đặt bạn muốn."</string>
+    <string name="alert_unknown_wakelock_title">"Hạn chế đánh thức không xác định?"</string>
+    <string name="alert_unknown_wakelock_content">"Đánh thúc này chưa được chứng minh an toàn để hạn chế. Bạn muốn hạn chế nó với bất cứ cách nào?"</string>
+    <string name="dialog_delete">"XÓA"</string>
+    <string name="alert_delete_stats_title">"Xóa tất cả các số liệu?"</string>
+    <string name="alert_delete_stats_content">"Điều này sẽ thiết lập lại số liệu cho tất cả các đánh thức và báo động của bạn! "</string>
+    <string name="title_settings">"Cài đặt"</string>
+    <string name="alert_reset_settings_title">"Đặt lại mặc định?"</string>
+    <string name="alert_reset_settings_content">"Điều này sẽ đặt lại tất cả các cài đặt cho báo động và đánh thức!"</string>
+    <string name="dialog_reset">"ĐẶT LẠI"</string>
+    <string name="reset_settings_confirmation">"Cài đặt đã được đặt lại về mặc định."</string>
+    <string name="dialog_save">"LƯU"</string>
+    <string name="desc_unknown">"Chúng tôi không có bất kỳ thông tin về sự kiện này, được nêu ra. Điều này có thể không an toàn để hạn chế. Chỉ có làm như vậy nếu bạn biết những gì bạn đang làm và bạn biết làm thế nào để vô hiệu hóa Xposed lúc khởi động. Chúng tôi đang nỗ lực để thu thập thông tin quan trọng về mọi đánh thúc và báo động. Xin hãy kiên nhẫn trong khi chúng tôi thu thập thông tin này."</string>
+    <string name="desc_nlpwakelock">"NlpWakeLock an toàn để hạn chế nó.  Nó được sử dụng bởi các dịch vụ Google Play để xác định vị trí thô của bạn bằng cách sử dụng một sự kết hợp của các tháp thu phát sóng di động và WiFi. Một khi đã có vị trí của bạn, nó lưu lại vị trí hiện hành như các ứng dụng khác, như Google Now, có thể truy cập vị trí của bạn mà không cần sử dụng GPS hoặc nhận được một sửa chữa mới.  Các cài đặt được đề nghị là từ 180 đến 600 giây."</string>
+    <string name="desc_nlpcollectorwakelock">"NlpCollectorWakeLock an toàn để hạn chế nó.  Nó được sử dụng bởi các dịch vụ Google Play để xác định vị trí thô của bạn bằng cách sử dụng một sự kết hợp của các tháp thu phát sóng di động và WiFi.   Một khi đã có vị trí của bạn, nó sẽ gửi lại cho Google để họ có thể mở rộng cơ sở dữ liệu của họ về vị trí WiFi.  Các cài đặt được đề nghị là từ 180 đến 600 giây."</string>
+    <string name="desc_alarmmanager">"Điều này cho phép truy cập vào các dịch vụ hệ thống báo động. Khi báo thức đã tắt, các Ý định đó đã được đăng ký để nó được truyền đi bởi hệ thống, tự động chạy ứng dụng mục tiêu nếu nó chưa được chạy. Báo động đã đăng ký được giữ lại trong khi điện thoại đang ngủ (và tùy chọn có thể đánh thức các thiết bị lên nếu họ đi ra trong thời gian đó), nhưng sẽ bị xóa nếu nó được tắt và khởi động lại."</string>
+    <string name="desc_audiooffload">"Phát âm thanh khi màn hình của bạn bị tắt. Nếu bạn vô hiệu hóa tính năng này, Bạn sẽ không có âm thanh nền hoặc nhạc có thể phát khi màn hình của bạn đang tắt."</string>
+    <string name="desc_activitymanagerlauncher">"Tương tác với các hoạt động chung đang chạy trong hệ thống. Nếu bạn giới hạn việc này , sẽ không có gì hoạt động tốt."</string>
+    <string name="desc_windowmanager">"Đây là một mức Đánh thức hệ thống Android.  Giao diện các ứng dụng sử dụng để liên lạc với trình quản lý cửa sổ - nghĩa là, các ứng dụng sẽ yêu cầu một Trình quản lý cửa sổ khóa mọi lúc chúng cần phải được hiển thị trên màn hình."</string>
+    <string name="desc_rilj">"RILJ cho phép thiết bị của bạn thức giấc trong quá trình xử lý các cuộc gọi, như là gọi điện thoại và truyền sóng di động"</string>
+    <string name="desc_syncloopwakelock">"Đây là các Đánh thức sử dụng Android để đồng bộ hóa tài khoản Quản lý đồng bộ như Google+, Twitter, Linkedin, Gmail v.v. Không bị ràng buộc cao hơn, càng lâu hơn lượng thời gian cho đến khi tài khoản của bạn sẽ được đồng bộ hoá một lần nữa."</string>
+    <string name="desc_icing">"ICING là một dịch vụ Google WakeLock.  Hiện đang tìm kiếm để biết thêm nhiều chi tiết hơn."</string>
+    <string name="desc_startingalertservice">"WakeLock này thường có thể được liên kết với Lịch, mặc dù có thể ảnh hưởng các ứng dụng khác như nhắn tin. Nếu bạn có thông báo Lịch / cảnh báo nó có thể giữ WakeLock này."</string>
+    <string name="desc_audiomix">"WakeLock này xử lý các âm thanh cảm ứng và âm thanh cảnh báo khác. Nó đã cản một số thiết bị ngay cả với Âm thanh cảm ứng đã  tắt."</string>
+    <string name="desc_locationmanagerservice">"Như tên của nó. Đây không phải là một điển hình làm hao pin cao cho một số nó có thể diễn ra một wakelock lớn."</string>
+    <string name="desc_audioin">"Wakelock này được sử dụng để giữ các thiết bị  thức lắng nghe  trong Google tìm kiếm  / Phát hiện từ nóng. Ok, Google"</string>
+    <string name="desc_nfcservicemroutingwakelock">"Có liên quan đến dịch vụ định tuyến NFC phát hiện các thẻ cho các ứng dụng thích hợp."</string>
+    <string name="desc_wakefulintentservicegcoreulrlocationreportingservice">"Được sử dụng bởi dịch vụ định vị Google để báo cáo vị trí hiện tại của bạn."</string>
+    <string name="desc_vzwgpslocationprovider">"Dịch vụ vị trí Verizon cụ thể sử dụng để thống kê tháp phát sóng."</string>
+    <string name="desc_hangouts_rtcs">"Google Hangouts.  Nếu bạn giới hạn này, Hangouts sẽ không còn làm việc."</string>
+    <string name="desc_gcm_conn">"Thông điệp Google Cloud. Gửi thông điệp gọn nhẹ đến ứng dụng của bạn. Trách nhiệm gửi các thông báo quảng bá đến điện thoại của bạn, cho tất cả các ứng dụng."</string>
+    <string name="desc_google_c2dm">"Thông điệp Đám mây đến thiết bị  (C2DM) là một dịch vụ giúp các nhà phát triển gửi dữ liệu cho các ứng dụng của họ trên các thiết bị. Dịch vụ này cung cấp một cơ chế cho các máy chủ có thể sử dụng để báo cho các ứng dụng điện thoại di động để liên lạc với máy chủ để lấy ứng dụng hoặc sử dụng dữ liệu cập nhật. Các dịch vụ C2DM xử lý mọi khía cạnh của Xếp hàng của thông điệp và bàn giao cho mục tiêu ứng dụng chạy trên các thiết bị mục tiêu. Dịch vụ này đã bị phản đối kể từ năm 2012 nhưng vẫn còn có những ứng dụng đang sử dụng dịch vụ này thay vì các GCM mới và cải tiến."</string>
+    <string name="desc_timedeventqueue">"Đây là một phần cốt lõi của Android đó là tốt nhất còn lại một mình. Nó trì hoãn tất cả các sự kiện sắp tới."</string>
+    <string name="desc_comgoogleandroidgmsnlpalarm_wakeup_locator">"Báo động này là an toàn để hạn chế.  Nó được sử dụng bởi Google Play Services để xác định vị trí thô của bạn sử dụng một sự kết hợp của các tháp di động và WiFi. Một khi đã có vị trí của bạn, nó lưu nó tại địa phương ứng dụng rất khác, như Google Now , có thể truy cập vị trí của bạn mà không cần sử dụng GPS hoặc nhận được một sửa chữa mới. Thiết lập được đề nghị là từ 180 đến 600 giây."</string>
+    <string name="desc_comgoogleandroidgmsnlpalarm_wakeup_activity_detection">"Báo động này là an toàn để hạn chế. Nó được sử dụng bởi Các dịch vụ của Google Play để xác định vị trí thô của bạn và sử dụng một sự kết hợp của các tháp di động và wifi. Một khi đã có vị trí của bạn, nó sẽ gửi lại cho Google để họ có thể mở rộng cơ sở dữ liệu của họ về vị trí WiFi. Thiết lập được đề nghị là từ 180 đến 600 giây."</string>
+    <string name="desc_comgoogleandroidappshangoutsupdate_notification">"Người nghe sẽ cập nhật các thông báo Google Hangouts của bạn."</string>
+    <string name="desc_comandroidinternaltelephonydatastall">"Wakelock từ com.android.phone (Ứng dụng Điện thoại) khi sử dụng dữ liệu thông qua các tháp di động. Sử dụng WiFi sẽ không kích hoạt báo động này. Thông thường nó được thông qua các mái nhà trong khi sử dụng dữ liệu, đặc biệt là trên một kết nối bình thường."</string>
+    <string name="settings_allow_every">"Cho phép mọi lúc"</string>
+    <string name="settings_seconds">"giây."</string>
+    <string name="card_button_reset">"ĐẶT LẠI"</string>
+    <string name="stat_alarms_acquired">"Báo động thu được"</string>
+    <string name="stat_alarms_blocked">"Báo động bị chặn"</string>
+    <string name="stat_loading">"Đang nạp..."</string>
+    <string name="stat_collected_for">"Số liệu thống kê thu thập được cho"</string>
+    <string name="stat_wake_duration_allowed">"Thời gian Đánh thức được phép"</string>
+    <string name="stat_wake_duration_blocked">"Thời gian Đánh thức bị chặn"</string>
+    <string name="stat_wake_allowed">"Đánh thức thu được"</string>
+    <string name="stat_wake_blocked">"Đánh thức bị chặn"</string>
+    <string name="stat_alarm_allowed">"Báo động đã chạy"</string>
+    <string name="stat_alarm_blocked">"Báo động bị chặn"</string>
+    <string name="stat_disabled">"Vô hiệu"</string>
+    <string name="donate_text">"Ứng dụng này sẽ luôn luôn cho phép bạn sửa chữa các Vị trí dự trên mạng của nhà cung cấp kẻ sát thủ pin miễn phí.  If you'd also like to limit other wakelocks and alarms, you can upgrade to the Pro features by supporting the project below.  Any donation amount will unlock the Pro features."</string>
+    <string name="donate_1">"Một tách cà phê trong khi tôi viết mã"</string>
+    <string name="donate_5">"Một tách cà phê trong khi tôi trả lời câu hỏi diễn đàn"</string>
+    <string name="donate_10">"Niềm vui do không phải mang bộ sạc của bạn"</string>
+    <string name="donate_thank_you">"Cám ơn với gói ủng hộ của bạn . Nó mang nhiều ý nghĩa với tôi . Tôi làm việc chăm chỉ trong thời gian rảnh hạn hẹp của tôi  mang đến cho bạn thời gian sử dụng pin tốt hơn. Khi bạn ủng hộ, bạn đã thực hiện một sự khác biệt cho dự án, và tạo ra một sự khác biệt trong cuộc sống của gia đình tôi. "</string>
+    <string name="donate_more_button">"TÔI CÓ THỂ GIÚP THÊM?"</string>
+    <string name="donate_more_text">"Mọi người thường hỏi làm thế nào họ có thể đóng góp thêm vào khoản đóng góp ban đầu của họ. Các nút bên dưới để bạn tặng thêm, nhưng không cung cấp bất kỳ tính năng bổ sung. Cảm ơn bạn rất nhiều vì đã hỗ trợ Amplify! "</string>
+    <string name="welcome_banner_title">"Hãy chắc chắn rằng tất cả mọi thứ được thiết lập."</string>
+    <string name="welcome_banner_text">"Bạn có thể chặn đánh thúc để ngăn chặn điện thoại của bạn thức giấc, và ngăn chặn các báo động để ngăn chặn nó thức dậy ở nơi đầu tiên. Chúng tôi đã thiết lập một số thông số tiết kiệm đã pin lưu mặc định cho bạn. "</string>
+    <string name="settings_category_options">"Tùy chọn"</string>
+    <string name="settings_item_show_launcher">"Hiện biểu tượng trong launcher"</string>
+    <string name="settings_item_choose_theme">"Chọn chủ đề"</string>
+    <string name="settings_item_global_stats_title">"Tham gia vào thống kê số liệu toàn cầu"</string>
+    <string name="settings_item_global_stats_summary">"Gửi và nhận số liệu thống kê vô danh"</string>
+    <string name="settings_item_reset_defaults_title">"Đặt lại về mặc định"</string>
+    <string name="settings_item_reset_defaults_summary">"Đặt lại tất cả các báo động và đánh thức với thiết lập mặc định"</string>
+    <string name="settings_category_debug">"Gỡi lỗi"</string>
+    <string name="settings_item_author">"Tác giả: Ryan Steckler"</string>
+    <string name="settings_item_logging_level">"Cấp độ ghi"</string>
+    <string name="settings_category_translation">"Tín dụng cho bản dịch"</string>
+    <string name="settings_theme_material">"Material"</string>
+    <string name="settings_theme_dark">"Dark"</string>
+    <string name="settings_logging_quiet">"Im lặng"</string>
+    <string name="settings_logging_default">"Mặc định"</string>
+    <string name="settings_logging_verbose">"Dài dòng"</string>
+    <string name="settings_item_force_english_title">"Buộc hiển thị tiếng Anh"</string>
+    <string name="settings_item_force_english_summary">"Ghi đè lên các thiết lập hiện hành của bạn và sử dụng tiếng Anh"</string>
+    <string name="playstore_short_description">"Năng lượng pin cho mọi người!"</string>
+<string name="playstore_long_description">"
+Báo giá tự nguyện từ những người sử dụng thực:
+Nó đã cho tôi khoảng 2 giờ sử dụng nhiều hơn với màn hình 30 phút nữa về thời gian. Tiết kiệm cho tôi từ việc mua một pin giá $25.
+Chỉ cần tặng 5 Dollars để hỗ trợ tuyệt tác này .. Giữ gìn công việc tốt  đơn giản tuyệt vời
+[Amplify] giống một cuộc cách mạng các ý nghĩa thực sự quản lý wakelock
+Module này là tuyệt vời! Tôi nhận được ít hơn một nửa phần trăm lãng phí mỗi giờ cho chế độ chờ nhàn rỗi.
+...và rất nhiều hơn thế nữa.
+
+Amplify đặt bạn trong việc kiểm soát trong về cách điện thoại của bạn sử dụng pin của bạn bằng cách kiểm soát mức độ thường xuyên thiết bị của bạn có thể thức dậy, và bao lâu nó có thể ở lại tỉnh táo. Sử dụng các thiết lập cần thiết để tiết kiệm pin dễ dàng, hoặc khai thác trong và tùy chỉnh mọi báo động và đánh thức trên thiết bị của bạn. Dưới đây là một số điểm nổi bật:
+- Một thiết kế đẹp, lấy cảm hứng từ các nguyên tắc thiết kế Material Design
+- Một công cụ ngăn chặn ổn định
+- định lượng toàn diện trong thời gian bị lãng phí và tiết kiệm thời gian do báo động và đánh thức
+- Một danh sách ngày càng có nhiều các mô tả về các báo động và đánh thức bằng tiếng Anh (và các ngôn ngữ khác đến sớm!)
+- Một gói mới Pro cho phép bạn giới hạn bất kỳ báo động hoặc đánh thức trên thiết bị
+- Một cơ sở mã mã nguồn mở, do đó bạn có thể xem như thế nào nó hoạt động, hoặc xây dựng nó cho mình
+
+
+Mua hàng trong Ứng dụng cho phép bạn mở khóa các tính năng Pro cho phép bạn tùy chỉnh các báo động và đánh thức trên điện thoại. Nếu không có các gói pro, bạn có thể kiểm soát heo theo cách tồi tệ nhất:  NlpWakelock, NlpCollectorWakeLock, ALARM_WAKEUP_LOCATOR, và ALARM_WAKE_ACTIVITY_DETECTION.
+
+Có thể bạn có thời gian dùng lâu hơn [pin]!
+"</string>
+    <string name="welcome_banner_welcome">"Chào mừng!"</string>
+    <string name="welcome_banner_checking_service">"Kiểm tra xem Amplify đang chạy..."</string>
+    <string name="welcome_banner_checking_xposed">"Kiểm tra xem Xposed đã được cài đặt..."</string>
+    <string name="welcome_banner_checking_root">"Kiểm tra quyền truy cập root..."</string>
+    <string name="welcome_banner_checking_looks_great">"Mọi thứ thật tuyệt!"</string>
+    <string name="welcome_banner_checking_uhoh">"Có gì đó không đúng. Chúng ta hãy tìm ra và sửa chữa chúng..."</string>
+    <string name="welcome_banner_problem_none">"Chúng tôi đã thiết lập một số mặc định tiết kiệm pin cho bạn. Tận hưởng thời gian sử dụng pin lâu hơn của bạn!"</string>
+    <string name="welcome_banner_problem_service">"Có vẻ như bạn chưa kích hoạt module Amplify. Nhấp chuột \"FIX IT\", đảm bảo Amplify đã được chọn, sau đó khởi động lại."</string>
+    <string name="welcome_banner_problem_xposed_running">"Xposed không chạy. Nhấp vào \"FIX IT\", sau đó chọn \"Cài đặt/Cập nhật\" và khởi động lại thiết bị."</string>
+<string name="welcome_banner_problem_xposed_installed">"Xposed chưa được cài đặt. Xposed là cần thiết cho Amplify và nhiều ứng dụng root khác. Sau khi tải về xong, bấm CÀI ĐẶT, sau đó khởi động lại Amplify.
+Nếu bạn muốn tìm hiểu thêm về Xposed, truy cập vào %1$s."</string>
+    <string name="welcome_banner_problem_root">"Có vẻ như thiết bị của bạn chưa được root.  Amplify đòi hỏi một thiết đã được root để hoạt động đúng. Nếu bạn quan tâm đến root trên thiết bị của bạn, vui lòng truy cập vào trang %1$s."</string>
+    <string name="welcome_banner_button_next">"KẾ TIẾP"</string>
+    <string name="welcome_banner_button_fixit">"SỬA NÓ"</string>
+    <string name="welcome_banner_button_exit">"THOÁT"</string>
+    <string name="welcome_banner_button_install">"CÀI ĐẶT"</string>
+    <string name="welcome_downloading_xposed">"Đang tải Xposed..."</string>
+    <string name="welcome_downloaded_xposed">"Tải xuống hoàn tất."</string>
+    <string name="welcome_download_error_xposed">"Tải xuống thất bại.  Vui lòng thử lại sau."</string>
+    <string name="download_xposed_title">"Đang tải Xposed"</string>
+    <string name="download_xposed_description">"Bắt buộc cho Amplify"</string>
+    <string name="requires_root">"*** Yêu cầu thiết bị phải được root ***"</string>
+    <string name="installs_xposed">"Amplify sử dụng  Xposed Framework, cài đặt nó nếu bạn không có nó."</string>
+    <string name="settings_category_code_credits">"Tín dụng cho nhà phát triển"</string>
+    <string name="title_services">"Dịch vụ"</string>
+    <string name="action_sort_by_alpha">"Sắp xếp theo thứ tự abc"</string>
+    <string name="card_settings_subtitle_service">"Kiểm soát dịch vụ này"</string>
+    <string name="tasker_choose_service">"Chọn dịch vụ để điều chỉnh."</string>
+    <string name="alert_unknown_service_title">"Hạn chế dịch vụ không xác định?"</string>
+    <string name="alert_unknown_service_content">"Dịch vụ này chưa được chứng minh là an toàn để hạn chế. Bạn muốn giới hạn nó không?"</string>
+    <string name="stat_service_allowed">"Dịch vụ đã khởi chạy"</string>
+    <string name="stat_service_blocked">"Dịch vụ bị chặn"</string>
+    <string name="service_switch_allow">"Cho phép"</string>
+    <string name="service_switch_deny">"Chặn"</string>
+</resources>

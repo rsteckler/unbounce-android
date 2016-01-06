@@ -41,7 +41,7 @@ import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 public class Wakelocks implements IXposedHookLoadPackage {
 
     private static final String TAG = "Amplify: ";
-    public static final String VERSION = "3.3.4"; //This needs to be pulled from the manifest or gradle build.
+    public static final String VERSION = "3.3.6c"; //This needs to be pulled from the manifest or gradle build.
     public static final String FILE_VERSION = "3"; //This needs to be pulled from the manifest or gradle build.
     private HashMap<String, Long> mLastWakelockAttempts = null; //The last time each wakelock was allowed.
     private HashMap<String, Long> mLastAlarmAttempts = null; //The last time each alarm was allowed.
@@ -423,6 +423,8 @@ public class Wakelocks implements IXposedHookLoadPackage {
 
     private void handleWakeLockAcquire(XC_MethodHook.MethodHookParam param, String wakeLockName, IBinder lock, int uId) {
 
+        String trackingWakelockName = wakeLockName;
+
         //If we're blocking this wakelock
         String prefName = "wakelock_" + wakeLockName + "_enabled";
         boolean block = m_prefs.getBoolean(prefName, false);
@@ -437,7 +439,8 @@ public class Wakelocks implements IXposedHookLoadPackage {
                     if (wakeLockName.matches(wildcard)) {
                         block = true;
                         overrideSeconds = Integer.parseInt(wildcard.substring(wildcard.indexOf("$$||$$") + 6));
-                        debugLog("Blocking Wakelock: " + wakeLockName + " via regex for " + overrideSeconds + " seconds.");
+                        trackingWakelockName = wildcard;
+                        debugLog("Regex set for Wakelock: " + wakeLockName + " for " + overrideSeconds + " seconds.");
                         break;
                     }
                 }
@@ -456,7 +459,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
             //Debounce this to our minimum interval.
             long lastAttempt = 0;
             try {
-                lastAttempt = mLastWakelockAttempts.get(wakeLockName);
+                lastAttempt = mLastWakelockAttempts.get(trackingWakelockName);
             } catch (NullPointerException npe) { /* ok.  Just havent attempted yet.  Use 0 */ }
 
             long now = SystemClock.elapsedRealtime();
@@ -472,7 +475,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
             } else {
                 //Allow the wakelock
                 defaultLog("Allowing Wakelock " + wakeLockName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastWakeLock);
-                mLastWakelockAttempts.put(wakeLockName, now);
+                mLastWakelockAttempts.put(trackingWakelockName, now);
                 recordAcquire(wakeLockName, lock, uId);
             }
         } else {
@@ -630,6 +633,8 @@ public class Wakelocks implements IXposedHookLoadPackage {
                 continue;
             }
 
+            String trackingAlarmName = alarmName;
+
             //If we're blocking this alarm
             String prefName = "alarm_" + alarmName + "_enabled";
             boolean block = m_prefs.getBoolean(prefName, false);
@@ -644,7 +649,8 @@ public class Wakelocks implements IXposedHookLoadPackage {
                         if (alarmName.matches(wildcard)) {
                             block = true;
                             overrideSeconds = Integer.parseInt(wildcard.substring(wildcard.indexOf("$$||$$") + 6));
-                            debugLog("Blocking Wakelock: " + alarmName + " via regex for " + overrideSeconds + " seconds.");
+                            trackingAlarmName = wildcard;
+                            debugLog("Regex set for Alarm: " + alarmName + " for " + overrideSeconds + " seconds.");
                             break;
                         }
                     }
@@ -664,7 +670,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
                 //Debounce this to our minimum interval.
                 long lastAttempt = 0;
                 try {
-                    lastAttempt = mLastAlarmAttempts.get(alarmName);
+                    lastAttempt = mLastAlarmAttempts.get(trackingAlarmName);
                 } catch (NullPointerException npe) { /* ok.  Just havent attempted yet.  Use 0 */ }
 
                 long timeSinceLastAlarm = now - lastAttempt;
@@ -679,7 +685,7 @@ public class Wakelocks implements IXposedHookLoadPackage {
                 } else {
                     //Allow the wakelock
                     defaultLog("Allowing Alarm " + alarmName + ".  Max Interval: " + collectorMaxFreq + " Time since last granted: " + timeSinceLastAlarm);
-                    mLastAlarmAttempts.put(alarmName, now);
+                    mLastAlarmAttempts.put(trackingAlarmName, now);
                     recordAlarmAcquire(context, alarmName, pi.getTargetPackage());
                 }
             } else {

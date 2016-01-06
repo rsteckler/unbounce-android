@@ -32,7 +32,7 @@
 <string name="category_not_safe">"Not safe to limit"</string>
 <string name="category_error">"Error"</string>
 <string name="alert_noiab_title">"Pro features unavailable"</string>
-<string name="alert_noiab_content">"Your device doesn't support In App Billing.  You won't be able to purchase the Pro features of Amplify.  This is usually because you have Lucky Patcher installed, or you have Greenified the Play Store"</string>
+<string name="alert_noiab_content">"There's a problem with In-App Billing.  This is usually because Lucky Patcher is installed, or the Play Store is Greenified.  <a href="http://forum.xda-developers.com/xposed/modules/mod-nlpunbounce-reduce-nlp-wakelocks-t2853874">Visit the forum</a> for support."</string>
 <string name="dialog_ok">"OK"</string>
 <string name="tasker_on">"On"</string>
 <string name="tasker_off">"Off"</string>

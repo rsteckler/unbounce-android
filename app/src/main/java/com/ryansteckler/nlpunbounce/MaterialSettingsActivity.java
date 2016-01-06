@@ -11,8 +11,10 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ryansteckler.inappbilling.IabHelper;
@@ -116,7 +118,7 @@ public class MaterialSettingsActivity extends Activity
             {
                 if (!result.isSuccess()) {
                     Log.d(TAG, "In-app Billing setup failed: " + result);
-                    new AlertDialog.Builder(MaterialSettingsActivity.this)
+                    AlertDialog errorDialog = new AlertDialog.Builder(MaterialSettingsActivity.this)
                             .setTitle(R.string.alert_noiab_title)
                             .setMessage(R.string.alert_noiab_content)
                             .setNeutralButton("OK", new DialogInterface.OnClickListener() {
@@ -125,6 +127,8 @@ public class MaterialSettingsActivity extends Activity
                             })
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .show();
+
+                    ((TextView)errorDialog.findViewById(android.R.id.message)).setMovementMethod(LinkMovementMethod.getInstance());
 
                 }
                 else {

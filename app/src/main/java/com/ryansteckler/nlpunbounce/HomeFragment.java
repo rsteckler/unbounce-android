@@ -214,7 +214,7 @@ public class HomeFragment extends Fragment  {
                 public void run() {
                     progressAnimation.start();
                 }
-            }, 800); //Let the screen "come up" and blur start.  Let the user take in the screen before starting things moving.
+            }, 1200); //Let the screen "come up" and blur start.  Let the user take in the screen before starting things moving.
 
         }
     }
@@ -252,23 +252,47 @@ public class HomeFragment extends Fragment  {
         public void onAnimationEnd(Animator animator) {
             //Each time the animation finishes, handle the next step
             mSetupStep++;
+            Log.i(TAG, "OnAnimationEnd called.  We're on step: " + mSetupStep);
+
+            Log.d(TAG, "Original fragment status: " + (isAdded() ? "True" : "False"));
+            Log.d(TAG, "Refreshing fragment status");
+            getFragmentManager().executePendingTransactions();
+            Log.d(TAG, "New fragment status: " + (isAdded() ? "True" : "False"));
 
             if (isAdded()) {
                 final TextView stepText = (TextView) mParentView.findViewById(R.id.welcomeStepText);
 
                 if (mSetupStep == 1) {
+                    Log.d(TAG, "Starting animation for step 1.");
+                    Log.d(TAG, "Status of animation.isRunning (Should be false): " + mProgressAnimation.isRunning());
                     stepText.setText(getResources().getString(R.string.welcome_banner_checking_xposed));
                     mProgressChecking.setProgress(0);
-                    mProgressAnimation.setCurrentPlayTime(0);
+                    mProgressAnimation = ValueAnimator.ofInt(0, 100);
+                    mProgressAnimation.addListener(this);
+                    mProgressAnimation.addUpdateListener(this);
+                    mProgressAnimation.setDuration(2000);
+                    mProgressAnimation.setStartDelay(200); //Create a small gap between each step, so they look discrete
+                    mProgressAnimation.setInterpolator(new LinearInterpolator());
                     mProgressAnimation.start();
+                    Log.d(TAG, "Started animation for step 1.");
+
                 } else if (mSetupStep == 2) {
+                    Log.i(TAG, "Starting animation for step 2.");
                     stepText.setText(getResources().getString(R.string.welcome_banner_checking_root));
-                    mProgressChecking.setProgress(0);
-                    mProgressAnimation.setCurrentPlayTime(0);
+                    mProgressAnimation = ValueAnimator.ofInt(0, 100);
+                    mProgressAnimation.addListener(this);
+                    mProgressAnimation.addUpdateListener(this);
+                    mProgressAnimation.setDuration(2000);
+                    mProgressAnimation.setStartDelay(200); //Create a small gap between each step, so they look discrete
+                    mProgressAnimation.setInterpolator(new LinearInterpolator());
                     mProgressAnimation.start();
+                    Log.d(TAG, "Started animation for step 2.");
+
                 } else if (mSetupStep == 3) {
                     handleFinalStep();
                 }
+            } else {
+                Log.i(TAG, "Not running animation because the fragment isn't added.");
             }
         }
 
