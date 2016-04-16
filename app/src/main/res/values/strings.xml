@@ -26,6 +26,7 @@
 <string name="card_settings_subtitle_wakelock">"Control this wakelock"</string>
 <string name="card_description_title">"DESCRIPTION"</string>
 <string name="card_description_subtitle">"Why is this thing eating your battery?"</string>
+<string name="card_description_subtitle_regex">"What will this do?"</string>
 <string name="category_unbounced">"Limited"</string>
 <string name="category_safe">"Safe to limit"</string>
 <string name="category_unknown">"Unknown"</string>
@@ -217,5 +218,8 @@ May you have a long [battery] life!
 <string name="action_new_custom_item">"New"</string>
     <string name="settings_scroll_item_names">Scroll Item Names</string>
 <string name="alarm_regex_matches">"Matches %1$d/%2$d alarms"</string>
+    <string name="desc_regex_unknown">"This pattern doesn't apply to any currently known alarms"</string>
+    <string name="desc_regex">"This pattern matches the following alarms (%1$d of %2$d):"</string>
+    <string name="settings_regex">"Pattern:"</string>
 
 </resources>
