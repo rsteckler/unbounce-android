@@ -216,5 +216,6 @@ May you have a long [battery] life!
 <string name="service_switch_deny">"Deny"</string>
 <string name="action_new_custom_item">"New"</string>
     <string name="settings_scroll_item_names">Scroll Item Names</string>
+<string name="alarm_regex_matches">"Matches %1$d/%2$d alarms"</string>
 
 </resources>

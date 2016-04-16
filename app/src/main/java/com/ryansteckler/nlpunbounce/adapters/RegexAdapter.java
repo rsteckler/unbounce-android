@@ -3,6 +3,9 @@ package com.ryansteckler.nlpunbounce.adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Path;
+import android.text.Layout;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +13,12 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ryansteckler.nlpunbounce.R;
+import com.ryansteckler.nlpunbounce.models.BaseStats;
+import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -72,6 +78,30 @@ public class RegexAdapter extends ArrayAdapter<String> {
                 }
             });
         }
+
+        LinearLayout regexMatchListView = (LinearLayout) view.findViewById(R.id.regexMatchList);
+        TextView regexMatchText = (TextView) view.findViewById(R.id.regexMatchText);
+        int matchingAlarmsCount = 0;
+        ArrayList<BaseStats> alarms = UnbounceStatsCollection.getInstance().toAlarmArrayList(null);
+        for (BaseStats alarm : alarms) {
+            String alarmName = alarm.getName();
+            if (alarmName.matches(text.getText().toString())) {
+                TextView tv = new TextView(view.getContext());
+                tv.setText(alarmName);
+                regexMatchListView.addView(tv);
+                matchingAlarmsCount++;
+
+                // for scrolling
+                tv.setLayoutParams(regexMatchText.getLayoutParams());
+                tv.setEllipsize(regexMatchText.getEllipsize());
+                tv.setSelected(true);
+                tv.setSingleLine(true);
+            }
+        }
+
+        regexMatchText.setText(String.format(context.getResources().getString(R.string.alarm_regex_matches),
+                matchingAlarmsCount, alarms.size()));
+
         return view;
     }
 
