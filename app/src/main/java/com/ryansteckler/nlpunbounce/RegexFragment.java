@@ -1,6 +1,5 @@
 package com.ryansteckler.nlpunbounce;
 
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -24,7 +23,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-public abstract class BaseRegexFragment extends android.app.ListFragment implements AlarmDetailFragment.FragmentClearListener {
+public abstract class RegexFragment extends android.app.ListFragment implements AlarmDetailFragment.FragmentClearListener {
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     protected final static String ARG_TYPE = "type";
@@ -38,7 +37,7 @@ public abstract class BaseRegexFragment extends android.app.ListFragment impleme
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public BaseRegexFragment() {
+    public RegexFragment() {
     }
 
     protected abstract String getType();
@@ -77,7 +76,7 @@ public abstract class BaseRegexFragment extends android.app.ListFragment impleme
 
         if (id == R.id.action_new_custom) {
             //Create a new custom alarm regex
-            //Fragment fragment = RegexDialogFragment.newInstance("", "", "", mType);
+            //Fragment fragment = RegexDetailFragment.newInstance("", "", "", mType);
             //fragment.setTargetFragment(this, 0);
             switchToDetail(0, "", "", "");
             //fragment.show(getActivity().getFragmentManager(), "RegexDialog");
@@ -96,18 +95,7 @@ public abstract class BaseRegexFragment extends android.app.ListFragment impleme
         super.onCreate(savedInstanceState);
         ThemeHelper.onActivityCreateSetTheme(this.getActivity());
 
-        //Setup the list adapter
-        SharedPreferences prefs = getActivity().getSharedPreferences("com.ryansteckler.nlpunbounce_preferences", Context.MODE_WORLD_READABLE);
-        Set<String> sampleSet = new HashSet<String>();
-        Set<String> set = prefs.getStringSet(String.format(PREF_SET_TEMPLATE, getType()), sampleSet);
-        ArrayList<String> list = new ArrayList<String>(set);
-
-        // Create The Adapter with passing ArrayList as 3rd parameter
-        mAdapter = new RegexAdapter(getActivity(), list, getType());
-
-        // Sets The Adapter
-        setListAdapter(mAdapter);
-
+        reload();
         setHasOptionsMenu(true);
     }
 
@@ -130,10 +118,6 @@ public abstract class BaseRegexFragment extends android.app.ListFragment impleme
 
         if (values.length > 2)
             enabled = values[2];
-
-        //Fragment fragment = RegexDialogFragment.newInstance(name, seconds, enabled, mType);
-        //fragment.setTargetFragment(this, 0);
-        //fragment.show(getActivity().getFragmentManager(), "RegexDialog");
 
         //Switch to detail view.
         switchToDetail(position, name, seconds, enabled);
@@ -162,17 +146,32 @@ public abstract class BaseRegexFragment extends android.app.ListFragment impleme
         //Spin up the new Detail fragment.  Dig the custom animations.  Also put it on the back stack
         //so we can hit the back button and come back to the list.
         FragmentManager fragmentManager = getFragmentManager();
-        RegexDialogFragment newFrag = (RegexDialogFragment) new RegexDialogFragment().newInstance(startBounds.top, finalBounds.top, startBounds.bottom, finalBounds.bottom, new AlarmStats("Regex", "Regex"), mTaskerMode,
+        RegexDetailFragment newFrag = RegexDetailFragment.newInstance(startBounds.top, finalBounds.top, startBounds.bottom, finalBounds.bottom, new AlarmStats("Regex", "Regex"), mTaskerMode,
                 name, seconds, enabled, getType());
-        //RegexDialogFragment newFrag = (RegexDialogFragment) new RegexDialogFragment().newInstance(name, seconds, enabled, mType);
         newFrag.attachClearListener(this);
-        newFrag.setTargetFragment(this, 0);
         fragmentManager.beginTransaction()
                 .setCustomAnimations(R.animator.expand_in, R.animator.noop, R.animator.noop, R.animator.expand_out)
                 .hide(this)
                 .add(R.id.container, newFrag, "regex_detail")
                 .addToBackStack(null)
                 .commit();
+
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        //Remember the scroll pos so we can reinstate it
+        if (!hidden) {
+//            if (mListener != null) {
+//                mListener.onAlarmsSetTitle(getResources().getString(R.string.title_alarms));
+//                mListener.onAlarmsSetTaskerTitle(getResources().getString(R.string.tasker_choose_alarm));
+//            }
+            if (mReloadOnShow) {
+                mReloadOnShow = false;
+                reload();
+            }
+        }
 
     }
 

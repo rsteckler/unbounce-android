@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -26,11 +27,13 @@ import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 /**
  * Created by rsteckler on 11/10/15.
  */
-public class RegexDialogFragment  extends BaseDetailFragment {
+public class RegexDetailFragment extends BaseDetailFragment {
 
     private String mDefaultValue = "";
     private String mDefaultSeconds = "240";
@@ -38,17 +41,17 @@ public class RegexDialogFragment  extends BaseDetailFragment {
     private String mEnabled = "enabled";
 
     @Override
-    public RegexDialogFragment newInstance() {
-        return new RegexDialogFragment();
+    public RegexDetailFragment newInstance() {
+        return new RegexDetailFragment();
     }
 
-    public RegexDialogFragment() {
+    public RegexDetailFragment() {
         // Required empty public constructor
     }
 
-    public static RegexDialogFragment newInstance(int startTop, int finalTop, int startBottom, int finalBottom, BaseStats stat, boolean taskerMode,
+    public static RegexDetailFragment newInstance(int startTop, int finalTop, int startBottom, int finalBottom, BaseStats stat, boolean taskerMode,
                                                   String defaultValue, String defaultSeconds, String enabled, String defaultSetName) {
-        RegexDialogFragment f = new RegexDialogFragment();
+        RegexDetailFragment f = new RegexDetailFragment();
 
         // Supply num input as an argument.
         Bundle args = new Bundle();
@@ -107,7 +110,9 @@ public class RegexDialogFragment  extends BaseDetailFragment {
         panel.setBackgroundDrawable(backgroundColor);
         panel.setAlpha(b ? 1 : (float) .4);
 
-        getView().findViewById(R.id.editRegex).setEnabled(b);
+        TextView textView = (TextView) getView().findViewById(R.id.editRegex);
+        textView.setEnabled(b);
+        textView.clearFocus();
         panel = (View)getView().findViewById(R.id.settingsPanelRegex);
         panel.setBackgroundDrawable(backgroundColor);
         panel.setAlpha(b ? 1 : (float) .4);
@@ -173,11 +178,11 @@ public class RegexDialogFragment  extends BaseDetailFragment {
         TextView description = (TextView) view.findViewById(R.id.textViewDescription);
         description.setText(getDescriptionText(mDefaultValue));
 
-        SharedPreferences prefs = getActivity().getSharedPreferences(RegexDialogFragment.class.getPackage().getName() + "_preferences", Context.MODE_WORLD_READABLE);
+        SharedPreferences prefs = getActivity().getSharedPreferences(RegexDetailFragment.class.getPackage().getName() + "_preferences", Context.MODE_WORLD_READABLE);
 
         final EditText editSeconds = (EditText) view.findViewById(R.id.editRegexSeconds);
 
-        editSeconds.setText(String.valueOf(Long.getLong(mDefaultSeconds, 240)));
+        editSeconds.setText(mDefaultSeconds);
         editSeconds.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
@@ -203,7 +208,7 @@ public class RegexDialogFragment  extends BaseDetailFragment {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
                 if (i == EditorInfo.IME_ACTION_DONE) {
-                    return handleTextChange(textView, editSeconds);
+                    return handleTextChange(textView, editRegex);
                 }
                 return false;
             }
@@ -212,7 +217,7 @@ public class RegexDialogFragment  extends BaseDetailFragment {
             @Override
             public void onFocusChange(View view, boolean b) {
                 if (!b) {
-                    handleTextChange((TextView) view, editSeconds);
+                    handleTextChange((TextView) view, editRegex);
                 }
             }
         });
@@ -245,23 +250,36 @@ public class RegexDialogFragment  extends BaseDetailFragment {
     private boolean handleTextChange(TextView textView, EditText edit) {
         try {
             String prevBlockName = mDefaultValue + "$$||$$" + mDefaultSeconds + "$$||$$" + mEnabled;
+            boolean regexValid = true;
             long seconds = Long.parseLong(mDefaultSeconds);
-            if (textView.getId() == R.id.editRegexSeconds) {
+            if (edit.getId() == R.id.editRegexSeconds) {
                 mDefaultSeconds = Long.toString(Long.parseLong(textView.getText().toString()));
-            } else if (textView.getId() == R.id.editRegex) {
-                mDefaultValue = textView.getText().toString();
-                TextView description = (TextView) getView().findViewById(R.id.textViewDescription);
-                description.setText(getDescriptionText(mDefaultValue));
-
-                if (mClearListener != null)
-                {
-                    mClearListener.onCleared();
+            } else if (edit.getId() == R.id.editRegex) {
+                try {
+                    Pattern.compile(textView.getText().toString());
+                } catch (PatternSyntaxException ex) {
+                    regexValid = false;
+                }
+                if (regexValid) {
+                    mDefaultValue = textView.getText().toString();
+                    TextView description = (TextView) getView().findViewById(R.id.textViewDescription);
+                    description.setText(getDescriptionText(mDefaultValue));
+                } else {
+                    textView.setError("Invalid regex");
                 }
             }
             String blockName = mDefaultValue + "$$||$$" + mDefaultSeconds + "$$||$$" + mEnabled;
 
+            if (blockName.equals(prevBlockName))
+                return true;
+
+            if (mClearListener != null)
+            {
+                mClearListener.onCleared();
+            }
+
             if (!mTaskerMode) {
-                SharedPreferences prefs = getActivity().getSharedPreferences(RegexDialogFragment.class.getPackage().getName() + "_preferences", Context.MODE_WORLD_READABLE);
+                SharedPreferences prefs = getActivity().getSharedPreferences(RegexDetailFragment.class.getPackage().getName() + "_preferences", Context.MODE_WORLD_READABLE);
                 Set<String> sampleSet = new HashSet<String>();
                 Set<String> set = new HashSet<String>(prefs.getStringSet(mDefaultSetName + "_regex_set", sampleSet));
                 if (!TextUtils.isEmpty(mDefaultValue)) {
@@ -277,10 +295,6 @@ public class RegexDialogFragment  extends BaseDetailFragment {
             // hide virtual keyboard
             InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(edit.getWindowToken(), 0);
-
-            Fragment regexFrag = getTargetFragment();
-            if (regexFrag instanceof BaseRegexFragment)
-                ((BaseRegexFragment) (regexFrag)).reload();
 
             return true;
 
