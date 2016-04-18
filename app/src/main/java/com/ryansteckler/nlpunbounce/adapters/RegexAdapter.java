@@ -79,28 +79,20 @@ public class RegexAdapter extends ArrayAdapter<String> {
             });
         }
 
-        LinearLayout regexMatchListView = (LinearLayout) view.findViewById(R.id.regexMatchList);
         TextView regexMatchText = (TextView) view.findViewById(R.id.regexMatchText);
         int matchingAlarmsCount = 0;
         ArrayList<BaseStats> alarms = UnbounceStatsCollection.getInstance().toAlarmArrayList(null);
         for (BaseStats alarm : alarms) {
-            String alarmName = alarm.getName();
-            if (alarmName.matches(text.getText().toString())) {
-                TextView tv = new TextView(view.getContext());
-                tv.setText(alarmName);
-                regexMatchListView.addView(tv);
+            if (alarm.getName().matches(text.getText().toString()))
                 matchingAlarmsCount++;
-
-                // for scrolling
-                tv.setLayoutParams(regexMatchText.getLayoutParams());
-                tv.setEllipsize(regexMatchText.getEllipsize());
-                tv.setSelected(true);
-                tv.setSingleLine(true);
-            }
         }
 
-        regexMatchText.setText(String.format(context.getResources().getString(R.string.alarm_regex_matches),
-                matchingAlarmsCount, alarms.size()));
+        if (this.list.get(position).substring(this.list.get(position).lastIndexOf("$$||$$") + "$$||$$".length()).equals("disabled")) {
+            regexMatchText.setText(context.getResources().getString(R.string.regex_list_disabled));
+        } else {
+            regexMatchText.setText(String.format(context.getResources().getString(R.string.regex_list_enabled),
+                    matchingAlarmsCount, alarms.size()));
+        }
 
         return view;
     }

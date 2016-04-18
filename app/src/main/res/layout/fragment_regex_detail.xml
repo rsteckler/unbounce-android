@@ -65,7 +65,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/card_settings_subtitle_alarm"
+                            android:text="@string/card_settings_subtitle_regex"
                             android:layout_marginLeft="@dimen/pad_icon"
                             android:layout_marginStart="@dimen/pad_icon"
                             style="@style/TextCaptionLight" />
@@ -76,7 +76,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/switchStat"
-                        android:alpha="1"/>
+                        android:alpha="1"
+                        android:checked="false" />
 
 
                 </LinearLayout>
@@ -87,7 +88,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:padding="@dimen/card_internal_padding"
-                    android:id="@+id/settingsPanelPattern"
+                    android:id="@+id/settingsPanelRegex"
                     android:background="?background_panel_disabled"
                     android:paddingLeft="1dp"
                     android:paddingRight="1dp"
@@ -109,7 +110,6 @@
                         android:inputType="text"
                         android:id="@+id/editRegex"
                         android:layout_weight=".8"
-                        android:maxLength="7"
                         android:maxLines="1"
                         android:lines="1"
                         android:textAlignment="center"
@@ -144,7 +144,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:inputType="number"
-                                    android:id="@+id/editAlarmSeconds"
+                                    android:id="@+id/editRegexSeconds"
                                     android:layout_weight=".35"
                                     android:maxLength="7"
                                     android:maxLines="1"

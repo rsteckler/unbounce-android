@@ -435,11 +435,15 @@ public class Wakelocks implements IXposedHookLoadPackage {
             if (wakelockWildcards != null) {
                 //For each wildcard block
                 for (String wildcard : wakelockWildcards) {
-                    String regexToMatch = wildcard.substring(0, wildcard.indexOf("$$||$$"));
-                    if (wakeLockName.matches(wildcard)) {
+                    String[] values = wildcard.split("\\$\\$\\|\\|\\$\\$"); // matches $$||$$
+                    if (values.length < 2)
+                        continue;  // *should* never happen
+
+                    String regexToMatch = values[0];
+                    boolean disabled = values.length > 2 && "disabled".equals(values[2]);
+                    if (!disabled && wakeLockName.matches(regexToMatch)) {
                         block = true;
-                        overrideSeconds = Integer.parseInt(wildcard.substring(wildcard.indexOf("$$||$$") + 6));
-                        trackingWakelockName = wildcard;
+                        overrideSeconds = Integer.parseInt(values[1]);
                         debugLog("Regex set for Wakelock: " + wakeLockName + " for " + overrideSeconds + " seconds.");
                         break;
                     }
@@ -645,11 +649,15 @@ public class Wakelocks implements IXposedHookLoadPackage {
                 if (alarmWildcards != null) {
                     //For each wildcard block
                     for (String wildcard : alarmWildcards) {
-                        String regexToMatch = wildcard.substring(0, wildcard.indexOf("$$||$$"));
-                        if (alarmName.matches(wildcard)) {
+                        String[] values = wildcard.split("\\$\\$\\|\\|\\$\\$"); // matches $$||$$
+                        if (values.length < 2)
+                            continue;  // *should* never happen
+
+                        String regexToMatch = values[0];
+                        boolean disabled = values.length > 2 && "disabled".equals(values[2]);
+                        if (!disabled && alarmName.matches(regexToMatch)) {
                             block = true;
-                            overrideSeconds = Integer.parseInt(wildcard.substring(wildcard.indexOf("$$||$$") + 6));
-                            trackingAlarmName = wildcard;
+                            overrideSeconds = Integer.parseInt(values[1]);
                             debugLog("Regex set for Alarm: " + alarmName + " for " + overrideSeconds + " seconds.");
                             break;
                         }

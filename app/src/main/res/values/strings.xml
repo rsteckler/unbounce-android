@@ -217,9 +217,11 @@ May you have a long [battery] life!
 <string name="service_switch_deny">"Deny"</string>
 <string name="action_new_custom_item">"New"</string>
     <string name="settings_scroll_item_names">Scroll Item Names</string>
-<string name="alarm_regex_matches">"Matches %1$d/%2$d alarms"</string>
-    <string name="desc_regex_unknown">"This pattern doesn't apply to any currently known alarms"</string>
-    <string name="desc_regex">"This pattern matches the following alarms (%1$d of %2$d):"</string>
-    <string name="settings_regex">"Pattern:"</string>
+<string name="regex_list_enabled">"Matches %1$d/%2$d events"</string>
+<string name="regex_list_disabled">"Pattern disabled"</string>
+<string name="desc_regex_unknown">"This pattern doesn't apply to any currently known events"</string>
+<string name="desc_regex">"This pattern matches %1$d of %2$d events:"</string>
+<string name="settings_regex">"Pattern:"</string>
+<string name="card_settings_subtitle_regex">"Control this regex"</string>
 
 </resources>

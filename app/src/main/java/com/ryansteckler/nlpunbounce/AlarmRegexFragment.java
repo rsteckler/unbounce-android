@@ -23,18 +23,21 @@ import java.util.Set;
  * Created by rsteckler on 11/21/15.
  */
 public class AlarmRegexFragment extends BaseRegexFragment /* implements BaseDetailFragment.FragmentClearListener */ {
-
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
     public AlarmRegexFragment() {
         super();
-        this.mType = "alarm";
     }
 
     public static AlarmRegexFragment newInstance() {
         AlarmRegexFragment fragment = new AlarmRegexFragment();
         return fragment;
+    }
+
+    @Override
+    protected String getType() {
+        return "alarm";
     }
 }

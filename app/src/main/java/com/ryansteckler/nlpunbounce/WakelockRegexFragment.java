@@ -34,11 +34,17 @@ public class WakelockRegexFragment extends BaseRegexFragment {
      */
     public WakelockRegexFragment() {
         super();
-        this.mType = "wakelock";
     }
 
     public static WakelockRegexFragment newInstance() {
         WakelockRegexFragment fragment = new WakelockRegexFragment();
         return fragment;
     }
+
+    @Override
+    protected String getType() {
+        return "wakelock";
+    }
+
+
 }
