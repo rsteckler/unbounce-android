@@ -23,15 +23,15 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-public abstract class RegexFragment extends android.app.ListFragment implements AlarmDetailFragment.FragmentClearListener {
+public abstract class RegexFragment extends android.app.ListFragment implements RegexDetailFragment.FragmentClearListener {
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     protected final static String ARG_TYPE = "type";
     protected static final String PREF_SET_TEMPLATE = "%1$s_regex_set";
 
     private RegexAdapter mAdapter;
+    private OnFragmentInteractionListener mListener;
     private boolean mReloadOnShow = false;
-    private boolean mTaskerMode = false;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -42,12 +42,22 @@ public abstract class RegexFragment extends android.app.ListFragment implements 
 
     protected abstract String getType();
 
+    protected abstract boolean getTaskerMode();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_stats, container, false);
 
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        if (mListener != null)
+            mListener.onRegexSetTitle(getResources().getString(R.string.title_regex));
     }
 
     @Override
@@ -146,13 +156,13 @@ public abstract class RegexFragment extends android.app.ListFragment implements 
         //Spin up the new Detail fragment.  Dig the custom animations.  Also put it on the back stack
         //so we can hit the back button and come back to the list.
         FragmentManager fragmentManager = getFragmentManager();
-        RegexDetailFragment newFrag = RegexDetailFragment.newInstance(startBounds.top, finalBounds.top, startBounds.bottom, finalBounds.bottom, new AlarmStats("Regex", "Regex"), mTaskerMode,
+        RegexDetailFragment newFrag = RegexDetailFragment.newInstance(startBounds.top, finalBounds.top, startBounds.bottom, finalBounds.bottom, new AlarmStats("Regex", "Regex"), getTaskerMode(),
                 name, seconds, enabled, getType());
         newFrag.attachClearListener(this);
         fragmentManager.beginTransaction()
                 .setCustomAnimations(R.animator.expand_in, R.animator.noop, R.animator.noop, R.animator.expand_out)
                 .hide(this)
-                .add(R.id.container, newFrag, "regex_detail")
+                .add(R.id.container, newFrag, "regex_detail_" + getType())
                 .addToBackStack(null)
                 .commit();
 
@@ -163,10 +173,14 @@ public abstract class RegexFragment extends android.app.ListFragment implements 
         super.onHiddenChanged(hidden);
         //Remember the scroll pos so we can reinstate it
         if (!hidden) {
-//            if (mListener != null) {
-//                mListener.onAlarmsSetTitle(getResources().getString(R.string.title_alarms));
-//                mListener.onAlarmsSetTaskerTitle(getResources().getString(R.string.tasker_choose_alarm));
-//            }
+            if (mListener != null) {
+                mListener.onRegexSetTitle(getResources().getString(R.string.title_regex));
+                if ("alarm".equals(getType())) {
+                    mListener.onRegexSetTaskerTitle(getResources().getString(R.string.tasker_choose_alarm_regex));
+                } else {
+                    mListener.onRegexSetTaskerTitle(getResources().getString(R.string.tasker_choose_wakelock_regex));
+                }
+            }
             if (mReloadOnShow) {
                 mReloadOnShow = false;
                 reload();
@@ -178,5 +192,27 @@ public abstract class RegexFragment extends android.app.ListFragment implements 
     @Override
     public void onCleared() {
         mReloadOnShow = true;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
+     * <p/>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
+    public interface OnFragmentInteractionListener {
+        public void onRegexSetTitle(String id);
+
+        public void onRegexSetTaskerTitle(String title);
     }
 }

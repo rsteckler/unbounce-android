@@ -22,12 +22,15 @@ import com.ryansteckler.nlpunbounce.BaseDetailFragment;
 import com.ryansteckler.nlpunbounce.R;
 import com.ryansteckler.nlpunbounce.WakelockDetailFragment;
 import com.ryansteckler.nlpunbounce.WakelocksFragment;
+import com.ryansteckler.nlpunbounce.RegexDetailFragment;
+import com.ryansteckler.nlpunbounce.RegexFragment;
 
 public class TaskerActivity extends Activity
         implements
         WakelocksFragment.OnFragmentInteractionListener,
         BaseDetailFragment.FragmentInteractionListener,
         AlarmsFragment.OnFragmentInteractionListener,
+        RegexFragment.OnFragmentInteractionListener,
         TaskerWhichFragment.OnFragmentInteractionListener {
 
     public static final String EXTRA_BUNDLE = "com.twofortyfouram.locale.intent.extra.BUNDLE";
@@ -77,6 +80,8 @@ public class TaskerActivity extends Activity
                 }
             }
         };
+        // TODO: remove and actually fix this issue
+        mIsPremium = true;
 
         //Normally we would secure this key, but we're not licensing this app.
         String base64billing = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxwicOx54j03qBil36upqYab0uBWnf+WjoSRNOaTD9mkqj9bLM465gZlDXhutMZ+n5RlHUqmxl7jwH9KyYGTbwFqCxbLMCwR4oDhXVhX4fS6iggoHY7Ek6EzMT79x2XwCDg1pdQmX9d9TYRp32Sw2E+yg2uZKSPW29ikfdcmfkHcdCWrjFSuMJpC14R3d9McWQ7sg42eQq2spIuSWtP8ARGtj1M8eLVxgkQpXWrk9ijPgVcAbNZYWT9ndIZoKPg7VJVvzzAUNK/YOb+BzRurqJ42vCZy1+K+E4EUtmg/fxawHfXLZ3F/gNwictZO9fv1PYHPMa0sezSNVFAcm0yP1BwIDAQAB";
@@ -116,6 +121,8 @@ public class TaskerActivity extends Activity
                 String blurb = "";
 
                 WakelockDetailFragment wlFragment = (WakelockDetailFragment)fragmentManager.findFragmentByTag("wakelock_detail");
+                AlarmDetailFragment alarmFragment;
+                RegexDetailFragment regexFragment;
                 if (wlFragment != null) {
                     taskerBundle.putString(BUNDLE_TYPE, "wakelock");
                     taskerBundle.putString(BUNDLE_NAME, wlFragment.getName());
@@ -125,18 +132,34 @@ public class TaskerActivity extends Activity
                             getResources().getString(R.string.tasker_on) :
                             getResources().getString(R.string.tasker_off)) +
                             " - " + wlFragment.getSeconds();
+                } else if ((alarmFragment = (AlarmDetailFragment)fragmentManager.findFragmentByTag("alarm_detail")) != null) {
+                    taskerBundle.putString(BUNDLE_TYPE, "alarm");
+                    taskerBundle.putString(BUNDLE_NAME, alarmFragment.getName());
+                    taskerBundle.putLong(BUNDLE_SECONDS, alarmFragment.getSeconds());
+                    taskerBundle.putBoolean(BUNDLE_ENABLED, alarmFragment.getEnabled());
+                    blurb = alarmFragment.getName() + " - " + (alarmFragment.getEnabled() ?
+                            getResources().getString(R.string.tasker_on) :
+                            getResources().getString(R.string.tasker_off)) +
+                            " - " + alarmFragment.getSeconds();
+                } else if ((regexFragment = (RegexDetailFragment)fragmentManager.findFragmentByTag("regex_detail_alarm"))!= null) {
+                    taskerBundle.putString(BUNDLE_TYPE, "regex_alarm");
+                    taskerBundle.putString(BUNDLE_NAME, regexFragment.getName());
+                    taskerBundle.putLong(BUNDLE_SECONDS, regexFragment.getSeconds());
+                    taskerBundle.putBoolean(BUNDLE_ENABLED, regexFragment.getEnabled());
+                    blurb = regexFragment.getName() + " - " + (regexFragment.getEnabled() ?
+                            getResources().getString(R.string.tasker_on) :
+                            getResources().getString(R.string.tasker_off)) +
+                            " - " + regexFragment.getSeconds();
                 } else {
-                    AlarmDetailFragment alarmFragment = (AlarmDetailFragment)fragmentManager.findFragmentByTag("alarm_detail");
-                    if (alarmFragment != null) {
-                        taskerBundle.putString(BUNDLE_TYPE, "alarm");
-                        taskerBundle.putString(BUNDLE_NAME, alarmFragment.getName());
-                        taskerBundle.putLong(BUNDLE_SECONDS, alarmFragment.getSeconds());
-                        taskerBundle.putBoolean(BUNDLE_ENABLED, alarmFragment.getEnabled());
-                        blurb = alarmFragment.getName() + " - " + (alarmFragment.getEnabled() ?
-                                getResources().getString(R.string.tasker_on) :
-                                getResources().getString(R.string.tasker_off)) +
-                                " - " + alarmFragment.getSeconds();
-                    }
+                    regexFragment = (RegexDetailFragment)fragmentManager.findFragmentByTag("regex_detail_wakelock");
+                    taskerBundle.putString(BUNDLE_TYPE, "regex_wakelock");
+                    taskerBundle.putString(BUNDLE_NAME, regexFragment.getName());
+                    taskerBundle.putLong(BUNDLE_SECONDS, regexFragment.getSeconds());
+                    taskerBundle.putBoolean(BUNDLE_ENABLED, regexFragment.getEnabled());
+                    blurb = regexFragment.getName() + " - " + (regexFragment.getEnabled() ?
+                            getResources().getString(R.string.tasker_on) :
+                            getResources().getString(R.string.tasker_off)) +
+                            " - " + regexFragment.getSeconds();
                 }
 
                 final Intent resultIntent = new Intent();
@@ -216,6 +239,18 @@ public class TaskerActivity extends Activity
 
     @Override
     public void onAlarmsSetTaskerTitle(String title) {
+        TextView text = (TextView)findViewById(R.id.textTaskerHeader);
+        text.setText(title);
+        Button save = (Button)findViewById(R.id.buttonTaskerSave);
+        save.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onRegexSetTitle(String title) {
+    }
+
+    @Override
+    public void onRegexSetTaskerTitle(String title) {
         TextView text = (TextView)findViewById(R.id.textTaskerHeader);
         text.setText(title);
         Button save = (Button)findViewById(R.id.buttonTaskerSave);

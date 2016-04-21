@@ -26,6 +26,7 @@ import com.ryansteckler.nlpunbounce.models.UnbounceStatsCollection;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
@@ -68,6 +69,19 @@ public class RegexDetailFragment extends BaseDetailFragment {
         f.setArguments(args);
 
         return f;
+    }
+
+    @Override
+    public String getName() {
+        return mDefaultValue;
+    }
+
+    public long getSeconds() {
+        try {
+            return Long.parseLong(mDefaultSeconds);
+        } catch (NumberFormatException ex) {
+            return 240;
+        }
     }
 
     @Override
@@ -251,7 +265,7 @@ public class RegexDetailFragment extends BaseDetailFragment {
         try {
             String prevBlockName = mDefaultValue + "$$||$$" + mDefaultSeconds + "$$||$$" + mEnabled;
             boolean regexValid = true;
-            long seconds = Long.parseLong(mDefaultSeconds);
+            boolean regexChanged = false;
             if (edit.getId() == R.id.editRegexSeconds) {
                 mDefaultSeconds = Long.toString(Long.parseLong(textView.getText().toString()));
             } else if (edit.getId() == R.id.editRegex) {
@@ -261,6 +275,7 @@ public class RegexDetailFragment extends BaseDetailFragment {
                     regexValid = false;
                 }
                 if (regexValid) {
+                    regexChanged = true;
                     mDefaultValue = textView.getText().toString();
                     TextView description = (TextView) getView().findViewById(R.id.textViewDescription);
                     description.setText(getDescriptionText(mDefaultValue));
@@ -283,6 +298,17 @@ public class RegexDetailFragment extends BaseDetailFragment {
                 Set<String> sampleSet = new HashSet<String>();
                 Set<String> set = new HashSet<String>(prefs.getStringSet(mDefaultSetName + "_regex_set", sampleSet));
                 if (!TextUtils.isEmpty(mDefaultValue)) {
+                    if (regexChanged) {
+                        // check if this regex already exists
+                        for (Iterator<String> i = set.iterator(); i.hasNext();) {
+                            String str = i.next();
+                            if (str.startsWith(mDefaultValue)) {
+                                textView.setError("Duplicate regex");
+                                return true;
+                            }
+                        }
+                    }
+
                     set.remove(prevBlockName);
                     set.add(blockName);
                 }

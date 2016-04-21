@@ -38,6 +38,24 @@
             android:layout_marginTop="@dimen/card_external_padding" />
 
         <Button
+            style="@style/TextTitleLight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tasker_task_wakelock_regex"
+            android:id="@+id/buttonTaskerWakelockRegex"
+            android:layout_marginTop="@dimen/card_internal_padding"
+            android:background="@color/background_secondary" />
+
+        <Button
+            style="@style/TextTitleLight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tasker_task_alarm_regex"
+            android:id="@+id/buttonTaskerAlarmRegex"
+            android:background="@color/background_four"
+            android:layout_marginTop="@dimen/card_external_padding" />
+
+        <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/tasker_task_reset"
