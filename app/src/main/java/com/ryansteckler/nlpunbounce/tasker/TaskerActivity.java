@@ -146,7 +146,7 @@ public class TaskerActivity extends Activity
                     taskerBundle.putString(BUNDLE_NAME, regexFragment.getName());
                     taskerBundle.putLong(BUNDLE_SECONDS, regexFragment.getSeconds());
                     taskerBundle.putBoolean(BUNDLE_ENABLED, regexFragment.getEnabled());
-                    blurb = regexFragment.getName() + " - " + (regexFragment.getEnabled() ?
+                    blurb = "Alarm: " + regexFragment.getName() + " - " + (regexFragment.getEnabled() ?
                             getResources().getString(R.string.tasker_on) :
                             getResources().getString(R.string.tasker_off)) +
                             " - " + regexFragment.getSeconds();
@@ -156,7 +156,7 @@ public class TaskerActivity extends Activity
                     taskerBundle.putString(BUNDLE_NAME, regexFragment.getName());
                     taskerBundle.putLong(BUNDLE_SECONDS, regexFragment.getSeconds());
                     taskerBundle.putBoolean(BUNDLE_ENABLED, regexFragment.getEnabled());
-                    blurb = regexFragment.getName() + " - " + (regexFragment.getEnabled() ?
+                    blurb = "Wakelock: " + regexFragment.getName() + " - " + (regexFragment.getEnabled() ?
                             getResources().getString(R.string.tasker_on) :
                             getResources().getString(R.string.tasker_off)) +
                             " - " + regexFragment.getSeconds();
