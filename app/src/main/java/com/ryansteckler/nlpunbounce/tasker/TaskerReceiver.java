@@ -48,7 +48,7 @@ public class TaskerReceiver extends BroadcastReceiver {
                     Set<String> set = new HashSet<String>(prefs.getStringSet(type + "_regex_set", sampleSet));
                     for (Iterator<String> i = set.iterator(); i.hasNext();) {
                         String str = i.next();
-                        if (str.startsWith(name)) {
+                        if (str.startsWith(name + "$$||$$")) {
                             i.remove();
                         }
                     }

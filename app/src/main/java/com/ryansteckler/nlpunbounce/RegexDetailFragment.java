@@ -302,7 +302,7 @@ public class RegexDetailFragment extends BaseDetailFragment {
                         // check if this regex already exists
                         for (Iterator<String> i = set.iterator(); i.hasNext();) {
                             String str = i.next();
-                            if (str.startsWith(mDefaultValue)) {
+                            if (str.startsWith(mDefaultValue + "$$||$$")) {
                                 textView.setError("Duplicate regex");
                                 return true;
                             }
