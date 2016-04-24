@@ -1,5 +1,6 @@
 package com.ryansteckler.nlpunbounce;
 
+import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -57,7 +58,7 @@ public abstract class RegexFragment extends android.app.ListFragment implements 
         super.onViewCreated(view, savedInstanceState);
 
         if (mListener != null)
-            mListener.onRegexSetTitle(getResources().getString(R.string.title_regex));
+            mListener.onRegexSetTitle(getType().substring(0,1).toUpperCase() + getType().substring(1) + " " + getResources().getString(R.string.title_regex));
     }
 
     @Override
@@ -74,7 +75,7 @@ public abstract class RegexFragment extends android.app.ListFragment implements 
         ArrayList<String> list = new ArrayList<String>(set);
 
         // Create The Adapter with passing ArrayList as 3rd parameter
-        mAdapter = new RegexAdapter(getActivity(), list, getType());
+        mAdapter = new RegexAdapter(getActivity(), list, getType(), getTaskerMode());
 
         // Sets The Adapter
         setListAdapter(mAdapter);
@@ -156,7 +157,7 @@ public abstract class RegexFragment extends android.app.ListFragment implements 
         //Spin up the new Detail fragment.  Dig the custom animations.  Also put it on the back stack
         //so we can hit the back button and come back to the list.
         FragmentManager fragmentManager = getFragmentManager();
-        RegexDetailFragment newFrag = RegexDetailFragment.newInstance(startBounds.top, finalBounds.top, startBounds.bottom, finalBounds.bottom, new AlarmStats("Regex", "Regex"), getTaskerMode(),
+        RegexDetailFragment newFrag = RegexDetailFragment.newInstance(startBounds.top, finalBounds.top, startBounds.bottom, finalBounds.bottom, new AlarmStats(name, "Regex"), getTaskerMode(),
                 name, seconds, enabled, getType());
         newFrag.attachClearListener(this);
         fragmentManager.beginTransaction()
@@ -174,7 +175,7 @@ public abstract class RegexFragment extends android.app.ListFragment implements 
         //Remember the scroll pos so we can reinstate it
         if (!hidden) {
             if (mListener != null) {
-                mListener.onRegexSetTitle(getResources().getString(R.string.title_regex));
+                mListener.onRegexSetTitle(getType().substring(0,1).toUpperCase() + getType().substring(1) + " " + getResources().getString(R.string.title_regex));
                 if ("alarm".equals(getType())) {
                     mListener.onRegexSetTaskerTitle(getResources().getString(R.string.tasker_choose_alarm_regex));
                 } else {
@@ -192,6 +193,17 @@ public abstract class RegexFragment extends android.app.ListFragment implements 
     @Override
     public void onCleared() {
         mReloadOnShow = true;
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            mListener = (OnFragmentInteractionListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
     }
 
     @Override

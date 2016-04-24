@@ -54,7 +54,6 @@ public class RegexDetailFragment extends BaseDetailFragment {
                                                   String defaultValue, String defaultSeconds, String enabled, String defaultSetName) {
         RegexDetailFragment f = new RegexDetailFragment();
 
-        // Supply num input as an argument.
         Bundle args = new Bundle();
         args.putInt(ARG_START_TOP, startTop);
         args.putInt(ARG_FINAL_TOP, finalTop);
@@ -125,7 +124,7 @@ public class RegexDetailFragment extends BaseDetailFragment {
         panel.setAlpha(b ? 1 : (float) .4);
 
         TextView textView = (TextView) getView().findViewById(R.id.editRegex);
-        textView.setEnabled(b);
+        textView.setEnabled(!mTaskerMode && b);
         textView.clearFocus();
         panel = (View)getView().findViewById(R.id.settingsPanelRegex);
         panel.setBackgroundDrawable(backgroundColor);
@@ -254,7 +253,7 @@ public class RegexDetailFragment extends BaseDetailFragment {
         panel.setBackgroundDrawable(backgroundColor);
         panel.setAlpha(enabled ? 1 : (float) .4);
 
-        getView().findViewById(R.id.editRegex).setEnabled(onOff.isChecked());
+        getView().findViewById(R.id.editRegex).setEnabled(!mTaskerMode && onOff.isChecked());
         panel = (View)getView().findViewById(R.id.settingsPanelRegex);
         panel.setBackgroundDrawable(backgroundColor);
         panel.setAlpha(enabled ? 1 : (float) .4);

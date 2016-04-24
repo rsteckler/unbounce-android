@@ -33,12 +33,14 @@ public class RegexAdapter extends ArrayAdapter<String> {
     private final ArrayList<String> list;
     private final Activity context;
     private final String mEntityName;
+    private final boolean mTaskerMode;
 
-    public RegexAdapter(Activity context, ArrayList<String> list, String entityName) {
+    public RegexAdapter(Activity context, ArrayList<String> list, String entityName, boolean taskerMode) {
         super(context, R.layout.fragment_regex_listitem, list);
         this.context = context;
         this.list = list;
         this.mEntityName = entityName;
+        this.mTaskerMode = taskerMode;
     }
 
     @Override
@@ -77,6 +79,8 @@ public class RegexAdapter extends ArrayAdapter<String> {
 
                 }
             });
+
+            button.setEnabled(!mTaskerMode);
         }
 
         TextView regexMatchText = (TextView) view.findViewById(R.id.regexMatchText);
