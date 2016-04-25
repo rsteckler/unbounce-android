@@ -126,18 +126,20 @@ public abstract class BaseDetailFragment extends Fragment {
         });
 
         TextView resetButton = (TextView) view.findViewById(R.id.buttonResetStats);
-        resetButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View resetView) {
-                //Reset stats
-                UnbounceStatsCollection stats = UnbounceStatsCollection.getInstance();
-                stats.resetStats(getActivity(), mStat.getName());
-                loadStatsFromSource(view);
-                if (mClearListener != null) {
-                    mClearListener.onCleared();
+        if (resetButton != null) {
+            resetButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View resetView) {
+                    //Reset stats
+                    UnbounceStatsCollection stats = UnbounceStatsCollection.getInstance();
+                    stats.resetStats(getActivity(), mStat.getName());
+                    loadStatsFromSource(view);
+                    if (mClearListener != null) {
+                        mClearListener.onCleared();
+                    }
                 }
-            }
-        });
+            });
+        }
 
         TextView description = (TextView) view.findViewById(R.id.textViewDescription);
         String descriptionText = EventLookup.getDescription(getActivity(), mStat.getName());

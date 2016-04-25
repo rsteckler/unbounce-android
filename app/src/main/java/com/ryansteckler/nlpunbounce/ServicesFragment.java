@@ -73,6 +73,9 @@ public class ServicesFragment extends ListFragment implements ServiceDetailFragm
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        // Prevent menu items from crossing fragments
+        menu.clear();
+
         getActivity().getMenuInflater().inflate(R.menu.list, menu);
         SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -88,6 +91,11 @@ public class ServicesFragment extends ListFragment implements ServiceDetailFragm
                 return true;
             }
         });
+
+        // Don't support regex for services, so disable the button
+        menu.findItem(R.id.action_new_custom).setVisible(false)
+                .setEnabled(false);
+
         super.onCreateOptionsMenu(menu, inflater);
     }
 

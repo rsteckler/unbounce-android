@@ -8,6 +8,7 @@
 <string name="title_home">"Home"</string>
 <string name="title_wakelocks">"Wakelocks"</string>
 <string name="title_alarms">"Alarms"</string>
+<string name="title_regex">"Regex"</string>
 <string name="navigation_drawer_open">"Open navigation drawer"</string>
 <string name="navigation_drawer_close">"Close navigation drawer"</string>
 <string name="action_search">"Search"</string>
@@ -26,6 +27,7 @@
 <string name="card_settings_subtitle_wakelock">"Control this wakelock"</string>
 <string name="card_description_title">"DESCRIPTION"</string>
 <string name="card_description_subtitle">"Why is this thing eating your battery?"</string>
+<string name="card_description_subtitle_regex">"What will this do?"</string>
 <string name="category_unbounced">"Limited"</string>
 <string name="category_safe">"Safe to limit"</string>
 <string name="category_unknown">"Unknown"</string>
@@ -216,5 +218,16 @@ May you have a long [battery] life!
 <string name="service_switch_deny">"Deny"</string>
 <string name="action_new_custom_item">"New"</string>
     <string name="settings_scroll_item_names">Scroll Item Names</string>
+<string name="regex_list_enabled">"Matches %1$d/%2$d events"</string>
+<string name="regex_list_disabled">"Pattern disabled"</string>
+<string name="desc_regex_unknown">"This pattern doesn't apply to any currently known events"</string>
+<string name="desc_regex">"This pattern matches %1$d of %2$d events:"</string>
+<string name="settings_regex">"Pattern:"</string>
+<string name="card_settings_subtitle_regex">"Control this regex"</string>
+<string name="tasker_task_wakelock_regex">"REGEX"</string>
+<string name="tasker_task_alarm_regex">"REGEX"</string>
+<string name="tasker_choose_alarm_regex">"Adjust an alarm regex."</string>
+<string name="tasker_choose_wakelock_regex">"Adjust a wakelock regex."</string>
+
 
 </resources>

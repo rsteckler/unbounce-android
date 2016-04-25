@@ -12,6 +12,8 @@ import android.widget.Button;
 import com.ryansteckler.nlpunbounce.AlarmsFragment;
 import com.ryansteckler.nlpunbounce.R;
 import com.ryansteckler.nlpunbounce.WakelocksFragment;
+import com.ryansteckler.nlpunbounce.WakelockRegexFragment;
+import com.ryansteckler.nlpunbounce.AlarmRegexFragment;
 
 /**
  * Created by rsteckler on 9/28/14.
@@ -68,6 +70,40 @@ public class TaskerWhichFragment extends Fragment {
 
                 if (mListener != null)
                     mListener.onTaskerWhichSetTitle(getResources().getString(R.string.tasker_choose_alarm));
+            }
+        });
+
+        button = (Button) view.findViewById(R.id.buttonTaskerWakelockRegex);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction()
+                        .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, android.R.animator.fade_in, android.R.animator.fade_out)
+                        .hide(TaskerWhichFragment.this)
+                        .add(R.id.container, WakelockRegexFragment.newInstance(true))
+                        .addToBackStack(null)
+                        .commit();
+
+                if (mListener != null)
+                    mListener.onTaskerWhichSetTitle(getResources().getString(R.string.tasker_choose_wakelock_regex));
+            }
+        });
+
+        button = (Button) view.findViewById(R.id.buttonTaskerAlarmRegex);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction()
+                        .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, android.R.animator.fade_in, android.R.animator.fade_out)
+                        .hide(TaskerWhichFragment.this)
+                        .add(R.id.container, AlarmRegexFragment.newInstance(true))
+                        .addToBackStack(null)
+                        .commit();
+
+                if (mListener != null)
+                    mListener.onTaskerWhichSetTitle(getResources().getString(R.string.tasker_choose_alarm_regex));
             }
         });
 

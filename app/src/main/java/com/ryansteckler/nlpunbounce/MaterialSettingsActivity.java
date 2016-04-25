@@ -31,6 +31,7 @@ public class MaterialSettingsActivity extends Activity
         BaseDetailFragment.FragmentInteractionListener,
         HomeFragment.OnFragmentInteractionListener,
         AlarmsFragment.OnFragmentInteractionListener,
+        RegexFragment.OnFragmentInteractionListener,
         ServicesFragment.OnFragmentInteractionListener
     {
 
@@ -340,4 +341,15 @@ public class MaterialSettingsActivity extends Activity
             //Do nothing because we're not in Tasker mode.
 
         }
+
+    @Override
+    public void onRegexSetTitle(String title) {
+        mTitle = title;
+        restoreActionBar();
     }
+
+    @Override
+    public void onRegexSetTaskerTitle(String title) {
+        //Do nothing because we're not in Tasker mode.
+    }
+}
