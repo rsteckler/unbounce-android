@@ -70,6 +70,7 @@ public class TaskerActivity extends Activity
                         Log.d("Unbounce", "IAP inventory exists");
 
                         if (inventory.hasPurchase("donate_1") ||
+                                inventory.hasPurchase("donate_2") ||
                                 inventory.hasPurchase("donate_5") ||
                                 inventory.hasPurchase("donate_10")) {
                             Log.d("Unbounce", "IAP inventory contains a donation");
@@ -80,8 +81,6 @@ public class TaskerActivity extends Activity
                 }
             }
         };
-        // TODO: remove and actually fix this issue
-        mIsPremium = true;
 
         //Normally we would secure this key, but we're not licensing this app.
         String base64billing = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxwicOx54j03qBil36upqYab0uBWnf+WjoSRNOaTD9mkqj9bLM465gZlDXhutMZ+n5RlHUqmxl7jwH9KyYGTbwFqCxbLMCwR4oDhXVhX4fS6iggoHY7Ek6EzMT79x2XwCDg1pdQmX9d9TYRp32Sw2E+yg2uZKSPW29ikfdcmfkHcdCWrjFSuMJpC14R3d9McWQ7sg42eQq2spIuSWtP8ARGtj1M8eLVxgkQpXWrk9ijPgVcAbNZYWT9ndIZoKPg7VJVvzzAUNK/YOb+BzRurqJ42vCZy1+K+E4EUtmg/fxawHfXLZ3F/gNwictZO9fv1PYHPMa0sezSNVFAcm0yP1BwIDAQAB";
