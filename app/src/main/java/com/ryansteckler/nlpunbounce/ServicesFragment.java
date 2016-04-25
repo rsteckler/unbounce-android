@@ -73,6 +73,9 @@ public class ServicesFragment extends ListFragment implements ServiceDetailFragm
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        // Prevent menu items from crossing fragments
+        menu.clear();
+
         getActivity().getMenuInflater().inflate(R.menu.list, menu);
         SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
