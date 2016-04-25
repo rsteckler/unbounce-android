@@ -42,10 +42,11 @@ public class AlarmRegexFragment extends RegexFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        ThemeHelper.onActivityCreateSetTheme(this.getActivity());
         if (getArguments() != null) {
             mTaskerMode = getArguments().getBoolean(ARG_TASKER_MODE);
         }
+
+        super.onCreate(savedInstanceState);
+        ThemeHelper.onActivityCreateSetTheme(this.getActivity());
     }
 }

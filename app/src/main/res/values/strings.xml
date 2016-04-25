@@ -226,8 +226,8 @@ May you have a long [battery] life!
 <string name="card_settings_subtitle_regex">"Control this regex"</string>
 <string name="tasker_task_wakelock_regex">"REGEX"</string>
 <string name="tasker_task_alarm_regex">"REGEX"</string>
-<string name="tasker_choose_alarm_regex">"Choose the alarm regex to adjust."</string>
-<string name="tasker_choose_wakelock_regex">"Choose the wakelock regex to adjust."</string>
+<string name="tasker_choose_alarm_regex">"Adjust an alarm regex."</string>
+<string name="tasker_choose_wakelock_regex">"Adjust a wakelock regex."</string>
 
 
 </resources>

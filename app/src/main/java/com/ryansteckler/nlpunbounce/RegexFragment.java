@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -87,10 +88,7 @@ public abstract class RegexFragment extends android.app.ListFragment implements 
 
         if (id == R.id.action_new_custom) {
             //Create a new custom alarm regex
-            //Fragment fragment = RegexDetailFragment.newInstance("", "", "", mType);
-            //fragment.setTargetFragment(this, 0);
             switchToDetail(0, "", "", "");
-            //fragment.show(getActivity().getFragmentManager(), "RegexDialog");
         }
         return super.onOptionsItemSelected(item);
     }
@@ -157,7 +155,8 @@ public abstract class RegexFragment extends android.app.ListFragment implements 
         //Spin up the new Detail fragment.  Dig the custom animations.  Also put it on the back stack
         //so we can hit the back button and come back to the list.
         FragmentManager fragmentManager = getFragmentManager();
-        RegexDetailFragment newFrag = RegexDetailFragment.newInstance(startBounds.top, finalBounds.top, startBounds.bottom, finalBounds.bottom, new AlarmStats(name, "Regex"), getTaskerMode(),
+        String title = TextUtils.isEmpty(name) ? "New Regex" : name;
+        RegexDetailFragment newFrag = RegexDetailFragment.newInstance(startBounds.top, finalBounds.top, startBounds.bottom, finalBounds.bottom, new AlarmStats(title, "Regex"), getTaskerMode(),
                 name, seconds, enabled, getType());
         newFrag.attachClearListener(this);
         fragmentManager.beginTransaction()
