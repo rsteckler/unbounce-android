@@ -88,6 +88,11 @@ public class ServicesFragment extends ListFragment implements ServiceDetailFragm
                 return true;
             }
         });
+
+        // Don't support regex for services, so disable the button
+        menu.findItem(R.id.action_new_custom).setVisible(false)
+                .setEnabled(false);
+
         super.onCreateOptionsMenu(menu, inflater);
     }
 
