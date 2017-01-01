@@ -99,7 +99,7 @@
 <string name="stat_alarm_allowed">"Alarmes autorisées"</string>
 <string name="stat_alarm_blocked">"Alarmes bloquées"</string>
 <string name="stat_disabled">"Désactivé"</string>
-<string name="donate_text">"Cette application vous permettra toujours de modifier le comportement des services de localisation 'NLP' (Network Location Provider) gratuitement. Si vous voulez également bloquer d\autres wakelocks ou alarmes, vous pouvez passer à la version pro en aidant le projet. Toute donation débloquera les fonctionnalités pro."</string>
+<string name="donate_text">"Cette application vous permettra toujours de modifier le comportement des services de localisation 'NLP' (Network Location Provider) gratuitement. Si vous voulez également bloquer d'autres wakelocks ou alarmes, vous pouvez passer à la version pro en aidant le projet. Toute donation débloquera les fonctionnalités pro."</string>
 <string name="donate_1">"Une tasse de café pendant que je code"</string>
 <string name="donate_5">"Un café crème pendant que je réponds à des questions sur le forum"</string>
 <string name="donate_10">"La joie de ne pas transporter son chargeur"</string>
