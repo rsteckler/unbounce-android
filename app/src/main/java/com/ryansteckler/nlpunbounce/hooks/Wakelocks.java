@@ -597,6 +597,9 @@ public class Wakelocks implements IXposedHookLoadPackage {
 
             PendingIntent pi = (PendingIntent) XposedHelpers.getObjectField(curAlarm, "operation");
             Intent intent = null;
+            if (pi == null) {
+                return;
+            }
             try {
                 intent = (Intent) callMethod(pi, "getIntent");
             } catch (NoSuchMethodError nsme) {
